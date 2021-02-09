@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:icandoit/screens/components/build_challenge_list.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -18,6 +19,7 @@ class _HomeState extends State<Home> {
           title: Text('ICanDoIt'),
           backgroundColor: Colors.transparent,
           elevation: 0.0),
+      body: ChallengesListBuilder(),
       backgroundColor: Color(0xff414a4c),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: buildBottomSheet(),
@@ -48,8 +50,11 @@ class _HomeState extends State<Home> {
                         children: [
                           TextFormField(
                             validator: (value) {
+                              final RegExp checkReg = RegExp(r'^\D+$');
                               if (value.isEmpty) {
                                 return "Merci d'entrer un nom pour le challenge";
+                              } else if (!checkReg.hasMatch(value)) {
+                                return "$value";
                               }
                               return null;
                             },
@@ -86,7 +91,11 @@ class _HomeState extends State<Home> {
                             ],
                           ),
                           RaisedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              if (formKey.currentState.validate()) {
+                                // formKey.currentState.save();
+                              }
+                            },
                             child: Text("Ajouter le challenge"),
                           ),
                         ],
