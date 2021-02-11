@@ -1,11 +1,11 @@
 import 'package:flutter/foundation.dart';
 
-enum unity_cahllenge { kg, km }
+enum unity_challenge { kg, km }
 
 class ChallengeModel {
   final String name;
   final int target;
-  final unity_cahllenge unity;
+  final unity_challenge unity;
 
   ChallengeModel(
       {@required this.name, @required this.target, @required this.unity});
