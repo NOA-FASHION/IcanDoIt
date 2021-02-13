@@ -22,27 +22,36 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
         return Padding(
           padding: const EdgeInsets.only(bottom: 3.0, left: 8.0, right: 8.0),
           child: Dismissible(
-            confirmDismiss: (direction) {
+            confirmDismiss: (direction) async {
               if (direction == DismissDirection.startToEnd) {
-                showDialog(
+                final bool resultat = await showDialog<bool>(
                     context: context,
                     builder: (context) {
                       return AlertDialog(
-                        title: Text("Confirmation"),
+                        title: Text(
+                          "Confirmation",
+                          style: TextStyle(color: Colors.blue),
+                        ),
                         content: Text("Voulez vous suprimmez le challenge"),
                         actions: [
                           RaisedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.pop(context, true);
+                            },
                             child: Text("Oui"),
                           ),
                           RaisedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.pop(context, false);
+                            },
                             child: Text("Nom"),
                           )
                         ],
                       );
                     });
+                return resultat;
               }
+              return true;
             },
             background: Container(
               color: Colors.red,
