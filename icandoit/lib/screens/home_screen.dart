@@ -11,6 +11,8 @@ class _HomeState extends State<Home> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   PersistentBottomSheetController _bottomSheetController;
   String unityChallenge = "KG";
+  String nameChallenge;
+  String targetChallenge;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,6 +51,9 @@ class _HomeState extends State<Home> {
                       child: ListView(
                         children: [
                           TextFormField(
+                            onSaved: (value) {
+                              nameChallenge = value;
+                            },
                             validator: (value) {
                               final RegExp checkReg = RegExp(r'^\D+$');
                               if (value.isEmpty) {
@@ -62,6 +67,9 @@ class _HomeState extends State<Home> {
                                 InputDecoration(labelText: "Nom du challenge"),
                           ),
                           TextFormField(
+                            onSaved: (value) {
+                              targetChallenge = value;
+                            },
                             validator: (value) {
                               final _isInt = int.tryParse(value);
                               if (_isInt == null) {
@@ -93,7 +101,7 @@ class _HomeState extends State<Home> {
                           RaisedButton(
                             onPressed: () {
                               if (formKey.currentState.validate()) {
-                                // formKey.currentState.save();
+                                formKey.currentState.save();
                               }
                             },
                             child: Text("Ajouter le challenge"),
