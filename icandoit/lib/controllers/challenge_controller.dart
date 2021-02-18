@@ -3,10 +3,29 @@ import 'dart:convert';
 import 'package:icandoit/models/challenge_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+const String keyAcces = "challengeList";
+
 class Challengecontroller {
   List<ChallengeModel> _challengeList = [];
+  SharedPreferences _localData;
 
   List<ChallengeModel> getChallenges() {
+    return _challengeList;
+  }
+
+  Future<List<ChallengeModel>> initChallengeList() async {
+    _localData = await SharedPreferences.getInstance();
+    final List<String> _tempList = _localData.getStringList(keyAcces);
+    if (_tempList.isNotEmpty) {
+      final List<Map<String, dynamic>> _jsonDecodeList = _tempList
+          .map((challengeEncoded) => jsonDecode(challengeEncoded))
+          .toList()
+          .cast<Map<String, dynamic>>();
+
+      _challengeList = _jsonDecodeList
+          .map((challenge) => ChallengeModel.fromJSON(challenge))
+          .toList();
+    }
     return _challengeList;
   }
 
@@ -30,12 +49,11 @@ class Challengecontroller {
   }
 
   Future<bool> _save() async {
-    SharedPreferences localData = await SharedPreferences.getInstance();
     if (_challengeList.isNotEmpty) {
       List<String> _jsonList = _challengeList.map((challenge) {
-        jsonEncode(challenge.toJson());
+        return jsonEncode(challenge.toJson());
       }).toList();
-      return localData.setStringList("challengeList", _jsonList);
+      return _localData.setStringList(keyAcces, _jsonList);
     }
     return false;
   }

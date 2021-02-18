@@ -12,7 +12,9 @@ class ChallengeModel {
   ChallengeModel.fromJSON(Map<String, dynamic> json)
       : name = json['name'],
         target = json['target'],
-        unity = json['unity'];
+        unity = json['unity'] == "unity_challenge.kg"
+            ? unity_challenge.kg
+            : unity_challenge.km;
 
   Map<String, dynamic> toJson() {
     return {"name": name, "target": target, "unity": unity.toString()};
