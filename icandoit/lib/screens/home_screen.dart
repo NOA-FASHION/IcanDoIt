@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:icandoit/screens/components/build_challenge_list.dart';
-import 'package:icandoit/controllers/challenge_controller.dart'
+import 'package:icandoit/controllers/challenge_controller.dart';
+
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
@@ -10,16 +11,17 @@ class _HomeState extends State<Home> {
   final GlobalKey<ScaffoldState> scaffoldkey = GlobalKey<ScaffoldState>();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   PersistentBottomSheetController _bottomSheetController;
-  Challengecontroller _controller=Challengecontroller();
+  final Challengecontroller _controller = Challengecontroller();
+  Future<List> challengesData;
   String unityChallenge = "KG";
   String nameChallenge;
   String targetChallenge;
 
-@override
-void initState(){
-  _controller.initChallengeList();
-  super.initState();
-}
+  @override
+  void initState() {
+    challengesData = _controller.initChallengeList();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +31,10 @@ void initState(){
           title: Text('ICanDoIt'),
           backgroundColor: Colors.transparent,
           elevation: 0.0),
-      body: ChallengesListBuilder(),
+      body: ChallengesListBuilder(
+        controller: _controller,
+        challenData: challengesData,
+      ),
       backgroundColor: Color(0xff414a4c),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: buildBottomSheet(),
@@ -111,9 +116,9 @@ void initState(){
                               if (formKey.currentState.validate()) {
                                 formKey.currentState.save();
                                 _controller.addChallenge(
-                                  name: nameChallenge,
-                                  target: targetChallenge, 
-                                  unity: unityChallenge);
+                                    name: nameChallenge,
+                                    target: targetChallenge,
+                                    unity: unityChallenge);
                               }
                             },
                             child: Text("Ajouter le challenge"),
