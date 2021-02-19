@@ -24,7 +24,7 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
             return Text("Pas de challenge crees.");
           }
           return ListView.builder(
-            itemCount: _challengesList.length,
+            itemCount: data.data.length,
             itemBuilder: (context, index) {
               return Padding(
                 padding:
