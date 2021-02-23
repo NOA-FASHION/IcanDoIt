@@ -9,14 +9,10 @@ class Challengecontroller {
   List<ChallengeModel> _challengeList = [];
   SharedPreferences _localData;
 
-  List<ChallengeModel> getChallenges() {
-    return _challengeList;
-  }
-
   Future<List<ChallengeModel>> initChallengeList() async {
     _localData = await SharedPreferences.getInstance();
     final List<String> _tempList = _localData.getStringList(keyAcces);
-    if (_tempList.isNotEmpty) {
+    if (_tempList != null) {
       final List<Map<String, dynamic>> _jsonDecodeList = _tempList
           .map((challengeEncoded) => jsonDecode(challengeEncoded))
           .toList()
@@ -39,16 +35,15 @@ class Challengecontroller {
           target: int.parse(target),
           unity: unity == "KG" ? unity_challenge.kg : unity_challenge.km),
     );
-    final bool resultat = await _save();
-    if (resultat) {
-      print("sa marche");
-    } else {
-      print("sa bug $resultat");
-    }
-    return getChallenges();
+    await _save();
+
+    return _challengeList;
   }
 
-  Future<bool> _save() async {
+  Future<bool> _save({bool remove}) async {
+    if (remove ?? false) {
+      return _localData.setStringList(keyAcces, []);
+    }
     if (_challengeList.isNotEmpty) {
       List<String> _jsonList = _challengeList.map((challenge) {
         return jsonEncode(challenge.toJson());
@@ -56,5 +51,11 @@ class Challengecontroller {
       return _localData.setStringList(keyAcces, _jsonList);
     }
     return false;
+  }
+
+  Future<List<ChallengeModel>> remove({@required int index}) async {
+    _challengeList.removeAt(index);
+    await _save(remove: true);
+    return _challengeList;
   }
 }

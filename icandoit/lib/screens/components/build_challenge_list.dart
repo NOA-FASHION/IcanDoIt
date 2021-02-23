@@ -20,11 +20,24 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
     return FutureBuilder(
         future: _challengesList,
         builder: (context, AsyncSnapshot<List<ChallengeModel>> data) {
+          List<ChallengeModel> _challengesList = data.data;
           if (!data.hasData) {
-            return Text("Pas de challenge crees.");
+            return Container(
+              alignment: Alignment.center,
+              child: CircularProgressIndicator(),
+            );
+          } else if (_challengesList.isEmpty) {
+            return Container(
+              alignment: Alignment.center,
+              child: Text(
+                "Pas de challenge crees.",
+                style: TextStyle(color: Colors.orange[600], fontSize: 18.0),
+                textAlign: TextAlign.center,
+              ),
+            );
           }
           return ListView.builder(
-            itemCount: data.data.length,
+            itemCount: _challengesList.length,
             itemBuilder: (context, index) {
               return Padding(
                 padding:
@@ -45,6 +58,7 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                               actions: [
                                 RaisedButton(
                                   onPressed: () {
+                                    widget.controller.remove(index: index);
                                     Navigator.pop(context, true);
                                   },
                                   child: Text("Oui"),

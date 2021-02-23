@@ -115,10 +115,13 @@ class _HomeState extends State<Home> {
                             onPressed: () {
                               if (formKey.currentState.validate()) {
                                 formKey.currentState.save();
-                                _controller.addChallenge(
-                                    name: nameChallenge,
-                                    target: targetChallenge,
-                                    unity: unityChallenge);
+                                setState(() {
+                                  challengesData = _controller.addChallenge(
+                                      name: nameChallenge,
+                                      target: targetChallenge,
+                                      unity: unityChallenge);
+                                });
+                                Navigator.pop(context);
                               }
                             },
                             child: Text("Ajouter le challenge"),
