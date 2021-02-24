@@ -13,7 +13,7 @@ class _HomeState extends State<Home> {
   PersistentBottomSheetController _bottomSheetController;
   final Challengecontroller _controller = Challengecontroller();
   Future<List> challengesData;
-  String unityChallenge = "KG";
+  String unityChallenge = "haute";
   String nameChallenge;
   String targetChallenge;
 
@@ -68,29 +68,36 @@ class _HomeState extends State<Home> {
                               nameChallenge = value;
                             },
                             validator: (value) {
-                              final RegExp checkReg = RegExp(r'^\D+$');
+                              // final RegExp checkReg = RegExp(r'^\D+$');
                               if (value.isEmpty) {
                                 return "Merci d'entrer un nom pour le challenge";
-                              } else if (!checkReg.hasMatch(value)) {
-                                return "$value";
                               }
+                              // else if (!checkReg.hasMatch(value)) {
+                              //   return "$value";
+                              // }
                               return null;
                             },
                             decoration:
-                                InputDecoration(labelText: "Nom du challenge"),
+                                InputDecoration(labelText: "Nom de la mission"),
                           ),
                           TextFormField(
                             onSaved: (value) {
                               targetChallenge = value;
                             },
                             validator: (value) {
-                              final _isInt = int.tryParse(value);
-                              if (_isInt == null) {
-                                return "Merci d'entrer uniquement des chiffres";
+                              // final _isInt = int.tryParse(value);
+                              // if (_isInt == null) {
+                              //   return "Merci d'entrer uniquement des chiffres";
+                              // }
+                              if (value.isEmpty) {
+                                return "Merci d'entrer une description pour la mission";
+                              } else if (value.length > 35) {
+                                return "pas plus de 50 caracteres";
                               }
                               return null;
                             },
-                            decoration: InputDecoration(labelText: "Objectif"),
+                            decoration:
+                                InputDecoration(labelText: "Description"),
                           ),
                           DropdownButtonFormField(
                             value: unityChallenge,
@@ -102,12 +109,12 @@ class _HomeState extends State<Home> {
                             },
                             items: <DropdownMenuItem>[
                               DropdownMenuItem(
-                                value: "KG",
-                                child: Text("Kg"),
+                                value: "haute",
+                                child: Text("haute"),
                               ),
                               DropdownMenuItem(
-                                value: "KM",
-                                child: Text("Km"),
+                                value: "normal",
+                                child: Text("normal"),
                               ),
                             ],
                           ),
@@ -118,13 +125,13 @@ class _HomeState extends State<Home> {
                                 setState(() {
                                   challengesData = _controller.addChallenge(
                                       name: nameChallenge,
-                                      target: targetChallenge,
+                                      description: targetChallenge,
                                       unity: unityChallenge);
                                 });
                                 Navigator.pop(context);
                               }
                             },
-                            child: Text("Ajouter le challenge"),
+                            child: Text("Ajouter la mission"),
                           ),
                         ],
                       ),

@@ -27,13 +27,15 @@ class Challengecontroller {
 
   Future<List<ChallengeModel>> addChallenge(
       {@required String name,
-      @required String target,
+      @required String description,
       @required String unity}) async {
     _challengeList.add(
       ChallengeModel(
           name: name,
-          target: int.parse(target),
-          unity: unity == "KG" ? unity_challenge.kg : unity_challenge.km),
+          description: description,
+          unity: unity == "haute"
+              ? unity_challenge.haute
+              : unity_challenge.normal),
     );
     await _save();
 
@@ -53,9 +55,8 @@ class Challengecontroller {
     return false;
   }
 
-  Future<List<ChallengeModel>> remove({@required int index}) async {
+  void remove({@required int index}) async {
     _challengeList.removeAt(index);
     await _save(remove: true);
-    return _challengeList;
   }
 }

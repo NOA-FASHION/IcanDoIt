@@ -30,7 +30,7 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
             return Container(
               alignment: Alignment.center,
               child: Text(
-                "Pas de challenge crees.",
+                "Pas de mission en cours.",
                 style: TextStyle(color: Colors.orange[600], fontSize: 18.0),
                 textAlign: TextAlign.center,
               ),
@@ -43,6 +43,21 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                 padding:
                     const EdgeInsets.only(bottom: 3.0, left: 8.0, right: 8.0),
                 child: Dismissible(
+                  onDismissed: (direction) {
+                    if (direction == DismissDirection.endToStart) {
+                      Scaffold.of(context).showSnackBar(_buildSnackBar(
+                          content:
+                              "Le challenge ${_challengesList[index].name} a bien ete valide"));
+                      widget.controller.remove(index: index);
+                    }
+
+                    if (direction == DismissDirection.startToEnd) {
+                      Scaffold.of(context).showSnackBar(_buildSnackBar(
+                          content:
+                              "La mission ${_challengesList[index].name} a bien ete supprime"));
+                      widget.controller.remove(index: index);
+                    }
+                  },
                   confirmDismiss: (direction) async {
                     if (direction == DismissDirection.startToEnd) {
                       final bool resultat = await showDialog<bool>(
@@ -53,12 +68,10 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                                 "Confirmation",
                                 style: TextStyle(color: Colors.blue),
                               ),
-                              content:
-                                  Text("Voulez vous suprimmez le challenge"),
+                              content: Text("Voulez vous suprimmez la mission"),
                               actions: [
                                 RaisedButton(
                                   onPressed: () {
-                                    widget.controller.remove(index: index);
                                     Navigator.pop(context, true);
                                   },
                                   child: Text("Oui"),
@@ -98,31 +111,77 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                   ),
                   key: Key(UniqueKey().toString()),
                   child: Container(
-                    color: Colors.white,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.white,
+                      border: Border(),
+                    ),
                     child: ListTile(
-                      title: Text(_challengesList[index].name),
+                      title: Row(
+                        children: [
+                          Text(
+                            "Titre",
+                            style: TextStyle(
+                                backgroundColor: Colors.blue,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.red),
+                          ),
+                          SizedBox(
+                            width: 5.0,
+                          ),
+                          Text(_challengesList[index].name),
+                          SizedBox(
+                            width: 5.0,
+                          ),
+                        ],
+                      ),
                       subtitle: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Row(
+                        child: Column(
                           children: [
-                            Text(
-                              "Objectif",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black),
+                            Container(
+                              height: 50.0,
+                              child: Row(
+                                children: [
+                                  Text(
+                                    "Description",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.blue),
+                                  ),
+                                  SizedBox(
+                                    width: 5.0,
+                                  ),
+                                  Text(_challengesList[index]
+                                      .description
+                                      .toString()),
+                                  SizedBox(
+                                    width: 5.0,
+                                  ),
+                                ],
+                              ),
                             ),
-                            SizedBox(
-                              width: 5.0,
+                            Row(
+                              children: [
+                                Text(
+                                  "Priorite",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.blue),
+                                ),
+                                SizedBox(
+                                  width: 5.0,
+                                ),
+                                Text(_challengesList[index]
+                                    .unity
+                                    .toString()
+                                    .replaceAll(unityPattern, "")
+                                    .toUpperCase()),
+                                SizedBox(
+                                  width: 5.0,
+                                ),
+                              ],
                             ),
-                            Text(_challengesList[index].target.toString()),
-                            SizedBox(
-                              width: 5.0,
-                            ),
-                            Text(_challengesList[index]
-                                .unity
-                                .toString()
-                                .replaceAll(unityPattern, "")
-                                .toUpperCase()),
                           ],
                         ),
                       ),
@@ -134,5 +193,14 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
             },
           );
         });
+  }
+
+  SnackBar _buildSnackBar({@required String content}) {
+    return SnackBar(
+      content: Text(
+        content,
+        textAlign: TextAlign.center,
+      ),
+    );
   }
 }
