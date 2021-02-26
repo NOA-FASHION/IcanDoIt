@@ -43,7 +43,7 @@ class Challengecontroller {
   }
 
   Future<bool> _save({bool remove}) async {
-    if (remove ?? false) {
+    if (_challengeList.length < 1 && remove ?? false) {
       return _localData.setStringList(keyAcces, []);
     }
     if (_challengeList.isNotEmpty) {

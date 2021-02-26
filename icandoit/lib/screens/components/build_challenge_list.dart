@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:icandoit/models/challenge_model.dart';
 import '../../controllers/challenge_controller.dart';
+import 'package:colour/colour.dart';
 
 class ChallengesListBuilder extends StatefulWidget {
   final Future<List<ChallengeModel>> challenData;
@@ -95,7 +96,7 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                     alignment: Alignment.centerLeft,
                     child: Icon(
                       Icons.delete,
-                      size: 50.0,
+                      size: 55.0,
                       color: Colors.white,
                     ),
                   ),
@@ -114,75 +115,95 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       color: Colors.white,
-                      border: Border(),
+                      border: Border.all(
+                        color: Colour('#518faa'),
+                        width: 4,
+                      ),
                     ),
                     child: ListTile(
-                      title: Row(
-                        children: [
-                          Text(
-                            "Titre",
-                            style: TextStyle(
-                                backgroundColor: Colors.blue,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.red),
-                          ),
-                          SizedBox(
-                            width: 5.0,
-                          ),
-                          Text(_challengesList[index].name),
-                          SizedBox(
-                            width: 5.0,
-                          ),
-                        ],
+                      title: Container(
+                        child: Row(
+                          children: [
+                            Text(
+                              "Titre",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.blue),
+                            ),
+                            SizedBox(
+                              width: 5.0,
+                            ),
+                            Text(_challengesList[index].name),
+                            SizedBox(
+                              width: 5.0,
+                            ),
+                          ],
+                        ),
                       ),
                       subtitle: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          children: [
-                            Container(
-                              height: 50.0,
-                              child: Row(
-                                children: [
-                                  Text(
-                                    "Description",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.blue),
-                                  ),
-                                  SizedBox(
-                                    width: 5.0,
-                                  ),
-                                  Text(_challengesList[index]
-                                      .description
-                                      .toString()),
-                                  SizedBox(
-                                    width: 5.0,
-                                  ),
-                                ],
-                              ),
+                        padding: const EdgeInsets.all(5.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.white,
+                            border: Border.all(
+                              color: Colour('#C4AB4D'),
+                              width: 2,
                             ),
-                            Row(
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
                               children: [
-                                Text(
-                                  "Priorite",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.blue),
+                                Container(
+                                  height: 30.0,
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        "Description",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.blue),
+                                      ),
+                                      SizedBox(
+                                        width: 5.0,
+                                      ),
+                                      Text(_challengesList[index]
+                                          .description
+                                          .toString()),
+                                      SizedBox(
+                                        width: 5.0,
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                                SizedBox(
-                                  width: 5.0,
-                                ),
-                                Text(_challengesList[index]
-                                    .unity
-                                    .toString()
-                                    .replaceAll(unityPattern, "")
-                                    .toUpperCase()),
-                                SizedBox(
-                                  width: 5.0,
+                                Container(
+                                  height: 30.0,
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        "Priorite",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.blue),
+                                      ),
+                                      SizedBox(
+                                        width: 5.0,
+                                      ),
+                                      Text(_challengesList[index]
+                                          .unity
+                                          .toString()
+                                          .replaceAll(unityPattern, "")
+                                          .toUpperCase()),
+                                      SizedBox(
+                                        width: 5.0,
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ],
                             ),
-                          ],
+                          ),
                         ),
                       ),
                       isThreeLine: true,

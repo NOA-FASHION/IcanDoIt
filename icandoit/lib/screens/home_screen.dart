@@ -85,10 +85,6 @@ class _HomeState extends State<Home> {
                               targetChallenge = value;
                             },
                             validator: (value) {
-                              // final _isInt = int.tryParse(value);
-                              // if (_isInt == null) {
-                              //   return "Merci d'entrer uniquement des chiffres";
-                              // }
                               if (value.isEmpty) {
                                 return "Merci d'entrer une description pour la mission";
                               } else if (value.length > 35) {
