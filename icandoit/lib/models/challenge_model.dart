@@ -1,21 +1,59 @@
 import 'package:flutter/foundation.dart';
 
 enum unity_challenge { haute, normal }
+enum unity_challenge1 {
+  evenement,
+  achat,
+  tache,
+  mission,
+  vente,
+  choix,
+  essai,
+  validation,
+  url
+}
+choixDesciptionEnum(dynamic json) {
+  unity_challenge1 unity;
+  if (json['unity'] == "evenement") {
+    unity = unity_challenge1.evenement;
+  } else if (json['unity'] == "achat") {
+    unity = unity_challenge1.achat;
+  } else if (json['unity'] == "tache") {
+    unity = unity_challenge1.tache;
+  } else if (json['unity'] == "mission") {
+    unity = unity_challenge1.mission;
+  } else if (json['unity'] == "vente") {
+    unity = unity_challenge1.vente;
+  } else if (json['unity'] == "choix") {
+    unity = unity_challenge1.choix;
+  } else if (json['unity'] == "essai") {
+    unity = unity_challenge1.essai;
+  } else if (json['unity'] == "validation") {
+    unity = unity_challenge1.validation;
+  } else if (json['unity'] == "url") {
+    unity = unity_challenge1.url;
+  }
+  return unity;
+}
 
 class Challengemodel2 {
   final String name;
   final String tache;
-  final String description;
+  final unity_challenge1 description;
   Challengemodel2(
       {@required this.name, @required this.tache, @required this.description});
 
   Challengemodel2.fromJSON(Map<String, dynamic> json)
       : name = json['name'],
         tache = json['tache'],
-        description = json['description'];
+        description = choixDesciptionEnum(json);
 
   Map<String, dynamic> toJson() {
-    return {"name": name, "tache": tache, "description": description};
+    return {
+      "name": name,
+      "tache": tache,
+      "description": description.toString()
+    };
   }
 }
 
