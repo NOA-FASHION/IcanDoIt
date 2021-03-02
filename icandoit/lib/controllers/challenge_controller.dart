@@ -26,22 +26,6 @@ class Challengecontroller {
     return _challengeList;
   }
 
-  Future<List<ChallengeModel>> initChallengeList1() async {
-    _localData = await SharedPreferences.getInstance();
-    final List<String> _tempList = _localData.getStringList(keyAcces);
-    if (_tempList != null) {
-      final List<Map<String, dynamic>> _jsonDecodeList = _tempList
-          .map((challengeEncoded) => jsonDecode(challengeEncoded))
-          .toList()
-          .cast<Map<String, dynamic>>();
-
-      _challengeList = _jsonDecodeList
-          .map((challenge) => ChallengeModel.fromJSON(challenge))
-          .toList();
-    }
-    return _challengeList;
-  }
-
   choixDesciptionEnum(dynamic json) {
     unity_challenge1 unity;
     if (json == "evenement") {
