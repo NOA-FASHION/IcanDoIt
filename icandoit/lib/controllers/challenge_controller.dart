@@ -51,6 +51,7 @@ class Challengecontroller {
   }
 
   Future<List<Challengemodel2>> addChallenge2({
+    @required String nameListChallenge,
     @required String name,
     @required String tache,
     @required String description,
@@ -59,6 +60,11 @@ class Challengecontroller {
         name: name,
         tache: tache,
         description: choixDesciptionEnum(description)));
+
+    addChallenge1(
+      name: nameListChallenge,
+      challengeListTest: _challengeList2,
+    );
 
     await _save();
 
@@ -81,9 +87,7 @@ class Challengecontroller {
         }
       }
     }
-
     await _save();
-
     return _challengeList;
   }
 

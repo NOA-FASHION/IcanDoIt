@@ -68,13 +68,9 @@ class _HomeState extends State<Home> {
                               nameChallenge = value;
                             },
                             validator: (value) {
-                              // final RegExp checkReg = RegExp(r'^\D+$');
                               if (value.isEmpty) {
                                 return "Merci d'entrer un nom pour le challenge";
                               }
-                              // else if (!checkReg.hasMatch(value)) {
-                              //   return "$value";
-                              // }
                               return null;
                             },
                             decoration:

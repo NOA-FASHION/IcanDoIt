@@ -71,8 +71,9 @@ class ChallengeModel {
         unity: json['unity'] == "unity_challenge.haute"
             ? unity_challenge.haute
             : unity_challenge.normal,
-        listeDeTache: List<Challengemodel2>.from(
-            json["listeDeTache"].map((x) => Challengemodel2.fromJSON(x))),
+        listeDeTache: List<Challengemodel2>.from(json["listeDeTache"]
+            .map((x) => Challengemodel2.fromJSON(x))
+            .toList()),
       );
 
   Map<String, dynamic> toJson() {
