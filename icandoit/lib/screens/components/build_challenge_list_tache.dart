@@ -3,19 +3,18 @@ import 'package:icandoit/models/challenge_model.dart';
 import '../../controllers/challenge_controller.dart';
 import 'package:colour/colour.dart';
 
-import 'build_challenge_list_tache.dart';
-import 'home_screen_tache.dart';
-
-class ChallengesListBuilder extends StatefulWidget {
+class ChallengesListBuilderTaches extends StatefulWidget {
   final Future<List<ChallengeModel>> challenData;
   final Challengecontroller controller;
-  ChallengesListBuilder(
+  ChallengesListBuilderTaches(
       {@required this.challenData, @required this.controller});
   @override
-  _ChallengesListBuilderState createState() => _ChallengesListBuilderState();
+  _ChallengesListBuilderTachesState createState() =>
+      _ChallengesListBuilderTachesState();
 }
 
-class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
+class _ChallengesListBuilderTachesState
+    extends State<ChallengesListBuilderTaches> {
   String unityPattern = "unity_challenge.";
   @override
   Widget build(BuildContext context) {
@@ -124,11 +123,6 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                       ),
                     ),
                     child: ListTile(
-                      onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) =>
-                                HomeTaches(_challengesList[index].name)));
-                      },
                       title: Container(
                         child: Row(
                           children: [
