@@ -4,7 +4,7 @@ import '../../controllers/challenge_controller.dart';
 import 'package:colour/colour.dart';
 
 class ChallengesListBuilderTaches extends StatefulWidget {
-  final Future<List<ChallengeModel>> challenData;
+  final Future<List<Challengemodel2>> challenData;
   final Challengecontroller controller;
   ChallengesListBuilderTaches(
       {@required this.challenData, @required this.controller});
@@ -15,15 +15,15 @@ class ChallengesListBuilderTaches extends StatefulWidget {
 
 class _ChallengesListBuilderTachesState
     extends State<ChallengesListBuilderTaches> {
-  String unityPattern = "unity_challenge.";
+  String unityPattern = "unity_challenge1.";
   @override
   Widget build(BuildContext context) {
-    Future<List<ChallengeModel>> _challengesList = widget.challenData;
+    Future<List<Challengemodel2>> _challengesList = widget.challenData;
 
     return FutureBuilder(
         future: _challengesList,
-        builder: (context, AsyncSnapshot<List<ChallengeModel>> data) {
-          List<ChallengeModel> _challengesList = data.data;
+        builder: (context, AsyncSnapshot<List<Challengemodel2>> data) {
+          List<Challengemodel2> _challengesList = data.data;
           if (!data.hasData) {
             return Container(
               alignment: Alignment.center,
@@ -162,7 +162,7 @@ class _ChallengesListBuilderTachesState
                                   child: Row(
                                     children: [
                                       Text(
-                                        "Description",
+                                        "Tache",
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                             color: Colors.blue),
@@ -171,7 +171,7 @@ class _ChallengesListBuilderTachesState
                                         width: 5.0,
                                       ),
                                       Text(_challengesList[index]
-                                          .description
+                                          .tache
                                           .toString()),
                                       SizedBox(
                                         width: 5.0,
@@ -184,7 +184,7 @@ class _ChallengesListBuilderTachesState
                                   child: Row(
                                     children: [
                                       Text(
-                                        "Priorite",
+                                        "Description",
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                             color: Colors.blue),
@@ -193,7 +193,7 @@ class _ChallengesListBuilderTachesState
                                         width: 5.0,
                                       ),
                                       Text(_challengesList[index]
-                                          .unity
+                                          .description
                                           .toString()
                                           .replaceAll(unityPattern, "")
                                           .toUpperCase()),

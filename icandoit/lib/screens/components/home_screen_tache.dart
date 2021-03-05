@@ -17,7 +17,7 @@ class _HomeTachesState extends State<HomeTaches> {
   PersistentBottomSheetController _bottomSheetController;
   final Challengecontroller _controller = Challengecontroller();
   Future<List> challengesData;
-  String unityChallenge = "haute";
+  String unityChallenge = "evenement";
   String nameChallenge;
   String targetChallenge;
 
@@ -105,12 +105,40 @@ class _HomeTachesState extends State<HomeTaches> {
                             },
                             items: <DropdownMenuItem>[
                               DropdownMenuItem(
-                                value: "haute",
-                                child: Text("haute"),
+                                value: "evenement",
+                                child: Text("evenement"),
                               ),
                               DropdownMenuItem(
-                                value: "normal",
-                                child: Text("normal"),
+                                value: "achat",
+                                child: Text("achat"),
+                              ),
+                              DropdownMenuItem(
+                                value: "tache",
+                                child: Text("tache"),
+                              ),
+                              DropdownMenuItem(
+                                value: "mission",
+                                child: Text("mission"),
+                              ),
+                              DropdownMenuItem(
+                                value: "vente",
+                                child: Text("vente"),
+                              ),
+                              DropdownMenuItem(
+                                value: "choix",
+                                child: Text("choix"),
+                              ),
+                              DropdownMenuItem(
+                                value: "essai",
+                                child: Text("essai"),
+                              ),
+                              DropdownMenuItem(
+                                value: "validation",
+                                child: Text("validation"),
+                              ),
+                              DropdownMenuItem(
+                                value: "url",
+                                child: Text("url"),
                               ),
                             ],
                           ),
@@ -119,10 +147,11 @@ class _HomeTachesState extends State<HomeTaches> {
                               if (formKey.currentState.validate()) {
                                 formKey.currentState.save();
                                 setState(() {
-                                  challengesData = _controller.addChallenge(
+                                  challengesData = _controller.addChallenge2(
+                                      nameListChallenge: something,
                                       name: nameChallenge,
                                       description: targetChallenge,
-                                      unity: unityChallenge);
+                                      tache: unityChallenge);
                                 });
                                 Navigator.pop(context);
                               }
