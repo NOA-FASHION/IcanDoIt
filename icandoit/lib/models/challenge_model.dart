@@ -84,6 +84,17 @@ class ChallengeModel {
       "listeDeTache": List<dynamic>.from(listeDeTache.map((x) => x.toJson())),
     };
   }
+
+  Map<String, dynamic> toJson1() {
+    return {
+      "name": name,
+      "description": description,
+      "unity": unity.toString(),
+      "listeDeTache": [],
+      // List<Challengemodel2>.from(listeDeTache.map((x) => x.toJson())),
+    };
+  }
+
   //  ChallengeModel.fromJSON(Map<String, dynamic> json)
   //     : name = json['name'],
   //       description = json['description'],
@@ -97,5 +108,15 @@ class ChallengeModel {
   //     "description": description,
   //     "unity": unity.toString()
   //   };
+  // }
+  // List<String> toJSON() {
+  //   var listeDETACHE;
+  //   if (this.listeDeTache.length < 1) {
+  //     listeDETACHE = [];
+  //   } else {
+  //     listeDETACHE =
+  //         List<Challengemodel2>.from(listeDeTache.map((x) => x.toJson()));
+  //   }
+  //   return listeDETACHE;
   // }
 }

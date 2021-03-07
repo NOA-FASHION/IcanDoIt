@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:icandoit/models/challenge_model.dart';
 import 'package:icandoit/screens/components/build_challenge_list_tache.dart';
 import 'package:icandoit/controllers/challenge_controller.dart';
 
@@ -17,13 +18,15 @@ class _HomeTachesState extends State<HomeTaches> {
   PersistentBottomSheetController _bottomSheetController;
   final Challengecontroller _controller = Challengecontroller();
   Future<List> challengesData;
+  Future<List<ChallengeModel>> challengesData2;
   String unityChallenge = "evenement";
   String nameChallenge;
   String targetChallenge;
 
   @override
   void initState() {
-    challengesData = _controller.initChallengeList();
+    challengesData2 = _controller.initChallengeList();
+    challengesData = _controller.initChallengeList1(something);
     super.initState();
   }
 
@@ -150,8 +153,8 @@ class _HomeTachesState extends State<HomeTaches> {
                                   challengesData = _controller.addChallenge2(
                                       nameListChallenge: something,
                                       name: nameChallenge,
-                                      description: targetChallenge,
-                                      tache: unityChallenge);
+                                      description: unityChallenge,
+                                      tache: targetChallenge);
                                 });
                                 Navigator.pop(context);
                               }

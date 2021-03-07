@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:icandoit/models/challenge_model.dart';
 import 'package:icandoit/screens/components/build_challenge_list.dart';
 import 'package:icandoit/controllers/challenge_controller.dart';
 
@@ -16,6 +17,7 @@ class _HomeState extends State<Home> {
   String unityChallenge = "haute";
   String nameChallenge;
   String targetChallenge;
+  List<Challengemodel2> challengeListTache = [];
 
   @override
   void initState() {
@@ -118,7 +120,8 @@ class _HomeState extends State<Home> {
                                   challengesData = _controller.addChallenge(
                                       name: nameChallenge,
                                       description: targetChallenge,
-                                      unity: unityChallenge);
+                                      unity: unityChallenge,
+                                      challengeListTache: challengeListTache);
                                 });
                                 Navigator.pop(context);
                               }
