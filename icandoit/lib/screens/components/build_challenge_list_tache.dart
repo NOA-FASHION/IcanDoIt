@@ -4,10 +4,13 @@ import '../../controllers/challenge_controller.dart';
 import 'package:colour/colour.dart';
 
 class ChallengesListBuilderTaches extends StatefulWidget {
+  String nameChallenge;
   final Future<List<Challengemodel2>> challenData;
   final Challengecontroller controller;
   ChallengesListBuilderTaches(
-      {@required this.challenData, @required this.controller});
+      {@required this.challenData,
+      @required this.controller,
+      @required this.nameChallenge});
   @override
   _ChallengesListBuilderTachesState createState() =>
       _ChallengesListBuilderTachesState();
@@ -51,14 +54,16 @@ class _ChallengesListBuilderTachesState
                       Scaffold.of(context).showSnackBar(_buildSnackBar(
                           content:
                               "Le challenge ${_challengesList[index].name} a bien ete valide"));
-                      widget.controller.remove(index: index);
+                      widget.controller.remove2(
+                          index: index, nameChallenge: widget.nameChallenge);
                     }
 
                     if (direction == DismissDirection.startToEnd) {
                       Scaffold.of(context).showSnackBar(_buildSnackBar(
                           content:
                               "La mission ${_challengesList[index].name} a bien ete supprime"));
-                      widget.controller.remove(index: index);
+                      widget.controller.remove2(
+                          index: index, nameChallenge: widget.nameChallenge);
                     }
                   },
                   confirmDismiss: (direction) async {
@@ -98,7 +103,7 @@ class _ChallengesListBuilderTachesState
                     alignment: Alignment.centerLeft,
                     child: Icon(
                       Icons.delete,
-                      size: 55.0,
+                      size: 35.0,
                       color: Colors.white,
                     ),
                   ),
@@ -127,7 +132,7 @@ class _ChallengesListBuilderTachesState
                         child: Row(
                           children: [
                             Text(
-                              "Titre",
+                              _challengesList[index].name,
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: Colors.blue),
@@ -135,7 +140,7 @@ class _ChallengesListBuilderTachesState
                             SizedBox(
                               width: 5.0,
                             ),
-                            Text(_challengesList[index].name),
+                            Text((index + 1).toString()),
                             SizedBox(
                               width: 5.0,
                             ),
@@ -161,12 +166,11 @@ class _ChallengesListBuilderTachesState
                                   height: 30.0,
                                   child: Row(
                                     children: [
-                                      Text(
-                                        "Tache",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.blue),
-                                      ),
+                                      Text(_challengesList[index]
+                                          .description
+                                          .toString()
+                                          .replaceAll(unityPattern, "")
+                                          .toUpperCase()),
                                       SizedBox(
                                         width: 5.0,
                                       ),
@@ -179,30 +183,30 @@ class _ChallengesListBuilderTachesState
                                     ],
                                   ),
                                 ),
-                                Container(
-                                  height: 30.0,
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        "Description",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.blue),
-                                      ),
-                                      SizedBox(
-                                        width: 5.0,
-                                      ),
-                                      Text(_challengesList[index]
-                                          .description
-                                          .toString()
-                                          .replaceAll(unityPattern, "")
-                                          .toUpperCase()),
-                                      SizedBox(
-                                        width: 5.0,
-                                      ),
-                                    ],
-                                  ),
-                                ),
+                                // Container(
+                                //   height: 30.0,
+                                //   child: Row(
+                                //     children: [
+                                //       Text(
+                                //         "Description",
+                                //         style: TextStyle(
+                                //             fontWeight: FontWeight.bold,
+                                //             color: Colors.blue),
+                                //       ),
+                                //       SizedBox(
+                                //         width: 5.0,
+                                //       ),
+                                //       Text(_challengesList[index]
+                                //           .description
+                                //           .toString()
+                                //           .replaceAll(unityPattern, "")
+                                //           .toUpperCase()),
+                                //       SizedBox(
+                                //         width: 5.0,
+                                //       ),
+                                //     ],
+                                //   ),
+                                // ),
                               ],
                             ),
                           ),

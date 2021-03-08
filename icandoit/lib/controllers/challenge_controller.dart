@@ -58,13 +58,10 @@ class Challengecontroller {
         print(_challengeList4);
       }
     }
-    // for (var i = _challengeList4.length - 1; i >= 0; i--) {
-    //   print(_challengeList4[i]);
-    // }
     return _challengeList4;
   }
 
-  choixDesciptionEnum(dynamic json) {
+  unity_challenge1 choixDesciptionEnum(dynamic json) {
     unity_challenge1 unity;
     if (json == "evenement") {
       unity = unity_challenge1.evenement;
@@ -106,7 +103,7 @@ class Challengecontroller {
         tache: tache,
         description: choixDesciptionEnum(description)));
 
-    await addChallenge1(
+    addChallenge1(
         name: nameListChallenge,
         challengeListTest: _challengeList2,
         challengeList: _challengeList);
@@ -122,9 +119,7 @@ class Challengecontroller {
     _challengeList = challengeList;
     for (var i = _challengeList.length - 1; i >= 0; i--) {
       if (_challengeList[i].name == name) {
-        print("challenListename");
-        print(_challengeList[i].name);
-        for (var n = challengeListTest.length - 1; i >= 0; i--) {
+        for (var n = challengeListTest.length - 1; n >= 0; n--) {
           _challengeList[i].listeDeTache.add(
                 Challengemodel2(
                     name: challengeListTest[n].name,
@@ -187,12 +182,22 @@ class Challengecontroller {
     await _save(remove: true);
   }
 
-  List<ChallengeModel> removesuper(
-      Future<List<ChallengeModel>> challengeListSuper) {
-    List<ChallengeModel> _listProducts;
-    challengeListSuper.then((value) {
-      if (value != null) value.forEach((item) => _listProducts.add(item));
-    });
-    return _listProducts;
+  void remove2({@required int index, @required String nameChallenge}) async {
+    for (var i = _challengeList.length - 1; i >= 0; i--) {
+      if (_challengeList[i].name == nameChallenge) {
+        _challengeList[i].listeDeTache.removeAt(index);
+      }
+    }
+    await _save(remove: true);
   }
+
+  // List<ChallengeModel> removesuper(
+  //     Future<List<ChallengeModel>> challengeListSuper) {
+  //   List<ChallengeModel> _listProducts;
+  //   challengeListSuper.then((value) {
+  //     if (value != null) value.forEach((item) => _listProducts.add(item));
+  //   });
+  //   return _listProducts;
+  // }
+
 }

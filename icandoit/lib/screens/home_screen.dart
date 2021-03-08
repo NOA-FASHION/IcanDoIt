@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:icandoit/models/challenge_model.dart';
 import 'package:icandoit/screens/components/build_challenge_list.dart';
 import 'package:icandoit/controllers/challenge_controller.dart';
-
+import 'package:shimmer_animation/shimmer_animation.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
@@ -30,14 +31,35 @@ class _HomeState extends State<Home> {
     return Scaffold(
       key: scaffoldkey,
       appBar: AppBar(
-          title: Text('ICanDoIt'),
-          backgroundColor: Colors.transparent,
-          elevation: 0.0),
-      body: ChallengesListBuilder(
-        controller: _controller,
-        challenData: challengesData,
+        centerTitle: true,
+        title: Text("ICanDoIt"),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: <Color>[Colors.red, Colors.blue])),
+        ),
       ),
-      backgroundColor: Color(0xff414a4c),
+      body: Shimmer(
+        duration: Duration(seconds: 3),
+        interval: Duration(seconds: 5),
+        color: Colors.white,
+        enabled: true,
+        direction: ShimmerDirection.fromLTRB(),
+        child: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                  colors: [Colors.purple, Colors.blue])),
+          child: ChallengesListBuilder(
+            controller: _controller,
+            challenData: challengesData,
+          ),
+        ),
+      ),
+      // backgroundColor: Color(0xff414a4c),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: buildBottomSheet(),
     );

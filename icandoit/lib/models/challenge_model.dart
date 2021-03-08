@@ -14,23 +14,23 @@ enum unity_challenge1 {
 }
 choixDesciptionEnum(dynamic json) {
   unity_challenge1 unity;
-  if (json['unity'] == "evenement") {
+  if (json['description'] == "unity_challenge1.evenement") {
     unity = unity_challenge1.evenement;
-  } else if (json['unity'] == "achat") {
+  } else if (json['description'] == "unity_challenge1.achat") {
     unity = unity_challenge1.achat;
-  } else if (json['unity'] == "tache") {
+  } else if (json['description'] == "unity_challenge1.tache") {
     unity = unity_challenge1.tache;
-  } else if (json['unity'] == "mission") {
+  } else if (json['description'] == "unity_challenge1.mission") {
     unity = unity_challenge1.mission;
-  } else if (json['unity'] == "vente") {
+  } else if (json['description'] == "unity_challenge1.vente") {
     unity = unity_challenge1.vente;
-  } else if (json['unity'] == "choix") {
+  } else if (json['description'] == "unity_challenge1.choix") {
     unity = unity_challenge1.choix;
-  } else if (json['unity'] == "essai") {
+  } else if (json['description'] == "unity_challenge1.essai") {
     unity = unity_challenge1.essai;
-  } else if (json['unity'] == "validation") {
+  } else if (json['description'] == "unity_challenge1.validation") {
     unity = unity_challenge1.validation;
-  } else if (json['unity'] == "url") {
+  } else if (json['description'] == "unity_challenge1.url") {
     unity = unity_challenge1.url;
   }
   return unity;

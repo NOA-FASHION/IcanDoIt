@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:icandoit/models/challenge_model.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
 import '../../controllers/challenge_controller.dart';
 import 'package:colour/colour.dart';
 
@@ -161,52 +162,66 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                           ),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Column(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Container(
-                                  height: 30.0,
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        "Description",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.blue),
+                                Column(
+                                  children: [
+                                    Container(
+                                      height: 30.0,
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            "Description",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.blue),
+                                          ),
+                                          SizedBox(
+                                            width: 5.0,
+                                          ),
+                                          Text(_challengesList[index]
+                                              .description
+                                              .toString()),
+                                          SizedBox(
+                                            width: 5.0,
+                                          ),
+                                        ],
                                       ),
-                                      SizedBox(
-                                        width: 5.0,
+                                    ),
+                                    Container(
+                                      height: 30.0,
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            "Priorite",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.blue),
+                                          ),
+                                          SizedBox(
+                                            width: 5.0,
+                                          ),
+                                          Text(_challengesList[index]
+                                              .unity
+                                              .toString()
+                                              .replaceAll(unityPattern, "")
+                                              .toUpperCase()),
+                                          SizedBox(
+                                            width: 5.0,
+                                          ),
+                                        ],
                                       ),
-                                      Text(_challengesList[index]
-                                          .description
-                                          .toString()),
-                                      SizedBox(
-                                        width: 5.0,
-                                      ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
                                 Container(
-                                  height: 30.0,
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        "Priorite",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.blue),
-                                      ),
-                                      SizedBox(
-                                        width: 5.0,
-                                      ),
-                                      Text(_challengesList[index]
-                                          .unity
-                                          .toString()
-                                          .replaceAll(unityPattern, "")
-                                          .toUpperCase()),
-                                      SizedBox(
-                                        width: 5.0,
-                                      ),
-                                    ],
+                                  child: new CircularPercentIndicator(
+                                    radius: 60.0,
+                                    lineWidth: 5.0,
+                                    percent: 1.0,
+                                    center: new Text("100%"),
+                                    progressColor: Colors.green,
                                   ),
                                 ),
                               ],

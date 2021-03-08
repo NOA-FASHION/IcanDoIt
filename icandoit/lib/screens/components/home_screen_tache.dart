@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:icandoit/models/challenge_model.dart';
 import 'package:icandoit/screens/components/build_challenge_list_tache.dart';
 import 'package:icandoit/controllers/challenge_controller.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:shimmer_animation/shimmer_animation.dart';
 
 class HomeTaches extends StatefulWidget {
   final String something;
@@ -20,7 +22,7 @@ class _HomeTachesState extends State<HomeTaches> {
   Future<List> challengesData;
   Future<List<ChallengeModel>> challengesData2;
   String unityChallenge = "evenement";
-  String nameChallenge;
+  String nameChallenge = "Tache";
   String targetChallenge;
 
   @override
@@ -34,13 +36,65 @@ class _HomeTachesState extends State<HomeTaches> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldkey,
-      appBar: AppBar(
-          title: Text('ICanDoIt'),
-          backgroundColor: Colors.transparent,
-          elevation: 0.0),
-      body: ChallengesListBuilderTaches(
-        controller: _controller,
-        challenData: challengesData,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(100.0),
+        child: SafeArea(
+          child: AppBar(
+            centerTitle: true,
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text("ICanDoIt"),
+                Container(
+                  padding: EdgeInsets.all(8.0),
+                  // child: new CircularPercentIndicator(
+                  //   radius: 60.0,
+                  //   lineWidth: 5.0,
+                  //   percent: 1.0,
+                  //   center: new Text("100%"),
+                  //   progressColor: Colors.green,
+                  // ),
+                ),
+              ],
+            ),
+            flexibleSpace: Container(
+              padding: EdgeInsets.only(right: 30.0),
+              alignment: Alignment.centerRight,
+              height: 100,
+              child: new CircularPercentIndicator(
+                radius: 60.0,
+                lineWidth: 5.0,
+                percent: 1.0,
+                center: new Text("100%"),
+                progressColor: Colors.green,
+              ),
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: <Color>[Colors.red, Colors.blue])),
+            ),
+          ),
+        ),
+      ),
+      body: Shimmer(
+        duration: Duration(seconds: 3),
+        interval: Duration(seconds: 5),
+        color: Colors.white,
+        enabled: true,
+        direction: ShimmerDirection.fromLTRB(),
+        child: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                  colors: [Colors.purple, Colors.blue])),
+          child: ChallengesListBuilderTaches(
+            controller: _controller,
+            challenData: challengesData,
+            nameChallenge: something,
+          ),
+        ),
       ),
       backgroundColor: Color(0xff414a4c),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
@@ -70,34 +124,20 @@ class _HomeTachesState extends State<HomeTaches> {
                       padding: const EdgeInsets.all(10.0),
                       child: ListView(
                         children: [
-                          TextFormField(
-                            onSaved: (value) {
-                              nameChallenge = value;
-                            },
-                            validator: (value) {
-                              if (value.isEmpty) {
-                                return "Merci d'entrer un nom pour le challenge";
-                              }
-                              return null;
-                            },
-                            decoration:
-                                InputDecoration(labelText: "Nom de la mission"),
-                          ),
-                          TextFormField(
-                            onSaved: (value) {
-                              targetChallenge = value;
-                            },
-                            validator: (value) {
-                              if (value.isEmpty) {
-                                return "Merci d'entrer une description pour la mission";
-                              } else if (value.length > 35) {
-                                return "pas plus de 50 caracteres";
-                              }
-                              return null;
-                            },
-                            decoration:
-                                InputDecoration(labelText: "Description"),
-                          ),
+                          // TextFormField(
+                          //   onSaved: (value) {
+                          //     nameChallenge = value;
+                          //   },
+                          //   validator: (value) {
+                          //     if (value.isEmpty) {
+                          //       return "Merci d'entrer un nom pour le challenge";
+                          //     }
+                          //     return null;
+                          //   },
+                          //   decoration:
+                          //       InputDecoration(labelText: "Nom de la mission"),
+                          // ),
+
                           DropdownButtonFormField(
                             value: unityChallenge,
                             onChanged: (value) {
@@ -145,6 +185,21 @@ class _HomeTachesState extends State<HomeTaches> {
                               ),
                             ],
                           ),
+                          TextFormField(
+                            onSaved: (value) {
+                              targetChallenge = value;
+                            },
+                            validator: (value) {
+                              if (value.isEmpty) {
+                                return "Merci d'entrer une description pour la mission";
+                              } else if (value.length > 35) {
+                                return "pas plus de 50 caracteres";
+                              }
+                              return null;
+                            },
+                            decoration:
+                                InputDecoration(labelText: "Description"),
+                          ),
                           RaisedButton(
                             onPressed: () {
                               if (formKey.currentState.validate()) {
@@ -156,8 +211,8 @@ class _HomeTachesState extends State<HomeTaches> {
                                       description: unityChallenge,
                                       tache: targetChallenge);
                                 });
-                                Navigator.pop(context);
                               }
+                              Navigator.pop(context);
                             },
                             child: Text("Ajouter la mission"),
                           ),
