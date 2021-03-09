@@ -4,6 +4,7 @@ import 'package:icandoit/screens/components/build_challenge_list.dart';
 import 'package:icandoit/controllers/challenge_controller.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
@@ -26,19 +27,31 @@ class _HomeState extends State<Home> {
     super.initState();
   }
 
+  ThemeData _appTheme() {
+    final ThemeData base = ThemeData.light();
+    return base.copyWith(
+      canvasColor: Colors.blue,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldkey,
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text("ICanDoIt"),
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: <Color>[Colors.red, Colors.blue])),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(100.0),
+        child: SafeArea(
+          child: AppBar(
+            centerTitle: true,
+            title: Text("ICanDoIt"),
+            flexibleSpace: Container(
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
+                      colors: <Color>[Colors.purple, Colors.blue])),
+            ),
+          ),
         ),
       ),
       body: Shimmer(
@@ -79,6 +92,12 @@ class _HomeState extends State<Home> {
           _bottomSheetController = scaffoldkey.currentState.showBottomSheet(
             (context) {
               return Container(
+                  // decoration: BoxDecoration(
+                  //     borderRadius: BorderRadius.circular(20),
+                  //     gradient: LinearGradient(
+                  //         begin: Alignment.centerLeft,
+                  //         end: Alignment.centerRight,
+                  //         colors: [Colors.orange[900], Colors.blue])),
                   alignment: Alignment.center,
                   height: MediaQuery.of(context).size.height * 0.5,
                   child: Form(
@@ -86,7 +105,11 @@ class _HomeState extends State<Home> {
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: ListView(
+                        padding: EdgeInsets.all(10.0),
                         children: [
+                          SizedBox(
+                            height: 15.0,
+                          ),
                           TextFormField(
                             onSaved: (value) {
                               nameChallenge = value;
@@ -97,8 +120,23 @@ class _HomeState extends State<Home> {
                               }
                               return null;
                             },
-                            decoration:
-                                InputDecoration(labelText: "Nom de la mission"),
+                            decoration: InputDecoration(
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        width: 2.0, color: Colors.blueAccent),
+                                    borderRadius: BorderRadius.circular(15.0)),
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        width: 1.0, color: Colors.blueAccent),
+                                    borderRadius: BorderRadius.circular(15.0)),
+                                contentPadding: EdgeInsets.symmetric(
+                                    horizontal: 20, vertical: 10),
+                                labelText: "Nom de la mission",
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(15.0))),
+                          ),
+                          SizedBox(
+                            height: 15.0,
                           ),
                           TextFormField(
                             onSaved: (value) {
@@ -112,10 +150,38 @@ class _HomeState extends State<Home> {
                               }
                               return null;
                             },
-                            decoration:
-                                InputDecoration(labelText: "Description"),
+                            decoration: InputDecoration(
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        width: 2.0, color: Colors.blueAccent),
+                                    borderRadius: BorderRadius.circular(15.0)),
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        width: 1.0, color: Colors.blueAccent),
+                                    borderRadius: BorderRadius.circular(15.0)),
+                                labelText: "Description",
+                                contentPadding: EdgeInsets.symmetric(
+                                    horizontal: 20, vertical: 10),
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(15.0))),
+                          ),
+                          SizedBox(
+                            height: 15.0,
                           ),
                           DropdownButtonFormField(
+                            decoration: InputDecoration(
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        width: 2.0, color: Colors.blueAccent),
+                                    borderRadius: BorderRadius.circular(15.0)),
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        width: 1.0, color: Colors.blueAccent),
+                                    borderRadius: BorderRadius.circular(15.0)),
+                                contentPadding: EdgeInsets.symmetric(
+                                    horizontal: 20, vertical: 10),
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(15.0))),
                             value: unityChallenge,
                             onChanged: (value) {
                               updateController(value);
@@ -133,6 +199,9 @@ class _HomeState extends State<Home> {
                                 child: Text("normal"),
                               ),
                             ],
+                          ),
+                          SizedBox(
+                            height: 15.0,
                           ),
                           RaisedButton(
                             onPressed: () {

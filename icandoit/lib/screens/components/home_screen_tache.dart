@@ -47,13 +47,6 @@ class _HomeTachesState extends State<HomeTaches> {
                 Text("ICanDoIt"),
                 Container(
                   padding: EdgeInsets.all(8.0),
-                  // child: new CircularPercentIndicator(
-                  //   radius: 60.0,
-                  //   lineWidth: 5.0,
-                  //   percent: 1.0,
-                  //   center: new Text("100%"),
-                  //   progressColor: Colors.green,
-                  // ),
                 ),
               ],
             ),
@@ -70,9 +63,9 @@ class _HomeTachesState extends State<HomeTaches> {
               ),
               decoration: BoxDecoration(
                   gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: <Color>[Colors.red, Colors.blue])),
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
+                      colors: <Color>[Colors.purple, Colors.blue])),
             ),
           ),
         ),

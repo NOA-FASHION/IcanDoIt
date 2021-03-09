@@ -117,119 +117,140 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                   key: Key(UniqueKey().toString()),
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.white,
-                      border: Border.all(
-                        color: Colour('#518faa'),
-                        width: 4,
-                      ),
-                    ),
-                    child: ListTile(
-                      onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) =>
-                                HomeTaches(_challengesList[index].name)));
-                      },
-                      title: Container(
-                        child: Row(
-                          children: [
-                            Text(
-                              "Titre",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.blue),
-                            ),
-                            SizedBox(
-                              width: 5.0,
-                            ),
-                            Text(_challengesList[index].name),
-                            SizedBox(
-                              width: 5.0,
-                            ),
-                          ],
-                        ),
-                      ),
-                      subtitle: Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.white,
-                            border: Border.all(
-                              color: Colour('#C4AB4D'),
-                              width: 2,
-                            ),
+                      boxShadow: [
+                        //background color of box
+                        BoxShadow(
+                          color: Colors.black,
+                          blurRadius: 45.0, // soften the shadow
+                          spreadRadius: 2.0, //extend the shadow
+                          offset: Offset(
+                            3.0, // Move to right 10  horizontally
+                            3.0, // Move to bottom 10 Vertically
                           ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Column(
+                        )
+                      ],
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.transparent,
+                    ),
+                    child: Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      elevation: 20.0,
+                      child: ListTile(
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) =>
+                                  HomeTaches(_challengesList[index].name)));
+                        },
+                        title: Container(
+                          child: Row(
+                            children: [
+                              Text(
+                                "Titre",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.blue),
+                              ),
+                              SizedBox(
+                                width: 5.0,
+                              ),
+                              Text(_challengesList[index].name),
+                              SizedBox(
+                                width: 5.0,
+                              ),
+                            ],
+                          ),
+                        ),
+                        subtitle: Padding(
+                          padding: const EdgeInsets.all(1.0),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: Colors.white,
+                              // border: Border.all(
+                              //   color: Colour('#C4AB4D'),
+                              //   width: 2,
+                              // ),
+                            ),
+                            child: Card(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15.0),
+                              ),
+                              elevation: 15.0,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Container(
-                                      height: 30.0,
-                                      child: Row(
-                                        children: [
-                                          Text(
-                                            "Description",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.blue),
+                                    Column(
+                                      children: [
+                                        Container(
+                                          height: 25.0,
+                                          child: Row(
+                                            children: [
+                                              Text(
+                                                "Description",
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.blue),
+                                              ),
+                                              SizedBox(
+                                                width: 5.0,
+                                              ),
+                                              Text(_challengesList[index]
+                                                  .description
+                                                  .toString()),
+                                              SizedBox(
+                                                width: 5.0,
+                                              ),
+                                            ],
                                           ),
-                                          SizedBox(
-                                            width: 5.0,
+                                        ),
+                                        Container(
+                                          height: 30.0,
+                                          child: Row(
+                                            children: [
+                                              Text(
+                                                "Priorite",
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.blue),
+                                              ),
+                                              SizedBox(
+                                                width: 5.0,
+                                              ),
+                                              Text(_challengesList[index]
+                                                  .unity
+                                                  .toString()
+                                                  .replaceAll(unityPattern, "")
+                                                  .toUpperCase()),
+                                              SizedBox(
+                                                width: 5.0,
+                                              ),
+                                            ],
                                           ),
-                                          Text(_challengesList[index]
-                                              .description
-                                              .toString()),
-                                          SizedBox(
-                                            width: 5.0,
-                                          ),
-                                        ],
-                                      ),
+                                        ),
+                                      ],
                                     ),
                                     Container(
-                                      height: 30.0,
-                                      child: Row(
-                                        children: [
-                                          Text(
-                                            "Priorite",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.blue),
-                                          ),
-                                          SizedBox(
-                                            width: 5.0,
-                                          ),
-                                          Text(_challengesList[index]
-                                              .unity
-                                              .toString()
-                                              .replaceAll(unityPattern, "")
-                                              .toUpperCase()),
-                                          SizedBox(
-                                            width: 5.0,
-                                          ),
-                                        ],
+                                      child: new CircularPercentIndicator(
+                                        radius: 60.0,
+                                        lineWidth: 5.0,
+                                        percent: 1.0,
+                                        center: new Text("100%"),
+                                        progressColor: Colors.green,
                                       ),
                                     ),
                                   ],
                                 ),
-                                Container(
-                                  child: new CircularPercentIndicator(
-                                    radius: 60.0,
-                                    lineWidth: 5.0,
-                                    percent: 1.0,
-                                    center: new Text("100%"),
-                                    progressColor: Colors.green,
-                                  ),
-                                ),
-                              ],
+                              ),
                             ),
                           ),
                         ),
+                        isThreeLine: true,
                       ),
-                      isThreeLine: true,
                     ),
                   ),
                 ),
