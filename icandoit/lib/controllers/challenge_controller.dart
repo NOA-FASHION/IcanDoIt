@@ -112,6 +112,7 @@ class Challengecontroller {
         challengeListTest: _challengeList2,
         challengeList: _challengeList);
     await _save();
+    _challengeList2 = [];
     return addChallengeFinal;
   }
 
@@ -137,7 +138,7 @@ class Challengecontroller {
             _challengeList[i].percent = "0";
           } else if (index != additionCahllenge)
             _challengeList[i].percent =
-                ((index / additionCahllenge) * 100).toString();
+                ((index / additionCahllenge) * 100).toStringAsFixed(2);
         }
 
         challenliste2 = _challengeList[i].listeDeTache;
@@ -206,10 +207,16 @@ class Challengecontroller {
     return _challengeList;
   }
 
-  Future<bool> _save1({bool remove}) async {
-    if (_challengeList.length < 1 && remove ?? false) {
-      return _localData.setStringList(keyAcces, []);
+  Future<bool> _save1({bool remove, String nameChallenge}) async {
+    for (var i = _challengeList.length - 1; i >= 0; i--) {
+      if (_challengeList[i].name == nameChallenge) {
+        if (_challengeList[i].listeDeTache.length < 1 && remove ?? false) {
+          _challengeList[i].listeDeTache = [];
+          return _localData.setStringList(keyAcces, []);
+        }
+      }
     }
+
     if (_challengeList.isNotEmpty) {
       List<String> _jsonList = _challengeList.map((challenge) {
         return jsonEncode(challenge.toJson1());
@@ -243,7 +250,7 @@ class Challengecontroller {
         _challengeList[i].listeDeTache.removeAt(index);
       }
     }
-    await _save(remove: true);
+    await _save1(remove: true, nameChallenge: nameChallenge);
   }
 
   // List<ChallengeModel> removesuper(
