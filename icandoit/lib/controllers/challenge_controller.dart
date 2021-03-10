@@ -86,11 +86,13 @@ class Challengecontroller {
   }
 
   Future<List<Challengemodel2>> addChallenge2({
+    @required String totalChallenge,
     @required String nameListChallenge,
     @required String name,
     @required String tache,
     @required String description,
   }) async {
+    Future<List<Challengemodel2>> addChallengeFinal;
     print(nameListChallenge);
     print(name);
     print(tache);
@@ -98,27 +100,47 @@ class Challengecontroller {
     for (var i = _challengeList.length - 1; i >= 0; i--) {
       print(_challengeList[i]);
     }
+
     _challengeList2.add(Challengemodel2(
         name: name,
         tache: tache,
         description: choixDesciptionEnum(description)));
 
-    addChallenge1(
+    addChallengeFinal = addChallenge1(
+        totalChallenge: totalChallenge,
         name: nameListChallenge,
         challengeListTest: _challengeList2,
         challengeList: _challengeList);
     await _save();
-    return _challengeList2;
+    return addChallengeFinal;
   }
 
-  Future<List<ChallengeModel>> addChallenge1({
+  Future<List<Challengemodel2>> addChallenge1({
+    @required String totalChallenge,
     @required String name,
     @required List<Challengemodel2> challengeListTest,
     List<ChallengeModel> challengeList,
   }) async {
     _challengeList = challengeList;
+    List<Challengemodel2> challenliste2;
     for (var i = _challengeList.length - 1; i >= 0; i--) {
       if (_challengeList[i].name == name) {
+        var additionchallenge = _challengeList[i].totalChallenge;
+        _challengeList[i].totalChallenge =
+            (int.parse(additionchallenge) + int.parse(totalChallenge))
+                .toString();
+        int additionCahllenge =
+            (int.parse(additionchallenge) + int.parse(totalChallenge));
+        int index = _challengeList[i].listeDeTache.length;
+        if (index > 0) {
+          if (index == additionCahllenge) {
+            _challengeList[i].percent = "0";
+          } else if (index != additionCahllenge)
+            _challengeList[i].percent =
+                ((index / additionCahllenge) * 100).toString();
+        }
+
+        challenliste2 = _challengeList[i].listeDeTache;
         for (var n = challengeListTest.length - 1; n >= 0; n--) {
           _challengeList[i].listeDeTache.add(
                 Challengemodel2(
@@ -130,23 +152,56 @@ class Challengecontroller {
       }
     }
 
-    return _challengeList;
+    return challenliste2;
+  }
+
+  String recupereTotalChallenge(String challenEnCours) {
+    var challenge10;
+    for (var i = _challengeList.length - 1; i >= 0; i--) {
+      if (_challengeList[i].name == challenEnCours) {
+        challenge10 = _challengeList[i].totalChallenge;
+        print('toalchallenge2');
+        print(challenge10);
+      }
+    }
+    return challenge10;
+  }
+
+  int calculIndex(String name) {
+    var calculindex;
+    for (var i = _challengeList.length - 1; i >= 0; i--) {
+      if (_challengeList[i].name == name) {
+        calculindex = _challengeList[i].listeDeTache.length;
+      }
+    }
+    return calculindex;
+  }
+
+  int calcuPercent(int index, int toalChallenge) {
+    int percent;
+    percent = ((index / toalChallenge) * 100) as int;
+    return percent;
   }
 
   Future<List<ChallengeModel>> addChallenge(
       {@required String name,
+      @required String percent,
+      @required String totalChallenge,
       @required String description,
       @required String unity,
       @required List<Challengemodel2> challengeListTache}) async {
     _challengeList.add(
       ChallengeModel(
+          listeDeTache: challengeListTache,
           name: name,
           description: description,
+          totalChallenge: totalChallenge,
+          percent: percent,
           unity: unity == "haute"
               ? unity_challenge.haute
               : unity_challenge.normal),
     );
-    await _save1();
+    await _save();
 
     return _challengeList;
   }

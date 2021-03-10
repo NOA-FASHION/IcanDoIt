@@ -20,18 +20,14 @@ class _HomeState extends State<Home> {
   String nameChallenge;
   String targetChallenge;
   List<Challengemodel2> challengeListTache = [];
+  String percent = "0";
+  String totalChallenge = "0";
 
   @override
   void initState() {
     challengesData = _controller.initChallengeList();
-    super.initState();
-  }
 
-  ThemeData _appTheme() {
-    final ThemeData base = ThemeData.light();
-    return base.copyWith(
-      canvasColor: Colors.blue,
-    );
+    super.initState();
   }
 
   @override
@@ -92,12 +88,6 @@ class _HomeState extends State<Home> {
           _bottomSheetController = scaffoldkey.currentState.showBottomSheet(
             (context) {
               return Container(
-                  // decoration: BoxDecoration(
-                  //     borderRadius: BorderRadius.circular(20),
-                  //     gradient: LinearGradient(
-                  //         begin: Alignment.centerLeft,
-                  //         end: Alignment.centerRight,
-                  //         colors: [Colors.orange[900], Colors.blue])),
                   alignment: Alignment.center,
                   height: MediaQuery.of(context).size.height * 0.5,
                   child: Form(
@@ -209,6 +199,8 @@ class _HomeState extends State<Home> {
                                 formKey.currentState.save();
                                 setState(() {
                                   challengesData = _controller.addChallenge(
+                                      totalChallenge: totalChallenge,
+                                      percent: percent,
                                       name: nameChallenge,
                                       description: targetChallenge,
                                       unity: unityChallenge,

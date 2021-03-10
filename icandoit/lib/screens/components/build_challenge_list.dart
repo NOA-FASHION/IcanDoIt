@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:icandoit/models/challenge_model.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import '../../controllers/challenge_controller.dart';
-import 'package:colour/colour.dart';
-
-import 'build_challenge_list_tache.dart';
 import 'home_screen_tache.dart';
 
 class ChallengesListBuilder extends StatefulWidget {
@@ -17,6 +14,24 @@ class ChallengesListBuilder extends StatefulWidget {
 }
 
 class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
+  double percentage(String percent) {
+    var percent1;
+    percent1 = (double.parse(percent) / 100);
+    return percent1;
+  }
+
+  Color changeColors(String challengeListeColors) {
+    Color colors;
+    if (challengeListeColors == "normal") {
+      colors = Colors.green;
+    } else if (challengeListeColors == "haute") {
+      colors = Colors.red;
+    } else if (challengeListeColors == "Moyen") {
+      colors = Colors.orange;
+    }
+    return colors;
+  }
+
   String unityPattern = "unity_challenge.";
   @override
   Widget build(BuildContext context) {
@@ -140,17 +155,24 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                       child: ListTile(
                         onTap: () {
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) =>
-                                  HomeTaches(_challengesList[index].name)));
+                              builder: (context) => HomeTaches(
+                                  _challengesList[index].name,
+                                  _challengesList[index].percent)));
                         },
                         title: Container(
                           child: Row(
                             children: [
-                              Text(
-                                "Titre",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.blue),
+                              Card(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5.0),
+                                ),
+                                elevation: 15.0,
+                                child: Text(
+                                  "Titre",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.blue),
+                                ),
                               ),
                               SizedBox(
                                 width: 5.0,
@@ -221,11 +243,23 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                                               SizedBox(
                                                 width: 5.0,
                                               ),
-                                              Text(_challengesList[index]
-                                                  .unity
-                                                  .toString()
-                                                  .replaceAll(unityPattern, "")
-                                                  .toUpperCase()),
+                                              Text(
+                                                _challengesList[index]
+                                                    .unity
+                                                    .toString()
+                                                    .replaceAll(
+                                                        unityPattern, "")
+                                                    .toUpperCase(),
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    color: changeColors(
+                                                        _challengesList[index]
+                                                            .unity
+                                                            .toString()
+                                                            .replaceAll(
+                                                                unityPattern,
+                                                                ""))),
+                                              ),
                                               SizedBox(
                                                 width: 5.0,
                                               ),
@@ -234,13 +268,23 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                                         ),
                                       ],
                                     ),
-                                    Container(
-                                      child: new CircularPercentIndicator(
-                                        radius: 60.0,
-                                        lineWidth: 5.0,
-                                        percent: 1.0,
-                                        center: new Text("100%"),
-                                        progressColor: Colors.green,
+                                    Card(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(60.0),
+                                      ),
+                                      elevation: 15.0,
+                                      child: Container(
+                                        child: new CircularPercentIndicator(
+                                          radius: 60.0,
+                                          lineWidth: 5.0,
+                                          percent: percentage(
+                                              _challengesList[index].percent),
+                                          center: new Text(
+                                              _challengesList[index].percent +
+                                                  "%"),
+                                          progressColor: Colors.green,
+                                        ),
                                       ),
                                     ),
                                   ],

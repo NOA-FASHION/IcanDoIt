@@ -62,12 +62,22 @@ class ChallengeModel {
   final String description;
   final unity_challenge unity;
   List<Challengemodel2> listeDeTache;
+  String totalChallenge;
+  String percent;
 
-  ChallengeModel({this.name, this.description, this.unity, this.listeDeTache});
+  ChallengeModel(
+      {this.name,
+      this.description,
+      this.unity,
+      this.listeDeTache,
+      this.totalChallenge,
+      this.percent});
 
   factory ChallengeModel.fromJSON(Map<String, dynamic> json) => ChallengeModel(
         name: json['name'],
+        percent: json['percent'],
         description: json['description'],
+        totalChallenge: json['totalChallenge'],
         unity: json['unity'] == "unity_challenge.haute"
             ? unity_challenge.haute
             : unity_challenge.normal,
@@ -79,7 +89,9 @@ class ChallengeModel {
   Map<String, dynamic> toJson() {
     return {
       "name": name,
+      "percent": percent,
       "description": description,
+      "totalChallenge": totalChallenge,
       "unity": unity.toString(),
       "listeDeTache": List<dynamic>.from(listeDeTache.map((x) => x.toJson())),
     };
@@ -88,7 +100,9 @@ class ChallengeModel {
   Map<String, dynamic> toJson1() {
     return {
       "name": name,
+      "percent": percent,
       "description": description,
+      "totalChallenge": totalChallenge,
       "unity": unity.toString(),
       "listeDeTache": [],
       // List<Challengemodel2>.from(listeDeTache.map((x) => x.toJson())),

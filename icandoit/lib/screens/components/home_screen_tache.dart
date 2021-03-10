@@ -7,28 +7,41 @@ import 'package:shimmer_animation/shimmer_animation.dart';
 
 class HomeTaches extends StatefulWidget {
   final String something;
-  HomeTaches(this.something);
+  final String percent;
+  HomeTaches(this.something, this.percent);
   @override
-  _HomeTachesState createState() => _HomeTachesState(this.something);
+  _HomeTachesState createState() =>
+      _HomeTachesState(this.something, this.percent);
 }
 
 class _HomeTachesState extends State<HomeTaches> {
+  double percentage(String percent) {
+    var percent1;
+    percent1 = (double.parse(percent) / 100);
+    return percent1;
+  }
+
   final String something;
-  _HomeTachesState(this.something);
+  final String percent;
+  _HomeTachesState(this.something, this.percent);
   final GlobalKey<ScaffoldState> scaffoldkey = GlobalKey<ScaffoldState>();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   PersistentBottomSheetController _bottomSheetController;
   final Challengecontroller _controller = Challengecontroller();
   Future<List> challengesData;
-  Future<List<ChallengeModel>> challengesData2;
+  Future<List> challengesData2;
   String unityChallenge = "evenement";
   String nameChallenge = "Tache";
   String targetChallenge;
+  String totalChallengeEnCours;
+  int totaChallengeEnCours1 = 0;
+  int index;
 
   @override
   void initState() {
-    challengesData2 = _controller.initChallengeList();
     challengesData = _controller.initChallengeList1(something);
+    challengesData2 = _controller.initChallengeList();
+
     super.initState();
   }
 
@@ -54,12 +67,18 @@ class _HomeTachesState extends State<HomeTaches> {
               padding: EdgeInsets.only(right: 30.0),
               alignment: Alignment.centerRight,
               height: 100,
-              child: new CircularPercentIndicator(
-                radius: 60.0,
-                lineWidth: 5.0,
-                percent: 1.0,
-                center: new Text("100%"),
-                progressColor: Colors.green,
+              child: Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(60.0),
+                ),
+                elevation: 35.0,
+                child: new CircularPercentIndicator(
+                  radius: 60.0,
+                  lineWidth: 5.0,
+                  percent: percentage(percent),
+                  center: new Text(percent),
+                  progressColor: Colors.green,
+                ),
               ),
               decoration: BoxDecoration(
                   gradient: LinearGradient(
@@ -117,20 +136,6 @@ class _HomeTachesState extends State<HomeTaches> {
                       padding: const EdgeInsets.all(10.0),
                       child: ListView(
                         children: [
-                          // TextFormField(
-                          //   onSaved: (value) {
-                          //     nameChallenge = value;
-                          //   },
-                          //   validator: (value) {
-                          //     if (value.isEmpty) {
-                          //       return "Merci d'entrer un nom pour le challenge";
-                          //     }
-                          //     return null;
-                          //   },
-                          //   decoration:
-                          //       InputDecoration(labelText: "Nom de la mission"),
-                          // ),
-
                           DropdownButtonFormField(
                             value: unityChallenge,
                             onChanged: (value) {
@@ -198,7 +203,12 @@ class _HomeTachesState extends State<HomeTaches> {
                               if (formKey.currentState.validate()) {
                                 formKey.currentState.save();
                                 setState(() {
+                                  // totaChallengeEnCours1 =
+                                  //     totaChallengeEnCours1 + 1;
+                                  // totalChallengeEnCours =
+                                  //     totaChallengeEnCours1.toString();
                                   challengesData = _controller.addChallenge2(
+                                      totalChallenge: '1',
                                       nameListChallenge: something,
                                       name: nameChallenge,
                                       description: unityChallenge,

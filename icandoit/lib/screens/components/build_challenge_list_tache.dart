@@ -4,7 +4,7 @@ import '../../controllers/challenge_controller.dart';
 import 'package:colour/colour.dart';
 
 class ChallengesListBuilderTaches extends StatefulWidget {
-  String nameChallenge;
+  final String nameChallenge;
   final Future<List<Challengemodel2>> challenData;
   final Challengecontroller controller;
   ChallengesListBuilderTaches(
@@ -136,11 +136,16 @@ class _ChallengesListBuilderTachesState
                         title: Container(
                           child: Row(
                             children: [
-                              Text(
-                                _challengesList[index].name,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.blue),
+                              Card(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5.0),
+                                ),
+                                child: Text(
+                                  _challengesList[index].name,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.blue),
+                                ),
                               ),
                               SizedBox(
                                 width: 5.0,
@@ -163,10 +168,6 @@ class _ChallengesListBuilderTachesState
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 color: Colors.white,
-                                // border: Border.all(
-                                //   color: Colour('#C4AB4D'),
-                                //   width: 2,
-                                // ),
                               ),
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
