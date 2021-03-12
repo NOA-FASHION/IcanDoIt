@@ -37,21 +37,27 @@ choixDesciptionEnum(dynamic json) {
 }
 
 class Challengemodel2 {
+  String index;
   final String name;
   final String tache;
   final unity_challenge1 description;
   Challengemodel2(
-      {@required this.name, @required this.tache, @required this.description});
+      {@required this.name,
+      @required this.tache,
+      @required this.description,
+      this.index});
 
   Challengemodel2.fromJSON(Map<String, dynamic> json)
       : name = json['name'],
         tache = json['tache'],
+        index = json['index'],
         description = choixDesciptionEnum(json);
 
   Map<String, dynamic> toJson() {
     return {
       "name": name,
       "tache": tache,
+      "index": index,
       "description": description.toString()
     };
   }
@@ -63,19 +69,17 @@ class ChallengeModel {
   final unity_challenge unity;
   List<Challengemodel2> listeDeTache;
   String totalChallenge;
-  String percent;
 
-  ChallengeModel(
-      {this.name,
-      this.description,
-      this.unity,
-      this.listeDeTache,
-      this.totalChallenge,
-      this.percent});
+  ChallengeModel({
+    this.name,
+    this.description,
+    this.unity,
+    this.listeDeTache,
+    this.totalChallenge,
+  });
 
   factory ChallengeModel.fromJSON(Map<String, dynamic> json) => ChallengeModel(
         name: json['name'],
-        percent: json['percent'],
         description: json['description'],
         totalChallenge: json['totalChallenge'],
         unity: json['unity'] == "unity_challenge.haute"
@@ -89,7 +93,6 @@ class ChallengeModel {
   Map<String, dynamic> toJson() {
     return {
       "name": name,
-      "percent": percent,
       "description": description,
       "totalChallenge": totalChallenge,
       "unity": unity.toString(),
@@ -97,17 +100,17 @@ class ChallengeModel {
     };
   }
 
-  Map<String, dynamic> toJson1() {
-    return {
-      "name": name,
-      "percent": percent,
-      "description": description,
-      "totalChallenge": totalChallenge,
-      "unity": unity.toString(),
-      "listeDeTache": [],
-      // List<Challengemodel2>.from(listeDeTache.map((x) => x.toJson())),
-    };
-  }
+  // Map<String, dynamic> toJson1() {
+  //   return {
+  //     "name": name,
+  //     "percent": percent,
+  //     "description": description,
+  //     "totalChallenge": totalChallenge,
+  //     "unity": unity.toString(),
+  //     "listeDeTache": [],
+
+  //   };
+  // }
 
   //  ChallengeModel.fromJSON(Map<String, dynamic> json)
   //     : name = json['name'],

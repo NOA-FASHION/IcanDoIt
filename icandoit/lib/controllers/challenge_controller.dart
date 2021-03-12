@@ -2,19 +2,28 @@ import 'package:flutter/foundation.dart';
 import 'dart:convert';
 import 'package:icandoit/models/challenge_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:collection';
 
 const String keyAcces = "challengeList";
 
-class Challengecontroller {
+class Challengecontroller extends ChangeNotifier {
   List<ChallengeModel> _challengeList = [];
   List<Challengemodel2> _challengeList2 = [];
+  List<Challengemodel2> _challengeList3 = [];
   SharedPreferences _localData;
+  String something = "";
+  String percent = "0";
+  Challengecontroller() {
+    _initChallengeList();
+  }
 
-  Future<List<ChallengeModel>> initChallengeList() async {
+  void _initChallengeList() async {
     _localData = await SharedPreferences.getInstance();
+    // List<Map<String, dynamic>> tempListMap = [];
+    List<Map<String, dynamic>> _jsonDecodeList;
     final List<String> _tempList = _localData.getStringList(keyAcces);
     if (_tempList != null) {
-      final List<Map<String, dynamic>> _jsonDecodeList = _tempList
+      _jsonDecodeList = _tempList
           .map((challengeEncoded) => jsonDecode(challengeEncoded))
           .toList()
           .cast<Map<String, dynamic>>();
@@ -22,43 +31,112 @@ class Challengecontroller {
       _challengeList = _jsonDecodeList
           .map((challenge) => ChallengeModel.fromJSON(challenge))
           .toList();
+      _challengeList
+          .sort((a, b) => a.unity.toString().compareTo(b.unity.toString()));
+      print("challengeList");
+      print(something);
+      // for (var v in _jsonDecodeList) {
+      //   if (v['name'] == something) {
+      //     if (v['listeDeTache'] != null) {
+      //       for (var i in (v['listeDeTache'])) {
+      //         tempListMap.add({
+      //           "name": i["name"],
+      //           "tache": i["tache"],
+      //           "description": i["description"],
+      //         });
+      //       }
+      //     }
+      //   }
+      // }
+      // if (tempListMap != null) {
+      //   _challengeList2 = tempListMap
+      //       .map((challenge) => Challengemodel2.fromJSON(challenge))
+      //       .toList();
+      // }
+
     }
+    notifyListeners();
+  }
+
+  // Future<List<Challengemodel2>> initChallengeList1(String something) async {
+  //   List<Challengemodel2> _challengeList4 = [];
+  //   List<Map<String, dynamic>> tempListMap = [];
+  //   _localData = await SharedPreferences.getInstance();
+  //   final List<String> _tempList = _localData.getStringList(keyAcces);
+
+  //   if (_tempList != null) {
+  //     final List<Map<String, dynamic>> _jsonDecodeList = _tempList
+  //         .map((challengeEncoded) => jsonDecode(challengeEncoded))
+  //         .toList()
+  //         .cast<Map<String, dynamic>>();
+  //     for (var v in _jsonDecodeList) {
+  //       if (v['name'] == something) {
+  //         if (v['listeDeTache'] != null) {
+  //           for (var i in (v['listeDeTache'])) {
+  //             tempListMap.add({
+  //               "name": i["name"],
+  //               "tache": i["tache"],
+  //               "description": i["description"],
+  //             });
+  //           }
+  //         }
+  //       }
+  //     }
+  //     if (tempListMap != null) {
+  //       _challengeList4 = tempListMap
+  //           .map((challenge) => Challengemodel2.fromJSON(challenge))
+  //           .toList();
+  //     }
+  //   }
+  //   return _challengeList4;
+  // }
+
+  List<ChallengeModel> getChallenges() {
     return _challengeList;
   }
 
-  Future<List<Challengemodel2>> initChallengeList1(String something) async {
-    List<Challengemodel2> _challengeList4 = [];
-    List<Map<String, dynamic>> tempListMap = [];
-    _localData = await SharedPreferences.getInstance();
-    final List<String> _tempList = _localData.getStringList(keyAcces);
-    print(_tempList);
-    if (_tempList != null) {
-      final List<Map<String, dynamic>> _jsonDecodeList = _tempList
-          .map((challengeEncoded) => jsonDecode(challengeEncoded))
-          .toList()
-          .cast<Map<String, dynamic>>();
-      for (var v in _jsonDecodeList) {
-        if (v['name'] == something) {
-          if (v['listeDeTache'] != null) {
-            print(v['listeDeTache']);
-            for (var i in (v['listeDeTache'])) {
-              tempListMap.add({
-                "name": i["name"],
-                "tache": i["tache"],
-                "description": i["description"],
-              });
-            }
+  List<Challengemodel2> getChallenges1() {
+    return UnmodifiableListView(_challengeList2);
+  }
+
+  double calulPercent(String name) {
+    double resultat;
+    for (var i = _challengeList.length - 1; i >= 0; i--) {
+      if (_challengeList[i].name == name) {
+        if (_challengeList[i].listeDeTache.length != null) {
+          if (_challengeList[i].listeDeTache.length > 0 &&
+              (_challengeList[i].listeDeTache.length ==
+                  int.parse(_challengeList[i].totalChallenge))) {
+            resultat = 0.00;
+          } else if (_challengeList[i].listeDeTache.length != 0 &&
+              (_challengeList[i].listeDeTache.length !=
+                  int.parse(_challengeList[i].totalChallenge))) {
+            resultat = (_challengeList[i].listeDeTache.length /
+                int.parse(_challengeList[i].totalChallenge));
+          } else {
+            resultat = 0.00;
           }
+        } else {
+          resultat = 0.00;
         }
       }
-      if (tempListMap != null) {
-        _challengeList4 = tempListMap
-            .map((challenge) => Challengemodel2.fromJSON(challenge))
-            .toList();
-        print(_challengeList4);
+      return resultat;
+    }
+  }
+
+  List<Challengemodel2> challengelist2(String name) {
+    List<Challengemodel2> additionchallenge = [];
+    for (var i = _challengeList.length - 1; i >= 0; i--) {
+      if (_challengeList[i].name == name) {
+        additionchallenge = _challengeList[i].listeDeTache;
+        for (var n = _challengeList[i].listeDeTache.length - 1; n >= 0; n--) {
+          _challengeList[i].listeDeTache[n].index = n.toString();
+        }
       }
     }
-    return _challengeList4;
+    print("additionchallenge");
+    print(additionchallenge);
+    return additionchallenge;
   }
 
   unity_challenge1 choixDesciptionEnum(dynamic json) {
@@ -85,63 +163,48 @@ class Challengecontroller {
     return unity;
   }
 
-  Future<List<Challengemodel2>> addChallenge2({
+  void addChallenge2({
     @required String totalChallenge,
     @required String nameListChallenge,
     @required String name,
     @required String tache,
     @required String description,
   }) async {
-    Future<List<Challengemodel2>> addChallengeFinal;
-    print(nameListChallenge);
-    print(name);
-    print(tache);
-    print(description);
-    for (var i = _challengeList.length - 1; i >= 0; i--) {
-      print(_challengeList[i]);
-    }
-
-    _challengeList2.add(Challengemodel2(
+    // something = nameListChallenge;
+    // for (var i = _challengeList.length - 1; i >= 0; i--) {}
+    _challengeList3 = [];
+    _challengeList3.add(Challengemodel2(
         name: name,
         tache: tache,
         description: choixDesciptionEnum(description)));
 
-    addChallengeFinal = addChallenge1(
-        totalChallenge: totalChallenge,
-        name: nameListChallenge,
-        challengeListTest: _challengeList2,
-        challengeList: _challengeList);
+    addChallenge1(
+      totalChallenge: totalChallenge,
+      name: nameListChallenge,
+      challengeListTest: _challengeList3,
+    );
     await _save();
-    _challengeList2 = [];
-    return addChallengeFinal;
+    _initChallengeList();
+    notifyListeners();
   }
 
-  Future<List<Challengemodel2>> addChallenge1({
+  void save() async {
+    await _save();
+    _initChallengeList();
+    notifyListeners();
+  }
+
+  void addChallenge1({
     @required String totalChallenge,
     @required String name,
     @required List<Challengemodel2> challengeListTest,
-    List<ChallengeModel> challengeList,
   }) async {
-    _challengeList = challengeList;
-    List<Challengemodel2> challenliste2;
     for (var i = _challengeList.length - 1; i >= 0; i--) {
       if (_challengeList[i].name == name) {
         var additionchallenge = _challengeList[i].totalChallenge;
         _challengeList[i].totalChallenge =
-            (int.parse(additionchallenge) + int.parse(totalChallenge))
-                .toString();
-        int additionCahllenge =
-            (int.parse(additionchallenge) + int.parse(totalChallenge));
-        int index = _challengeList[i].listeDeTache.length;
-        if (index > 0) {
-          if (index == additionCahllenge) {
-            _challengeList[i].percent = "0";
-          } else if (index != additionCahllenge)
-            _challengeList[i].percent =
-                ((index / additionCahllenge) * 100).toStringAsFixed(2);
-        }
+            (int.parse(additionchallenge) + 1).toString();
 
-        challenliste2 = _challengeList[i].listeDeTache;
         for (var n = challengeListTest.length - 1; n >= 0; n--) {
           _challengeList[i].listeDeTache.add(
                 Challengemodel2(
@@ -152,41 +215,10 @@ class Challengecontroller {
         }
       }
     }
-
-    return challenliste2;
   }
 
-  String recupereTotalChallenge(String challenEnCours) {
-    var challenge10;
-    for (var i = _challengeList.length - 1; i >= 0; i--) {
-      if (_challengeList[i].name == challenEnCours) {
-        challenge10 = _challengeList[i].totalChallenge;
-        print('toalchallenge2');
-        print(challenge10);
-      }
-    }
-    return challenge10;
-  }
-
-  int calculIndex(String name) {
-    var calculindex;
-    for (var i = _challengeList.length - 1; i >= 0; i--) {
-      if (_challengeList[i].name == name) {
-        calculindex = _challengeList[i].listeDeTache.length;
-      }
-    }
-    return calculindex;
-  }
-
-  int calcuPercent(int index, int toalChallenge) {
-    int percent;
-    percent = ((index / toalChallenge) * 100) as int;
-    return percent;
-  }
-
-  Future<List<ChallengeModel>> addChallenge(
+  void addChallenge(
       {@required String name,
-      @required String percent,
       @required String totalChallenge,
       @required String description,
       @required String unity,
@@ -197,14 +229,14 @@ class Challengecontroller {
           name: name,
           description: description,
           totalChallenge: totalChallenge,
-          percent: percent,
           unity: unity == "haute"
               ? unity_challenge.haute
               : unity_challenge.normal),
     );
-    await _save();
 
-    return _challengeList;
+    await _save();
+    _initChallengeList();
+    notifyListeners();
   }
 
   Future<bool> _save1({bool remove, String nameChallenge}) async {
@@ -212,14 +244,17 @@ class Challengecontroller {
       if (_challengeList[i].name == nameChallenge) {
         if (_challengeList[i].listeDeTache.length < 1 && remove ?? false) {
           _challengeList[i].listeDeTache = [];
-          return _localData.setStringList(keyAcces, []);
+          List<String> _jsonList = _challengeList.map((challenge) {
+            return jsonEncode(challenge.toJson());
+          }).toList();
+          return _localData.setStringList(keyAcces, _jsonList);
         }
       }
     }
 
     if (_challengeList.isNotEmpty) {
       List<String> _jsonList = _challengeList.map((challenge) {
-        return jsonEncode(challenge.toJson1());
+        return jsonEncode(challenge.toJson());
       }).toList();
       return _localData.setStringList(keyAcces, _jsonList);
     }
@@ -236,12 +271,15 @@ class Challengecontroller {
       }).toList();
       return _localData.setStringList(keyAcces, _jsonList);
     }
+
     return false;
   }
 
   void remove({@required int index}) async {
     _challengeList.removeAt(index);
     await _save(remove: true);
+    _initChallengeList();
+    notifyListeners();
   }
 
   void remove2({@required int index, @required String nameChallenge}) async {
@@ -251,15 +289,7 @@ class Challengecontroller {
       }
     }
     await _save1(remove: true, nameChallenge: nameChallenge);
+    _initChallengeList();
+    notifyListeners();
   }
-
-  // List<ChallengeModel> removesuper(
-  //     Future<List<ChallengeModel>> challengeListSuper) {
-  //   List<ChallengeModel> _listProducts;
-  //   challengeListSuper.then((value) {
-  //     if (value != null) value.forEach((item) => _listProducts.add(item));
-  //   });
-  //   return _listProducts;
-  // }
-
 }

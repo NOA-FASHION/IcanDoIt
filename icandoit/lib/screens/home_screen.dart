@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:icandoit/models/challenge_model.dart';
 import 'package:icandoit/screens/components/build_challenge_list.dart';
 import 'package:icandoit/controllers/challenge_controller.dart';
+import 'package:provider/provider.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
-import 'package:percent_indicator/percent_indicator.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -14,21 +14,11 @@ class _HomeState extends State<Home> {
   final GlobalKey<ScaffoldState> scaffoldkey = GlobalKey<ScaffoldState>();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   PersistentBottomSheetController _bottomSheetController;
-  final Challengecontroller _controller = Challengecontroller();
-  Future<List> challengesData;
   String unityChallenge = "haute";
   String nameChallenge;
   String targetChallenge;
   List<Challengemodel2> challengeListTache = [];
-  String percent = "0";
   String totalChallenge = "0";
-
-  @override
-  void initState() {
-    challengesData = _controller.initChallengeList();
-
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,10 +52,7 @@ class _HomeState extends State<Home> {
                   begin: Alignment.centerLeft,
                   end: Alignment.centerRight,
                   colors: [Colors.purple, Colors.blue])),
-          child: ChallengesListBuilder(
-            controller: _controller,
-            challenData: challengesData,
-          ),
+          child: ChallengesListBuilder(),
         ),
       ),
       // backgroundColor: Color(0xff414a4c),
@@ -197,15 +184,15 @@ class _HomeState extends State<Home> {
                             onPressed: () {
                               if (formKey.currentState.validate()) {
                                 formKey.currentState.save();
-                                setState(() {
-                                  challengesData = _controller.addChallenge(
-                                      totalChallenge: totalChallenge,
-                                      percent: percent,
-                                      name: nameChallenge,
-                                      description: targetChallenge,
-                                      unity: unityChallenge,
-                                      challengeListTache: challengeListTache);
-                                });
+                                Provider.of<Challengecontroller>(context,
+                                        listen: false)
+                                    .addChallenge(
+                                        name: nameChallenge,
+                                        totalChallenge: totalChallenge,
+                                        description: targetChallenge,
+                                        unity: unityChallenge,
+                                        challengeListTache: challengeListTache);
+
                                 Navigator.pop(context);
                               }
                             },
