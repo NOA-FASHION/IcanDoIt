@@ -4,6 +4,8 @@ import 'package:icandoit/screens/components/build_challenge_list.dart';
 import 'package:icandoit/controllers/challenge_controller.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
+import 'package:lottie/lottie.dart';
+import 'package:slide_drawer/slide_drawer.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -28,6 +30,12 @@ class _HomeState extends State<Home> {
         preferredSize: Size.fromHeight(100.0),
         child: SafeArea(
           child: AppBar(
+            leading: IconButton(
+              icon: Icon(Icons.menu),
+              // call toggle from SlideDrawer to alternate between open and close
+              // when pressed menu button
+              onPressed: () => SlideDrawer.of(context).toggle(),
+            ),
             centerTitle: true,
             title: Text("ICanDoIt"),
             flexibleSpace: Container(
@@ -69,8 +77,7 @@ class _HomeState extends State<Home> {
 
   FloatingActionButton buildBottomSheet() {
     return FloatingActionButton(
-        child: Icon(Icons.add),
-        backgroundColor: Colors.orange[900],
+        child: Lottie.asset('assets/float.json'),
         onPressed: () {
           _bottomSheetController = scaffoldkey.currentState.showBottomSheet(
             (context) {
@@ -178,26 +185,47 @@ class _HomeState extends State<Home> {
                             ],
                           ),
                           SizedBox(
-                            height: 15.0,
+                            height: 5.0,
                           ),
-                          RaisedButton(
-                            onPressed: () {
-                              if (formKey.currentState.validate()) {
-                                formKey.currentState.save();
-                                Provider.of<Challengecontroller>(context,
-                                        listen: false)
-                                    .addChallenge(
-                                        name: nameChallenge,
-                                        totalChallenge: totalChallenge,
-                                        description: targetChallenge,
-                                        unity: unityChallenge,
-                                        challengeListTache: challengeListTache);
+                          InkWell(
+                              onTap: () {
+                                if (formKey.currentState.validate()) {
+                                  formKey.currentState.save();
+                                  Provider.of<Challengecontroller>(context,
+                                          listen: false)
+                                      .addChallenge(
+                                          name: nameChallenge,
+                                          totalChallenge: totalChallenge,
+                                          description: targetChallenge,
+                                          unity: unityChallenge,
+                                          challengeListTache:
+                                              challengeListTache);
 
-                                Navigator.pop(context);
-                              }
-                            },
-                            child: Text("Ajouter la mission"),
-                          ),
+                                  Navigator.pop(context);
+                                }
+                              },
+                              child: Container(
+                                  width: 200.0,
+                                  height: 200.0,
+                                  child: Lottie.asset('assets/save1.json'))),
+                          // RaisedButton(
+                          //   onPressed: () {
+                          //     if (formKey.currentState.validate()) {
+                          //       formKey.currentState.save();
+                          //       Provider.of<Challengecontroller>(context,
+                          //               listen: false)
+                          //           .addChallenge(
+                          //               name: nameChallenge,
+                          //               totalChallenge: totalChallenge,
+                          //               description: targetChallenge,
+                          //               unity: unityChallenge,
+                          //               challengeListTache: challengeListTache);
+
+                          //       Navigator.pop(context);
+                          //     }
+                          //   },
+                          //   child: Text("Ajouter la mission"),
+                          // ),
                         ],
                       ),
                     ),

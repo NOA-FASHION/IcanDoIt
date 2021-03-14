@@ -59,8 +59,8 @@ class _HomeTachesState extends State<HomeTaches> {
   @override
   @override
   Widget build(BuildContext context) {
-    Challengecontroller providerType =
-        Provider.of<Challengecontroller>(context);
+    // Challengecontroller providerType =
+    //     Provider.of<Challengecontroller>(context);
     // _challengesList = providerType.getChallenges();
     return Scaffold(
       key: scaffoldkey,
