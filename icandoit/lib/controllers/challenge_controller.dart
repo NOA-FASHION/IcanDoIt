@@ -5,12 +5,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:collection';
 
 const String keyAcces = "challengeList";
+const String keyAccesSAve = "challengeListSAve";
 
 class Challengecontroller extends ChangeNotifier {
   List<ChallengeModel> _challengeList = [];
   List<Challengemodel2> _challengeList2 = [];
   List<Challengemodel2> _challengeList3 = [];
+  List<ChallengeModel> _challengeListSave = [];
   SharedPreferences _localData;
+  SharedPreferences _localDataSave;
+  List<int> indexSave;
   String something = "";
   String percent = "0";
   Challengecontroller() {
@@ -33,63 +37,29 @@ class Challengecontroller extends ChangeNotifier {
           .toList();
       _challengeList
           .sort((a, b) => a.unity.toString().compareTo(b.unity.toString()));
-      print("challengeList");
-      print(something);
-      // for (var v in _jsonDecodeList) {
-      //   if (v['name'] == something) {
-      //     if (v['listeDeTache'] != null) {
-      //       for (var i in (v['listeDeTache'])) {
-      //         tempListMap.add({
-      //           "name": i["name"],
-      //           "tache": i["tache"],
-      //           "description": i["description"],
-      //         });
-      //       }
-      //     }
-      //   }
-      // }
-      // if (tempListMap != null) {
-      //   _challengeList2 = tempListMap
-      //       .map((challenge) => Challengemodel2.fromJSON(challenge))
-      //       .toList();
-      // }
+    }
+    _localDataSave = await SharedPreferences.getInstance();
+    // List<Map<String, dynamic>> tempListMap = [];
+    List<Map<String, dynamic>> _jsonDecodeListSave;
+    final List<String> _tempListSave = _localData.getStringList(keyAccesSAve);
+    if (_tempList != null) {
+      _jsonDecodeListSave = _tempListSave
+          .map((challengeEncoded) => jsonDecode(challengeEncoded))
+          .toList()
+          .cast<Map<String, dynamic>>();
 
+      _challengeListSave = _jsonDecodeListSave
+          .map((challenge) => ChallengeModel.fromJSON(challenge))
+          .toList();
+      _challengeListSave
+          .sort((a, b) => a.unity.toString().compareTo(b.unity.toString()));
     }
     notifyListeners();
   }
 
-  // Future<List<Challengemodel2>> initChallengeList1(String something) async {
-  //   List<Challengemodel2> _challengeList4 = [];
-  //   List<Map<String, dynamic>> tempListMap = [];
-  //   _localData = await SharedPreferences.getInstance();
-  //   final List<String> _tempList = _localData.getStringList(keyAcces);
-
-  //   if (_tempList != null) {
-  //     final List<Map<String, dynamic>> _jsonDecodeList = _tempList
-  //         .map((challengeEncoded) => jsonDecode(challengeEncoded))
-  //         .toList()
-  //         .cast<Map<String, dynamic>>();
-  //     for (var v in _jsonDecodeList) {
-  //       if (v['name'] == something) {
-  //         if (v['listeDeTache'] != null) {
-  //           for (var i in (v['listeDeTache'])) {
-  //             tempListMap.add({
-  //               "name": i["name"],
-  //               "tache": i["tache"],
-  //               "description": i["description"],
-  //             });
-  //           }
-  //         }
-  //       }
-  //     }
-  //     if (tempListMap != null) {
-  //       _challengeList4 = tempListMap
-  //           .map((challenge) => Challengemodel2.fromJSON(challenge))
-  //           .toList();
-  //     }
-  //   }
-  //   return _challengeList4;
-  // }
+  List<ChallengeModel> getChallenges2() {
+    return _challengeListSave;
+  }
 
   List<ChallengeModel> getChallenges() {
     return _challengeList;
@@ -239,6 +209,70 @@ class Challengecontroller extends ChangeNotifier {
     notifyListeners();
   }
 
+  List<int> indexSaveFunction(bool selected, int index) {
+    indexSave = [];
+    if (selected) {
+      indexSave.add(index);
+    }
+  }
+
+  void addSlectSave() async {
+    for (var i = _challengeList.length - 1; i >= 0; i--) {
+      for (var n = indexSave.length - 1; n >= 0; n--) {
+        if (i == indexSave[n]) {
+          _challengeList.add(
+            ChallengeModel(
+                listeDeTache: _challengeListSave[i].listeDeTache,
+                name: _challengeListSave[i].name,
+                description: _challengeListSave[i].description,
+                totalChallenge: _challengeListSave[i].totalChallenge,
+                unity: _challengeListSave[i].unity),
+          );
+          for (var j = _challengeListSave[i].listeDeTache.length - 1;
+              j >= 0;
+              j--) {
+            _challengeListSave[i].listeDeTache.add(
+                  Challengemodel2(
+                      name: _challengeListSave[i].listeDeTache[j].name,
+                      tache: _challengeListSave[i].listeDeTache[j].tache,
+                      description:
+                          _challengeListSave[i].listeDeTache[j].description),
+                );
+          }
+        }
+      }
+    }
+    await _save();
+    _initChallengeList();
+    notifyListeners();
+  }
+
+  void addListChallengeSave(String namechallenge) async {
+    for (var i = _challengeList.length - 1; i >= 0; i--) {
+      if (_challengeList[i].name == namechallenge) {
+        _challengeListSave.add(
+          ChallengeModel(
+              listeDeTache: _challengeList[i].listeDeTache,
+              name: _challengeList[i].name,
+              description: _challengeList[i].description,
+              totalChallenge: _challengeList[i].totalChallenge,
+              unity: _challengeList[i].unity),
+        );
+        for (var n = _challengeList[i].listeDeTache.length - 1; n >= 0; n--) {
+          _challengeListSave[i].listeDeTache.add(
+                Challengemodel2(
+                    name: _challengeList[i].listeDeTache[n].name,
+                    tache: _challengeList[i].listeDeTache[n].tache,
+                    description: _challengeList[i].listeDeTache[n].description),
+              );
+        }
+      }
+    }
+    await _saveSauvegarde();
+    _initChallengeList();
+    notifyListeners();
+  }
+
   Future<bool> _save1({bool remove, String nameChallenge}) async {
     for (var i = _challengeList.length - 1; i >= 0; i--) {
       if (_challengeList[i].name == nameChallenge) {
@@ -273,6 +307,27 @@ class Challengecontroller extends ChangeNotifier {
     }
 
     return false;
+  }
+
+  Future<bool> _saveSauvegarde({bool remove}) async {
+    if (_challengeListSave.length < 1 && remove ?? false) {
+      return _localData.setStringList(keyAccesSAve, []);
+    }
+    if (_challengeListSave.isNotEmpty) {
+      List<String> _jsonList = _challengeListSave.map((challenge) {
+        return jsonEncode(challenge.toJson());
+      }).toList();
+      return _localData.setStringList(keyAccesSAve, _jsonList);
+    }
+
+    return false;
+  }
+
+  void removeSave({@required int index}) async {
+    _challengeListSave.removeAt(index);
+    await _save(remove: true);
+    _initChallengeList();
+    notifyListeners();
   }
 
   void remove({@required int index}) async {

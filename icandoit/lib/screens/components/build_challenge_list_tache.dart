@@ -17,19 +17,6 @@ class ChallengesListBuilderTaches extends StatefulWidget {
 class _ChallengesListBuilderTachesState
     extends State<ChallengesListBuilderTaches> {
   List<ChallengeModel> challengeListCharge;
-  // List<Challengemodel2> challengelist2(
-  //     List<ChallengeModel> challengeList, String name) {
-  //   List<Challengemodel2> additionchallenge;
-  //   for (var i = challengeList.length - 1; i >= 0; i--) {
-  //     if (challengeList[i].name == name) {
-  //       additionchallenge = challengeList[i].listeDeTache;
-  //       for (var n = challengeList[i].listeDeTache.length - 1; n >= 0; n--) {
-  //         challengeList[i].listeDeTache[n].index = n.toString();
-  //       }
-  //     }
-  //   }
-  //   return additionchallenge;
-  // }
 
   String unityPattern = "unity_challenge1.";
   @override

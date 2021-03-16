@@ -164,6 +164,31 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                 ),
                 elevation: 20.0,
                 child: ListTile(
+                  onLongPress: () {
+                    AlertDialog(
+                      title: Text(
+                        "Confirmation",
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                      content: Text("Voulez sauvegardez cette mission"),
+                      actions: [
+                        RaisedButton(
+                          onPressed: () {
+                            Navigator.pop(context, true);
+                          },
+                          child: Text("Oui"),
+                        ),
+                        RaisedButton(
+                          onPressed: () {
+                            variable.addListChallengeSave(
+                                _challengesList[index].name);
+                            Navigator.pop(context, false);
+                          },
+                          child: Text("Nom"),
+                        )
+                      ],
+                    );
+                  },
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => ChangeNotifierProvider.value(

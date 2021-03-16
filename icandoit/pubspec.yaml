@@ -36,6 +36,8 @@ dependencies:
   flutter_list_drag_and_drop: ^0.1.6
   lottie: ^1.0.1
   slide_drawer: ^1.0.1
+  item_selector: ^0.1.1
+  
   
   
 
