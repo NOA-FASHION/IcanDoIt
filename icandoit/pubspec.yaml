@@ -37,6 +37,7 @@ dependencies:
   lottie: ^1.0.1
   slide_drawer: ^1.0.1
   item_selector: ^0.1.1
+  fancy_drawer: ^1.0.0
   
   
   

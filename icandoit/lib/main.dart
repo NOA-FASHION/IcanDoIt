@@ -5,12 +5,18 @@ import 'package:slide_drawer/slide_drawer.dart';
 import 'screens/home_screen.dart';
 import 'package:provider/provider.dart';
 
-void main() => runApp(ICanDoIt());
+void main() => runApp(IcanDoIt());
 
-class ICanDoIt extends StatelessWidget {
+class IcanDoIt extends StatefulWidget {
+  IcanDoIt({Key key}) : super(key: key);
+
+  @override
+  _IcanDoItState createState() => _IcanDoItState();
+}
+
+class _IcanDoItState extends State<IcanDoIt> {
   @override
   Widget build(BuildContext context) {
-    Challengecontroller variable = Provider.of<Challengecontroller>(context);
     return MaterialApp(
       theme: ThemeData(
         brightness: Brightness.light,
@@ -18,21 +24,45 @@ class ICanDoIt extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       title: 'ICanDoIt',
-      home: SlideDrawer(
-        items: [
-          MenuItem('Home', icon: Icons.home, onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => ChangeNotifierProvider.value(
-                    value: variable, child: ExampleApp())));
-          }),
-          MenuItem('Project', icon: Icons.rss_feed, onTap: () {}),
-          MenuItem('Favourite', icon: Icons.favorite_border, onTap: () {}),
-          MenuItem('Profile', icon: Icons.person_outline, onTap: () {}),
-          MenuItem('Setting', icon: Icons.settings, onTap: () {}),
-        ],
-        child: ChangeNotifierProvider<Challengecontroller>(
-            create: (context) => Challengecontroller(), child: Home()),
-      ),
+      routes: {
+        // When navigating to the "/" route, build the Main widget.
+
+        '/list_save': (context) => ExampleApp(),
+        '/settings': (context) => ExampleApp()
+      },
+      home:
+          // home: Builder(
+          //   builder: (context) => SlideDrawer(
+          //     items: [
+          //       MenuItem('Project', icon: Icons.rss_feed, onTap: () {
+          //         Navigator.of(context).pop();
+          //         Navigator.push(
+          //           context,
+          //           MaterialPageRoute(
+          //               builder: (context) =>
+          //                   ChangeNotifierProvider<Challengecontroller>(
+          //                       create: (context) => Challengecontroller(),
+          //                       child: Home())),
+          //         );
+          //       }),
+          //       MenuItem('Project', icon: Icons.rss_feed, onTap: () {
+          //         Navigator.of(context).pop();
+          //         Navigator.push(
+          //           context,
+          //           MaterialPageRoute(
+          //               builder: (context) =>
+          //                   ChangeNotifierProvider<Challengecontroller>(
+          //                       create: (context) => Challengecontroller(),
+          //                       child: ExampleApp())),
+          //         );
+          //       }),
+          //       MenuItem('Favourite', icon: Icons.favorite_border, onTap: () {}),
+          //       MenuItem('Profile', icon: Icons.person_outline, onTap: () {}),
+          //       MenuItem('Setting', icon: Icons.settings, onTap: () {}),
+          //     ],
+          // child:
+          ChangeNotifierProvider<Challengecontroller>(
+              create: (context) => Challengecontroller(), child: Home()),
     );
   }
 }

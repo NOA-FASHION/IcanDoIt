@@ -1,3 +1,4 @@
+import 'package:fancy_drawer/fancy_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:icandoit/models/challenge_model.dart';
 import 'package:icandoit/screens/components/build_challenge_list.dart';
@@ -12,7 +13,7 @@ class Home extends StatefulWidget {
   _HomeState createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> {
+class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   final GlobalKey<ScaffoldState> scaffoldkey = GlobalKey<ScaffoldState>();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   PersistentBottomSheetController _bottomSheetController;
@@ -21,51 +22,124 @@ class _HomeState extends State<Home> {
   String targetChallenge;
   List<Challengemodel2> challengeListTache = [];
   String totalChallenge = "0";
+  FancyDrawerController _controller;
+  void initState() {
+    super.initState();
+    _controller = FancyDrawerController(
+        vsync: this, duration: Duration(milliseconds: 250))
+      ..addListener(() {
+        setState(() {});
+      });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: scaffoldkey,
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(100.0),
-        child: SafeArea(
-          child: AppBar(
-            leading: IconButton(
-              icon: Icon(Icons.menu),
-              // call toggle from SlideDrawer to alternate between open and close
-              // when pressed menu button
-              onPressed: () => SlideDrawer.of(context).toggle(),
+    return Material(
+      child: FancyDrawerWrapper(
+        backgroundColor: Colors.white,
+        controller: _controller,
+        drawerItems: <Widget>[
+          Text(
+            "Go to home",
+            style: TextStyle(
+              fontSize: 18,
+              color: Colors.purple.shade700,
+              fontWeight: FontWeight.bold,
             ),
-            centerTitle: true,
-            title: Text("ICanDoIt"),
-            flexibleSpace: Container(
+          ),
+          Text(
+            "About us",
+            style: TextStyle(
+              fontSize: 18,
+              color: Colors.purple.shade700,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            "Our products",
+            style: TextStyle(
+              fontSize: 18,
+              color: Colors.purple.shade700,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            "Support us",
+            style: TextStyle(
+              fontSize: 18,
+              color: Colors.purple.shade700,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            "Log out",
+            style: TextStyle(
+              fontSize: 18,
+              color: Colors.purple.shade700,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
+        child: Scaffold(
+          key: scaffoldkey,
+          appBar: PreferredSize(
+            preferredSize: Size.fromHeight(100.0),
+            child: SafeArea(
+              child: AppBar(
+                leading: IconButton(
+                  icon: Icon(
+                    Icons.menu,
+                    color: Colors.black,
+                  ),
+                  onPressed: () {
+                    _controller.toggle();
+                  },
+                ),
+                // leading: IconButton(
+                //   icon: Icon(Icons.menu),
+                //   // call toggle from SlideDrawer to alternate between open and close
+                //   // when pressed menu button
+                //   onPressed: () => SlideDrawer.of(context).toggle(),
+                // ),
+                centerTitle: true,
+                title: Text("ICanDoIt"),
+                flexibleSpace: Container(
+                  decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight,
+                          colors: <Color>[Colors.purple, Colors.blue])),
+                ),
+              ),
+            ),
+          ),
+          body: Shimmer(
+            duration: Duration(seconds: 3),
+            interval: Duration(seconds: 5),
+            color: Colors.white,
+            enabled: true,
+            direction: ShimmerDirection.fromLTRB(),
+            child: Container(
               decoration: BoxDecoration(
                   gradient: LinearGradient(
                       begin: Alignment.centerLeft,
                       end: Alignment.centerRight,
-                      colors: <Color>[Colors.purple, Colors.blue])),
+                      colors: [Colors.purple, Colors.blue])),
+              child: ChallengesListBuilder(),
             ),
           ),
+          // backgroundColor: Color(0xff414a4c),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerFloat,
+          floatingActionButton: buildBottomSheet(),
         ),
       ),
-      body: Shimmer(
-        duration: Duration(seconds: 3),
-        interval: Duration(seconds: 5),
-        color: Colors.white,
-        enabled: true,
-        direction: ShimmerDirection.fromLTRB(),
-        child: Container(
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.centerLeft,
-                  end: Alignment.centerRight,
-                  colors: [Colors.purple, Colors.blue])),
-          child: ChallengesListBuilder(),
-        ),
-      ),
-      // backgroundColor: Color(0xff414a4c),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: buildBottomSheet(),
     );
   }
 

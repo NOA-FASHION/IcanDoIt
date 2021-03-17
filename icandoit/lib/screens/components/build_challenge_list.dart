@@ -4,6 +4,7 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:provider/provider.dart';
 import '../../controllers/challenge_controller.dart';
 import '../home_screen.dart';
+import 'baseAlertDialog.dart';
 import 'home_screen_tache.dart';
 
 class ChallengesListBuilder extends StatefulWidget {
@@ -53,8 +54,22 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
   @override
   Widget build(BuildContext context) {
     Challengecontroller variable = Provider.of<Challengecontroller>(context);
-
     List<ChallengeModel> _challengesList = variable.getChallenges();
+    _confirmRegister(int index) {
+      var baseDialog = BaseAlertDialog(
+          title: "Confirm Registration",
+          content: "I Agree that the information provided is correct",
+          yesOnPressed: () {
+            variable.addListChallengeSave(_challengesList[index].name);
+            Navigator.pop(context, false);
+          },
+          noOnPressed: () {},
+          yes: "Agree",
+          no: "Cancel");
+      showDialog(
+          context: context, builder: (BuildContext context) => baseDialog);
+    }
+
     final Challengecontroller provider =
         Provider.of<Challengecontroller>(context);
     if (_challengesList.isEmpty) {
@@ -165,29 +180,7 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                 elevation: 20.0,
                 child: ListTile(
                   onLongPress: () {
-                    AlertDialog(
-                      title: Text(
-                        "Confirmation",
-                        style: TextStyle(color: Colors.blue),
-                      ),
-                      content: Text("Voulez sauvegardez cette mission"),
-                      actions: [
-                        RaisedButton(
-                          onPressed: () {
-                            Navigator.pop(context, true);
-                          },
-                          child: Text("Oui"),
-                        ),
-                        RaisedButton(
-                          onPressed: () {
-                            variable.addListChallengeSave(
-                                _challengesList[index].name);
-                            Navigator.pop(context, false);
-                          },
-                          child: Text("Nom"),
-                        )
-                      ],
-                    );
+                    _confirmRegister(index);
                   },
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(

@@ -14,7 +14,7 @@ class Challengecontroller extends ChangeNotifier {
   List<ChallengeModel> _challengeListSave = [];
   SharedPreferences _localData;
   SharedPreferences _localDataSave;
-  List<int> indexSave;
+  int indexSave;
   String something = "";
   String percent = "0";
   Challengecontroller() {
@@ -41,8 +41,9 @@ class Challengecontroller extends ChangeNotifier {
     _localDataSave = await SharedPreferences.getInstance();
     // List<Map<String, dynamic>> tempListMap = [];
     List<Map<String, dynamic>> _jsonDecodeListSave;
-    final List<String> _tempListSave = _localData.getStringList(keyAccesSAve);
-    if (_tempList != null) {
+    final List<String> _tempListSave =
+        _localDataSave.getStringList(keyAccesSAve);
+    if (_tempListSave != null) {
       _jsonDecodeListSave = _tempListSave
           .map((challengeEncoded) => jsonDecode(challengeEncoded))
           .toList()
@@ -209,17 +210,20 @@ class Challengecontroller extends ChangeNotifier {
     notifyListeners();
   }
 
+  int getChallengesindex() {
+    return indexSave;
+  }
+
   List<int> indexSaveFunction(bool selected, int index) {
-    indexSave = [];
     if (selected) {
-      indexSave.add(index);
+      indexSave = index;
     }
   }
 
   void addSlectSave() async {
-    for (var i = _challengeList.length - 1; i >= 0; i--) {
-      for (var n = indexSave.length - 1; n >= 0; n--) {
-        if (i == indexSave[n]) {
+    if (indexSave != 0) {
+      for (var i = _challengeListSave.length - 1; i >= 0; i--) {
+        if (i == indexSave) {
           _challengeList.add(
             ChallengeModel(
                 listeDeTache: _challengeListSave[i].listeDeTache,
@@ -231,20 +235,25 @@ class Challengecontroller extends ChangeNotifier {
           for (var j = _challengeListSave[i].listeDeTache.length - 1;
               j >= 0;
               j--) {
-            _challengeListSave[i].listeDeTache.add(
-                  Challengemodel2(
-                      name: _challengeListSave[i].listeDeTache[j].name,
-                      tache: _challengeListSave[i].listeDeTache[j].tache,
-                      description:
-                          _challengeListSave[i].listeDeTache[j].description),
-                );
+            for (var n = _challengeList.length - 1; n >= 0; n--) {
+              if (_challengeList[n].name == _challengeListSave[i].name) {
+                _challengeList[n].listeDeTache.add(
+                      Challengemodel2(
+                          name: _challengeListSave[i].listeDeTache[j].name,
+                          tache: _challengeListSave[i].listeDeTache[j].tache,
+                          description: _challengeListSave[i]
+                              .listeDeTache[j]
+                              .description),
+                    );
+              }
+            }
           }
         }
       }
+      await _save();
+      _initChallengeList();
+      notifyListeners();
     }
-    await _save();
-    _initChallengeList();
-    notifyListeners();
   }
 
   void addListChallengeSave(String namechallenge) async {
@@ -258,13 +267,18 @@ class Challengecontroller extends ChangeNotifier {
               totalChallenge: _challengeList[i].totalChallenge,
               unity: _challengeList[i].unity),
         );
-        for (var n = _challengeList[i].listeDeTache.length - 1; n >= 0; n--) {
-          _challengeListSave[i].listeDeTache.add(
-                Challengemodel2(
-                    name: _challengeList[i].listeDeTache[n].name,
-                    tache: _challengeList[i].listeDeTache[n].tache,
-                    description: _challengeList[i].listeDeTache[n].description),
-              );
+        for (var j = _challengeList[i].listeDeTache.length - 1; j >= 0; j--) {
+          for (var n = _challengeList.length - 1; n >= 0; n--) {
+            if (_challengeList[n].name == _challengeListSave[i].name) {
+              _challengeListSave[n].listeDeTache.add(
+                    Challengemodel2(
+                        name: _challengeList[i].listeDeTache[j].name,
+                        tache: _challengeList[i].listeDeTache[j].tache,
+                        description:
+                            _challengeList[i].listeDeTache[j].description),
+                  );
+            }
+          }
         }
       }
     }
