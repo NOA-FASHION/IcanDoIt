@@ -1,71 +1,210 @@
+import 'package:fancy_drawer/fancy_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:icandoit/controllers/challenge_controller.dart';
 import 'package:icandoit/models/challenge_model.dart';
 import 'package:item_selector/item_selector.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
-import 'package:slide_drawer/slide_drawer.dart';
+// import 'package:slide_drawer/slide_drawer.dart';
+
+import '../home_screen.dart';
+import 'baseAlertDialog.dart';
 
 class ExampleApp extends StatefulWidget {
   @override
   _ExampleAppState createState() => _ExampleAppState();
 }
 
-class _ExampleAppState extends State<ExampleApp> {
+class _ExampleAppState extends State<ExampleApp>
+    with SingleTickerProviderStateMixin {
+  _confirmRegister() {
+    var baseDialog = BaseAlertDialog(
+        title: "pas de selection",
+        content: "Vous devez selectionner un challenge",
+        yesOnPressed: () {
+          Navigator.pop(context, false);
+        },
+        yes: "Agree");
+    showDialog(context: context, builder: (BuildContext context) => baseDialog);
+    return;
+  }
+
   int currentPage = 0;
+  FancyDrawerController _controller;
+  void initState() {
+    super.initState();
+    _controller = FancyDrawerController(
+        vsync: this, duration: Duration(milliseconds: 250))
+      ..addListener(() {
+        setState(() {});
+      });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     Challengecontroller variable2 = Provider.of<Challengecontroller>(context);
     List<ChallengeModel> _challengeList = variable2.getChallenges2();
-    return MaterialApp(
-      title: 'Item Selector',
-      home: Scaffold(
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(100.0),
-          child: SafeArea(
-            child: AppBar(
-              leading: IconButton(
-                icon: Icon(Icons.menu),
-                // call toggle from SlideDrawer to alternate between open and close
-                // when pressed menu button
-                onPressed: () => SlideDrawer.of(context).toggle(),
-              ),
-              flexibleSpace: Container(
-                child: InkWell(
-                    onTap: () {
-                      int indexSave;
-                      indexSave = variable2.getChallengesindex();
-                      print("resultat des index");
-                      print(indexSave);
-                      if (indexSave != null) {
-                        variable2.addSlectSave();
-                      } else {
-                        return AlertDialog(
-                          content: Text(
-                              "Vous devez selectionner un challenge pour l'enregistrer"),
-                        );
-                      }
-                    },
-                    child: Container(
-                        width: 200.0,
-                        height: 200.0,
-                        child: Lottie.asset('assets/save1.json'))),
-                decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                        begin: Alignment.centerLeft,
-                        end: Alignment.centerRight,
-                        colors: <Color>[Colors.purple, Colors.blue])),
-              ),
-              title: Text("save"),
+
+    return Material(
+      child: FancyDrawerWrapper(
+        controller: _controller,
+        drawerItems: <Widget>[
+          InkWell(
+            onTap: () {
+              Navigator.of(context).pop();
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => ChangeNotifierProvider.value(
+                      value: variable2, child: Home())));
+              // setState(() {});
+            },
+            child: Row(
+              children: [
+                Icon(Icons.home),
+                SizedBox(
+                  width: 5.0,
+                ),
+                Text(
+                  "Go to home",
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.purple.shade700,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
             ),
           ),
-        ),
-        body: AnimatedSwitcher(
-          duration: Duration(milliseconds: 246),
-          child: Container(
-            // key: ValueKey<int>(currentPage),
-            child: ListViewPage(_challengeList),
+          InkWell(
+            onTap: () {
+              Navigator.of(context).pop();
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => ChangeNotifierProvider.value(
+                      value: variable2, child: Home())));
+              // setState(() {});
+            },
+            child: Row(
+              children: [
+                Icon(Icons.home),
+                SizedBox(
+                  width: 5.0,
+                ),
+                Text(
+                  "Sauvegare challenge",
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.purple.shade700,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          InkWell(
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => ChangeNotifierProvider.value(
+                      value: variable2, child: ExampleApp())));
+              // setState(() {});
+            },
+            child: Row(
+              children: [
+                Icon(Icons.home),
+                SizedBox(
+                  width: 5.0,
+                ),
+                Text(
+                  "Support us",
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.purple.shade700,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          InkWell(
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => ChangeNotifierProvider.value(
+                      value: variable2, child: Home())));
+              // setState(() {});
+            },
+            child: Row(
+              children: [
+                Icon(Icons.home),
+                SizedBox(
+                  width: 5.0,
+                ),
+                Text(
+                  "About us",
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.purple.shade700,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+        child: MaterialApp(
+          title: 'Item Selector',
+          home: Scaffold(
+            appBar: PreferredSize(
+              preferredSize: Size.fromHeight(100.0),
+              child: SafeArea(
+                child: AppBar(
+                  leading: IconButton(
+                    alignment: Alignment.topRight,
+                    icon: Icon(
+                      Icons.menu,
+                      color: Colors.black,
+                    ),
+                    onPressed: () {
+                      _controller.toggle();
+                    },
+                  ),
+                  flexibleSpace: Container(
+                    child: InkWell(
+                        onTap: () {
+                          int indexSave;
+                          indexSave = variable2.getChallengesindex();
+                          print("resultat des index");
+                          print(indexSave);
+                          if (indexSave != null) {
+                            variable2.addSlectSave();
+                          } else {
+                            _confirmRegister();
+                          }
+                        },
+                        child: Container(
+                            width: 200.0,
+                            height: 200.0,
+                            child: Lottie.asset('assets/save1.json'))),
+                    decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                            begin: Alignment.centerLeft,
+                            end: Alignment.centerRight,
+                            colors: <Color>[Colors.purple, Colors.blue])),
+                  ),
+                  title: Text("save"),
+                ),
+              ),
+            ),
+            body: AnimatedSwitcher(
+              duration: Duration(milliseconds: 246),
+              child: Container(
+                // key: ValueKey<int>(currentPage),
+                child: ListViewPage(_challengeList),
+              ),
+            ),
           ),
         ),
       ),

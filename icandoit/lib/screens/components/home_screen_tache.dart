@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:icandoit/models/challenge_model.dart';
+// import 'package:icandoit/models/challenge_model.dart';
 import 'package:icandoit/screens/components/build_challenge_list_tache.dart';
 import 'package:icandoit/controllers/challenge_controller.dart';
-import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:lottie/lottie.dart';
+// import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 
@@ -151,6 +152,19 @@ class _HomeTachesState extends State<HomeTaches> {
                       child: ListView(
                         children: [
                           DropdownButtonFormField(
+                            decoration: InputDecoration(
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        width: 2.0, color: Colors.blueAccent),
+                                    borderRadius: BorderRadius.circular(15.0)),
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        width: 1.0, color: Colors.blueAccent),
+                                    borderRadius: BorderRadius.circular(15.0)),
+                                contentPadding: EdgeInsets.symmetric(
+                                    horizontal: 20, vertical: 10),
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(15.0))),
                             value: unityChallenge,
                             onChanged: (value) {
                               updateController(value);
@@ -197,6 +211,9 @@ class _HomeTachesState extends State<HomeTaches> {
                               ),
                             ],
                           ),
+                          SizedBox(
+                            height: 15.0,
+                          ),
                           TextFormField(
                             onSaved: (value) {
                               targetChallenge = value;
@@ -209,32 +226,69 @@ class _HomeTachesState extends State<HomeTaches> {
                               }
                               return null;
                             },
-                            decoration:
-                                InputDecoration(labelText: "Description"),
+                            decoration: InputDecoration(
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        width: 2.0, color: Colors.blueAccent),
+                                    borderRadius: BorderRadius.circular(15.0)),
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        width: 1.0, color: Colors.blueAccent),
+                                    borderRadius: BorderRadius.circular(15.0)),
+                                contentPadding: EdgeInsets.symmetric(
+                                    horizontal: 20, vertical: 10),
+                                labelText: "Description",
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(15.0))),
                           ),
-                          RaisedButton(
-                            onPressed: () {
-                              if (formKey.currentState.validate()) {
-                                formKey.currentState.save();
-                                setState(() {
-                                  // totaChallengeEnCours1 =
-                                  //     totaChallengeEnCours1 + 1;
-                                  // totalChallengeEnCours =
-                                  //     totaChallengeEnCours1.toString();
-                                  Provider.of<Challengecontroller>(context,
-                                          listen: false)
-                                      .addChallenge2(
-                                          totalChallenge: '1',
-                                          nameListChallenge: something,
-                                          name: nameChallenge,
-                                          description: unityChallenge,
-                                          tache: targetChallenge);
-                                });
-                              }
-                              Navigator.pop(context);
-                            },
-                            child: Text("Ajouter la mission"),
-                          ),
+                          InkWell(
+                              onTap: () {
+                                if (formKey.currentState.validate()) {
+                                  formKey.currentState.save();
+                                  setState(() {
+                                    // totaChallengeEnCours1 =
+                                    //     totaChallengeEnCours1 + 1;
+                                    // totalChallengeEnCours =
+                                    //     totaChallengeEnCours1.toString();
+                                    Provider.of<Challengecontroller>(context,
+                                            listen: false)
+                                        .addChallenge2(
+                                            totalChallenge: '1',
+                                            nameListChallenge: something,
+                                            name: nameChallenge,
+                                            description: unityChallenge,
+                                            tache: targetChallenge);
+                                  });
+                                }
+                                Navigator.pop(context);
+                              },
+                              child: Container(
+                                  width: 200.0,
+                                  height: 200.0,
+                                  child: Lottie.asset('assets/save1.json'))),
+                          // RaisedButton(
+                          //   onPressed: () {
+                          //     if (formKey.currentState.validate()) {
+                          //       formKey.currentState.save();
+                          //       setState(() {
+                          //         // totaChallengeEnCours1 =
+                          //         //     totaChallengeEnCours1 + 1;
+                          //         // totalChallengeEnCours =
+                          //         //     totaChallengeEnCours1.toString();
+                          //         Provider.of<Challengecontroller>(context,
+                          //                 listen: false)
+                          //             .addChallenge2(
+                          //                 totalChallenge: '1',
+                          //                 nameListChallenge: something,
+                          //                 name: nameChallenge,
+                          //                 description: unityChallenge,
+                          //                 tache: targetChallenge);
+                          //       });
+                          //     }
+                          //     Navigator.pop(context);
+                          //   },
+                          //   child: Text("Ajouter la mission"),
+                          // ),
                         ],
                       ),
                     ),

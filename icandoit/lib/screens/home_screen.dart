@@ -8,6 +8,8 @@ import 'package:shimmer_animation/shimmer_animation.dart';
 import 'package:lottie/lottie.dart';
 import 'package:slide_drawer/slide_drawer.dart';
 
+import 'components/challenge_list_save.dart';
+
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
@@ -40,49 +42,107 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    Challengecontroller variable = Provider.of<Challengecontroller>(context);
     return Material(
       child: FancyDrawerWrapper(
-        backgroundColor: Colors.white,
         controller: _controller,
         drawerItems: <Widget>[
-          Text(
-            "Go to home",
-            style: TextStyle(
-              fontSize: 18,
-              color: Colors.purple.shade700,
-              fontWeight: FontWeight.bold,
+          InkWell(
+            onTap: () {
+              Navigator.of(context).pop();
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => ChangeNotifierProvider.value(
+                      value: variable, child: Home())));
+              // setState(() {});
+            },
+            child: Row(
+              children: [
+                Icon(Icons.home),
+                SizedBox(
+                  width: 5.0,
+                ),
+                Text(
+                  "Go to home",
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.purple.shade700,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
             ),
           ),
-          Text(
-            "About us",
-            style: TextStyle(
-              fontSize: 18,
-              color: Colors.purple.shade700,
-              fontWeight: FontWeight.bold,
+          InkWell(
+            onTap: () {
+              Navigator.of(context).pop();
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => ChangeNotifierProvider.value(
+                      value: variable, child: Home())));
+              // setState(() {});
+            },
+            child: Row(
+              children: [
+                Icon(Icons.home),
+                SizedBox(
+                  width: 5.0,
+                ),
+                Text(
+                  "Sauvegare challenge",
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.purple.shade700,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
             ),
           ),
-          Text(
-            "Our products",
-            style: TextStyle(
-              fontSize: 18,
-              color: Colors.purple.shade700,
-              fontWeight: FontWeight.bold,
+          InkWell(
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => ChangeNotifierProvider.value(
+                      value: variable, child: ExampleApp())));
+              // setState(() {});
+            },
+            child: Row(
+              children: [
+                Icon(Icons.home),
+                SizedBox(
+                  width: 5.0,
+                ),
+                Text(
+                  "Support us",
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.purple.shade700,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
             ),
           ),
-          Text(
-            "Support us",
-            style: TextStyle(
-              fontSize: 18,
-              color: Colors.purple.shade700,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          Text(
-            "Log out",
-            style: TextStyle(
-              fontSize: 18,
-              color: Colors.purple.shade700,
-              fontWeight: FontWeight.bold,
+          InkWell(
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => ChangeNotifierProvider.value(
+                      value: variable, child: Home())));
+              // setState(() {});
+            },
+            child: Row(
+              children: [
+                Icon(Icons.home),
+                SizedBox(
+                  width: 5.0,
+                ),
+                Text(
+                  "About us",
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.purple.shade700,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
             ),
           ),
         ],
@@ -93,6 +153,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             child: SafeArea(
               child: AppBar(
                 leading: IconButton(
+                  alignment: Alignment.topRight,
                   icon: Icon(
                     Icons.menu,
                     color: Colors.black,
@@ -282,24 +343,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                   width: 200.0,
                                   height: 200.0,
                                   child: Lottie.asset('assets/save1.json'))),
-                          // RaisedButton(
-                          //   onPressed: () {
-                          //     if (formKey.currentState.validate()) {
-                          //       formKey.currentState.save();
-                          //       Provider.of<Challengecontroller>(context,
-                          //               listen: false)
-                          //           .addChallenge(
-                          //               name: nameChallenge,
-                          //               totalChallenge: totalChallenge,
-                          //               description: targetChallenge,
-                          //               unity: unityChallenge,
-                          //               challengeListTache: challengeListTache);
-
-                          //       Navigator.pop(context);
-                          //     }
-                          //   },
-                          //   child: Text("Ajouter la mission"),
-                          // ),
                         ],
                       ),
                     ),
