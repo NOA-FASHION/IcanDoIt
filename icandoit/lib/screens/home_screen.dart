@@ -6,7 +6,7 @@ import 'package:icandoit/controllers/challenge_controller.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 import 'package:lottie/lottie.dart';
-import 'package:slide_drawer/slide_drawer.dart';
+// import 'package:slide_drawer/slide_drawer.dart';
 
 import 'components/challenge_list_save.dart';
 
@@ -49,10 +49,12 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         drawerItems: <Widget>[
           InkWell(
             onTap: () {
-              Navigator.of(context).pop();
+              // Navigator.of(context).pop();
+
               Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => ChangeNotifierProvider.value(
                       value: variable, child: Home())));
+              setState(() {});
               // setState(() {});
             },
             child: Row(
@@ -74,11 +76,12 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           ),
           InkWell(
             onTap: () {
-              Navigator.of(context).pop();
+              // Navigator.of(context).pop();
+
               Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => ChangeNotifierProvider.value(
-                      value: variable, child: Home())));
-              // setState(() {});
+                      value: variable, child: ExampleApp())));
+              setState(() {});
             },
             child: Row(
               children: [
@@ -99,9 +102,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           ),
           InkWell(
             onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => ChangeNotifierProvider.value(
-                      value: variable, child: ExampleApp())));
+              // Navigator.of(context).push(MaterialPageRoute(
+              //     builder: (context) => ChangeNotifierProvider.value(
+              //         value: variable, child: ExampleApp())));
               // setState(() {});
             },
             child: Row(
@@ -123,9 +126,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           ),
           InkWell(
             onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => ChangeNotifierProvider.value(
-                      value: variable, child: Home())));
+              // Navigator.of(context).push(MaterialPageRoute(
+              //     builder: (context) => ChangeNotifierProvider.value(
+              //         value: variable, child: Home())));
               // setState(() {});
             },
             child: Row(

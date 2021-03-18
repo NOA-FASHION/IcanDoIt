@@ -185,16 +185,22 @@ class _ExampleAppState extends State<ExampleApp>
                           }
                         },
                         child: Container(
-                            width: 200.0,
+                            width: 400.0,
                             height: 200.0,
-                            child: Lottie.asset('assets/save1.json'))),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Lottie.asset('assets/save1.json'),
+                                Lottie.asset('assets/save1.json'),
+                              ],
+                            ))),
                     decoration: BoxDecoration(
                         gradient: LinearGradient(
                             begin: Alignment.centerLeft,
                             end: Alignment.centerRight,
                             colors: <Color>[Colors.purple, Colors.blue])),
                   ),
-                  title: Text("save"),
+                  // title: Text("save"),
                 ),
               ),
             ),
@@ -221,33 +227,42 @@ Widget buildListItem(
   List<ChallengeModel> challengeListSave = variable.getChallenges2();
   variable.indexSaveFunction(selected, index);
   return Card(
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(20.0),
+    ),
     margin: EdgeInsets.all(10),
     elevation: selected ? 2 : 10,
     child: ListTile(
       leading: FlutterLogo(),
       contentPadding: EdgeInsets.all(10),
-      title: Container(
-        child: Row(
-          children: [
-            Card(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(5.0),
+      title: Card(
+        elevation: 10,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(60.0),
+        ),
+        child: Container(
+          child: Row(
+            children: [
+              Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5.0),
+                ),
+                elevation: 15.0,
+                child: Text(
+                  "Titre",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.blue),
+                ),
               ),
-              elevation: 15.0,
-              child: Text(
-                "Titre",
-                style:
-                    TextStyle(fontWeight: FontWeight.bold, color: Colors.blue),
+              SizedBox(
+                width: 5.0,
               ),
-            ),
-            SizedBox(
-              width: 5.0,
-            ),
-            Text(challengeListSave[index].name),
-            SizedBox(
-              width: 5.0,
-            ),
-          ],
+              Text(challengeListSave[index].name),
+              SizedBox(
+                width: 5.0,
+              ),
+            ],
+          ),
         ),
       ),
     ),
