@@ -6,6 +6,8 @@ import 'dart:collection';
 
 const String keyAcces = "challengeList";
 const String keyAccesSAve = "challengeListSAve";
+const String keyAccesChallenge = "challenge";
+const String keyAccesChallengeyesterday = "Challengeyesterday";
 
 class Challengecontroller extends ChangeNotifier {
   List<ChallengeModel> _challengeList = [];
@@ -14,6 +16,10 @@ class Challengecontroller extends ChangeNotifier {
   List<ChallengeModel> _challengeListSave = [];
   SharedPreferences _localData;
   SharedPreferences _localDataSave;
+  SharedPreferences _localDataChallenge;
+  SharedPreferences _localDataChallengeyesterday;
+  ChallengeDays challengeDays;
+  Challengeyesterday challengeyesterday;
   int indexSave;
   String something = "";
   String percent = "0";
@@ -55,11 +61,103 @@ class Challengecontroller extends ChangeNotifier {
       _challengeListSave
           .sort((a, b) => a.unity.toString().compareTo(b.unity.toString()));
     }
+    _localDataChallenge = await SharedPreferences.getInstance();
+    // List<Map<String, dynamic>> tempListMap = [];
+    Map _jsonDecodeListChallenge;
+    final String _tempListChallenge =
+        _localDataChallenge.getString(keyAccesChallenge);
+    if (_tempListChallenge != null) {
+      _jsonDecodeListChallenge = jsonDecode(_tempListChallenge);
+      challengeDays = ChallengeDays.fromJSON(_jsonDecodeListChallenge);
+    }
+    _localDataChallengeyesterday = await SharedPreferences.getInstance();
+    // List<Map<String, dynamic>> tempListMap = [];
+    Map _jsonDecodeListchallengeyesterday;
+    final String _tempListchallengeyesterday =
+        _localDataChallengeyesterday.getString(keyAccesChallengeyesterday);
+    if (_tempListchallengeyesterday != null) {
+      _jsonDecodeListchallengeyesterday =
+          jsonDecode(_tempListchallengeyesterday);
+      challengeyesterday =
+          Challengeyesterday.fromJSON(_jsonDecodeListchallengeyesterday);
+    }
+
+    notifyListeners();
+  }
+
+  void addChallengeyesterday() async {
+    DateTime today = new DateTime.now();
+    if (challengeyesterday.date != today.toString()) {
+      challengeyesterday.date = today.toString();
+      challengeyesterday.nbChallengeEnCours = challengeDays.nbChallengeEnCours;
+      challengeyesterday.nbTacheEnCours = challengeDays.nbTacheEnCours;
+      challengeyesterday.commentaire = challengeDays.commentaire;
+      challengeyesterday.nbchallengeVallide = challengeDays.nbchallengeVallide;
+      challengeyesterday.nbtacheVallide = challengeDays.nbtacheVallide;
+    }
+    await _save();
+    _initChallengeList();
+    notifyListeners();
+  }
+
+  void initChallendays() async {
+    DateTime today = new DateTime.now();
+    if (challengeDays.date != today.toString()) {
+      challengeDays.date = today.toString();
+      challengeDays.nbtacheVallide = "0";
+      challengeDays.nbchallengeVallide = "0";
+      challengeDays.commentaire = "";
+    }
+    await _save();
+    _initChallengeList();
+    notifyListeners();
+  }
+
+  void addCommentaireChallengeDay() async {
+    var nbtacheVallide1 = int.parse(challengeDays.nbtacheVallide);
+    if (nbtacheVallide1 == 0) {
+      challengeDays.commentaire = "Vous n'avez pas valide de challenge";
+    } else if (nbtacheVallide1 > 3) {
+      challengeDays.commentaire =
+          "pas mal, encore un effort et vous atteindrez vos objectifs";
+    } else if (nbtacheVallide1 > 6) {
+      challengeDays.commentaire = "Bravo, vos effort ont ete recompense";
+    } else if (nbtacheVallide1 > 9) {
+      challengeDays.commentaire = "extraordinaire, rien ne vous arretes.";
+    }
+    await _save();
+    _initChallengeList();
+    notifyListeners();
+  }
+
+  void addnbtacheVallide() async {
+    challengeDays.nbtacheVallide =
+        (int.parse(challengeDays.nbtacheVallide) + 1).toString();
+
+    await _save();
+    _initChallengeList();
+    notifyListeners();
+  }
+
+  void addnbChallengeVallide() async {
+    challengeDays.nbchallengeVallide =
+        (int.parse(challengeDays.nbchallengeVallide) + 1).toString();
+
+    await _save();
+    _initChallengeList();
     notifyListeners();
   }
 
   List<ChallengeModel> getChallenges2() {
     return _challengeListSave;
+  }
+
+  Challengeyesterday getChallengeyesterday() {
+    return challengeyesterday;
+  }
+
+  ChallengeDays getChallengeDays() {
+    return challengeDays;
   }
 
   List<ChallengeModel> getChallenges() {
@@ -232,27 +330,49 @@ class Challengecontroller extends ChangeNotifier {
                 totalChallenge: _challengeListSave[i].totalChallenge,
                 unity: _challengeListSave[i].unity),
           );
-          for (var j = _challengeListSave[i].listeDeTache.length - 1;
-              j >= 0;
-              j--) {
-            for (var n = _challengeList.length - 1; n >= 0; n--) {
-              if (_challengeList[n].name == _challengeListSave[i].name) {
-                _challengeList[n].listeDeTache.add(
-                      Challengemodel2(
-                          name: _challengeListSave[i].listeDeTache[j].name,
-                          tache: _challengeListSave[i].listeDeTache[j].tache,
-                          description: _challengeListSave[i]
-                              .listeDeTache[j]
-                              .description),
-                    );
-              }
-            }
-          }
+          addSlectSave1(
+            name: _challengeListSave[i].name,
+            challengeListTest: _challengeListSave[i].listeDeTache,
+          );
+          // for (var j = _challengeListSave[i].listeDeTache.length - 1;
+          //     j >= 0;
+          //     j--) {
+          //   for (var n = _challengeList.length - 1; n >= 0; n--) {
+          //     if (_challengeList[n].name == _challengeListSave[i].name) {
+          //       _challengeList[n].listeDeTache.add(
+          //             Challengemodel2(
+          //                 name: _challengeListSave[i].listeDeTache[j].name,
+          //                 tache: _challengeListSave[i].listeDeTache[j].tache,
+          //                 description: _challengeListSave[i]
+          //                     .listeDeTache[j]
+          //                     .description),
+          //           );
+          //     }
+          //   }
+          // }
         }
       }
       await _save();
       _initChallengeList();
       notifyListeners();
+    }
+  }
+
+  void addSlectSave1({
+    @required String name,
+    @required List<Challengemodel2> challengeListTest,
+  }) async {
+    for (var i = _challengeList.length - 1; i >= 0; i--) {
+      if (_challengeList[i].name == name) {
+        for (var n = challengeListTest.length - 1; n >= 0; n--) {
+          _challengeList[i].listeDeTache.add(
+                Challengemodel2(
+                    name: challengeListTest[n].name,
+                    tache: challengeListTest[n].tache,
+                    description: challengeListTest[n].description),
+              );
+        }
+      }
     }
   }
 
@@ -267,24 +387,46 @@ class Challengecontroller extends ChangeNotifier {
               totalChallenge: _challengeList[i].totalChallenge,
               unity: _challengeList[i].unity),
         );
-        for (var j = _challengeList[i].listeDeTache.length - 1; j >= 0; j--) {
-          for (var n = _challengeList.length - 1; n >= 0; n--) {
-            if (_challengeList[n].name == _challengeListSave[i].name) {
-              _challengeListSave[n].listeDeTache.add(
-                    Challengemodel2(
-                        name: _challengeList[i].listeDeTache[j].name,
-                        tache: _challengeList[i].listeDeTache[j].tache,
-                        description:
-                            _challengeList[i].listeDeTache[j].description),
-                  );
-            }
-          }
-        }
+        addListChallengeSave1(
+          name: _challengeList[i].name,
+          challengeListTest: _challengeList[i].listeDeTache,
+        );
+        // for (var j = _challengeList[i].listeDeTache.length - 1; j >= 0; j--) {
+        //   for (var n = _challengeList.length - 1; n >= 0; n--) {
+        //     if (_challengeList[n].name == _challengeListSave[i].name) {
+        //       _challengeListSave[n].listeDeTache.add(
+        //             Challengemodel2(
+        //                 name: _challengeList[i].listeDeTache[j].name,
+        //                 tache: _challengeList[i].listeDeTache[j].tache,
+        //                 description:
+        //                     _challengeList[i].listeDeTache[j].description),
+        //           );
+        //     }
+        //   }
+        // }
       }
     }
     await _saveSauvegarde();
     _initChallengeList();
     notifyListeners();
+  }
+
+  void addListChallengeSave1({
+    @required String name,
+    @required List<Challengemodel2> challengeListTest,
+  }) async {
+    for (var i = _challengeListSave.length - 1; i >= 0; i--) {
+      if (_challengeListSave[i].name == name) {
+        for (var n = challengeListTest.length - 1; n >= 0; n--) {
+          _challengeListSave[i].listeDeTache.add(
+                Challengemodel2(
+                    name: challengeListTest[n].name,
+                    tache: challengeListTest[n].tache,
+                    description: challengeListTest[n].description),
+              );
+        }
+      }
+    }
   }
 
   Future<bool> _save1({bool remove, String nameChallenge}) async {
@@ -339,7 +481,7 @@ class Challengecontroller extends ChangeNotifier {
 
   void removeSave({@required int index}) async {
     _challengeListSave.removeAt(index);
-    await _save(remove: true);
+    await _saveSauvegarde(remove: true);
     _initChallengeList();
     notifyListeners();
   }

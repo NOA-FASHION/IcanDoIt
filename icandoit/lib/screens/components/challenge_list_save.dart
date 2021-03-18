@@ -172,28 +172,37 @@ class _ExampleAppState extends State<ExampleApp>
                     },
                   ),
                   flexibleSpace: Container(
-                    child: InkWell(
-                        onTap: () {
-                          int indexSave;
-                          indexSave = variable2.getChallengesindex();
-                          print("resultat des index");
-                          print(indexSave);
-                          if (indexSave != null) {
-                            variable2.addSlectSave();
-                          } else {
-                            _confirmRegister();
-                          }
-                        },
-                        child: Container(
-                            width: 400.0,
-                            height: 200.0,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Lottie.asset('assets/save1.json'),
-                                Lottie.asset('assets/save1.json'),
-                              ],
-                            ))),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        InkWell(
+                            onTap: () {
+                              int indexSave;
+                              indexSave = variable2.getChallengesindex();
+                              print("resultat des index");
+                              print(indexSave);
+                              if (indexSave != null) {
+                                variable2.addSlectSave();
+                              } else {
+                                _confirmRegister();
+                              }
+                            },
+                            child: Container(
+                                width: 400.0,
+                                height: 200.0,
+                                child: Lottie.asset('assets/save1.json'))),
+                        InkWell(
+                            onTap: () {
+                              int indexSave;
+                              indexSave = variable2.getChallengesindex();
+                              variable2.removeSave(index: indexSave);
+                            },
+                            child: Container(
+                                width: 400.0,
+                                height: 200.0,
+                                child: Lottie.asset('assets/trash.json'))),
+                      ],
+                    ),
                     decoration: BoxDecoration(
                         gradient: LinearGradient(
                             begin: Alignment.centerLeft,

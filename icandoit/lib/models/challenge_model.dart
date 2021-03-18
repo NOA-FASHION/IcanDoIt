@@ -99,41 +99,75 @@ class ChallengeModel {
       "listeDeTache": List<dynamic>.from(listeDeTache.map((x) => x.toJson())),
     };
   }
+}
 
-  // Map<String, dynamic> toJson1() {
-  //   return {
-  //     "name": name,
-  //     "percent": percent,
-  //     "description": description,
-  //     "totalChallenge": totalChallenge,
-  //     "unity": unity.toString(),
-  //     "listeDeTache": [],
+class ChallengeDays {
+  String date;
+  String nbTacheEnCours;
+  String nbChallengeEnCours;
+  String commentaire;
+  String nbchallengeVallide;
+  String nbtacheVallide;
+  ChallengeDays(
+      {@required this.date,
+      @required this.nbChallengeEnCours,
+      this.commentaire,
+      this.nbchallengeVallide,
+      this.nbTacheEnCours,
+      this.nbtacheVallide});
 
-  //   };
-  // }
+  ChallengeDays.fromJSON(Map<String, dynamic> json)
+      : date = json['date'],
+        nbChallengeEnCours = json['nbChallengeEnCours'],
+        nbchallengeVallide = json['nbchallengeVallide'],
+        nbtacheVallide = json['nbtacheVallide'],
+        nbTacheEnCours = json['nbTacheEnCours'],
+        commentaire = json['commentaire'];
 
-  //  ChallengeModel.fromJSON(Map<String, dynamic> json)
-  //     : name = json['name'],
-  //       description = json['description'],
-  //       unity = json['unity'] == "unity_challenge.haute"
-  //           ? unity_challenge.haute
-  //           : unity_challenge.normal;
+  Map<String, dynamic> toJson() {
+    return {
+      "date": date,
+      "nbchallengeVallide": nbchallengeVallide,
+      "nbtacheVallide": nbtacheVallide,
+      "nbTacheEnCours": nbTacheEnCours,
+      "nbChallengeEnCours": nbChallengeEnCours,
+      "commentaire": commentaire
+    };
+  }
+}
 
-  // Map<String, dynamic> toJson() {
-  //   return {
-  //     "name": name,
-  //     "description": description,
-  //     "unity": unity.toString()
-  //   };
-  // }
-  // List<String> toJSON() {
-  //   var listeDETACHE;
-  //   if (this.listeDeTache.length < 1) {
-  //     listeDETACHE = [];
-  //   } else {
-  //     listeDETACHE =
-  //         List<Challengemodel2>.from(listeDeTache.map((x) => x.toJson()));
-  //   }
-  //   return listeDETACHE;
-  // }
+class Challengeyesterday {
+  String date;
+  String nbChallengeEnCours;
+  String nbTacheEnCours;
+  String commentaire;
+  String nbchallengeVallide;
+  String nbtacheVallide;
+
+  Challengeyesterday(
+      {@required this.date,
+      @required this.nbChallengeEnCours,
+      this.commentaire,
+      this.nbchallengeVallide,
+      this.nbTacheEnCours,
+      this.nbtacheVallide});
+
+  Challengeyesterday.fromJSON(Map<String, dynamic> json)
+      : date = json['date'],
+        nbChallengeEnCours = json['nbChallengeEnCours'],
+        nbTacheEnCours = json['nbTacheEnCours'],
+        nbchallengeVallide = json['nbchallengeVallide'],
+        nbtacheVallide = json['nbtacheVallide'],
+        commentaire = json['commentaire'];
+
+  Map<String, dynamic> toJson() {
+    return {
+      "date": date,
+      "nbchallengeVallide": nbchallengeVallide,
+      "nbTacheEnCours": nbTacheEnCours,
+      "nbtacheVallide": nbtacheVallide,
+      "nbChallengeEnCours": nbChallengeEnCours,
+      "commentaire": commentaire
+    };
+  }
 }
