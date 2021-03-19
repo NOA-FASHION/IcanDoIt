@@ -58,8 +58,8 @@ class Challengecontroller extends ChangeNotifier {
       _challengeListSave = _jsonDecodeListSave
           .map((challenge) => ChallengeModel.fromJSON(challenge))
           .toList();
-      _challengeListSave
-          .sort((a, b) => a.unity.toString().compareTo(b.unity.toString()));
+      // _challengeListSave
+      //     .sort((a, b) => a.unity.toString().compareTo(b.unity.toString()));
     }
     _localDataChallenge = await SharedPreferences.getInstance();
     // List<Map<String, dynamic>> tempListMap = [];
@@ -203,8 +203,7 @@ class Challengecontroller extends ChangeNotifier {
         }
       }
     }
-    print("additionchallenge");
-    print(additionchallenge);
+
     return additionchallenge;
   }
 
@@ -319,7 +318,9 @@ class Challengecontroller extends ChangeNotifier {
   }
 
   void addSlectSave() async {
-    if (indexSave != 0) {
+    print('index save');
+    print(indexSave);
+    if (indexSave != null) {
       for (var i = _challengeListSave.length - 1; i >= 0; i--) {
         if (i == indexSave) {
           _challengeList.add(
@@ -330,47 +331,11 @@ class Challengecontroller extends ChangeNotifier {
                 totalChallenge: _challengeListSave[i].totalChallenge,
                 unity: _challengeListSave[i].unity),
           );
-          addSlectSave1(
-            name: _challengeListSave[i].name,
-            challengeListTest: _challengeListSave[i].listeDeTache,
-          );
-          // for (var j = _challengeListSave[i].listeDeTache.length - 1;
-          //     j >= 0;
-          //     j--) {
-          //   for (var n = _challengeList.length - 1; n >= 0; n--) {
-          //     if (_challengeList[n].name == _challengeListSave[i].name) {
-          //       _challengeList[n].listeDeTache.add(
-          //             Challengemodel2(
-          //                 name: _challengeListSave[i].listeDeTache[j].name,
-          //                 tache: _challengeListSave[i].listeDeTache[j].tache,
-          //                 description: _challengeListSave[i]
-          //                     .listeDeTache[j]
-          //                     .description),
-          //           );
-          //     }
-          //   }
-          // }
-        }
-      }
-      await _save();
-      _initChallengeList();
-      notifyListeners();
-    }
-  }
 
-  void addSlectSave1({
-    @required String name,
-    @required List<Challengemodel2> challengeListTest,
-  }) async {
-    for (var i = _challengeList.length - 1; i >= 0; i--) {
-      if (_challengeList[i].name == name) {
-        for (var n = challengeListTest.length - 1; n >= 0; n--) {
-          _challengeList[i].listeDeTache.add(
-                Challengemodel2(
-                    name: challengeListTest[n].name,
-                    tache: challengeListTest[n].tache,
-                    description: challengeListTest[n].description),
-              );
+          await _save();
+          _initChallengeList();
+          notifyListeners();
+          return;
         }
       }
     }
@@ -378,6 +343,8 @@ class Challengecontroller extends ChangeNotifier {
 
   void addListChallengeSave(String namechallenge) async {
     for (var i = _challengeList.length - 1; i >= 0; i--) {
+      print('challengelistname');
+      print(namechallenge);
       if (_challengeList[i].name == namechallenge) {
         _challengeListSave.add(
           ChallengeModel(
@@ -387,44 +354,11 @@ class Challengecontroller extends ChangeNotifier {
               totalChallenge: _challengeList[i].totalChallenge,
               unity: _challengeList[i].unity),
         );
-        addListChallengeSave1(
-          name: _challengeList[i].name,
-          challengeListTest: _challengeList[i].listeDeTache,
-        );
-        // for (var j = _challengeList[i].listeDeTache.length - 1; j >= 0; j--) {
-        //   for (var n = _challengeList.length - 1; n >= 0; n--) {
-        //     if (_challengeList[n].name == _challengeListSave[i].name) {
-        //       _challengeListSave[n].listeDeTache.add(
-        //             Challengemodel2(
-        //                 name: _challengeList[i].listeDeTache[j].name,
-        //                 tache: _challengeList[i].listeDeTache[j].tache,
-        //                 description:
-        //                     _challengeList[i].listeDeTache[j].description),
-        //           );
-        //     }
-        //   }
-        // }
-      }
-    }
-    await _saveSauvegarde();
-    _initChallengeList();
-    notifyListeners();
-  }
 
-  void addListChallengeSave1({
-    @required String name,
-    @required List<Challengemodel2> challengeListTest,
-  }) async {
-    for (var i = _challengeListSave.length - 1; i >= 0; i--) {
-      if (_challengeListSave[i].name == name) {
-        for (var n = challengeListTest.length - 1; n >= 0; n--) {
-          _challengeListSave[i].listeDeTache.add(
-                Challengemodel2(
-                    name: challengeListTest[n].name,
-                    tache: challengeListTest[n].tache,
-                    description: challengeListTest[n].description),
-              );
-        }
+        await _saveSauvegarde();
+        _initChallengeList();
+        notifyListeners();
+        return;
       }
     }
   }

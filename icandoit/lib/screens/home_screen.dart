@@ -45,6 +45,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     Challengecontroller variable = Provider.of<Challengecontroller>(context);
     return Material(
       child: FancyDrawerWrapper(
+        backgroundColor: Colors.blue,
         controller: _controller,
         drawerItems: <Widget>[
           InkWell(
@@ -67,13 +68,14 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   "Go to home",
                   style: TextStyle(
                     fontSize: 18,
-                    color: Colors.purple.shade700,
+                    color: Colors.black,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ],
             ),
           ),
+          SizedBox(height: 5.0),
           InkWell(
             onTap: () {
               // Navigator.of(context).pop();
@@ -85,7 +87,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             },
             child: Row(
               children: [
-                Icon(Icons.home),
+                Icon(Icons.save_rounded),
                 SizedBox(
                   width: 5.0,
                 ),
@@ -93,13 +95,14 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   "Sauvegare challenge",
                   style: TextStyle(
                     fontSize: 18,
-                    color: Colors.purple.shade700,
+                    color: Colors.black,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ],
             ),
           ),
+          SizedBox(height: 5.0),
           InkWell(
             onTap: () {
               // Navigator.of(context).push(MaterialPageRoute(
@@ -109,7 +112,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             },
             child: Row(
               children: [
-                Icon(Icons.home),
+                Icon(Icons.support),
                 SizedBox(
                   width: 5.0,
                 ),
@@ -117,13 +120,14 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   "Support us",
                   style: TextStyle(
                     fontSize: 18,
-                    color: Colors.purple.shade700,
+                    color: Colors.black,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ],
             ),
           ),
+          SizedBox(height: 5.0),
           InkWell(
             onTap: () {
               // Navigator.of(context).push(MaterialPageRoute(
@@ -133,7 +137,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             },
             child: Row(
               children: [
-                Icon(Icons.home),
+                Icon(Icons.policy),
                 SizedBox(
                   width: 5.0,
                 ),
@@ -141,7 +145,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   "About us",
                   style: TextStyle(
                     fontSize: 18,
-                    color: Colors.purple.shade700,
+                    color: Colors.black,
                     fontWeight: FontWeight.bold,
                   ),
                 ),

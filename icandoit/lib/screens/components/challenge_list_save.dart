@@ -53,6 +53,7 @@ class _ExampleAppState extends State<ExampleApp>
 
     return Material(
       child: FancyDrawerWrapper(
+        backgroundColor: Colors.blue,
         controller: _controller,
         drawerItems: <Widget>[
           InkWell(
@@ -73,13 +74,14 @@ class _ExampleAppState extends State<ExampleApp>
                   "Go to home",
                   style: TextStyle(
                     fontSize: 18,
-                    color: Colors.purple.shade700,
+                    color: Colors.black,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ],
             ),
           ),
+          SizedBox(height: 5.0),
           InkWell(
             onTap: () {
               Navigator.of(context).pop();
@@ -98,13 +100,14 @@ class _ExampleAppState extends State<ExampleApp>
                   "Sauvegare challenge",
                   style: TextStyle(
                     fontSize: 18,
-                    color: Colors.purple.shade700,
+                    color: Colors.black,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ],
             ),
           ),
+          SizedBox(height: 5.0),
           InkWell(
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(
@@ -122,13 +125,14 @@ class _ExampleAppState extends State<ExampleApp>
                   "Support us",
                   style: TextStyle(
                     fontSize: 18,
-                    color: Colors.purple.shade700,
+                    color: Colors.black,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ],
             ),
           ),
+          SizedBox(height: 5.0),
           InkWell(
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(
@@ -146,7 +150,7 @@ class _ExampleAppState extends State<ExampleApp>
                   "About us",
                   style: TextStyle(
                     fontSize: 18,
-                    color: Colors.purple.shade700,
+                    color: Colors.black,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -172,6 +176,7 @@ class _ExampleAppState extends State<ExampleApp>
                     },
                   ),
                   flexibleSpace: Container(
+                    width: 300,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
@@ -188,7 +193,7 @@ class _ExampleAppState extends State<ExampleApp>
                               }
                             },
                             child: Container(
-                                width: 400.0,
+                                width: 200.0,
                                 height: 200.0,
                                 child: Lottie.asset('assets/save1.json'))),
                         InkWell(
@@ -198,9 +203,10 @@ class _ExampleAppState extends State<ExampleApp>
                               variable2.removeSave(index: indexSave);
                             },
                             child: Container(
-                                width: 400.0,
-                                height: 200.0,
-                                child: Lottie.asset('assets/trash.json'))),
+                                width: 200.0,
+                                height: 50.0,
+                                child: Lottie.asset('assets/trash.json',
+                                    width: 10.0, height: 10))),
                       ],
                     ),
                     decoration: BoxDecoration(
@@ -216,6 +222,11 @@ class _ExampleAppState extends State<ExampleApp>
             body: AnimatedSwitcher(
               duration: Duration(milliseconds: 246),
               child: Container(
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
+                        colors: <Color>[Colors.purple, Colors.blue])),
                 // key: ValueKey<int>(currentPage),
                 child: ListViewPage(_challengeList),
               ),
