@@ -2,6 +2,7 @@ import 'package:fancy_drawer/fancy_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:icandoit/controllers/challenge_controller.dart';
 import 'package:icandoit/models/challenge_model.dart';
+import 'package:icandoit/screens/components/resultat_challenge.dart';
 import 'package:item_selector/item_selector.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
@@ -107,6 +108,33 @@ class _ExampleAppState extends State<ExampleApp>
               ],
             ),
           ),
+          InkWell(
+            onTap: () {
+              // Navigator.of(context).pop();
+
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => ChangeNotifierProvider.value(
+                      value: variable2, child: ResultaChallenge())));
+              setState(() {});
+            },
+            child: Row(
+              children: [
+                Icon(Icons.save_rounded),
+                SizedBox(
+                  width: 5.0,
+                ),
+                Text(
+                  "score des challenges",
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: 5.0),
           SizedBox(height: 5.0),
           InkWell(
             onTap: () {

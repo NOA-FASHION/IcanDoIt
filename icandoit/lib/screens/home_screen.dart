@@ -9,6 +9,7 @@ import 'package:lottie/lottie.dart';
 // import 'package:slide_drawer/slide_drawer.dart';
 
 import 'components/challenge_list_save.dart';
+import 'components/resultat_challenge.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -93,6 +94,33 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 ),
                 Text(
                   "Sauvegare challenge",
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: 5.0),
+          InkWell(
+            onTap: () {
+              // Navigator.of(context).pop();
+
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => ChangeNotifierProvider.value(
+                      value: variable, child: ResultaChallenge())));
+              setState(() {});
+            },
+            child: Row(
+              children: [
+                Icon(Icons.save_rounded),
+                SizedBox(
+                  width: 5.0,
+                ),
+                Text(
+                  "score des challenges",
                   style: TextStyle(
                     fontSize: 18,
                     color: Colors.black,
