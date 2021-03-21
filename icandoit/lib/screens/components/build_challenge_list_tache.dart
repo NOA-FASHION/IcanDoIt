@@ -38,6 +38,8 @@ class _ChallengesListBuilderTachesState
         Icons.text_format,
         size: 30.0,
       );
+    } else {
+      documentJoint = null;
     }
     return documentJoint;
   }

@@ -115,6 +115,8 @@ class _HomeTachesState extends State<HomeTaches> {
                   borderRadius: BorderRadius.circular(15.0))),
         ),
       );
+    } else {
+      documentJoint = null;
     }
     return documentJoint;
   }
