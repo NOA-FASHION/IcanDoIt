@@ -91,17 +91,18 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
           child: Dismissible(
             onDismissed: (direction) {
               if (direction == DismissDirection.endToStart) {
+                provider.addnbChallengeVallide();
+                provider.remove(index: index);
                 Scaffold.of(context).showSnackBar(_buildSnackBar(
                     content:
                         "Le challenge ${_challengesList[index].name} a bien ete valide"));
-                provider.remove(index: index);
               }
 
               if (direction == DismissDirection.startToEnd) {
+                provider.remove(index: index);
                 Scaffold.of(context).showSnackBar(_buildSnackBar(
                     content:
                         "La mission ${_challengesList[index].name} a bien ete supprime"));
-                provider.remove(index: index);
               }
             },
             confirmDismiss: (direction) async {

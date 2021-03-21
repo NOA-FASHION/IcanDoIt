@@ -1,6 +1,7 @@
 import 'package:fancy_drawer/fancy_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:icandoit/controllers/challenge_controller.dart';
+import 'package:icandoit/models/challenge_model.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:vertical_barchart/vertical-barchart.dart';
@@ -19,6 +20,8 @@ class ResultaChallenge extends StatefulWidget {
 
 class _ResultaChallengeState extends State<ResultaChallenge>
     with SingleTickerProviderStateMixin {
+  // ChallengeDays challengeDaysResult;
+  // Challengeyesterday challengeyesterdayResult;
   String resultaChallenge(int nbchallengeValide) {
     String resultat;
     if (nbchallengeValide == 0) {
@@ -84,6 +87,8 @@ class _ResultaChallengeState extends State<ResultaChallenge>
   Widget build(BuildContext context) {
     var mediaQueryData = MediaQuery.of(context);
     Challengecontroller variable2 = Provider.of<Challengecontroller>(context);
+    ChallengeDays challengeDaysResult = variable2.getChallengeDays();
+    Challengeyesterday challengeyesterdayResult = variable2.challengeyesterday;
 
     return Material(
       child: FancyDrawerWrapper(
@@ -325,7 +330,8 @@ class _ResultaChallengeState extends State<ResultaChallenge>
                                           ),
                                           Padding(
                                             padding: const EdgeInsets.all(8.0),
-                                            child: Text("3 taches valide",
+                                            child: Text(
+                                                "${challengeyesterdayResult.nbtacheVallide} taches valide",
                                                 textAlign: TextAlign.center),
                                           )
                                         ],
@@ -355,7 +361,8 @@ class _ResultaChallengeState extends State<ResultaChallenge>
                                               width: 50),
                                           Padding(
                                             padding: const EdgeInsets.all(8.0),
-                                            child: Text("3 challenges valide",
+                                            child: Text(
+                                                "${challengeyesterdayResult.nbchallengeVallide} challenges valide",
                                                 textAlign: TextAlign.center),
                                           )
                                         ],
@@ -415,7 +422,8 @@ class _ResultaChallengeState extends State<ResultaChallenge>
                                                   padding:
                                                       const EdgeInsets.all(8.0),
                                                   child: Text(
-                                                    "pas mal",
+                                                    challengeDaysResult
+                                                        .commentaire,
                                                     textAlign: TextAlign.center,
                                                   ),
                                                 )
@@ -446,7 +454,7 @@ class _ResultaChallengeState extends State<ResultaChallenge>
                                                   padding:
                                                       const EdgeInsets.all(8.0),
                                                   child: Text(
-                                                      "7 challenge en cours",
+                                                      "${challengeDaysResult.nbChallengeEnCours} challenge en cours",
                                                       textAlign:
                                                           TextAlign.center),
                                                 )
@@ -485,7 +493,8 @@ class _ResultaChallengeState extends State<ResultaChallenge>
                                                 Padding(
                                                   padding:
                                                       const EdgeInsets.all(8.0),
-                                                  child: Text("3 taches valide",
+                                                  child: Text(
+                                                      "${challengeDaysResult.nbtacheVallide}  taches valide",
                                                       textAlign:
                                                           TextAlign.center),
                                                 )
@@ -512,7 +521,7 @@ class _ResultaChallengeState extends State<ResultaChallenge>
                                                   padding:
                                                       const EdgeInsets.all(8.0),
                                                   child: Text(
-                                                      "3 challenges valide",
+                                                      "${challengeDaysResult.nbchallengeVallide} challenges valide",
                                                       textAlign:
                                                           TextAlign.center),
                                                 )

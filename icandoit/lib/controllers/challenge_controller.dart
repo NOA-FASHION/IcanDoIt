@@ -6,8 +6,8 @@ import 'dart:collection';
 
 const String keyAcces = "challengeList";
 const String keyAccesSAve = "challengeListSAve";
-const String keyAccesChallenge = "challenge";
-const String keyAccesChallengeyesterday = "Challengeyesterday";
+const String keyAccesChallengeDay = "challengeDay";
+const String keyAccesChallengeYesterday = "ChallengeyesterDay";
 
 class Challengecontroller extends ChangeNotifier {
   List<ChallengeModel> _challengeList = [];
@@ -16,7 +16,7 @@ class Challengecontroller extends ChangeNotifier {
   List<ChallengeModel> _challengeListSave = [];
   SharedPreferences _localData;
   SharedPreferences _localDataSave;
-  SharedPreferences _localDataChallenge;
+  SharedPreferences _localDataChallengeDay;
   SharedPreferences _localDataChallengeyesterday;
   ChallengeDays challengeDays;
   Challengeyesterday challengeyesterday;
@@ -61,11 +61,11 @@ class Challengecontroller extends ChangeNotifier {
       // _challengeListSave
       //     .sort((a, b) => a.unity.toString().compareTo(b.unity.toString()));
     }
-    _localDataChallenge = await SharedPreferences.getInstance();
+    _localDataChallengeDay = await SharedPreferences.getInstance();
     // List<Map<String, dynamic>> tempListMap = [];
     Map _jsonDecodeListChallenge;
     final String _tempListChallenge =
-        _localDataChallenge.getString(keyAccesChallenge);
+        _localDataChallengeDay.getString(keyAccesChallengeDay);
     if (_tempListChallenge != null) {
       _jsonDecodeListChallenge = jsonDecode(_tempListChallenge);
       challengeDays = ChallengeDays.fromJSON(_jsonDecodeListChallenge);
@@ -74,13 +74,17 @@ class Challengecontroller extends ChangeNotifier {
     // List<Map<String, dynamic>> tempListMap = [];
     Map _jsonDecodeListchallengeyesterday;
     final String _tempListchallengeyesterday =
-        _localDataChallengeyesterday.getString(keyAccesChallengeyesterday);
+        _localDataChallengeyesterday.getString(keyAccesChallengeYesterday);
     if (_tempListchallengeyesterday != null) {
       _jsonDecodeListchallengeyesterday =
           jsonDecode(_tempListchallengeyesterday);
       challengeyesterday =
           Challengeyesterday.fromJSON(_jsonDecodeListchallengeyesterday);
     }
+    startChallendays();
+    startChallenyesterday();
+    addChallengeyesterday();
+    initChallendays();
 
     notifyListeners();
   }
@@ -95,7 +99,37 @@ class Challengecontroller extends ChangeNotifier {
       challengeyesterday.nbchallengeVallide = challengeDays.nbchallengeVallide;
       challengeyesterday.nbtacheVallide = challengeDays.nbtacheVallide;
     }
-    await _save();
+    await _saveChallenyesterday();
+    _initChallengeList();
+    notifyListeners();
+  }
+
+  void startChallendays() async {
+    DateTime today = new DateTime.now();
+    if (challengeyesterday == null) {
+      challengeyesterday.date = today.toString();
+      challengeyesterday.nbChallengeEnCours = "0";
+      challengeyesterday.nbTacheEnCours = "0";
+      challengeyesterday.commentaire = "";
+      challengeyesterday.nbchallengeVallide = "0";
+      challengeyesterday.nbtacheVallide = "0";
+    }
+    await _saveChallendays();
+    _initChallengeList();
+    notifyListeners();
+  }
+
+  void startChallenyesterday() async {
+    DateTime today = new DateTime.now();
+    if (challengeyesterday == null) {
+      challengeyesterday.date = today.toString();
+      challengeyesterday.nbChallengeEnCours = "0";
+      challengeyesterday.nbTacheEnCours = "0";
+      challengeyesterday.commentaire = "";
+      challengeyesterday.nbchallengeVallide = "0";
+      challengeyesterday.nbtacheVallide = "0";
+    }
+    await _saveChallenyesterday();
     _initChallengeList();
     notifyListeners();
   }
@@ -108,15 +142,17 @@ class Challengecontroller extends ChangeNotifier {
       challengeDays.nbchallengeVallide = "0";
       challengeDays.commentaire = "";
     }
-    await _save();
+    await _saveChallendays();
     _initChallengeList();
     notifyListeners();
   }
 
   void addCommentaireChallengeDay() async {
-    var nbtacheVallide1 = int.parse(challengeDays.nbtacheVallide);
+    var nbtacheVallide1 = int.parse(challengeDays.nbtacheVallide) +
+        int.parse(challengeDays.nbchallengeVallide);
     if (nbtacheVallide1 == 0) {
-      challengeDays.commentaire = "Vous n'avez pas valide de challenge";
+      challengeDays.commentaire =
+          "Vous n'avez pas valide de challenge ou de tache";
     } else if (nbtacheVallide1 > 3) {
       challengeDays.commentaire =
           "pas mal, encore un effort et vous atteindrez vos objectifs";
@@ -125,16 +161,13 @@ class Challengecontroller extends ChangeNotifier {
     } else if (nbtacheVallide1 > 9) {
       challengeDays.commentaire = "extraordinaire, rien ne vous arretes.";
     }
-    await _save();
-    _initChallengeList();
-    notifyListeners();
   }
 
   void addnbtacheVallide() async {
     challengeDays.nbtacheVallide =
         (int.parse(challengeDays.nbtacheVallide) + 1).toString();
-
-    await _save();
+    addCommentaireChallengeDay();
+    await _saveChallendays();
     _initChallengeList();
     notifyListeners();
   }
@@ -142,10 +175,31 @@ class Challengecontroller extends ChangeNotifier {
   void addnbChallengeVallide() async {
     challengeDays.nbchallengeVallide =
         (int.parse(challengeDays.nbchallengeVallide) + 1).toString();
-
-    await _save();
+    addCommentaireChallengeDay();
+    await _saveChallendays();
     _initChallengeList();
     notifyListeners();
+  }
+
+  Future<bool> _saveChallenyesterday() async {
+    if (challengeyesterday != null) {
+      Map mapyesterday = challengeyesterday.toJson();
+      String _jsonyesterday = jsonEncode(mapyesterday);
+      return _localData.setString(keyAccesChallengeYesterday, _jsonyesterday);
+    }
+
+    return false;
+  }
+
+  Future<bool> _saveChallendays() async {
+    challengeDays.nbChallengeEnCours = (_challengeList.length).toString();
+    if (challengeDays != null) {
+      Map mapday = challengeDays.toJson();
+      String _jsonDay = jsonEncode(mapday);
+      return _localData.setString(keyAccesChallengeDay, _jsonDay);
+    }
+
+    return false;
   }
 
   List<ChallengeModel> getChallenges2() {

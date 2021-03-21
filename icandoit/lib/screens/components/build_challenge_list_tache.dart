@@ -47,6 +47,7 @@ class _ChallengesListBuilderTachesState
           child: Dismissible(
             onDismissed: (direction) {
               if (direction == DismissDirection.endToStart) {
+                provider.addnbtacheVallide();
                 Scaffold.of(context).showSnackBar(_buildSnackBar(
                     content: "Le challenge ${item.name} a bien ete valide"));
                 provider.remove2(
