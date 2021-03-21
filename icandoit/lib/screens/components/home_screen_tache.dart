@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 // import 'package:icandoit/models/challenge_model.dart';
 import 'package:icandoit/screens/components/build_challenge_list_tache.dart';
@@ -6,6 +8,7 @@ import 'package:lottie/lottie.dart';
 // import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
+import 'package:file_picker/file_picker.dart';
 
 class HomeTaches extends StatefulWidget {
   final String something;
@@ -20,12 +23,104 @@ class _HomeTachesState extends State<HomeTaches> {
   String percentokString = "0";
   double percentage(String percent) {
     var percent1;
+
     percent1 = (double.parse(percent) / 100);
     return percent1;
   }
 
-  final String something;
+  Widget selectdropdown(String resultat) {
+    Widget documentJoint;
+    if (resultat == "video") {
+      InkWell(
+          onTap: () async {
+            FilePickerResult result = await FilePicker.platform.pickFiles();
 
+            if (result != null) {
+              dataJoin = result.files.single.path;
+              // File file1 = File(result.files.single.path);
+            } else {
+              // User canceled the picker
+              return;
+            }
+          },
+          child: Container(
+              width: 200.0,
+              height: 200.0,
+              child: Lottie.asset('assets/save1.json')));
+    } else if (resultat == "image") {
+      InkWell(
+          onTap: () async {
+            FilePickerResult result = await FilePicker.platform.pickFiles();
+
+            if (result != null) {
+              dataJoin = result.files.single.path;
+              // File file = File(result.files.single.path);
+            } else {
+              // User canceled the picker
+              return;
+            }
+          },
+          child: Container(
+              width: 200.0,
+              height: 200.0,
+              child: Lottie.asset('assets/save1.json')));
+    } else if (resultat == "url") {
+      documentJoint = TextFormField(
+        onSaved: (value) {
+          dataJoin = value;
+        },
+        validator: (value) {
+          if (value.isEmpty) {
+            return "Merci d'entrer l'url";
+          }
+          return null;
+        },
+        decoration: InputDecoration(
+            focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(width: 2.0, color: Colors.blueAccent),
+                borderRadius: BorderRadius.circular(15.0)),
+            enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(width: 1.0, color: Colors.blueAccent),
+                borderRadius: BorderRadius.circular(15.0)),
+            contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            labelText: "Description",
+            border:
+                OutlineInputBorder(borderRadius: BorderRadius.circular(15.0))),
+      );
+    } else if (resultat == "url") {
+      documentJoint = Container(
+        height: 50,
+        child: TextFormField(
+          maxLines: 10,
+          onSaved: (value) {
+            dataJoin = value;
+          },
+          validator: (value) {
+            if (value.isEmpty) {
+              return "Merci de laisser un commentaire";
+            }
+            return null;
+          },
+          decoration: InputDecoration(
+              focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(width: 2.0, color: Colors.blueAccent),
+                  borderRadius: BorderRadius.circular(15.0)),
+              enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(width: 1.0, color: Colors.blueAccent),
+                  borderRadius: BorderRadius.circular(15.0)),
+              contentPadding:
+                  EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              labelText: "commentaire",
+              border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(15.0))),
+        ),
+      );
+    }
+    return documentJoint;
+  }
+
+  final String something;
+  String dataJoin;
   _HomeTachesState(this.something);
   final GlobalKey<ScaffoldState> scaffoldkey = GlobalKey<ScaffoldState>();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -194,16 +289,16 @@ class _HomeTachesState extends State<HomeTaches> {
                                 child: Text("vente"),
                               ),
                               DropdownMenuItem(
-                                value: "choix",
-                                child: Text("choix"),
+                                value: "commentaire",
+                                child: Text("commentaire"),
                               ),
                               DropdownMenuItem(
-                                value: "essai",
-                                child: Text("essai"),
+                                value: "video",
+                                child: Text("video"),
                               ),
                               DropdownMenuItem(
-                                value: "validation",
-                                child: Text("validation"),
+                                value: "image",
+                                child: Text("image"),
                               ),
                               DropdownMenuItem(
                                 value: "url",
@@ -241,6 +336,7 @@ class _HomeTachesState extends State<HomeTaches> {
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(15.0))),
                           ),
+                          selectdropdown(targetChallenge),
                           InkWell(
                               onTap: () {
                                 if (formKey.currentState.validate()) {
@@ -266,29 +362,6 @@ class _HomeTachesState extends State<HomeTaches> {
                                   width: 200.0,
                                   height: 200.0,
                                   child: Lottie.asset('assets/save1.json'))),
-                          // RaisedButton(
-                          //   onPressed: () {
-                          //     if (formKey.currentState.validate()) {
-                          //       formKey.currentState.save();
-                          //       setState(() {
-                          //         // totaChallengeEnCours1 =
-                          //         //     totaChallengeEnCours1 + 1;
-                          //         // totalChallengeEnCours =
-                          //         //     totaChallengeEnCours1.toString();
-                          //         Provider.of<Challengecontroller>(context,
-                          //                 listen: false)
-                          //             .addChallenge2(
-                          //                 totalChallenge: '1',
-                          //                 nameListChallenge: something,
-                          //                 name: nameChallenge,
-                          //                 description: unityChallenge,
-                          //                 tache: targetChallenge);
-                          //       });
-                          //     }
-                          //     Navigator.pop(context);
-                          //   },
-                          //   child: Text("Ajouter la mission"),
-                          // ),
                         ],
                       ),
                     ),

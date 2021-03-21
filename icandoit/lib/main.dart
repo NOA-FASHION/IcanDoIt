@@ -25,44 +25,11 @@ class _IcanDoItState extends State<IcanDoIt> {
       ),
       title: 'ICanDoIt',
       routes: {
-        // When navigating to the "/" route, build the Main widget.
-
         '/list_save': (context) => ExampleApp(),
         '/settings': (context) => ExampleApp()
       },
-      home:
-          // home: Builder(
-          //   builder: (context) => SlideDrawer(
-          //     items: [
-          //       MenuItem('Project', icon: Icons.rss_feed, onTap: () {
-          //         Navigator.of(context).pop();
-          //         Navigator.push(
-          //           context,
-          //           MaterialPageRoute(
-          //               builder: (context) =>
-          //                   ChangeNotifierProvider<Challengecontroller>(
-          //                       create: (context) => Challengecontroller(),
-          //                       child: Home())),
-          //         );
-          //       }),
-          //       MenuItem('Project', icon: Icons.rss_feed, onTap: () {
-          //         Navigator.of(context).pop();
-          //         Navigator.push(
-          //           context,
-          //           MaterialPageRoute(
-          //               builder: (context) =>
-          //                   ChangeNotifierProvider<Challengecontroller>(
-          //                       create: (context) => Challengecontroller(),
-          //                       child: ExampleApp())),
-          //         );
-          //       }),
-          //       MenuItem('Favourite', icon: Icons.favorite_border, onTap: () {}),
-          //       MenuItem('Profile', icon: Icons.person_outline, onTap: () {}),
-          //       MenuItem('Setting', icon: Icons.settings, onTap: () {}),
-          //     ],
-          // child:
-          ChangeNotifierProvider<Challengecontroller>(
-              create: (context) => Challengecontroller(), child: Home()),
+      home: ChangeNotifierProvider<Challengecontroller>(
+          create: (context) => Challengecontroller(), child: Home()),
     );
   }
 }

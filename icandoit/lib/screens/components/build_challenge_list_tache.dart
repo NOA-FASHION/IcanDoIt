@@ -16,6 +16,32 @@ class ChallengesListBuilderTaches extends StatefulWidget {
 
 class _ChallengesListBuilderTachesState
     extends State<ChallengesListBuilderTaches> {
+  Widget iconDataJoin(String resultat) {
+    Widget documentJoint;
+    if (resultat == "video") {
+      documentJoint = Icon(
+        Icons.video_call,
+        size: 30.0,
+      );
+    } else if (resultat == "image") {
+      documentJoint = Icon(
+        Icons.picture_in_picture,
+        size: 30.0,
+      );
+    } else if (resultat == "url") {
+      documentJoint = Icon(
+        Icons.cloud,
+        size: 30.0,
+      );
+    } else if (resultat == "commentaire") {
+      documentJoint = Icon(
+        Icons.text_format,
+        size: 30.0,
+      );
+    }
+    return documentJoint;
+  }
+
   List<ChallengeModel> challengeListCharge;
 
   String unityPattern = "unity_challenge1.";
@@ -130,6 +156,37 @@ class _ChallengesListBuilderTachesState
                 ),
                 elevation: 20.0,
                 child: ListTile(
+                  onTap: () {
+                    if (item.description
+                            .toString()
+                            .replaceAll(unityPattern, "") ==
+                        "video") {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => ChangeNotifierProvider.value(
+                              value: provider, child: Home())));
+                    } else if (item.description
+                            .toString()
+                            .replaceAll(unityPattern, "") ==
+                        "image") {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => ChangeNotifierProvider.value(
+                              value: provider, child: Home())));
+                    } else if (item.description
+                            .toString()
+                            .replaceAll(unityPattern, "") ==
+                        "url") {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => ChangeNotifierProvider.value(
+                              value: provider, child: Home())));
+                    } else if (item.description
+                            .toString()
+                            .replaceAll(unityPattern, "") ==
+                        "commentaire") {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => ChangeNotifierProvider.value(
+                              value: provider, child: Home())));
+                    }
+                  },
                   title: Container(
                     child: Row(
                       children: [
@@ -190,6 +247,9 @@ class _ChallengesListBuilderTachesState
                                     SizedBox(
                                       width: 5.0,
                                     ),
+                                    iconDataJoin(item.description
+                                        .toString()
+                                        .replaceAll(unityPattern, "")),
                                   ],
                                 ),
                               ),

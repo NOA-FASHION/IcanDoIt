@@ -39,6 +39,7 @@ dependencies:
   item_selector: ^0.1.1
   fancy_drawer: ^1.0.0
   vertical_barchart: ^2.0.0
+  file_picker: any
   
   
   
