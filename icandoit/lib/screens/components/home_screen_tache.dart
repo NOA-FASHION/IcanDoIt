@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 // import 'package:icandoit/models/challenge_model.dart';
 import 'package:icandoit/screens/components/build_challenge_list_tache.dart';
 import 'package:icandoit/controllers/challenge_controller.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:lottie/lottie.dart';
 // import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
-import 'package:file_picker/file_picker.dart';
+
+// import 'package:documents_picker/documents_picker.dart';
 
 class HomeTaches extends StatefulWidget {
   final String something;
@@ -19,6 +21,36 @@ class HomeTaches extends StatefulWidget {
 }
 
 class _HomeTachesState extends State<HomeTaches> {
+  List<String> docPaths;
+  String _image;
+  final picker = ImagePicker();
+
+  Future getImageCamera() async {
+    final pickedFile = await picker.getImage(source: ImageSource.camera);
+
+    setState(() {
+      if (pickedFile != null) {
+        dataJoin = pickedFile.path;
+        _image = pickedFile.path;
+      } else {
+        print('No image selected.');
+      }
+    });
+  }
+
+  Future getImageGallery() async {
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+
+    setState(() {
+      if (pickedFile != null) {
+        dataJoin = pickedFile.path;
+        _image = pickedFile.path;
+      } else {
+        print('No image selected.');
+      }
+    });
+  }
+
   double percentok = 0;
   String percentokString = "0";
   double percentage(String percent) {
@@ -29,41 +61,56 @@ class _HomeTachesState extends State<HomeTaches> {
   }
 
   Widget selectdropdown(String resultat) {
-    Widget documentJoint;
+    Widget documentJoint = SizedBox(
+      width: 1.0,
+    );
     if (resultat == "video") {
-      InkWell(
+      documentJoint = InkWell(
           onTap: () async {
-            FilePickerResult result = await FilePicker.platform.pickFiles();
-
-            if (result != null) {
-              dataJoin = result.files.single.path;
-              // File file1 = File(result.files.single.path);
-            } else {
-              // User canceled the picker
-              return;
-            }
+            // _getDocuments();
+            // if (docPaths != null) {
+            //   dataJoin = docPaths.join('\n');
+            // }
           },
           child: Container(
-              width: 200.0,
-              height: 200.0,
+              width: 150.0,
+              height: 150.0,
               child: Lottie.asset('assets/save1.json')));
     } else if (resultat == "image") {
-      InkWell(
-          onTap: () async {
-            FilePickerResult result = await FilePicker.platform.pickFiles();
-
-            if (result != null) {
-              dataJoin = result.files.single.path;
-              // File file = File(result.files.single.path);
-            } else {
-              // User canceled the picker
-              return;
-            }
-          },
-          child: Container(
-              width: 200.0,
-              height: 200.0,
-              child: Lottie.asset('assets/save1.json')));
+      documentJoint = Column(
+        children: [
+          Container(
+            height: 100,
+            width: 100,
+            child: Center(
+              child: _image == null
+                  ? Text('No image selected.')
+                  : Image.file(File(_image)),
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              InkWell(
+                  onTap: () async {
+                    getImageGallery();
+                  },
+                  child: Container(
+                      width: 150.0,
+                      height: 150.0,
+                      child: Lottie.asset('assets/save1.json'))),
+              InkWell(
+                  onTap: () async {
+                    getImageCamera();
+                  },
+                  child: Container(
+                      width: 150.0,
+                      height: 150.0,
+                      child: Lottie.asset('assets/save1.json'))),
+            ],
+          ),
+        ],
+      );
     } else if (resultat == "url") {
       documentJoint = TextFormField(
         onSaved: (value) {
@@ -83,15 +130,16 @@ class _HomeTachesState extends State<HomeTaches> {
                 borderSide: BorderSide(width: 1.0, color: Colors.blueAccent),
                 borderRadius: BorderRadius.circular(15.0)),
             contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            labelText: "Description",
+            labelText: "url",
             border:
                 OutlineInputBorder(borderRadius: BorderRadius.circular(15.0))),
       );
-    } else if (resultat == "url") {
-      documentJoint = Container(
-        height: 50,
+    } else if (resultat == "commentaire") {
+      documentJoint = SizedBox(
+        width: 200.0,
+        height: 300.0,
         child: TextFormField(
-          maxLines: 10,
+          maxLines: 30,
           onSaved: (value) {
             dataJoin = value;
           },
@@ -115,8 +163,6 @@ class _HomeTachesState extends State<HomeTaches> {
                   borderRadius: BorderRadius.circular(15.0))),
         ),
       );
-    } else {
-      documentJoint = null;
     }
     return documentJoint;
   }
@@ -128,38 +174,13 @@ class _HomeTachesState extends State<HomeTaches> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   PersistentBottomSheetController _bottomSheetController;
   String unityChallenge = "evenement";
-  String nameChallenge = "Tache";
   String targetChallenge;
   String totalChallengeEnCours;
-  // List<ChallengeModel> _challengesList;
   int totaChallengeEnCours1 = 0;
-  // double calulPercent(List<ChallengeModel> challengesList, String name) {
-  //   var resultat;
-  //   for (var i = challengesList.length - 1; i >= 0; i--) {
-  //     if (challengesList[i].name == name) {
-  //       if (_challengesList[i].listeDeTache.length != 0 &&
-  //           (_challengesList[i].listeDeTache.length ==
-  //               int.parse(_challengesList[i].totalChallenge))) {
-  //         resultat = 0.00;
-  //       } else if (_challengesList[i].listeDeTache.length != 0 &&
-  //           (_challengesList[i].listeDeTache.length !=
-  //               int.parse(_challengesList[i].totalChallenge))) {
-  //         resultat = (_challengesList[i].listeDeTache.length /
-  //             int.parse(_challengesList[i].totalChallenge));
-  //       }
-  //     } else {
-  //       resultat = 0.00;
-  //     }
-  //   }
-  //   return resultat;
-  // }
 
   @override
   @override
   Widget build(BuildContext context) {
-    // Challengecontroller providerType =
-    //     Provider.of<Challengecontroller>(context);
-    // _challengesList = providerType.getChallenges();
     return Scaffold(
       key: scaffoldkey,
       appBar: PreferredSize(
@@ -237,6 +258,7 @@ class _HomeTachesState extends State<HomeTaches> {
         child: Icon(Icons.add),
         backgroundColor: Colors.orange[900],
         onPressed: () {
+          _image = "";
           _bottomSheetController = scaffoldkey.currentState.showBottomSheet(
             (context) {
               return Container(
@@ -338,22 +360,21 @@ class _HomeTachesState extends State<HomeTaches> {
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(15.0))),
                           ),
-                          selectdropdown(targetChallenge),
+                          SizedBox(
+                            height: 15.0,
+                          ),
+                          selectdropdown(unityChallenge),
                           InkWell(
                               onTap: () {
                                 if (formKey.currentState.validate()) {
                                   formKey.currentState.save();
                                   setState(() {
-                                    // totaChallengeEnCours1 =
-                                    //     totaChallengeEnCours1 + 1;
-                                    // totalChallengeEnCours =
-                                    //     totaChallengeEnCours1.toString();
                                     Provider.of<Challengecontroller>(context,
                                             listen: false)
                                         .addChallenge2(
                                             totalChallenge: '1',
                                             nameListChallenge: something,
-                                            name: nameChallenge,
+                                            name: dataJoin,
                                             description: unityChallenge,
                                             tache: targetChallenge);
                                   });
@@ -361,8 +382,8 @@ class _HomeTachesState extends State<HomeTaches> {
                                 Navigator.pop(context);
                               },
                               child: Container(
-                                  width: 200.0,
-                                  height: 200.0,
+                                  width: 150.0,
+                                  height: 150.0,
                                   child: Lottie.asset('assets/save1.json'))),
                         ],
                       ),

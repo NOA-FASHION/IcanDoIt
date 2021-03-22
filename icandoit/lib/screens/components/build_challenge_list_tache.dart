@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_list_drag_and_drop/drag_and_drop_list.dart';
 
 import 'package:icandoit/models/challenge_model.dart';
+import 'package:icandoit/screens/playPicture.dart';
+import 'package:icandoit/screens/playUrl.dart';
+import 'package:icandoit/screens/playVideo.dart';
 import 'package:provider/provider.dart';
 import '../../controllers/challenge_controller.dart';
+import '../playCommentaire.dart';
 
 class ChallengesListBuilderTaches extends StatefulWidget {
   final String nameChallenge;
@@ -16,8 +20,25 @@ class ChallengesListBuilderTaches extends StatefulWidget {
 
 class _ChallengesListBuilderTachesState
     extends State<ChallengesListBuilderTaches> {
+  String maxLetter(String word) {
+    var word2;
+    word2 = word[0];
+    if (word.length > 23) {
+      for (var i = 1; i <= 23; i++) {
+        word2 = word2 + word[i];
+      }
+      word2 = word2 + "...";
+    } else {
+      word2 = word;
+    }
+    return word2;
+  }
+
   Widget iconDataJoin(String resultat) {
-    Widget documentJoint;
+    Widget documentJoint = Icon(
+      Icons.block,
+      size: 30.0,
+    );
     if (resultat == "video") {
       documentJoint = Icon(
         Icons.video_call,
@@ -25,7 +46,7 @@ class _ChallengesListBuilderTachesState
       );
     } else if (resultat == "image") {
       documentJoint = Icon(
-        Icons.picture_in_picture,
+        Icons.photo_size_select_large,
         size: 30.0,
       );
     } else if (resultat == "url") {
@@ -35,11 +56,9 @@ class _ChallengesListBuilderTachesState
       );
     } else if (resultat == "commentaire") {
       documentJoint = Icon(
-        Icons.text_format,
+        Icons.comment,
         size: 30.0,
       );
-    } else {
-      documentJoint = null;
     }
     return documentJoint;
   }
@@ -165,28 +184,34 @@ class _ChallengesListBuilderTachesState
                         "video") {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => ChangeNotifierProvider.value(
-                              value: provider, child: Home())));
+                              value: provider,
+                              child: VideoPlayerScreen(
+                                  nameChallenge: item.name))));
                     } else if (item.description
                             .toString()
                             .replaceAll(unityPattern, "") ==
                         "image") {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => ChangeNotifierProvider.value(
-                              value: provider, child: Home())));
+                              value: provider,
+                              child: PlayPicture(nameChallenge: item.name))));
                     } else if (item.description
                             .toString()
                             .replaceAll(unityPattern, "") ==
                         "url") {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => ChangeNotifierProvider.value(
-                              value: provider, child: Home())));
+                              value: provider,
+                              child: PlayUrl(nameChallenge: item.name))));
                     } else if (item.description
                             .toString()
                             .replaceAll(unityPattern, "") ==
                         "commentaire") {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => ChangeNotifierProvider.value(
-                              value: provider, child: Home())));
+                              value: provider,
+                              child:
+                                  PlayCommentaire(nameChallenge: item.name))));
                     }
                   },
                   title: Container(
@@ -197,7 +222,7 @@ class _ChallengesListBuilderTachesState
                             borderRadius: BorderRadius.circular(5.0),
                           ),
                           child: Text(
-                            item.name,
+                            "Tache",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Colors.blue),
@@ -232,6 +257,8 @@ class _ChallengesListBuilderTachesState
                               Container(
                                 height: 30.0,
                                 child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       item.description
@@ -245,7 +272,7 @@ class _ChallengesListBuilderTachesState
                                     SizedBox(
                                       width: 5.0,
                                     ),
-                                    Text(item.tache.toString()),
+                                    Text(maxLetter(item.tache.toString())),
                                     SizedBox(
                                       width: 5.0,
                                     ),

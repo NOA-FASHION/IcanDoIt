@@ -109,8 +109,8 @@ class ChallengeDays {
   String nbchallengeVallide;
   String nbtacheVallide;
   ChallengeDays(
-      {@required this.date,
-      @required this.nbChallengeEnCours,
+      {this.date,
+      this.nbChallengeEnCours,
       this.commentaire,
       this.nbchallengeVallide,
       this.nbTacheEnCours,
@@ -145,8 +145,8 @@ class Challengeyesterday {
   String nbtacheVallide;
 
   Challengeyesterday(
-      {@required this.date,
-      @required this.nbChallengeEnCours,
+      {this.date,
+      this.nbChallengeEnCours,
       this.commentaire,
       this.nbchallengeVallide,
       this.nbTacheEnCours,

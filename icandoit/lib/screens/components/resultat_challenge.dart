@@ -88,7 +88,8 @@ class _ResultaChallengeState extends State<ResultaChallenge>
     var mediaQueryData = MediaQuery.of(context);
     Challengecontroller variable2 = Provider.of<Challengecontroller>(context);
     ChallengeDays challengeDaysResult = variable2.getChallengeDays();
-    Challengeyesterday challengeyesterdayResult = variable2.challengeyesterday;
+    Challengeyesterday challengeyesterdayResult =
+        variable2.getChallengeyesterday();
 
     return Material(
       child: FancyDrawerWrapper(

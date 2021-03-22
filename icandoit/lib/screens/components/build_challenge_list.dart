@@ -29,9 +29,10 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
     var word2;
     word2 = word[0];
     if (word.length > 18) {
-      for (var i = 1; i <= 18; i++) {
+      for (var i = 1; i <= 15; i++) {
         word2 = word2 + word[i];
       }
+      word2 = word2 + "...";
     } else {
       word2 = word;
     }
@@ -309,13 +310,13 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                                   child: new CircularPercentIndicator(
                                     radius: 60.0,
                                     lineWidth: 5.0,
-                                    percent: 1.0,
-                                    // percent: percentage(
-                                    //     _challengesList[index]
-                                    //         .listeDeTache
-                                    //         .length,
-                                    //     int.parse(_challengesList[index]
-                                    //         .totalChallenge)),
+                                    // percent: 1.0,
+                                    percent: percentage(
+                                        _challengesList[index]
+                                            .listeDeTache
+                                            .length,
+                                        int.parse(_challengesList[index]
+                                            .totalChallenge)),
                                     center: new Text((percentage(
                                                     _challengesList[index]
                                                         .listeDeTache

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:icandoit/models/challenge_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:collection';
+import 'package:intl/intl.dart';
 
 const String keyAcces = "challengeList";
 const String keyAccesSAve = "challengeListSAve";
@@ -18,8 +19,8 @@ class Challengecontroller extends ChangeNotifier {
   SharedPreferences _localDataSave;
   SharedPreferences _localDataChallengeDay;
   SharedPreferences _localDataChallengeyesterday;
-  ChallengeDays challengeDays;
-  Challengeyesterday challengeyesterday;
+  ChallengeDays challengeDays = ChallengeDays();
+  Challengeyesterday challengeyesterday = Challengeyesterday();
   int indexSave;
   String something = "";
   String percent = "0";
@@ -58,11 +59,14 @@ class Challengecontroller extends ChangeNotifier {
       _challengeListSave = _jsonDecodeListSave
           .map((challenge) => ChallengeModel.fromJSON(challenge))
           .toList();
-      // _challengeListSave
-      //     .sort((a, b) => a.unity.toString().compareTo(b.unity.toString()));
     }
+    _initChallengeListStartChallenge();
+
+    notifyListeners();
+  }
+
+  void _initChallengeListStartChallenge() async {
     _localDataChallengeDay = await SharedPreferences.getInstance();
-    // List<Map<String, dynamic>> tempListMap = [];
     Map _jsonDecodeListChallenge;
     final String _tempListChallenge =
         _localDataChallengeDay.getString(keyAccesChallengeDay);
@@ -70,8 +74,9 @@ class Challengecontroller extends ChangeNotifier {
       _jsonDecodeListChallenge = jsonDecode(_tempListChallenge);
       challengeDays = ChallengeDays.fromJSON(_jsonDecodeListChallenge);
     }
+    challengeDays.nbChallengeEnCours = (_challengeList.length).toString();
+
     _localDataChallengeyesterday = await SharedPreferences.getInstance();
-    // List<Map<String, dynamic>> tempListMap = [];
     Map _jsonDecodeListchallengeyesterday;
     final String _tempListchallengeyesterday =
         _localDataChallengeyesterday.getString(keyAccesChallengeYesterday);
@@ -80,71 +85,78 @@ class Challengecontroller extends ChangeNotifier {
           jsonDecode(_tempListchallengeyesterday);
       challengeyesterday =
           Challengeyesterday.fromJSON(_jsonDecodeListchallengeyesterday);
+      // DateTime today = new DateTime.now();
+      // print(DateFormat('EEEE, d MMM, yyyy').format(today));
+
+      print(challengeyesterday.date);
+      print(challengeyesterday.nbchallengeVallide);
     }
     startChallendays();
     startChallenyesterday();
-    addChallengeyesterday();
+    initChallengeyesterday();
     initChallendays();
-
-    notifyListeners();
-  }
-
-  void addChallengeyesterday() async {
-    DateTime today = new DateTime.now();
-    if (challengeyesterday.date != today.toString()) {
-      challengeyesterday.date = today.toString();
-      challengeyesterday.nbChallengeEnCours = challengeDays.nbChallengeEnCours;
-      challengeyesterday.nbTacheEnCours = challengeDays.nbTacheEnCours;
-      challengeyesterday.commentaire = challengeDays.commentaire;
-      challengeyesterday.nbchallengeVallide = challengeDays.nbchallengeVallide;
-      challengeyesterday.nbtacheVallide = challengeDays.nbtacheVallide;
-    }
-    await _saveChallenyesterday();
-    _initChallengeList();
     notifyListeners();
   }
 
   void startChallendays() async {
     DateTime today = new DateTime.now();
-    if (challengeyesterday == null) {
-      challengeyesterday.date = today.toString();
-      challengeyesterday.nbChallengeEnCours = "0";
-      challengeyesterday.nbTacheEnCours = "0";
-      challengeyesterday.commentaire = "";
-      challengeyesterday.nbchallengeVallide = "0";
-      challengeyesterday.nbtacheVallide = "0";
+    if (challengeDays == null) {
+      challengeDays.date = DateFormat('EEEE, d MMM, yyyy').format(today);
+      challengeDays.nbChallengeEnCours = "0";
+      challengeDays.nbTacheEnCours = "0";
+      challengeDays.commentaire = "";
+      challengeDays.nbchallengeVallide = "0";
+      challengeDays.nbtacheVallide = "0";
+      await _saveChallendays();
+      _initChallengeListStartChallenge();
+
+      notifyListeners();
     }
-    await _saveChallendays();
-    _initChallengeList();
-    notifyListeners();
   }
 
   void startChallenyesterday() async {
     DateTime today = new DateTime.now();
     if (challengeyesterday == null) {
-      challengeyesterday.date = today.toString();
+      challengeyesterday.date = DateFormat('EEEE, d MMM, yyyy').format(today);
       challengeyesterday.nbChallengeEnCours = "0";
       challengeyesterday.nbTacheEnCours = "0";
       challengeyesterday.commentaire = "";
       challengeyesterday.nbchallengeVallide = "0";
       challengeyesterday.nbtacheVallide = "0";
+      await _saveChallenyesterday();
+      _initChallengeListStartChallenge();
+
+      notifyListeners();
     }
-    await _saveChallenyesterday();
-    _initChallengeList();
-    notifyListeners();
+  }
+
+  void initChallengeyesterday() async {
+    DateTime today = new DateTime.now();
+    if (challengeyesterday.date !=
+        DateFormat('EEEE, d MMM, yyyy').format(today)) {
+      challengeyesterday.date = DateFormat('EEEE, d MMM, yyyy').format(today);
+      challengeyesterday.nbChallengeEnCours = challengeDays.nbChallengeEnCours;
+      challengeyesterday.nbTacheEnCours = challengeDays.nbTacheEnCours;
+      challengeyesterday.commentaire = challengeDays.commentaire;
+      challengeyesterday.nbchallengeVallide = challengeDays.nbchallengeVallide;
+      challengeyesterday.nbtacheVallide = challengeDays.nbtacheVallide;
+      await _saveChallenyesterday();
+      _initChallengeListStartChallenge();
+      notifyListeners();
+    }
   }
 
   void initChallendays() async {
     DateTime today = new DateTime.now();
-    if (challengeDays.date != today.toString()) {
-      challengeDays.date = today.toString();
+    if (challengeDays.date != DateFormat('EEEE, d MMM, yyyy').format(today)) {
+      challengeDays.date = DateFormat('EEEE, d MMM, yyyy').format(today);
       challengeDays.nbtacheVallide = "0";
       challengeDays.nbchallengeVallide = "0";
       challengeDays.commentaire = "";
+      await _saveChallendays();
+      _initChallengeListStartChallenge();
+      notifyListeners();
     }
-    await _saveChallendays();
-    _initChallengeList();
-    notifyListeners();
   }
 
   void addCommentaireChallengeDay() async {
@@ -161,6 +173,9 @@ class Challengecontroller extends ChangeNotifier {
     } else if (nbtacheVallide1 > 9) {
       challengeDays.commentaire = "extraordinaire, rien ne vous arretes.";
     }
+    await _saveChallendays();
+    _initChallengeListStartChallenge();
+    notifyListeners();
   }
 
   void addnbtacheVallide() async {
@@ -168,7 +183,7 @@ class Challengecontroller extends ChangeNotifier {
         (int.parse(challengeDays.nbtacheVallide) + 1).toString();
     addCommentaireChallengeDay();
     await _saveChallendays();
-    _initChallengeList();
+    _initChallengeListStartChallenge();
     notifyListeners();
   }
 
@@ -177,7 +192,7 @@ class Challengecontroller extends ChangeNotifier {
         (int.parse(challengeDays.nbchallengeVallide) + 1).toString();
     addCommentaireChallengeDay();
     await _saveChallendays();
-    _initChallengeList();
+    _initChallengeListStartChallenge();
     notifyListeners();
   }
 
@@ -192,7 +207,7 @@ class Challengecontroller extends ChangeNotifier {
   }
 
   Future<bool> _saveChallendays() async {
-    challengeDays.nbChallengeEnCours = (_challengeList.length).toString();
+    // challengeDays.nbChallengeEnCours = (_challengeList.length).toString();
     if (challengeDays != null) {
       Map mapday = challengeDays.toJson();
       String _jsonDay = jsonEncode(mapday);
@@ -273,11 +288,11 @@ class Challengecontroller extends ChangeNotifier {
       unity = unity_challenge1.mission;
     } else if (json == "vente") {
       unity = unity_challenge1.vente;
-    } else if (json == "choix") {
+    } else if (json == "video") {
       unity = unity_challenge1.video;
-    } else if (json == "essai") {
+    } else if (json == "commentaire") {
       unity = unity_challenge1.commentaire;
-    } else if (json == "validation") {
+    } else if (json == "image") {
       unity = unity_challenge1.image;
     } else if (json == "url") {
       unity = unity_challenge1.url;
