@@ -23,49 +23,19 @@ class _ResultaChallengeState extends State<ResultaChallenge>
   // ChallengeDays challengeDaysResult;
   // Challengeyesterday challengeyesterdayResult;
   String resultaChallenge(int nbchallengeValide) {
-    String resultat;
+    String resultat = "assets/succes0.json";
     if (nbchallengeValide == 0) {
-      resultat = "assets/success0.json";
+      resultat = "assets/succes0.json";
     } else if (nbchallengeValide > 0) {
-      resultat = "assets/success1.json";
+      resultat = "assets/succes1.json";
     } else if (nbchallengeValide > 3) {
-      resultat = "assets/success2.json";
+      resultat = "assets/succes2.json";
     } else if (nbchallengeValide > 6) {
-      resultat = "assets/success3.json";
+      resultat = "assets/succes3.json";
     }
     return resultat;
   }
 
-  List<VBarChartModel> bardata = [
-    VBarChartModel(
-      index: 0,
-      label: "Strawberry",
-      colors: [Colors.orange, Colors.deepOrange],
-      jumlah: 20,
-      tooltip: "20 Pcs",
-    ),
-    VBarChartModel(
-      index: 1,
-      label: "Apple",
-      colors: [Colors.orange, Colors.deepOrange],
-      jumlah: 55,
-      tooltip: "55 Pcs",
-    ),
-    VBarChartModel(
-      index: 2,
-      label: "Broccoli",
-      colors: [Colors.teal, Colors.indigo],
-      jumlah: 12,
-      tooltip: "12 Pcs",
-    ),
-    VBarChartModel(
-      index: 3,
-      label: "Chilli",
-      colors: [Colors.teal, Colors.indigo],
-      jumlah: 5,
-      tooltip: "5 Pcs",
-    ),
-  ];
   int currentPage = 0;
   FancyDrawerController _controller;
   void initState() {
@@ -90,6 +60,29 @@ class _ResultaChallengeState extends State<ResultaChallenge>
     ChallengeDays challengeDaysResult = variable2.getChallengeDays();
     Challengeyesterday challengeyesterdayResult =
         variable2.getChallengeyesterday();
+    List<VBarChartModel> bardata = [
+      VBarChartModel(
+        index: 0,
+        label: "Challenge vallide",
+        colors: [Colors.orange, Colors.deepOrange],
+        jumlah: double.parse(challengeDaysResult.nbchallengeVallide),
+        tooltip: "${challengeDaysResult.nbchallengeVallide}",
+      ),
+      VBarChartModel(
+        index: 1,
+        label: "Tache vallide",
+        colors: [Colors.orange, Colors.deepOrange],
+        jumlah: double.parse(challengeDaysResult.nbtacheVallide),
+        tooltip: "${challengeDaysResult.nbtacheVallide}",
+      ),
+      VBarChartModel(
+        index: 2,
+        label: "Challenge en cours",
+        colors: [Colors.teal, Colors.indigo],
+        jumlah: double.parse(challengeDaysResult.nbChallengeEnCours),
+        tooltip: "${challengeDaysResult.nbChallengeEnCours}",
+      ),
+    ];
 
     return Material(
       child: FancyDrawerWrapper(
@@ -417,7 +410,9 @@ class _ResultaChallengeState extends State<ResultaChallenge>
                                             child: Column(
                                               children: [
                                                 Lottie.asset(
-                                                    'assets/succes0.json',
+                                                    resultaChallenge(int.parse(
+                                                        challengeDaysResult
+                                                            .nbchallengeVallide)),
                                                     width: 90),
                                                 Padding(
                                                   padding:
@@ -578,13 +573,19 @@ class _ResultaChallengeState extends State<ResultaChallenge>
           textColor: Colors.white,
           isSquare: false,
           color: Colors.orange,
-          text: "Fruits",
+          text: "Challenge vallide",
         ),
         Vlegend(
           textColor: Colors.white,
           isSquare: false,
           color: Colors.teal,
-          text: "Vegetables",
+          text: "tache vallide",
+        ),
+        Vlegend(
+          textColor: Colors.white,
+          isSquare: false,
+          color: Colors.black,
+          text: "challenge en cours",
         )
       ],
     );

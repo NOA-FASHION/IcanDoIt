@@ -167,7 +167,7 @@ class Challengecontroller extends ChangeNotifier {
           "Vous n'avez pas valide de challenge ou de tache";
     } else if (nbtacheVallide1 > 3) {
       challengeDays.commentaire =
-          "pas mal, encore un effort et vous atteindrez vos objectifs";
+          " encore un effort et vos objectifs seront atteint";
     } else if (nbtacheVallide1 > 6) {
       challengeDays.commentaire = "Bravo, vos effort ont ete recompense";
     } else if (nbtacheVallide1 > 9) {

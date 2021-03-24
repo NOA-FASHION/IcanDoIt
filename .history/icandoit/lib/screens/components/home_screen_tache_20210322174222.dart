@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 // import 'package:icandoit/models/challenge_model.dart';
 import 'package:icandoit/screens/components/build_challenge_list_tache.dart';
@@ -10,7 +9,6 @@ import 'package:lottie/lottie.dart';
 // import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
-// import 'package:video_player/video_player.dart';
 
 // import 'package:documents_picker/documents_picker.dart';
 
@@ -25,24 +23,15 @@ class HomeTaches extends StatefulWidget {
 class _HomeTachesState extends State<HomeTaches> {
   List<String> docPaths;
   String _image;
-  String _video;
-  String wait = "assets/wait.json";
   final picker = ImagePicker();
-  bool _visibility1 = true;
 
   Future getImageCamera() async {
-    _bottomSheetController.setState(() {
-      _changeVisibility(false);
-    });
     final pickedFile = await picker.getImage(source: ImageSource.camera);
 
     setState(() {
       if (pickedFile != null) {
         dataJoin = pickedFile.path;
         _image = pickedFile.path;
-        _bottomSheetController.setState(() {
-          wait = "assets/picture.json";
-        });
       } else {
         print('No image selected.');
       }
@@ -50,78 +39,18 @@ class _HomeTachesState extends State<HomeTaches> {
   }
 
   Future getImageGallery() async {
-    _bottomSheetController.setState(() {
-      _changeVisibility(false);
-    });
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
 
     setState(() {
       if (pickedFile != null) {
         dataJoin = pickedFile.path;
         _image = pickedFile.path;
-        _bottomSheetController.setState(() {
-          wait = "assets/picture.json";
-        });
       } else {
         print('No image selected.');
       }
     });
   }
 
-  Future getVideoCamera() async {
-    _bottomSheetController.setState(() {
-      _changeVisibility(false);
-    });
-    final pickedFile = await picker.getVideo(source: ImageSource.camera);
-
-    setState(() {
-      if (pickedFile != null) {
-        dataJoin = pickedFile.path;
-        _video = pickedFile.path;
-        _bottomSheetController.setState(() {
-          wait = "assets/video.json";
-        });
-      } else {
-        print('No image selected.');
-      }
-    });
-  }
-
-  Future getVideoGallery() async {
-    _bottomSheetController.setState(() {
-      _changeVisibility(false);
-    });
-    final pickedFile = await picker.getVideo(source: ImageSource.gallery);
-
-    setState(() {
-      if (pickedFile != null) {
-        dataJoin = pickedFile.path;
-        _video = pickedFile.path;
-        _bottomSheetController.setState(() {
-          wait = "assets/video.json";
-        });
-      } else {
-        print('No image selected.');
-      }
-    });
-  }
-
-  void _changeVisibility(bool visibility) {
-    setState(() {
-      _visibility1 = visibility;
-    });
-  }
-
-  final String something;
-  String dataJoin;
-  _HomeTachesState(this.something);
-  final GlobalKey<ScaffoldState> scaffoldkey = GlobalKey<ScaffoldState>();
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  PersistentBottomSheetController _bottomSheetController;
-  String unityChallenge = "evenement";
-  String targetChallenge;
-  String totalChallengeEnCours;
-  int totaChallengeEnCours1 = 0;
   double percentok = 0;
   String percentokString = "0";
   double percentage(String percent) {
@@ -136,57 +65,27 @@ class _HomeTachesState extends State<HomeTaches> {
       width: 1.0,
     );
     if (resultat == "video") {
-      _visibility1 = true;
-      wait = "assets/wait.json";
-      documentJoint = Column(
-        children: [
-          Offstage(
-            offstage: _visibility1,
-            child: Container(
-              height: 100,
-              width: 100,
-              child: Center(child: Lottie.asset(wait)),
-            ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              InkWell(
-                  onTap: () async {
-                    getVideoGallery();
-                    // _playVideo(_video);
-                  },
-                  child: Container(
-                      width: 120.0,
-                      height: 120.0,
-                      child: Lottie.asset('assets/save1.json'))),
-              SizedBox(
-                width: 15.0,
-              ),
-              InkWell(
-                  onTap: () async {
-                    getVideoCamera();
-                    // _playVideo(_video);
-                  },
-                  child: Container(
-                      width: 120.0,
-                      height: 120.0,
-                      child: Lottie.asset('assets/save1.json'))),
-            ],
-          ),
-        ],
-      );
+      documentJoint = InkWell(
+          onTap: () async {
+            // _getDocuments();
+            // if (docPaths != null) {
+            //   dataJoin = docPaths.join('\n');
+            // }
+          },
+          child: Container(
+              width: 150.0,
+              height: 150.0,
+              child: Lottie.asset('assets/save1.json')));
     } else if (resultat == "image") {
-      _visibility1 = true;
-      wait = "assets/wait.json";
       documentJoint = Column(
         children: [
-          Offstage(
-            offstage: _visibility1,
-            child: Container(
-              height: 100,
-              width: 100,
-              child: Center(child: Lottie.asset(wait)),
+          Container(
+            height: 100,
+            width: 100,
+            child: Center(
+              child: _image == null
+                  ? Text('No image selected.')
+                  : Image.file(File(_image)),
             ),
           ),
           Row(
@@ -197,19 +96,16 @@ class _HomeTachesState extends State<HomeTaches> {
                     getImageGallery();
                   },
                   child: Container(
-                      width: 120.0,
-                      height: 120.0,
+                      width: 150.0,
+                      height: 150.0,
                       child: Lottie.asset('assets/save1.json'))),
-              SizedBox(
-                width: 15.0,
-              ),
               InkWell(
                   onTap: () async {
                     getImageCamera();
                   },
                   child: Container(
-                      width: 120.0,
-                      height: 120.0,
+                      width: 150.0,
+                      height: 150.0,
                       child: Lottie.asset('assets/save1.json'))),
             ],
           ),
@@ -270,6 +166,17 @@ class _HomeTachesState extends State<HomeTaches> {
     }
     return documentJoint;
   }
+
+  final String something;
+  String dataJoin;
+  _HomeTachesState(this.something);
+  final GlobalKey<ScaffoldState> scaffoldkey = GlobalKey<ScaffoldState>();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  PersistentBottomSheetController _bottomSheetController;
+  String unityChallenge = "evenement";
+  String targetChallenge;
+  String totalChallengeEnCours;
+  int totaChallengeEnCours1 = 0;
 
   @override
   @override
@@ -475,8 +382,8 @@ class _HomeTachesState extends State<HomeTaches> {
                                 Navigator.pop(context);
                               },
                               child: Container(
-                                  width: 120.0,
-                                  height: 120.0,
+                                  width: 150.0,
+                                  height: 150.0,
                                   child: Lottie.asset('assets/save1.json'))),
                         ],
                       ),
