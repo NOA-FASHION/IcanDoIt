@@ -115,8 +115,8 @@ class _HomeTachesState extends State<HomeTaches> {
   final String something;
   String dataJoin;
   _HomeTachesState(this.something);
-  final GlobalKey<ScaffoldState> scaffoldkey = GlobalKey<ScaffoldState>();
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final GlobalKey<ScaffoldState> scaffoldkeyTache = GlobalKey<ScaffoldState>();
+  final GlobalKey<FormState> formKeyTache = GlobalKey<FormState>();
   PersistentBottomSheetController _bottomSheetController;
   String unityChallenge = "evenement";
   String targetChallenge;
@@ -136,8 +136,8 @@ class _HomeTachesState extends State<HomeTaches> {
       width: 1.0,
     );
     if (resultat == "video") {
-      _visibility1 = true;
-      wait = "assets/wait.json";
+      // _visibility1 = true;
+      // wait = "assets/wait.json";
       documentJoint = Column(
         children: [
           Offstage(
@@ -159,7 +159,7 @@ class _HomeTachesState extends State<HomeTaches> {
                   child: Container(
                       width: 120.0,
                       height: 120.0,
-                      child: Lottie.asset('assets/save1.json'))),
+                      child: Lottie.asset('assets/upload.json'))),
               SizedBox(
                 width: 15.0,
               ),
@@ -171,14 +171,14 @@ class _HomeTachesState extends State<HomeTaches> {
                   child: Container(
                       width: 120.0,
                       height: 120.0,
-                      child: Lottie.asset('assets/save1.json'))),
+                      child: Lottie.asset('assets/cam.json'))),
             ],
           ),
         ],
       );
     } else if (resultat == "image") {
-      _visibility1 = true;
-      wait = "assets/wait.json";
+      // _visibility1 = true;
+      // wait = "assets/wait.json";
       documentJoint = Column(
         children: [
           Offstage(
@@ -199,7 +199,7 @@ class _HomeTachesState extends State<HomeTaches> {
                   child: Container(
                       width: 120.0,
                       height: 120.0,
-                      child: Lottie.asset('assets/save1.json'))),
+                      child: Lottie.asset('assets/upload.json'))),
               SizedBox(
                 width: 15.0,
               ),
@@ -210,7 +210,7 @@ class _HomeTachesState extends State<HomeTaches> {
                   child: Container(
                       width: 120.0,
                       height: 120.0,
-                      child: Lottie.asset('assets/save1.json'))),
+                      child: Lottie.asset('assets/photo.json'))),
             ],
           ),
         ],
@@ -275,7 +275,7 @@ class _HomeTachesState extends State<HomeTaches> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: scaffoldkey,
+      key: scaffoldkeyTache,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(100.0),
         child: SafeArea(
@@ -352,13 +352,14 @@ class _HomeTachesState extends State<HomeTaches> {
         backgroundColor: Colors.orange[900],
         onPressed: () {
           _image = "";
-          _bottomSheetController = scaffoldkey.currentState.showBottomSheet(
+          _bottomSheetController =
+              scaffoldkeyTache.currentState.showBottomSheet(
             (context) {
               return Container(
                   alignment: Alignment.center,
                   height: MediaQuery.of(context).size.height * 0.5,
                   child: Form(
-                    key: formKey,
+                    key: formKeyTache,
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: ListView(
@@ -380,6 +381,8 @@ class _HomeTachesState extends State<HomeTaches> {
                             value: unityChallenge,
                             onChanged: (value) {
                               updateController(value);
+                              _visibility1 = true;
+                              wait = "assets/wait.json";
                             },
                             onSaved: (value) {
                               updateController(value);
@@ -459,8 +462,8 @@ class _HomeTachesState extends State<HomeTaches> {
                           selectdropdown(unityChallenge),
                           InkWell(
                               onTap: () {
-                                if (formKey.currentState.validate()) {
-                                  formKey.currentState.save();
+                                if (formKeyTache.currentState.validate()) {
+                                  formKeyTache.currentState.save();
                                   setState(() {
                                     Provider.of<Challengecontroller>(context,
                                             listen: false)

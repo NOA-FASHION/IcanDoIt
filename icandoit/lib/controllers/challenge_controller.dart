@@ -4,6 +4,9 @@ import 'package:icandoit/models/challenge_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:collection';
 import 'package:intl/intl.dart';
+import 'package:path_provider/path_provider.dart';
+import 'dart:io';
+// import 'package:share/share.dart';
 
 const String keyAcces = "challengeList";
 const String keyAccesSAve = "challengeListSAve";
@@ -24,6 +27,9 @@ class Challengecontroller extends ChangeNotifier {
   int indexSave;
   String something = "";
   String percent = "0";
+  String data;
+  String _jsonChallengeList;
+  String patchData;
   Challengecontroller() {
     _initChallengeList();
   }
@@ -505,5 +511,49 @@ class Challengecontroller extends ChangeNotifier {
     await _save1(remove: true, nameChallenge: nameChallenge);
     _initChallengeList();
     notifyListeners();
+  }
+
+  Future<String> get _localPath async {
+    final directory = await getApplicationDocumentsDirectory();
+    print(directory.path);
+    return directory.path;
+  }
+
+  Future<File> get _localFile async {
+    final path = await _localPath;
+    patchData = '$path/challengeList.txt';
+    return File('$path/counter.txt');
+  }
+
+  Future<String> readContent() async {
+    try {
+      final file = await _localFile;
+      // Read the file
+      String contents = await file.readAsString();
+      // Returning the contents of the file
+      return contents;
+    } catch (e) {
+      // If encountering an error, return
+      return 'Error!';
+    }
+  }
+
+  void writeContent({String nameChallenge}) async {
+    final file = await _localFile;
+    // Write the file
+    file.writeAsString(_saveLocalData(nameChallenge: nameChallenge));
+    // Share.shareFiles([patchData], text: "Images");
+  }
+
+  String _saveLocalData({String nameChallenge}) {
+    for (var i = _challengeList.length - 1; i >= 0; i--) {
+      if (_challengeList[i].name == nameChallenge) {
+        if (_challengeList[i] != null) {
+          Map mapChallengeList = _challengeList[i].toJson();
+          _jsonChallengeList = jsonEncode(mapChallengeList);
+        }
+      }
+    }
+    return _jsonChallengeList;
   }
 }
