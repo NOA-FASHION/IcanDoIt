@@ -293,9 +293,7 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                                                       .replaceAll(
                                                           unityPattern, ""))),
                                         ),
-                                        SizedBox(
-                                          width: 5.0,
-                                        ),
+                                       q
                                       ],
                                     ),
                                   ),
