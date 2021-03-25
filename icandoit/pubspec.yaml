@@ -44,7 +44,8 @@ dependencies:
   webview_flutter: ^2.0.2
   intl: ^0.17.0
   image_picker: ^0.7.3
-  # share: ^0.6.5+4
+  share: ^0.6.5+4
+  flutter_document_picker: ^4.0.1
   
   # documents_picker: ^1.0.0
   

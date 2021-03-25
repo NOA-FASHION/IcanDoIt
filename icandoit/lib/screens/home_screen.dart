@@ -1,3 +1,4 @@
+import 'package:colour/colour.dart';
 import 'package:fancy_drawer/fancy_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:icandoit/models/challenge_model.dart';
@@ -6,6 +7,7 @@ import 'package:icandoit/controllers/challenge_controller.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 import 'package:lottie/lottie.dart';
+import 'package:flutter_document_picker/flutter_document_picker.dart';
 // import 'package:slide_drawer/slide_drawer.dart';
 
 import 'components/challenge_list_save.dart';
@@ -197,15 +199,41 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                     _controller.toggle();
                   },
                 ),
-                // leading: IconButton(
-                //   icon: Icon(Icons.menu),
-                //   // call toggle from SlideDrawer to alternate between open and close
-                //   // when pressed menu button
-                //   onPressed: () => SlideDrawer.of(context).toggle(),
-                // ),
                 centerTitle: true,
-                title: Text("ICanDoIt"),
                 flexibleSpace: Container(
+                  padding: EdgeInsets.only(right: 30.0),
+                  alignment: Alignment.centerRight,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Image.asset(
+                        'assets/logo.png',
+                        width: 60,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          variable.uploadChallenge();
+                        },
+                        child: Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(60.0),
+                          ),
+                          elevation: 35.0,
+                          child: Ink(
+                            decoration: ShapeDecoration(
+                              color: Colour('#265FBC'),
+                              shape: CircleBorder(),
+                            ),
+                            child: Icon(
+                              Icons.upload_sharp,
+                              size: 50,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                   decoration: BoxDecoration(
                       gradient: LinearGradient(
                           begin: Alignment.centerLeft,

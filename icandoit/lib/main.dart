@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:icandoit/controllers/challenge_controller.dart';
 import 'package:icandoit/screens/components/challenge_list_save.dart';
-import 'package:slide_drawer/slide_drawer.dart';
+
 import 'screens/home_screen.dart';
 import 'package:provider/provider.dart';
 

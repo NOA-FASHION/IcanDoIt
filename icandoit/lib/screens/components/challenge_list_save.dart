@@ -279,7 +279,7 @@ Widget buildListItem(
       borderRadius: BorderRadius.circular(20.0),
     ),
     margin: EdgeInsets.all(10),
-    elevation: selected ? 2 : 10,
+    elevation: selected ? 1 : 15,
     child: ListTile(
       leading: FlutterLogo(),
       contentPadding: EdgeInsets.all(10),

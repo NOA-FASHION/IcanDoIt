@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter_document_picker/flutter_document_picker.dart';
 import 'dart:convert';
 import 'package:icandoit/models/challenge_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -6,7 +7,7 @@ import 'dart:collection';
 import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
-// import 'package:share/share.dart';
+import 'package:share/share.dart';
 
 const String keyAcces = "challengeList";
 const String keyAccesSAve = "challengeListSAve";
@@ -14,6 +15,7 @@ const String keyAccesChallengeDay = "challengeDay";
 const String keyAccesChallengeYesterday = "ChallengeyesterDay";
 
 class Challengecontroller extends ChangeNotifier {
+  String unityPattern = "unity_challenge.";
   List<ChallengeModel> _challengeList = [];
   List<Challengemodel2> _challengeList2 = [];
   List<Challengemodel2> _challengeList3 = [];
@@ -171,7 +173,7 @@ class Challengecontroller extends ChangeNotifier {
     if (nbtacheVallide1 == 0) {
       challengeDays.commentaire =
           "Vous n'avez pas valide de challenge ou de tache";
-    } else if (nbtacheVallide1 > 3) {
+    } else if (nbtacheVallide1 > 0) {
       challengeDays.commentaire =
           " encore un effort et vos objectifs seront atteint";
     } else if (nbtacheVallide1 > 6) {
@@ -522,12 +524,13 @@ class Challengecontroller extends ChangeNotifier {
   Future<File> get _localFile async {
     final path = await _localPath;
     patchData = '$path/challengeList.txt';
-    return File('$path/counter.txt');
+    return File('$path/challengeList.txt');
   }
 
   Future<String> readContent() async {
     try {
-      final file = await _localFile;
+      final path = await FlutterDocumentPicker.openDocument();
+      final file = File(path);
       // Read the file
       String contents = await file.readAsString();
       // Returning the contents of the file
@@ -538,11 +541,29 @@ class Challengecontroller extends ChangeNotifier {
     }
   }
 
+  void uploadChallenge() async {
+    ChallengeModel uploadFileChallenge;
+    Map _jsonDecodeuploadFile;
+    String uploadFile = await readContent();
+    if (uploadFile != null) {
+      _jsonDecodeuploadFile = jsonDecode(uploadFile);
+      uploadFileChallenge = ChallengeModel.fromJSON(_jsonDecodeuploadFile);
+      addChallenge(
+          challengeListTache: uploadFileChallenge.listeDeTache,
+          name: uploadFileChallenge.name,
+          description: uploadFileChallenge.description,
+          totalChallenge: uploadFileChallenge.totalChallenge,
+          unity: uploadFileChallenge.unity
+              .toString()
+              .replaceAll(unityPattern, ""));
+    }
+  }
+
   void writeContent({String nameChallenge}) async {
     final file = await _localFile;
     // Write the file
-    file.writeAsString(_saveLocalData(nameChallenge: nameChallenge));
-    // Share.shareFiles([patchData], text: "Images");
+    await file.writeAsString(_saveLocalData(nameChallenge: nameChallenge));
+    Share.shareFiles([patchData], text: "Challenges");
   }
 
   String _saveLocalData({String nameChallenge}) {
@@ -554,6 +575,7 @@ class Challengecontroller extends ChangeNotifier {
         }
       }
     }
+    print(_jsonChallengeList);
     return _jsonChallengeList;
   }
 }

@@ -1,18 +1,15 @@
-import 'dart:io';
+// import 'dart:io';
 
-import 'package:flutter/foundation.dart';
+// import 'package:flutter/foundation.dart';
+import 'package:colour/colour.dart';
 import 'package:flutter/material.dart';
 // import 'package:icandoit/models/challenge_model.dart';
 import 'package:icandoit/screens/components/build_challenge_list_tache.dart';
 import 'package:icandoit/controllers/challenge_controller.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lottie/lottie.dart';
-// import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
-// import 'package:video_player/video_player.dart';
-
-// import 'package:documents_picker/documents_picker.dart';
 
 class HomeTaches extends StatefulWidget {
   final String something;
@@ -280,34 +277,44 @@ class _HomeTachesState extends State<HomeTaches> {
         preferredSize: Size.fromHeight(100.0),
         child: SafeArea(
           child: AppBar(
+            backgroundColor: Colors.blue,
             centerTitle: true,
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text("ICanDoIt"),
-                Container(
-                  padding: EdgeInsets.all(8.0),
-                ),
-              ],
-            ),
             flexibleSpace: Container(
               padding: EdgeInsets.only(right: 30.0),
               alignment: Alignment.centerRight,
               height: 100,
-              // child: Card(
-              //   shape: RoundedRectangleBorder(
-              //     borderRadius: BorderRadius.circular(60.0),
-              //   ),
-              //   elevation: 35.0,
-              //   child: new CircularPercentIndicator(
-              //     radius: 60.0,
-              //     lineWidth: 5.0,
-              //     percent: providerType.calulPercent(something),
-              //     center: new Text("2"
-              //         "%"),
-              //     progressColor: Colors.green,
-              //   ),
-              // ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Image.asset(
+                    'assets/logo.png',
+                    width: 60,
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Provider.of<Challengecontroller>(context, listen: false)
+                          .writeContent(nameChallenge: something);
+                    },
+                    child: Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(60.0),
+                      ),
+                      elevation: 35.0,
+                      child: Ink(
+                        decoration: ShapeDecoration(
+                          color: Colour('#265FBC'),
+                          shape: CircleBorder(),
+                        ),
+                        child: Icon(
+                          Icons.share_rounded,
+                          size: 50,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
               decoration: BoxDecoration(
                   gradient: LinearGradient(
                       begin: Alignment.centerLeft,
