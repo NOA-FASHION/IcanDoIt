@@ -6,7 +6,7 @@ enum unity_challenge1 {
   achat,
   tache,
   mission,
-  vente,
+  youtube,
   video,
   commentaire,
   image,
@@ -22,8 +22,8 @@ choixDesciptionEnum(dynamic json) {
     unity = unity_challenge1.tache;
   } else if (json['description'] == "unity_challenge1.mission") {
     unity = unity_challenge1.mission;
-  } else if (json['description'] == "unity_challenge1.vente") {
-    unity = unity_challenge1.vente;
+  } else if (json['description'] == "unity_challenge1.youtube") {
+    unity = unity_challenge1.youtube;
   } else if (json['description'] == "unity_challenge1.video") {
     unity = unity_challenge1.video;
   } else if (json['description'] == "unity_challenge1.commentaire") {

@@ -235,6 +235,29 @@ class _HomeTachesState extends State<HomeTaches> {
             border:
                 OutlineInputBorder(borderRadius: BorderRadius.circular(15.0))),
       );
+    } else if (resultat == "Youtube") {
+      documentJoint = TextFormField(
+        onSaved: (value) {
+          dataJoin = value;
+        },
+        validator: (value) {
+          if (value.isEmpty) {
+            return "Merci d'entrer l'url";
+          }
+          return null;
+        },
+        decoration: InputDecoration(
+            focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(width: 2.0, color: Colors.blueAccent),
+                borderRadius: BorderRadius.circular(15.0)),
+            enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(width: 1.0, color: Colors.blueAccent),
+                borderRadius: BorderRadius.circular(15.0)),
+            contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            labelText: "url",
+            border:
+                OutlineInputBorder(borderRadius: BorderRadius.circular(15.0))),
+      );
     } else if (resultat == "commentaire") {
       documentJoint = SizedBox(
         width: 200.0,
@@ -277,43 +300,73 @@ class _HomeTachesState extends State<HomeTaches> {
         preferredSize: Size.fromHeight(100.0),
         child: SafeArea(
           child: AppBar(
-            backgroundColor: Colors.blue,
-            centerTitle: true,
-            flexibleSpace: Container(
-              padding: EdgeInsets.only(right: 30.0),
-              alignment: Alignment.centerRight,
-              height: 100,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Image.asset(
-                    'assets/logo.png',
-                    width: 60,
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Provider.of<Challengecontroller>(context, listen: false)
-                          .writeContent(nameChallenge: something);
-                    },
-                    child: Card(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(60.0),
-                      ),
-                      elevation: 35.0,
-                      child: Ink(
-                        decoration: ShapeDecoration(
-                          color: Colour('#265FBC'),
-                          shape: CircleBorder(),
-                        ),
-                        child: Icon(
-                          Icons.share_rounded,
-                          size: 50,
-                          color: Colors.white,
+            actions: [
+              Padding(
+                padding: const EdgeInsets.only(right: 15, top: 10),
+                child: SizedBox.fromSize(
+                  size: Size(50, 50), // button width and height
+                  child: ClipOval(
+                    child: Material(
+                      color: Colors.purple, // button color
+                      child: InkWell(
+                        // splash color
+                        splashColor: Colors.white,
+                        onTap: () {
+                          Provider.of<Challengecontroller>(context,
+                                  listen: false)
+                              .writeContent(nameChallenge: something);
+                        }, // button pressed
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Icon(
+                              Icons.share_rounded,
+                              size: 20,
+                              color: Colors.white,
+                            ), // icon
+                            Text(
+                              "Share",
+                              style:
+                                  TextStyle(fontSize: 10, color: Colors.white),
+                            ), // text
+                          ],
                         ),
                       ),
                     ),
                   ),
-                ],
+                ),
+              ),
+              // InkWell(
+              //   splashColor: Colors.purple,
+              //   onTap: () {
+              //     Provider.of<Challengecontroller>(context, listen: false)
+              //         .writeContent(nameChallenge: something);
+              //   },
+              //   child: Padding(
+              //     padding: const EdgeInsets.only(right: 15),
+              //     child: Ink(
+              //       decoration: ShapeDecoration(
+              //         color: Colour('#265FBC'),
+              //         shape: CircleBorder(),
+              //       ),
+              //       child: Icon(
+              //         Icons.share_rounded,
+              //         size: 40,
+              //         color: Colors.white,
+              //       ),
+              //     ),
+              //   ),
+              // ),
+            ],
+            backgroundColor: Colors.blue,
+            centerTitle: true,
+            flexibleSpace: Container(
+              padding: EdgeInsets.only(right: 30.0),
+              alignment: Alignment.center,
+              height: 100,
+              child: Image.asset(
+                'assets/logo.png',
+                width: 60,
               ),
               decoration: BoxDecoration(
                   gradient: LinearGradient(
@@ -397,39 +450,120 @@ class _HomeTachesState extends State<HomeTaches> {
                             items: <DropdownMenuItem>[
                               DropdownMenuItem(
                                 value: "evenement",
-                                child: Text("evenement"),
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.event,
+                                      size: 30.0,
+                                    ),
+                                    SizedBox(width: 10),
+                                    Text("evenement"),
+                                  ],
+                                ),
                               ),
                               DropdownMenuItem(
                                 value: "achat",
-                                child: Text("achat"),
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.add_business_sharp,
+                                      size: 30.0,
+                                    ),
+                                    SizedBox(width: 10),
+                                    Text("achat"),
+                                  ],
+                                ),
                               ),
                               DropdownMenuItem(
                                 value: "tache",
-                                child: Text("tache"),
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.event_available,
+                                      size: 30.0,
+                                    ),
+                                    SizedBox(width: 10),
+                                    Text("tache"),
+                                  ],
+                                ),
                               ),
                               DropdownMenuItem(
                                 value: "mission",
-                                child: Text("mission"),
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.change_history,
+                                      size: 30.0,
+                                    ),
+                                    SizedBox(width: 10),
+                                    Text("mission"),
+                                  ],
+                                ),
                               ),
                               DropdownMenuItem(
-                                value: "vente",
-                                child: Text("vente"),
+                                value: "youtube",
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.youtube_searched_for_outlined,
+                                      size: 30.0,
+                                    ),
+                                    SizedBox(width: 10),
+                                    Text("youtube"),
+                                  ],
+                                ),
                               ),
                               DropdownMenuItem(
                                 value: "commentaire",
-                                child: Text("commentaire"),
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.comment,
+                                      size: 30.0,
+                                    ),
+                                    SizedBox(width: 10),
+                                    Text("commentaire"),
+                                  ],
+                                ),
                               ),
                               DropdownMenuItem(
                                 value: "video",
-                                child: Text("video"),
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.video_label,
+                                      size: 30.0,
+                                    ),
+                                    SizedBox(width: 10),
+                                    Text("video"),
+                                  ],
+                                ),
                               ),
                               DropdownMenuItem(
                                 value: "image",
-                                child: Text("image"),
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.text_fields,
+                                      size: 30.0,
+                                    ),
+                                    SizedBox(width: 10),
+                                    Text("image"),
+                                  ],
+                                ),
                               ),
                               DropdownMenuItem(
                                 value: "url",
-                                child: Text("url"),
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.cloud,
+                                      size: 30.0,
+                                    ),
+                                    SizedBox(width: 10),
+                                    Text("url"),
+                                  ],
+                                ),
                               ),
                             ],
                           ),

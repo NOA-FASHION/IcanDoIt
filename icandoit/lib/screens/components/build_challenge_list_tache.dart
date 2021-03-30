@@ -59,7 +59,13 @@ class _ChallengesListBuilderTachesState
         Icons.comment,
         size: 30.0,
       );
+    } else if (resultat == "youtube") {
+      documentJoint = Icon(
+        Icons.youtube_searched_for_sharp,
+        size: 30.0,
+      );
     }
+
     return documentJoint;
   }
 

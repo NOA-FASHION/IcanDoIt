@@ -42,11 +42,11 @@ class _ResultaChallengeState extends State<ResultaChallenge>
   FancyDrawerController _controller;
   void initState() {
     super.initState();
-    _controller = FancyDrawerController(
-        vsync: this, duration: Duration(milliseconds: 250))
-      ..addListener(() {
-        setState(() {});
-      });
+    _controller =
+        FancyDrawerController(vsync: this, duration: Duration(milliseconds: 50))
+          ..addListener(() {
+            setState(() {});
+          });
   }
 
   @override
@@ -88,15 +88,18 @@ class _ResultaChallengeState extends State<ResultaChallenge>
 
     return Material(
       child: FancyDrawerWrapper(
-        backgroundColor: Colors.blue,
+        hideOnContentTap: true,
+        backgroundColor: Colors.white,
         controller: _controller,
         drawerItems: <Widget>[
           InkWell(
             onTap: () {
-              Navigator.of(context).pop();
+              // Navigator.of(context).pop();
+
               Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => ChangeNotifierProvider.value(
                       value: variable2, child: Home())));
+              setState(() {});
               // setState(() {});
             },
             child: Row(
@@ -109,7 +112,7 @@ class _ResultaChallengeState extends State<ResultaChallenge>
                   "Go to home",
                   style: TextStyle(
                     fontSize: 18,
-                    color: Colors.black,
+                    color: Colors.purple,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -119,15 +122,16 @@ class _ResultaChallengeState extends State<ResultaChallenge>
           SizedBox(height: 5.0),
           InkWell(
             onTap: () {
-              Navigator.of(context).pop();
+              // Navigator.of(context).pop();
+
               Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => ChangeNotifierProvider.value(
-                      value: variable2, child: Home())));
-              // setState(() {});
+                      value: variable2, child: ExampleApp())));
+              setState(() {});
             },
             child: Row(
               children: [
-                Icon(Icons.home),
+                Icon(Icons.save_rounded),
                 SizedBox(
                   width: 5.0,
                 ),
@@ -135,7 +139,7 @@ class _ResultaChallengeState extends State<ResultaChallenge>
                   "Sauvegare challenge",
                   style: TextStyle(
                     fontSize: 18,
-                    color: Colors.black,
+                    color: Colors.purple,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -162,7 +166,7 @@ class _ResultaChallengeState extends State<ResultaChallenge>
                   "score des challenges",
                   style: TextStyle(
                     fontSize: 18,
-                    color: Colors.black,
+                    color: Colors.purple,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -172,14 +176,14 @@ class _ResultaChallengeState extends State<ResultaChallenge>
           SizedBox(height: 5.0),
           InkWell(
             onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => ChangeNotifierProvider.value(
-                      value: variable2, child: ExampleApp())));
+              // Navigator.of(context).push(MaterialPageRoute(
+              //     builder: (context) => ChangeNotifierProvider.value(
+              //         value: variable, child: ExampleApp())));
               // setState(() {});
             },
             child: Row(
               children: [
-                Icon(Icons.home),
+                Icon(Icons.support),
                 SizedBox(
                   width: 5.0,
                 ),
@@ -187,7 +191,7 @@ class _ResultaChallengeState extends State<ResultaChallenge>
                   "Support us",
                   style: TextStyle(
                     fontSize: 18,
-                    color: Colors.black,
+                    color: Colors.purple,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -197,14 +201,14 @@ class _ResultaChallengeState extends State<ResultaChallenge>
           SizedBox(height: 5.0),
           InkWell(
             onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => ChangeNotifierProvider.value(
-                      value: variable2, child: Home())));
+              // Navigator.of(context).push(MaterialPageRoute(
+              //     builder: (context) => ChangeNotifierProvider.value(
+              //         value: variable, child: Home())));
               // setState(() {});
             },
             child: Row(
               children: [
-                Icon(Icons.home),
+                Icon(Icons.policy),
                 SizedBox(
                   width: 5.0,
                 ),
@@ -212,7 +216,7 @@ class _ResultaChallengeState extends State<ResultaChallenge>
                   "About us",
                   style: TextStyle(
                     fontSize: 18,
-                    color: Colors.black,
+                    color: Colors.purple,
                     fontWeight: FontWeight.bold,
                   ),
                 ),

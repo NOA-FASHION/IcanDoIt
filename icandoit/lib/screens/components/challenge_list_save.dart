@@ -34,11 +34,11 @@ class _ExampleAppState extends State<ExampleApp>
   FancyDrawerController _controller;
   void initState() {
     super.initState();
-    _controller = FancyDrawerController(
-        vsync: this, duration: Duration(milliseconds: 250))
-      ..addListener(() {
-        setState(() {});
-      });
+    _controller =
+        FancyDrawerController(vsync: this, duration: Duration(milliseconds: 50))
+          ..addListener(() {
+            setState(() {});
+          });
   }
 
   @override
@@ -54,15 +54,18 @@ class _ExampleAppState extends State<ExampleApp>
 
     return Material(
       child: FancyDrawerWrapper(
-        backgroundColor: Colors.blue,
+        hideOnContentTap: true,
+        backgroundColor: Colors.white,
         controller: _controller,
         drawerItems: <Widget>[
           InkWell(
             onTap: () {
-              Navigator.of(context).pop();
+              // Navigator.of(context).pop();
+
               Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => ChangeNotifierProvider.value(
                       value: variable2, child: Home())));
+              setState(() {});
               // setState(() {});
             },
             child: Row(
@@ -75,7 +78,7 @@ class _ExampleAppState extends State<ExampleApp>
                   "Go to home",
                   style: TextStyle(
                     fontSize: 18,
-                    color: Colors.black,
+                    color: Colors.purple,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -85,15 +88,16 @@ class _ExampleAppState extends State<ExampleApp>
           SizedBox(height: 5.0),
           InkWell(
             onTap: () {
-              Navigator.of(context).pop();
+              // Navigator.of(context).pop();
+
               Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => ChangeNotifierProvider.value(
-                      value: variable2, child: Home())));
-              // setState(() {});
+                      value: variable2, child: ExampleApp())));
+              setState(() {});
             },
             child: Row(
               children: [
-                Icon(Icons.home),
+                Icon(Icons.save_rounded),
                 SizedBox(
                   width: 5.0,
                 ),
@@ -101,13 +105,14 @@ class _ExampleAppState extends State<ExampleApp>
                   "Sauvegare challenge",
                   style: TextStyle(
                     fontSize: 18,
-                    color: Colors.black,
+                    color: Colors.purple,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ],
             ),
           ),
+          SizedBox(height: 5.0),
           InkWell(
             onTap: () {
               // Navigator.of(context).pop();
@@ -127,7 +132,7 @@ class _ExampleAppState extends State<ExampleApp>
                   "score des challenges",
                   style: TextStyle(
                     fontSize: 18,
-                    color: Colors.black,
+                    color: Colors.purple,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -135,17 +140,16 @@ class _ExampleAppState extends State<ExampleApp>
             ),
           ),
           SizedBox(height: 5.0),
-          SizedBox(height: 5.0),
           InkWell(
             onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => ChangeNotifierProvider.value(
-                      value: variable2, child: ExampleApp())));
+              // Navigator.of(context).push(MaterialPageRoute(
+              //     builder: (context) => ChangeNotifierProvider.value(
+              //         value: variable, child: ExampleApp())));
               // setState(() {});
             },
             child: Row(
               children: [
-                Icon(Icons.home),
+                Icon(Icons.support),
                 SizedBox(
                   width: 5.0,
                 ),
@@ -153,7 +157,7 @@ class _ExampleAppState extends State<ExampleApp>
                   "Support us",
                   style: TextStyle(
                     fontSize: 18,
-                    color: Colors.black,
+                    color: Colors.purple,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -163,14 +167,14 @@ class _ExampleAppState extends State<ExampleApp>
           SizedBox(height: 5.0),
           InkWell(
             onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => ChangeNotifierProvider.value(
-                      value: variable2, child: Home())));
+              // Navigator.of(context).push(MaterialPageRoute(
+              //     builder: (context) => ChangeNotifierProvider.value(
+              //         value: variable, child: Home())));
               // setState(() {});
             },
             child: Row(
               children: [
-                Icon(Icons.home),
+                Icon(Icons.policy),
                 SizedBox(
                   width: 5.0,
                 ),
@@ -178,7 +182,7 @@ class _ExampleAppState extends State<ExampleApp>
                   "About us",
                   style: TextStyle(
                     fontSize: 18,
-                    color: Colors.black,
+                    color: Colors.purple,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -279,28 +283,25 @@ Widget buildListItem(
       borderRadius: BorderRadius.circular(20.0),
     ),
     margin: EdgeInsets.all(10),
-    elevation: selected ? 1 : 15,
+    elevation: selected ? 1 : 35,
     child: ListTile(
-      leading: FlutterLogo(),
+      leading: Icon(
+        Icons.backup,
+        size: 35.0,
+        color: Colors.blue,
+      ),
       contentPadding: EdgeInsets.all(10),
       title: Card(
-        elevation: 10,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(60.0),
         ),
         child: Container(
           child: Row(
             children: [
-              Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5.0),
-                ),
-                elevation: 15.0,
-                child: Text(
-                  "Titre",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.blue),
-                ),
+              Text(
+                "Titre",
+                style:
+                    TextStyle(fontWeight: FontWeight.bold, color: Colors.blue),
               ),
               SizedBox(
                 width: 5.0,

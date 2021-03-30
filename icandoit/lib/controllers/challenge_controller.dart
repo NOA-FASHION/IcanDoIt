@@ -294,8 +294,8 @@ class Challengecontroller extends ChangeNotifier {
       unity = unity_challenge1.tache;
     } else if (json == "mission") {
       unity = unity_challenge1.mission;
-    } else if (json == "vente") {
-      unity = unity_challenge1.vente;
+    } else if (json == "youtube") {
+      unity = unity_challenge1.youtube;
     } else if (json == "video") {
       unity = unity_challenge1.video;
     } else if (json == "commentaire") {

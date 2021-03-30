@@ -39,6 +39,20 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
     return word2;
   }
 
+  String maxLetterTitre(String word) {
+    var word2;
+    word2 = word[0];
+    if (word.length > 30) {
+      for (var i = 1; i <= 27; i++) {
+        word2 = word2 + word[i];
+      }
+      word2 = word2 + "...";
+    } else {
+      word2 = word;
+    }
+    return word2;
+  }
+
   Color changeColors(String challengeListeColors) {
     Color colors;
     if (challengeListeColors == "normal") {
@@ -200,17 +214,25 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                             borderRadius: BorderRadius.circular(5.0),
                           ),
                           elevation: 15.0,
-                          child: Text(
-                            "Titre",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.blue),
+                          child: Row(
+                            children: [
+                              Text(
+                                "Titre".toUpperCase(),
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.purple),
+                              ),
+                              SizedBox(
+                                width: 5.0,
+                              ),
+                              Text(
+                                maxLetterTitre(
+                                    _challengesList[index].name.toUpperCase()),
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                            ],
                           ),
                         ),
-                        SizedBox(
-                          width: 5.0,
-                        ),
-                        Text(_challengesList[index].name),
                         SizedBox(
                           width: 5.0,
                         ),
@@ -293,7 +315,6 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                                                       .replaceAll(
                                                           unityPattern, ""))),
                                         ),
-                                       q
                                       ],
                                     ),
                                   ),

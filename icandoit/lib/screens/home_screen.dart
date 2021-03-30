@@ -1,4 +1,4 @@
-import 'package:colour/colour.dart';
+// import 'package:colour/colour.dart';
 import 'package:fancy_drawer/fancy_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:icandoit/models/challenge_model.dart';
@@ -7,7 +7,7 @@ import 'package:icandoit/controllers/challenge_controller.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 import 'package:lottie/lottie.dart';
-import 'package:flutter_document_picker/flutter_document_picker.dart';
+// import 'package:flutter_document_picker/flutter_document_picker.dart';
 // import 'package:slide_drawer/slide_drawer.dart';
 
 import 'components/challenge_list_save.dart';
@@ -30,11 +30,11 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   FancyDrawerController _controller;
   void initState() {
     super.initState();
-    _controller = FancyDrawerController(
-        vsync: this, duration: Duration(milliseconds: 250))
-      ..addListener(() {
-        setState(() {});
-      });
+    _controller =
+        FancyDrawerController(vsync: this, duration: Duration(milliseconds: 50))
+          ..addListener(() {
+            setState(() {});
+          });
   }
 
   @override
@@ -48,7 +48,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     Challengecontroller variable = Provider.of<Challengecontroller>(context);
     return Material(
       child: FancyDrawerWrapper(
-        backgroundColor: Colors.blue,
+        hideOnContentTap: true,
+        backgroundColor: Colors.white,
         controller: _controller,
         drawerItems: <Widget>[
           InkWell(
@@ -71,7 +72,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   "Go to home",
                   style: TextStyle(
                     fontSize: 18,
-                    color: Colors.black,
+                    color: Colors.purple,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -98,7 +99,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   "Sauvegare challenge",
                   style: TextStyle(
                     fontSize: 18,
-                    color: Colors.black,
+                    color: Colors.purple,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -125,7 +126,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   "score des challenges",
                   style: TextStyle(
                     fontSize: 18,
-                    color: Colors.black,
+                    color: Colors.purple,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -150,7 +151,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   "Support us",
                   style: TextStyle(
                     fontSize: 18,
-                    color: Colors.black,
+                    color: Colors.purple,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -175,7 +176,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   "About us",
                   style: TextStyle(
                     fontSize: 18,
-                    color: Colors.black,
+                    color: Colors.purple,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -189,6 +190,61 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             preferredSize: Size.fromHeight(100.0),
             child: SafeArea(
               child: AppBar(
+                actions: [
+                  Padding(
+                    padding: const EdgeInsets.only(right: 15, top: 10),
+                    child: SizedBox.fromSize(
+                      size: Size(50, 50), // button width and height
+                      child: ClipOval(
+                        child: Material(
+                          color: Colors.purple, // button color
+                          child: InkWell(
+                            // splash color
+                            splashColor: Colors.white,
+                            onTap: () {
+                              variable.uploadChallenge();
+                            }, // button pressed
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Icon(
+                                  Icons.upload_sharp,
+                                  size: 20,
+                                  color: Colors.white,
+                                ), // icon
+                                Text(
+                                  "Upload",
+                                  style: TextStyle(
+                                      fontSize: 10, color: Colors.white),
+                                ), // text
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  // InkWell(
+                  //   splashColor: Colors.purple,
+                  //   onTap: () {
+                  //     variable.uploadChallenge();
+                  //   },
+                  //   child: Padding(
+                  //     padding: const EdgeInsets.only(right: 15),
+                  //     child: Ink(
+                  //       decoration: ShapeDecoration(
+                  //         color: Colour('#265FBC'),
+                  //         shape: CircleBorder(),
+                  //       ),
+                  //       child: Icon(
+                  //         Icons.upload_sharp,
+                  //         size: 40,
+                  //         color: Colors.white,
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
+                ],
                 leading: IconButton(
                   alignment: Alignment.topRight,
                   icon: Icon(
@@ -202,37 +258,10 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 centerTitle: true,
                 flexibleSpace: Container(
                   padding: EdgeInsets.only(right: 30.0),
-                  alignment: Alignment.centerRight,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Image.asset(
-                        'assets/logo.png',
-                        width: 60,
-                      ),
-                      InkWell(
-                        onTap: () {
-                          variable.uploadChallenge();
-                        },
-                        child: Card(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(60.0),
-                          ),
-                          elevation: 35.0,
-                          child: Ink(
-                            decoration: ShapeDecoration(
-                              color: Colour('#265FBC'),
-                              shape: CircleBorder(),
-                            ),
-                            child: Icon(
-                              Icons.upload_sharp,
-                              size: 50,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
+                  alignment: Alignment.center,
+                  child: Image.asset(
+                    'assets/logo.png',
+                    width: 60,
                   ),
                   decoration: BoxDecoration(
                       gradient: LinearGradient(
