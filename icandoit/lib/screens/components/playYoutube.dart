@@ -1,12 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-class PlayYoutube extends StatelessWidget {
+class PlayYoutubeScreen extends StatefulWidget {
   final String nameChallenge;
-  const PlayYoutube({Key key, this.nameChallenge}) : super(key: key);
+  const PlayYoutubeScreen({Key key, this.nameChallenge}) : super(key: key);
 
   @override
+  _PlayYoutubeScreenState createState() => _PlayYoutubeScreenState();
+}
+
+class _PlayYoutubeScreenState extends State<PlayYoutubeScreen> {
+  @override
   Widget build(BuildContext context) {
+    PlayerState _playerState;
+    YoutubeMetaData _videoMetaData;
+
+    bool _isPlayerReady = false;
+    String videoId = YoutubePlayer.convertUrlToId(widget.nameChallenge);
+    YoutubePlayerController _controller = YoutubePlayerController(
+      initialVideoId: videoId,
+      flags: YoutubePlayerFlags(
+        autoPlay: true,
+        mute: true,
+      ),
+    );
+    void listener() {
+      if (_isPlayerReady && mounted && !_controller.value.isFullScreen) {
+        setState(() {
+          _playerState = _controller.value.playerState;
+          _videoMetaData = _controller.metadata;
+        });
+      }
+    }
+
     return Container(
       child: Scaffold(
         appBar: PreferredSize(
@@ -35,19 +62,17 @@ class PlayYoutube extends StatelessWidget {
             ),
           ),
         ),
-        body: Container(
-            child: FlutterYoutubeView(
-                onViewCreated: _onYoutubeCreated,
-                listener: this,
-                scaleMode:
-                    YoutubeScaleMode.none, // <option> fitWidth, fitHeight
-                params: YoutubeParam(
-                    videoId: nameChallenge.replaceAll(
-                        "https://www.youtube.com/watch?v=", ""),
-                    showUI: false,
-                    startSeconds: 0.0, // <option>
-                    autoPlay: false) // <option>
-                )),
+        body: YoutubePlayer(
+          controller: _controller,
+          showVideoProgressIndicator: true,
+          progressColors: ProgressBarColors(
+            playedColor: Colors.amber,
+            handleColor: Colors.amberAccent,
+          ),
+          onReady: () {
+            _controller.addListener(listener);
+          },
+        ),
       ),
     );
   }

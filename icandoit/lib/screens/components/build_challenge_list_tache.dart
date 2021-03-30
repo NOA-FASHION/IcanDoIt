@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_list_drag_and_drop/drag_and_drop_list.dart';
 
 import 'package:icandoit/models/challenge_model.dart';
+import 'package:icandoit/screens/components/playYoutube.dart';
 import 'package:icandoit/screens/playPicture.dart';
 import 'package:icandoit/screens/playUrl.dart';
 import 'package:icandoit/screens/playVideo.dart';
@@ -218,6 +219,15 @@ class _ChallengesListBuilderTachesState
                               value: provider,
                               child:
                                   PlayCommentaire(nameChallenge: item.name))));
+                    } else if (item.description
+                            .toString()
+                            .replaceAll(unityPattern, "") ==
+                        "youtube") {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => ChangeNotifierProvider.value(
+                              value: provider,
+                              child: PlayYoutubeScreen(
+                                  nameChallenge: item.name))));
                     }
                   },
                   title: Container(
