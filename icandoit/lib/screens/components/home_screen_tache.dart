@@ -401,215 +401,207 @@ class _HomeTachesState extends State<HomeTaches> {
                     key: formKeyTache,
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child: SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            DropdownButtonFormField(
-                              decoration: InputDecoration(
-                                  focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          width: 2.0, color: Colors.blueAccent),
-                                      borderRadius:
-                                          BorderRadius.circular(15.0)),
-                                  enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          width: 1.0, color: Colors.blueAccent),
-                                      borderRadius:
-                                          BorderRadius.circular(15.0)),
-                                  contentPadding: EdgeInsets.symmetric(
-                                      horizontal: 20, vertical: 10),
-                                  border: OutlineInputBorder(
-                                      borderRadius:
-                                          BorderRadius.circular(15.0))),
-                              value: unityChallenge,
-                              onChanged: (value) {
-                                updateController(value);
-                                _visibility1 = true;
-                                wait = "assets/wait.json";
-                              },
-                              onSaved: (value) {
-                                updateController(value);
-                              },
-                              items: <DropdownMenuItem>[
-                                DropdownMenuItem(
-                                  value: "evenement",
-                                  child: Row(
-                                    children: [
-                                      Icon(
-                                        Icons.event,
-                                        size: 30.0,
-                                      ),
-                                      SizedBox(width: 10),
-                                      Text("evenement"),
-                                    ],
-                                  ),
+                      child: ListView(
+                        children: [
+                          DropdownButtonFormField(
+                            decoration: InputDecoration(
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        width: 2.0, color: Colors.blueAccent),
+                                    borderRadius: BorderRadius.circular(15.0)),
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        width: 1.0, color: Colors.blueAccent),
+                                    borderRadius: BorderRadius.circular(15.0)),
+                                contentPadding: EdgeInsets.symmetric(
+                                    horizontal: 20, vertical: 10),
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(15.0))),
+                            value: unityChallenge,
+                            onChanged: (value) {
+                              updateController(value);
+                              _visibility1 = true;
+                              wait = "assets/wait.json";
+                            },
+                            onSaved: (value) {
+                              updateController(value);
+                            },
+                            items: <DropdownMenuItem>[
+                              DropdownMenuItem(
+                                value: "evenement",
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.event,
+                                      size: 30.0,
+                                    ),
+                                    SizedBox(width: 10),
+                                    Text("evenement"),
+                                  ],
                                 ),
-                                DropdownMenuItem(
-                                  value: "achat",
-                                  child: Row(
-                                    children: [
-                                      Icon(
-                                        Icons.shopping_cart,
-                                        size: 30.0,
-                                      ),
-                                      SizedBox(width: 10),
-                                      Text("achat"),
-                                    ],
-                                  ),
+                              ),
+                              DropdownMenuItem(
+                                value: "achat",
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.shopping_cart,
+                                      size: 30.0,
+                                    ),
+                                    SizedBox(width: 10),
+                                    Text("achat"),
+                                  ],
                                 ),
-                                DropdownMenuItem(
-                                  value: "tache",
-                                  child: Row(
-                                    children: [
-                                      Icon(
-                                        Icons.event_available,
-                                        size: 30.0,
-                                      ),
-                                      SizedBox(width: 10),
-                                      Text("tache"),
-                                    ],
-                                  ),
+                              ),
+                              DropdownMenuItem(
+                                value: "tache",
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.event_available,
+                                      size: 30.0,
+                                    ),
+                                    SizedBox(width: 10),
+                                    Text("tache"),
+                                  ],
                                 ),
-                                DropdownMenuItem(
-                                  value: "mission",
-                                  child: Row(
-                                    children: [
-                                      Icon(
-                                        Icons.change_history,
-                                        size: 30.0,
-                                      ),
-                                      SizedBox(width: 10),
-                                      Text("mission"),
-                                    ],
-                                  ),
+                              ),
+                              DropdownMenuItem(
+                                value: "mission",
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.change_history,
+                                      size: 30.0,
+                                    ),
+                                    SizedBox(width: 10),
+                                    Text("mission"),
+                                  ],
                                 ),
-                                DropdownMenuItem(
-                                  value: "youtube",
-                                  child: Row(
-                                    children: [
-                                      Icon(
-                                        Icons.youtube_searched_for_outlined,
-                                        size: 30.0,
-                                      ),
-                                      SizedBox(width: 10),
-                                      Text("youtube"),
-                                    ],
-                                  ),
+                              ),
+                              DropdownMenuItem(
+                                value: "youtube",
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.youtube_searched_for_outlined,
+                                      size: 30.0,
+                                    ),
+                                    SizedBox(width: 10),
+                                    Text("youtube"),
+                                  ],
                                 ),
-                                DropdownMenuItem(
-                                  value: "commentaire",
-                                  child: Row(
-                                    children: [
-                                      Icon(
-                                        Icons.comment,
-                                        size: 30.0,
-                                      ),
-                                      SizedBox(width: 10),
-                                      Text("commentaire"),
-                                    ],
-                                  ),
+                              ),
+                              DropdownMenuItem(
+                                value: "commentaire",
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.comment,
+                                      size: 30.0,
+                                    ),
+                                    SizedBox(width: 10),
+                                    Text("commentaire"),
+                                  ],
                                 ),
-                                DropdownMenuItem(
-                                  value: "video",
-                                  child: Row(
-                                    children: [
-                                      Icon(
-                                        Icons.video_label,
-                                        size: 30.0,
-                                      ),
-                                      SizedBox(width: 10),
-                                      Text("video"),
-                                    ],
-                                  ),
+                              ),
+                              DropdownMenuItem(
+                                value: "video",
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.video_label,
+                                      size: 30.0,
+                                    ),
+                                    SizedBox(width: 10),
+                                    Text("video"),
+                                  ],
                                 ),
-                                DropdownMenuItem(
-                                  value: "image",
-                                  child: Row(
-                                    children: [
-                                      Icon(
-                                        Icons.text_fields,
-                                        size: 30.0,
-                                      ),
-                                      SizedBox(width: 10),
-                                      Text("image"),
-                                    ],
-                                  ),
+                              ),
+                              DropdownMenuItem(
+                                value: "image",
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.text_fields,
+                                      size: 30.0,
+                                    ),
+                                    SizedBox(width: 10),
+                                    Text("image"),
+                                  ],
                                 ),
-                                DropdownMenuItem(
-                                  value: "url",
-                                  child: Row(
-                                    children: [
-                                      Icon(
-                                        Icons.cloud,
-                                        size: 30.0,
-                                      ),
-                                      SizedBox(width: 10),
-                                      Text("url"),
-                                    ],
-                                  ),
+                              ),
+                              DropdownMenuItem(
+                                value: "url",
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.cloud,
+                                      size: 30.0,
+                                    ),
+                                    SizedBox(width: 10),
+                                    Text("url"),
+                                  ],
                                 ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 15.0,
-                            ),
-                            TextFormField(
-                              onSaved: (value) {
-                                targetChallenge = value;
-                              },
-                              validator: (value) {
-                                if (value.isEmpty) {
-                                  return "Merci d'entrer une description pour la mission";
-                                } else if (value.length > 35) {
-                                  return "pas plus de 50 caracteres";
-                                }
-                                return null;
-                              },
-                              decoration: InputDecoration(
-                                  focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          width: 2.0, color: Colors.blueAccent),
-                                      borderRadius:
-                                          BorderRadius.circular(15.0)),
-                                  enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          width: 1.0, color: Colors.blueAccent),
-                                      borderRadius:
-                                          BorderRadius.circular(15.0)),
-                                  contentPadding: EdgeInsets.symmetric(
-                                      horizontal: 20, vertical: 10),
-                                  labelText: "Description",
-                                  border: OutlineInputBorder(
-                                      borderRadius:
-                                          BorderRadius.circular(15.0))),
-                            ),
-                            SizedBox(
-                              height: 15.0,
-                            ),
-                            selectdropdown(unityChallenge),
-                            InkWell(
-                                onTap: () {
-                                  if (formKeyTache.currentState.validate()) {
-                                    formKeyTache.currentState.save();
-                                    setState(() {
-                                      Provider.of<Challengecontroller>(context,
-                                              listen: false)
-                                          .addChallenge2(
-                                              totalChallenge: '1',
-                                              nameListChallenge: something,
-                                              name: dataJoin,
-                                              description: unityChallenge,
-                                              tache: targetChallenge);
-                                    });
-                                  }
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 15.0,
+                          ),
+                          TextFormField(
+                            onSaved: (value) {
+                              targetChallenge = value;
+                            },
+                            validator: (value) {
+                              if (value.isEmpty) {
+                                return "Merci d'entrer une description pour la mission";
+                              } else if (value.length > 35) {
+                                return "pas plus de 50 caracteres";
+                              }
+                              return null;
+                            },
+                            decoration: InputDecoration(
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        width: 2.0, color: Colors.blueAccent),
+                                    borderRadius: BorderRadius.circular(15.0)),
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        width: 1.0, color: Colors.blueAccent),
+                                    borderRadius: BorderRadius.circular(15.0)),
+                                contentPadding: EdgeInsets.symmetric(
+                                    horizontal: 20, vertical: 10),
+                                labelText: "Description",
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(15.0))),
+                          ),
+                          SizedBox(
+                            height: 15.0,
+                          ),
+                          // selectdropdown(unityChallenge),
+                          InkWell(
+                              onTap: () {
+                                if (formKeyTache.currentState.validate()) {
+                                  formKeyTache.currentState.save();
+                                  setState(() {
+                                    Provider.of<Challengecontroller>(context,
+                                            listen: false)
+                                        .addChallenge2(
+                                            totalChallenge: '1',
+                                            nameListChallenge: something,
+                                            name: dataJoin,
+                                            description: unityChallenge,
+                                            tache: targetChallenge);
+                                  });
                                   Navigator.pop(context);
-                                },
-                                child: Container(
-                                    width: 120.0,
-                                    height: 120.0,
-                                    child: Lottie.asset('assets/save1.json'))),
-                          ],
-                        ),
+                                }
+                              },
+                              child: Container(
+                                  width: 120.0,
+                                  height: 120.0,
+                                  child: Lottie.asset('assets/save1.json'))),
+                        ],
                       ),
                     ),
                   ));

@@ -450,8 +450,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                 }
                               },
                               child: Container(
-                                  width: 200.0,
-                                  height: 200.0,
+                                  width: 120.0,
+                                  height: 120.0,
                                   child: Lottie.asset('assets/save1.json'))),
                         ],
                       ),

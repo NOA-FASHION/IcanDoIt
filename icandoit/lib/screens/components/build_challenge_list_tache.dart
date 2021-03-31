@@ -1,6 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_list_drag_and_drop/drag_and_drop_list.dart';
-
+import 'dart:io' as io;
 import 'package:icandoit/models/challenge_model.dart';
 import 'package:icandoit/screens/components/playYoutube.dart';
 import 'package:icandoit/screens/playPicture.dart';
@@ -217,7 +219,8 @@ class _ChallengesListBuilderTachesState
                             .toString()
                             .replaceAll(unityPattern, "") ==
                         "video") {
-                      if (item.name == null) {
+                      print(item.name);
+                      if (!await File(item.name).exists()) {
                         final pickedFile =
                             await picker.getVideo(source: ImageSource.gallery);
 
@@ -239,7 +242,7 @@ class _ChallengesListBuilderTachesState
                             .toString()
                             .replaceAll(unityPattern, "") ==
                         "image") {
-                      if (item.name == null) {
+                      if (!await File(item.name).exists()) {
                         final pickedFile =
                             await picker.getImage(source: ImageSource.gallery);
 
