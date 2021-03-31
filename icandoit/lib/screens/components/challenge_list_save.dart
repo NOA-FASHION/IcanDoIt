@@ -4,7 +4,9 @@ import 'package:icandoit/controllers/challenge_controller.dart';
 import 'package:icandoit/models/challenge_model.dart';
 import 'package:icandoit/screens/components/resultat_challenge.dart';
 import 'package:item_selector/item_selector.dart';
-import 'package:lottie/lottie.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/tap_bounce_container.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 import 'package:provider/provider.dart';
 // import 'package:slide_drawer/slide_drawer.dart';
 
@@ -18,14 +20,14 @@ class ExampleApp extends StatefulWidget {
 
 class _ExampleAppState extends State<ExampleApp>
     with SingleTickerProviderStateMixin {
-  SnackBar _buildSnackBar({@required String content}) {
-    return SnackBar(
-      content: Text(
-        content,
-        textAlign: TextAlign.center,
-      ),
-    );
-  }
+  // SnackBar _buildSnackBar({@required String content}) {
+  //   return SnackBar(
+  //     content: Text(
+  //       content,
+  //       textAlign: TextAlign.center,
+  //     ),
+  //   );
+  // }
 
   _confirmRegister() {
     var baseDialog = BaseAlertDialog(
@@ -229,9 +231,21 @@ class _ExampleAppState extends State<ExampleApp>
                             indexSave = variable2.getChallengesindex();
                             if (indexSave != null) {
                               variable2.addSlectSave();
-                              Scaffold.of(context).showSnackBar(_buildSnackBar(
-                                  content:
-                                      "Le challenge  a bien ete restaurer"));
+                              showTopSnackBar(
+                                context,
+                                CustomSnackBar.success(
+                                  backgroundColor: Colors.white,
+                                  icon: Icon(
+                                    Icons.restore,
+                                    size: 30,
+                                    color: Colors.white,
+                                  ),
+                                  message: "Restauration rèussi avec succes",
+                                ),
+                              );
+                              // Scaffold.of(context).showSnackBar(_buildSnackBar(
+                              //     content:
+                              //         "Le challenge  a bien ete restaurer"));
                             } else {
                               _confirmRegister();
                             }
@@ -260,8 +274,20 @@ class _ExampleAppState extends State<ExampleApp>
                             int indexSave;
                             indexSave = variable2.getChallengesindex();
                             variable2.removeSave(index: indexSave);
-                            Scaffold.of(context).showSnackBar(_buildSnackBar(
-                                content: "Le sauvegarde a bien ete supprimé"));
+                            showTopSnackBar(
+                              context,
+                              CustomSnackBar.success(
+                                backgroundColor: Colors.blue,
+                                icon: Icon(
+                                  Icons.delete,
+                                  size: 30,
+                                  color: Colors.white,
+                                ),
+                                message: "Sauvegarde éffacer avec succes.",
+                              ),
+                            );
+                            // Scaffold.of(context).showSnackBar(_buildSnackBar(
+                            //     content: "Le sauvegarde a bien ete supprimé"));
                           }, // button pressed
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,

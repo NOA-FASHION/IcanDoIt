@@ -29,28 +29,34 @@ class BaseAlertDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      title: new Text(this._title),
-      content: new Text(this._content),
-      backgroundColor: this._color,
-      shape:
-          RoundedRectangleBorder(borderRadius: new BorderRadius.circular(15)),
-      actions: <Widget>[
-        new FlatButton(
-          child: new Text(this._yes),
-          textColor: Colors.greenAccent,
-          onPressed: () {
-            this._yesOnPressed();
-          },
-        ),
-        new FlatButton(
-          child: Text(this._no),
-          textColor: Colors.redAccent,
-          onPressed: () {
-            this._noOnPressed();
-          },
-        ),
-      ],
+    return Container(
+      decoration: BoxDecoration(
+          gradient: LinearGradient(
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+              colors: <Color>[Colors.purple, Colors.blue])),
+      child: AlertDialog(
+        title: new Text(this._title),
+        content: new Text(this._content),
+        shape:
+            RoundedRectangleBorder(borderRadius: new BorderRadius.circular(15)),
+        actions: <Widget>[
+          new FlatButton(
+            child: new Text(this._yes),
+            textColor: Colors.greenAccent,
+            onPressed: () {
+              this._yesOnPressed();
+            },
+          ),
+          new FlatButton(
+            child: Text(this._no),
+            textColor: Colors.redAccent,
+            onPressed: () {
+              this._noOnPressed();
+            },
+          ),
+        ],
+      ),
     );
   }
 }

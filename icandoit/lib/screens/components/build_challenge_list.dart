@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:icandoit/models/challenge_model.dart';
+import 'package:lottie/lottie.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:provider/provider.dart';
 import '../../controllers/challenge_controller.dart';
@@ -72,15 +73,15 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
     List<ChallengeModel> _challengesList = variable.getChallenges();
     _confirmRegister(int index) {
       var baseDialog = BaseAlertDialog(
-          title: "Confirm Registration",
-          content: "I Agree that the information provided is correct",
+          title: "Confirmez la sauvegarde",
+          content: "Une sauvegarde va être éffectué",
           yesOnPressed: () {
             variable.addListChallengeSave(_challengesList[index].name);
             Navigator.pop(context, false);
           },
           noOnPressed: () {},
-          yes: "Agree",
-          no: "Cancel");
+          yes: "oui",
+          no: "non");
       showDialog(
           context: context, builder: (BuildContext context) => baseDialog);
     }
@@ -109,15 +110,15 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                 provider.addnbChallengeVallide();
                 provider.remove(index: index);
                 Scaffold.of(context).showSnackBar(_buildSnackBar(
-                    content:
-                        "Le challenge ${_challengesList[index].name} a bien ete valide"));
+                    content: "Le challenge a bien ete valide",
+                    lotties: 'assets/challenge.json'));
               }
 
               if (direction == DismissDirection.startToEnd) {
                 provider.remove(index: index);
                 Scaffold.of(context).showSnackBar(_buildSnackBar(
-                    content:
-                        "La mission ${_challengesList[index].name} a bien ete supprime"));
+                    content: "La mission a bien ete supprime",
+                    lotties: 'assets/trash.json'));
               }
             },
             confirmDismiss: (direction) async {
@@ -370,11 +371,21 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
     );
   }
 
-  SnackBar _buildSnackBar({@required String content}) {
+  SnackBar _buildSnackBar({@required String content, String lotties}) {
     return SnackBar(
-      content: Text(
-        content,
-        textAlign: TextAlign.center,
+      backgroundColor: Colors.white,
+      content: Container(
+        height: 80,
+        child: Row(
+          children: [
+            Lottie.asset(lotties, width: 60),
+            Text(
+              content,
+              style: TextStyle(color: Colors.purple),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
       ),
     );
   }

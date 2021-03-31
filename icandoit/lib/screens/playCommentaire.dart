@@ -38,7 +38,13 @@ class PlayCommentaire extends StatelessWidget {
       body: Container(
         padding: EdgeInsets.all(20),
         child: SizedBox(
-            width: mediaQueryData.size.width, child: Text(nameChallenge)),
+            width: mediaQueryData.size.width,
+            child: SelectableText(nameChallenge,
+                cursorColor: Colors.red,
+                showCursor: true,
+                toolbarOptions: ToolbarOptions(
+                    copy: true, selectAll: true, cut: false, paste: false),
+                style: Theme.of(context).textTheme.body2)),
       ),
     );
   }

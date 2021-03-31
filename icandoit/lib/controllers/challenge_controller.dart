@@ -173,13 +173,13 @@ class Challengecontroller extends ChangeNotifier {
     if (nbtacheVallide1 == 0) {
       challengeDays.commentaire =
           "Vous n'avez pas valide de challenge ou de tache";
+    } else if (nbtacheVallide1 > 9) {
+      challengeDays.commentaire = "extraordinaire, rien ne vous arretes.";
+    } else if (nbtacheVallide1 > 6) {
+      challengeDays.commentaire = "Bravo, vos effort ont ete recompense";
     } else if (nbtacheVallide1 > 0) {
       challengeDays.commentaire =
           " encore un effort et vos objectifs seront atteint";
-    } else if (nbtacheVallide1 > 6) {
-      challengeDays.commentaire = "Bravo, vos effort ont ete recompense";
-    } else if (nbtacheVallide1 > 9) {
-      challengeDays.commentaire = "extraordinaire, rien ne vous arretes.";
     }
     await _saveChallendays();
     _initChallengeListStartChallenge();
@@ -395,8 +395,8 @@ class Challengecontroller extends ChangeNotifier {
   }
 
   void addSlectSave() async {
-    print('index save');
-    print(indexSave);
+    // print('index save');
+    // print(indexSave);
     if (indexSave != null) {
       for (var i = _challengeListSave.length - 1; i >= 0; i--) {
         if (i == indexSave) {
@@ -507,6 +507,9 @@ class Challengecontroller extends ChangeNotifier {
   void remove2({@required int index, @required String nameChallenge}) async {
     for (var i = _challengeList.length - 1; i >= 0; i--) {
       if (_challengeList[i].name == nameChallenge) {
+        var additionchallenge = _challengeList[i].totalChallenge;
+        _challengeList[i].totalChallenge =
+            (int.parse(additionchallenge) - 1).toString();
         _challengeList[i].listeDeTache.removeAt(index);
       }
     }

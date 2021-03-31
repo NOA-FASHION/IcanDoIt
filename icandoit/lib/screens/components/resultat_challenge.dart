@@ -28,12 +28,12 @@ class _ResultaChallengeState extends State<ResultaChallenge>
     String resultat = "assets/succes0.json";
     if (nbchallengeValide == 0) {
       resultat = "assets/succes0.json";
-    } else if (nbchallengeValide > 0) {
-      resultat = "assets/succes1.json";
-    } else if (nbchallengeValide > 3) {
+    } else if (nbchallengeValide > 9) {
       resultat = "assets/succes2.json";
     } else if (nbchallengeValide > 6) {
-      resultat = "assets/succes3.json";
+      resultat = "assets/succes2.json";
+    } else if (nbchallengeValide > 0) {
+      resultat = "assets/succes1.json";
     }
     return resultat;
   }

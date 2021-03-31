@@ -6,6 +6,8 @@ import 'package:icandoit/screens/components/playYoutube.dart';
 import 'package:icandoit/screens/playPicture.dart';
 import 'package:icandoit/screens/playUrl.dart';
 import 'package:icandoit/screens/playVideo.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import '../../controllers/challenge_controller.dart';
 import '../playCommentaire.dart';
@@ -21,6 +23,7 @@ class ChallengesListBuilderTaches extends StatefulWidget {
 
 class _ChallengesListBuilderTachesState
     extends State<ChallengesListBuilderTaches> {
+  final picker = ImagePicker();
   String maxLetter(String word) {
     var word2;
     word2 = word[0];
@@ -118,7 +121,8 @@ class _ChallengesListBuilderTachesState
               if (direction == DismissDirection.endToStart) {
                 provider.addnbtacheVallide();
                 Scaffold.of(context).showSnackBar(_buildSnackBar(
-                    content: "Le challenge ${item.name} a bien ete valide"));
+                    content: "La tâche a bien été validé",
+                    lotties: 'assets/challenge.json'));
                 provider.remove2(
                     index: int.parse(item.index),
                     nameChallenge: widget.nameChallenge);
@@ -126,7 +130,8 @@ class _ChallengesListBuilderTachesState
 
               if (direction == DismissDirection.startToEnd) {
                 Scaffold.of(context).showSnackBar(_buildSnackBar(
-                    content: "La mission ${item.name} a bien ete supprime"));
+                    content: "La mission a bien ete supprime",
+                    lotties: 'assets/trash.json'));
                 provider.remove2(
                     index: int.parse(item.index),
                     nameChallenge: widget.nameChallenge);
@@ -207,11 +212,24 @@ class _ChallengesListBuilderTachesState
                 ),
                 elevation: 20.0,
                 child: ListTile(
-                  onTap: () {
+                  onTap: () async {
                     if (item.description
                             .toString()
                             .replaceAll(unityPattern, "") ==
                         "video") {
+                      if (item.name == null) {
+                        final pickedFile =
+                            await picker.getVideo(source: ImageSource.gallery);
+
+                        setState(() {
+                          if (pickedFile != null) {
+                            item.name = pickedFile.path;
+                          } else {
+                            print('No image selected.');
+                          }
+                        });
+                        return;
+                      }
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => ChangeNotifierProvider.value(
                               value: provider,
@@ -221,6 +239,19 @@ class _ChallengesListBuilderTachesState
                             .toString()
                             .replaceAll(unityPattern, "") ==
                         "image") {
+                      if (item.name == null) {
+                        final pickedFile =
+                            await picker.getImage(source: ImageSource.gallery);
+
+                        setState(() {
+                          if (pickedFile != null) {
+                            item.name = pickedFile.path;
+                          } else {
+                            print('No image selected.');
+                          }
+                        });
+                        return;
+                      }
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => ChangeNotifierProvider.value(
                               value: provider,
@@ -353,11 +384,21 @@ class _ChallengesListBuilderTachesState
     );
   }
 
-  SnackBar _buildSnackBar({@required String content}) {
+  SnackBar _buildSnackBar({@required String content, String lotties}) {
     return SnackBar(
-      content: Text(
-        content,
-        textAlign: TextAlign.center,
+      backgroundColor: Colors.white,
+      content: Container(
+        height: 80,
+        child: Row(
+          children: [
+            Lottie.asset(lotties, width: 60),
+            Text(
+              content,
+              style: TextStyle(color: Colors.purple),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
       ),
     );
   }
