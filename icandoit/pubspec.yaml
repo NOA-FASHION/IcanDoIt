@@ -46,7 +46,7 @@ dependencies:
   share: ^0.6.5+4
   flutter_document_picker: ^4.0.1
   video_player: ^2.1.0
-  youtube_player_flutter: ^8.0.0
+  # youtube_player_flutter: ^8.0.0
   
   # documents_picker: ^1.0.0
   

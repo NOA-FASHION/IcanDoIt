@@ -403,11 +403,29 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                             items: <DropdownMenuItem>[
                               DropdownMenuItem(
                                 value: "haute",
-                                child: Text("haute"),
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.update,
+                                      size: 30.0,
+                                    ),
+                                    SizedBox(width: 10),
+                                    Text("haute"),
+                                  ],
+                                ),
                               ),
                               DropdownMenuItem(
                                 value: "normal",
-                                child: Text("normal"),
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.auto_fix_normal,
+                                      size: 30.0,
+                                    ),
+                                    SizedBox(width: 10),
+                                    Text("normal"),
+                                  ],
+                                ),
                               ),
                             ],
                           ),

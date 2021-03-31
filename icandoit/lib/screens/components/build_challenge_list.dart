@@ -214,23 +214,27 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                             borderRadius: BorderRadius.circular(5.0),
                           ),
                           elevation: 15.0,
-                          child: Row(
-                            children: [
-                              Text(
-                                "Titre".toUpperCase(),
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.purple),
-                              ),
-                              SizedBox(
-                                width: 5.0,
-                              ),
-                              Text(
-                                maxLetterTitre(
-                                    _challengesList[index].name.toUpperCase()),
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                              ),
-                            ],
+                          child: Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: Row(
+                              children: [
+                                Text(
+                                  "Titre".toUpperCase(),
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.purple),
+                                ),
+                                SizedBox(
+                                  width: 5.0,
+                                ),
+                                Text(
+                                  maxLetterTitre(_challengesList[index]
+                                      .name
+                                      .toUpperCase()),
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                         SizedBox(

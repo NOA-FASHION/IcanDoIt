@@ -18,6 +18,15 @@ class ExampleApp extends StatefulWidget {
 
 class _ExampleAppState extends State<ExampleApp>
     with SingleTickerProviderStateMixin {
+  SnackBar _buildSnackBar({@required String content}) {
+    return SnackBar(
+      content: Text(
+        content,
+        textAlign: TextAlign.center,
+      ),
+    );
+  }
+
   _confirmRegister() {
     var baseDialog = BaseAlertDialog(
         title: "pas de selection",
@@ -210,35 +219,68 @@ class _ExampleAppState extends State<ExampleApp>
                   flexibleSpace: Container(
                     width: 300,
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         InkWell(
-                            onTap: () {
-                              int indexSave;
-                              indexSave = variable2.getChallengesindex();
-                              print("resultat des index");
-                              print(indexSave);
-                              if (indexSave != null) {
-                                variable2.addSlectSave();
-                              } else {
-                                _confirmRegister();
-                              }
-                            },
-                            child: Container(
-                                width: 200.0,
-                                height: 200.0,
-                                child: Lottie.asset('assets/save1.json'))),
+                          // splash color
+                          splashColor: Colors.white,
+                          onTap: () {
+                            int indexSave;
+                            indexSave = variable2.getChallengesindex();
+                            if (indexSave != null) {
+                              variable2.addSlectSave();
+                              Scaffold.of(context).showSnackBar(_buildSnackBar(
+                                  content:
+                                      "Le challenge  a bien ete restaurer"));
+                            } else {
+                              _confirmRegister();
+                            }
+                          }, // button pressed
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Icon(
+                                Icons.restore,
+                                size: 30,
+                                color: Colors.white,
+                              ),
+
+                              Text(
+                                "restaurer",
+                                style: TextStyle(
+                                    fontSize: 10, color: Colors.white),
+                              ), // text
+                            ],
+                          ),
+                        ),
                         InkWell(
-                            onTap: () {
-                              int indexSave;
-                              indexSave = variable2.getChallengesindex();
-                              variable2.removeSave(index: indexSave);
-                            },
-                            child: Container(
-                                width: 200.0,
-                                height: 50.0,
-                                child: Lottie.asset('assets/trash.json',
-                                    width: 10.0, height: 10))),
+                          // splash color
+                          splashColor: Colors.white,
+                          onTap: () {
+                            int indexSave;
+                            indexSave = variable2.getChallengesindex();
+                            variable2.removeSave(index: indexSave);
+                            Scaffold.of(context).showSnackBar(_buildSnackBar(
+                                content: "Le sauvegarde a bien ete supprimé"));
+                          }, // button pressed
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Icon(
+                                Icons.backup,
+                                size: 30,
+                                color: Colors.white,
+                              ),
+                              // Lottie.asset('assets/trash.json',
+                              //     width: 40.0, height: 40), // icon
+                              Text(
+                                "Delete",
+                                style: TextStyle(
+                                    fontSize: 10, color: Colors.white),
+                              ), // text
+                            ],
+                          ),
+                        ),
                       ],
                     ),
                     decoration: BoxDecoration(
@@ -295,23 +337,21 @@ Widget buildListItem(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(60.0),
         ),
-        child: Container(
-          child: Row(
-            children: [
-              Text(
-                "Titre",
-                style:
-                    TextStyle(fontWeight: FontWeight.bold, color: Colors.blue),
-              ),
-              SizedBox(
-                width: 5.0,
-              ),
-              Text(challengeListSave[index].name),
-              SizedBox(
-                width: 5.0,
-              ),
-            ],
-          ),
+        child: Row(
+          children: [
+            Text(
+              "Titre",
+              style:
+                  TextStyle(fontWeight: FontWeight.bold, color: Colors.purple),
+            ),
+            SizedBox(
+              width: 5.0,
+            ),
+            Text(challengeListSave[index].name),
+            SizedBox(
+              width: 5.0,
+            ),
+          ],
         ),
       ),
     ),

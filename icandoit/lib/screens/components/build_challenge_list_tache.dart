@@ -65,6 +65,21 @@ class _ChallengesListBuilderTachesState
         Icons.youtube_searched_for_sharp,
         size: 30.0,
       );
+    } else if (resultat == "evenement") {
+      documentJoint = Icon(
+        Icons.event,
+        size: 30.0,
+      );
+    } else if (resultat == "achat") {
+      documentJoint = Icon(
+        Icons.shopping_cart,
+        size: 30.0,
+      );
+    } else if (resultat == "tache") {
+      documentJoint = Icon(
+        Icons.event_available,
+        size: 30.0,
+      );
     }
 
     return documentJoint;
@@ -171,12 +186,20 @@ class _ChallengesListBuilderTachesState
             key: Key(UniqueKey().toString()),
             child: Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                // color: Colors.white,
-                // border: Border.all(
-                //   color: Colour('#518faa'),
-                //   width: 4,
-                // ),
+                boxShadow: [
+                  //background color of box
+                  BoxShadow(
+                    color: Colors.black,
+                    blurRadius: 45.0, // soften the shadow
+                    spreadRadius: 2.0, //extend the shadow
+                    offset: Offset(
+                      3.0, // Move to right 10  horizontally
+                      3.0, // Move to bottom 10 Vertically
+                    ),
+                  )
+                ],
+                borderRadius: BorderRadius.circular(20),
+                color: Colors.transparent,
               ),
               child: Card(
                 shape: RoundedRectangleBorder(
@@ -223,11 +246,11 @@ class _ChallengesListBuilderTachesState
                             .toString()
                             .replaceAll(unityPattern, "") ==
                         "youtube") {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => ChangeNotifierProvider.value(
-                              value: provider,
-                              child: PlayYoutubeScreen(
-                                  nameChallenge: item.name))));
+                      // Navigator.of(context).push(MaterialPageRoute(
+                      //     builder: (context) => ChangeNotifierProvider.value(
+                      //         value: provider,
+                      //         child: PlayYoutubeScreen(
+                      //             nameChallenge: item.name))));
                     }
                   },
                   title: Container(
@@ -237,19 +260,27 @@ class _ChallengesListBuilderTachesState
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(5.0),
                           ),
-                          child: Text(
-                            "Tache",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.blue),
+                          elevation: 15.0,
+                          child: Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: Row(
+                              children: [
+                                Text(
+                                  "Tache".toUpperCase(),
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.purple),
+                                ),
+                                SizedBox(
+                                  width: 5.0,
+                                ),
+                                Text(item.index),
+                                // SizedBox(
+                                //   width: 5.0,
+                                // ),
+                              ],
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          width: 5.0,
-                        ),
-                        Text(item.index),
-                        SizedBox(
-                          width: 5.0,
                         ),
                       ],
                     ),

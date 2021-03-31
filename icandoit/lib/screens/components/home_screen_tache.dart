@@ -466,7 +466,7 @@ class _HomeTachesState extends State<HomeTaches> {
                                 child: Row(
                                   children: [
                                     Icon(
-                                      Icons.add_business_sharp,
+                                      Icons.shopping_cart,
                                       size: 30.0,
                                     ),
                                     SizedBox(width: 10),
