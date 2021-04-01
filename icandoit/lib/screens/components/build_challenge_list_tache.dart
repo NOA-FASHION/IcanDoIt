@@ -29,8 +29,8 @@ class _ChallengesListBuilderTachesState
   String maxLetter(String word) {
     var word2;
     word2 = word[0];
-    if (word.length > 23) {
-      for (var i = 1; i <= 23; i++) {
+    if (word.length > 29) {
+      for (var i = 1; i <= 26; i++) {
         word2 = word2 + word[i];
       }
       word2 = word2 + "...";
@@ -280,11 +280,11 @@ class _ChallengesListBuilderTachesState
                             .toString()
                             .replaceAll(unityPattern, "") ==
                         "youtube") {
-                      // Navigator.of(context).push(MaterialPageRoute(
-                      //     builder: (context) => ChangeNotifierProvider.value(
-                      //         value: provider,
-                      //         child: PlayYoutubeScreen(
-                      //             nameChallenge: item.name))));
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => ChangeNotifierProvider.value(
+                              value: provider,
+                              child: PlayYoutubeScreen(
+                                  nameChallenge: item.name))));
                     }
                   },
                   title: Container(

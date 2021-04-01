@@ -29,8 +29,8 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
   String maxLetter(String word) {
     var word2;
     word2 = word[0];
-    if (word.length > 18) {
-      for (var i = 1; i <= 15; i++) {
+    if (word.length > 23) {
+      for (var i = 1; i <= 20; i++) {
         word2 = word2 + word[i];
       }
       word2 = word2 + "...";
@@ -285,9 +285,9 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                                           maxLetter(_challengesList[index]
                                               .description),
                                         ),
-                                        SizedBox(
-                                          width: 5.0,
-                                        ),
+                                        // SizedBox(
+                                        //   width: 1.0,
+                                        // ),
                                       ],
                                     ),
                                   ),

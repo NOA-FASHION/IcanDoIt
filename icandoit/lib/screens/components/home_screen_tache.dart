@@ -1,7 +1,7 @@
 // import 'dart:io';
 
 // import 'package:flutter/foundation.dart';
-import 'package:colour/colour.dart';
+// import 'package:colour/colour.dart';
 import 'package:flutter/material.dart';
 // import 'package:icandoit/models/challenge_model.dart';
 import 'package:icandoit/screens/components/build_challenge_list_tache.dart';
@@ -235,7 +235,7 @@ class _HomeTachesState extends State<HomeTaches> {
             border:
                 OutlineInputBorder(borderRadius: BorderRadius.circular(15.0))),
       );
-    } else if (resultat == "Youtube") {
+    } else if (resultat == "youtube") {
       documentJoint = TextFormField(
         onSaved: (value) {
           dataJoin = value;
@@ -254,7 +254,7 @@ class _HomeTachesState extends State<HomeTaches> {
                 borderSide: BorderSide(width: 1.0, color: Colors.blueAccent),
                 borderRadius: BorderRadius.circular(15.0)),
             contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            labelText: "url",
+            labelText: "youtube",
             border:
                 OutlineInputBorder(borderRadius: BorderRadius.circular(15.0))),
       );
@@ -579,7 +579,7 @@ class _HomeTachesState extends State<HomeTaches> {
                           SizedBox(
                             height: 15.0,
                           ),
-                          // selectdropdown(unityChallenge),
+                          selectdropdown(unityChallenge),
                           InkWell(
                               onTap: () {
                                 if (formKeyTache.currentState.validate()) {
