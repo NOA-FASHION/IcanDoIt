@@ -304,6 +304,12 @@ class Challengecontroller extends ChangeNotifier {
       unity = unity_challenge1.image;
     } else if (json == "url") {
       unity = unity_challenge1.url;
+    }else if (json == "formation") {
+      unity = unity_challenge1.formation;
+    }else if (json == "paiement") {
+      unity = unity_challenge1.paiement;
+    }else if (json == "projet") {
+      unity = unity_challenge1.projet;
     }
     return unity;
   }

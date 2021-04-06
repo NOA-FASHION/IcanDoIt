@@ -26,11 +26,16 @@ class ChallengesListBuilderTaches extends StatefulWidget {
 class _ChallengesListBuilderTachesState
     extends State<ChallengesListBuilderTaches> {
   final picker = ImagePicker();
-  String maxLetter(String word) {
+  String maxLetter(String word, String comment) {
     var word2;
     word2 = word[0];
-    if (word.length > 29) {
+    if (word.length > 29 && comment.length <= 5) {
       for (var i = 1; i <= 26; i++) {
+        word2 = word2 + word[i];
+      }
+      word2 = word2 + "...";
+    } else if (word.length > 25 && comment.length > 5) {
+      for (var i = 1; i <= (25 - (comment.length - 5)); i++) {
         word2 = word2 + word[i];
       }
       word2 = word2 + "...";
@@ -83,6 +88,26 @@ class _ChallengesListBuilderTachesState
     } else if (resultat == "tache") {
       documentJoint = Icon(
         Icons.event_available,
+        size: 30.0,
+      );
+    } else if (resultat == "formation") {
+      documentJoint = Icon(
+        Icons.model_training,
+        size: 30.0,
+      );
+    } else if (resultat == "paiement") {
+      documentJoint = Icon(
+        Icons.payment,
+        size: 30.0,
+      );
+    } else if (resultat == "projet") {
+      documentJoint = Icon(
+        Icons.build,
+        size: 30.0,
+      );
+    } else if (resultat == "mission") {
+      documentJoint = Icon(
+        Icons.assignment,
         size: 30.0,
       );
     }
@@ -353,7 +378,11 @@ class _ChallengesListBuilderTachesState
                                     SizedBox(
                                       width: 5.0,
                                     ),
-                                    Text(maxLetter(item.tache.toString())),
+                                    Text(maxLetter(
+                                        item.tache.toString(),
+                                        item.description
+                                            .toString()
+                                            .replaceAll(unityPattern, ""))),
                                     SizedBox(
                                       width: 5.0,
                                     ),

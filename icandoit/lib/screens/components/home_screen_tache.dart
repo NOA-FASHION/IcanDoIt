@@ -471,11 +471,50 @@ class _HomeTachesState extends State<HomeTaches> {
                                 child: Row(
                                   children: [
                                     Icon(
-                                      Icons.change_history,
+                                      Icons.assignment,
                                       size: 30.0,
                                     ),
                                     SizedBox(width: 10),
                                     Text("mission"),
+                                  ],
+                                ),
+                              ),
+                              DropdownMenuItem(
+                                value: "projet",
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.build,
+                                      size: 30.0,
+                                    ),
+                                    SizedBox(width: 10),
+                                    Text("projet"),
+                                  ],
+                                ),
+                              ),
+                              DropdownMenuItem(
+                                value: "paiement",
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.payment,
+                                      size: 30.0,
+                                    ),
+                                    SizedBox(width: 10),
+                                    Text("paiement"),
+                                  ],
+                                ),
+                              ),
+                              DropdownMenuItem(
+                                value: "formation",
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.model_training,
+                                      size: 30.0,
+                                    ),
+                                    SizedBox(width: 10),
+                                    Text("formation"),
                                   ],
                                 ),
                               ),

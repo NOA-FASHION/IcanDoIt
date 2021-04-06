@@ -10,7 +10,10 @@ enum unity_challenge1 {
   video,
   commentaire,
   image,
-  url
+  url,
+  paiement,
+  formation,
+  projet
 }
 choixDesciptionEnum(dynamic json) {
   unity_challenge1 unity;
@@ -32,6 +35,12 @@ choixDesciptionEnum(dynamic json) {
     unity = unity_challenge1.image;
   } else if (json['description'] == "unity_challenge1.url") {
     unity = unity_challenge1.url;
+  } else if (json['description'] == "unity_challenge1.paiement") {
+    unity = unity_challenge1.paiement;
+  } else if (json['description'] == "unity_challenge1.projet") {
+    unity = unity_challenge1.projet;
+  } else if (json['description'] == "unity_challenge1.formation") {
+    unity = unity_challenge1.formation;
   }
   return unity;
 }
