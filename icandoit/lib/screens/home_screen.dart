@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:icandoit/models/challenge_model.dart';
 import 'package:icandoit/screens/components/build_challenge_list.dart';
 import 'package:icandoit/controllers/challenge_controller.dart';
+import 'package:multiselect_formfield/multiselect_formfield.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 import 'package:lottie/lottie.dart';
@@ -20,6 +21,275 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
+  String dateQuotidien;
+  List _myActivities;
+  String _myActivitiesResult;
+  _saveForm() {
+    var form = formKey.currentState;
+    if (form.validate()) {
+      form.save();
+      setState(() {
+        _myActivitiesResult = _myActivities.toString();
+      });
+    }
+  }
+
+  Widget selectdropdown(String resultat) {
+    Widget documentJoint = SizedBox(
+      width: 1.0,
+    );
+    if (resultat == "quotidien") {
+      // _visibility1 = true;
+      // wait = "assets/wait.json";
+      documentJoint = Column(
+        children: [
+          DropdownButtonFormField<String>(
+              decoration: InputDecoration(
+                  focusedBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(width: 2.0, color: Colors.blueAccent),
+                      borderRadius: BorderRadius.circular(15.0)),
+                  enabledBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(width: 1.0, color: Colors.blueAccent),
+                      borderRadius: BorderRadius.circular(15.0)),
+                  contentPadding:
+                      EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0))),
+              isExpanded: true,
+              value: dateQuotidien,
+              icon: Icon(Icons.keyboard_arrow_down),
+              iconSize: 30,
+              // underline: SizedBox(),
+              onChanged: (String newValue) {
+                setState(() {
+                  dateQuotidien = newValue;
+                });
+              },
+              items: <String>[
+                '1 h',
+                '2 h',
+                '3 h',
+                '4 h',
+                '5 h',
+                '6 h',
+                '7 h',
+                '8 h',
+                '9 h',
+                '10 h',
+                '11 h',
+                '12 h',
+                '13 h',
+                '14 h',
+                '15 h',
+                '16 h',
+                '17 h',
+                '18 h',
+                '19 h',
+                '20 h',
+                '21 h',
+                '22 h',
+                '23 h',
+                '24 h',
+              ].map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList()),
+        ],
+      );
+    } else if (resultat == "hebdomadaire") {
+      // _visibility1 = true;
+      // wait = "assets/wait.json";
+      documentJoint = Column(
+        children: [
+          MultiSelectFormField(
+            autovalidate: false,
+            // titleText: 'My workouts',
+            validator: (value) {
+              if (value.isEmpty) {
+                return "Merci d'entrer un nom pour le challenge";
+              }
+              return null;
+            },
+            dataSource: [
+              {
+                "display": "Running",
+                "value": "Running",
+              },
+              {
+                "display": "Climbing",
+                "value": "Climbing",
+              },
+              {
+                "display": "Walking",
+                "value": "Walking",
+              },
+              {
+                "display": "Swimming",
+                "value": "Swimming",
+              },
+              {
+                "display": "Soccer Practice",
+                "value": "Soccer Practice",
+              },
+              {
+                "display": "Baseball Practice",
+                "value": "Baseball Practice",
+              },
+              {
+                "display": "Football Practice",
+                "value": "Football Practice",
+              },
+            ],
+            textField: 'display',
+            valueField: 'value',
+            okButtonLabel: 'OK',
+            cancelButtonLabel: 'CANCEL',
+            // required: true,
+            // hintText: 'Please choose one or more',
+            initialValue: _myActivities,
+            onSaved: (value) {
+              if (value == null) return;
+              setState(() {
+                _myActivities = value;
+              });
+            },
+          ),
+          Container(
+            padding: EdgeInsets.all(8),
+            child: RaisedButton(
+              child: Text('Save'),
+              onPressed: _saveForm,
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.all(16),
+            child: Text(_myActivitiesResult),
+          ),
+          DropdownButtonFormField<String>(
+              decoration: InputDecoration(
+                  focusedBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(width: 2.0, color: Colors.blueAccent),
+                      borderRadius: BorderRadius.circular(15.0)),
+                  enabledBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(width: 1.0, color: Colors.blueAccent),
+                      borderRadius: BorderRadius.circular(15.0)),
+                  contentPadding:
+                      EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0))),
+              isExpanded: true,
+              value: dateQuotidien,
+              icon: Icon(Icons.keyboard_arrow_down),
+              iconSize: 30,
+              // underline: SizedBox(),
+              onChanged: (String newValue) {
+                setState(() {
+                  dateQuotidien = newValue;
+                });
+              },
+              items: <String>[
+                '1 h',
+                '2 h',
+                '3 h',
+                '4 h',
+                '5 h',
+                '6 h',
+                '7 h',
+                '8 h',
+                '9 h',
+                '10 h',
+                '11 h',
+                '12 h',
+                '13 h',
+                '14 h',
+                '15 h',
+                '16 h',
+                '17 h',
+                '18 h',
+                '19 h',
+                '20 h',
+                '21 h',
+                '22 h',
+                '23 h',
+                '24 h',
+              ].map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList()),
+        ],
+      );
+    } else if (resultat == "mensuel") {
+      documentJoint = Column(
+        children: [
+          DropdownButtonFormField<String>(
+              decoration: InputDecoration(
+                  focusedBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(width: 2.0, color: Colors.blueAccent),
+                      borderRadius: BorderRadius.circular(15.0)),
+                  enabledBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(width: 1.0, color: Colors.blueAccent),
+                      borderRadius: BorderRadius.circular(15.0)),
+                  contentPadding:
+                      EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0))),
+              isExpanded: true,
+              value: dateQuotidien,
+              icon: Icon(Icons.keyboard_arrow_down),
+              iconSize: 30,
+              // underline: SizedBox(),
+              onChanged: (String newValue) {
+                setState(() {
+                  dateQuotidien = newValue;
+                });
+              },
+              items: <String>[
+                '1 h',
+                '2 h',
+                '3 h',
+                '4 h',
+                '5 h',
+                '6 h',
+                '7 h',
+                '8 h',
+                '9 h',
+                '10 h',
+                '11 h',
+                '12 h',
+                '13 h',
+                '14 h',
+                '15 h',
+                '16 h',
+                '17 h',
+                '18 h',
+                '19 h',
+                '20 h',
+                '21 h',
+                '22 h',
+                '23 h',
+                '24 h',
+              ].map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList()),
+        ],
+      );
+    } else if (resultat == "notification") {}
+    return documentJoint;
+  }
+
   final GlobalKey<ScaffoldState> scaffoldkey = GlobalKey<ScaffoldState>();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   PersistentBottomSheetController _bottomSheetController;
@@ -31,6 +301,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   FancyDrawerController _controller;
   void initState() {
     super.initState();
+    _myActivities = [];
+    _myActivitiesResult = '';
     _controller =
         FancyDrawerController(vsync: this, duration: Duration(milliseconds: 50))
           ..addListener(() {
@@ -428,11 +700,64 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                   ],
                                 ),
                               ),
+                              DropdownMenuItem(
+                                value: "quotidien",
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.auto_fix_normal,
+                                      size: 30.0,
+                                    ),
+                                    SizedBox(width: 10),
+                                    Text("quotidien"),
+                                  ],
+                                ),
+                              ),
+                              DropdownMenuItem(
+                                value: "hebdomadaire",
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.auto_fix_normal,
+                                      size: 30.0,
+                                    ),
+                                    SizedBox(width: 10),
+                                    Text("hebdomadaire"),
+                                  ],
+                                ),
+                              ),
+                              DropdownMenuItem(
+                                value: "mensuel",
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.auto_fix_normal,
+                                      size: 30.0,
+                                    ),
+                                    SizedBox(width: 10),
+                                    Text("mensuel"),
+                                  ],
+                                ),
+                              ),
+                              DropdownMenuItem(
+                                value: "notification",
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.auto_fix_normal,
+                                      size: 30.0,
+                                    ),
+                                    SizedBox(width: 10),
+                                    Text("notification"),
+                                  ],
+                                ),
+                              ),
                             ],
                           ),
                           SizedBox(
-                            height: 5.0,
+                            height: 15.0,
                           ),
+                          selectdropdown(unityChallenge),
                           InkWell(
                               onTap: () {
                                 if (formKey.currentState.validate()) {

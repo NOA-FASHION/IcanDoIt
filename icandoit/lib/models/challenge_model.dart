@@ -1,6 +1,13 @@
 import 'package:flutter/foundation.dart';
 
-enum unity_challenge { haute, normal }
+enum unity_challenge {
+  haute,
+  normal,
+  quotidien,
+  hebdomadaire,
+  mensuel,
+  notification
+}
 enum unity_challenge1 {
   evenement,
   achat,
@@ -41,6 +48,24 @@ choixDesciptionEnum(dynamic json) {
     unity = unity_challenge1.projet;
   } else if (json['description'] == "unity_challenge1.formation") {
     unity = unity_challenge1.formation;
+  }
+  return unity;
+}
+
+choixDesciptionEnum1(dynamic json) {
+  unity_challenge unity;
+  if (json['unity'] == "unity_challenge.haute") {
+    unity = unity_challenge.haute;
+  } else if (json['unity'] == "unity_challenge.normal") {
+    unity = unity_challenge.normal;
+  } else if (json['unity'] == "unity_challenge.quotidien") {
+    unity = unity_challenge.quotidien;
+  } else if (json['unity'] == "unity_challenge.hebdomadaire") {
+    unity = unity_challenge.hebdomadaire;
+  } else if (json['unity'] == "unity_challenge.mensuel") {
+    unity = unity_challenge.mensuel;
+  } else if (json['unity'] == "unity_challenge.notification") {
+    unity = unity_challenge.notification;
   }
   return unity;
 }
@@ -91,9 +116,7 @@ class ChallengeModel {
         name: json['name'],
         description: json['description'],
         totalChallenge: json['totalChallenge'],
-        unity: json['unity'] == "unity_challenge.haute"
-            ? unity_challenge.haute
-            : unity_challenge.normal,
+        unity: choixDesciptionEnum1(json),
         listeDeTache: List<Challengemodel2>.from(json["listeDeTache"]
             .map((x) => Challengemodel2.fromJSON(x))
             .toList()),

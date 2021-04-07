@@ -304,12 +304,30 @@ class Challengecontroller extends ChangeNotifier {
       unity = unity_challenge1.image;
     } else if (json == "url") {
       unity = unity_challenge1.url;
-    }else if (json == "formation") {
+    } else if (json == "formation") {
       unity = unity_challenge1.formation;
-    }else if (json == "paiement") {
+    } else if (json == "paiement") {
       unity = unity_challenge1.paiement;
-    }else if (json == "projet") {
+    } else if (json == "projet") {
       unity = unity_challenge1.projet;
+    }
+    return unity;
+  }
+
+  unity_challenge choixDesciptionEnum1(dynamic json) {
+    unity_challenge unity;
+    if (json == "haute") {
+      unity = unity_challenge.haute;
+    } else if (json == "normal") {
+      unity = unity_challenge.normal;
+    } else if (json == "quotidien") {
+      unity = unity_challenge.quotidien;
+    } else if (json == "hebdomadaire") {
+      unity = unity_challenge.hebdomadaire;
+    } else if (json == "mensuel") {
+      unity = unity_challenge.mensuel;
+    } else if (json == "notification") {
+      unity = unity_challenge.notification;
     }
     return unity;
   }
@@ -380,9 +398,7 @@ class Challengecontroller extends ChangeNotifier {
           name: name,
           description: description,
           totalChallenge: totalChallenge,
-          unity: unity == "haute"
-              ? unity_challenge.haute
-              : unity_challenge.normal),
+          unity: choixDesciptionEnum1(unity)),
     );
 
     await _save();
