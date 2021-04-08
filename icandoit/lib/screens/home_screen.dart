@@ -1,5 +1,6 @@
 // import 'package:colour/colour.dart';
 
+import 'package:date_time_picker/date_time_picker.dart';
 import 'package:fancy_drawer/fancy_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:icandoit/models/challenge_model.dart';
@@ -22,6 +23,8 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   String dateQuotidien;
+  String heure;
+  String date;
   List _myActivities;
   String _myActivitiesResult;
   _saveForm() {
@@ -41,63 +44,81 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     if (resultat == "quotidien") {
       // _visibility1 = true;
       // wait = "assets/wait.json";
-      documentJoint = Column(
+      documentJoint = Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          DropdownButtonFormField<String>(
-              decoration: InputDecoration(
-                  focusedBorder: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(width: 2.0, color: Colors.blueAccent),
-                      borderRadius: BorderRadius.circular(15.0)),
-                  enabledBorder: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(width: 1.0, color: Colors.blueAccent),
-                      borderRadius: BorderRadius.circular(15.0)),
-                  contentPadding:
-                      EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15.0))),
-              isExpanded: true,
-              value: dateQuotidien,
-              icon: Icon(Icons.keyboard_arrow_down),
-              iconSize: 30,
-              // underline: SizedBox(),
-              onChanged: (String newValue) {
-                setState(() {
-                  dateQuotidien = newValue;
-                });
-              },
-              items: <String>[
-                '1 h',
-                '2 h',
-                '3 h',
-                '4 h',
-                '5 h',
-                '6 h',
-                '7 h',
-                '8 h',
-                '9 h',
-                '10 h',
-                '11 h',
-                '12 h',
-                '13 h',
-                '14 h',
-                '15 h',
-                '16 h',
-                '17 h',
-                '18 h',
-                '19 h',
-                '20 h',
-                '21 h',
-                '22 h',
-                '23 h',
-                '24 h',
-              ].map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList()),
+          Container(
+            padding: EdgeInsets.all(12.0),
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.blue),
+              borderRadius: BorderRadius.circular(15),
+              color: Colors.transparent,
+            ),
+            margin: EdgeInsets.only(left: 15.0),
+            child: Text(
+              'heure',
+              style: TextStyle(fontSize: 17),
+            ),
+          ),
+          SizedBox(width: 15.0),
+          Container(
+            width: 150,
+            child: DropdownButtonFormField<String>(
+                decoration: InputDecoration(
+                    focusedBorder: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(width: 2.0, color: Colors.blueAccent),
+                        borderRadius: BorderRadius.circular(15.0)),
+                    enabledBorder: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(width: 1.0, color: Colors.blueAccent),
+                        borderRadius: BorderRadius.circular(15.0)),
+                    contentPadding:
+                        EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0))),
+                isExpanded: true,
+                value: dateQuotidien,
+                icon: Icon(Icons.keyboard_arrow_down),
+                iconSize: 30,
+                // underline: SizedBox(),
+                onChanged: (String newValue) {
+                  setState(() {
+                    dateQuotidien = newValue;
+                  });
+                },
+                items: <String>[
+                  '1 h',
+                  '2 h',
+                  '3 h',
+                  '4 h',
+                  '5 h',
+                  '6 h',
+                  '7 h',
+                  '8 h',
+                  '9 h',
+                  '10 h',
+                  '11 h',
+                  '12 h',
+                  '13 h',
+                  '14 h',
+                  '15 h',
+                  '16 h',
+                  '17 h',
+                  '18 h',
+                  '19 h',
+                  '20 h',
+                  '21 h',
+                  '22 h',
+                  '23 h',
+                  '24 h',
+                ].map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList()),
+          ),
         ],
       );
     } else if (resultat == "hebdomadaire") {
@@ -106,6 +127,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
       documentJoint = Column(
         children: [
           MultiSelectFormField(
+            border:
+                OutlineInputBorder(borderRadius: BorderRadius.circular(15.0)),
+            title: Text("Choix"),
             autovalidate: false,
             // titleText: 'My workouts',
             validator: (value) {
@@ -116,32 +140,32 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             },
             dataSource: [
               {
-                "display": "Running",
-                "value": "Running",
+                "display": "Lundi",
+                "value": "Lundi",
               },
               {
-                "display": "Climbing",
-                "value": "Climbing",
+                "display": "Mardi",
+                "value": "Mardi",
               },
               {
-                "display": "Walking",
-                "value": "Walking",
+                "display": "Mercredi",
+                "value": "Mercredi",
               },
               {
-                "display": "Swimming",
-                "value": "Swimming",
+                "display": "Jeudi",
+                "value": "Jeudi",
               },
               {
-                "display": "Soccer Practice",
-                "value": "Soccer Practice",
+                "display": "Vendredi",
+                "value": "Vendredi",
               },
               {
-                "display": "Baseball Practice",
-                "value": "Baseball Practice",
+                "display": "Samedi",
+                "value": "Samedi",
               },
               {
-                "display": "Football Practice",
-                "value": "Football Practice",
+                "display": "Dimanche",
+                "value": "Dimanche",
               },
             ],
             textField: 'display',
@@ -158,135 +182,293 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               });
             },
           ),
-          Container(
-            padding: EdgeInsets.all(8),
-            child: RaisedButton(
-              child: Text('Save'),
-              onPressed: _saveForm,
-            ),
-          ),
+          // Container(
+          //   padding: EdgeInsets.all(8),
+          //   child: RaisedButton(
+          //     child: Text('Save'),
+          //     onPressed: _saveForm,
+          //   ),
+          // ),
           Container(
             padding: EdgeInsets.all(16),
             child: Text(_myActivitiesResult),
           ),
-          DropdownButtonFormField<String>(
-              decoration: InputDecoration(
-                  focusedBorder: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(width: 2.0, color: Colors.blueAccent),
-                      borderRadius: BorderRadius.circular(15.0)),
-                  enabledBorder: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(width: 1.0, color: Colors.blueAccent),
-                      borderRadius: BorderRadius.circular(15.0)),
-                  contentPadding:
-                      EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15.0))),
-              isExpanded: true,
-              value: dateQuotidien,
-              icon: Icon(Icons.keyboard_arrow_down),
-              iconSize: 30,
-              // underline: SizedBox(),
-              onChanged: (String newValue) {
-                setState(() {
-                  dateQuotidien = newValue;
-                });
-              },
-              items: <String>[
-                '1 h',
-                '2 h',
-                '3 h',
-                '4 h',
-                '5 h',
-                '6 h',
-                '7 h',
-                '8 h',
-                '9 h',
-                '10 h',
-                '11 h',
-                '12 h',
-                '13 h',
-                '14 h',
-                '15 h',
-                '16 h',
-                '17 h',
-                '18 h',
-                '19 h',
-                '20 h',
-                '21 h',
-                '22 h',
-                '23 h',
-                '24 h',
-              ].map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList()),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                padding: EdgeInsets.all(12.0),
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.blue),
+                  borderRadius: BorderRadius.circular(15),
+                  color: Colors.transparent,
+                ),
+                margin: EdgeInsets.only(left: 15.0),
+                child: Text(
+                  'heure',
+                  style: TextStyle(fontSize: 17),
+                ),
+              ),
+              SizedBox(width: 15.0),
+              Container(
+                width: 150,
+                child: DropdownButtonFormField<String>(
+                    decoration: InputDecoration(
+                        focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                width: 2.0, color: Colors.blueAccent),
+                            borderRadius: BorderRadius.circular(15.0)),
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                width: 1.0, color: Colors.blueAccent),
+                            borderRadius: BorderRadius.circular(15.0)),
+                        contentPadding:
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15.0))),
+                    isExpanded: true,
+                    value: heure,
+                    icon: Icon(Icons.keyboard_arrow_down),
+                    iconSize: 30,
+                    // underline: SizedBox(),
+                    onChanged: (String newValue) {
+                      setState(() {
+                        heure = newValue;
+                      });
+                    },
+                    items: <String>[
+                      '1 h',
+                      '2 h',
+                      '3 h',
+                      '4 h',
+                      '5 h',
+                      '6 h',
+                      '7 h',
+                      '8 h',
+                      '9 h',
+                      '10 h',
+                      '11 h',
+                      '12 h',
+                      '13 h',
+                      '14 h',
+                      '15 h',
+                      '16 h',
+                      '17 h',
+                      '18 h',
+                      '19 h',
+                      '20 h',
+                      '21 h',
+                      '22 h',
+                      '23 h',
+                      '24 h',
+                    ].map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList()),
+              ),
+            ],
+          ),
         ],
       );
     } else if (resultat == "mensuel") {
       documentJoint = Column(
         children: [
-          DropdownButtonFormField<String>(
-              decoration: InputDecoration(
-                  focusedBorder: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(width: 2.0, color: Colors.blueAccent),
-                      borderRadius: BorderRadius.circular(15.0)),
-                  enabledBorder: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(width: 1.0, color: Colors.blueAccent),
-                      borderRadius: BorderRadius.circular(15.0)),
-                  contentPadding:
-                      EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15.0))),
-              isExpanded: true,
-              value: dateQuotidien,
-              icon: Icon(Icons.keyboard_arrow_down),
-              iconSize: 30,
-              // underline: SizedBox(),
-              onChanged: (String newValue) {
-                setState(() {
-                  dateQuotidien = newValue;
-                });
-              },
-              items: <String>[
-                '1 h',
-                '2 h',
-                '3 h',
-                '4 h',
-                '5 h',
-                '6 h',
-                '7 h',
-                '8 h',
-                '9 h',
-                '10 h',
-                '11 h',
-                '12 h',
-                '13 h',
-                '14 h',
-                '15 h',
-                '16 h',
-                '17 h',
-                '18 h',
-                '19 h',
-                '20 h',
-                '21 h',
-                '22 h',
-                '23 h',
-                '24 h',
-              ].map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList()),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                padding: EdgeInsets.all(12.0),
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.blue),
+                  borderRadius: BorderRadius.circular(15),
+                  color: Colors.transparent,
+                ),
+                margin: EdgeInsets.only(left: 15.0),
+                child: Text(
+                  'Date',
+                  style: TextStyle(fontSize: 17),
+                ),
+              ),
+              SizedBox(width: 15.0),
+              Container(
+                width: 150,
+                child: DropdownButtonFormField<String>(
+                    decoration: InputDecoration(
+                        focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                width: 2.0, color: Colors.blueAccent),
+                            borderRadius: BorderRadius.circular(15.0)),
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                width: 1.0, color: Colors.blueAccent),
+                            borderRadius: BorderRadius.circular(15.0)),
+                        contentPadding:
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15.0))),
+                    isExpanded: true,
+                    value: date,
+                    icon: Icon(Icons.keyboard_arrow_down),
+                    iconSize: 30,
+                    // underline: SizedBox(),
+                    onChanged: (String newValue) {
+                      setState(() {
+                        date = newValue;
+                      });
+                    },
+                    items: <String>[
+                      '1',
+                      '2',
+                      '3',
+                      '4',
+                      '5',
+                      '6',
+                      '7',
+                      '8',
+                      '9',
+                      '10',
+                      '11',
+                      '12',
+                      '13',
+                      '14',
+                      '15',
+                      '16',
+                      '17',
+                      '18',
+                      '19',
+                      '20',
+                      '21',
+                      '22',
+                      '23',
+                      '24',
+                      '25',
+                      '26',
+                      '27',
+                      '28',
+                      '29',
+                      '30',
+                      '31',
+                    ].map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList()),
+              ),
+            ],
+          ),
+          SizedBox(height: 15.0),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                padding: EdgeInsets.all(12.0),
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.blue),
+                  borderRadius: BorderRadius.circular(15),
+                  color: Colors.transparent,
+                ),
+                margin: EdgeInsets.only(left: 15.0),
+                child: Text(
+                  'heure',
+                  style: TextStyle(fontSize: 17),
+                ),
+              ),
+              SizedBox(width: 15.0),
+              Container(
+                width: 150,
+                child: DropdownButtonFormField<String>(
+                    decoration: InputDecoration(
+                        focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                width: 2.0, color: Colors.blueAccent),
+                            borderRadius: BorderRadius.circular(15.0)),
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                width: 1.0, color: Colors.blueAccent),
+                            borderRadius: BorderRadius.circular(15.0)),
+                        contentPadding:
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15.0))),
+                    isExpanded: true,
+                    value: dateQuotidien,
+                    icon: Icon(Icons.keyboard_arrow_down),
+                    iconSize: 30,
+                    // underline: SizedBox(),
+                    onChanged: (String newValue) {
+                      setState(() {
+                        dateQuotidien = newValue;
+                      });
+                    },
+                    items: <String>[
+                      '1 h',
+                      '2 h',
+                      '3 h',
+                      '4 h',
+                      '5 h',
+                      '6 h',
+                      '7 h',
+                      '8 h',
+                      '9 h',
+                      '10 h',
+                      '11 h',
+                      '12 h',
+                      '13 h',
+                      '14 h',
+                      '15 h',
+                      '16 h',
+                      '17 h',
+                      '18 h',
+                      '19 h',
+                      '20 h',
+                      '21 h',
+                      '22 h',
+                      '23 h',
+                      '24 h',
+                    ].map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList()),
+              ),
+            ],
+          ),
         ],
       );
-    } else if (resultat == "notification") {}
+    } else if (resultat == "notification") {
+      documentJoint = Column(
+        children: [
+          DateTimePicker(
+            type: DateTimePickerType.dateTimeSeparate,
+            dateMask: 'd MMM, yyyy',
+            initialValue: DateTime.now().toString(),
+            firstDate: DateTime(2000),
+            lastDate: DateTime(2100),
+            icon: Icon(Icons.event),
+            dateLabelText: 'Date',
+            timeLabelText: "Hour",
+            selectableDayPredicate: (date) {
+              // Disable weekend days to select from the calendar
+              if (date.weekday == 6 || date.weekday == 7) {
+                return false;
+              }
+
+              return true;
+            },
+            onChanged: (val) => print(val),
+            validator: (val) {
+              print(val);
+              return null;
+            },
+            onSaved: (val) => print(val),
+          ),
+        ],
+      );
+    }
     return documentJoint;
   }
 
@@ -705,7 +887,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                 child: Row(
                                   children: [
                                     Icon(
-                                      Icons.auto_fix_normal,
+                                      Icons.view_day,
                                       size: 30.0,
                                     ),
                                     SizedBox(width: 10),
@@ -718,7 +900,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                 child: Row(
                                   children: [
                                     Icon(
-                                      Icons.auto_fix_normal,
+                                      Icons.view_week,
                                       size: 30.0,
                                     ),
                                     SizedBox(width: 10),
@@ -731,7 +913,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                 child: Row(
                                   children: [
                                     Icon(
-                                      Icons.auto_fix_normal,
+                                      Icons.date_range,
                                       size: 30.0,
                                     ),
                                     SizedBox(width: 10),
@@ -744,7 +926,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                 child: Row(
                                   children: [
                                     Icon(
-                                      Icons.auto_fix_normal,
+                                      Icons.schedule,
                                       size: 30.0,
                                     ),
                                     SizedBox(width: 10),
