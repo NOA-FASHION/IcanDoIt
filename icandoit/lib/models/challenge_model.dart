@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
 
 enum unity_challenge {
   haute,
@@ -99,20 +100,36 @@ class Challengemodel2 {
 
 class ChallengeModel {
   final String name;
+  List<String> totalDays;
+  String date;
+  bool quotidient;
+  String notification;
+  bool animatedpadding;
   final String description;
   final unity_challenge unity;
   List<Challengemodel2> listeDeTache;
   String totalChallenge;
 
   ChallengeModel({
+    this.notification,
+    this.animatedpadding,
+    this.date,
+    this.quotidient,
+    this.totalDays,
     this.name,
     this.description,
     this.unity,
     this.listeDeTache,
     this.totalChallenge,
+    String notifiaction,
   });
 
   factory ChallengeModel.fromJSON(Map<String, dynamic> json) => ChallengeModel(
+        notification: json['notification'],
+        date: json['date'],
+        animatedpadding: json['animatedpadding'],
+        quotidient: json['quotidient'],
+        totalDays: List<String>.from(json["totalDays"].map((x) => x)),
         name: json['name'],
         description: json['description'],
         totalChallenge: json['totalChallenge'],
@@ -124,7 +141,12 @@ class ChallengeModel {
 
   Map<String, dynamic> toJson() {
     return {
+      "notification": notification,
       "name": name,
+      "date": date,
+      "animatedpadding": animatedpadding.toString(),
+      "quotidient": quotidient.toString(),
+      "totalDays": List<dynamic>.from(totalDays.map((x) => x)),
       "description": description,
       "totalChallenge": totalChallenge,
       "unity": unity.toString(),

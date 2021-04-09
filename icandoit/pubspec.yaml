@@ -49,6 +49,8 @@ dependencies:
   top_snackbar_flutter: ^1.0.0
   multiselect_formfield: ^0.1.6
   date_time_picker: "^2.0.0"
+  avatar_glow: ^2.0.1
+  marquee: ^2.0.0
  
   
   

@@ -23,8 +23,12 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   String dateQuotidien;
+  String notifiaction = "";
+  bool animatedpadding = false;
+  bool quotidient = false;
+  List<String> totalDays = [];
+  String date = "";
   String heure;
-  String date;
   List _myActivities;
   String _myActivitiesResult;
   _saveForm() {
@@ -85,6 +89,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 onChanged: (String newValue) {
                   setState(() {
                     dateQuotidien = newValue;
+                    quotidient = true;
+                    animatedpadding = true;
                   });
                 },
                 items: <String>[
@@ -178,7 +184,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             onSaved: (value) {
               if (value == null) return;
               setState(() {
-                _myActivities = value;
+                totalDays = value;
+                animatedpadding = true;
               });
             },
           ),
@@ -316,6 +323,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                     onChanged: (String newValue) {
                       setState(() {
                         date = newValue;
+                        animatedpadding = true;
                       });
                     },
                     items: <String>[
@@ -464,7 +472,11 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               print(val);
               return null;
             },
-            onSaved: (val) => print(val),
+            onSaved: (val) {
+              print(val);
+              notifiaction = val;
+              animatedpadding = true;
+            },
           ),
         ],
       );
@@ -947,6 +959,11 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                   Provider.of<Challengecontroller>(context,
                                           listen: false)
                                       .addChallenge(
+                                          notifiaction: notifiaction,
+                                          date: date,
+                                          totalDays: totalDays,
+                                          quotidient: quotidient,
+                                          animatedpadding: animatedpadding,
                                           name: nameChallenge,
                                           totalChallenge: totalChallenge,
                                           description: targetChallenge,

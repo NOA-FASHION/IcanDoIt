@@ -1,10 +1,13 @@
+import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
 import 'package:icandoit/models/challenge_model.dart';
+import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
+import 'package:marquee/marquee.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:provider/provider.dart';
 import '../../controllers/challenge_controller.dart';
-import '../home_screen.dart';
+// import '../home_screen.dart';
 import 'baseAlertDialog.dart';
 import 'home_screen_tache.dart';
 
@@ -26,32 +29,291 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
     return percent1;
   }
 
-  String maxLetter(String word) {
-    var word2;
-    word2 = word[0];
+  Widget maxLetter(String word) {
+    Widget longLetter;
+
+    String word2;
+
     if (word.length > 23) {
-      for (var i = 1; i <= 20; i++) {
-        word2 = word2 + word[i];
-      }
-      word2 = word2 + "...";
+      longLetter = Marquee(
+        text: word2,
+        fadingEdgeStartFraction: 0.2,
+        fadingEdgeEndFraction: 0.2,
+        blankSpace: 20,
+      );
     } else {
       word2 = word;
+      longLetter = Text(word2);
     }
-    return word2;
+    return longLetter;
   }
 
-  String maxLetterTitre(String word) {
-    var word2;
-    word2 = word[0];
+  Widget maxLetterTitre(String word) {
+    Widget longLetter;
+
+    String word2;
+
     if (word.length > 30) {
-      for (var i = 1; i <= 27; i++) {
-        word2 = word2 + word[i];
-      }
-      word2 = word2 + "...";
+      longLetter = Marquee(style: TextStyle(fontWeight: FontWeight.bold),
+        text: word2,
+        fadingEdgeStartFraction: 0.2,
+        fadingEdgeEndFraction: 0.2,
+        blankSpace: 20,
+      );
     } else {
       word2 = word;
+      longLetter = Text(word2,style: TextStyle(fontWeight: FontWeight.bold),);
     }
-    return word2;
+    return longLetter;
+  }
+
+  // String maxLetterTitre(String word) {
+  //   var word2;
+  //   word2 = word[0];
+  //   if (word.length > 30) {
+  //     for (var i = 1; i <= 27; i++) {
+  //       word2 = word2 + word[i];
+  //     }
+  //     word2 = word2 + "...";
+  //   } else {
+  //     word2 = word;
+  //   }
+  //   return word2;
+  // }
+
+  Color colorGlow(ChallengeModel chalenge) {
+    DateTime today = new DateTime.now();
+    Color colors = Colors.transparent;
+    if (chalenge.quotidient) {
+      colors = Colors.blue;
+    } else if (chalenge.date.isNotEmpty) {
+      colors = Colors.orange;
+    } else if (chalenge.totalDays.isNotEmpty) {
+      colors = Colors.yellow;
+    } else if (chalenge.notification ==
+        DateFormat('EEEE, d MMM, yyyy').format(today)) {
+      colors = Colors.red;
+    }
+    return colors;
+  }
+
+  Widget activeGlow(ChallengeModel chalenge) {
+    Widget glow = Padding(
+      padding: const EdgeInsets.all(1.0),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          color: Colors.white,
+          // border: Border.all(
+          //   color: Colour('#C4AB4D'),
+          //   width: 2,
+          // ),
+        ),
+        child: Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15.0),
+          ),
+          elevation: 15.0,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  children: [
+                    Container(
+                      width: 250.0,
+                      height: 25.0,
+                      child: Row(
+                        children: [
+                          Text(
+                            "Description",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.blue),
+                          ),
+                          SizedBox(
+                            width: 5.0,
+                          ),
+
+                          maxLetter(chalenge.description),
+
+                          // SizedBox(
+                          //   width: 1.0,
+                          // ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      width: 250.0,
+                      height: 30.0,
+                      child: Row(
+                        children: [
+                          Text(
+                            "Priorite",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.blue),
+                          ),
+                          SizedBox(
+                            width: 5.0,
+                          ),
+                          Text(
+                            chalenge.unity
+                                .toString()
+                                .replaceAll(unityPattern, "")
+                                .toUpperCase(),
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: changeColors(chalenge.unity
+                                    .toString()
+                                    .replaceAll(unityPattern, ""))),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(60.0),
+                  ),
+                  elevation: 15.0,
+                  child: Container(
+                    child: new CircularPercentIndicator(
+                      radius: 60.0,
+                      lineWidth: 5.0,
+                      // percent: 1.0,
+                      percent: percentage(chalenge.listeDeTache.length,
+                          int.parse(chalenge.totalChallenge)),
+                      center: new Text((percentage(chalenge.listeDeTache.length,
+                                      int.parse(chalenge.totalChallenge)) *
+                                  100)
+                              .toStringAsFixed(2) +
+                          "%"),
+                      progressColor: Colors.green,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+    if (chalenge.animatedpadding) {
+      glow = AvatarGlow(
+        glowColor: colorGlow(chalenge),
+        endRadius: 20.0,
+        duration: Duration(milliseconds: 2000),
+        repeat: true,
+        // showTwoGlows: true,
+        repeatPauseDuration: Duration(milliseconds: 100),
+        child: Padding(
+          padding: const EdgeInsets.all(1.0),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              color: Colors.white,
+              // border: Border.all(
+              //   color: Colour('#C4AB4D'),
+              //   width: 2,
+              // ),
+            ),
+            child: Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.0),
+              ),
+              elevation: 15.0,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      children: [
+                        Container(
+                          width: 250.0,
+                          height: 25.0,
+                          child: Row(
+                            children: [
+                              Text(
+                                "Description",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.blue),
+                              ),
+                              SizedBox(
+                                width: 5.0,
+                              ),
+                              maxLetter(chalenge.description),
+                              // SizedBox(
+                              //   width: 1.0,
+                              // ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          width: 250.0,
+                          height: 30.0,
+                          child: Row(
+                            children: [
+                              Text(
+                                "Priorite",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.blue),
+                              ),
+                              SizedBox(
+                                width: 5.0,
+                              ),
+                              Text(
+                                chalenge.unity
+                                    .toString()
+                                    .replaceAll(unityPattern, "")
+                                    .toUpperCase(),
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: changeColors(chalenge.unity
+                                        .toString()
+                                        .replaceAll(unityPattern, ""))),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(60.0),
+                      ),
+                      elevation: 15.0,
+                      child: Container(
+                        child: new CircularPercentIndicator(
+                          radius: 60.0,
+                          lineWidth: 5.0,
+                          // percent: 1.0,
+                          percent: percentage(chalenge.listeDeTache.length,
+                              int.parse(chalenge.totalChallenge)),
+                          center: new Text((percentage(
+                                          chalenge.listeDeTache.length,
+                                          int.parse(chalenge.totalChallenge)) *
+                                      100)
+                                  .toStringAsFixed(2) +
+                              "%"),
+                          progressColor: Colors.green,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+    }
+    return glow;
   }
 
   Color changeColors(String challengeListeColors) {
@@ -228,12 +490,9 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                                 SizedBox(
                                   width: 5.0,
                                 ),
-                                Text(
                                   maxLetterTitre(_challengesList[index]
                                       .name
                                       .toUpperCase()),
-                                  style: TextStyle(fontWeight: FontWeight.bold),
-                                ),
                               ],
                             ),
                           ),
@@ -244,123 +503,7 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                       ],
                     ),
                   ),
-                  subtitle: Padding(
-                    padding: const EdgeInsets.all(1.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.white,
-                        // border: Border.all(
-                        //   color: Colour('#C4AB4D'),
-                        //   width: 2,
-                        // ),
-                      ),
-                      child: Card(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                        ),
-                        elevation: 15.0,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Column(
-                                children: [
-                                  Container(
-                                    width: 250.0,
-                                    height: 25.0,
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          "Description",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.blue),
-                                        ),
-                                        SizedBox(
-                                          width: 5.0,
-                                        ),
-                                        Text(
-                                          maxLetter(_challengesList[index]
-                                              .description),
-                                        ),
-                                        // SizedBox(
-                                        //   width: 1.0,
-                                        // ),
-                                      ],
-                                    ),
-                                  ),
-                                  Container(
-                                    width: 250.0,
-                                    height: 30.0,
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          "Priorite",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.blue),
-                                        ),
-                                        SizedBox(
-                                          width: 5.0,
-                                        ),
-                                        Text(
-                                          _challengesList[index]
-                                              .unity
-                                              .toString()
-                                              .replaceAll(unityPattern, "")
-                                              .toUpperCase(),
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              color: changeColors(
-                                                  _challengesList[index]
-                                                      .unity
-                                                      .toString()
-                                                      .replaceAll(
-                                                          unityPattern, ""))),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Card(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(60.0),
-                                ),
-                                elevation: 15.0,
-                                child: Container(
-                                  child: new CircularPercentIndicator(
-                                    radius: 60.0,
-                                    lineWidth: 5.0,
-                                    // percent: 1.0,
-                                    percent: percentage(
-                                        _challengesList[index]
-                                            .listeDeTache
-                                            .length,
-                                        int.parse(_challengesList[index]
-                                            .totalChallenge)),
-                                    center: new Text((percentage(
-                                                    _challengesList[index]
-                                                        .listeDeTache
-                                                        .length,
-                                                    int.parse(
-                                                        _challengesList[index]
-                                                            .totalChallenge)) *
-                                                100)
-                                            .toStringAsFixed(2) +
-                                        "%"),
-                                    progressColor: Colors.green,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
+                  subtitle: activeGlow(_challengesList[index]),
                   isThreeLine: true,
                 ),
               ),

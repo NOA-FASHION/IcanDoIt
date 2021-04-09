@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_list_drag_and_drop/drag_and_drop_list.dart';
-import 'dart:io' as io;
+// import 'dart:io' as io;
 import 'package:icandoit/models/challenge_model.dart';
 import 'package:icandoit/screens/components/playYoutube.dart';
 import 'package:icandoit/screens/playPicture.dart';
@@ -10,6 +10,7 @@ import 'package:icandoit/screens/playUrl.dart';
 import 'package:icandoit/screens/playVideo.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lottie/lottie.dart';
+import 'package:marquee/marquee.dart';
 import 'package:provider/provider.dart';
 import '../../controllers/challenge_controller.dart';
 import '../playCommentaire.dart';
@@ -26,23 +27,48 @@ class ChallengesListBuilderTaches extends StatefulWidget {
 class _ChallengesListBuilderTachesState
     extends State<ChallengesListBuilderTaches> {
   final picker = ImagePicker();
-  String maxLetter(String word, String comment) {
-    var word2;
-    word2 = word[0];
+  // String maxLetter(String word, String comment) {
+  //   var word2;
+  //   word2 = word[0];
+  //   if (word.length > 29 && comment.length <= 5) {
+  //     for (var i = 1; i <= 26; i++) {
+  //       word2 = word2 + word[i];
+  //     }
+  //     word2 = word2 + "...";
+  //   } else if (word.length > 25 && comment.length > 5) {
+  //     for (var i = 1; i <= (25 - (comment.length - 5)); i++) {
+  //       word2 = word2 + word[i];
+  //     }
+  //     word2 = word2 + "...";
+  //   } else {
+  //     word2 = word;
+  //   }
+  //   return word2;
+  // }
+  Widget maxLetter(String word, String comment) {
+    Widget longLetter;
+
+    String word2;
+
     if (word.length > 29 && comment.length <= 5) {
-      for (var i = 1; i <= 26; i++) {
-        word2 = word2 + word[i];
-      }
-      word2 = word2 + "...";
-    } else if (word.length > 25 && comment.length > 5) {
-      for (var i = 1; i <= (25 - (comment.length - 5)); i++) {
-        word2 = word2 + word[i];
-      }
-      word2 = word2 + "...";
+      longLetter = Marquee(
+        text: word2,
+        fadingEdgeStartFraction: 0.2,
+        fadingEdgeEndFraction: 0.2,
+        blankSpace: 20,
+      );
+    } else if (word.length > 29 && comment.length <= 5) {
+      longLetter = Marquee(
+        text: word2,
+        fadingEdgeStartFraction: 0.2,
+        fadingEdgeEndFraction: 0.2,
+        blankSpace: 20,
+      );
     } else {
       word2 = word;
+      longLetter = Text(word2);
     }
-    return word2;
+    return longLetter;
   }
 
   Widget iconDataJoin(String resultat) {
@@ -378,11 +404,11 @@ class _ChallengesListBuilderTachesState
                                     SizedBox(
                                       width: 5.0,
                                     ),
-                                    Text(maxLetter(
+                                    maxLetter(
                                         item.tache.toString(),
                                         item.description
                                             .toString()
-                                            .replaceAll(unityPattern, ""))),
+                                            .replaceAll(unityPattern, "")),
                                     SizedBox(
                                       width: 5.0,
                                     ),

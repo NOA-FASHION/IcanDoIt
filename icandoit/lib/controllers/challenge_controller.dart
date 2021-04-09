@@ -68,9 +68,149 @@ class Challengecontroller extends ChangeNotifier {
           .map((challenge) => ChallengeModel.fromJSON(challenge))
           .toList();
     }
+    removeHebdo();
+    hebdoSave();
+    removeMensuel();
+    mensuelSave();
     _initChallengeListStartChallenge();
 
     notifyListeners();
+  }
+
+  // void testChallengeListListeTache() async {
+  //   for (var i = _challengeListSave.length - 1; i >= 0; i--) {
+  //     for (var n = _challengeList.length - 1; n >= 0; n--) {
+  //       if (_challengeList[n].name == _challengeListSave[i].name &&
+  //           _challengeListSave[i].listeDeTache.length !=
+  //               _challengeList[n].listeDeTache.length) {
+  //         _challengeListSave.add(
+  //           ChallengeModel(
+  //               notifiaction: _challengeList[n].notification,
+  //               date: _challengeList[n].date,
+  //               quotidient: _challengeList[n].quotidient,
+  //               animatedpadding: _challengeList[n].animatedpadding,
+  //               totalDays: _challengeList[n].totalDays,
+  //               listeDeTache: _challengeList[n].listeDeTache,
+  //               name: _challengeList[n].name,
+  //               description: _challengeList[n].description,
+  //               totalChallenge: _challengeList[n].totalChallenge,
+  //               unity: _challengeList[n].unity),
+  //         );
+
+  //         await _saveSauvegarde();
+  //         _initChallengeList();
+  //         notifyListeners();
+  //         return;
+  //       }
+  //     }
+  //   }
+  // }
+
+  String translateDays(String days) {
+    String daysFinal = "";
+    if (days == "lundi") {
+      daysFinal = "monday";
+    } else if (days == "mardi") {
+      daysFinal = "tueday";
+    } else if (days == "mercredi") {
+      daysFinal = "wednesday";
+    } else if (days == "jeudi") {
+      daysFinal = "thursday";
+    } else if (days == "vendredi") {
+      daysFinal = "friday";
+    } else if (days == "samedi") {
+      daysFinal = "saturday";
+    } else if (days == "dimanche") {
+      daysFinal = "sunday";
+    }
+    return daysFinal;
+  }
+
+  void mensuelSave() {
+    DateTime today = new DateTime.now();
+    for (var i = _challengeListSave.length - 1; i >= 0; i--) {
+      if (_challengeListSave[i].date.isNotEmpty) {
+        if (_challengeListSave[i].date == DateFormat('Md').format(today)) {
+          challegListSaveShedule(i);
+        }
+      }
+    }
+  }
+
+  void removeMensuel() {
+    DateTime today = new DateTime.now();
+    for (var i = _challengeList.length - 1; i >= 0; i--) {
+      if (_challengeList[i].date.isNotEmpty) {
+        if (_challengeList[i].date == DateFormat('Md').format(today)) {
+          remove(index: i);
+        }
+      }
+    }
+  }
+
+  void hebdoSave() {
+    DateTime today = new DateTime.now();
+    for (var i = _challengeListSave.length - 1; i >= 0; i--) {
+      if (_challengeListSave[i].totalDays.isNotEmpty) {
+        for (var n = _challengeListSave[i].totalDays.length - 1; n >= 0; n--) {
+          if (_challengeListSave[i].totalDays[n] ==
+              translateDays(DateFormat('d').format(today))) {
+            challegListSaveShedule(i);
+          }
+        }
+      }
+    }
+  }
+
+  void removeHebdo() {
+    DateTime today = new DateTime.now();
+    for (var i = _challengeList.length - 1; i >= 0; i--) {
+      if (_challengeList[i].totalDays.isNotEmpty) {
+        for (var n = _challengeList[i].totalDays.length - 1; n >= 0; n--) {
+          if (_challengeList[i].totalDays[n] ==
+              translateDays(DateFormat('d').format(today))) {
+            remove(index: i);
+          }
+        }
+      }
+    }
+  }
+
+  void removeQuotidientSave() async {
+    for (var i = _challengeList.length - 1; i >= 0; i--) {
+      if (_challengeList[i].quotidient == true) {
+        remove(index: i);
+      }
+    }
+  }
+
+  void initialiseQuotidient() async {
+    for (var i = _challengeListSave.length - 1; i >= 0; i--) {
+      if (_challengeListSave[i].quotidient == true) {
+        challegListSaveShedule(i);
+      }
+    }
+  }
+
+  void challegListSaveShedule(int index) async {
+    _challengeList.add(
+      ChallengeModel(
+          notifiaction: _challengeListSave[index].notification,
+          date: _challengeListSave[index].date,
+          quotidient: _challengeListSave[index].quotidient,
+          animatedpadding: _challengeListSave[index].animatedpadding,
+          totalDays: _challengeListSave[index].totalDays,
+          listeDeTache: _challengeListSave[index].listeDeTache,
+          name: _challengeListSave[index].name,
+          description: _challengeListSave[index].description,
+          totalChallenge: _challengeListSave[index].totalChallenge,
+          unity: _challengeListSave[index].unity),
+    );
+
+    await _save();
+    _initChallengeList();
+    notifyListeners();
+    return;
   }
 
   void _initChallengeListStartChallenge() async {
@@ -142,6 +282,8 @@ class Challengecontroller extends ChangeNotifier {
     DateTime today = new DateTime.now();
     if (challengeyesterday.date !=
         DateFormat('EEEE, d MMM, yyyy').format(today)) {
+      removeQuotidientSave();
+      initialiseQuotidient();
       challengeyesterday.date = DateFormat('EEEE, d MMM, yyyy').format(today);
       challengeyesterday.nbChallengeEnCours = challengeDays.nbChallengeEnCours;
       challengeyesterday.nbTacheEnCours = challengeDays.nbTacheEnCours;
@@ -355,6 +497,13 @@ class Challengecontroller extends ChangeNotifier {
     await _save();
     _initChallengeList();
     notifyListeners();
+    for (var i = _challengeList.length - 1; i >= 0; i--) {
+      if (_challengeList[i].name == nameListChallenge &&
+          _challengeList[i].animatedpadding == true) {
+        addListChallengeSave(nameListChallenge);
+        return;
+      }
+    }
   }
 
   void save() async {
@@ -388,18 +537,31 @@ class Challengecontroller extends ChangeNotifier {
 
   void addChallenge(
       {@required String name,
+      @required String notifiaction,
+      @required String date,
+      @required bool quotidient,
+      @required bool animatedpadding,
+      @required List<String> totalDays,
       @required String totalChallenge,
       @required String description,
       @required String unity,
       @required List<Challengemodel2> challengeListTache}) async {
     _challengeList.add(
       ChallengeModel(
+          notifiaction: notifiaction,
+          date: date,
+          quotidient: quotidient,
+          animatedpadding: animatedpadding,
+          totalDays: totalDays,
           listeDeTache: challengeListTache,
           name: name,
           description: description,
           totalChallenge: totalChallenge,
           unity: choixDesciptionEnum1(unity)),
     );
+    if (animatedpadding == true) {
+      addListChallengeSave(name);
+    }
 
     await _save();
     _initChallengeList();
@@ -424,6 +586,11 @@ class Challengecontroller extends ChangeNotifier {
         if (i == indexSave) {
           _challengeList.add(
             ChallengeModel(
+                notifiaction: _challengeListSave[i].notification,
+                date: _challengeListSave[i].date,
+                quotidient: _challengeListSave[i].quotidient,
+                animatedpadding: _challengeListSave[i].animatedpadding,
+                totalDays: _challengeListSave[i].totalDays,
                 listeDeTache: _challengeListSave[i].listeDeTache,
                 name: _challengeListSave[i].name,
                 description: _challengeListSave[i].description,
@@ -441,12 +608,22 @@ class Challengecontroller extends ChangeNotifier {
   }
 
   void addListChallengeSave(String namechallenge) async {
+    for (var i = _challengeListSave.length - 1; i >= 0; i--) {
+      if (_challengeListSave[i].name == namechallenge) {
+        _challengeListSave.removeAt(i);
+      }
+    }
     for (var i = _challengeList.length - 1; i >= 0; i--) {
       print('challengelistname');
       print(namechallenge);
       if (_challengeList[i].name == namechallenge) {
         _challengeListSave.add(
           ChallengeModel(
+              notifiaction: _challengeList[i].notification,
+              date: _challengeList[i].date,
+              quotidient: _challengeList[i].quotidient,
+              animatedpadding: _challengeList[i].animatedpadding,
+              totalDays: _challengeList[i].totalDays,
               listeDeTache: _challengeList[i].listeDeTache,
               name: _challengeList[i].name,
               description: _challengeList[i].description,
@@ -538,6 +715,13 @@ class Challengecontroller extends ChangeNotifier {
     await _save1(remove: true, nameChallenge: nameChallenge);
     _initChallengeList();
     notifyListeners();
+    for (var i = _challengeList.length - 1; i >= 0; i--) {
+      if (_challengeList[i].name == nameChallenge &&
+          _challengeList[i].animatedpadding == true) {
+        addListChallengeSave(nameChallenge);
+        return;
+      }
+    }
   }
 
   Future<String> get _localPath async {
@@ -574,6 +758,11 @@ class Challengecontroller extends ChangeNotifier {
       _jsonDecodeuploadFile = jsonDecode(uploadFile);
       uploadFileChallenge = ChallengeModel.fromJSON(_jsonDecodeuploadFile);
       addChallenge(
+          notifiaction: uploadFileChallenge.notification,
+          totalDays: uploadFileChallenge.totalDays,
+          quotidient: uploadFileChallenge.quotidient,
+          animatedpadding: uploadFileChallenge.animatedpadding,
+          date: uploadFileChallenge.date,
           challengeListTache: uploadFileChallenge.listeDeTache,
           name: uploadFileChallenge.name,
           description: uploadFileChallenge.description,
