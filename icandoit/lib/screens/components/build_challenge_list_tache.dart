@@ -10,10 +10,10 @@ import 'package:icandoit/screens/playUrl.dart';
 import 'package:icandoit/screens/playVideo.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lottie/lottie.dart';
-import 'package:marquee/marquee.dart';
 import 'package:provider/provider.dart';
 import '../../controllers/challenge_controller.dart';
 import '../playCommentaire.dart';
+import 'package:marquee_text/marquee_text.dart';
 
 class ChallengesListBuilderTaches extends StatefulWidget {
   final String nameChallenge;
@@ -27,42 +27,35 @@ class ChallengesListBuilderTaches extends StatefulWidget {
 class _ChallengesListBuilderTachesState
     extends State<ChallengesListBuilderTaches> {
   final picker = ImagePicker();
-  // String maxLetter(String word, String comment) {
-  //   var word2;
-  //   word2 = word[0];
-  //   if (word.length > 29 && comment.length <= 5) {
-  //     for (var i = 1; i <= 26; i++) {
-  //       word2 = word2 + word[i];
-  //     }
-  //     word2 = word2 + "...";
-  //   } else if (word.length > 25 && comment.length > 5) {
-  //     for (var i = 1; i <= (25 - (comment.length - 5)); i++) {
-  //       word2 = word2 + word[i];
-  //     }
-  //     word2 = word2 + "...";
-  //   } else {
-  //     word2 = word;
-  //   }
-  //   return word2;
-  // }
+
   Widget maxLetter(String word, String comment) {
     Widget longLetter;
 
     String word2;
 
     if (word.length > 29 && comment.length <= 5) {
-      longLetter = Marquee(
-        text: word2,
-        fadingEdgeStartFraction: 0.2,
-        fadingEdgeEndFraction: 0.2,
-        blankSpace: 20,
+      longLetter = Container(
+        width: MediaQuery.of(context).size.width / 2.55,
+        color: Colors.transparent,
+        child: MarqueeText(
+          text: word,
+          style: TextStyle(
+            color: Colors.black,
+          ),
+          speed: 30,
+        ),
       );
     } else if (word.length > 29 && comment.length <= 5) {
-      longLetter = Marquee(
-        text: word2,
-        fadingEdgeStartFraction: 0.2,
-        fadingEdgeEndFraction: 0.2,
-        blankSpace: 20,
+      longLetter = Container(
+        width: MediaQuery.of(context).size.width / 2.55,
+        color: Colors.transparent,
+        child: MarqueeText(
+          text: word,
+          style: TextStyle(
+            color: Colors.black,
+          ),
+          speed: 30,
+        ),
       );
     } else {
       word2 = word;
@@ -177,6 +170,7 @@ class _ChallengesListBuilderTachesState
                     content: "La tâche a bien été validé",
                     lotties: 'assets/challenge.json'));
                 provider.remove2(
+                    validate: true,
                     index: int.parse(item.index),
                     nameChallenge: widget.nameChallenge);
               }
@@ -186,6 +180,7 @@ class _ChallengesListBuilderTachesState
                     content: "La mission a bien ete supprime",
                     lotties: 'assets/trash.json'));
                 provider.remove2(
+                    validate: false,
                     index: int.parse(item.index),
                     nameChallenge: widget.nameChallenge);
               }

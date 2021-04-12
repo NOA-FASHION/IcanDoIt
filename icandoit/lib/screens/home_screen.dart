@@ -28,6 +28,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   bool quotidient = false;
   List<String> totalDays = [];
   String date = "";
+  String date1;
   String heure;
   List _myActivities;
   String _myActivitiesResult;
@@ -37,6 +38,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
       form.save();
       setState(() {
         _myActivitiesResult = _myActivities.toString();
+        totalDays = _myActivities.toString() as List<String>;
       });
     }
   }
@@ -184,7 +186,11 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             onSaved: (value) {
               if (value == null) return;
               setState(() {
-                totalDays = value;
+                _myActivities = value;
+                for (var i = _myActivities.length - 1; i >= 0; i--) {
+                  totalDays.add(_myActivities[i].toString());
+                }
+
                 animatedpadding = true;
               });
             },
@@ -316,7 +322,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15.0))),
                     isExpanded: true,
-                    value: date,
+                    value: date1,
                     icon: Icon(Icons.keyboard_arrow_down),
                     iconSize: 30,
                     // underline: SizedBox(),
@@ -475,7 +481,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             onSaved: (val) {
               print(val);
               notifiaction = val;
-              animatedpadding = true;
+              // animatedpadding = true;
             },
           ),
         ],

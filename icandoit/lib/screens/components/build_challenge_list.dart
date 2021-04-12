@@ -1,11 +1,11 @@
-import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
 import 'package:icandoit/models/challenge_model.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
-import 'package:marquee/marquee.dart';
+import 'package:marquee_text/marquee_text.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:provider/provider.dart';
+import 'package:shimmer_animation/shimmer_animation.dart';
 import '../../controllers/challenge_controller.dart';
 // import '../home_screen.dart';
 import 'baseAlertDialog.dart';
@@ -35,11 +35,16 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
     String word2;
 
     if (word.length > 23) {
-      longLetter = Marquee(
-        text: word2,
-        fadingEdgeStartFraction: 0.2,
-        fadingEdgeEndFraction: 0.2,
-        blankSpace: 20,
+      longLetter = Container(
+        width: MediaQuery.of(context).size.width / 2.55,
+        color: Colors.transparent,
+        child: MarqueeText(
+          text: word,
+          style: TextStyle(
+            color: Colors.black,
+          ),
+          speed: 30,
+        ),
       );
     } else {
       word2 = word;
@@ -54,15 +59,23 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
     String word2;
 
     if (word.length > 30) {
-      longLetter = Marquee(style: TextStyle(fontWeight: FontWeight.bold),
-        text: word2,
-        fadingEdgeStartFraction: 0.2,
-        fadingEdgeEndFraction: 0.2,
-        blankSpace: 20,
+      longLetter = Container(
+        width: MediaQuery.of(context).size.width / 2.55,
+        color: Colors.transparent,
+        child: MarqueeText(
+          text: word,
+          style: TextStyle(
+            color: Colors.black,
+          ),
+          speed: 30,
+        ),
       );
     } else {
       word2 = word;
-      longLetter = Text(word2,style: TextStyle(fontWeight: FontWeight.bold),);
+      longLetter = Text(
+        word2,
+        style: TextStyle(fontWeight: FontWeight.bold),
+      );
     }
     return longLetter;
   }
@@ -83,6 +96,9 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
 
   Color colorGlow(ChallengeModel chalenge) {
     DateTime today = new DateTime.now();
+    print(chalenge.notification);
+    print(DateFormat('yyyy-MM-dd hh:mm').format(today));
+
     Color colors = Colors.transparent;
     if (chalenge.quotidient) {
       colors = Colors.blue;
@@ -91,7 +107,7 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
     } else if (chalenge.totalDays.isNotEmpty) {
       colors = Colors.yellow;
     } else if (chalenge.notification ==
-        DateFormat('EEEE, d MMM, yyyy').format(today)) {
+        DateFormat('yyyy-MM-dd hh:mm').format(today)) {
       colors = Colors.red;
     }
     return colors;
@@ -101,6 +117,7 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
     Widget glow = Padding(
       padding: const EdgeInsets.all(1.0),
       child: Container(
+        width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           color: Colors.white,
@@ -122,7 +139,7 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                 Column(
                   children: [
                     Container(
-                      width: 250.0,
+                      width: MediaQuery.of(context).size.width / 1.8,
                       height: 25.0,
                       child: Row(
                         children: [
@@ -145,7 +162,7 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                       ),
                     ),
                     Container(
-                      width: 250.0,
+                      width: MediaQuery.of(context).size.width / 1.8,
                       height: 30.0,
                       child: Row(
                         children: [
@@ -202,16 +219,16 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
       ),
     );
     if (chalenge.animatedpadding) {
-      glow = AvatarGlow(
-        glowColor: colorGlow(chalenge),
-        endRadius: 20.0,
-        duration: Duration(milliseconds: 2000),
-        repeat: true,
-        // showTwoGlows: true,
-        repeatPauseDuration: Duration(milliseconds: 100),
+      glow = Shimmer(
+        duration: Duration(seconds: 5),
+        interval: Duration(seconds: 1),
+        color: colorGlow(chalenge),
+        enabled: true,
+        direction: ShimmerDirection.fromRightToLeft(),
         child: Padding(
           padding: const EdgeInsets.all(1.0),
           child: Container(
+            width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
               color: Colors.white,
@@ -233,7 +250,7 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                     Column(
                       children: [
                         Container(
-                          width: 250.0,
+                          width: MediaQuery.of(context).size.width / 1.8,
                           height: 25.0,
                           child: Row(
                             children: [
@@ -254,7 +271,7 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                           ),
                         ),
                         Container(
-                          width: 250.0,
+                          width: MediaQuery.of(context).size.width / 1.8,
                           height: 30.0,
                           child: Row(
                             children: [
@@ -370,14 +387,14 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
             onDismissed: (direction) {
               if (direction == DismissDirection.endToStart) {
                 provider.addnbChallengeVallide();
-                provider.remove(index: index);
+                provider.remove(index: index, validate: true);
                 Scaffold.of(context).showSnackBar(_buildSnackBar(
                     content: "Le challenge a bien ete valide",
                     lotties: 'assets/challenge.json'));
               }
 
               if (direction == DismissDirection.startToEnd) {
-                provider.remove(index: index);
+                provider.remove(index: index, validate: false);
                 Scaffold.of(context).showSnackBar(_buildSnackBar(
                     content: "La mission a bien ete supprime",
                     lotties: 'assets/trash.json'));
@@ -490,9 +507,8 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                                 SizedBox(
                                   width: 5.0,
                                 ),
-                                  maxLetterTitre(_challengesList[index]
-                                      .name
-                                      .toUpperCase()),
+                                maxLetterTitre(
+                                    _challengesList[index].name.toUpperCase()),
                               ],
                             ),
                           ),

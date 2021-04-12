@@ -68,10 +68,10 @@ class Challengecontroller extends ChangeNotifier {
           .map((challenge) => ChallengeModel.fromJSON(challenge))
           .toList();
     }
-    removeHebdo();
-    hebdoSave();
-    removeMensuel();
-    mensuelSave();
+    // removeHebdo();
+    // hebdoSave();
+    // removeMensuel();
+    // mensuelSave();
     _initChallengeListStartChallenge();
 
     notifyListeners();
@@ -108,29 +108,30 @@ class Challengecontroller extends ChangeNotifier {
 
   String translateDays(String days) {
     String daysFinal = "";
-    if (days == "lundi") {
-      daysFinal = "monday";
-    } else if (days == "mardi") {
-      daysFinal = "tueday";
-    } else if (days == "mercredi") {
-      daysFinal = "wednesday";
+    if (days == "Lundi") {
+      daysFinal = "Monday";
+    } else if (days == "Mardi") {
+      daysFinal = "Tueday";
+    } else if (days == "Mercredi") {
+      daysFinal = "Wednesday";
     } else if (days == "jeudi") {
-      daysFinal = "thursday";
-    } else if (days == "vendredi") {
-      daysFinal = "friday";
-    } else if (days == "samedi") {
-      daysFinal = "saturday";
-    } else if (days == "dimanche") {
-      daysFinal = "sunday";
+      daysFinal = "Thursday";
+    } else if (days == "Vendredi") {
+      daysFinal = "Friday";
+    } else if (days == "Samedi") {
+      daysFinal = "Saturday";
+    } else if (days == "Dimanche") {
+      daysFinal = "Sunday";
     }
     return daysFinal;
   }
 
   void mensuelSave() {
+    print("mensuelsave");
     DateTime today = new DateTime.now();
     for (var i = _challengeListSave.length - 1; i >= 0; i--) {
       if (_challengeListSave[i].date.isNotEmpty) {
-        if (_challengeListSave[i].date == DateFormat('Md').format(today)) {
+        if (_challengeListSave[i].date == DateFormat('d').format(today)) {
           challegListSaveShedule(i);
         }
       }
@@ -138,23 +139,25 @@ class Challengecontroller extends ChangeNotifier {
   }
 
   void removeMensuel() {
+    print("removesuelsave");
     DateTime today = new DateTime.now();
     for (var i = _challengeList.length - 1; i >= 0; i--) {
       if (_challengeList[i].date.isNotEmpty) {
-        if (_challengeList[i].date == DateFormat('Md').format(today)) {
-          remove(index: i);
+        if (_challengeList[i].date == DateFormat('d').format(today)) {
+          remove(index: i, validate: true);
         }
       }
     }
   }
 
   void hebdoSave() {
+    print("hebdosave");
     DateTime today = new DateTime.now();
     for (var i = _challengeListSave.length - 1; i >= 0; i--) {
       if (_challengeListSave[i].totalDays.isNotEmpty) {
         for (var n = _challengeListSave[i].totalDays.length - 1; n >= 0; n--) {
           if (_challengeListSave[i].totalDays[n] ==
-              translateDays(DateFormat('d').format(today))) {
+              translateDays(DateFormat('EEEE').format(today))) {
             challegListSaveShedule(i);
           }
         }
@@ -163,13 +166,14 @@ class Challengecontroller extends ChangeNotifier {
   }
 
   void removeHebdo() {
+    print("removehebdosave");
     DateTime today = new DateTime.now();
     for (var i = _challengeList.length - 1; i >= 0; i--) {
       if (_challengeList[i].totalDays.isNotEmpty) {
         for (var n = _challengeList[i].totalDays.length - 1; n >= 0; n--) {
           if (_challengeList[i].totalDays[n] ==
-              translateDays(DateFormat('d').format(today))) {
-            remove(index: i);
+              translateDays(DateFormat('EEEE').format(today))) {
+            remove(index: i, validate: true);
           }
         }
       }
@@ -177,14 +181,16 @@ class Challengecontroller extends ChangeNotifier {
   }
 
   void removeQuotidientSave() async {
+    print("quotidiensave");
     for (var i = _challengeList.length - 1; i >= 0; i--) {
       if (_challengeList[i].quotidient == true) {
-        remove(index: i);
+        remove(index: i, validate: true);
       }
     }
   }
 
   void initialiseQuotidient() async {
+    print("removequotidien");
     for (var i = _challengeListSave.length - 1; i >= 0; i--) {
       if (_challengeListSave[i].quotidient == true) {
         challegListSaveShedule(i);
@@ -284,6 +290,10 @@ class Challengecontroller extends ChangeNotifier {
         DateFormat('EEEE, d MMM, yyyy').format(today)) {
       removeQuotidientSave();
       initialiseQuotidient();
+      removeHebdo();
+      hebdoSave();
+      removeMensuel();
+      mensuelSave();
       challengeyesterday.date = DateFormat('EEEE, d MMM, yyyy').format(today);
       challengeyesterday.nbChallengeEnCours = challengeDays.nbChallengeEnCours;
       challengeyesterday.nbTacheEnCours = challengeDays.nbTacheEnCours;
@@ -632,8 +642,8 @@ class Challengecontroller extends ChangeNotifier {
         );
 
         await _saveSauvegarde();
-        _initChallengeList();
-        notifyListeners();
+        // _initChallengeList();
+        // notifyListeners();
         return;
       }
     }
@@ -696,14 +706,25 @@ class Challengecontroller extends ChangeNotifier {
     notifyListeners();
   }
 
-  void remove({@required int index}) async {
+  void remove({@required int index, @required bool validate}) async {
     _challengeList.removeAt(index);
     await _save(remove: true);
+    for (var i = _challengeListSave.length - 1; i >= 0; i--) {
+      if (!validate &&
+          _challengeList[index].animatedpadding == true &&
+          _challengeListSave[i].name == _challengeList[index].name) {
+        _challengeListSave.removeAt(i);
+        await _saveSauvegarde(remove: true);
+      }
+    }
     _initChallengeList();
     notifyListeners();
   }
 
-  void remove2({@required int index, @required String nameChallenge}) async {
+  void remove2(
+      {@required int index,
+      @required String nameChallenge,
+      @required bool validate}) async {
     for (var i = _challengeList.length - 1; i >= 0; i--) {
       if (_challengeList[i].name == nameChallenge) {
         var additionchallenge = _challengeList[i].totalChallenge;
@@ -713,15 +734,16 @@ class Challengecontroller extends ChangeNotifier {
       }
     }
     await _save1(remove: true, nameChallenge: nameChallenge);
-    _initChallengeList();
-    notifyListeners();
     for (var i = _challengeList.length - 1; i >= 0; i--) {
-      if (_challengeList[i].name == nameChallenge &&
+      if (!validate &&
+          _challengeList[i].name == nameChallenge &&
           _challengeList[i].animatedpadding == true) {
         addListChallengeSave(nameChallenge);
         return;
       }
     }
+    _initChallengeList();
+    notifyListeners();
   }
 
   Future<String> get _localPath async {
