@@ -74,7 +74,7 @@ choixDesciptionEnum1(dynamic json) {
 class Challengemodel2 {
   String index;
   String name;
-  final String tache;
+  final String tache;   
   final unity_challenge1 description;
   Challengemodel2(
       {@required this.name,
