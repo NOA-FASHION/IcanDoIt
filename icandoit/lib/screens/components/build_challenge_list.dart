@@ -18,14 +18,19 @@ class ChallengesListBuilder extends StatefulWidget {
 
 class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
   double percentage(int listeTache, int totalChallenge) {
+    // print(listeTache);
     double percent1;
     if (listeTache != 0 && listeTache == totalChallenge) {
+      print("1");
       percent1 = 0.00;
     } else if (listeTache != 0 && listeTache != totalChallenge) {
       percent1 = listeTache / totalChallenge;
     } else {
       percent1 = 0.00;
+      print("2");
     }
+    print("totalchallenge");
+    print(percent1);
     return percent1;
   }
 
@@ -34,7 +39,7 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
 
     String word2;
 
-    if (word.length > 23) {
+    if (word.length >= 22) {
       longLetter = Container(
         width: MediaQuery.of(context).size.width / 2.9,
         color: Colors.transparent,
@@ -222,7 +227,7 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
       glow = Shimmer(
         duration: Duration(seconds: 5),
         interval: Duration(seconds: 1),
-        color: Colors.red,
+        color: Colors.lightBlueAccent,
         enabled: true,
         direction: ShimmerDirection.fromRightToLeft(),
         child: Padding(
@@ -339,7 +344,7 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
       colors = Colors.green;
     } else if (challengeListeColors == "haute") {
       colors = Colors.red;
-    } else if (challengeListeColors == "Moyen") {
+    } else {
       colors = Colors.orange;
     }
     return colors;
@@ -387,14 +392,20 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
             onDismissed: (direction) {
               if (direction == DismissDirection.endToStart) {
                 provider.addnbChallengeVallide();
-                provider.remove(index: index, validate: true);
+                provider.remove(
+                    index: index,
+                    validate: true,
+                    name: _challengesList[index].name);
                 Scaffold.of(context).showSnackBar(_buildSnackBar(
                     content: "Le challenge a bien ete valide",
                     lotties: 'assets/challenge.json'));
               }
 
               if (direction == DismissDirection.startToEnd) {
-                provider.remove(index: index, validate: false);
+                provider.remove(
+                    index: index,
+                    validate: false,
+                    name: _challengesList[index].name);
                 Scaffold.of(context).showSnackBar(_buildSnackBar(
                     content: "La mission a bien ete supprime",
                     lotties: 'assets/trash.json'));
@@ -482,9 +493,8 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => ChangeNotifierProvider.value(
                             value: variable,
-                            child: HomeTaches(
-                              _challengesList[index].name,
-                            ))));
+                            child: HomeTaches(_challengesList[index].name,
+                                _challengesList[index].animatedpadding))));
                   },
                   title: Container(
                     child: Row(
