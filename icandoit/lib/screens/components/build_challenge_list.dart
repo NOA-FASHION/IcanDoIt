@@ -36,7 +36,7 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
 
     if (word.length > 23) {
       longLetter = Container(
-        width: MediaQuery.of(context).size.width / 2.55,
+        width: MediaQuery.of(context).size.width / 2.9,
         color: Colors.transparent,
         child: MarqueeText(
           text: word,
@@ -94,24 +94,24 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
   //   return word2;
   // }
 
-  Color colorGlow(ChallengeModel chalenge) {
-    DateTime today = new DateTime.now();
-    print(chalenge.notification);
-    print(DateFormat('yyyy-MM-dd hh:mm').format(today));
+  // Color colorGlow(ChallengeModel chalenge) {
+  //   DateTime today = new DateTime.now();
+  //   print(chalenge.notification);
+  //   print(DateFormat('yyyy-MM-dd hh:mm').format(today));
 
-    Color colors = Colors.transparent;
-    if (chalenge.quotidient) {
-      colors = Colors.blue;
-    } else if (chalenge.date.isNotEmpty) {
-      colors = Colors.orange;
-    } else if (chalenge.totalDays.isNotEmpty) {
-      colors = Colors.yellow;
-    } else if (chalenge.notification ==
-        DateFormat('yyyy-MM-dd hh:mm').format(today)) {
-      colors = Colors.red;
-    }
-    return colors;
-  }
+  //   Color colors = Colors.transparent;
+  //   if (chalenge.quotidient) {
+  //     colors = Colors.blue;
+  //   } else if (chalenge.date.isNotEmpty) {
+  //     colors = Colors.orange;
+  //   } else if (chalenge.totalDays.isNotEmpty) {
+  //     colors = Colors.yellow;
+  //   } else if (chalenge.notification ==
+  //       DateFormat('yyyy-MM-dd hh:mm').format(today)) {
+  //     colors = Colors.red;
+  //   }
+  //   return colors;
+  // }
 
   Widget activeGlow(ChallengeModel chalenge) {
     Widget glow = Padding(
@@ -222,7 +222,7 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
       glow = Shimmer(
         duration: Duration(seconds: 5),
         interval: Duration(seconds: 1),
-        color: colorGlow(chalenge),
+        color: Colors.red,
         enabled: true,
         direction: ShimmerDirection.fromRightToLeft(),
         child: Padding(

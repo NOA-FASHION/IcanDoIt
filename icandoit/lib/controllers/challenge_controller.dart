@@ -68,43 +68,11 @@ class Challengecontroller extends ChangeNotifier {
           .map((challenge) => ChallengeModel.fromJSON(challenge))
           .toList();
     }
-    // removeHebdo();
-    // hebdoSave();
-    // removeMensuel();
-    // mensuelSave();
+
     _initChallengeListStartChallenge();
 
     notifyListeners();
   }
-
-  // void testChallengeListListeTache() async {
-  //   for (var i = _challengeListSave.length - 1; i >= 0; i--) {
-  //     for (var n = _challengeList.length - 1; n >= 0; n--) {
-  //       if (_challengeList[n].name == _challengeListSave[i].name &&
-  //           _challengeListSave[i].listeDeTache.length !=
-  //               _challengeList[n].listeDeTache.length) {
-  //         _challengeListSave.add(
-  //           ChallengeModel(
-  //               notifiaction: _challengeList[n].notification,
-  //               date: _challengeList[n].date,
-  //               quotidient: _challengeList[n].quotidient,
-  //               animatedpadding: _challengeList[n].animatedpadding,
-  //               totalDays: _challengeList[n].totalDays,
-  //               listeDeTache: _challengeList[n].listeDeTache,
-  //               name: _challengeList[n].name,
-  //               description: _challengeList[n].description,
-  //               totalChallenge: _challengeList[n].totalChallenge,
-  //               unity: _challengeList[n].unity),
-  //         );
-
-  //         await _saveSauvegarde();
-  //         _initChallengeList();
-  //         notifyListeners();
-  //         return;
-  //       }
-  //     }
-  //   }
-  // }
 
   String translateDays(String days) {
     String daysFinal = "";
@@ -288,12 +256,12 @@ class Challengecontroller extends ChangeNotifier {
     DateTime today = new DateTime.now();
     if (challengeyesterday.date !=
         DateFormat('EEEE, d MMM, yyyy').format(today)) {
-      removeQuotidientSave();
-      initialiseQuotidient();
-      removeHebdo();
-      hebdoSave();
-      removeMensuel();
-      mensuelSave();
+      // removeQuotidientSave();
+      // initialiseQuotidient();
+      // removeHebdo();
+      // hebdoSave();
+      // removeMensuel();
+      // mensuelSave();
       challengeyesterday.date = DateFormat('EEEE, d MMM, yyyy').format(today);
       challengeyesterday.nbChallengeEnCours = challengeDays.nbChallengeEnCours;
       challengeyesterday.nbTacheEnCours = challengeDays.nbTacheEnCours;
@@ -309,6 +277,12 @@ class Challengecontroller extends ChangeNotifier {
   void initChallendays() async {
     DateTime today = new DateTime.now();
     if (challengeDays.date != DateFormat('EEEE, d MMM, yyyy').format(today)) {
+      removeQuotidientSave();
+      initialiseQuotidient();
+      removeHebdo();
+      hebdoSave();
+      removeMensuel();
+      mensuelSave();
       challengeDays.date = DateFormat('EEEE, d MMM, yyyy').format(today);
       challengeDays.nbtacheVallide = "0";
       challengeDays.nbchallengeVallide = "0";
@@ -734,6 +708,7 @@ class Challengecontroller extends ChangeNotifier {
       }
     }
     await _save1(remove: true, nameChallenge: nameChallenge);
+
     for (var i = _challengeList.length - 1; i >= 0; i--) {
       if (!validate &&
           _challengeList[i].name == nameChallenge &&

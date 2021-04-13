@@ -45,7 +45,7 @@ class _ChallengesListBuilderTachesState
           speed: 30,
         ),
       );
-    } else if (word.length > 29 && comment.length <= 5) {
+    } else if (word.length > 20 && comment.length > 5) {
       longLetter = Container(
         width: MediaQuery.of(context).size.width / 2.55,
         color: Colors.transparent,
