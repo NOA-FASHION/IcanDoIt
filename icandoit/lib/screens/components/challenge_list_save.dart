@@ -234,7 +234,7 @@ class _ExampleAppState extends State<ExampleApp>
                               showTopSnackBar(
                                 context,
                                 CustomSnackBar.success(
-                                  backgroundColor: Colors.white,
+                                  backgroundColor: Colors.blue,
                                   icon: Icon(
                                     Icons.restore,
                                     size: 30,

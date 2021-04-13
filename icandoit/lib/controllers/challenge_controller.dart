@@ -763,8 +763,8 @@ class Challengecontroller extends ChangeNotifier {
           var additionchallenge = _challengeListSave[i].totalChallenge;
           _challengeListSave[i].totalChallenge =
               (int.parse(additionchallenge) - 1).toString();
-          _challengeListSave[i].listeDeTache.removeAt(index);
         }
+        _challengeListSave[i].listeDeTache.removeAt(index);
       }
     }
     await _save1Sauvegarde(remove: true, nameChallenge: nameChallenge);
@@ -783,15 +783,15 @@ class Challengecontroller extends ChangeNotifier {
           var additionchallenge = _challengeList[i].totalChallenge;
           _challengeList[i].totalChallenge =
               (int.parse(additionchallenge) - 1).toString();
-          _challengeList[i].listeDeTache.removeAt(index);
         }
+        _challengeList[i].listeDeTache.removeAt(index);
       }
     }
     await _save1(remove: true, nameChallenge: nameChallenge);
 
     _initChallengeList();
     notifyListeners();
-    if (validate) {
+    if (!validate) {
       voidremove2Save(
           index: index, nameChallenge: nameChallenge, validate: validate);
     }
