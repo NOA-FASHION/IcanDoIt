@@ -697,26 +697,16 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                       ),
                     ),
                   ),
-                  // InkWell(
-                  //   splashColor: Colors.purple,
-                  //   onTap: () {
-                  //     variable.uploadChallenge();
-                  //   },
-                  //   child: Padding(
-                  //     padding: const EdgeInsets.only(right: 15),
-                  //     child: Ink(
-                  //       decoration: ShapeDecoration(
-                  //         color: Colour('#265FBC'),
-                  //         shape: CircleBorder(),
-                  //       ),
-                  //       child: Icon(
-                  //         Icons.upload_sharp,
-                  //         size: 40,
-                  //         color: Colors.white,
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
+                  IconButton(
+                    alignment: Alignment.topRight,
+                    icon: Icon(
+                      Icons.schedule,
+                      color: Colors.black,
+                    ),
+                    onPressed: () {
+                      variable.testSchedule();
+                    },
+                  ),
                 ],
                 leading: IconButton(
                   alignment: Alignment.topRight,

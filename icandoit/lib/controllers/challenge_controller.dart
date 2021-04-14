@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter_document_picker/flutter_document_picker.dart';
 import 'dart:convert';
@@ -15,6 +17,10 @@ const String keyAccesChallengeDay = "challengeDay";
 const String keyAccesChallengeYesterday = "ChallengeyesterDay";
 
 class Challengecontroller extends ChangeNotifier {
+  Future<Null> delay(int milliseconds) {
+    return new Future.delayed(new Duration(milliseconds: milliseconds));
+  }
+
   String unityPattern = "unity_challenge.";
   List<ChallengeModel> _challengeList = [];
   List<Challengemodel2> _challengeList2 = [];
@@ -95,53 +101,65 @@ class Challengecontroller extends ChangeNotifier {
   }
 
   void mensuelSave() {
-    print("mensuelsave");
     DateTime today = new DateTime.now();
+    print(DateFormat('d').format(today));
     for (var i = _challengeListSave.length - 1; i >= 0; i--) {
       if (_challengeListSave[i].date.isNotEmpty) {
         if (_challengeListSave[i].date == DateFormat('d').format(today)) {
           challegListSaveShedule(i);
+          return;
         }
       }
     }
   }
 
   void removeMensuel() {
-    print("removesuelsave");
     DateTime today = new DateTime.now();
     for (var i = _challengeList.length - 1; i >= 0; i--) {
       if (_challengeList[i].date.isNotEmpty) {
         if (_challengeList[i].date == DateFormat('d').format(today)) {
           remove(index: i, validate: true);
+          print(_challengeListSave[i].date);
+
+          return;
         }
       }
     }
   }
 
   void hebdoSave() {
-    print("hebdosave");
     DateTime today = new DateTime.now();
     for (var i = _challengeListSave.length - 1; i >= 0; i--) {
       if (_challengeListSave[i].totalDays.isNotEmpty) {
         for (var n = _challengeListSave[i].totalDays.length - 1; n >= 0; n--) {
-          if (_challengeListSave[i].totalDays[n] ==
-              translateDays(DateFormat('EEEE').format(today))) {
+          if (translateDays(_challengeListSave[i].totalDays[n]) ==
+              DateFormat('EEEE').format(today)) {
             challegListSaveShedule(i);
+            return;
           }
         }
       }
     }
   }
 
+  void testSchedule() {
+    removeQuotidientSave();
+    initialiseQuotidient();
+    removeHebdo();
+    hebdoSave();
+    removeMensuel();
+    mensuelSave();
+  }
+
   void removeHebdo() {
-    print("removehebdosave");
     DateTime today = new DateTime.now();
     for (var i = _challengeList.length - 1; i >= 0; i--) {
       if (_challengeList[i].totalDays.isNotEmpty) {
         for (var n = _challengeList[i].totalDays.length - 1; n >= 0; n--) {
-          if (_challengeList[i].totalDays[n] ==
-              translateDays(DateFormat('EEEE').format(today))) {
+          if (translateDays(_challengeList[i].totalDays[n]) ==
+              DateFormat('EEEE').format(today)) {
             remove(index: i, validate: true);
+            return;
           }
         }
       }
@@ -149,19 +167,19 @@ class Challengecontroller extends ChangeNotifier {
   }
 
   void removeQuotidientSave() async {
-    print("quotidiensave");
     for (var i = _challengeList.length - 1; i >= 0; i--) {
       if (_challengeList[i].quotidient == true) {
         remove(index: i, validate: true);
+        return;
       }
     }
   }
 
   void initialiseQuotidient() async {
-    print("removequotidien");
     for (var i = _challengeListSave.length - 1; i >= 0; i--) {
       if (_challengeListSave[i].quotidient == true) {
         challegListSaveShedule(i);
+        return;
       }
     }
   }
@@ -207,11 +225,6 @@ class Challengecontroller extends ChangeNotifier {
           jsonDecode(_tempListchallengeyesterday);
       challengeyesterday =
           Challengeyesterday.fromJSON(_jsonDecodeListchallengeyesterday);
-      // DateTime today = new DateTime.now();
-      // print(DateFormat('EEEE, d MMM, yyyy').format(today));
-
-      print(challengeyesterday.date);
-      print(challengeyesterday.nbchallengeVallide);
     }
     startChallendays();
     startChallenyesterday();
@@ -479,6 +492,7 @@ class Challengecontroller extends ChangeNotifier {
       name: nameListChallenge,
       challengeListTest: _challengeList3,
     );
+
     if (animatedpadding) {
       addChallengesave1(
         totalChallenge: totalChallenge,
@@ -490,13 +504,6 @@ class Challengecontroller extends ChangeNotifier {
     await _save();
     _initChallengeList();
     notifyListeners();
-    // for (var i = _challengeList.length - 1; i >= 0; i--) {
-    //   if (_challengeList[i].name == nameListChallenge &&
-    //       _challengeList[i].animatedpadding == true) {
-    //     addListChallengeSave(nameListChallenge);
-    //     return;
-    //   }
-    // }
   }
 
   void save() async {
@@ -510,11 +517,12 @@ class Challengecontroller extends ChangeNotifier {
     @required String name,
     @required List<Challengemodel2> challengeListTest,
   }) async {
+    await delay(500);
     for (var i = _challengeListSave.length - 1; i >= 0; i--) {
       if (_challengeListSave[i].name == name) {
-        // var additionchallenge = _challengeList[i].totalChallenge;
-        // _challengeList[i].totalChallenge =
-        //     (int.parse(additionchallenge) + 1).toString();
+        var additionchallenge = _challengeListSave[i].totalChallenge;
+        _challengeListSave[i].totalChallenge =
+            (int.parse(additionchallenge) + 1).toString();
 
         for (var n = challengeListTest.length - 1; n >= 0; n--) {
           _challengeListSave[i].listeDeTache.add(
@@ -524,6 +532,10 @@ class Challengecontroller extends ChangeNotifier {
                     description: challengeListTest[n].description),
               );
         }
+        await _saveSauvegarde();
+        _initChallengeList();
+        notifyListeners();
+        return;
       }
     }
   }
@@ -575,6 +587,7 @@ class Challengecontroller extends ChangeNotifier {
           totalChallenge: totalChallenge,
           unity: choixDesciptionEnum1(unity)),
     );
+
     if (animatedpadding == true) {
       addListChallengeSave(name);
     }
@@ -595,8 +608,6 @@ class Challengecontroller extends ChangeNotifier {
   }
 
   void addSlectSave() async {
-    // print('index save');
-    // print(indexSave);
     if (indexSave != null) {
       for (var i = _challengeListSave.length - 1; i >= 0; i--) {
         if (i == indexSave) {
@@ -630,8 +641,6 @@ class Challengecontroller extends ChangeNotifier {
     //   }
     // }
     for (var i = _challengeList.length - 1; i >= 0; i--) {
-      print('challengelistname');
-      print(namechallenge);
       if (_challengeList[i].name == namechallenge) {
         _challengeListSave.add(
           ChallengeModel(
@@ -648,8 +657,8 @@ class Challengecontroller extends ChangeNotifier {
         );
 
         await _saveSauvegarde();
-        // _initChallengeList();
-        // notifyListeners();
+        _initChallengeList();
+        notifyListeners();
         return;
       }
     }
@@ -799,7 +808,6 @@ class Challengecontroller extends ChangeNotifier {
 
   Future<String> get _localPath async {
     final directory = await getApplicationDocumentsDirectory();
-    print(directory.path);
     return directory.path;
   }
 
@@ -862,7 +870,6 @@ class Challengecontroller extends ChangeNotifier {
         }
       }
     }
-    print(_jsonChallengeList);
     return _jsonChallengeList;
   }
 }

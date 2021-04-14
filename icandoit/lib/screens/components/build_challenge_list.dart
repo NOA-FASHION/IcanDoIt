@@ -21,16 +21,12 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
     // print(listeTache);
     double percent1;
     if (listeTache != 0 && listeTache == totalChallenge) {
-      print("1");
       percent1 = 0.00;
     } else if (listeTache != 0 && listeTache != totalChallenge) {
       percent1 = listeTache / totalChallenge;
     } else {
       percent1 = 0.00;
-      print("2");
     }
-    print("totalchallenge");
-    print(percent1);
     return percent1;
   }
 
@@ -84,39 +80,6 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
     }
     return longLetter;
   }
-
-  // String maxLetterTitre(String word) {
-  //   var word2;
-  //   word2 = word[0];
-  //   if (word.length > 30) {
-  //     for (var i = 1; i <= 27; i++) {
-  //       word2 = word2 + word[i];
-  //     }
-  //     word2 = word2 + "...";
-  //   } else {
-  //     word2 = word;
-  //   }
-  //   return word2;
-  // }
-
-  // Color colorGlow(ChallengeModel chalenge) {
-  //   DateTime today = new DateTime.now();
-  //   print(chalenge.notification);
-  //   print(DateFormat('yyyy-MM-dd hh:mm').format(today));
-
-  //   Color colors = Colors.transparent;
-  //   if (chalenge.quotidient) {
-  //     colors = Colors.blue;
-  //   } else if (chalenge.date.isNotEmpty) {
-  //     colors = Colors.orange;
-  //   } else if (chalenge.totalDays.isNotEmpty) {
-  //     colors = Colors.yellow;
-  //   } else if (chalenge.notification ==
-  //       DateFormat('yyyy-MM-dd hh:mm').format(today)) {
-  //     colors = Colors.red;
-  //   }
-  //   return colors;
-  // }
 
   Widget activeGlow(ChallengeModel chalenge) {
     Widget glow = Padding(
@@ -235,6 +198,10 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
           child: Container(
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
+              border: Border.all(
+                color: Colors.red,
+                width: 1,
+              ),
               borderRadius: BorderRadius.circular(20),
               color: Colors.white,
               // border: Border.all(
