@@ -88,7 +88,7 @@ class Challengecontroller extends ChangeNotifier {
       daysFinal = "Tueday";
     } else if (days == "Mercredi") {
       daysFinal = "Wednesday";
-    } else if (days == "jeudi") {
+    } else if (days == "Jeudi") {
       daysFinal = "Thursday";
     } else if (days == "Vendredi") {
       daysFinal = "Friday";
