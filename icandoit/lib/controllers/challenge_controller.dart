@@ -187,6 +187,7 @@ class Challengecontroller extends ChangeNotifier {
   void challegListSaveShedule(int index) async {
     _challengeList.add(
       ChallengeModel(
+          id: _challengeListSave[index].id,
           notifiaction: _challengeListSave[index].notification,
           date: _challengeListSave[index].date,
           quotidient: _challengeListSave[index].quotidient,
@@ -381,7 +382,7 @@ class Challengecontroller extends ChangeNotifier {
   }
 
   List<Challengemodel2> getChallenges1() {
-    return UnmodifiableListView(_challengeList2);
+    return _challengeList2;
   }
 
   double calulPercent(String name) {
@@ -472,6 +473,7 @@ class Challengecontroller extends ChangeNotifier {
   }
 
   void addChallenge2({
+    @required Formation formation,
     @required bool animatedpadding,
     @required String totalChallenge,
     @required String nameListChallenge,
@@ -485,9 +487,11 @@ class Challengecontroller extends ChangeNotifier {
     _challengeList3.add(Challengemodel2(
         name: name,
         tache: tache,
-        description: choixDesciptionEnum(description)));
+        description: choixDesciptionEnum(description),
+        formation: formation));
 
     addChallenge1(
+      formation: formation,
       totalChallenge: totalChallenge,
       name: nameListChallenge,
       challengeListTest: _challengeList3,
@@ -495,6 +499,7 @@ class Challengecontroller extends ChangeNotifier {
 
     if (animatedpadding) {
       addChallengesave1(
+        formation: formation,
         totalChallenge: totalChallenge,
         name: nameListChallenge,
         challengeListTest: _challengeList3,
@@ -513,6 +518,7 @@ class Challengecontroller extends ChangeNotifier {
   }
 
   void addChallengesave1({
+    @required Formation formation,
     @required String totalChallenge,
     @required String name,
     @required List<Challengemodel2> challengeListTest,
@@ -529,7 +535,8 @@ class Challengecontroller extends ChangeNotifier {
                 Challengemodel2(
                     name: challengeListTest[n].name,
                     tache: challengeListTest[n].tache,
-                    description: challengeListTest[n].description),
+                    description: challengeListTest[n].description,
+                    formation: formation),
               );
         }
         await _saveSauvegarde();
@@ -541,6 +548,7 @@ class Challengecontroller extends ChangeNotifier {
   }
 
   void addChallenge1({
+    @required Formation formation,
     @required String totalChallenge,
     @required String name,
     @required List<Challengemodel2> challengeListTest,
@@ -556,7 +564,8 @@ class Challengecontroller extends ChangeNotifier {
                 Challengemodel2(
                     name: challengeListTest[n].name,
                     tache: challengeListTest[n].tache,
-                    description: challengeListTest[n].description),
+                    description: challengeListTest[n].description,
+                    formation: formation),
               );
         }
       }
@@ -564,7 +573,8 @@ class Challengecontroller extends ChangeNotifier {
   }
 
   void addChallenge(
-      {@required String name,
+      {@required String id,
+      @required String name,
       @required String notifiaction,
       @required String date,
       @required bool quotidient,
@@ -576,6 +586,7 @@ class Challengecontroller extends ChangeNotifier {
       @required List<Challengemodel2> challengeListTache}) async {
     _challengeList.add(
       ChallengeModel(
+          id: id,
           notifiaction: notifiaction,
           date: date,
           quotidient: quotidient,
@@ -601,7 +612,7 @@ class Challengecontroller extends ChangeNotifier {
     return indexSave;
   }
 
-  List<int> indexSaveFunction(bool selected, int index) {
+  indexSaveFunction(bool selected, int index) {
     if (selected) {
       indexSave = index;
     }
@@ -613,6 +624,7 @@ class Challengecontroller extends ChangeNotifier {
         if (i == indexSave) {
           _challengeList.add(
             ChallengeModel(
+                id: _challengeListSave[i].id,
                 notifiaction: _challengeListSave[i].notification,
                 date: _challengeListSave[i].date,
                 quotidient: _challengeListSave[i].quotidient,
@@ -644,6 +656,7 @@ class Challengecontroller extends ChangeNotifier {
       if (_challengeList[i].name == namechallenge) {
         _challengeListSave.add(
           ChallengeModel(
+              id: _challengeList[i].id,
               notifiaction: _challengeList[i].notification,
               date: _challengeList[i].date,
               quotidient: _challengeList[i].quotidient,
@@ -848,9 +861,9 @@ class Challengecontroller extends ChangeNotifier {
           name: uploadFileChallenge.name,
           description: uploadFileChallenge.description,
           totalChallenge: uploadFileChallenge.totalChallenge,
-          unity: uploadFileChallenge.unity
-              .toString()
-              .replaceAll(unityPattern, ""));
+          unity:
+              uploadFileChallenge.unity.toString().replaceAll(unityPattern, ""),
+          id: uploadFileChallenge.id);
     }
   }
 

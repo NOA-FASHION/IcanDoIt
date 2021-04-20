@@ -1,15 +1,18 @@
 import 'dart:io';
 
+import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_list_drag_and_drop/drag_and_drop_list.dart';
 // import 'dart:io' as io;
 import 'package:icandoit/models/challenge_model.dart';
 import 'package:icandoit/screens/components/playYoutube.dart';
+import 'package:icandoit/screens/formationEdit.dart';
 import 'package:icandoit/screens/playPicture.dart';
 import 'package:icandoit/screens/playUrl.dart';
 import 'package:icandoit/screens/playVideo.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lottie/lottie.dart';
+
 import 'package:provider/provider.dart';
 import '../../controllers/challenge_controller.dart';
 import '../playCommentaire.dart';
@@ -26,11 +29,15 @@ class ChallengesListBuilderTaches extends StatefulWidget {
 
 class _ChallengesListBuilderTachesState
     extends State<ChallengesListBuilderTaches> {
+  FocusNode myFocusNode = FocusNode();
+  TextEditingController textEditingControllerAnimated =
+      new TextEditingController();
   final picker = ImagePicker();
+  bool formation = false;
+  String chapitre;
 
   Widget maxLetter(String word, String comment) {
     Widget longLetter;
-
     String word2;
 
     if (word.length > 29 && comment.length <= 5) {
@@ -110,6 +117,7 @@ class _ChallengesListBuilderTachesState
         size: 30.0,
       );
     } else if (resultat == "formation") {
+      formation = true;
       documentJoint = Icon(
         Icons.model_training,
         size: 30.0,
@@ -134,9 +142,16 @@ class _ChallengesListBuilderTachesState
     return documentJoint;
   }
 
+  void dispose() {
+    textEditingControllerAnimated.dispose();
+    myFocusNode.dispose();
+    super.dispose();
+  }
+
   List<ChallengeModel> challengeListCharge;
 
   String unityPattern = "unity_challenge1.";
+
   @override
   Widget build(BuildContext context) {
     Challengecontroller providerType =
@@ -362,58 +377,130 @@ class _ChallengesListBuilderTachesState
                             ),
                           ),
                         ),
+                        IconButton(
+                          alignment: Alignment.topRight,
+                          icon: Icon(
+                            Icons.edit,
+                            color: Colors.black,
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) =>
+                                    ChangeNotifierProvider.value(
+                                        value: provider,
+                                        child: FormationEdit(
+                                          chapitre: item.formation.chapitre,
+                                          duree: item.formation.duree,
+                                          theoriePratique:
+                                              item.formation.theoriePratique,
+                                        ))));
+                          },
+                        ),
                       ],
                     ),
                   ),
-                  subtitle: Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: Card(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      elevation: 20.0,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.white,
+                  subtitle: FlipCard(
+                    flipOnTouch: formation,
+                    direction: FlipDirection.HORIZONTAL, // default
+                    front: Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Card(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20.0),
                         ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            children: [
-                              Container(
-                                height: 30.0,
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      item.description
-                                          .toString()
-                                          .replaceAll(unityPattern, "")
-                                          .toUpperCase(),
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.blue),
-                                    ),
-                                    SizedBox(
-                                      width: 5.0,
-                                    ),
-                                    maxLetter(
-                                        item.tache.toString(),
-                                        item.description
-                                            .toString()
-                                            .replaceAll(unityPattern, "")),
-                                    SizedBox(
-                                      width: 5.0,
-                                    ),
-                                    iconDataJoin(item.description
-                                        .toString()
-                                        .replaceAll(unityPattern, "")),
-                                  ],
+                        elevation: 20.0,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.white,
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              children: [
+                                Container(
+                                  height: 30.0,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      maxLetter(
+                                          item.formation.chapitre,
+                                          item.description
+                                              .toString()
+                                              .replaceAll(unityPattern, "")),
+                                      SizedBox(
+                                        width: 5.0,
+                                      ),
+                                      maxLetter(
+                                          item.formation.duree,
+                                          item.description
+                                              .toString()
+                                              .replaceAll(unityPattern, "")),
+                                      SizedBox(
+                                        width: 5.0,
+                                      ),
+                                      maxLetter(
+                                          item.formation.theoriePratique,
+                                          item.description
+                                              .toString()
+                                              .replaceAll(unityPattern, "")),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    back: Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Card(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        elevation: 20.0,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.white,
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              children: [
+                                Container(
+                                  height: 60.0,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        item.formation.chapitre,
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.blue),
+                                      ),
+                                      SizedBox(
+                                        width: 2.0,
+                                      ),
+                                      maxLetter(
+                                          item.tache.toString(),
+                                          item.description
+                                              .toString()
+                                              .replaceAll(unityPattern, "")),
+                                      SizedBox(
+                                        width: 2.0,
+                                      ),
+                                      iconDataJoin(item.description
+                                          .toString()
+                                          .replaceAll(unityPattern, "")),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),

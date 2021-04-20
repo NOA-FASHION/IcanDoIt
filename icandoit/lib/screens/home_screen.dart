@@ -22,6 +22,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
+  String idNotif = "";
   String dateQuotidien;
   String notifiaction = "";
   bool animatedpadding = false;
@@ -955,6 +956,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                   Provider.of<Challengecontroller>(context,
                                           listen: false)
                                       .addChallenge(
+                                          id: idNotif,
                                           notifiaction: notifiaction,
                                           date: date,
                                           totalDays: totalDays,

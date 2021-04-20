@@ -2,7 +2,9 @@
 
 // import 'package:flutter/foundation.dart';
 // import 'package:colour/colour.dart';
+
 import 'package:flutter/material.dart';
+import 'package:icandoit/models/challenge_model.dart';
 // import 'package:icandoit/models/challenge_model.dart';
 import 'package:icandoit/screens/components/build_challenge_list_tache.dart';
 import 'package:icandoit/controllers/challenge_controller.dart';
@@ -22,6 +24,11 @@ class HomeTaches extends StatefulWidget {
 }
 
 class _HomeTachesState extends State<HomeTaches> {
+  Formation formations = Formation(
+    chapitre: 'Chapitre',
+    duree: 'Duree',
+    theoriePratique: 'Theorie-pratique',
+  );
   List<String> docPaths;
   String _image;
   String _video;
@@ -635,7 +642,8 @@ class _HomeTachesState extends State<HomeTaches> {
                                             nameListChallenge: something,
                                             name: dataJoin,
                                             description: unityChallenge,
-                                            tache: targetChallenge);
+                                            tache: targetChallenge,
+                                            formation: formations);
                                   });
                                   Navigator.pop(context);
                                 }

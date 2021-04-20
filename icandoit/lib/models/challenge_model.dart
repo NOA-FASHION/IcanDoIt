@@ -71,13 +71,39 @@ choixDesciptionEnum1(dynamic json) {
   return unity;
 }
 
+class Formation {
+  String chapitre;
+  String duree;
+  String theoriePratique;
+  Formation({
+    @required this.chapitre,
+    @required this.duree,
+    @required this.theoriePratique,
+  });
+
+  Formation.fromJSON(Map<String, dynamic> json)
+      : chapitre = json['chapitre'],
+        duree = json['duree'],
+        theoriePratique = json['theoriePratique'];
+
+  Map<String, dynamic> toJson() {
+    return {
+      "chapitre": chapitre,
+      "duree": duree,
+      "theoriePratique": theoriePratique
+    };
+  }
+}
+
 class Challengemodel2 {
+  Formation formation;
   String index;
   String name;
-  final String tache;   
+  final String tache;
   final unity_challenge1 description;
   Challengemodel2(
-      {@required this.name,
+      {@required this.formation,
+      @required this.name,
       @required this.tache,
       @required this.description,
       this.index});
@@ -86,6 +112,7 @@ class Challengemodel2 {
       : name = json['name'],
         tache = json['tache'],
         index = json['index'],
+        formation = Formation.fromJSON(json["formation"]),
         description = choixDesciptionEnum(json);
 
   Map<String, dynamic> toJson() {
@@ -93,12 +120,14 @@ class Challengemodel2 {
       "name": name,
       "tache": tache,
       "index": index,
+      "formation": formation.toJson(),
       "description": description.toString()
     };
   }
 }
 
 class ChallengeModel {
+  String id;
   final String name;
   List<String> totalDays;
   String date;
@@ -111,6 +140,7 @@ class ChallengeModel {
   String totalChallenge;
 
   ChallengeModel({
+    this.id,
     this.notification,
     this.animatedpadding,
     this.date,
@@ -125,6 +155,7 @@ class ChallengeModel {
   });
 
   factory ChallengeModel.fromJSON(Map<String, dynamic> json) => ChallengeModel(
+        id: json['id'],
         notification: json['notification'],
         date: json['date'],
         animatedpadding: json['animatedpadding'],
@@ -141,6 +172,7 @@ class ChallengeModel {
 
   Map<String, dynamic> toJson() {
     return {
+      "id": id,
       "notification": notification,
       "name": name,
       "date": date,
