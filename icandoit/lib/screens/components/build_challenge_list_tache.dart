@@ -71,6 +71,33 @@ class _ChallengesListBuilderTachesState
     return longLetter;
   }
 
+  Widget formationEdit(
+      Challengecontroller provider, Challengemodel2 item, String description) {
+    Widget fomationEdit = SizedBox(
+      width: 5.0,
+    );
+    if (description == "formation") {
+      fomationEdit = IconButton(
+        alignment: Alignment.topRight,
+        icon: Icon(
+          Icons.edit,
+          color: Colors.black,
+        ),
+        onPressed: () {
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => ChangeNotifierProvider.value(
+                  value: provider,
+                  child: FormationEdit(
+                    chapitre: item.formation.chapitre,
+                    duree: item.formation.duree,
+                    theoriePratique: item.formation.theoriePratique,
+                  ))));
+        },
+      );
+    }
+    return fomationEdit;
+  }
+
   Widget iconDataJoin(String resultat) {
     Widget documentJoint = Icon(
       Icons.block,
@@ -377,25 +404,12 @@ class _ChallengesListBuilderTachesState
                             ),
                           ),
                         ),
-                        IconButton(
-                          alignment: Alignment.topRight,
-                          icon: Icon(
-                            Icons.edit,
-                            color: Colors.black,
-                          ),
-                          onPressed: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) =>
-                                    ChangeNotifierProvider.value(
-                                        value: provider,
-                                        child: FormationEdit(
-                                          chapitre: item.formation.chapitre,
-                                          duree: item.formation.duree,
-                                          theoriePratique:
-                                              item.formation.theoriePratique,
-                                        ))));
-                          },
-                        ),
+                        formationEdit(
+                            provider,
+                            item,
+                            item.description
+                                .toString()
+                                .replaceAll(unityPattern, ""))
                       ],
                     ),
                   ),
@@ -403,6 +417,59 @@ class _ChallengesListBuilderTachesState
                     flipOnTouch: formation,
                     direction: FlipDirection.HORIZONTAL, // default
                     front: Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Card(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        elevation: 20.0,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.white,
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              children: [
+                                Container(
+                                  height: 30.0,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        item.description
+                                            .toString()
+                                            .replaceAll(unityPattern, ""),
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.blue),
+                                      ),
+                                      SizedBox(
+                                        width: 2.0,
+                                      ),
+                                      maxLetter(
+                                          item.tache.toString(),
+                                          item.description
+                                              .toString()
+                                              .replaceAll(unityPattern, "")),
+                                      SizedBox(
+                                        width: 2.0,
+                                      ),
+                                      iconDataJoin(item.description
+                                          .toString()
+                                          .replaceAll(unityPattern, "")),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    back: Padding(
                       padding: const EdgeInsets.all(5.0),
                       child: Card(
                         shape: RoundedRectangleBorder(
@@ -445,57 +512,6 @@ class _ChallengesListBuilderTachesState
                                           item.description
                                               .toString()
                                               .replaceAll(unityPattern, "")),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    back: Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Card(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                        elevation: 20.0,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.white,
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              children: [
-                                Container(
-                                  height: 60.0,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        item.formation.chapitre,
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.blue),
-                                      ),
-                                      SizedBox(
-                                        width: 2.0,
-                                      ),
-                                      maxLetter(
-                                          item.tache.toString(),
-                                          item.description
-                                              .toString()
-                                              .replaceAll(unityPattern, "")),
-                                      SizedBox(
-                                        width: 2.0,
-                                      ),
-                                      iconDataJoin(item.description
-                                          .toString()
-                                          .replaceAll(unityPattern, "")),
                                     ],
                                   ),
                                 ),
