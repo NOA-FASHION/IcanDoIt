@@ -23,7 +23,7 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
     if (listeTache != 0 && listeTache == totalChallenge) {
       percent1 = 0.00;
     } else if (listeTache != 0 && listeTache != totalChallenge) {
-      percent1 = listeTache / totalChallenge;
+      percent1 = (1 - (listeTache / totalChallenge));
     } else {
       percent1 = 0.00;
     }
@@ -35,7 +35,7 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
 
     String word2;
 
-    if (word.length >= 22) {
+    if (word.length >= 21) {
       longLetter = Container(
         width: MediaQuery.of(context).size.width / 2.9,
         color: Colors.transparent,
@@ -460,7 +460,9 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => ChangeNotifierProvider.value(
                             value: variable,
-                            child: HomeTaches(_challengesList[index].name,
+                            child: HomeTaches(
+                                index,
+                                _challengesList[index].name,
                                 _challengesList[index].animatedpadding))));
                   },
                   title: Container(

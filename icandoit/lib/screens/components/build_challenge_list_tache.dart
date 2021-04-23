@@ -20,8 +20,10 @@ import 'package:marquee_text/marquee_text.dart';
 
 class ChallengesListBuilderTaches extends StatefulWidget {
   final String nameChallenge;
+  final int indexChallenge;
 
-  ChallengesListBuilderTaches({@required this.nameChallenge});
+  ChallengesListBuilderTaches(
+      {@required this.indexChallenge, @required this.nameChallenge});
   @override
   _ChallengesListBuilderTachesState createState() =>
       _ChallengesListBuilderTachesState();
@@ -88,10 +90,8 @@ class _ChallengesListBuilderTachesState
               builder: (context) => ChangeNotifierProvider.value(
                   value: provider,
                   child: FormationEdit(
-                    chapitre: item.formation.chapitre,
-                    duree: item.formation.duree,
-                    theoriePratique: item.formation.theoriePratique,
-                  ))));
+                      item: item,
+                      indexChallenge: widget.indexChallenge))));
         },
       );
     }

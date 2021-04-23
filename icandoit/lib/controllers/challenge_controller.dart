@@ -472,6 +472,103 @@ class Challengecontroller extends ChangeNotifier {
     return unity;
   }
 
+  void addformationChapitre(
+      {@required int indexChallenge,
+      @required int index,
+      @required String chapitre}) async {
+    _challengeList[indexChallenge].listeDeTache[index].formation.chapitre =
+        chapitre;
+    addChallengesaveChapitre(
+      index: index,
+      name: _challengeList[indexChallenge].name,
+      chapitre: chapitre,
+    );
+    // await _saveSauvegarde();
+    await _save();
+    _initChallengeList();
+    notifyListeners();
+  }
+
+  void addformationDuree(
+      {@required int indexChallenge,
+      @required int index,
+      @required String duree}) async {
+    _challengeList[indexChallenge].listeDeTache[index].formation.duree = duree;
+    addChallengesaveDuree(
+      index: index,
+      name: _challengeList[indexChallenge].name,
+      duree: duree,
+    );
+    // await _saveSauvegarde();
+    await _save();
+    _initChallengeList();
+    notifyListeners();
+  }
+
+  void addformationTheoriePratique(
+      {@required int indexChallenge,
+      @required int index,
+      @required String theoriePratique}) async {
+    _challengeList[indexChallenge]
+        .listeDeTache[index]
+        .formation
+        .theoriePratique = theoriePratique;
+    addChallengesavetheoriePratique(
+      index: index,
+      name: _challengeList[indexChallenge].name,
+      theoriePratique: theoriePratique,
+    );
+    await _save();
+    _initChallengeList();
+    notifyListeners();
+  }
+
+  void addChallengesavetheoriePratique({
+    @required String theoriePratique,
+    @required int index,
+    @required String name,
+  }) async {
+    await delay(500);
+    for (var i = _challengeListSave.length - 1; i >= 0; i--) {
+      if (_challengeListSave[i].name == name) {
+        _challengeListSave[i].listeDeTache[index].formation.theoriePratique =
+            theoriePratique;
+        await _saveSauvegarde();
+        return;
+      }
+    }
+  }
+
+  void addChallengesaveChapitre({
+    @required String chapitre,
+    @required int index,
+    @required String name,
+  }) async {
+    await delay(500);
+    for (var i = _challengeListSave.length - 1; i >= 0; i--) {
+      if (_challengeListSave[i].name == name) {
+        _challengeListSave[i].listeDeTache[index].formation.chapitre = chapitre;
+        await _saveSauvegarde();
+        return;
+      }
+    }
+  }
+
+  void addChallengesaveDuree({
+    @required String duree,
+    @required int index,
+    @required String name,
+  }) async {
+    await delay(500);
+    for (var i = _challengeListSave.length - 1; i >= 0; i--) {
+      if (_challengeListSave[i].name == name) {
+        _challengeListSave[i].listeDeTache[index].formation.duree = duree;
+        await _saveSauvegarde();
+        return;
+      }
+    }
+  }
+
   void addChallenge2({
     @required Formation formation,
     @required bool animatedpadding,

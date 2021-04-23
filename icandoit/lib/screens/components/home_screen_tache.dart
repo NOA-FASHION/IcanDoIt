@@ -16,11 +16,12 @@ import 'package:shimmer_animation/shimmer_animation.dart';
 class HomeTaches extends StatefulWidget {
   final String something;
   final bool animatedpadding;
+  final int indexChallenge;
 
-  HomeTaches(this.something, this.animatedpadding);
+  HomeTaches(this.indexChallenge, this.something, this.animatedpadding);
   @override
   _HomeTachesState createState() =>
-      _HomeTachesState(something, animatedpadding);
+      _HomeTachesState(indexChallenge, something, animatedpadding);
 }
 
 class _HomeTachesState extends State<HomeTaches> {
@@ -120,8 +121,9 @@ class _HomeTachesState extends State<HomeTaches> {
 
   final bool animatedpadding;
   final String something;
+  final int indexChallenge;
   String dataJoin;
-  _HomeTachesState(this.something, this.animatedpadding);
+  _HomeTachesState(this.indexChallenge, this.something, this.animatedpadding);
   final GlobalKey<ScaffoldState> scaffoldkeyTache = GlobalKey<ScaffoldState>();
   final GlobalKey<FormState> formKeyTache = GlobalKey<FormState>();
   PersistentBottomSheetController _bottomSheetController;
@@ -379,6 +381,7 @@ class _HomeTachesState extends State<HomeTaches> {
                   end: Alignment.centerRight,
                   colors: [Colors.purple, Colors.blue])),
           child: ChallengesListBuilderTaches(
+            indexChallenge: indexChallenge,
             nameChallenge: something,
           ),
         ),
