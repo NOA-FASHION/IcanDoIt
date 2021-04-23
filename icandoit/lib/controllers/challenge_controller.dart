@@ -961,27 +961,36 @@ class Challengecontroller extends ChangeNotifier {
   }
 
   voidremove2Save(
-      {@required int index,
+      {@required int indexSave,
+      @required int index,
       @required String nameChallenge,
       bool validate}) async {
     for (var i = _challengeListSave.length - 1; i >= 0; i--) {
       if (_challengeListSave[i].name == nameChallenge) {
-        if (!validate) {
-          var additionchallenge = _challengeListSave[i].totalChallenge;
-          _challengeListSave[i].totalChallenge =
-              (int.parse(additionchallenge) - 1).toString();
-        }
-        _challengeListSave[i].listeDeTache.removeAt(index);
-      }
-    }
-    await _save1Sauvegarde(remove: true, nameChallenge: nameChallenge);
+        var additionchallenge = _challengeListSave[i].totalChallenge;
+        _challengeListSave[i].totalChallenge =
+            (int.parse(additionchallenge) - 1).toString();
 
-    _initChallengeList();
-    notifyListeners();
+        for (var n = _challengeListSave[i].listeDeTache.length - 1;
+            n >= 0;
+            n--) {
+          if (_challengeListSave[i].listeDeTache[n].tache ==
+              _challengeList[indexSave].listeDeTache[index].tache) {
+            _challengeListSave[i].listeDeTache.removeAt(n);
+          }
+        }
+      }
+      await _save1Sauvegarde(remove: true, nameChallenge: nameChallenge);
+
+      _initChallengeList();
+      notifyListeners();
+      return;
+    }
   }
 
   void remove2(
-      {@required int index,
+      {@required int indexSave,
+      @required int index,
       @required String nameChallenge,
       @required bool validate}) async {
     for (var i = _challengeList.length - 1; i >= 0; i--) {
@@ -1000,9 +1009,36 @@ class Challengecontroller extends ChangeNotifier {
     notifyListeners();
     if (!validate) {
       voidremove2Save(
-          index: index, nameChallenge: nameChallenge, validate: validate);
+          indexSave: indexSave,
+          index: index,
+          nameChallenge: nameChallenge,
+          validate: validate);
     }
   }
+
+  // void remove2(
+  //     {@required int index,
+  //     @required String nameChallenge,
+  //     @required bool validate}) async {
+  //   for (var i = _challengeList.length - 1; i >= 0; i--) {
+  //     if (_challengeList[i].name == nameChallenge) {
+  //       if (!validate) {
+  //         var additionchallenge = _challengeList[i].totalChallenge;
+  //         _challengeList[i].totalChallenge =
+  //             (int.parse(additionchallenge) - 1).toString();
+  //       }
+  //       _challengeList[i].listeDeTache.removeAt(index);
+  //     }
+  //   }
+  //   await _save1(remove: true, nameChallenge: nameChallenge);
+
+  //   _initChallengeList();
+  //   notifyListeners();
+  //   if (!validate) {
+  //     voidremove2Save(
+  //         index: index, nameChallenge: nameChallenge, validate: validate);
+  //   }
+  // }
 
   Future<String> get _localPath async {
     final directory = await getApplicationDocumentsDirectory();
