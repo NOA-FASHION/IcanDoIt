@@ -385,30 +385,30 @@ class Challengecontroller extends ChangeNotifier {
     return _challengeList2;
   }
 
-  double calulPercent(String name) {
-    double resultat;
-    for (var i = _challengeList.length - 1; i >= 0; i--) {
-      if (_challengeList[i].name == name) {
-        if (_challengeList[i].listeDeTache.length != null) {
-          if (_challengeList[i].listeDeTache.length > 0 &&
-              (_challengeList[i].listeDeTache.length ==
-                  int.parse(_challengeList[i].totalChallenge))) {
-            resultat = 0.00;
-          } else if (_challengeList[i].listeDeTache.length != 0 &&
-              (_challengeList[i].listeDeTache.length !=
-                  int.parse(_challengeList[i].totalChallenge))) {
-            resultat = (_challengeList[i].listeDeTache.length /
-                int.parse(_challengeList[i].totalChallenge));
-          } else {
-            resultat = 0.00;
-          }
-        } else {
-          resultat = 0.00;
-        }
-      }
-      return resultat;
-    }
-  }
+  // double calulPercent(String name) {
+  //   double resultat;
+  //   for (var i = _challengeList.length - 1; i >= 0; i--) {
+  //     if (_challengeList[i].name == name) {
+  //       if (_challengeList[i].listeDeTache.length != null) {
+  //         if (_challengeList[i].listeDeTache.length > 0 &&
+  //             (_challengeList[i].listeDeTache.length ==
+  //                 int.parse(_challengeList[i].totalChallenge))) {
+  //           resultat = 0.00;
+  //         } else if (_challengeList[i].listeDeTache.length != 0 &&
+  //             (_challengeList[i].listeDeTache.length !=
+  //                 int.parse(_challengeList[i].totalChallenge))) {
+  //           resultat = (_challengeList[i].listeDeTache.length /
+  //               int.parse(_challengeList[i].totalChallenge));
+  //         } else {
+  //           resultat = 0.00;
+  //         }
+  //       } else {
+  //         resultat = 0.00;
+  //       }
+  //     }
+  //     return resultat;
+  //   }
+  // }
 
   List<Challengemodel2> challengelist2(String name) {
     List<Challengemodel2> additionchallenge = [];
@@ -479,7 +479,7 @@ class Challengecontroller extends ChangeNotifier {
     _challengeList[indexChallenge].listeDeTache[index].formation.chapitre =
         chapitre;
     addChallengesaveChapitre(
-      index: index,
+      tache: _challengeList[indexChallenge].listeDeTache[index].tache,
       name: _challengeList[indexChallenge].name,
       chapitre: chapitre,
     );
@@ -495,7 +495,7 @@ class Challengecontroller extends ChangeNotifier {
       @required String duree}) async {
     _challengeList[indexChallenge].listeDeTache[index].formation.duree = duree;
     addChallengesaveDuree(
-      index: index,
+      tache: _challengeList[indexChallenge].listeDeTache[index].tache,
       name: _challengeList[indexChallenge].name,
       duree: duree,
     );
@@ -514,7 +514,7 @@ class Challengecontroller extends ChangeNotifier {
         .formation
         .theoriePratique = theoriePratique;
     addChallengesavetheoriePratique(
-      index: index,
+      tache: _challengeList[indexChallenge].listeDeTache[index].tache,
       name: _challengeList[indexChallenge].name,
       theoriePratique: theoriePratique,
     );
@@ -525,51 +525,73 @@ class Challengecontroller extends ChangeNotifier {
 
   void addChallengesavetheoriePratique({
     @required String theoriePratique,
-    @required int index,
+    @required String tache,
     @required String name,
   }) async {
     await delay(500);
     for (var i = _challengeListSave.length - 1; i >= 0; i--) {
       if (_challengeListSave[i].name == name) {
-        _challengeListSave[i].listeDeTache[index].formation.theoriePratique =
-            theoriePratique;
-        await _saveSauvegarde();
-        return;
+        for (var n = _challengeListSave[i].listeDeTache.length - 1;
+            n >= 0;
+            n--) {
+          if (_challengeListSave[i].listeDeTache[n].tache == tache) {
+            _challengeListSave[i].listeDeTache[n].formation.theoriePratique =
+                theoriePratique;
+            await _saveSauvegarde();
+            _initChallengeList();
+            return;
+          }
+        }
       }
     }
   }
 
   void addChallengesaveChapitre({
     @required String chapitre,
-    @required int index,
+    @required String tache,
     @required String name,
   }) async {
     await delay(500);
     for (var i = _challengeListSave.length - 1; i >= 0; i--) {
       if (_challengeListSave[i].name == name) {
-        _challengeListSave[i].listeDeTache[index].formation.chapitre = chapitre;
-        await _saveSauvegarde();
-        return;
+        for (var n = _challengeListSave[i].listeDeTache.length - 1;
+            n >= 0;
+            n--) {
+          if (_challengeListSave[i].listeDeTache[n].tache == tache) {
+            _challengeListSave[i].listeDeTache[n].formation.chapitre = chapitre;
+            await _saveSauvegarde();
+            _initChallengeList();
+            return;
+          }
+        }
       }
     }
   }
 
   void addChallengesaveDuree({
     @required String duree,
-    @required int index,
+    @required String tache,
     @required String name,
   }) async {
     await delay(500);
     for (var i = _challengeListSave.length - 1; i >= 0; i--) {
       if (_challengeListSave[i].name == name) {
-        _challengeListSave[i].listeDeTache[index].formation.duree = duree;
-        await _saveSauvegarde();
-        return;
+        for (var n = _challengeListSave[i].listeDeTache.length - 1;
+            n >= 0;
+            n--) {
+          if (_challengeListSave[i].listeDeTache[n].tache == tache) {
+            _challengeListSave[i].listeDeTache[n].formation.duree = duree;
+            await _saveSauvegarde();
+            _initChallengeList();
+            return;
+          }
+        }
       }
     }
   }
 
   void addChallenge2({
+    @required int index,
     @required Formation formation,
     @required bool animatedpadding,
     @required String totalChallenge,
@@ -588,6 +610,7 @@ class Challengecontroller extends ChangeNotifier {
         formation: formation));
 
     addChallenge1(
+      index: index,
       formation: formation,
       totalChallenge: totalChallenge,
       name: nameListChallenge,
@@ -644,29 +667,54 @@ class Challengecontroller extends ChangeNotifier {
     }
   }
 
+  // void addChallengesave1({
+  //   @required Formation formation,
+  //   @required String totalChallenge,
+  //   @required String name,
+  //   @required List<Challengemodel2> challengeListTest,
+  // }) async {
+  //   await delay(500);
+  //   for (var i = _challengeListSave.length - 1; i >= 0; i--) {
+  //     if (_challengeListSave[i].name == name) {
+  //       var additionchallenge = _challengeListSave[i].totalChallenge;
+  //       _challengeListSave[i].totalChallenge =
+  //           (int.parse(additionchallenge) + 1).toString();
+
+  //       for (var n = challengeListTest.length - 1; n >= 0; n--) {
+  //         _challengeListSave[i].listeDeTache.add(
+  //               Challengemodel2(
+  //                   name: challengeListTest[n].name,
+  //                   tache: challengeListTest[n].tache,
+  //                   description: challengeListTest[n].description,
+  //                   formation: formation),
+  //             );
+  //       }
+  //       await _saveSauvegarde();
+  //       _initChallengeList();
+  //       notifyListeners();
+  //       return;
+  //     }
+  //   }
+  // }
+
   void addChallenge1({
+    @required int index,
     @required Formation formation,
     @required String totalChallenge,
     @required String name,
     @required List<Challengemodel2> challengeListTest,
   }) async {
-    for (var i = _challengeList.length - 1; i >= 0; i--) {
-      if (_challengeList[i].name == name) {
-        var additionchallenge = _challengeList[i].totalChallenge;
-        _challengeList[i].totalChallenge =
-            (int.parse(additionchallenge) + 1).toString();
+    var additionchallenge = _challengeList[index].totalChallenge;
+    _challengeList[index].totalChallenge =
+        (int.parse(additionchallenge) + 1).toString();
 
-        for (var n = challengeListTest.length - 1; n >= 0; n--) {
-          _challengeList[i].listeDeTache.add(
-                Challengemodel2(
-                    name: challengeListTest[n].name,
-                    tache: challengeListTest[n].tache,
-                    description: challengeListTest[n].description,
-                    formation: formation),
-              );
-        }
-      }
-    }
+    _challengeList[index].listeDeTache.add(
+          Challengemodel2(
+              name: challengeListTest[0].name,
+              tache: challengeListTest[0].tache,
+              description: challengeListTest[0].description,
+              formation: formation),
+        );
   }
 
   void addChallenge(
@@ -709,6 +757,12 @@ class Challengecontroller extends ChangeNotifier {
     return indexSave;
   }
 
+  void deplacelistSAve(int index, String name) async {
+    await delay(500);
+    removeSave2(name: name);
+    addListChallengeSaveindex(index);
+  }
+
   indexSaveFunction(bool selected, int index) {
     if (selected) {
       indexSave = index;
@@ -743,12 +797,29 @@ class Challengecontroller extends ChangeNotifier {
     }
   }
 
+  void addListChallengeSaveindex(int index) async {
+    _challengeListSave.add(
+      ChallengeModel(
+          id: _challengeList[index].id,
+          notifiaction: _challengeList[index].notification,
+          date: _challengeList[index].date,
+          quotidient: _challengeList[index].quotidient,
+          animatedpadding: _challengeList[index].animatedpadding,
+          totalDays: _challengeList[index].totalDays,
+          listeDeTache: _challengeList[index].listeDeTache,
+          name: _challengeList[index].name,
+          description: _challengeList[index].description,
+          totalChallenge: _challengeList[index].totalChallenge,
+          unity: _challengeList[index].unity),
+    );
+
+    await _saveSauvegarde();
+    _initChallengeList();
+    notifyListeners();
+    return;
+  }
+
   void addListChallengeSave(String namechallenge) async {
-    // for (var i = _challengeListSave.length - 1; i >= 0; i--) {
-    //   if (_challengeListSave[i].name == namechallenge) {
-    //     _challengeListSave.removeAt(i);
-    //   }
-    // }
     for (var i = _challengeList.length - 1; i >= 0; i--) {
       if (_challengeList[i].name == namechallenge) {
         _challengeListSave.add(
@@ -851,6 +922,16 @@ class Challengecontroller extends ChangeNotifier {
     await _saveSauvegarde(remove: true);
     _initChallengeList();
     notifyListeners();
+  }
+
+  void removeSave2({@required String name}) async {
+    for (var i = _challengeListSave.length - 1; i >= 0; i--) {
+      if (_challengeListSave[i].name == name) {
+        _challengeListSave.removeAt(i);
+        await _saveSauvegarde(remove: true);
+        return;
+      }
+    }
   }
 
   void remove(

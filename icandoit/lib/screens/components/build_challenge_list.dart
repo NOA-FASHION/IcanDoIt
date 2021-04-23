@@ -327,7 +327,7 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
           title: "Confirmez la sauvegarde",
           content: "Une sauvegarde va être éffectué",
           yesOnPressed: () {
-            variable.addListChallengeSave(_challengesList[index].name);
+            variable.addListChallengeSaveindex(index);
             Navigator.pop(context, false);
           },
           noOnPressed: () {},

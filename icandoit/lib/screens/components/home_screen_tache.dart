@@ -640,6 +640,7 @@ class _HomeTachesState extends State<HomeTaches> {
                                     Provider.of<Challengecontroller>(context,
                                             listen: false)
                                         .addChallenge2(
+                                          index:indexChallenge ,
                                             animatedpadding: animatedpadding,
                                             totalChallenge: '1',
                                             nameListChallenge: something,

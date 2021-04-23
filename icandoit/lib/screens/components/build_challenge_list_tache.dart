@@ -90,8 +90,7 @@ class _ChallengesListBuilderTachesState
               builder: (context) => ChangeNotifierProvider.value(
                   value: provider,
                   child: FormationEdit(
-                      item: item,
-                      indexChallenge: widget.indexChallenge))));
+                      item: item, indexChallenge: widget.indexChallenge))));
         },
       );
     }
@@ -534,6 +533,7 @@ class _ChallengesListBuilderTachesState
         _challengesList.removeAt(before);
         _challengesList.insert(after, data);
         provider.save();
+        provider.deplacelistSAve(widget.indexChallenge, widget.nameChallenge);
       },
       canBeDraggedTo: (one, two) => true,
       dragElevation: 8.0,
