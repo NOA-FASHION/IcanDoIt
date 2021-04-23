@@ -759,8 +759,15 @@ class Challengecontroller extends ChangeNotifier {
 
   void deplacelistSAve(int index, String name) async {
     await delay(500);
-    removeSave2(name: name);
-    addListChallengeSaveindex(index);
+    for (var i = _challengeListSave.length - 1; i >= 0; i--) {
+      if (_challengeListSave[i].name == name &&
+          _challengeListSave[i].listeDeTache.length ==
+              _challengeList[index].listeDeTache.length) {
+        removeSave2(name: name);
+        addListChallengeSaveindex(index);
+        return;
+      }
+    }
   }
 
   indexSaveFunction(bool selected, int index) {
