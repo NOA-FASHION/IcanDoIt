@@ -758,7 +758,7 @@ class Challengecontroller extends ChangeNotifier {
   }
 
   void deplacelistSAve(int index, String name) async {
-    await delay(500);
+    await delay(200);
     for (var i = _challengeListSave.length - 1; i >= 0; i--) {
       if (_challengeListSave[i].name == name &&
           _challengeListSave[i].listeDeTache.length ==
