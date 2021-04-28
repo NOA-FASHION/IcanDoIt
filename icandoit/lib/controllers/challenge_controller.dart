@@ -975,16 +975,18 @@ class Challengecontroller extends ChangeNotifier {
             n >= 0;
             n--) {
           if (_challengeListSave[i].listeDeTache[n].tache ==
-              _challengeList[indexSave].listeDeTache[index].tache) {
+                  _challengeList[indexSave].listeDeTache[index].tache &&
+              _challengeListSave[i].listeDeTache[n].description ==
+                  _challengeList[indexSave].listeDeTache[index].description) {
             _challengeListSave[i].listeDeTache.removeAt(n);
+            await _save1Sauvegarde(remove: true, nameChallenge: nameChallenge);
+
+            // _initChallengeList();
+            // notifyListeners();
+            return;
           }
         }
       }
-      await _save1Sauvegarde(remove: true, nameChallenge: nameChallenge);
-
-      _initChallengeList();
-      notifyListeners();
-      return;
     }
   }
 
@@ -1004,16 +1006,16 @@ class Challengecontroller extends ChangeNotifier {
       }
     }
     await _save1(remove: true, nameChallenge: nameChallenge);
-
-    _initChallengeList();
-    notifyListeners();
     if (!validate) {
-      voidremove2Save(
+      await voidremove2Save(
           indexSave: indexSave,
           index: index,
           nameChallenge: nameChallenge,
           validate: validate);
     }
+
+    _initChallengeList();
+    notifyListeners();
   }
 
   // void remove2(
