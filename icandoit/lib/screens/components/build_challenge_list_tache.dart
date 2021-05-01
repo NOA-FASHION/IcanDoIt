@@ -211,6 +211,7 @@ class _ChallengesListBuilderTachesState
                     content: "La tâche a bien été validé",
                     lotties: 'assets/challenge.json'));
                 provider.remove2(
+                    tache: item.tache,
                     indexSave: widget.indexChallenge,
                     validate: true,
                     index: int.parse(item.index),
@@ -222,6 +223,7 @@ class _ChallengesListBuilderTachesState
                     content: "La mission a bien ete supprime",
                     lotties: 'assets/trash.json'));
                 provider.remove2(
+                    tache: item.tache,
                     indexSave: widget.indexChallenge,
                     validate: false,
                     index: int.parse(item.index),

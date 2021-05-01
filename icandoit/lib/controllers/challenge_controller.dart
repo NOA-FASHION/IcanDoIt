@@ -961,7 +961,8 @@ class Challengecontroller extends ChangeNotifier {
   }
 
   voidremove2Save(
-      {@required int indexSave,
+      {@required String tache,
+      @required int indexSave,
       @required int index,
       @required String nameChallenge,
       bool validate}) async {
@@ -974,10 +975,7 @@ class Challengecontroller extends ChangeNotifier {
         for (var n = _challengeListSave[i].listeDeTache.length - 1;
             n >= 0;
             n--) {
-          if (_challengeListSave[i].listeDeTache[n].tache ==
-                  _challengeList[indexSave].listeDeTache[index].tache &&
-              _challengeListSave[i].listeDeTache[n].description ==
-                  _challengeList[indexSave].listeDeTache[index].description) {
+          if (_challengeListSave[i].listeDeTache[n].tache == tache) {
             _challengeListSave[i].listeDeTache.removeAt(n);
             await _save1Sauvegarde(remove: true, nameChallenge: nameChallenge);
 
@@ -991,7 +989,8 @@ class Challengecontroller extends ChangeNotifier {
   }
 
   void remove2(
-      {@required int indexSave,
+      {@required String tache,
+      @required int indexSave,
       @required int index,
       @required String nameChallenge,
       @required bool validate}) async {
@@ -1001,18 +1000,18 @@ class Challengecontroller extends ChangeNotifier {
           var additionchallenge = _challengeList[i].totalChallenge;
           _challengeList[i].totalChallenge =
               (int.parse(additionchallenge) - 1).toString();
+
+          await voidremove2Save(
+              tache: tache,
+              indexSave: indexSave,
+              index: index,
+              nameChallenge: nameChallenge,
+              validate: validate);
         }
         _challengeList[i].listeDeTache.removeAt(index);
       }
     }
     await _save1(remove: true, nameChallenge: nameChallenge);
-    if (!validate) {
-      await voidremove2Save(
-          indexSave: indexSave,
-          index: index,
-          nameChallenge: nameChallenge,
-          validate: validate);
-    }
 
     _initChallengeList();
     notifyListeners();
