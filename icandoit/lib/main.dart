@@ -29,7 +29,11 @@ class _IcanDoItState extends State<IcanDoIt> {
         '/settings': (context) => ExampleApp()
       },
       home: ChangeNotifierProvider<Challengecontroller>(
-          create: (context) => Challengecontroller(), child: Home()),
+          create: (context) => Challengecontroller(),
+          child: Home(
+            id: "",
+            idChallenge1: '',
+          )),
     );
   }
 }

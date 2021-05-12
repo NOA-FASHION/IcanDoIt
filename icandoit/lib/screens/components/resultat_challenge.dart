@@ -98,7 +98,11 @@ class _ResultaChallengeState extends State<ResultaChallenge>
 
               Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => ChangeNotifierProvider.value(
-                      value: variable2, child: Home())));
+                      value: variable2,
+                      child: Home(
+                        id: "",
+                        idChallenge1: '',
+                      ))));
               setState(() {});
               // setState(() {});
             },

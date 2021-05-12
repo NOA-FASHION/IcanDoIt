@@ -96,13 +96,15 @@ class Formation {
 }
 
 class Challengemodel2 {
+  String id;
   Formation formation;
   String index;
   String name;
   final String tache;
   final unity_challenge1 description;
   Challengemodel2(
-      {@required this.formation,
+      {@required this.id,
+      @required this.formation,
       @required this.name,
       @required this.tache,
       @required this.description,
@@ -110,6 +112,7 @@ class Challengemodel2 {
 
   Challengemodel2.fromJSON(Map<String, dynamic> json)
       : name = json['name'],
+        id = json['id'],
         tache = json['tache'],
         index = json['index'],
         formation = Formation.fromJSON(json["formation"]),
@@ -118,6 +121,7 @@ class Challengemodel2 {
   Map<String, dynamic> toJson() {
     return {
       "name": name,
+      "id": id,
       "tache": tache,
       "index": index,
       "formation": formation.toJson(),
@@ -127,7 +131,10 @@ class Challengemodel2 {
 }
 
 class ChallengeModel {
+  bool boolId;
   String id;
+  String idNotif;
+  String idChallenge;
   final String name;
   List<String> totalDays;
   String date;
@@ -141,6 +148,9 @@ class ChallengeModel {
 
   ChallengeModel({
     this.id,
+    this.idNotif,
+    this.boolId,
+    this.idChallenge,
     this.notification,
     this.animatedpadding,
     this.date,
@@ -156,6 +166,9 @@ class ChallengeModel {
 
   factory ChallengeModel.fromJSON(Map<String, dynamic> json) => ChallengeModel(
         id: json['id'],
+        boolId: json['boolId'],
+        idNotif: json['idNotif'],
+        idChallenge: json['idChallenge'],
         notification: json['notification'],
         date: json['date'],
         animatedpadding: json['animatedpadding'],
@@ -173,6 +186,9 @@ class ChallengeModel {
   Map<String, dynamic> toJson() {
     return {
       "id": id,
+      "boolId": boolId,
+      "idNotif": idNotif,
+      "idChallenge": idChallenge,
       "notification": notification,
       "name": name,
       "date": date,

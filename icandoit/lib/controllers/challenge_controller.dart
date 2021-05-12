@@ -187,6 +187,9 @@ class Challengecontroller extends ChangeNotifier {
   void challegListSaveShedule(int index) async {
     _challengeList.add(
       ChallengeModel(
+          idChallenge: _challengeListSave[index].idChallenge,
+          idNotif: _challengeListSave[index].idNotif,
+          boolId: _challengeListSave[index].boolId,
           id: _challengeListSave[index].id,
           notifiaction: _challengeListSave[index].notification,
           date: _challengeListSave[index].date,
@@ -591,6 +594,7 @@ class Challengecontroller extends ChangeNotifier {
   }
 
   void addChallenge2({
+    @required String id,
     @required int index,
     @required Formation formation,
     @required bool animatedpadding,
@@ -604,12 +608,14 @@ class Challengecontroller extends ChangeNotifier {
     // for (var i = _challengeList.length - 1; i >= 0; i--) {}
     _challengeList3 = [];
     _challengeList3.add(Challengemodel2(
+        id: id,
         name: name,
         tache: tache,
         description: choixDesciptionEnum(description),
         formation: formation));
 
     addChallenge1(
+      id: id,
       index: index,
       formation: formation,
       totalChallenge: totalChallenge,
@@ -619,6 +625,7 @@ class Challengecontroller extends ChangeNotifier {
 
     if (animatedpadding) {
       addChallengesave1(
+        id: id,
         formation: formation,
         totalChallenge: totalChallenge,
         name: nameListChallenge,
@@ -638,6 +645,7 @@ class Challengecontroller extends ChangeNotifier {
   }
 
   void addChallengesave1({
+    @required String id,
     @required Formation formation,
     @required String totalChallenge,
     @required String name,
@@ -653,6 +661,7 @@ class Challengecontroller extends ChangeNotifier {
         for (var n = challengeListTest.length - 1; n >= 0; n--) {
           _challengeListSave[i].listeDeTache.add(
                 Challengemodel2(
+                    id: id,
                     name: challengeListTest[n].name,
                     tache: challengeListTest[n].tache,
                     description: challengeListTest[n].description,
@@ -698,6 +707,7 @@ class Challengecontroller extends ChangeNotifier {
   // }
 
   void addChallenge1({
+    @required String id,
     @required int index,
     @required Formation formation,
     @required String totalChallenge,
@@ -710,6 +720,7 @@ class Challengecontroller extends ChangeNotifier {
 
     _challengeList[index].listeDeTache.add(
           Challengemodel2(
+              id: id,
               name: challengeListTest[0].name,
               tache: challengeListTest[0].tache,
               description: challengeListTest[0].description,
@@ -718,7 +729,10 @@ class Challengecontroller extends ChangeNotifier {
   }
 
   void addChallenge(
-      {@required String id,
+      {@required String idChallenge,
+      @required String idNotif,
+      @required bool boolId,
+      @required String id,
       @required String name,
       @required String notifiaction,
       @required String date,
@@ -731,6 +745,9 @@ class Challengecontroller extends ChangeNotifier {
       @required List<Challengemodel2> challengeListTache}) async {
     _challengeList.add(
       ChallengeModel(
+          boolId: boolId,
+          idChallenge: idChallenge,
+          idNotif: idNotif,
           id: id,
           notifiaction: notifiaction,
           date: date,
@@ -782,6 +799,9 @@ class Challengecontroller extends ChangeNotifier {
         if (i == indexSave) {
           _challengeList.add(
             ChallengeModel(
+                idChallenge: _challengeListSave[i].idChallenge,
+                idNotif: _challengeListSave[i].idNotif,
+                boolId: _challengeListSave[i].boolId,
                 id: _challengeListSave[i].id,
                 notifiaction: _challengeListSave[i].notification,
                 date: _challengeListSave[i].date,
@@ -807,6 +827,9 @@ class Challengecontroller extends ChangeNotifier {
   void addListChallengeSaveindex(int index) async {
     _challengeListSave.add(
       ChallengeModel(
+          idChallenge: _challengeList[index].idChallenge,
+          idNotif: _challengeList[index].idNotif,
+          boolId: _challengeList[index].boolId,
           id: _challengeList[index].id,
           notifiaction: _challengeList[index].notification,
           date: _challengeList[index].date,
@@ -831,6 +854,9 @@ class Challengecontroller extends ChangeNotifier {
       if (_challengeList[i].name == namechallenge) {
         _challengeListSave.add(
           ChallengeModel(
+              idChallenge: _challengeList[i].idChallenge,
+              idNotif: _challengeList[i].idNotif,
+              boolId: _challengeList[i].boolId,
               id: _challengeList[i].id,
               notifiaction: _challengeList[i].notification,
               date: _challengeList[i].date,
@@ -850,6 +876,37 @@ class Challengecontroller extends ChangeNotifier {
         return;
       }
     }
+  }
+
+  int returnIndexForName(String id) {
+    int index;
+    for (var i = _challengeList.length - 1; i >= 0; i--) {
+      if (_challengeList[i].id == id) {
+        index = i;
+      }
+    }
+    return index;
+  }
+
+  void desactivAffichagePrinc(int index, bool boolId) async {
+    _challengeList[index].boolId = boolId;
+    await _save();
+    _initChallengeList();
+    notifyListeners();
+  }
+
+  void raccourciChallenge(
+      {List<String> raccourci, String name, String idChallenge}) async {
+    for (var i = _challengeList.length - 1; i >= 0; i--) {
+      for (var n = raccourci.length - 1; n >= 0; n--) {
+        if (_challengeList[i].id == raccourci[n]) {
+          _challengeList[i].idChallenge = idChallenge;
+        }
+      }
+    }
+    await _save();
+    _initChallengeList();
+    notifyListeners();
   }
 
   Future<bool> _save1({bool remove, String nameChallenge}) async {
@@ -1074,6 +1131,9 @@ class Challengecontroller extends ChangeNotifier {
       _jsonDecodeuploadFile = jsonDecode(uploadFile);
       uploadFileChallenge = ChallengeModel.fromJSON(_jsonDecodeuploadFile);
       addChallenge(
+          idNotif: uploadFileChallenge.idNotif,
+          boolId: uploadFileChallenge.boolId,
+          idChallenge: uploadFileChallenge.idChallenge,
           notifiaction: uploadFileChallenge.notification,
           totalDays: uploadFileChallenge.totalDays,
           quotidient: uploadFileChallenge.quotidient,

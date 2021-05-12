@@ -15,15 +15,19 @@ import 'package:lottie/lottie.dart';
 
 import 'package:provider/provider.dart';
 import '../../controllers/challenge_controller.dart';
+import '../home_screen.dart';
 import '../playCommentaire.dart';
 import 'package:marquee_text/marquee_text.dart';
 
 class ChallengesListBuilderTaches extends StatefulWidget {
+  final String id;
   final String nameChallenge;
   final int indexChallenge;
 
   ChallengesListBuilderTaches(
-      {@required this.indexChallenge, @required this.nameChallenge});
+      {@required this.id,
+      @required this.indexChallenge,
+      @required this.nameChallenge});
   @override
   _ChallengesListBuilderTachesState createState() =>
       _ChallengesListBuilderTachesState();
@@ -376,6 +380,27 @@ class _ChallengesListBuilderTachesState
                               value: provider,
                               child: PlayYoutubeScreen(
                                   nameChallenge: item.name))));
+                    } else if (item.description
+                                .toString()
+                                .replaceAll(unityPattern, "") ==
+                            "evenement" ||
+                        item.description
+                                .toString()
+                                .replaceAll(unityPattern, "") ==
+                            "tache" ||
+                        item.description
+                                .toString()
+                                .replaceAll(unityPattern, "") ==
+                            "projet" ||
+                        item.description
+                                .toString()
+                                .replaceAll(unityPattern, "") ==
+                            "mission") {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => ChangeNotifierProvider.value(
+                              value: provider,
+                              child:
+                                  Home(id: widget.id, idChallenge1: item.id))));
                     }
                   },
                   title: Container(

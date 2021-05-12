@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:icandoit/models/challenge_model.dart';
-import 'package:intl/intl.dart';
+// import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import 'package:marquee_text/marquee_text.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
@@ -12,11 +12,16 @@ import 'baseAlertDialog.dart';
 import 'home_screen_tache.dart';
 
 class ChallengesListBuilder extends StatefulWidget {
+  final bool selectbool;
+  final String idChallenge;
+  ChallengesListBuilder(
+      {@required this.selectbool, @required this.idChallenge});
   @override
   _ChallengesListBuilderState createState() => _ChallengesListBuilderState();
 }
 
 class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
+  bool isSwitched = false;
   double percentage(int listeTache, int totalChallenge) {
     // print(listeTache);
     double percent1;
@@ -321,8 +326,26 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
   @override
   Widget build(BuildContext context) {
     Challengecontroller variable = Provider.of<Challengecontroller>(context);
-    List<ChallengeModel> _challengesList = variable.getChallenges();
-    _confirmRegister(int index) {
+    List<ChallengeModel> _challengesList;
+    List<ChallengeModel> _challengesListget = variable.getChallenges();
+    if (widget.idChallenge.isNotEmpty) {
+      _challengesList = _challengesListget
+          .where((c) => c.idChallenge.contains(widget.idChallenge))
+          .toList();
+    } else {
+      // _challengesList = variable.getChallenges();
+      // for (var i = _challengesList.length - 1; i >= 0; i--) {
+      //   print(_challengesList[i].boolId);
+
+      // }
+
+      _challengesList =
+          _challengesListget.where((c) => c.boolId == true).toList();
+    }
+
+    // List<ChallengeModel> _challengesList = variable.getChallenges();
+    _confirmRegister(String id) {
+      int index = variable.returnIndexForName(id);
       var baseDialog = BaseAlertDialog(
           title: "Confirmez la sauvegarde",
           content: "Une sauvegarde va être éffectué",
@@ -337,8 +360,32 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
           context: context, builder: (BuildContext context) => baseDialog);
     }
 
-    final Challengecontroller provider =
-        Provider.of<Challengecontroller>(context);
+    Widget switchButtm(String id, bool boolId) {
+      Widget switchButtom = SizedBox(
+        width: 1.0,
+      );
+      if (widget.idChallenge.isNotEmpty) {
+        print(boolId);
+        isSwitched = boolId;
+        int index = variable.returnIndexForName(id);
+        switchButtom = Switch(
+          value: isSwitched,
+          onChanged: (value) {
+            setState(() {
+              isSwitched = value;
+              print(isSwitched);
+              variable.desactivAffichagePrinc(index, isSwitched);
+            });
+          },
+          activeTrackColor: Colors.yellow,
+          activeColor: Colors.orangeAccent,
+        );
+      }
+      return switchButtom;
+    }
+
+    // final Challengecontroller provider =
+    //     Provider.of<Challengecontroller>(context);
     if (_challengesList.isEmpty) {
       return Container(
         alignment: Alignment.center,
@@ -358,9 +405,11 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
           child: Dismissible(
             onDismissed: (direction) {
               if (direction == DismissDirection.endToStart) {
-                provider.addnbChallengeVallide();
-                provider.remove(
-                    index: index,
+                int index1 =
+                    variable.returnIndexForName(_challengesList[index].id);
+                variable.addnbChallengeVallide();
+                variable.remove(
+                    index: index1,
                     validate: true,
                     name: _challengesList[index].name);
                 Scaffold.of(context).showSnackBar(_buildSnackBar(
@@ -369,8 +418,10 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
               }
 
               if (direction == DismissDirection.startToEnd) {
-                provider.remove(
-                    index: index,
+                int index1 =
+                    variable.returnIndexForName(_challengesList[index].id);
+                variable.remove(
+                    index: index1,
                     validate: false,
                     name: _challengesList[index].name);
                 Scaffold.of(context).showSnackBar(_buildSnackBar(
@@ -454,13 +505,14 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                 elevation: 20.0,
                 child: ListTile(
                   onLongPress: () {
-                    _confirmRegister(index);
+                    _confirmRegister(_challengesList[index].id);
                   },
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => ChangeNotifierProvider.value(
                             value: variable,
                             child: HomeTaches(
+                                _challengesList[index].id,
                                 index,
                                 _challengesList[index].name,
                                 _challengesList[index].animatedpadding))));
@@ -495,6 +547,8 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                         SizedBox(
                           width: 5.0,
                         ),
+                        switchButtm(_challengesList[index].id,
+                            _challengesList[index].boolId),
                       ],
                     ),
                   ),
@@ -511,6 +565,7 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
 
   SnackBar _buildSnackBar({@required String content, String lotties}) {
     return SnackBar(
+      duration: Duration(seconds: 2),
       backgroundColor: Colors.white,
       content: Container(
         height: 80,

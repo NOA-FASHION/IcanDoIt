@@ -10,15 +10,18 @@ import 'package:icandoit/screens/components/build_challenge_list_tache.dart';
 import 'package:icandoit/controllers/challenge_controller.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lottie/lottie.dart';
+import 'package:nanoid/nanoid.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 
 class HomeTaches extends StatefulWidget {
+  final String id;
   final String something;
   final bool animatedpadding;
   final int indexChallenge;
 
-  HomeTaches(this.indexChallenge, this.something, this.animatedpadding);
+  HomeTaches(
+      this.id, this.indexChallenge, this.something, this.animatedpadding);
   @override
   _HomeTachesState createState() =>
       _HomeTachesState(indexChallenge, something, animatedpadding);
@@ -381,6 +384,7 @@ class _HomeTachesState extends State<HomeTaches> {
                   end: Alignment.centerRight,
                   colors: [Colors.purple, Colors.blue])),
           child: ChallengesListBuilderTaches(
+            id: widget.id,
             indexChallenge: indexChallenge,
             nameChallenge: something,
           ),
@@ -640,7 +644,8 @@ class _HomeTachesState extends State<HomeTaches> {
                                     Provider.of<Challengecontroller>(context,
                                             listen: false)
                                         .addChallenge2(
-                                          index:indexChallenge ,
+                                            id: nanoid(10),
+                                            index: indexChallenge,
                                             animatedpadding: animatedpadding,
                                             totalChallenge: '1',
                                             nameListChallenge: something,

@@ -7,6 +7,7 @@ import 'package:icandoit/models/challenge_model.dart';
 import 'package:icandoit/screens/components/build_challenge_list.dart';
 import 'package:icandoit/controllers/challenge_controller.dart';
 import 'package:multiselect_formfield/multiselect_formfield.dart';
+import 'package:nanoid/nanoid.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 import 'package:lottie/lottie.dart';
@@ -17,11 +18,20 @@ import 'components/challenge_list_save.dart';
 import 'components/resultat_challenge.dart';
 
 class Home extends StatefulWidget {
+  final String id;
+  final String idChallenge1;
+  Home({@required this.id, @required this.idChallenge1});
   @override
   _HomeState createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
+  Future<Null> delay(int milliseconds) {
+    return new Future.delayed(new Duration(milliseconds: milliseconds));
+  }
+
+  bool boolid = true;
+  String idChallenge;
   String idNotif = "";
   String dateQuotidien;
   String notifiaction = "";
@@ -31,26 +41,113 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   String date = "";
   String date1;
   String heure;
+  List<String> totalChangeListChal = [];
+  List _changeLiatChall;
+  String _myChangeListChall;
   List _myActivities;
   String _myActivitiesResult;
+  bool visibility = false;
   _saveForm() {
     var form = formKey.currentState;
     if (form.validate()) {
       form.save();
       setState(() {
+        _myChangeListChall = _changeLiatChall.toString();
         _myActivitiesResult = _myActivities.toString();
+        totalChangeListChal = _changeLiatChall.toString() as List<String>;
         totalDays = _myActivities.toString() as List<String>;
       });
     }
   }
 
-  Widget selectdropdown(String resultat) {
-    Widget documentJoint = SizedBox(
-      width: 1.0,
-    );
-    if (resultat == "quotidien") {
+  // changeListChallenge(List<ChallengeModel> _challengesList) {
+  //   List<dynamic> changeList;
+
+  //   if (_challengesList != null) {
+  //     for (var i = _challengesList.length - 1; i >= 0; i--) {
+  //       changeList['display'].add(_challengesList[i].id);
+  //       // changeList.add(
+  //       //     {'display': _challengesList[i].id, 'value': _challengesList[i].id});
+  //     }
+  //   }
+  // }
+
+  Widget selectraccourci() {
+    Widget raccourci = SizedBox(width: 1);
+    if (widget.idChallenge1.isNotEmpty) {
+      raccourci = Row(
+        children: [
+          Icon(
+            Icons.update,
+            size: 30.0,
+          ),
+          SizedBox(width: 10),
+          Text("raccourci"),
+        ],
+      );
+    }
+    return raccourci;
+  }
+
+  Widget selectdropdown(String resultat, List<ChallengeModel> challengesList) {
+    Widget documentJoint = SizedBox(width: 1.0);
+
+    if (widget.idChallenge1.isNotEmpty && resultat == "raccourci") {
+      updateController1(true);
+      List<ChallengeModel> _challengesList =
+          challengesList.where((c) => c.id != widget.id).toList();
+      documentJoint = Column(
+        children: [
+          MultiSelectFormField(
+            border:
+                OutlineInputBorder(borderRadius: BorderRadius.circular(15.0)),
+            title: Text("Choix"),
+            autovalidate: false,
+            // titleText: 'My workouts',
+            validator: (value) {
+              if (value.isEmpty) {
+                return "Merci d'entrer un nom pour le challenge";
+              }
+              return null;
+            },
+            dataSource: [
+              for (var i = _challengesList.length - 1; i >= 0; i--)
+                {
+                  "display": _challengesList[i].name,
+                  "value": _challengesList[i].id,
+                },
+            ],
+            textField: 'display',
+            valueField: 'value',
+            okButtonLabel: 'OK',
+            cancelButtonLabel: 'CANCEL',
+            // required: true,
+            // hintText: 'Please choose one or more',
+            initialValue: _changeLiatChall,
+            onSaved: (value) {
+              if (value == null) return;
+              setState(() {
+                _changeLiatChall = value;
+                for (var i = _changeLiatChall.length - 1; i >= 0; i--) {
+                  totalChangeListChal.add(_changeLiatChall[i].toString());
+                }
+
+                animatedpadding = true;
+              });
+            },
+          ),
+          // Container(
+          //   padding: EdgeInsets.all(16),
+          //   child: Text(_myChangeListChall),
+          // ),
+        ],
+      );
+    } else if (resultat == "raccourci") {
+      retour();
+    } else if (resultat == "quotidien") {
       // _visibility1 = true;
       // wait = "assets/wait.json";
+      visibility = false;
       documentJoint = Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -133,6 +230,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     } else if (resultat == "hebdomadaire") {
       // _visibility1 = true;
       // wait = "assets/wait.json";
+      visibility = false;
       documentJoint = Column(
         children: [
           MultiSelectFormField(
@@ -196,13 +294,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               });
             },
           ),
-          // Container(
-          //   padding: EdgeInsets.all(8),
-          //   child: RaisedButton(
-          //     child: Text('Save'),
-          //     onPressed: _saveForm,
-          //   ),
-          // ),
           Container(
             padding: EdgeInsets.all(16),
             child: Text(_myActivitiesResult),
@@ -287,6 +378,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         ],
       );
     } else if (resultat == "mensuel") {
+      visibility = false;
       documentJoint = Column(
         children: [
           Row(
@@ -455,6 +547,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         ],
       );
     } else if (resultat == "notification") {
+      visibility = false;
       documentJoint = Column(
         children: [
           DateTimePicker(
@@ -532,7 +625,11 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
               Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => ChangeNotifierProvider.value(
-                      value: variable, child: Home())));
+                      value: variable,
+                      child: Home(
+                        id: "",
+                        idChallenge1: '',
+                      ))));
               setState(() {});
               // setState(() {});
             },
@@ -748,7 +845,10 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                       begin: Alignment.centerLeft,
                       end: Alignment.centerRight,
                       colors: [Colors.purple, Colors.blue])),
-              child: ChallengesListBuilder(),
+              child: ChallengesListBuilder(
+                idChallenge: widget.idChallenge1,
+                selectbool: false,
+              ),
             ),
           ),
           // backgroundColor: Color(0xff414a4c),
@@ -764,6 +864,19 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     _bottomSheetController.setState(() {
       unityChallenge = value;
     });
+  }
+
+  updateController1(bool visibility1) async {
+    await delay(500);
+    _bottomSheetController.setState(() {
+      visibility = visibility1;
+    });
+  }
+
+  retour() async {
+    await delay(500);
+    Navigator.pop(context);
+    unityChallenge = "haute";
   }
 
   FloatingActionButton buildBottomSheet() {
@@ -785,60 +898,72 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                           SizedBox(
                             height: 15.0,
                           ),
-                          TextFormField(
-                            onSaved: (value) {
-                              nameChallenge = value;
-                            },
-                            validator: (value) {
-                              if (value.isEmpty) {
-                                return "Merci d'entrer un nom pour le challenge";
-                              }
-                              return null;
-                            },
-                            decoration: InputDecoration(
-                                focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        width: 2.0, color: Colors.blueAccent),
-                                    borderRadius: BorderRadius.circular(15.0)),
-                                enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        width: 1.0, color: Colors.blueAccent),
-                                    borderRadius: BorderRadius.circular(15.0)),
-                                contentPadding: EdgeInsets.symmetric(
-                                    horizontal: 20, vertical: 10),
-                                labelText: "Nom de la mission",
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(15.0))),
+                          Offstage(
+                            offstage: visibility,
+                            child: TextFormField(
+                              onSaved: (value) {
+                                nameChallenge = value;
+                              },
+                              validator: (value) {
+                                if (value.isEmpty) {
+                                  return "Merci d'entrer un nom pour le challenge";
+                                }
+                                return null;
+                              },
+                              decoration: InputDecoration(
+                                  focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          width: 2.0, color: Colors.blueAccent),
+                                      borderRadius:
+                                          BorderRadius.circular(15.0)),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          width: 1.0, color: Colors.blueAccent),
+                                      borderRadius:
+                                          BorderRadius.circular(15.0)),
+                                  contentPadding: EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 10),
+                                  labelText: "Nom de la mission",
+                                  border: OutlineInputBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(15.0))),
+                            ),
                           ),
                           SizedBox(
                             height: 15.0,
                           ),
-                          TextFormField(
-                            onSaved: (value) {
-                              targetChallenge = value;
-                            },
-                            validator: (value) {
-                              if (value.isEmpty) {
-                                return "Merci d'entrer une description pour la mission";
-                              } else if (value.length > 35) {
-                                return "pas plus de 50 caracteres";
-                              }
-                              return null;
-                            },
-                            decoration: InputDecoration(
-                                focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        width: 2.0, color: Colors.blueAccent),
-                                    borderRadius: BorderRadius.circular(15.0)),
-                                enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        width: 1.0, color: Colors.blueAccent),
-                                    borderRadius: BorderRadius.circular(15.0)),
-                                labelText: "Description",
-                                contentPadding: EdgeInsets.symmetric(
-                                    horizontal: 20, vertical: 10),
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(15.0))),
+                          Offstage(
+                            offstage: visibility,
+                            child: TextFormField(
+                              onSaved: (value) {
+                                targetChallenge = value;
+                              },
+                              validator: (value) {
+                                if (value.isEmpty) {
+                                  return "Merci d'entrer une description pour la mission";
+                                } else if (value.length > 35) {
+                                  return "pas plus de 50 caracteres";
+                                }
+                                return null;
+                              },
+                              decoration: InputDecoration(
+                                  focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          width: 2.0, color: Colors.blueAccent),
+                                      borderRadius:
+                                          BorderRadius.circular(15.0)),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          width: 1.0, color: Colors.blueAccent),
+                                      borderRadius:
+                                          BorderRadius.circular(15.0)),
+                                  labelText: "Description",
+                                  contentPadding: EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 10),
+                                  border: OutlineInputBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(15.0))),
+                            ),
                           ),
                           SizedBox(
                             height: 15.0,
@@ -943,33 +1068,67 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                   ],
                                 ),
                               ),
+                              DropdownMenuItem(
+                                value: "raccourci",
+                                // child: Row(
+                                //   children: [
+                                //     Icon(
+                                //       Icons.schedule,
+                                //       size: 30.0,
+                                //     ),
+                                //     SizedBox(width: 10),
+                                //     Text("notification"),
+                                //   ],
+                                // ),
+                                child: selectraccourci(),
+                              )
                             ],
                           ),
                           SizedBox(
                             height: 15.0,
                           ),
-                          selectdropdown(unityChallenge),
+                          selectdropdown(
+                              unityChallenge,
+                              Provider.of<Challengecontroller>(context)
+                                  .getChallenges()),
                           InkWell(
                               onTap: () {
-                                if (formKey.currentState.validate()) {
-                                  formKey.currentState.save();
-                                  Provider.of<Challengecontroller>(context,
+                                if (unityChallenge == "raccourci") {
+                                  Provider.of<
+                                              Challengecontroller>(context,
                                           listen: false)
-                                      .addChallenge(
-                                          id: idNotif,
-                                          notifiaction: notifiaction,
-                                          date: date,
-                                          totalDays: totalDays,
-                                          quotidient: quotidient,
-                                          animatedpadding: animatedpadding,
+                                      .raccourciChallenge(
+                                          raccourci: totalChangeListChal
+                                              .toSet()
+                                              .toList(),
                                           name: nameChallenge,
-                                          totalChallenge: totalChallenge,
-                                          description: targetChallenge,
-                                          unity: unityChallenge,
-                                          challengeListTache:
-                                              challengeListTache);
-
+                                          idChallenge: widget.idChallenge1);
                                   Navigator.pop(context);
+                                } else if (formKey.currentState.validate()) {
+                                  formKey.currentState.save();
+                                  {
+                                    Provider.of<Challengecontroller>(context,
+                                            listen: false)
+                                        .addChallenge(
+                                            boolId: true,
+                                            idNotif: idNotif,
+                                            idChallenge: widget.idChallenge1,
+                                            id: nanoid(11),
+                                            notifiaction: notifiaction,
+                                            date: date,
+                                            totalDays:
+                                                totalDays.toSet().toList(),
+                                            quotidient: quotidient,
+                                            animatedpadding: animatedpadding,
+                                            name: nameChallenge,
+                                            totalChallenge: totalChallenge,
+                                            description: targetChallenge,
+                                            unity: unityChallenge,
+                                            challengeListTache:
+                                                challengeListTache);
+
+                                    Navigator.pop(context);
+                                  }
                                 }
                               },
                               child: Container(
