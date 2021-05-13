@@ -411,7 +411,7 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                 variable.remove(
                     index: index1,
                     validate: true,
-                    name: _challengesList[index].name);
+                    id: _challengesList[index].id);
                 Scaffold.of(context).showSnackBar(_buildSnackBar(
                     content: "Le challenge a bien ete valide",
                     lotties: 'assets/challenge.json'));
@@ -423,7 +423,7 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                 variable.remove(
                     index: index1,
                     validate: false,
-                    name: _challengesList[index].name);
+                    id: _challengesList[index].id);
                 Scaffold.of(context).showSnackBar(_buildSnackBar(
                     content: "La mission a bien ete supprime",
                     lotties: 'assets/trash.json'));
@@ -513,7 +513,8 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                             value: variable,
                             child: HomeTaches(
                                 _challengesList[index].id,
-                                index,
+                                variable.returnIndexForName(
+                                    _challengesList[index].id),
                                 _challengesList[index].name,
                                 _challengesList[index].animatedpadding))));
                   },

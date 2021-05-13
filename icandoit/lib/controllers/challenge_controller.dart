@@ -413,10 +413,10 @@ class Challengecontroller extends ChangeNotifier {
   //   }
   // }
 
-  List<Challengemodel2> challengelist2(String name) {
+  List<Challengemodel2> challengelist2(String id) {
     List<Challengemodel2> additionchallenge = [];
     for (var i = _challengeList.length - 1; i >= 0; i--) {
-      if (_challengeList[i].name == name) {
+      if (_challengeList[i].id == id) {
         additionchallenge = _challengeList[i].listeDeTache;
         for (var n = _challengeList[i].listeDeTache.length - 1; n >= 0; n--) {
           _challengeList[i].listeDeTache[n].index = n.toString();
@@ -482,8 +482,8 @@ class Challengecontroller extends ChangeNotifier {
     _challengeList[indexChallenge].listeDeTache[index].formation.chapitre =
         chapitre;
     addChallengesaveChapitre(
-      tache: _challengeList[indexChallenge].listeDeTache[index].tache,
-      name: _challengeList[indexChallenge].name,
+      idlistTache: _challengeList[indexChallenge].listeDeTache[index].id,
+      id: _challengeList[indexChallenge].id,
       chapitre: chapitre,
     );
     // await _saveSauvegarde();
@@ -498,8 +498,8 @@ class Challengecontroller extends ChangeNotifier {
       @required String duree}) async {
     _challengeList[indexChallenge].listeDeTache[index].formation.duree = duree;
     addChallengesaveDuree(
-      tache: _challengeList[indexChallenge].listeDeTache[index].tache,
-      name: _challengeList[indexChallenge].name,
+      idlistTache: _challengeList[indexChallenge].listeDeTache[index].id,
+      id: _challengeList[indexChallenge].id,
       duree: duree,
     );
     // await _saveSauvegarde();
@@ -517,8 +517,8 @@ class Challengecontroller extends ChangeNotifier {
         .formation
         .theoriePratique = theoriePratique;
     addChallengesavetheoriePratique(
-      tache: _challengeList[indexChallenge].listeDeTache[index].tache,
-      name: _challengeList[indexChallenge].name,
+      idlistTache: _challengeList[indexChallenge].listeDeTache[index].id,
+      id: _challengeList[indexChallenge].id,
       theoriePratique: theoriePratique,
     );
     await _save();
@@ -528,16 +528,16 @@ class Challengecontroller extends ChangeNotifier {
 
   void addChallengesavetheoriePratique({
     @required String theoriePratique,
-    @required String tache,
-    @required String name,
+    @required String idlistTache,
+    @required String id,
   }) async {
     await delay(500);
     for (var i = _challengeListSave.length - 1; i >= 0; i--) {
-      if (_challengeListSave[i].name == name) {
+      if (_challengeListSave[i].id == id) {
         for (var n = _challengeListSave[i].listeDeTache.length - 1;
             n >= 0;
             n--) {
-          if (_challengeListSave[i].listeDeTache[n].tache == tache) {
+          if (_challengeListSave[i].listeDeTache[n].id == idlistTache) {
             _challengeListSave[i].listeDeTache[n].formation.theoriePratique =
                 theoriePratique;
             await _saveSauvegarde();
@@ -551,16 +551,16 @@ class Challengecontroller extends ChangeNotifier {
 
   void addChallengesaveChapitre({
     @required String chapitre,
-    @required String tache,
-    @required String name,
+    @required String idlistTache,
+    @required String id,
   }) async {
     await delay(500);
     for (var i = _challengeListSave.length - 1; i >= 0; i--) {
-      if (_challengeListSave[i].name == name) {
+      if (_challengeListSave[i].id == id) {
         for (var n = _challengeListSave[i].listeDeTache.length - 1;
             n >= 0;
             n--) {
-          if (_challengeListSave[i].listeDeTache[n].tache == tache) {
+          if (_challengeListSave[i].listeDeTache[n].id == idlistTache) {
             _challengeListSave[i].listeDeTache[n].formation.chapitre = chapitre;
             await _saveSauvegarde();
             _initChallengeList();
@@ -573,16 +573,16 @@ class Challengecontroller extends ChangeNotifier {
 
   void addChallengesaveDuree({
     @required String duree,
-    @required String tache,
-    @required String name,
+    @required String idlistTache,
+    @required String id,
   }) async {
     await delay(500);
     for (var i = _challengeListSave.length - 1; i >= 0; i--) {
-      if (_challengeListSave[i].name == name) {
+      if (_challengeListSave[i].id == id) {
         for (var n = _challengeListSave[i].listeDeTache.length - 1;
             n >= 0;
             n--) {
-          if (_challengeListSave[i].listeDeTache[n].tache == tache) {
+          if (_challengeListSave[i].listeDeTache[n].id == idlistTache) {
             _challengeListSave[i].listeDeTache[n].formation.duree = duree;
             await _saveSauvegarde();
             _initChallengeList();
@@ -599,7 +599,7 @@ class Challengecontroller extends ChangeNotifier {
     @required Formation formation,
     @required bool animatedpadding,
     @required String totalChallenge,
-    @required String nameListChallenge,
+    @required String idListChallenge,
     @required String name,
     @required String tache,
     @required String description,
@@ -619,7 +619,6 @@ class Challengecontroller extends ChangeNotifier {
       index: index,
       formation: formation,
       totalChallenge: totalChallenge,
-      name: nameListChallenge,
       challengeListTest: _challengeList3,
     );
 
@@ -628,7 +627,7 @@ class Challengecontroller extends ChangeNotifier {
         id: id,
         formation: formation,
         totalChallenge: totalChallenge,
-        name: nameListChallenge,
+        idChallenge: idListChallenge,
         challengeListTest: _challengeList3,
       );
     }
@@ -648,12 +647,12 @@ class Challengecontroller extends ChangeNotifier {
     @required String id,
     @required Formation formation,
     @required String totalChallenge,
-    @required String name,
+    @required String idChallenge,
     @required List<Challengemodel2> challengeListTest,
   }) async {
     await delay(500);
     for (var i = _challengeListSave.length - 1; i >= 0; i--) {
-      if (_challengeListSave[i].name == name) {
+      if (_challengeListSave[i].id == id) {
         var additionchallenge = _challengeListSave[i].totalChallenge;
         _challengeListSave[i].totalChallenge =
             (int.parse(additionchallenge) + 1).toString();
@@ -676,42 +675,11 @@ class Challengecontroller extends ChangeNotifier {
     }
   }
 
-  // void addChallengesave1({
-  //   @required Formation formation,
-  //   @required String totalChallenge,
-  //   @required String name,
-  //   @required List<Challengemodel2> challengeListTest,
-  // }) async {
-  //   await delay(500);
-  //   for (var i = _challengeListSave.length - 1; i >= 0; i--) {
-  //     if (_challengeListSave[i].name == name) {
-  //       var additionchallenge = _challengeListSave[i].totalChallenge;
-  //       _challengeListSave[i].totalChallenge =
-  //           (int.parse(additionchallenge) + 1).toString();
-
-  //       for (var n = challengeListTest.length - 1; n >= 0; n--) {
-  //         _challengeListSave[i].listeDeTache.add(
-  //               Challengemodel2(
-  //                   name: challengeListTest[n].name,
-  //                   tache: challengeListTest[n].tache,
-  //                   description: challengeListTest[n].description,
-  //                   formation: formation),
-  //             );
-  //       }
-  //       await _saveSauvegarde();
-  //       _initChallengeList();
-  //       notifyListeners();
-  //       return;
-  //     }
-  //   }
-  // }
-
   void addChallenge1({
     @required String id,
     @required int index,
     @required Formation formation,
     @required String totalChallenge,
-    @required String name,
     @required List<Challengemodel2> challengeListTest,
   }) async {
     var additionchallenge = _challengeList[index].totalChallenge;
@@ -762,7 +730,7 @@ class Challengecontroller extends ChangeNotifier {
     );
 
     if (animatedpadding == true) {
-      addListChallengeSave(name);
+      addListChallengeSave(id);
     }
 
     await _save();
@@ -774,13 +742,13 @@ class Challengecontroller extends ChangeNotifier {
     return indexSave;
   }
 
-  void deplacelistSAve(int index, String name) async {
+  void deplacelistSAve(int index, String id) async {
     await delay(200);
     for (var i = _challengeListSave.length - 1; i >= 0; i--) {
-      if (_challengeListSave[i].name == name &&
+      if (_challengeListSave[i].id == id &&
           _challengeListSave[i].listeDeTache.length ==
               _challengeList[index].listeDeTache.length) {
-        removeSave2(name: name);
+        removeSave2(id: id);
         addListChallengeSaveindex(index);
         return;
       }
@@ -849,9 +817,9 @@ class Challengecontroller extends ChangeNotifier {
     return;
   }
 
-  void addListChallengeSave(String namechallenge) async {
+  void addListChallengeSave(String id) async {
     for (var i = _challengeList.length - 1; i >= 0; i--) {
-      if (_challengeList[i].name == namechallenge) {
+      if (_challengeList[i].id == id) {
         _challengeListSave.add(
           ChallengeModel(
               idChallenge: _challengeList[i].idChallenge,
@@ -909,9 +877,9 @@ class Challengecontroller extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<bool> _save1({bool remove, String nameChallenge}) async {
+  Future<bool> _save1({bool remove, String idChallenge}) async {
     for (var i = _challengeList.length - 1; i >= 0; i--) {
-      if (_challengeList[i].name == nameChallenge) {
+      if (_challengeList[i].id == idChallenge) {
         if (_challengeList[i].listeDeTache.length < 1 && remove ?? false) {
           _challengeList[i].listeDeTache = [];
           List<String> _jsonList = _challengeList.map((challenge) {
@@ -959,9 +927,9 @@ class Challengecontroller extends ChangeNotifier {
     return false;
   }
 
-  Future<bool> _save1Sauvegarde({bool remove, String nameChallenge}) async {
+  Future<bool> _save1Sauvegarde({bool remove, String idChallenge}) async {
     for (var i = _challengeListSave.length - 1; i >= 0; i--) {
-      if (_challengeListSave[i].name == nameChallenge) {
+      if (_challengeListSave[i].id == idChallenge) {
         if (_challengeListSave[i].listeDeTache.length < 1 && remove ?? false) {
           _challengeListSave[i].listeDeTache = [];
           List<String> _jsonList = _challengeListSave.map((challenge) {
@@ -988,9 +956,9 @@ class Challengecontroller extends ChangeNotifier {
     notifyListeners();
   }
 
-  void removeSave2({@required String name}) async {
+  void removeSave2({@required String id}) async {
     for (var i = _challengeListSave.length - 1; i >= 0; i--) {
-      if (_challengeListSave[i].name == name) {
+      if (_challengeListSave[i].id == id) {
         _challengeListSave.removeAt(i);
         await _saveSauvegarde(remove: true);
         return;
@@ -998,14 +966,13 @@ class Challengecontroller extends ChangeNotifier {
     }
   }
 
-  void remove(
-      {@required int index, @required bool validate, String name}) async {
+  void remove({@required int index, @required bool validate, String id}) async {
     _challengeList.removeAt(index);
     await _save(remove: true);
 
     if (!validate) {
       for (var i = _challengeListSave.length - 1; i >= 0; i--) {
-        if (_challengeListSave[i].name == name) {
+        if (_challengeListSave[i].id == id) {
           _challengeListSave.removeAt(i);
           await _saveSauvegarde(remove: true);
           return;
@@ -1018,13 +985,13 @@ class Challengecontroller extends ChangeNotifier {
   }
 
   voidremove2Save(
-      {@required String tache,
+      {@required String id,
       @required int indexSave,
       @required int index,
-      @required String nameChallenge,
+      @required String idChallenge,
       bool validate}) async {
     for (var i = _challengeListSave.length - 1; i >= 0; i--) {
-      if (_challengeListSave[i].name == nameChallenge) {
+      if (_challengeListSave[i].id == idChallenge) {
         var additionchallenge = _challengeListSave[i].totalChallenge;
         _challengeListSave[i].totalChallenge =
             (int.parse(additionchallenge) - 1).toString();
@@ -1032,9 +999,9 @@ class Challengecontroller extends ChangeNotifier {
         for (var n = _challengeListSave[i].listeDeTache.length - 1;
             n >= 0;
             n--) {
-          if (_challengeListSave[i].listeDeTache[n].tache == tache) {
+          if (_challengeListSave[i].listeDeTache[n].id == id) {
             _challengeListSave[i].listeDeTache.removeAt(n);
-            await _save1Sauvegarde(remove: true, nameChallenge: nameChallenge);
+            await _save1Sauvegarde(remove: true, idChallenge: idChallenge);
 
             // _initChallengeList();
             // notifyListeners();
@@ -1046,29 +1013,29 @@ class Challengecontroller extends ChangeNotifier {
   }
 
   void remove2(
-      {@required String tache,
+      {@required String id,
       @required int indexSave,
       @required int index,
-      @required String nameChallenge,
+      @required String idChallenge,
       @required bool validate}) async {
     for (var i = _challengeList.length - 1; i >= 0; i--) {
-      if (_challengeList[i].name == nameChallenge) {
+      if (_challengeList[i].id == idChallenge) {
         if (!validate) {
           var additionchallenge = _challengeList[i].totalChallenge;
           _challengeList[i].totalChallenge =
               (int.parse(additionchallenge) - 1).toString();
 
           await voidremove2Save(
-              tache: tache,
+              id: id,
               indexSave: indexSave,
               index: index,
-              nameChallenge: nameChallenge,
+              idChallenge: idChallenge,
               validate: validate);
         }
         _challengeList[i].listeDeTache.removeAt(index);
       }
     }
-    await _save1(remove: true, nameChallenge: nameChallenge);
+    await _save1(remove: true, idChallenge: idChallenge);
 
     _initChallengeList();
     notifyListeners();
@@ -1149,16 +1116,16 @@ class Challengecontroller extends ChangeNotifier {
     }
   }
 
-  void writeContent({String nameChallenge}) async {
+  void writeContent({String id}) async {
     final file = await _localFile;
     // Write the file
-    await file.writeAsString(_saveLocalData(nameChallenge: nameChallenge));
+    await file.writeAsString(_saveLocalData(id: id));
     Share.shareFiles([patchData], text: "Challenges");
   }
 
-  String _saveLocalData({String nameChallenge}) {
+  String _saveLocalData({String id}) {
     for (var i = _challengeList.length - 1; i >= 0; i--) {
-      if (_challengeList[i].name == nameChallenge) {
+      if (_challengeList[i].id == id) {
         if (_challengeList[i] != null) {
           Map mapChallengeList = _challengeList[i].toJson();
           _jsonChallengeList = jsonEncode(mapChallengeList);

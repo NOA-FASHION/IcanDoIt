@@ -329,7 +329,7 @@ class _HomeTachesState extends State<HomeTaches> {
                         onTap: () {
                           Provider.of<Challengecontroller>(context,
                                   listen: false)
-                              .writeContent(nameChallenge: something);
+                              .writeContent(id: widget.id);
                         }, // button pressed
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -648,7 +648,7 @@ class _HomeTachesState extends State<HomeTaches> {
                                             index: indexChallenge,
                                             animatedpadding: animatedpadding,
                                             totalChallenge: '1',
-                                            nameListChallenge: something,
+                                            idListChallenge: something,
                                             name: dataJoin,
                                             description: unityChallenge,
                                             tache: targetChallenge,

@@ -187,7 +187,7 @@ class _ChallengesListBuilderTachesState
     Challengecontroller providerType =
         Provider.of<Challengecontroller>(context);
     List<Challengemodel2> _challengesList =
-        providerType.challengelist2(widget.nameChallenge);
+        providerType.challengelist2(widget.id);
     // List<Challengemodel2> _challengesList =
     //     challengelist2(challengeListCharge, widget.nameChallenge);
     final Challengecontroller provider =
@@ -215,11 +215,11 @@ class _ChallengesListBuilderTachesState
                     content: "La tâche a bien été validé",
                     lotties: 'assets/challenge.json'));
                 provider.remove2(
-                    tache: item.tache,
+                    id: item.id,
                     indexSave: widget.indexChallenge,
                     validate: true,
                     index: int.parse(item.index),
-                    nameChallenge: widget.nameChallenge);
+                    idChallenge: widget.id);
               }
 
               if (direction == DismissDirection.startToEnd) {
@@ -227,11 +227,11 @@ class _ChallengesListBuilderTachesState
                     content: "La mission a bien ete supprime",
                     lotties: 'assets/trash.json'));
                 provider.remove2(
-                    tache: item.tache,
+                    id: item.id,
                     indexSave: widget.indexChallenge,
                     validate: false,
                     index: int.parse(item.index),
-                    nameChallenge: widget.nameChallenge);
+                    idChallenge: widget.id);
               }
             },
             confirmDismiss: (direction) async {
@@ -562,7 +562,7 @@ class _ChallengesListBuilderTachesState
         _challengesList.removeAt(before);
         _challengesList.insert(after, data);
         provider.save();
-        provider.deplacelistSAve(widget.indexChallenge, widget.nameChallenge);
+        provider.deplacelistSAve(widget.indexChallenge, widget.id);
       },
       canBeDraggedTo: (one, two) => true,
       dragElevation: 8.0,
