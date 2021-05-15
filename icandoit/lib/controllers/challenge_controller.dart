@@ -652,7 +652,7 @@ class Challengecontroller extends ChangeNotifier {
   }) async {
     await delay(500);
     for (var i = _challengeListSave.length - 1; i >= 0; i--) {
-      if (_challengeListSave[i].id == id) {
+      if (_challengeListSave[i].id == idChallenge) {
         var additionchallenge = _challengeListSave[i].totalChallenge;
         _challengeListSave[i].totalChallenge =
             (int.parse(additionchallenge) + 1).toString();

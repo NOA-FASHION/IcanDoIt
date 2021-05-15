@@ -648,7 +648,7 @@ class _HomeTachesState extends State<HomeTaches> {
                                             index: indexChallenge,
                                             animatedpadding: animatedpadding,
                                             totalChallenge: '1',
-                                            idListChallenge: something,
+                                            idListChallenge: widget.id,
                                             name: dataJoin,
                                             description: unityChallenge,
                                             tache: targetChallenge,
