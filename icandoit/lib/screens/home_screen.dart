@@ -908,6 +908,16 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                       child: ListView(
                         padding: EdgeInsets.all(10.0),
                         children: [
+                          IconButton(
+                            alignment: Alignment.topRight,
+                            icon: Icon(
+                              Icons.cancel,
+                              color: Colors.black,
+                            ),
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                          ),
                           SizedBox(
                             height: 15.0,
                           ),
