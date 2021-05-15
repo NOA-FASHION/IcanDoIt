@@ -353,7 +353,9 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
             variable.addListChallengeSaveindex(index);
             Navigator.pop(context, false);
           },
-          noOnPressed: () {},
+          noOnPressed: () {
+            Navigator.pop(context);
+          },
           yes: "oui",
           no: "non");
       showDialog(

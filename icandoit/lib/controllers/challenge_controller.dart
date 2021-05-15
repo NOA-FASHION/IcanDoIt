@@ -814,6 +814,11 @@ class Challengecontroller extends ChangeNotifier {
   }
 
   void addListChallengeSaveindex(int index) async {
+    for (var i = _challengeListSave.length - 1; i >= 0; i--) {
+      if (_challengeListSave[i].id == _challengeList[index].id) {
+        _challengeListSave.removeAt(i);
+      }
+    }
     _challengeListSave.add(
       ChallengeModel(
           idChallenge: _challengeList[index].idChallenge,
