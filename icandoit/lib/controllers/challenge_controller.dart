@@ -5,7 +5,6 @@ import 'package:flutter_document_picker/flutter_document_picker.dart';
 import 'dart:convert';
 import 'package:icandoit/models/challenge_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:collection';
 import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
@@ -74,7 +73,7 @@ class Challengecontroller extends ChangeNotifier {
           .map((challenge) => ChallengeModel.fromJSON(challenge))
           .toList();
     }
-
+    // print('test unitaire');
     _initChallengeListStartChallenge();
 
     notifyListeners();
@@ -107,6 +106,7 @@ class Challengecontroller extends ChangeNotifier {
       if (_challengeListSave[i].date.isNotEmpty) {
         if (_challengeListSave[i].date == DateFormat('d').format(today)) {
           challegListSaveShedule(i);
+          // print('test unitaire save mensuel');
           return;
         }
       }
@@ -120,7 +120,7 @@ class Challengecontroller extends ChangeNotifier {
         if (_challengeList[i].date == DateFormat('d').format(today)) {
           remove(index: i, validate: true);
           print(_challengeListSave[i].date);
-
+          // print('test unitaire remove mensuel');
           return;
         }
       }
@@ -135,6 +135,7 @@ class Challengecontroller extends ChangeNotifier {
           if (translateDays(_challengeListSave[i].totalDays[n]) ==
               DateFormat('EEEE').format(today)) {
             challegListSaveShedule(i);
+            // print('test unitaire save hebdo');
             return;
           }
         }
@@ -159,6 +160,7 @@ class Challengecontroller extends ChangeNotifier {
           if (translateDays(_challengeList[i].totalDays[n]) ==
               DateFormat('EEEE').format(today)) {
             remove(index: i, validate: true);
+            // print('test unitaire remove hebdo');
             return;
           }
         }
@@ -170,6 +172,7 @@ class Challengecontroller extends ChangeNotifier {
     for (var i = _challengeList.length - 1; i >= 0; i--) {
       if (_challengeList[i].quotidient == true) {
         remove(index: i, validate: true);
+        // print('test unitaire2');
         return;
       }
     }
@@ -179,6 +182,7 @@ class Challengecontroller extends ChangeNotifier {
     for (var i = _challengeListSave.length - 1; i >= 0; i--) {
       if (_challengeListSave[i].quotidient == true) {
         challegListSaveShedule(i);
+        // print('test unitaire3');
         return;
       }
     }
@@ -248,8 +252,8 @@ class Challengecontroller extends ChangeNotifier {
       challengeDays.nbtacheVallide = "0";
       await _saveChallendays();
       _initChallengeListStartChallenge();
-
-      notifyListeners();
+      // print('test unitaire startchallengedays');
+      // notifyListeners();
     }
   }
 
@@ -264,8 +268,8 @@ class Challengecontroller extends ChangeNotifier {
       challengeyesterday.nbtacheVallide = "0";
       await _saveChallenyesterday();
       _initChallengeListStartChallenge();
-
-      notifyListeners();
+      // print('test unitaire startchallengeyestedays');
+      // notifyListeners();
     }
   }
 
@@ -285,9 +289,10 @@ class Challengecontroller extends ChangeNotifier {
       challengeyesterday.commentaire = challengeDays.commentaire;
       challengeyesterday.nbchallengeVallide = challengeDays.nbchallengeVallide;
       challengeyesterday.nbtacheVallide = challengeDays.nbtacheVallide;
+      // print('test unitaire initchallengeyestedays');
       await _saveChallenyesterday();
       _initChallengeListStartChallenge();
-      notifyListeners();
+      // notifyListeners();
     }
   }
 
@@ -304,6 +309,7 @@ class Challengecontroller extends ChangeNotifier {
       challengeDays.nbtacheVallide = "0";
       challengeDays.nbchallengeVallide = "0";
       challengeDays.commentaire = "";
+      // print('test unitaire initchallengedays');
       await _saveChallendays();
       _initChallengeListStartChallenge();
       notifyListeners();
@@ -324,27 +330,30 @@ class Challengecontroller extends ChangeNotifier {
       challengeDays.commentaire =
           " encore un effort et vos objectifs seront atteint";
     }
+    // print('test unitaire addCommentaireChallengeDay');
     await _saveChallendays();
     _initChallengeListStartChallenge();
-    notifyListeners();
+    // notifyListeners();
   }
 
   void addnbtacheVallide() async {
     challengeDays.nbtacheVallide =
         (int.parse(challengeDays.nbtacheVallide) + 1).toString();
     addCommentaireChallengeDay();
+    // print('test unitaire addnbtacheVallide');
     await _saveChallendays();
     _initChallengeListStartChallenge();
-    notifyListeners();
+    // notifyListeners();
   }
 
   void addnbChallengeVallide() async {
     challengeDays.nbchallengeVallide =
         (int.parse(challengeDays.nbchallengeVallide) + 1).toString();
     addCommentaireChallengeDay();
+    // print('test unitaire addnbChallengeVallide');
     await _saveChallendays();
     _initChallengeListStartChallenge();
-    notifyListeners();
+    // notifyListeners();
   }
 
   Future<bool> _saveChallenyesterday() async {
@@ -421,6 +430,7 @@ class Challengecontroller extends ChangeNotifier {
         for (var n = _challengeList[i].listeDeTache.length - 1; n >= 0; n--) {
           _challengeList[i].listeDeTache[n].index = n.toString();
         }
+        // print('test unitaire challengelist2');
       }
     }
 
@@ -486,6 +496,7 @@ class Challengecontroller extends ChangeNotifier {
       id: _challengeList[indexChallenge].id,
       chapitre: chapitre,
     );
+    // print('test unitaire addformationChapitre');
     // await _saveSauvegarde();
     await _save();
     _initChallengeList();
@@ -502,6 +513,7 @@ class Challengecontroller extends ChangeNotifier {
       id: _challengeList[indexChallenge].id,
       duree: duree,
     );
+    // print('test unitaire addformationDuree');
     // await _saveSauvegarde();
     await _save();
     _initChallengeList();
@@ -521,6 +533,7 @@ class Challengecontroller extends ChangeNotifier {
       id: _challengeList[indexChallenge].id,
       theoriePratique: theoriePratique,
     );
+    // print('test unitaire addformationTheoriePratique');
     await _save();
     _initChallengeList();
     notifyListeners();
@@ -540,6 +553,7 @@ class Challengecontroller extends ChangeNotifier {
           if (_challengeListSave[i].listeDeTache[n].id == idlistTache) {
             _challengeListSave[i].listeDeTache[n].formation.theoriePratique =
                 theoriePratique;
+            // print('test unitaire addChallengesavetheoriePratique');
             await _saveSauvegarde();
             _initChallengeList();
             return;
@@ -564,6 +578,7 @@ class Challengecontroller extends ChangeNotifier {
             _challengeListSave[i].listeDeTache[n].formation.chapitre = chapitre;
             await _saveSauvegarde();
             _initChallengeList();
+            // print('test unitaire addChallengesaveChapitre');
             return;
           }
         }
@@ -586,6 +601,7 @@ class Challengecontroller extends ChangeNotifier {
             _challengeListSave[i].listeDeTache[n].formation.duree = duree;
             await _saveSauvegarde();
             _initChallengeList();
+            // print('test unitaire addChallengesaveDuree');
             return;
           }
         }
@@ -631,7 +647,7 @@ class Challengecontroller extends ChangeNotifier {
         challengeListTest: _challengeList3,
       );
     }
-
+    // print('test unitaire addChallenge2');
     await _save();
     _initChallengeList();
     notifyListeners();
@@ -666,10 +682,12 @@ class Challengecontroller extends ChangeNotifier {
                     description: challengeListTest[n].description,
                     formation: formation),
               );
+          // print('test unitaire addChallengesave0');
         }
         await _saveSauvegarde();
         _initChallengeList();
         notifyListeners();
+        // print('test unitaire addChallengesave1');
         return;
       }
     }
@@ -694,6 +712,7 @@ class Challengecontroller extends ChangeNotifier {
               description: challengeListTest[0].description,
               formation: formation),
         );
+    // print('test unitaire addChallenge1');
   }
 
   void addChallenge(
@@ -750,6 +769,7 @@ class Challengecontroller extends ChangeNotifier {
               _challengeList[index].listeDeTache.length) {
         removeSave2(id: id);
         addListChallengeSaveindex(index);
+        // print('test unitaire deplacelistSAve');
         return;
       }
     }
@@ -786,6 +806,7 @@ class Challengecontroller extends ChangeNotifier {
           await _save();
           _initChallengeList();
           notifyListeners();
+          // print('test unitaire addSlectSave');
           return;
         }
       }
@@ -810,7 +831,7 @@ class Challengecontroller extends ChangeNotifier {
           totalChallenge: _challengeList[index].totalChallenge,
           unity: _challengeList[index].unity),
     );
-
+    // print('test unitaire addListChallengeSaveindex');
     await _saveSauvegarde();
     _initChallengeList();
     notifyListeners();
@@ -837,7 +858,7 @@ class Challengecontroller extends ChangeNotifier {
               totalChallenge: _challengeList[i].totalChallenge,
               unity: _challengeList[i].unity),
         );
-
+        // print('test unitaire addListChallengeSave');
         await _saveSauvegarde();
         _initChallengeList();
         notifyListeners();
@@ -852,6 +873,7 @@ class Challengecontroller extends ChangeNotifier {
       if (_challengeList[i].id == id) {
         index = i;
       }
+      // print('test unitaire returnIndexForName');
     }
     return index;
   }
@@ -871,6 +893,7 @@ class Challengecontroller extends ChangeNotifier {
           _challengeList[i].idChallenge = idChallenge;
         }
       }
+      // print('test unitaire raccourciChallenge');
     }
     await _save();
     _initChallengeList();
@@ -1002,7 +1025,7 @@ class Challengecontroller extends ChangeNotifier {
           if (_challengeListSave[i].listeDeTache[n].id == id) {
             _challengeListSave[i].listeDeTache.removeAt(n);
             await _save1Sauvegarde(remove: true, idChallenge: idChallenge);
-
+            // print('test unitaire voidremove2Save');
             // _initChallengeList();
             // notifyListeners();
             return;
@@ -1033,6 +1056,7 @@ class Challengecontroller extends ChangeNotifier {
               validate: validate);
         }
         _challengeList[i].listeDeTache.removeAt(index);
+        // print('test unitaire remove2');
       }
     }
     await _save1(remove: true, idChallenge: idChallenge);
@@ -1040,30 +1064,6 @@ class Challengecontroller extends ChangeNotifier {
     _initChallengeList();
     notifyListeners();
   }
-
-  // void remove2(
-  //     {@required int index,
-  //     @required String nameChallenge,
-  //     @required bool validate}) async {
-  //   for (var i = _challengeList.length - 1; i >= 0; i--) {
-  //     if (_challengeList[i].name == nameChallenge) {
-  //       if (!validate) {
-  //         var additionchallenge = _challengeList[i].totalChallenge;
-  //         _challengeList[i].totalChallenge =
-  //             (int.parse(additionchallenge) - 1).toString();
-  //       }
-  //       _challengeList[i].listeDeTache.removeAt(index);
-  //     }
-  //   }
-  //   await _save1(remove: true, nameChallenge: nameChallenge);
-
-  //   _initChallengeList();
-  //   notifyListeners();
-  //   if (!validate) {
-  //     voidremove2Save(
-  //         index: index, nameChallenge: nameChallenge, validate: validate);
-  //   }
-  // }
 
   Future<String> get _localPath async {
     final directory = await getApplicationDocumentsDirectory();
