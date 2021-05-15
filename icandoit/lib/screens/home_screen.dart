@@ -795,27 +795,40 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                       ),
                     ),
                   ),
-                  IconButton(
-                    alignment: Alignment.topRight,
-                    icon: Icon(
-                      Icons.schedule,
-                      color: Colors.black,
-                    ),
-                    onPressed: () {
-                      variable.testSchedule();
-                    },
-                  ),
+                  widget.idChallenge1.isNotEmpty
+                      ? IconButton(
+                          alignment: Alignment.topRight,
+                          icon: Icon(
+                            Icons.menu,
+                            color: Colors.black,
+                          ),
+                          onPressed: () {
+                            _controller.toggle();
+                          },
+                        )
+                      : IconButton(
+                          alignment: Alignment.topRight,
+                          icon: Icon(
+                            Icons.schedule,
+                            color: Colors.black,
+                          ),
+                          onPressed: () {
+                            variable.testSchedule();
+                          },
+                        ),
                 ],
-                leading: IconButton(
-                  alignment: Alignment.topRight,
-                  icon: Icon(
-                    Icons.menu,
-                    color: Colors.black,
-                  ),
-                  onPressed: () {
-                    _controller.toggle();
-                  },
-                ),
+                leading: widget.idChallenge1.isEmpty
+                    ? IconButton(
+                        alignment: Alignment.topRight,
+                        icon: Icon(
+                          Icons.menu,
+                          color: Colors.black,
+                        ),
+                        onPressed: () {
+                          _controller.toggle();
+                        },
+                      )
+                    : null,
                 centerTitle: true,
                 flexibleSpace: Container(
                   padding: EdgeInsets.only(right: 30.0),
