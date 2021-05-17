@@ -681,7 +681,7 @@ class Challengecontroller extends ChangeNotifier {
         }
         await _saveSauvegarde();
         _initChallengeList();
-        notifyListeners();
+        // notifyListeners();
         // print('test unitaire addChallengesave1');
         return;
       }
