@@ -168,8 +168,6 @@ class Challengecontroller extends ChangeNotifier {
     for (var i = _challengeList.length - 1; i >= 0; i--) {
       if (_challengeList[i].quotidient == true) {
         remove(index: i, validate: true);
-        // print('test unitaire2');
-        return;
       }
     }
   }
