@@ -107,7 +107,6 @@ class Challengecontroller extends ChangeNotifier {
         if (_challengeListSave[i].date == DateFormat('d').format(today)) {
           challegListSaveShedule(i);
           // print('test unitaire save mensuel');
-          return;
         }
       }
     }
@@ -121,7 +120,6 @@ class Challengecontroller extends ChangeNotifier {
           remove(index: i, validate: true);
           print(_challengeListSave[i].date);
           // print('test unitaire remove mensuel');
-          return;
         }
       }
     }
@@ -136,7 +134,6 @@ class Challengecontroller extends ChangeNotifier {
               DateFormat('EEEE').format(today)) {
             challegListSaveShedule(i);
             // print('test unitaire save hebdo');
-            return;
           }
         }
       }
@@ -161,7 +158,6 @@ class Challengecontroller extends ChangeNotifier {
               DateFormat('EEEE').format(today)) {
             remove(index: i, validate: true);
             // print('test unitaire remove hebdo');
-            return;
           }
         }
       }
@@ -183,7 +179,6 @@ class Challengecontroller extends ChangeNotifier {
       if (_challengeListSave[i].quotidient == true) {
         challegListSaveShedule(i);
         // print('test unitaire3');
-        return;
       }
     }
   }
