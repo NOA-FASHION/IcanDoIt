@@ -112,13 +112,15 @@ class Challengecontroller extends ChangeNotifier {
     }
   }
 
-  void removeMensuel() {
+  void removeMensuel() async {
     DateTime today = new DateTime.now();
     for (var i = _challengeList.length - 1; i >= 0; i--) {
       if (_challengeList[i].date.isNotEmpty) {
         if (_challengeList[i].date == DateFormat('d').format(today)) {
-          remove(index: i, validate: true);
-          print(_challengeListSave[i].date);
+          _challengeList.removeAt(i);
+          await _save(remove: true);
+          // remove(index: i, validate: true);
+          // print(_challengeListSave[i].date);
           // print('test unitaire remove mensuel');
         }
       }
@@ -149,14 +151,19 @@ class Challengecontroller extends ChangeNotifier {
     mensuelSave();
   }
 
-  void removeHebdo() {
+  void removeHebdo() async {
     DateTime today = new DateTime.now();
     for (var i = _challengeList.length - 1; i >= 0; i--) {
       if (_challengeList[i].totalDays.isNotEmpty) {
+        print(_challengeList[i].name);
         for (var n = _challengeList[i].totalDays.length - 1; n >= 0; n--) {
           if (translateDays(_challengeList[i].totalDays[n]) ==
               DateFormat('EEEE').format(today)) {
-            remove(index: i, validate: true);
+            print(i);
+            _challengeList.removeAt(i);
+            await _save(remove: true);
+            // remove(index: i, validate: true);
+
             // print('test unitaire remove hebdo');
           }
         }
@@ -167,7 +174,8 @@ class Challengecontroller extends ChangeNotifier {
   void removeQuotidientSave() async {
     for (var i = _challengeList.length - 1; i >= 0; i--) {
       if (_challengeList[i].quotidient == true) {
-        remove(index: i, validate: true);
+        _challengeList.removeAt(i);
+        await _save(remove: true);
       }
     }
   }
@@ -203,7 +211,7 @@ class Challengecontroller extends ChangeNotifier {
     await _save();
     _initChallengeList();
     notifyListeners();
-    return;
+    // return;
   }
 
   void _initChallengeListStartChallenge() async {
