@@ -101,12 +101,11 @@ class Challengecontroller extends ChangeNotifier {
 
   void mensuelSave() {
     DateTime today = new DateTime.now();
-    print(DateFormat('d').format(today));
+    // print(DateFormat('d').format(today));
     for (var i = _challengeListSave.length - 1; i >= 0; i--) {
       if (_challengeListSave[i].date.isNotEmpty) {
         if (_challengeListSave[i].date == DateFormat('d').format(today)) {
           challegListSaveShedule(i);
-          // print('test unitaire save mensuel');
         }
       }
     }
@@ -118,13 +117,24 @@ class Challengecontroller extends ChangeNotifier {
       if (_challengeList[i].date.isNotEmpty) {
         if (_challengeList[i].date == DateFormat('d').format(today)) {
           _challengeList.removeAt(i);
-          await _save(remove: true);
-          // remove(index: i, validate: true);
-          // print(_challengeListSave[i].date);
-          // print('test unitaire remove mensuel');
         }
       }
     }
+    await _save(remove: true);
+  }
+
+  void testSchedule() async {
+    removeQuotidientSave();
+
+    initialiseQuotidient();
+
+    removeHebdo();
+
+    hebdoSave();
+
+    removeMensuel();
+
+    mensuelSave();
   }
 
   void hebdoSave() {
@@ -132,6 +142,7 @@ class Challengecontroller extends ChangeNotifier {
     for (var i = _challengeListSave.length - 1; i >= 0; i--) {
       if (_challengeListSave[i].totalDays.isNotEmpty) {
         for (var n = _challengeListSave[i].totalDays.length - 1; n >= 0; n--) {
+          print(_challengeList[i].totalDays.length);
           if (translateDays(_challengeListSave[i].totalDays[n]) ==
               DateFormat('EEEE').format(today)) {
             challegListSaveShedule(i);
@@ -142,26 +153,17 @@ class Challengecontroller extends ChangeNotifier {
     }
   }
 
-  void testSchedule() {
-    removeQuotidientSave();
-    initialiseQuotidient();
-    removeHebdo();
-    hebdoSave();
-    removeMensuel();
-    mensuelSave();
-  }
-
   void removeHebdo() async {
     DateTime today = new DateTime.now();
     for (var i = _challengeList.length - 1; i >= 0; i--) {
       if (_challengeList[i].totalDays.isNotEmpty) {
-        print(_challengeList[i].name);
         for (var n = _challengeList[i].totalDays.length - 1; n >= 0; n--) {
-          if (translateDays(_challengeList[i].totalDays[n]) ==
-              DateFormat('EEEE').format(today)) {
-            print(i);
+          if (_challengeList[i].totalDays.length > 0 &&
+              translateDays(_challengeList[i].totalDays[n]) ==
+                  DateFormat('EEEE').format(today)) {
             _challengeList.removeAt(i);
-            await _save(remove: true);
+
+            // notifyListeners();
             // remove(index: i, validate: true);
 
             // print('test unitaire remove hebdo');
@@ -169,20 +171,25 @@ class Challengecontroller extends ChangeNotifier {
         }
       }
     }
+    // await _save(remove: true);
   }
 
   void removeQuotidientSave() async {
     for (var i = _challengeList.length - 1; i >= 0; i--) {
       if (_challengeList[i].quotidient == true) {
+        print(_challengeList[i].name);
+        // print(i);
         _challengeList.removeAt(i);
-        await _save(remove: true);
       }
     }
+    // await _save(remove: true);
   }
 
-  void initialiseQuotidient() async {
+  void initialiseQuotidient() {
     for (var i = _challengeListSave.length - 1; i >= 0; i--) {
       if (_challengeListSave[i].quotidient == true) {
+        // print(_challengeListSave[i].name);
+        // print(i);
         challegListSaveShedule(i);
         // print('test unitaire3');
       }
