@@ -30,8 +30,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     return new Future.delayed(new Duration(milliseconds: milliseconds));
   }
 
+  List<String> idChallenge = [];
   bool boolid = true;
-  String idChallenge;
+  // String idChallenge;
   String idNotif = "";
   String dateQuotidien;
   String notifiaction = "";
@@ -71,6 +72,15 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   //     }
   //   }
   // }
+
+  List<String> idCHallengeFirat(String idChalleneString) {
+    List<String> idchal = [];
+    if (idChalleneString.isNotEmpty) {
+      idchal.add(idChalleneString);
+    }
+
+    return idchal;
+  }
 
   Widget selectraccourci() {
     Widget raccourci = SizedBox(width: 1);
@@ -1164,7 +1174,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                         .addChallenge(
                                             boolId: true,
                                             idNotif: idNotif,
-                                            idChallenge: widget.idChallenge1,
+                                            idChallenge: idCHallengeFirat(
+                                                widget.idChallenge1),
                                             id: nanoid(11),
                                             notifiaction: notifiaction,
                                             date: date,

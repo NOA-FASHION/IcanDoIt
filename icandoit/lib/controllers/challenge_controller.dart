@@ -862,7 +862,7 @@ class Challengecontroller extends ChangeNotifier {
   }
 
   void addChallenge(
-      {@required String idChallenge,
+      {@required List<String> idChallenge,
       @required String idNotif,
       @required bool boolId,
       @required String id,
@@ -1074,7 +1074,7 @@ class Challengecontroller extends ChangeNotifier {
     for (var i = _challengeList.length - 1; i >= 0; i--) {
       for (var n = raccourci.length - 1; n >= 0; n--) {
         if (_challengeList[i].id == raccourci[n]) {
-          _challengeList[i].idChallenge = idChallenge;
+          _challengeList[i].idChallenge.add(idChallenge);
         }
       }
       // print('test unitaire raccourciChallenge');

@@ -134,7 +134,7 @@ class ChallengeModel {
   bool boolId;
   String id;
   String idNotif;
-  String idChallenge;
+  List<String> idChallenge;
   final String name;
   List<String> totalDays;
   String date;
@@ -168,7 +168,7 @@ class ChallengeModel {
         id: json['id'],
         boolId: json['boolId'],
         idNotif: json['idNotif'],
-        idChallenge: json['idChallenge'],
+        idChallenge: List<String>.from(json["idChallenge"].map((x) => x)),
         notification: json['notification'],
         date: json['date'],
         animatedpadding: json['animatedpadding'],
@@ -188,7 +188,7 @@ class ChallengeModel {
       "id": id,
       "boolId": boolId,
       "idNotif": idNotif,
-      "idChallenge": idChallenge,
+      "idChallenge": List<dynamic>.from(idChallenge.map((x) => x)),
       "notification": notification,
       "name": name,
       "date": date,
