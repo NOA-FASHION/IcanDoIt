@@ -816,6 +816,35 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                             variable.testSchedule();
                           },
                         ),
+                  IconButton(
+                    alignment: Alignment.topRight,
+                    icon: Icon(
+                      Icons.notifications,
+                      color: Colors.black,
+                    ),
+                    onPressed: () {
+                      variable.scheduledNotification(
+                          channelID: 'Channel ID',
+                          channelName: 'Channel Name',
+                          channelDesc: 'Channel Description',
+                          notificationId: 1,
+                          notificationTitle: 'Date Tracker Test',
+                          notificationBody: 'We are showing notification!',
+                          // change to any time you want
+                          notificationTime:
+                              DateTime.now().add(Duration(seconds: 10)));
+                    },
+                  ),
+                  IconButton(
+                    alignment: Alignment.topRight,
+                    icon: Icon(
+                      Icons.notifications_off,
+                      color: Colors.black,
+                    ),
+                    onPressed: () {
+                      variable..cancelAllNotifications();
+                    },
+                  ),
                 ],
                 leading: widget.idChallenge1.isEmpty
                     ? IconButton(
