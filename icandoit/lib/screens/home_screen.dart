@@ -852,7 +852,16 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                       color: Colors.black,
                     ),
                     onPressed: () {
-                      variable..cancelAllNotifications();
+                      variable.scheduleHebdodNotification(
+                          channelID: 'Channel ID',
+                          channelName: 'Channel Name',
+                          channelDesc: 'Channel Description',
+                          notificationId: 1,
+                          notificationTitle: 'Date Tracker Test',
+                          notificationBody: 'We are showing notification!',
+                          // change to any time you want
+                          notificationTime:
+                              DateTime.now().add(Duration(seconds: 1)));
                     },
                   ),
                 ],

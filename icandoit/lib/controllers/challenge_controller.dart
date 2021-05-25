@@ -1,6 +1,10 @@
 import 'dart:async';
-
+import 'dart:typed_data';
+import 'package:flutter/services.dart';
+import 'package:timezone/data/latest.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_document_picker/flutter_document_picker.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'dart:convert';
@@ -53,6 +57,8 @@ class Challengecontroller extends ChangeNotifier {
   String patchData;
   Challengecontroller() {
     _initChallengeList();
+    initLocalNotification();
+    _configureLocalTimeZone();
   }
 
   void _initChallengeList() async {
@@ -91,7 +97,6 @@ class Challengecontroller extends ChangeNotifier {
     _initChallengeListStartChallenge();
 
     notifyListeners();
-    initLocalNotification();
   }
 
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
@@ -107,6 +112,9 @@ class Challengecontroller extends ChangeNotifier {
     List<PendingNotificationRequest> pendingNotifcationRequests =
         await flutterLocalNotificationsPlugin?.pendingNotificationRequests();
   }
+
+  static const MethodChannel platform =
+      MethodChannel('dexterx.dev/flutter_local_notifications_example');
 
   Future<int> getHighestNotificationId() async {
     List<PendingNotificationRequest> pendingNotifcationRequests =
@@ -127,6 +135,13 @@ class Challengecontroller extends ChangeNotifier {
     );
     if (notification != null) return notification.id;
     return null;
+  }
+
+  Future<void> _configureLocalTimeZone() async {
+    tz.initializeTimeZones();
+    final String timeZoneName =
+        await platform.invokeMethod<String>('getTimeZoneName');
+    tz.setLocalLocation(tz.getLocation(timeZoneName));
   }
 
   Future<void> cancelAllNotifications() async {
@@ -163,29 +178,46 @@ class Challengecontroller extends ChangeNotifier {
     await updateNotificationCount();
   }
 
-  Future<void> showNotification(
-      {@required String channelID,
-      @required String channelName,
-      @required String channelDesc,
-      @required String notificationTitle,
-      @required String notificationBody,
-      String payload}) async {
-    AndroidNotificationDetails androidNotificationDetails =
+  Future<void> _showNotification() async {
+    const AndroidNotificationDetails androidPlatformChannelSpecifics =
         AndroidNotificationDetails(
-      channelID,
-      channelName,
-      channelDesc,
-      priority: Priority.high,
-      importance: Importance.max,
-      ticker: channelName,
-    );
-    IOSNotificationDetails iosNotificationDetails = IOSNotificationDetails();
-    NotificationDetails notificationDetails = NotificationDetails(
-        android: androidNotificationDetails, iOS: iosNotificationDetails);
+            'your channel id', 'your channel name', 'your channel description',
+            importance: Importance.max,
+            priority: Priority.high,
+            ticker: 'ticker');
+    const NotificationDetails platformChannelSpecifics =
+        NotificationDetails(android: androidPlatformChannelSpecifics);
+    await flutterLocalNotificationsPlugin.show(
+        0, 'plain title', 'plain body', platformChannelSpecifics,
+        payload: 'item x');
+  }
 
-    await flutterLocalNotificationsPlugin?.show(
-        0, notificationTitle, notificationBody, notificationDetails,
-        payload: 'item X');
+  Future<void> showNotificationCustomVibrationIconLed() async {
+    final Int64List vibrationPattern = Int64List(4);
+    vibrationPattern[0] = 0;
+    vibrationPattern[1] = 1000;
+    vibrationPattern[2] = 5000;
+    vibrationPattern[3] = 2000;
+
+    final AndroidNotificationDetails androidPlatformChannelSpecifics =
+        AndroidNotificationDetails('other custom channel id',
+            'other custom channel name', 'other custom channel description',
+            // icon: 'secondary_icon',
+            // largeIcon: const DrawableResourceAndroidBitmap('sample_large_icon'),
+            vibrationPattern: vibrationPattern,
+            enableLights: true,
+            color: const Color.fromARGB(255, 255, 0, 0),
+            ledColor: const Color.fromARGB(255, 255, 0, 0),
+            ledOnMs: 1000,
+            ledOffMs: 500);
+
+    final NotificationDetails platformChannelSpecifics =
+        NotificationDetails(android: androidPlatformChannelSpecifics);
+    await flutterLocalNotificationsPlugin.show(
+        0,
+        'title of notification with custom vibration pattern, LED and icon',
+        'body of notification with custom vibration pattern, LED and icon',
+        platformChannelSpecifics);
   }
 
   Future<void> scheduledNotification(
@@ -215,6 +247,52 @@ class Challengecontroller extends ChangeNotifier {
     await flutterLocalNotificationsPlugin?.schedule(0, notificationTitle,
         notificationBody, scheduledNotificationDateTime, notificationDetails,
         payload: 'item X');
+  }
+
+  tz.TZDateTime _nextInstanceOfTenAM() {
+    final tz.TZDateTime now = tz.TZDateTime.now(tz.local);
+    tz.TZDateTime scheduledDate =
+        tz.TZDateTime(tz.local, now.year, now.month, now.day, 17, 50);
+    if (scheduledDate.isBefore(now)) {
+      scheduledDate = scheduledDate.add(const Duration(days: 1));
+    }
+    return scheduledDate;
+  }
+
+  Future<void> scheduleHebdodNotification(
+      {@required String channelID,
+      @required String channelName,
+      @required String channelDesc,
+      @required String notificationTitle,
+      int notificationId,
+      @required String notificationBody,
+      @required DateTime notificationTime}) async {
+    DateTime scheduledNotificationDateTime = notificationTime;
+
+    AndroidNotificationDetails androidNotificationDetails =
+        AndroidNotificationDetails(
+      channelID,
+      channelName,
+      channelDesc,
+      priority: Priority.high,
+      importance: Importance.max,
+      ticker: '$channelName',
+    );
+
+    IOSNotificationDetails iosNotificationDetails = IOSNotificationDetails();
+    NotificationDetails notificationDetails = NotificationDetails(
+        android: androidNotificationDetails, iOS: iosNotificationDetails);
+
+    await flutterLocalNotificationsPlugin.zonedSchedule(
+        0,
+        'weekly scheduled notification title',
+        'weekly scheduled notification body',
+        _nextInstanceOfTenAM(),
+        notificationDetails,
+        androidAllowWhileIdle: true,
+        uiLocalNotificationDateInterpretation:
+            UILocalNotificationDateInterpretation.absoluteTime,
+        matchDateTimeComponents: DateTimeComponents.dayOfWeekAndTime);
   }
 
   String translateDays(String days) {
