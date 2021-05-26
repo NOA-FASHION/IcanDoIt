@@ -30,6 +30,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     return new Future.delayed(new Duration(milliseconds: milliseconds));
   }
 
+  bool dateBool;
+  bool notificationBool;
+  bool hebdoBool;
   List<String> idChallenge = [];
   bool boolid = true;
   // String idChallenge;
@@ -80,6 +83,51 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     }
 
     return idchal;
+  }
+
+  void saveNotification(String nom, String description, String idNotif) {
+    Challengecontroller variable1 = Provider.of<Challengecontroller>(context);
+    if (quotidient) {
+      variable1.scheduleQuotidiendNotification(
+          channelID: 'Channel ID',
+          channelName: 'Channel Name',
+          channelDesc: 'Channel Description',
+          notificationId: 1,
+          notificationTitle: 'Date Tracker Test',
+          notificationBody: 'We are showing notification!',
+          hours: int.parse(dateQuotidien));
+    } else if (hebdoBool) {
+      for (var n = totalDays.length - 1; n >= 0; n--) {
+        variable1.scheduleHebdodNotification(
+            channelID: 'Channel ID',
+            channelName: 'Channel Name',
+            channelDesc: 'Channel Description',
+            notificationId: 1,
+            notificationTitle: 'Date Tracker Test',
+            notificationBody: 'We are showing notification!',
+            weekdays: totalDays[n],
+            hours: int.parse(heure));
+      }
+    } else if (dateBool) {
+      variable1.scheduleMonthdNotification(
+          channelID: 'Channel ID',
+          channelName: 'Channel Name',
+          channelDesc: 'Channel Description',
+          notificationId: 1,
+          notificationTitle: 'Date Tracker Test',
+          notificationBody: 'We are showing notification!',
+          days: int.parse(date),
+          hours: int.parse(dateQuotidien));
+    } else if (notificationBool) {
+      variable1.scheduledNotifNotification(
+          channelID: 'Channel ID',
+          channelName: 'Channel Name',
+          channelDesc: 'Channel Description',
+          notificationId: 1,
+          notificationTitle: 'Date Tracker Test',
+          notificationBody: 'We are showing notification!',
+          dateNotif: notifiaction);
+    }
   }
 
   Widget selectraccourci() {
@@ -299,7 +347,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 for (var i = _myActivities.length - 1; i >= 0; i--) {
                   totalDays.add(_myActivities[i].toString());
                 }
-
+                hebdoBool = true;
                 animatedpadding = true;
               });
             },
@@ -432,6 +480,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                     onChanged: (String newValue) {
                       setState(() {
                         date = newValue;
+                        dateBool = true;
                         animatedpadding = true;
                       });
                     },
@@ -585,6 +634,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             onSaved: (val) {
               print(val);
               notifiaction = val;
+              notificationBool = true;
               // animatedpadding = true;
             },
           ),
@@ -842,9 +892,10 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                           notificationBody: 'We are showing notification!',
                           // change to any time you want
                           notificationTime:
-                              DateTime.now().add(Duration(seconds: 10)));
+                              DateTime.now().add(Duration(seconds: 1)));
                     },
                   ),
+                  const Divider(),
                   IconButton(
                     alignment: Alignment.topRight,
                     icon: Icon(
@@ -852,16 +903,15 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                       color: Colors.black,
                     ),
                     onPressed: () {
-                      variable.scheduleHebdodNotification(
+                      variable.scheduledNotifNotification(
                           channelID: 'Channel ID',
                           channelName: 'Channel Name',
                           channelDesc: 'Channel Description',
                           notificationId: 1,
                           notificationTitle: 'Date Tracker Test',
                           notificationBody: 'We are showing notification!',
-                          // change to any time you want
-                          notificationTime:
-                              DateTime.now().add(Duration(seconds: 1)));
+                          dateNotif: "");
+                      // variable..cancelAllNotifications();
                     },
                   ),
                 ],
@@ -1198,6 +1248,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                             unity: unityChallenge,
                                             challengeListTache:
                                                 challengeListTache);
+                                    saveNotification(nameChallenge,
+                                        targetChallenge, idNotif);
 
                                     Navigator.pop(context);
                                   }

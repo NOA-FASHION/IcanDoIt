@@ -249,25 +249,77 @@ class Challengecontroller extends ChangeNotifier {
         payload: 'item X');
   }
 
-  tz.TZDateTime _nextInstanceOfTenAM() {
+  tz.TZDateTime _nextInstanceOfTenAM(int hours) {
     final tz.TZDateTime now = tz.TZDateTime.now(tz.local);
     tz.TZDateTime scheduledDate =
-        tz.TZDateTime(tz.local, now.year, now.month, now.day, 17, 50);
+        tz.TZDateTime(tz.local, now.year, now.month, now.day, hours);
     if (scheduledDate.isBefore(now)) {
       scheduledDate = scheduledDate.add(const Duration(days: 1));
     }
     return scheduledDate;
   }
 
-  Future<void> scheduleHebdodNotification(
-      {@required String channelID,
-      @required String channelName,
-      @required String channelDesc,
-      @required String notificationTitle,
-      int notificationId,
-      @required String notificationBody,
-      @required DateTime notificationTime}) async {
-    DateTime scheduledNotificationDateTime = notificationTime;
+  tz.TZDateTime _nextInstanceOfMondayTenAM(int hours, String Weekdays) {
+    tz.TZDateTime scheduledDate = _nextInstanceOfTenAM(hours);
+    while (scheduledDate.weekday != transformDate(Weekdays)) {
+      scheduledDate = scheduledDate.add(const Duration(days: 1));
+    }
+    return scheduledDate;
+  }
+
+  tz.TZDateTime _nextInstancDayeOfTenAM(int days, int hours) {
+    final tz.TZDateTime now = tz.TZDateTime.now(tz.local);
+    tz.TZDateTime scheduledDate =
+        tz.TZDateTime(tz.local, now.year, now.month, days, hours);
+    if (scheduledDate.isBefore(now)) {
+      scheduledDate = scheduledDate.add(const Duration(days: 1));
+    }
+    print(scheduledDate.toString());
+    return scheduledDate;
+  }
+
+  tz.TZDateTime _nextInstancNotifeOfTenAM(String dateNotif) {
+    final tz.TZDateTime now = tz.TZDateTime.now(tz.local);
+    tz.TZDateTime scheduledDate =
+        tz.TZDateTime.parse(tz.local, "2021-05-26 17:14:53.545853");
+
+    if (scheduledDate.isBefore(now)) {
+      scheduledDate = scheduledDate.add(const Duration(days: 1));
+    }
+    print(scheduledDate.toString());
+    return scheduledDate;
+  }
+
+  int transformDate(String days) {
+    int daysFinal = 1;
+    if (days == "Lundi") {
+      daysFinal = DateTime.monday;
+    } else if (days == "Mardi") {
+      daysFinal = DateTime.tuesday;
+    } else if (days == "Mercredi") {
+      daysFinal = DateTime.wednesday;
+    } else if (days == "Jeudi") {
+      daysFinal = DateTime.thursday;
+    } else if (days == "Vendredi") {
+      daysFinal = DateTime.friday;
+    } else if (days == "Samedi") {
+      daysFinal = DateTime.saturday;
+    } else if (days == "Dimanche") {
+      daysFinal = DateTime.sunday;
+    }
+    return daysFinal;
+  }
+
+  Future<void> scheduledNotifNotification({
+    @required String channelID,
+    @required String channelName,
+    @required String channelDesc,
+    @required String notificationTitle,
+    int notificationId,
+    @required String notificationBody,
+    @required String dateNotif,
+  }) async {
+    // DateTime scheduledNotificationDateTime = notificationTime;
 
     AndroidNotificationDetails androidNotificationDetails =
         AndroidNotificationDetails(
@@ -287,7 +339,117 @@ class Challengecontroller extends ChangeNotifier {
         0,
         'weekly scheduled notification title',
         'weekly scheduled notification body',
-        _nextInstanceOfTenAM(),
+        _nextInstancNotifeOfTenAM(dateNotif),
+        notificationDetails,
+        androidAllowWhileIdle: true,
+        uiLocalNotificationDateInterpretation:
+            UILocalNotificationDateInterpretation.absoluteTime,
+        matchDateTimeComponents: DateTimeComponents.dayOfWeekAndTime);
+  }
+
+  Future<void> scheduleMonthdNotification(
+      {@required String channelID,
+      @required String channelName,
+      @required String channelDesc,
+      @required String notificationTitle,
+      int notificationId,
+      @required String notificationBody,
+      @required int days,
+      @required int hours}) async {
+    // DateTime scheduledNotificationDateTime = notificationTime;
+
+    AndroidNotificationDetails androidNotificationDetails =
+        AndroidNotificationDetails(
+      channelID,
+      channelName,
+      channelDesc,
+      priority: Priority.high,
+      importance: Importance.max,
+      ticker: '$channelName',
+    );
+
+    IOSNotificationDetails iosNotificationDetails = IOSNotificationDetails();
+    NotificationDetails notificationDetails = NotificationDetails(
+        android: androidNotificationDetails, iOS: iosNotificationDetails);
+
+    await flutterLocalNotificationsPlugin.zonedSchedule(
+        0,
+        'weekly scheduled notification title',
+        'weekly scheduled notification body',
+        _nextInstancDayeOfTenAM(days, hours),
+        notificationDetails,
+        androidAllowWhileIdle: true,
+        uiLocalNotificationDateInterpretation:
+            UILocalNotificationDateInterpretation.absoluteTime,
+        matchDateTimeComponents: DateTimeComponents.dayOfWeekAndTime);
+  }
+
+  Future<void> scheduleHebdodNotification(
+      {@required String channelID,
+      @required String channelName,
+      @required String channelDesc,
+      @required String notificationTitle,
+      int notificationId,
+      @required String notificationBody,
+      @required int hours,
+      @required String weekdays}) async {
+    // DateTime scheduledNotificationDateTime = notificationTime;
+
+    AndroidNotificationDetails androidNotificationDetails =
+        AndroidNotificationDetails(
+      channelID,
+      channelName,
+      channelDesc,
+      priority: Priority.high,
+      importance: Importance.max,
+      ticker: '$channelName',
+    );
+
+    IOSNotificationDetails iosNotificationDetails = IOSNotificationDetails();
+    NotificationDetails notificationDetails = NotificationDetails(
+        android: androidNotificationDetails, iOS: iosNotificationDetails);
+
+    await flutterLocalNotificationsPlugin.zonedSchedule(
+        0,
+        'weekly scheduled notification title',
+        'weekly scheduled notification body',
+        _nextInstanceOfMondayTenAM(hours, weekdays),
+        notificationDetails,
+        androidAllowWhileIdle: true,
+        uiLocalNotificationDateInterpretation:
+            UILocalNotificationDateInterpretation.absoluteTime,
+        matchDateTimeComponents: DateTimeComponents.dayOfWeekAndTime);
+  }
+
+  Future<void> scheduleQuotidiendNotification(
+      {@required String channelID,
+      @required String channelName,
+      @required String channelDesc,
+      @required String notificationTitle,
+      int notificationId,
+      @required String notificationBody,
+      @required int hours}) async {
+    // DateTime scheduledNotificationDateTime = notificationTime;
+
+    AndroidNotificationDetails androidNotificationDetails =
+        AndroidNotificationDetails(
+      channelID,
+      channelName,
+      channelDesc,
+      priority: Priority.high,
+      importance: Importance.max,
+      ticker: '$channelName',
+    );
+
+    IOSNotificationDetails iosNotificationDetails = IOSNotificationDetails();
+    NotificationDetails notificationDetails = NotificationDetails(
+        android: androidNotificationDetails, iOS: iosNotificationDetails);
+
+    await flutterLocalNotificationsPlugin.zonedSchedule(
+        0,
+        'weekly scheduled notification title',
+        'weekly scheduled notification body',
+        _nextInstanceOfTenAM(hours),
         notificationDetails,
         androidAllowWhileIdle: true,
         uiLocalNotificationDateInterpretation:
