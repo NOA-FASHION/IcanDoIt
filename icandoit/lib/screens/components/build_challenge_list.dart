@@ -191,7 +191,7 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
         ),
       ),
     );
-    if (chalenge.animatedpadding) {
+    if (chalenge.animatedpadding || chalenge.idNotif.isNotEmpty) {
       glow = Shimmer(
         duration: Duration(seconds: 5),
         interval: Duration(seconds: 1),
@@ -407,6 +407,11 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
           child: Dismissible(
             onDismissed: (direction) {
               if (direction == DismissDirection.endToStart) {
+                if (!_challengesList[index].animatedpadding &&
+                    _challengesList[index].idNotif.isNotEmpty) {
+                  variable.cancelNotificationById(
+                      int.parse(_challengesList[index].idNotif));
+                }
                 int index1 =
                     variable.returnIndexForName(_challengesList[index].id);
                 variable.addnbChallengeVallide();
@@ -420,6 +425,11 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
               }
 
               if (direction == DismissDirection.startToEnd) {
+                if (_challengesList[index].animatedpadding ||
+                    _challengesList[index].idNotif.isNotEmpty) {
+                  variable.cancelNotificationById(
+                      int.parse(_challengesList[index].idNotif));
+                }
                 int index1 =
                     variable.returnIndexForName(_challengesList[index].id);
                 variable.remove(

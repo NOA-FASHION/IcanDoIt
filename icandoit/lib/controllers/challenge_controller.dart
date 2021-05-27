@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:typed_data';
 import 'package:flutter/services.dart';
+import 'package:nanoid/nanoid.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 import 'package:flutter/foundation.dart';
@@ -59,6 +60,7 @@ class Challengecontroller extends ChangeNotifier {
     _initChallengeList();
     initLocalNotification();
     _configureLocalTimeZone();
+    // print(customAlphabet("0123456789", 4));
   }
 
   void _initChallengeList() async {
@@ -124,6 +126,27 @@ class Challengecontroller extends ChangeNotifier {
       if (item.id > maxId) maxId = item.id;
     });
     return maxId;
+  }
+
+  Future<void> checkPendingNotificationRequests(BuildContext context) async {
+    final List<PendingNotificationRequest> pendingNotificationRequests =
+        await flutterLocalNotificationsPlugin.pendingNotificationRequests();
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        content:
+            Text('${pendingNotificationRequests.length} pending notification '
+                'requests'),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: const Text('OK'),
+          ),
+        ],
+      ),
+    );
   }
 
   Future<int> getNotificationId(String title) async {
@@ -280,13 +303,12 @@ class Challengecontroller extends ChangeNotifier {
 
   tz.TZDateTime _nextInstancNotifeOfTenAM(String dateNotif) {
     final tz.TZDateTime now = tz.TZDateTime.now(tz.local);
-    tz.TZDateTime scheduledDate =
-        tz.TZDateTime.parse(tz.local, "2021-05-26 17:14:53.545853");
+    tz.TZDateTime scheduledDate = tz.TZDateTime.parse(tz.local, dateNotif);
 
     if (scheduledDate.isBefore(now)) {
       scheduledDate = scheduledDate.add(const Duration(days: 1));
     }
-    print(scheduledDate.toString());
+    // print(scheduledDate.toString());
     return scheduledDate;
   }
 
@@ -336,9 +358,9 @@ class Challengecontroller extends ChangeNotifier {
         android: androidNotificationDetails, iOS: iosNotificationDetails);
 
     await flutterLocalNotificationsPlugin.zonedSchedule(
-        0,
-        'weekly scheduled notification title',
-        'weekly scheduled notification body',
+        notificationId,
+        channelName,
+        channelDesc,
         _nextInstancNotifeOfTenAM(dateNotif),
         notificationDetails,
         androidAllowWhileIdle: true,
@@ -373,9 +395,9 @@ class Challengecontroller extends ChangeNotifier {
         android: androidNotificationDetails, iOS: iosNotificationDetails);
 
     await flutterLocalNotificationsPlugin.zonedSchedule(
-        0,
-        'weekly scheduled notification title',
-        'weekly scheduled notification body',
+        notificationId,
+        channelName,
+        channelDesc,
         _nextInstancDayeOfTenAM(days, hours),
         notificationDetails,
         androidAllowWhileIdle: true,
@@ -410,9 +432,9 @@ class Challengecontroller extends ChangeNotifier {
         android: androidNotificationDetails, iOS: iosNotificationDetails);
 
     await flutterLocalNotificationsPlugin.zonedSchedule(
-        0,
-        'weekly scheduled notification title',
-        'weekly scheduled notification body',
+        notificationId,
+        channelName,
+        channelDesc,
         _nextInstanceOfMondayTenAM(hours, weekdays),
         notificationDetails,
         androidAllowWhileIdle: true,
@@ -446,9 +468,9 @@ class Challengecontroller extends ChangeNotifier {
         android: androidNotificationDetails, iOS: iosNotificationDetails);
 
     await flutterLocalNotificationsPlugin.zonedSchedule(
-        0,
-        'weekly scheduled notification title',
-        'weekly scheduled notification body',
+        notificationId,
+        channelName,
+        channelDesc,
         _nextInstanceOfTenAM(hours),
         notificationDetails,
         androidAllowWhileIdle: true,
@@ -1419,7 +1441,8 @@ class Challengecontroller extends ChangeNotifier {
 
     if (!validate) {
       for (var i = _challengeListSave.length - 1; i >= 0; i--) {
-        if (_challengeListSave[i].id == id) {
+        if (_challengeListSave[i].id == id &&
+            _challengeListSave[i].animatedpadding) {
           _challengeListSave.removeAt(i);
           await _saveSauvegarde(remove: true);
           return;

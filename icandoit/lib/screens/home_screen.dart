@@ -86,23 +86,24 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   }
 
   void saveNotification(String nom, String description, String idNotif) {
-    Challengecontroller variable1 = Provider.of<Challengecontroller>(context);
+    Challengecontroller variable1 =
+        Provider.of<Challengecontroller>(context, listen: false);
     if (quotidient) {
       variable1.scheduleQuotidiendNotification(
-          channelID: 'Channel ID',
-          channelName: 'Channel Name',
-          channelDesc: 'Channel Description',
-          notificationId: 1,
+          channelID: idNotif,
+          channelName: nom,
+          channelDesc: description,
+          notificationId: int.parse(idNotif),
           notificationTitle: 'Date Tracker Test',
           notificationBody: 'We are showing notification!',
           hours: int.parse(dateQuotidien));
     } else if (hebdoBool) {
       for (var n = totalDays.length - 1; n >= 0; n--) {
         variable1.scheduleHebdodNotification(
-            channelID: 'Channel ID',
-            channelName: 'Channel Name',
-            channelDesc: 'Channel Description',
-            notificationId: 1,
+            channelID: idNotif,
+            channelName: nom,
+            channelDesc: description,
+            notificationId: int.parse(idNotif),
             notificationTitle: 'Date Tracker Test',
             notificationBody: 'We are showing notification!',
             weekdays: totalDays[n],
@@ -110,20 +111,20 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
       }
     } else if (dateBool) {
       variable1.scheduleMonthdNotification(
-          channelID: 'Channel ID',
-          channelName: 'Channel Name',
-          channelDesc: 'Channel Description',
-          notificationId: 1,
+          channelID: idNotif,
+          channelName: nom,
+          channelDesc: description,
+          notificationId: int.parse(idNotif),
           notificationTitle: 'Date Tracker Test',
           notificationBody: 'We are showing notification!',
           days: int.parse(date),
           hours: int.parse(dateQuotidien));
     } else if (notificationBool) {
       variable1.scheduledNotifNotification(
-          channelID: 'Channel ID',
-          channelName: 'Channel Name',
-          channelDesc: 'Channel Description',
-          notificationId: 1,
+          channelID: idNotif,
+          channelName: nom,
+          channelDesc: description,
+          notificationId: int.parse(idNotif),
           notificationTitle: 'Date Tracker Test',
           notificationBody: 'We are showing notification!',
           dateNotif: notifiaction);
@@ -190,7 +191,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   totalChangeListChal.add(_changeLiatChall[i].toString());
                 }
 
-                animatedpadding = true;
+                // animatedpadding = true;
               });
             },
           ),
@@ -247,35 +248,38 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 onChanged: (String newValue) {
                   setState(() {
                     dateQuotidien = newValue;
+                    notificationBool = false;
+                    hebdoBool = false;
+                    dateBool = false;
                     quotidient = true;
                     animatedpadding = true;
                   });
                 },
                 items: <String>[
-                  '1 h',
-                  '2 h',
-                  '3 h',
-                  '4 h',
-                  '5 h',
-                  '6 h',
-                  '7 h',
-                  '8 h',
-                  '9 h',
-                  '10 h',
-                  '11 h',
-                  '12 h',
-                  '13 h',
-                  '14 h',
-                  '15 h',
-                  '16 h',
-                  '17 h',
-                  '18 h',
-                  '19 h',
-                  '20 h',
-                  '21 h',
-                  '22 h',
-                  '23 h',
-                  '24 h',
+                  '1',
+                  '2',
+                  '3',
+                  '4',
+                  '5',
+                  '6',
+                  '7',
+                  '8',
+                  '9',
+                  '10',
+                  '11',
+                  '12',
+                  '13',
+                  '14',
+                  '15',
+                  '16',
+                  '17',
+                  '18',
+                  '19',
+                  '20',
+                  '21',
+                  '22',
+                  '23',
+                  '24',
                 ].map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
@@ -347,6 +351,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 for (var i = _myActivities.length - 1; i >= 0; i--) {
                   totalDays.add(_myActivities[i].toString());
                 }
+                notificationBool = false;
+                quotidient = false;
+                dateBool = false;
                 hebdoBool = true;
                 animatedpadding = true;
               });
@@ -400,30 +407,30 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                       });
                     },
                     items: <String>[
-                      '1 h',
-                      '2 h',
-                      '3 h',
-                      '4 h',
-                      '5 h',
-                      '6 h',
-                      '7 h',
-                      '8 h',
-                      '9 h',
-                      '10 h',
-                      '11 h',
-                      '12 h',
-                      '13 h',
-                      '14 h',
-                      '15 h',
-                      '16 h',
-                      '17 h',
-                      '18 h',
-                      '19 h',
-                      '20 h',
-                      '21 h',
-                      '22 h',
-                      '23 h',
-                      '24 h',
+                      '1',
+                      '2',
+                      '3',
+                      '4',
+                      '5',
+                      '6',
+                      '7',
+                      '8',
+                      '9',
+                      '10',
+                      '11',
+                      '12',
+                      '13',
+                      '14',
+                      '15',
+                      '16',
+                      '17',
+                      '18',
+                      '19',
+                      '20',
+                      '21',
+                      '22',
+                      '23',
+                      '24',
                     ].map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
@@ -480,6 +487,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                     onChanged: (String newValue) {
                       setState(() {
                         date = newValue;
+                        notificationBool = false;
+                        quotidient = false;
+                        hebdoBool = false;
                         dateBool = true;
                         animatedpadding = true;
                       });
@@ -567,33 +577,35 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                     onChanged: (String newValue) {
                       setState(() {
                         dateQuotidien = newValue;
+                        print(dateQuotidien);
+                        ;
                       });
                     },
                     items: <String>[
-                      '1 h',
-                      '2 h',
-                      '3 h',
-                      '4 h',
-                      '5 h',
-                      '6 h',
-                      '7 h',
-                      '8 h',
-                      '9 h',
-                      '10 h',
-                      '11 h',
-                      '12 h',
-                      '13 h',
-                      '14 h',
-                      '15 h',
-                      '16 h',
-                      '17 h',
-                      '18 h',
-                      '19 h',
-                      '20 h',
-                      '21 h',
-                      '22 h',
-                      '23 h',
-                      '24 h',
+                      '1',
+                      '2',
+                      '3',
+                      '4',
+                      '5',
+                      '6',
+                      '7',
+                      '8',
+                      '9',
+                      '10',
+                      '11',
+                      '12',
+                      '13',
+                      '14',
+                      '15',
+                      '16',
+                      '17',
+                      '18',
+                      '19',
+                      '20',
+                      '21',
+                      '22',
+                      '23',
+                      '24',
                     ].map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
@@ -635,6 +647,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               print(val);
               notifiaction = val;
               notificationBool = true;
+              quotidient = false;
+              hebdoBool = false;
+              dateBool = false;
               // animatedpadding = true;
             },
           ),
@@ -655,6 +670,10 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   FancyDrawerController _controller;
   void initState() {
     super.initState();
+    quotidient = false;
+    hebdoBool = false;
+    dateBool = false;
+    notificationBool = false;
     _myActivities = [];
     _myActivitiesResult = '';
     _controller =
@@ -821,6 +840,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             preferredSize: Size.fromHeight(100.0),
             child: SafeArea(
               child: AppBar(
+                title: Text(
+                    widget.idChallenge1.isEmpty ? "" : widget.idChallenge1),
                 actions: [
                   Padding(
                     padding: const EdgeInsets.only(right: 15, top: 10),
@@ -883,16 +904,17 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                       color: Colors.black,
                     ),
                     onPressed: () {
-                      variable.scheduledNotification(
-                          channelID: 'Channel ID',
-                          channelName: 'Channel Name',
-                          channelDesc: 'Channel Description',
-                          notificationId: 1,
-                          notificationTitle: 'Date Tracker Test',
-                          notificationBody: 'We are showing notification!',
-                          // change to any time you want
-                          notificationTime:
-                              DateTime.now().add(Duration(seconds: 1)));
+                      variable.cancelAllNotifications();
+                      // variable.scheduledNotification(
+                      //     channelID: 'Channel ID',
+                      //     channelName: 'Channel Name',
+                      //     channelDesc: 'Channel Description',
+                      //     notificationId: 1,
+                      //     notificationTitle: 'Date Tracker Test',
+                      //     notificationBody: 'We are showing notification!',
+                      //     // change to any time you want
+                      //     notificationTime:
+                      //         DateTime.now().add(Duration(seconds: 1)));
                     },
                   ),
                   const Divider(),
@@ -903,14 +925,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                       color: Colors.black,
                     ),
                     onPressed: () {
-                      variable.scheduledNotifNotification(
-                          channelID: 'Channel ID',
-                          channelName: 'Channel Name',
-                          channelDesc: 'Channel Description',
-                          notificationId: 1,
-                          notificationTitle: 'Date Tracker Test',
-                          notificationBody: 'We are showing notification!',
-                          dateNotif: "");
+                      variable.checkPendingNotificationRequests(context);
                       // variable..cancelAllNotifications();
                     },
                   ),
@@ -929,11 +944,12 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                     : null,
                 centerTitle: true,
                 flexibleSpace: Container(
-                  padding: EdgeInsets.only(right: 30.0),
+                  padding: EdgeInsets.only(top: 40.0, right: 30.0),
                   alignment: Alignment.center,
                   child: Image.asset(
                     'assets/logo.png',
-                    width: 60,
+                    width: 55,
+                    height: 130,
                   ),
                   decoration: BoxDecoration(
                       gradient: LinearGradient(
@@ -1228,6 +1244,18 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                 } else if (formKey.currentState.validate()) {
                                   formKey.currentState.save();
                                   {
+                                    if (quotidient ||
+                                        hebdoBool ||
+                                        dateBool ||
+                                        notificationBool) {
+                                      idNotif = customAlphabet("0123456789", 4);
+                                    }
+                                    print(idNotif);
+                                    if (unityChallenge == "normal" ||
+                                        unityChallenge == "haute") {
+                                      animatedpadding = false;
+                                    }
+
                                     Provider.of<Challengecontroller>(context,
                                             listen: false)
                                         .addChallenge(

@@ -315,6 +315,7 @@ class _HomeTachesState extends State<HomeTaches> {
         preferredSize: Size.fromHeight(100.0),
         child: SafeArea(
           child: AppBar(
+            title: Text(widget.something),
             actions: [
               Padding(
                 padding: const EdgeInsets.only(right: 15, top: 10),
@@ -355,12 +356,12 @@ class _HomeTachesState extends State<HomeTaches> {
             backgroundColor: Colors.blue,
             centerTitle: true,
             flexibleSpace: Container(
-              padding: EdgeInsets.only(right: 30.0),
+              padding: EdgeInsets.only(top: 40.0, right: 30.0),
               alignment: Alignment.center,
-              height: 100,
+              height: 130,
               child: Image.asset(
                 'assets/logo.png',
-                width: 60,
+                width: 55,
               ),
               decoration: BoxDecoration(
                   gradient: LinearGradient(
