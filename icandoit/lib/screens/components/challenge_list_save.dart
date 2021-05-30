@@ -79,6 +79,7 @@ class _ExampleAppState extends State<ExampleApp>
                       child: Home(
                         id: "",
                         idChallenge1: '',
+                        namechallenge: '',
                       ))));
               setState(() {});
               // setState(() {});

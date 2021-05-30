@@ -33,6 +33,7 @@ class _IcanDoItState extends State<IcanDoIt> {
           child: Home(
             id: "",
             idChallenge1: '',
+            namechallenge: '',
           )),
     );
   }

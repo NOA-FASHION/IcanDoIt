@@ -102,6 +102,7 @@ class _ResultaChallengeState extends State<ResultaChallenge>
                       child: Home(
                         id: "",
                         idChallenge1: '',
+                        namechallenge: '',
                       ))));
               setState(() {});
               // setState(() {});

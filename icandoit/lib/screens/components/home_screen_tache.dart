@@ -122,6 +122,11 @@ class _HomeTachesState extends State<HomeTaches> {
     });
   }
 
+  // void initState() {
+  //   super.initState();
+
+  // }
+
   final bool animatedpadding;
   final String something;
   final int indexChallenge;
@@ -315,7 +320,7 @@ class _HomeTachesState extends State<HomeTaches> {
         preferredSize: Size.fromHeight(100.0),
         child: SafeArea(
           child: AppBar(
-            title: Text(widget.something),
+            title: Text(something),
             actions: [
               Padding(
                 padding: const EdgeInsets.only(right: 15, top: 10),

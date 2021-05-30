@@ -19,8 +19,12 @@ import 'components/resultat_challenge.dart';
 
 class Home extends StatefulWidget {
   final String id;
+  final String namechallenge;
   final String idChallenge1;
-  Home({@required this.id, @required this.idChallenge1});
+  Home(
+      {@required this.namechallenge,
+      @required this.id,
+      @required this.idChallenge1});
   @override
   _HomeState createState() => _HomeState();
 }
@@ -712,6 +716,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                       child: Home(
                         id: "",
                         idChallenge1: '',
+                        namechallenge: '',
                       ))));
               setState(() {});
               // setState(() {});
@@ -845,7 +850,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             child: SafeArea(
               child: AppBar(
                 title: Text(
-                    widget.idChallenge1.isEmpty ? "" : widget.idChallenge1),
+                    widget.idChallenge1.isEmpty ? "" : widget.namechallenge),
                 actions: [
                   Padding(
                     padding: const EdgeInsets.only(right: 15, top: 10),

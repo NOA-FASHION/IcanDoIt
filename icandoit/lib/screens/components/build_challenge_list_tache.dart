@@ -399,8 +399,11 @@ class _ChallengesListBuilderTachesState
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => ChangeNotifierProvider.value(
                               value: provider,
-                              child:
-                                  Home(id: widget.id, idChallenge1: item.id))));
+                              child: Home(
+                                id: widget.id,
+                                idChallenge1: item.id,
+                                namechallenge: item.tache,
+                              ))));
                     }
                   },
                   title: Container(
