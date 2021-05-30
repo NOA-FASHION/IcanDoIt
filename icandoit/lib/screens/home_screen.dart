@@ -30,13 +30,14 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     return new Future.delayed(new Duration(milliseconds: milliseconds));
   }
 
+  String heureTotal;
   bool dateBool;
   bool notificationBool;
   bool hebdoBool;
   List<String> idChallenge = [];
   bool boolid = true;
   // String idChallenge;
-  String idNotif = "";
+  List<String> idNotif = [];
   String dateQuotidien;
   String notifiaction = "";
   bool animatedpadding = false;
@@ -85,25 +86,25 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     return idchal;
   }
 
-  void saveNotification(String nom, String description, String idNotif) {
+  void saveNotification(String nom, String description, List<String> idNotif) {
     Challengecontroller variable1 =
         Provider.of<Challengecontroller>(context, listen: false);
     if (quotidient) {
       variable1.scheduleQuotidiendNotification(
-          channelID: idNotif,
+          channelID: idNotif[0],
           channelName: nom,
           channelDesc: description,
-          notificationId: int.parse(idNotif),
+          notificationId: int.parse(idNotif[0]),
           notificationTitle: 'Date Tracker Test',
           notificationBody: 'We are showing notification!',
           hours: int.parse(dateQuotidien));
     } else if (hebdoBool) {
       for (var n = totalDays.length - 1; n >= 0; n--) {
         variable1.scheduleHebdodNotification(
-            channelID: idNotif,
+            channelID: idNotif[n],
             channelName: nom,
             channelDesc: description,
-            notificationId: int.parse(idNotif),
+            notificationId: int.parse(idNotif[n]),
             notificationTitle: 'Date Tracker Test',
             notificationBody: 'We are showing notification!',
             weekdays: totalDays[n],
@@ -111,20 +112,20 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
       }
     } else if (dateBool) {
       variable1.scheduleMonthdNotification(
-          channelID: idNotif,
+          channelID: idNotif[0],
           channelName: nom,
           channelDesc: description,
-          notificationId: int.parse(idNotif),
+          notificationId: int.parse(idNotif[0]),
           notificationTitle: 'Date Tracker Test',
           notificationBody: 'We are showing notification!',
           days: int.parse(date),
           hours: int.parse(dateQuotidien));
     } else if (notificationBool) {
       variable1.scheduledNotifNotification(
-          channelID: idNotif,
+          channelID: idNotif[0],
           channelName: nom,
           channelDesc: description,
-          notificationId: int.parse(idNotif),
+          notificationId: int.parse(idNotif[0]),
           notificationTitle: 'Date Tracker Test',
           notificationBody: 'We are showing notification!',
           dateNotif: notifiaction);
@@ -248,6 +249,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 onChanged: (String newValue) {
                   setState(() {
                     dateQuotidien = newValue;
+                    heureTotal = newValue;
                     notificationBool = false;
                     hebdoBool = false;
                     dateBool = false;
@@ -404,6 +406,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                     onChanged: (String newValue) {
                       setState(() {
                         heure = newValue;
+                        heureTotal = newValue;
                       });
                     },
                     items: <String>[
@@ -577,6 +580,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                     onChanged: (String newValue) {
                       setState(() {
                         dateQuotidien = newValue;
+                        heureTotal = newValue;
                         print(dateQuotidien);
                         ;
                       });
@@ -1245,10 +1249,17 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                   formKey.currentState.save();
                                   {
                                     if (quotidient ||
-                                        hebdoBool ||
                                         dateBool ||
                                         notificationBool) {
-                                      idNotif = customAlphabet("0123456789", 4);
+                                      idNotif
+                                          .add(customAlphabet("0123456789", 4));
+                                    } else if (hebdoBool) {
+                                      for (var n = totalDays.length - 1;
+                                          n >= 0;
+                                          n--) {
+                                        idNotif.add(
+                                            customAlphabet("0123456789", 4));
+                                      }
                                     }
                                     print(idNotif);
                                     if (unityChallenge == "normal" ||
@@ -1264,7 +1275,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                             idChallenge: idCHallengeFirat(
                                                 widget.idChallenge1),
                                             id: nanoid(11),
-                                            notifiaction: notifiaction,
+                                            notifiaction: heureTotal,
                                             date: date,
                                             totalDays:
                                                 totalDays.toSet().toList(),

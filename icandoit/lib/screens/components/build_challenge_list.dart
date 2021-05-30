@@ -409,8 +409,12 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
               if (direction == DismissDirection.endToStart) {
                 if (!_challengesList[index].animatedpadding &&
                     _challengesList[index].idNotif.isNotEmpty) {
-                  variable.cancelNotificationById(
-                      int.parse(_challengesList[index].idNotif));
+                  for (var n = _challengesList[index].idNotif.length - 1;
+                      n >= 0;
+                      n--) {
+                    variable.cancelNotificationById(
+                        int.parse(_challengesList[index].idNotif[n]));
+                  }
                 }
                 int index1 =
                     variable.returnIndexForName(_challengesList[index].id);
@@ -427,8 +431,12 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
               if (direction == DismissDirection.startToEnd) {
                 if (_challengesList[index].animatedpadding ||
                     _challengesList[index].idNotif.isNotEmpty) {
-                  variable.cancelNotificationById(
-                      int.parse(_challengesList[index].idNotif));
+                  for (var n = _challengesList[index].idNotif.length - 1;
+                      n >= 0;
+                      n--) {
+                    variable.cancelNotificationById(
+                        int.parse(_challengesList[index].idNotif[n]));
+                  }
                 }
                 int index1 =
                     variable.returnIndexForName(_challengesList[index].id);

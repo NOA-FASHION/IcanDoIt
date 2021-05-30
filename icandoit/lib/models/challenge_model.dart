@@ -133,7 +133,7 @@ class Challengemodel2 {
 class ChallengeModel {
   bool boolId;
   String id;
-  String idNotif;
+  List<String> idNotif;
   List<String> idChallenge;
   final String name;
   List<String> totalDays;
@@ -167,7 +167,7 @@ class ChallengeModel {
   factory ChallengeModel.fromJSON(Map<String, dynamic> json) => ChallengeModel(
         id: json['id'],
         boolId: json['boolId'],
-        idNotif: json['idNotif'],
+        idNotif: List<String>.from(json["idNotif"].map((x) => x)),
         idChallenge: List<String>.from(json["idChallenge"].map((x) => x)),
         notification: json['notification'],
         date: json['date'],
@@ -187,7 +187,7 @@ class ChallengeModel {
     return {
       "id": id,
       "boolId": boolId,
-      "idNotif": idNotif,
+      "idNotif": List<dynamic>.from(idNotif.map((x) => x)),
       "idChallenge": List<dynamic>.from(idChallenge.map((x) => x)),
       "notification": notification,
       "name": name,

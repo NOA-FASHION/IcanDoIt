@@ -1125,7 +1125,7 @@ class Challengecontroller extends ChangeNotifier {
 
   void addChallenge(
       {@required List<String> idChallenge,
-      @required String idNotif,
+      @required List<String> idNotif,
       @required bool boolId,
       @required String id,
       @required String name,
@@ -1537,6 +1537,42 @@ class Challengecontroller extends ChangeNotifier {
     }
   }
 
+  void saveNotification(ChallengeModel listChallenge) {
+    if (listChallenge.animatedpadding && listChallenge.quotidient == true) {
+      scheduleQuotidiendNotification(
+          channelID: listChallenge.idNotif[0],
+          channelName: listChallenge.name,
+          channelDesc: listChallenge.description,
+          notificationId: int.parse(listChallenge.idNotif[0]),
+          notificationTitle: 'Date Tracker Test',
+          notificationBody: 'We are showing notification!',
+          hours: int.parse(listChallenge.notification));
+    } else if (listChallenge.animatedpadding &&
+        listChallenge.totalDays.isNotEmpty) {
+      for (var n = listChallenge.totalDays.length - 1; n >= 0; n--) {
+        scheduleHebdodNotification(
+            channelID: listChallenge.idNotif[n],
+            channelName: listChallenge.name,
+            channelDesc: listChallenge.description,
+            notificationId: int.parse(listChallenge.idNotif[n]),
+            notificationTitle: 'Date Tracker Test',
+            notificationBody: 'We are showing notification!',
+            weekdays: listChallenge.totalDays[n],
+            hours: int.parse(listChallenge.notification));
+      }
+    } else if (listChallenge.animatedpadding && listChallenge.date.isNotEmpty) {
+      scheduleMonthdNotification(
+          channelID: listChallenge.idNotif[0],
+          channelName: listChallenge.name,
+          channelDesc: listChallenge.description,
+          notificationId: int.parse(listChallenge.idNotif[0]),
+          notificationTitle: 'Date Tracker Test',
+          notificationBody: 'We are showing notification!',
+          days: int.parse(listChallenge.date),
+          hours: int.parse(listChallenge.notification));
+    }
+  }
+
   void uploadChallenge() async {
     ChallengeModel uploadFileChallenge;
     Map _jsonDecodeuploadFile;
@@ -1544,6 +1580,7 @@ class Challengecontroller extends ChangeNotifier {
     if (uploadFile != null) {
       _jsonDecodeuploadFile = jsonDecode(uploadFile);
       uploadFileChallenge = ChallengeModel.fromJSON(_jsonDecodeuploadFile);
+      saveNotification(uploadFileChallenge);
       addChallenge(
           idNotif: uploadFileChallenge.idNotif,
           boolId: uploadFileChallenge.boolId,
