@@ -57,7 +57,7 @@ dependencies:
   nanoid: ^1.0.0
   flutter_local_notifications: ^5.0.0+4
   flutter_native_splash: ^1.1.8+4
-  flutter_vlc_player: ^6.0.2
+  
   
  
   
