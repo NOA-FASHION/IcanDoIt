@@ -1435,7 +1435,28 @@ class Challengecontroller extends ChangeNotifier {
     }
   }
 
+  //A tester demain
+  void removeChallengelistId(int index) {
+    if (!_challengeList[index].animatedpadding) {
+      for (var i = _challengeList[index].listeDeTache.length - 1; i >= 0; i--) {
+        removeChallengelistRacourcci(index, i);
+      }
+    }
+  }
+
+  void removeChallengelistRacourcci(int index, int index2) {
+    for (var n = _challengeList.length - 1; n >= 0; n--) {
+      for (var i = _challengeList[n].idChallenge.length - 1; i >= 0; i--) {
+        if (_challengeList[n].idChallenge[i] ==
+            _challengeList[index].listeDeTache[index2].id) {
+          _challengeList.removeAt(n);
+        }
+      }
+    }
+  }
+
   void remove({@required int index, @required bool validate, String id}) async {
+    removeChallengelistId(index);
     _challengeList.removeAt(index);
     await _save(remove: true);
 
@@ -1482,6 +1503,17 @@ class Challengecontroller extends ChangeNotifier {
     }
   }
 
+//A tester demain
+  void removeChallengelistRacourcci2(String idListeChallenge) {
+    for (var n = _challengeList.length - 1; n >= 0; n--) {
+      for (var i = _challengeList[n].idChallenge.length - 1; i >= 0; i--) {
+        if (_challengeList[n].idChallenge[i] == idListeChallenge) {
+          _challengeList.removeAt(n);
+        }
+      }
+    }
+  }
+
   void remove2(
       {@required String id,
       @required int indexSave,
@@ -1502,6 +1534,8 @@ class Challengecontroller extends ChangeNotifier {
               idChallenge: idChallenge,
               validate: validate);
         }
+        removeChallengelistRacourcci2(
+            _challengeList[indexSave].listeDeTache[index].id);
         _challengeList[i].listeDeTache.removeAt(index);
         // print('test unitaire remove2');
       }
