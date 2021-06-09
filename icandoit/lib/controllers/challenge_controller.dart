@@ -1195,66 +1195,81 @@ class Challengecontroller extends ChangeNotifier {
         if (_challengeList[i].id == _challengeListSave[indexSave].id) {
           _challengeList.removeAt(i);
         }
-        _challengeList.add(
-          ChallengeModel(
-              idChallenge: _challengeListSave[indexSave].idChallenge,
-              idNotif: _challengeListSave[indexSave].idNotif,
-              boolId: _challengeListSave[indexSave].boolId,
-              id: _challengeListSave[indexSave].id,
-              notifiaction: _challengeListSave[indexSave].notification,
-              date: _challengeListSave[indexSave].date,
-              quotidient: _challengeListSave[indexSave].quotidient,
-              animatedpadding: _challengeListSave[indexSave].animatedpadding,
-              totalDays: _challengeListSave[indexSave].totalDays,
-              listeDeTache: _challengeListSave[indexSave].listeDeTache,
-              name: _challengeListSave[indexSave].name,
-              description: _challengeListSave[indexSave].description,
-              totalChallenge: _challengeListSave[indexSave].totalChallenge,
-              unity: _challengeListSave[indexSave].unity),
-        );
-
-        await _save();
-        _initChallengeList();
-        notifyListeners();
-        // print('test unitaire addSlectSave');
-        return;
       }
+      _challengeList.add(
+        ChallengeModel(
+            idChallenge: _challengeListSave[indexSave].idChallenge,
+            idNotif: _challengeListSave[indexSave].idNotif,
+            boolId: _challengeListSave[indexSave].boolId,
+            id: _challengeListSave[indexSave].id,
+            notifiaction: _challengeListSave[indexSave].notification,
+            date: _challengeListSave[indexSave].date,
+            quotidient: _challengeListSave[indexSave].quotidient,
+            animatedpadding: _challengeListSave[indexSave].animatedpadding,
+            totalDays: _challengeListSave[indexSave].totalDays,
+            listeDeTache: _challengeListSave[indexSave].listeDeTache,
+            name: _challengeListSave[indexSave].name,
+            description: _challengeListSave[indexSave].description,
+            totalChallenge: _challengeListSave[indexSave].totalChallenge,
+            unity: _challengeListSave[indexSave].unity),
+      );
+
+      await _save();
+      _initChallengeList();
+      notifyListeners();
+      // print('test unitaire addSlectSave');
+      return;
     }
   }
 
-  // void addSlectSave() async {
-  //   if (indexSave != null) {
-  //     for (var i = _challengeListSave.length - 1; i >= 0; i--) {
-  //       if (i == indexSave) {
-  //         _challengeList.add(
-  //           ChallengeModel(
-  //               idChallenge: _challengeListSave[i].idChallenge,
-  //               idNotif: _challengeListSave[i].idNotif,
-  //               boolId: _challengeListSave[i].boolId,
-  //               id: _challengeListSave[i].id,
-  //               notifiaction: _challengeListSave[i].notification,
-  //               date: _challengeListSave[i].date,
-  //               quotidient: _challengeListSave[i].quotidient,
-  //               animatedpadding: _challengeListSave[i].animatedpadding,
-  //               totalDays: _challengeListSave[i].totalDays,
-  //               listeDeTache: _challengeListSave[i].listeDeTache,
-  //               name: _challengeListSave[i].name,
-  //               description: _challengeListSave[i].description,
-  //               totalChallenge: _challengeListSave[i].totalChallenge,
-  //               unity: _challengeListSave[i].unity),
-  //         );
+  void saveChallengelistId(int index) {
+    if (!_challengeList[index].animatedpadding) {
+      for (var i = _challengeList[index].listeDeTache.length - 1; i >= 0; i--) {
+        saveChallengelistRacourcci(index, i);
+      }
+    }
+    print("2");
+  }
 
-  //         await _save();
-  //         _initChallengeList();
-  //         notifyListeners();
-  //         // print('test unitaire addSlectSave');
-  //         return;
-  //       }
-  //     }
-  //   }
-  // }
+  void saveChallengelistRacourcci(int index, int index2) {
+    for (var n = _challengeList.length - 1; n >= 0; n--) {
+      for (var i = _challengeList[n].idChallenge.length - 1; i >= 0; i--) {
+        if (_challengeList[n].idChallenge[i] ==
+            _challengeList[index].listeDeTache[index2].id) {
+          addListChallengeSaveindex2(n);
+        }
+      }
+    }
+    print("1");
+  }
+
+  void addListChallengeSaveindex2(int index) async {
+    for (var i = _challengeListSave.length - 1; i >= 0; i--) {
+      if (_challengeListSave[i].id == _challengeList[index].id) {
+        _challengeListSave.removeAt(i);
+      }
+    }
+    _challengeListSave.add(
+      ChallengeModel(
+          idChallenge: _challengeList[index].idChallenge,
+          idNotif: _challengeList[index].idNotif,
+          boolId: _challengeList[index].boolId,
+          id: _challengeList[index].id,
+          notifiaction: _challengeList[index].notification,
+          date: _challengeList[index].date,
+          quotidient: _challengeList[index].quotidient,
+          animatedpadding: _challengeList[index].animatedpadding,
+          totalDays: _challengeList[index].totalDays,
+          listeDeTache: _challengeList[index].listeDeTache,
+          name: _challengeList[index].name,
+          description: _challengeList[index].description,
+          totalChallenge: _challengeList[index].totalChallenge,
+          unity: _challengeList[index].unity),
+    );
+  }
 
   void addListChallengeSaveindex(int index) async {
+    saveChallengelistId(index);
     for (var i = _challengeListSave.length - 1; i >= 0; i--) {
       if (_challengeListSave[i].id == _challengeList[index].id) {
         _challengeListSave.removeAt(i);
