@@ -602,6 +602,8 @@ class Challengecontroller extends ChangeNotifier {
   void challegListSaveShedule(int index) async {
     _challengeList.add(
       ChallengeModel(
+          previsions: _challengeListSave[index].previsions,
+          restePaiement: _challengeListSave[index].restePaiement,
           coutTotalBool: _challengeListSave[index].coutTotalBool,
           prixTotalBool: _challengeListSave[index].prixTotalBool,
           prixTotal: _challengeListSave[index].prixTotal,
@@ -999,33 +1001,55 @@ class Challengecontroller extends ChangeNotifier {
     }
   }
 
-  double differenceCoutPaiement(int index) {
-    double paiement = 0;
-    for (var i = _challengeList[index].listeDeTache.length - 1; i >= 0; i--) {
-      if (_challengeList[index].listeDeTache[i].description.toString() ==
-          "unity_challenge1.paiement") {
-        paiement = paiement + _challengeList[index].listeDeTache[i].cout;
-      }
-    }
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // double differenceCoutPaiement(int index) {
+  //   double paiement = 0;
+  //   for (var i = _challengeList[index].listeDeTache.length - 1; i >= 0; i--) {
+  //     if (_challengeList[index].listeDeTache[i].description.toString() ==
+  //         "unity_challenge1.paiement") {
+  //       paiement = paiement + _challengeList[index].listeDeTache[i].cout;
+  //     }
+  //   }
 
-    return paiement;
-  }
+  //   return paiement;
+  // }
 
-  double totalPrevision(int index) {
-    double prevision = 0;
-    for (var i = _challengeList[index].listeDeTache.length - 1; i >= 0; i--) {
-      print(_challengeList[index].listeDeTache[i].tache.toString());
-      if (_challengeList[index].listeDeTache[i].tache.toString() ==
-          "unity_challenge1.achat") {
-        prevision = prevision + _challengeList[index].listeDeTache[i].prix;
-      }
-    }
-    return prevision;
-  }
+  // double totalPrevision(int index) {
+  //   double prevision = 0;
+  //   for (var i = _challengeList[index].listeDeTache.length - 1; i >= 0; i--) {
+  //     print(_challengeList[index].listeDeTache[i].tache.toString());
+  //     if (_challengeList[index].listeDeTache[i].tache.toString() ==
+  //         "unity_challenge1.achat") {
+  //       prevision = prevision + _challengeList[index].listeDeTache[i].prix;
+  //     }
+  //   }
+  //   return prevision;
+  // }
 
   void prixTotalAdd(int index, double prix) {
     if (prix > 0) {
       _challengeList[index].prixTotal = _challengeList[index].prixTotal + prix;
+    }
+  }
+
+  void previsionTotalAdd(int index, double prix) {
+    if (prix > 0) {
+      _challengeList[index].previsions =
+          _challengeList[index].previsions + prix;
+    }
+  }
+
+  void restePaiementTotalAdd(int index, double prix) {
+    if (prix > 0) {
+      _challengeList[index].restePaiement =
+          _challengeList[index].restePaiement + prix;
+    }
+  }
+
+  void restePaiementTotalRemove(int index, double prix) {
+    if (prix > 0) {
+      _challengeList[index].restePaiement =
+          _challengeList[index].restePaiement - prix;
     }
   }
 
@@ -1070,6 +1094,8 @@ class Challengecontroller extends ChangeNotifier {
     // prixTotalAdd(index, prix);
 
     coutTotalAdd(index, cout);
+    previsionTotalAdd(index, prix);
+    restePaiementTotalAdd(index, cout);
     activePrixBool(prix, index);
     activeCoutBool(cout, index);
     // something = nameListChallenge;
@@ -1182,7 +1208,9 @@ class Challengecontroller extends ChangeNotifier {
   }
 
   void addChallenge(
-      {@required bool coutTotalBool,
+      {@required double previsions,
+      @required double restePaiement,
+      @required bool coutTotalBool,
       @required bool prixTotalBool,
       @required double prixTotal,
       @required double coutTotal,
@@ -1202,6 +1230,8 @@ class Challengecontroller extends ChangeNotifier {
       @required List<Challengemodel2> challengeListTache}) async {
     _challengeList.add(
       ChallengeModel(
+          previsions: previsions,
+          restePaiement: restePaiement,
           coutTotalBool: coutTotalBool,
           prixTotalBool: prixTotalBool,
           prixTotal: prixTotal,
@@ -1264,6 +1294,8 @@ class Challengecontroller extends ChangeNotifier {
       }
       _challengeList.add(
         ChallengeModel(
+            previsions: _challengeListSave[indexSave].previsions,
+            restePaiement: _challengeListSave[indexSave].restePaiement,
             coutTotalBool: _challengeListSave[indexSave].coutTotalBool,
             prixTotalBool: _challengeListSave[indexSave].prixTotalBool,
             prixTotal: _challengeListSave[indexSave].prixTotal,
@@ -1321,6 +1353,8 @@ class Challengecontroller extends ChangeNotifier {
     }
     _challengeListSave.add(
       ChallengeModel(
+          previsions: _challengeList[index].previsions,
+          restePaiement: _challengeList[index].restePaiement,
           coutTotalBool: _challengeList[index].coutTotalBool,
           prixTotalBool: _challengeList[index].prixTotalBool,
           prixTotal: _challengeList[index].prixTotal,
@@ -1351,6 +1385,8 @@ class Challengecontroller extends ChangeNotifier {
     }
     _challengeListSave.add(
       ChallengeModel(
+          previsions: _challengeList[index].previsions,
+          restePaiement: _challengeList[index].restePaiement,
           coutTotalBool: _challengeList[index].coutTotalBool,
           prixTotalBool: _challengeList[index].prixTotalBool,
           prixTotal: _challengeList[index].prixTotal,
@@ -1382,6 +1418,8 @@ class Challengecontroller extends ChangeNotifier {
       if (_challengeList[i].id == id) {
         _challengeListSave.add(
           ChallengeModel(
+              previsions: _challengeList[i].previsions,
+              restePaiement: _challengeList[i].restePaiement,
               coutTotalBool: _challengeList[i].coutTotalBool,
               prixTotalBool: _challengeList[i].prixTotalBool,
               prixTotal: _challengeList[i].prixTotal,
@@ -1601,39 +1639,39 @@ class Challengecontroller extends ChangeNotifier {
   }
 
 //A tester demain
-  void removeChallengelistRacourcci2(String idListeChallenge) {
-    for (var n = _challengeList.length - 1; n >= 0; n--) {
-      for (var i = _challengeList[n].idChallenge.length - 1; i >= 0; i--) {
-        if (_challengeList[n].idChallenge[i] == idListeChallenge) {
-          _challengeList.removeAt(n);
-        }
-      }
-    }
-  }
+  // void removeChallengelistRacourcci2(String idListeChallenge) {
+  //   for (var n = _challengeList.length - 1; n >= 0; n--) {
+  //     for (var i = _challengeList[n].idChallenge.length - 1; i >= 0; i--) {
+  //       if (_challengeList[n].idChallenge[i] == idListeChallenge) {
+  //         _challengeList.removeAt(n);
+  //       }
+  //     }
+  //   }
+  // }
 
-  void deActiveCoutBool(double prix, int index) {
-    for (var i = _challengeList[index].listeDeTache.length - 1; i >= 0; i--) {
-      if (_challengeList[index].listeDeTache[i].description.toString() ==
-          "unity_challenge1.paiement") {
-        _challengeList[index].coutTotalBool = true;
-        return;
-      } else {
-        _challengeList[index].coutTotalBool = false;
-      }
-    }
-  }
+  // void deActiveCoutBool(double prix, int index) {
+  //   for (var i = _challengeList[index].listeDeTache.length - 1; i >= 0; i--) {
+  //     if (_challengeList[index].listeDeTache[i].description.toString() ==
+  //         "unity_challenge1.paiement") {
+  //       _challengeList[index].coutTotalBool = true;
+  //       return;
+  //     } else {
+  //       _challengeList[index].coutTotalBool = false;
+  //     }
+  //   }
+  // }
 
-  void deActivePrixBool(double prix, int index) {
-    for (var i = _challengeList[index].listeDeTache.length - 1; i >= 0; i--) {
-      if (_challengeList[index].listeDeTache[i].description.toString() ==
-          "unity_challenge1.achat") {
-        _challengeList[index].prixTotalBool = true;
-        return;
-      } else {
-        _challengeList[index].prixTotalBool = false;
-      }
-    }
-  }
+  // void deActivePrixBool(double prix, int index) {
+  //   for (var i = _challengeList[index].listeDeTache.length - 1; i >= 0; i--) {
+  //     if (_challengeList[index].listeDeTache[i].description.toString() ==
+  //         "unity_challenge1.achat") {
+  //       _challengeList[index].prixTotalBool = true;
+  //       return;
+  //     } else {
+  //       _challengeList[index].prixTotalBool = false;
+  //     }
+  //   }
+  // }
 
   void remove2(
       {@required String id,
@@ -1642,11 +1680,13 @@ class Challengecontroller extends ChangeNotifier {
       @required int index,
       @required String idChallenge,
       @required bool validate}) async {
-    deActiveCoutBool(prix, index);
-    deActivePrixBool(prix, index);
-    prixTotalAdd(indexSave, prix);
+    // deActiveCoutBool(prix, index);
+    // deActivePrixBool(prix, index);
 
-    if (!validate) {}
+    if (validate) {
+      prixTotalAdd(indexSave, prix);
+      restePaiementTotalRemove(indexSave, prix);
+    }
 
     for (var i = _challengeList.length - 1; i >= 0; i--) {
       if (_challengeList[i].id == idChallenge) {
@@ -1662,8 +1702,8 @@ class Challengecontroller extends ChangeNotifier {
               idChallenge: idChallenge,
               validate: validate);
         }
-        removeChallengelistRacourcci2(
-            _challengeList[indexSave].listeDeTache[index].id);
+        // removeChallengelistRacourcci2(
+        //     _challengeList[indexSave].listeDeTache[index].id);
         _challengeList[i].listeDeTache.removeAt(index);
         // print('test unitaire remove2');
       }
@@ -1744,6 +1784,8 @@ class Challengecontroller extends ChangeNotifier {
       uploadFileChallenge = ChallengeModel.fromJSON(_jsonDecodeuploadFile);
       saveNotification(uploadFileChallenge);
       addChallenge(
+          previsions: uploadFileChallenge.previsions,
+          restePaiement: uploadFileChallenge.restePaiement,
           coutTotalBool: uploadFileChallenge.prixTotalBool,
           prixTotalBool: uploadFileChallenge.prixTotalBool,
           prixTotal: uploadFileChallenge.prixTotal,

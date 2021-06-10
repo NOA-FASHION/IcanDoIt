@@ -143,6 +143,8 @@ class ChallengeModel {
   bool coutTotalBool;
   double prixTotal;
   double coutTotal;
+  double restePaiement;
+  double previsions;
   bool boolId;
   String id;
   List<String> idNotif;
@@ -159,6 +161,8 @@ class ChallengeModel {
   String totalChallenge;
 
   ChallengeModel({
+    this.previsions,
+    this.restePaiement,
     this.coutTotalBool,
     this.prixTotalBool,
     this.prixTotal,
@@ -181,6 +185,8 @@ class ChallengeModel {
   });
 
   factory ChallengeModel.fromJSON(Map<String, dynamic> json) => ChallengeModel(
+        previsions: json['previsions'],
+        restePaiement: json['restePaiement'],
         coutTotalBool: json['coutTotalBool'],
         prixTotalBool: json['prixTotalBool'],
         prixTotal: json['prixTotal'],
@@ -205,6 +211,8 @@ class ChallengeModel {
 
   Map<String, dynamic> toJson() {
     return {
+      "previsions": previsions,
+      "restePaiement": restePaiement,
       "coutTotalBool": coutTotalBool,
       "prixTotalBool": prixTotalBool,
       "prixTotal": prixTotal,

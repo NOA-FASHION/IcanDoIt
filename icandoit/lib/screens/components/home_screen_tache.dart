@@ -436,53 +436,65 @@ class _HomeTachesState extends State<HomeTaches> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Card(
+                              color: Colors.transparent,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(5.0),
                               ),
-                              elevation: 15.0,
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: _challengesListget[widget.indexChallenge]
-                                            .prixTotal <
-                                        0
-                                    ? Column(
-                                        children: [
-                                          Text(
-                                            variable
-                                                .totalPrevision(
-                                                    widget.indexChallenge)
-                                                .toString(),
-                                            style: TextStyle(
-                                                fontSize: 10,
-                                                color: Colors.black),
-                                          ),
-                                          Text(
-                                            "previsions",
-                                            style: TextStyle(
-                                                fontSize: 10,
-                                                color: Colors.white),
-                                          ),
-                                        ],
-                                      )
-                                    : Column(
-                                        children: [
-                                          Text(
-                                            _challengesListget[
-                                                    widget.indexChallenge]
-                                                .prixTotal
-                                                .toString(),
-                                            style: TextStyle(
-                                                fontSize: 10,
-                                                color: Colors.black),
-                                          ),
-                                          Text(
-                                            "prix total",
-                                            style: TextStyle(
-                                                fontSize: 10,
-                                                color: Colors.white),
-                                          ),
-                                        ],
-                                      ),
+                              elevation: 25.0,
+                              child: Row(
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                        color: Colors.blue,
+                                        borderRadius: BorderRadius.circular(5)),
+                                    padding: EdgeInsets.all(4),
+                                    margin: EdgeInsets.only(right: 7),
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          _challengesListget[
+                                                  widget.indexChallenge]
+                                              .previsions
+                                              .toString(),
+                                          style: TextStyle(
+                                              fontSize: 10,
+                                              color: Colors.black),
+                                        ),
+                                        Text(
+                                          "previsions",
+                                          style: TextStyle(
+                                              fontSize: 10,
+                                              color: Colors.black),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Container(
+                                    decoration: BoxDecoration(
+                                        color: Colors.blue,
+                                        borderRadius: BorderRadius.circular(5)),
+                                    padding: EdgeInsets.all(4),
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          _challengesListget[
+                                                  widget.indexChallenge]
+                                              .prixTotal
+                                              .toString(),
+                                          style: TextStyle(
+                                              fontSize: 10,
+                                              color: Colors.black),
+                                        ),
+                                        Text(
+                                          "prix total",
+                                          style: TextStyle(
+                                              fontSize: 10,
+                                              color: Colors.black),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
                               ),
                             ), // icon
                             // text
@@ -493,58 +505,68 @@ class _HomeTachesState extends State<HomeTaches> {
                     'assets/logo.png',
                     width: 55,
                   ),
-                  _challengesListget[widget.indexChallenge].coutTotalBool
+                  _challengesListget[widget.indexChallenge].prixTotalBool
                       ? Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Card(
+                              color: Colors.transparent,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(5.0),
                               ),
-                              elevation: 15.0,
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: _challengesListget[indexChallenge]
-                                            .coutTotal ==
-                                        variable.differenceCoutPaiement(
-                                            indexChallenge)
-                                    ? Column(
-                                        children: [
-                                          Text(
-                                            _challengesListget[indexChallenge]
-                                                .coutTotal
-                                                .toString(),
-                                            style: TextStyle(
-                                                fontSize: 10,
-                                                color: Colors.black),
-                                          ),
-                                          Text(
-                                            "Total paiment",
-                                            style: TextStyle(
-                                                fontSize: 10,
-                                                color: Colors.white),
-                                          ),
-                                        ],
-                                      )
-                                    : Column(
-                                        children: [
-                                          Text(
-                                            variable
-                                                .differenceCoutPaiement(
-                                                    indexChallenge)
-                                                .toString(),
-                                            style: TextStyle(
-                                                fontSize: 10,
-                                                color: Colors.black),
-                                          ),
-                                          Text(
-                                            "reste a payer",
-                                            style: TextStyle(
-                                                fontSize: 10,
-                                                color: Colors.white),
-                                          ),
-                                        ],
-                                      ),
+                              elevation: 25.0,
+                              child: Row(
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                        color: Colors.blue,
+                                        borderRadius: BorderRadius.circular(5)),
+                                    padding: EdgeInsets.all(4),
+                                    margin: EdgeInsets.only(right: 7),
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          _challengesListget[indexChallenge]
+                                              .coutTotal
+                                              .toString(),
+                                          style: TextStyle(
+                                              fontSize: 10,
+                                              color: Colors.black),
+                                        ),
+                                        Text(
+                                          "Total paiment",
+                                          style: TextStyle(
+                                              fontSize: 10,
+                                              color: Colors.black),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Container(
+                                    decoration: BoxDecoration(
+                                        color: Colors.blue,
+                                        borderRadius: BorderRadius.circular(5)),
+                                    padding: EdgeInsets.all(4),
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          _challengesListget[indexChallenge]
+                                              .restePaiement
+                                              .toString(),
+                                          style: TextStyle(
+                                              fontSize: 10,
+                                              color: Colors.black),
+                                        ),
+                                        Text(
+                                          "reste a payer",
+                                          style: TextStyle(
+                                              fontSize: 10,
+                                              color: Colors.black),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
                               ),
                             ), // icon
                             // text
