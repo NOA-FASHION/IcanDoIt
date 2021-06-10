@@ -188,8 +188,10 @@ class _ChallengesListBuilderTachesState
         Provider.of<Challengecontroller>(context);
     List<Challengemodel2> _challengesList =
         providerType.challengelist2(widget.id);
+
     // List<Challengemodel2> _challengesList =
     //     challengelist2(challengeListCharge, widget.nameChallenge);
+
     final Challengecontroller provider =
         Provider.of<Challengecontroller>(context);
     if (_challengesList.isEmpty) {
@@ -215,6 +217,7 @@ class _ChallengesListBuilderTachesState
                     content: "La tâche a bien été validé",
                     lotties: 'assets/challenge.json'));
                 provider.remove2(
+                    prix: item.prix,
                     id: item.id,
                     indexSave: widget.indexChallenge,
                     validate: true,
@@ -227,6 +230,7 @@ class _ChallengesListBuilderTachesState
                     content: "La mission a bien ete supprime",
                     lotties: 'assets/trash.json'));
                 provider.remove2(
+                    prix: item.prix,
                     id: item.id,
                     indexSave: widget.indexChallenge,
                     validate: false,

@@ -1275,6 +1275,10 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                     Provider.of<Challengecontroller>(context,
                                             listen: false)
                                         .addChallenge(
+                                            coutTotalBool: false,
+                                            prixTotalBool: false,
+                                            prixTotal: 0,
+                                            coutTotal: 0,
                                             boolId: true,
                                             idNotif: idNotif,
                                             idChallenge: idCHallengeFirat(

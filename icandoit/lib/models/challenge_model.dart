@@ -96,6 +96,8 @@ class Formation {
 }
 
 class Challengemodel2 {
+  double prix;
+  double cout;
   String id;
   Formation formation;
   String index;
@@ -103,7 +105,9 @@ class Challengemodel2 {
   final String tache;
   final unity_challenge1 description;
   Challengemodel2(
-      {@required this.id,
+      {@required this.prix,
+      @required this.cout,
+      @required this.id,
       @required this.formation,
       @required this.name,
       @required this.tache,
@@ -111,7 +115,9 @@ class Challengemodel2 {
       this.index});
 
   Challengemodel2.fromJSON(Map<String, dynamic> json)
-      : name = json['name'],
+      : prix = json['prix'],
+        cout = json['cout'],
+        name = json['name'],
         id = json['id'],
         tache = json['tache'],
         index = json['index'],
@@ -120,6 +126,8 @@ class Challengemodel2 {
 
   Map<String, dynamic> toJson() {
     return {
+      "prix": prix,
+      "cout": cout,
       "name": name,
       "id": id,
       "tache": tache,
@@ -131,6 +139,10 @@ class Challengemodel2 {
 }
 
 class ChallengeModel {
+  bool prixTotalBool;
+  bool coutTotalBool;
+  double prixTotal;
+  double coutTotal;
   bool boolId;
   String id;
   List<String> idNotif;
@@ -147,6 +159,10 @@ class ChallengeModel {
   String totalChallenge;
 
   ChallengeModel({
+    this.coutTotalBool,
+    this.prixTotalBool,
+    this.prixTotal,
+    this.coutTotal,
     this.id,
     this.idNotif,
     this.boolId,
@@ -165,6 +181,10 @@ class ChallengeModel {
   });
 
   factory ChallengeModel.fromJSON(Map<String, dynamic> json) => ChallengeModel(
+        coutTotalBool: json['coutTotalBool'],
+        prixTotalBool: json['prixTotalBool'],
+        prixTotal: json['prixTotal'],
+        coutTotal: json['coutTotal'],
         id: json['id'],
         boolId: json['boolId'],
         idNotif: List<String>.from(json["idNotif"].map((x) => x)),
@@ -185,6 +205,10 @@ class ChallengeModel {
 
   Map<String, dynamic> toJson() {
     return {
+      "coutTotalBool": coutTotalBool,
+      "prixTotalBool": prixTotalBool,
+      "prixTotal": prixTotal,
+      "coutTotal": coutTotal,
       "id": id,
       "boolId": boolId,
       "idNotif": List<dynamic>.from(idNotif.map((x) => x)),

@@ -39,6 +39,7 @@ class Challengecontroller extends ChangeNotifier {
     return new Future.delayed(new Duration(milliseconds: milliseconds));
   }
 
+  bool paiemtBool;
   String unityPattern = "unity_challenge.";
   List<ChallengeModel> _challengeList = [];
   List<Challengemodel2> _challengeList2 = [];
@@ -80,6 +81,7 @@ class Challengecontroller extends ChangeNotifier {
       _challengeList
           .sort((a, b) => a.unity.toString().compareTo(b.unity.toString()));
     }
+
     _localDataSave = await SharedPreferences.getInstance();
     // List<Map<String, dynamic>> tempListMap = [];
     List<Map<String, dynamic>> _jsonDecodeListSave;
@@ -95,6 +97,7 @@ class Challengecontroller extends ChangeNotifier {
           .map((challenge) => ChallengeModel.fromJSON(challenge))
           .toList();
     }
+    paiemtBool = false;
     // print('test unitaire');
     _initChallengeListStartChallenge();
 
@@ -599,6 +602,10 @@ class Challengecontroller extends ChangeNotifier {
   void challegListSaveShedule(int index) async {
     _challengeList.add(
       ChallengeModel(
+          coutTotalBool: _challengeListSave[index].coutTotalBool,
+          prixTotalBool: _challengeListSave[index].prixTotalBool,
+          prixTotal: _challengeListSave[index].prixTotal,
+          coutTotal: _challengeListSave[index].coutTotal,
           idChallenge: _challengeListSave[index].idChallenge,
           idNotif: _challengeListSave[index].idNotif,
           boolId: _challengeListSave[index].boolId,
@@ -805,31 +812,6 @@ class Challengecontroller extends ChangeNotifier {
     return _challengeList2;
   }
 
-  // double calulPercent(String name) {
-  //   double resultat;
-  //   for (var i = _challengeList.length - 1; i >= 0; i--) {
-  //     if (_challengeList[i].name == name) {
-  //       if (_challengeList[i].listeDeTache.length != null) {
-  //         if (_challengeList[i].listeDeTache.length > 0 &&
-  //             (_challengeList[i].listeDeTache.length ==
-  //                 int.parse(_challengeList[i].totalChallenge))) {
-  //           resultat = 0.00;
-  //         } else if (_challengeList[i].listeDeTache.length != 0 &&
-  //             (_challengeList[i].listeDeTache.length !=
-  //                 int.parse(_challengeList[i].totalChallenge))) {
-  //           resultat = (_challengeList[i].listeDeTache.length /
-  //               int.parse(_challengeList[i].totalChallenge));
-  //         } else {
-  //           resultat = 0.00;
-  //         }
-  //       } else {
-  //         resultat = 0.00;
-  //       }
-  //     }
-  //     return resultat;
-  //   }
-  // }
-
   List<Challengemodel2> challengelist2(String id) {
     List<Challengemodel2> additionchallenge = [];
     for (var i = _challengeList.length - 1; i >= 0; i--) {
@@ -1017,7 +999,64 @@ class Challengecontroller extends ChangeNotifier {
     }
   }
 
+  double differenceCoutPaiement(int index) {
+    double paiement = 0;
+    for (var i = _challengeList[index].listeDeTache.length - 1; i >= 0; i--) {
+      if (_challengeList[index].listeDeTache[i].description.toString() ==
+          "unity_challenge1.paiement") {
+        paiement = paiement + _challengeList[index].listeDeTache[i].cout;
+      }
+    }
+
+    return paiement;
+  }
+
+  double totalPrevision(int index) {
+    double prevision = 0;
+    for (var i = _challengeList[index].listeDeTache.length - 1; i >= 0; i--) {
+      print(_challengeList[index].listeDeTache[i].tache.toString());
+      if (_challengeList[index].listeDeTache[i].tache.toString() ==
+          "unity_challenge1.achat") {
+        prevision = prevision + _challengeList[index].listeDeTache[i].prix;
+      }
+    }
+    return prevision;
+  }
+
+  void prixTotalAdd(int index, double prix) {
+    if (prix > 0) {
+      _challengeList[index].prixTotal = _challengeList[index].prixTotal + prix;
+    }
+  }
+
+  void coutTotalAdd(int index, double cout) {
+    if (cout > 0) {
+      _challengeList[index].coutTotal = _challengeList[index].coutTotal + cout;
+    }
+    print(_challengeList[index].name);
+  }
+
+  void activePrixBool(double prix, int index) {
+    if (prix > 0) {
+      _challengeList[index].prixTotalBool = true;
+      return;
+    } else {
+      _challengeList[index].prixTotalBool = false;
+    }
+  }
+
+  void activeCoutBool(double cout, int index) {
+    if (cout > 0) {
+      _challengeList[index].coutTotalBool = true;
+      return;
+    } else {
+      _challengeList[index].coutTotalBool = false;
+    }
+  }
+
   void addChallenge2({
+    @required double cout,
+    @required double prix,
     @required String id,
     @required int index,
     @required Formation formation,
@@ -1028,6 +1067,11 @@ class Challengecontroller extends ChangeNotifier {
     @required String tache,
     @required String description,
   }) async {
+    // prixTotalAdd(index, prix);
+
+    coutTotalAdd(index, cout);
+    activePrixBool(prix, index);
+    activeCoutBool(cout, index);
     // something = nameListChallenge;
     // for (var i = _challengeList.length - 1; i >= 0; i--) {}
     _challengeList3 = [];
@@ -1036,7 +1080,9 @@ class Challengecontroller extends ChangeNotifier {
         name: name,
         tache: tache,
         description: choixDesciptionEnum(description),
-        formation: formation));
+        formation: formation,
+        cout: cout,
+        prix: prix));
 
     addChallenge1(
       id: id,
@@ -1044,6 +1090,8 @@ class Challengecontroller extends ChangeNotifier {
       formation: formation,
       totalChallenge: totalChallenge,
       challengeListTest: _challengeList3,
+      cout: cout,
+      prix: prix,
     );
 
     if (animatedpadding) {
@@ -1053,6 +1101,8 @@ class Challengecontroller extends ChangeNotifier {
         totalChallenge: totalChallenge,
         idChallenge: idListChallenge,
         challengeListTest: _challengeList3,
+        cout: cout,
+        prix: prix,
       );
     }
     // print('test unitaire addChallenge2');
@@ -1068,6 +1118,8 @@ class Challengecontroller extends ChangeNotifier {
   }
 
   void addChallengesave1({
+    @required double cout,
+    @required double prix,
     @required String id,
     @required Formation formation,
     @required String totalChallenge,
@@ -1084,6 +1136,8 @@ class Challengecontroller extends ChangeNotifier {
         for (var n = challengeListTest.length - 1; n >= 0; n--) {
           _challengeListSave[i].listeDeTache.add(
                 Challengemodel2(
+                    cout: cout,
+                    prix: prix,
                     id: id,
                     name: challengeListTest[n].name,
                     tache: challengeListTest[n].tache,
@@ -1102,6 +1156,8 @@ class Challengecontroller extends ChangeNotifier {
   }
 
   void addChallenge1({
+    @required double prix,
+    @required double cout,
     @required String id,
     @required int index,
     @required Formation formation,
@@ -1114,6 +1170,8 @@ class Challengecontroller extends ChangeNotifier {
 
     _challengeList[index].listeDeTache.add(
           Challengemodel2(
+              prix: prix,
+              cout: cout,
               id: id,
               name: challengeListTest[0].name,
               tache: challengeListTest[0].tache,
@@ -1124,7 +1182,11 @@ class Challengecontroller extends ChangeNotifier {
   }
 
   void addChallenge(
-      {@required List<String> idChallenge,
+      {@required bool coutTotalBool,
+      @required bool prixTotalBool,
+      @required double prixTotal,
+      @required double coutTotal,
+      @required List<String> idChallenge,
       @required List<String> idNotif,
       @required bool boolId,
       @required String id,
@@ -1140,6 +1202,10 @@ class Challengecontroller extends ChangeNotifier {
       @required List<Challengemodel2> challengeListTache}) async {
     _challengeList.add(
       ChallengeModel(
+          coutTotalBool: coutTotalBool,
+          prixTotalBool: prixTotalBool,
+          prixTotal: prixTotal,
+          coutTotal: coutTotal,
           boolId: boolId,
           idChallenge: idChallenge,
           idNotif: idNotif,
@@ -1198,6 +1264,10 @@ class Challengecontroller extends ChangeNotifier {
       }
       _challengeList.add(
         ChallengeModel(
+            coutTotalBool: _challengeListSave[indexSave].coutTotalBool,
+            prixTotalBool: _challengeListSave[indexSave].prixTotalBool,
+            prixTotal: _challengeListSave[indexSave].prixTotal,
+            coutTotal: _challengeListSave[indexSave].coutTotal,
             idChallenge: _challengeListSave[indexSave].idChallenge,
             idNotif: _challengeListSave[indexSave].idNotif,
             boolId: _challengeListSave[indexSave].boolId,
@@ -1251,6 +1321,10 @@ class Challengecontroller extends ChangeNotifier {
     }
     _challengeListSave.add(
       ChallengeModel(
+          coutTotalBool: _challengeList[index].coutTotalBool,
+          prixTotalBool: _challengeList[index].prixTotalBool,
+          prixTotal: _challengeList[index].prixTotal,
+          coutTotal: _challengeList[index].coutTotal,
           idChallenge: _challengeList[index].idChallenge,
           idNotif: _challengeList[index].idNotif,
           boolId: _challengeList[index].boolId,
@@ -1277,6 +1351,10 @@ class Challengecontroller extends ChangeNotifier {
     }
     _challengeListSave.add(
       ChallengeModel(
+          coutTotalBool: _challengeList[index].coutTotalBool,
+          prixTotalBool: _challengeList[index].prixTotalBool,
+          prixTotal: _challengeList[index].prixTotal,
+          coutTotal: _challengeList[index].coutTotal,
           idChallenge: _challengeList[index].idChallenge,
           idNotif: _challengeList[index].idNotif,
           boolId: _challengeList[index].boolId,
@@ -1304,6 +1382,10 @@ class Challengecontroller extends ChangeNotifier {
       if (_challengeList[i].id == id) {
         _challengeListSave.add(
           ChallengeModel(
+              coutTotalBool: _challengeList[i].coutTotalBool,
+              prixTotalBool: _challengeList[i].prixTotalBool,
+              prixTotal: _challengeList[i].prixTotal,
+              coutTotal: _challengeList[i].coutTotal,
               idChallenge: _challengeList[i].idChallenge,
               idNotif: _challengeList[i].idNotif,
               boolId: _challengeList[i].boolId,
@@ -1529,12 +1611,43 @@ class Challengecontroller extends ChangeNotifier {
     }
   }
 
+  void deActiveCoutBool(double prix, int index) {
+    for (var i = _challengeList[index].listeDeTache.length - 1; i >= 0; i--) {
+      if (_challengeList[index].listeDeTache[i].description.toString() ==
+          "unity_challenge1.paiement") {
+        _challengeList[index].coutTotalBool = true;
+        return;
+      } else {
+        _challengeList[index].coutTotalBool = false;
+      }
+    }
+  }
+
+  void deActivePrixBool(double prix, int index) {
+    for (var i = _challengeList[index].listeDeTache.length - 1; i >= 0; i--) {
+      if (_challengeList[index].listeDeTache[i].description.toString() ==
+          "unity_challenge1.achat") {
+        _challengeList[index].prixTotalBool = true;
+        return;
+      } else {
+        _challengeList[index].prixTotalBool = false;
+      }
+    }
+  }
+
   void remove2(
       {@required String id,
+      @required double prix,
       @required int indexSave,
       @required int index,
       @required String idChallenge,
       @required bool validate}) async {
+    deActiveCoutBool(prix, index);
+    deActivePrixBool(prix, index);
+    prixTotalAdd(indexSave, prix);
+
+    if (!validate) {}
+
     for (var i = _challengeList.length - 1; i >= 0; i--) {
       if (_challengeList[i].id == idChallenge) {
         if (!validate) {
@@ -1631,6 +1744,10 @@ class Challengecontroller extends ChangeNotifier {
       uploadFileChallenge = ChallengeModel.fromJSON(_jsonDecodeuploadFile);
       saveNotification(uploadFileChallenge);
       addChallenge(
+          coutTotalBool: uploadFileChallenge.prixTotalBool,
+          prixTotalBool: uploadFileChallenge.prixTotalBool,
+          prixTotal: uploadFileChallenge.prixTotal,
+          coutTotal: uploadFileChallenge.coutTotal,
           idNotif: uploadFileChallenge.idNotif,
           boolId: uploadFileChallenge.boolId,
           idChallenge: uploadFileChallenge.idChallenge,

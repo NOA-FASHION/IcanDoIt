@@ -33,6 +33,8 @@ class _HomeTachesState extends State<HomeTaches> {
     duree: 'Duree',
     theoriePratique: 'Theorie-pratique',
   );
+  String prixProduit;
+  String coutPaiment;
   List<String> docPaths;
   String _image;
   String _video;
@@ -122,11 +124,22 @@ class _HomeTachesState extends State<HomeTaches> {
     });
   }
 
-  // void initState() {
-  //   super.initState();
+  bool isNumericUsingRegularExpression(String string) {
+    final numericRegex = RegExp(r'^-?(([0-9]*)|(([0-9]*)\.([0-9]*)))$');
 
-  // }
+    return numericRegex.hasMatch(string);
+  }
 
+  void initState() {
+    super.initState();
+    coutPaiment = "0";
+    prixProduit = "0";
+    courBool = false;
+    paimentBool = false;
+  }
+
+  var courBool;
+  var paimentBool;
   final bool animatedpadding;
   final String something;
   final int indexChallenge;
@@ -307,6 +320,52 @@ class _HomeTachesState extends State<HomeTaches> {
                   borderRadius: BorderRadius.circular(15.0))),
         ),
       );
+    } else if (resultat == "achat") {
+      documentJoint = TextFormField(
+        onSaved: (value) {
+          prixProduit = value;
+        },
+        validator: (value) {
+          if (!isNumericUsingRegularExpression(value)) {
+            return "Merci de rentrer un prix";
+          }
+          return null;
+        },
+        decoration: InputDecoration(
+            focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(width: 2.0, color: Colors.blueAccent),
+                borderRadius: BorderRadius.circular(15.0)),
+            enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(width: 1.0, color: Colors.blueAccent),
+                borderRadius: BorderRadius.circular(15.0)),
+            contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            labelText: "achat",
+            border:
+                OutlineInputBorder(borderRadius: BorderRadius.circular(15.0))),
+      );
+    } else if (resultat == "paiement") {
+      documentJoint = TextFormField(
+        onSaved: (value) {
+          coutPaiment = value;
+        },
+        validator: (value) {
+          if (!isNumericUsingRegularExpression(value)) {
+            return "Merci de rentrer un paiement";
+          }
+          return null;
+        },
+        decoration: InputDecoration(
+            focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(width: 2.0, color: Colors.blueAccent),
+                borderRadius: BorderRadius.circular(15.0)),
+            enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(width: 1.0, color: Colors.blueAccent),
+                borderRadius: BorderRadius.circular(15.0)),
+            contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            labelText: "paiment",
+            border:
+                OutlineInputBorder(borderRadius: BorderRadius.circular(15.0))),
+      );
     }
     return documentJoint;
   }
@@ -314,6 +373,11 @@ class _HomeTachesState extends State<HomeTaches> {
   @override
   @override
   Widget build(BuildContext context) {
+    Challengecontroller variable = Provider.of<Challengecontroller>(context);
+    List<ChallengeModel> _challengesListget = variable.getChallenges();
+    if (_challengesListget[widget.indexChallenge].coutTotal > 0) {
+      courBool = true;
+    }
     return Scaffold(
       key: scaffoldkeyTache,
       appBar: PreferredSize(
@@ -364,9 +428,130 @@ class _HomeTachesState extends State<HomeTaches> {
               padding: EdgeInsets.only(top: 40.0, right: 30.0),
               alignment: Alignment.center,
               height: 130,
-              child: Image.asset(
-                'assets/logo.png',
-                width: 55,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  _challengesListget[widget.indexChallenge].prixTotalBool
+                      ? Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Card(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5.0),
+                              ),
+                              elevation: 15.0,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: _challengesListget[widget.indexChallenge]
+                                            .prixTotal <
+                                        0
+                                    ? Column(
+                                        children: [
+                                          Text(
+                                            variable
+                                                .totalPrevision(
+                                                    widget.indexChallenge)
+                                                .toString(),
+                                            style: TextStyle(
+                                                fontSize: 10,
+                                                color: Colors.black),
+                                          ),
+                                          Text(
+                                            "previsions",
+                                            style: TextStyle(
+                                                fontSize: 10,
+                                                color: Colors.white),
+                                          ),
+                                        ],
+                                      )
+                                    : Column(
+                                        children: [
+                                          Text(
+                                            _challengesListget[
+                                                    widget.indexChallenge]
+                                                .prixTotal
+                                                .toString(),
+                                            style: TextStyle(
+                                                fontSize: 10,
+                                                color: Colors.black),
+                                          ),
+                                          Text(
+                                            "prix total",
+                                            style: TextStyle(
+                                                fontSize: 10,
+                                                color: Colors.white),
+                                          ),
+                                        ],
+                                      ),
+                              ),
+                            ), // icon
+                            // text
+                          ],
+                        )
+                      : SizedBox(width: 10),
+                  Image.asset(
+                    'assets/logo.png',
+                    width: 55,
+                  ),
+                  _challengesListget[widget.indexChallenge].coutTotalBool
+                      ? Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Card(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5.0),
+                              ),
+                              elevation: 15.0,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: _challengesListget[indexChallenge]
+                                            .coutTotal ==
+                                        variable.differenceCoutPaiement(
+                                            indexChallenge)
+                                    ? Column(
+                                        children: [
+                                          Text(
+                                            _challengesListget[indexChallenge]
+                                                .coutTotal
+                                                .toString(),
+                                            style: TextStyle(
+                                                fontSize: 10,
+                                                color: Colors.black),
+                                          ),
+                                          Text(
+                                            "Total paiment",
+                                            style: TextStyle(
+                                                fontSize: 10,
+                                                color: Colors.white),
+                                          ),
+                                        ],
+                                      )
+                                    : Column(
+                                        children: [
+                                          Text(
+                                            variable
+                                                .differenceCoutPaiement(
+                                                    indexChallenge)
+                                                .toString(),
+                                            style: TextStyle(
+                                                fontSize: 10,
+                                                color: Colors.black),
+                                          ),
+                                          Text(
+                                            "reste a payer",
+                                            style: TextStyle(
+                                                fontSize: 10,
+                                                color: Colors.white),
+                                          ),
+                                        ],
+                                      ),
+                              ),
+                            ), // icon
+                            // text
+                          ],
+                        )
+                      : SizedBox(width: 10),
+                ],
               ),
               decoration: BoxDecoration(
                   gradient: LinearGradient(
@@ -650,8 +835,10 @@ class _HomeTachesState extends State<HomeTaches> {
                                     Provider.of<Challengecontroller>(context,
                                             listen: false)
                                         .addChallenge2(
+                                            prix: double.parse(prixProduit),
+                                            cout: double.parse(coutPaiment),
                                             id: nanoid(10),
-                                            index: indexChallenge,
+                                            index: widget.indexChallenge,
                                             animatedpadding: animatedpadding,
                                             totalChallenge: '1',
                                             idListChallenge: widget.id,
