@@ -181,6 +181,18 @@ class _ChallengesListBuilderTachesState
     return fomationEdit;
   }
 
+  Widget prixCout(double prix, double cout) {
+    Widget prixCout1 = SizedBox(
+      width: 5.0,
+    );
+    if (prix > 0) {
+      prixCout1 = Text("Prix : " + prix.toString() + "€");
+    } else if (cout > 0) {
+      prixCout1 = Text("Montant : " + cout.toString() + "€");
+    }
+    return prixCout1;
+  }
+
   Widget iconDataJoin(String resultat) {
     Widget documentJoint = Icon(
       Icons.block,
@@ -526,7 +538,11 @@ class _ChallengesListBuilderTachesState
                             item,
                             item.description
                                 .toString()
-                                .replaceAll(unityPattern, ""))
+                                .replaceAll(unityPattern, "")),
+                        SizedBox(
+                          width: 5.0,
+                        ),
+                        prixCout(item.prix, item.cout)
                       ],
                     ),
                   ),

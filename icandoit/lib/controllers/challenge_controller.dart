@@ -1029,7 +1029,12 @@ class Challengecontroller extends ChangeNotifier {
       {@required int indexChallenge,
       @required int index,
       @required double prix}) async {
+    _challengeList[indexChallenge].previsions =
+        _challengeList[indexChallenge].previsions -
+            _challengeList[indexChallenge].listeDeTache[index].prix;
     _challengeList[indexChallenge].listeDeTache[index].prix = prix;
+    _challengeList[indexChallenge].previsions =
+        _challengeList[indexChallenge].previsions + prix;
     modifAchatPratique(
       idlistTache: _challengeList[indexChallenge].listeDeTache[index].id,
       id: _challengeList[indexChallenge].id,
@@ -1053,7 +1058,12 @@ class Challengecontroller extends ChangeNotifier {
             n >= 0;
             n--) {
           if (_challengeListSave[i].listeDeTache[n].id == idlistTache) {
+            _challengeListSave[i].previsions =
+                _challengeListSave[i].previsions -
+                    _challengeListSave[i].listeDeTache[n].prix;
             _challengeListSave[i].listeDeTache[n].prix = prix;
+            _challengeListSave[i].previsions =
+                _challengeListSave[i].previsions + prix;
             // print('test unitaire addChallengesavetheoriePratique');
             await _saveSauvegarde();
             _initChallengeList();
@@ -1068,7 +1078,14 @@ class Challengecontroller extends ChangeNotifier {
       {@required int indexChallenge,
       @required int index,
       @required double cout}) async {
+    _challengeList[indexChallenge].coutTotal =
+        _challengeList[indexChallenge].coutTotal -
+            _challengeList[indexChallenge].listeDeTache[index].cout;
     _challengeList[indexChallenge].listeDeTache[index].cout = cout;
+    _challengeList[indexChallenge].coutTotal =
+        _challengeList[indexChallenge].coutTotal + cout;
+    _challengeList[indexChallenge].restePaiement =
+        _challengeList[indexChallenge].coutTotal;
     modifPaiementPratique(
       idlistTache: _challengeList[indexChallenge].listeDeTache[index].id,
       id: _challengeList[indexChallenge].id,
@@ -1092,7 +1109,13 @@ class Challengecontroller extends ChangeNotifier {
             n >= 0;
             n--) {
           if (_challengeListSave[i].listeDeTache[n].id == idlistTache) {
+            _challengeListSave[i].coutTotal = _challengeListSave[i].coutTotal -
+                _challengeListSave[i].listeDeTache[n].cout;
             _challengeListSave[i].listeDeTache[n].cout = cout;
+            _challengeListSave[i].coutTotal =
+                _challengeListSave[i].coutTotal + cout;
+            _challengeListSave[i].restePaiement =
+                _challengeListSave[i].coutTotal;
             // print('test unitaire addChallengesavetheoriePratique');
             await _saveSauvegarde();
             _initChallengeList();

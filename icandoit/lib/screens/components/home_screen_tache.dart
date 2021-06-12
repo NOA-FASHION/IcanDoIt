@@ -321,50 +321,72 @@ class _HomeTachesState extends State<HomeTaches> {
         ),
       );
     } else if (resultat == "achat") {
-      documentJoint = TextFormField(
-        onSaved: (value) {
-          prixProduit = value;
-        },
-        validator: (value) {
-          if (!isNumericUsingRegularExpression(value)) {
-            return "Merci de rentrer un prix";
-          }
-          return null;
-        },
-        decoration: InputDecoration(
-            focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(width: 2.0, color: Colors.blueAccent),
-                borderRadius: BorderRadius.circular(15.0)),
-            enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(width: 1.0, color: Colors.blueAccent),
-                borderRadius: BorderRadius.circular(15.0)),
-            contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            labelText: "achat",
-            border:
-                OutlineInputBorder(borderRadius: BorderRadius.circular(15.0))),
+      documentJoint = Row(
+        children: [
+          Container(
+            width: 100,
+            child: TextFormField(
+              onSaved: (value) {
+                prixProduit = value;
+              },
+              validator: (value) {
+                if (!isNumericUsingRegularExpression(value)) {
+                  return "Merci de rentrer un prix";
+                }
+                return null;
+              },
+              decoration: InputDecoration(
+                  focusedBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(width: 2.0, color: Colors.blueAccent),
+                      borderRadius: BorderRadius.circular(15.0)),
+                  enabledBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(width: 1.0, color: Colors.blueAccent),
+                      borderRadius: BorderRadius.circular(15.0)),
+                  contentPadding:
+                      EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  labelText: "achat",
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0))),
+            ),
+          ),
+          Text("€")
+        ],
       );
     } else if (resultat == "paiement") {
-      documentJoint = TextFormField(
-        onSaved: (value) {
-          coutPaiment = value;
-        },
-        validator: (value) {
-          if (!isNumericUsingRegularExpression(value)) {
-            return "Merci de rentrer un paiement";
-          }
-          return null;
-        },
-        decoration: InputDecoration(
-            focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(width: 2.0, color: Colors.blueAccent),
-                borderRadius: BorderRadius.circular(15.0)),
-            enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(width: 1.0, color: Colors.blueAccent),
-                borderRadius: BorderRadius.circular(15.0)),
-            contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            labelText: "paiment",
-            border:
-                OutlineInputBorder(borderRadius: BorderRadius.circular(15.0))),
+      documentJoint = Row(
+        children: [
+          Container(
+            width: 100,
+            child: TextFormField(
+              onSaved: (value) {
+                coutPaiment = value;
+              },
+              validator: (value) {
+                if (!isNumericUsingRegularExpression(value)) {
+                  return "Merci de rentrer un montant";
+                }
+                return null;
+              },
+              decoration: InputDecoration(
+                  focusedBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(width: 2.0, color: Colors.blueAccent),
+                      borderRadius: BorderRadius.circular(15.0)),
+                  enabledBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(width: 1.0, color: Colors.blueAccent),
+                      borderRadius: BorderRadius.circular(15.0)),
+                  contentPadding:
+                      EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  labelText: "paiment",
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0))),
+            ),
+          ),
+          Text("€")
+        ],
       );
     }
     return documentJoint;
@@ -453,9 +475,10 @@ class _HomeTachesState extends State<HomeTaches> {
                                       children: [
                                         Text(
                                           _challengesListget[
-                                                  widget.indexChallenge]
-                                              .previsions
-                                              .toString(),
+                                                      widget.indexChallenge]
+                                                  .previsions
+                                                  .toString() +
+                                              "€",
                                           style: TextStyle(
                                               fontSize: 10,
                                               color: Colors.black),
@@ -478,9 +501,10 @@ class _HomeTachesState extends State<HomeTaches> {
                                       children: [
                                         Text(
                                           _challengesListget[
-                                                  widget.indexChallenge]
-                                              .prixTotal
-                                              .toString(),
+                                                      widget.indexChallenge]
+                                                  .prixTotal
+                                                  .toString() +
+                                              "€",
                                           style: TextStyle(
                                               fontSize: 10,
                                               color: Colors.black),
@@ -527,8 +551,9 @@ class _HomeTachesState extends State<HomeTaches> {
                                       children: [
                                         Text(
                                           _challengesListget[indexChallenge]
-                                              .coutTotal
-                                              .toString(),
+                                                  .coutTotal
+                                                  .toString() +
+                                              "€",
                                           style: TextStyle(
                                               fontSize: 10,
                                               color: Colors.black),
@@ -551,8 +576,9 @@ class _HomeTachesState extends State<HomeTaches> {
                                       children: [
                                         Text(
                                           _challengesListget[indexChallenge]
-                                              .restePaiement
-                                              .toString(),
+                                                  .restePaiement
+                                                  .toString() +
+                                              "€",
                                           style: TextStyle(
                                               fontSize: 10,
                                               color: Colors.black),

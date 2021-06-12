@@ -73,7 +73,7 @@ class _AchatEditState extends State<AchatEdit> {
                     Icons.check,
                     color: Colors.white,
                   ),
-                  textHint: widget.item.formation.chapitre,
+                  textHint: widget.item.prix.toString() + "€",
                   onEditTap: () {},
                   onSaveTap: (text) {
                     print('value is: $text');

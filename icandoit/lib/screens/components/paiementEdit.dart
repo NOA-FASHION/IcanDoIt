@@ -73,7 +73,7 @@ class _PaiementEditState extends State<PaiementEdit> {
                     Icons.check,
                     color: Colors.white,
                   ),
-                  textHint: widget.item.formation.chapitre,
+                  textHint: widget.item.cout.toString() + "€",
                   onEditTap: () {},
                   onSaveTap: (text) {
                     print('value is: $text');
