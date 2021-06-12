@@ -477,7 +477,7 @@ class _HomeTachesState extends State<HomeTaches> {
                                           _challengesListget[
                                                       widget.indexChallenge]
                                                   .previsions
-                                                  .toString() +
+                                                  .toStringAsFixed(2) +
                                               "€",
                                           style: TextStyle(
                                               fontSize: 10,
@@ -503,7 +503,7 @@ class _HomeTachesState extends State<HomeTaches> {
                                           _challengesListget[
                                                       widget.indexChallenge]
                                                   .prixTotal
-                                                  .toString() +
+                                                  .toStringAsFixed(2) +
                                               "€",
                                           style: TextStyle(
                                               fontSize: 10,
@@ -552,7 +552,7 @@ class _HomeTachesState extends State<HomeTaches> {
                                         Text(
                                           _challengesListget[indexChallenge]
                                                   .coutTotal
-                                                  .toString() +
+                                                  .toStringAsFixed(2) +
                                               "€",
                                           style: TextStyle(
                                               fontSize: 10,
@@ -577,7 +577,7 @@ class _HomeTachesState extends State<HomeTaches> {
                                         Text(
                                           _challengesListget[indexChallenge]
                                                   .restePaiement
-                                                  .toString() +
+                                                  .toStringAsFixed(2) +
                                               "€",
                                           style: TextStyle(
                                               fontSize: 10,
