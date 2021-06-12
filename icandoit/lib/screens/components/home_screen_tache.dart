@@ -505,7 +505,7 @@ class _HomeTachesState extends State<HomeTaches> {
                     'assets/logo.png',
                     width: 55,
                   ),
-                  _challengesListget[widget.indexChallenge].prixTotalBool
+                  _challengesListget[widget.indexChallenge].coutTotalBool
                       ? Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[

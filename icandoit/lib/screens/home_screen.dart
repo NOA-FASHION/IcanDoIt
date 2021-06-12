@@ -658,7 +658,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               quotidient = false;
               hebdoBool = false;
               dateBool = false;
-              // animatedpadding = true;
+              animatedpadding = false;
             },
           ),
         ],
@@ -1270,6 +1270,11 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                     if (unityChallenge == "normal" ||
                                         unityChallenge == "haute") {
                                       animatedpadding = false;
+                                      quotidient = false;
+                                      dateBool = false;
+                                      notificationBool = false;
+                                      hebdoBool = false;
+                                      idNotif = [];
                                     }
 
                                     Provider.of<Challengecontroller>(context,

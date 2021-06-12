@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_list_drag_and_drop/drag_and_drop_list.dart';
 // import 'dart:io' as io;
 import 'package:icandoit/models/challenge_model.dart';
+import 'package:icandoit/screens/components/achatEdit.dart';
+import 'package:icandoit/screens/components/paiementEdit.dart';
 import 'package:icandoit/screens/components/playYoutube.dart';
 import 'package:icandoit/screens/formationEdit.dart';
 import 'package:icandoit/screens/playPicture.dart';
@@ -77,6 +79,54 @@ class _ChallengesListBuilderTachesState
     return longLetter;
   }
 
+  // Widget paiementEdit(
+  //     Challengecontroller provider, Challengemodel2 item, String description) {
+  //   Widget fomationEdit = SizedBox(
+  //     width: 5.0,
+  //   );
+  //   if (description == "paiement") {
+  //     fomationEdit = IconButton(
+  //       alignment: Alignment.topRight,
+  //       icon: Icon(
+  //         Icons.edit,
+  //         color: Colors.black,
+  //       ),
+  //       onPressed: () {
+  //         Navigator.of(context).push(MaterialPageRoute(
+  //             builder: (context) => ChangeNotifierProvider.value(
+  //                 value: provider,
+  //                 child: PaiementEdit(
+  //                     item: item, indexChallenge: widget.indexChallenge))));
+  //       },
+  //     );
+  //   }
+  //   return fomationEdit;
+  // }
+
+  // Widget achatEdit(
+  //     Challengecontroller provider, Challengemodel2 item, String description) {
+  //   Widget fomationEdit = SizedBox(
+  //     width: 5.0,
+  //   );
+  //   if (description == "achat") {
+  //     fomationEdit = IconButton(
+  //       alignment: Alignment.topRight,
+  //       icon: Icon(
+  //         Icons.edit,
+  //         color: Colors.black,
+  //       ),
+  //       onPressed: () {
+  //         Navigator.of(context).push(MaterialPageRoute(
+  //             builder: (context) => ChangeNotifierProvider.value(
+  //                 value: provider,
+  //                 child: FormationEdit(
+  //                     item: item, indexChallenge: widget.indexChallenge))));
+  //       },
+  //     );
+  //   }
+  //   return fomationEdit;
+  // }
+
   Widget formationEdit(
       Challengecontroller provider, Challengemodel2 item, String description) {
     Widget fomationEdit = SizedBox(
@@ -94,6 +144,36 @@ class _ChallengesListBuilderTachesState
               builder: (context) => ChangeNotifierProvider.value(
                   value: provider,
                   child: FormationEdit(
+                      item: item, indexChallenge: widget.indexChallenge))));
+        },
+      );
+    } else if (description == "paiement") {
+      fomationEdit = IconButton(
+        alignment: Alignment.topRight,
+        icon: Icon(
+          Icons.edit,
+          color: Colors.black,
+        ),
+        onPressed: () {
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => ChangeNotifierProvider.value(
+                  value: provider,
+                  child: PaiementEdit(
+                      item: item, indexChallenge: widget.indexChallenge))));
+        },
+      );
+    } else if (description == "achat") {
+      fomationEdit = IconButton(
+        alignment: Alignment.topRight,
+        icon: Icon(
+          Icons.edit,
+          color: Colors.black,
+        ),
+        onPressed: () {
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => ChangeNotifierProvider.value(
+                  value: provider,
+                  child: AchatEdit(
                       item: item, indexChallenge: widget.indexChallenge))));
         },
       );
@@ -217,6 +297,7 @@ class _ChallengesListBuilderTachesState
                     content: "La tâche a bien été validé",
                     lotties: 'assets/challenge.json'));
                 provider.remove2(
+                    cout: item.cout,
                     prix: item.prix,
                     id: item.id,
                     indexSave: widget.indexChallenge,
@@ -230,6 +311,7 @@ class _ChallengesListBuilderTachesState
                     content: "La mission a bien ete supprime",
                     lotties: 'assets/trash.json'));
                 provider.remove2(
+                    cout: item.cout,
                     prix: item.prix,
                     id: item.id,
                     indexSave: widget.indexChallenge,

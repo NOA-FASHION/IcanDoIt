@@ -1025,6 +1025,83 @@ class Challengecontroller extends ChangeNotifier {
   //   }
   //   return prevision;
   // }
+  void modifAchat(
+      {@required int indexChallenge,
+      @required int index,
+      @required double prix}) async {
+    _challengeList[indexChallenge].listeDeTache[index].prix = prix;
+    modifAchatPratique(
+      idlistTache: _challengeList[indexChallenge].listeDeTache[index].id,
+      id: _challengeList[indexChallenge].id,
+      prix: prix,
+    );
+    // print('test unitaire addformationTheoriePratique');
+    await _save();
+    _initChallengeList();
+    notifyListeners();
+  }
+
+  void modifAchatPratique({
+    @required double prix,
+    @required String idlistTache,
+    @required String id,
+  }) async {
+    await delay(500);
+    for (var i = _challengeListSave.length - 1; i >= 0; i--) {
+      if (_challengeListSave[i].id == id) {
+        for (var n = _challengeListSave[i].listeDeTache.length - 1;
+            n >= 0;
+            n--) {
+          if (_challengeListSave[i].listeDeTache[n].id == idlistTache) {
+            _challengeListSave[i].listeDeTache[n].prix = prix;
+            // print('test unitaire addChallengesavetheoriePratique');
+            await _saveSauvegarde();
+            _initChallengeList();
+            return;
+          }
+        }
+      }
+    }
+  }
+
+  void modifPaiement(
+      {@required int indexChallenge,
+      @required int index,
+      @required double cout}) async {
+    _challengeList[indexChallenge].listeDeTache[index].cout = cout;
+    modifPaiementPratique(
+      idlistTache: _challengeList[indexChallenge].listeDeTache[index].id,
+      id: _challengeList[indexChallenge].id,
+      cout: cout,
+    );
+    // print('test unitaire addformationTheoriePratique');
+    await _save();
+    _initChallengeList();
+    notifyListeners();
+  }
+
+  void modifPaiementPratique({
+    @required double cout,
+    @required String idlistTache,
+    @required String id,
+  }) async {
+    await delay(500);
+    for (var i = _challengeListSave.length - 1; i >= 0; i--) {
+      if (_challengeListSave[i].id == id) {
+        for (var n = _challengeListSave[i].listeDeTache.length - 1;
+            n >= 0;
+            n--) {
+          if (_challengeListSave[i].listeDeTache[n].id == idlistTache) {
+            _challengeListSave[i].listeDeTache[n].cout = cout;
+            // print('test unitaire addChallengesavetheoriePratique');
+            await _saveSauvegarde();
+            _initChallengeList();
+            return;
+          }
+        }
+      }
+    }
+  }
 
   void prixTotalAdd(int index, double prix) {
     if (prix > 0) {
@@ -1032,40 +1109,96 @@ class Challengecontroller extends ChangeNotifier {
     }
   }
 
-  void previsionTotalAdd(int index, double prix) {
+  void previsionTotalAdd(int index, double prix, String idChallenge) async {
     if (prix > 0) {
       _challengeList[index].previsions =
           _challengeList[index].previsions + prix;
     }
+    // for (var i = _challengeListSave.length - 1; i >= 0; i--) {
+    //   if (_challengeListSave[i].id == _challengeList[index].id) {
+    //     _challengeListSave[i].previsions = _challengeList[index].previsions;
+    //     _challengeListSave[i].prixTotalBool = true;
+    //     await _saveSauvegarde();
+    //     _initChallengeList();
+    //     return;
+    //   }
+    // }
   }
 
-  void restePaiementTotalAdd(int index, double prix) {
-    if (prix > 0) {
+  void restePaiementTotalAdd(int index, double cout) {
+    if (cout > 0) {
       _challengeList[index].restePaiement =
-          _challengeList[index].restePaiement + prix;
+          _challengeList[index].restePaiement + cout;
     }
   }
 
-  void restePaiementTotalRemove(int index, double prix) {
-    if (prix > 0) {
+  void restePaiementTotalRemove(int index, double cout) async {
+    if (cout > 0) {
       _challengeList[index].restePaiement =
-          _challengeList[index].restePaiement - prix;
+          _challengeList[index].restePaiement - cout;
+      for (var i = _challengeListSave.length - 1; i >= 0; i--) {
+        if (_challengeListSave[i].id == _challengeList[index].id) {
+          _challengeListSave[i].restePaiement = _challengeList[index].coutTotal;
+
+          await _saveSauvegarde();
+          _initChallengeList();
+          return;
+        }
+      }
     }
   }
 
-  void coutTotalAdd(int index, double cout) {
+  void coutTotalAdd(int index, double cout, String idChallenge) async {
     if (cout > 0) {
       _challengeList[index].coutTotal = _challengeList[index].coutTotal + cout;
     }
-    print(_challengeList[index].name);
+    // for (var i = _challengeListSave.length - 1; i >= 0; i--) {
+    //   if (_challengeListSave[i].id == _challengeList[index].id) {
+    //     _challengeListSave[i].coutTotal = _challengeList[index].coutTotal;
+    //     _challengeListSave[i].coutTotalBool = true;
+    //     await _saveSauvegarde();
+    //     _initChallengeList();
+    //     return;
+    //   }
+    // }
   }
+
+  // void supprimeCoutTotal(int index, double cout, String idChallenge) async {
+  //   if (cout > 0) {
+  //     _challengeList[index].coutTotal = _challengeList[index].coutTotal - cout;
+  //   }
+  //   for (var i = _challengeListSave.length - 1; i >= 0; i--) {
+  //     if (_challengeListSave[i].id == _challengeList[index].id) {
+  //       _challengeListSave[i].coutTotal = _challengeList[index].coutTotal;
+
+  //       await _saveSauvegarde();
+  //       _initChallengeList();
+  //       return;
+  //     }
+  //   }
+  // }
+
+  // void supprimePrevisionTotalAdd(
+  //     int index, double prix, String idChallenge) async {
+  //   if (prix > 0) {
+  //     _challengeList[index].previsions =
+  //         _challengeList[index].previsions - prix;
+  //   }
+  //   for (var i = _challengeListSave.length - 1; i >= 0; i--) {
+  //     if (_challengeListSave[i].id == _challengeList[index].id) {
+  //       _challengeListSave[i].previsions = _challengeList[index].previsions;
+
+  //       await _saveSauvegarde();
+  //       _initChallengeList();
+  //       return;
+  //     }
+  //   }
+  // }
 
   void activePrixBool(double prix, int index) {
     if (prix > 0) {
       _challengeList[index].prixTotalBool = true;
       return;
-    } else {
-      _challengeList[index].prixTotalBool = false;
     }
   }
 
@@ -1073,8 +1206,6 @@ class Challengecontroller extends ChangeNotifier {
     if (cout > 0) {
       _challengeList[index].coutTotalBool = true;
       return;
-    } else {
-      _challengeList[index].coutTotalBool = false;
     }
   }
 
@@ -1093,8 +1224,8 @@ class Challengecontroller extends ChangeNotifier {
   }) async {
     // prixTotalAdd(index, prix);
 
-    coutTotalAdd(index, cout);
-    previsionTotalAdd(index, prix);
+    coutTotalAdd(index, cout, idListChallenge);
+    previsionTotalAdd(index, prix, idListChallenge);
     restePaiementTotalAdd(index, cout);
     activePrixBool(prix, index);
     activeCoutBool(cout, index);
@@ -1158,6 +1289,17 @@ class Challengecontroller extends ChangeNotifier {
         var additionchallenge = _challengeListSave[i].totalChallenge;
         _challengeListSave[i].totalChallenge =
             (int.parse(additionchallenge) + 1).toString();
+        if (cout > 0) {
+          _challengeListSave[i].coutTotal =
+              _challengeListSave[i].coutTotal + cout;
+          _challengeListSave[i].coutTotalBool = true;
+        }
+
+        if (prix > 0) {
+          _challengeListSave[i].previsions =
+              _challengeListSave[i].previsions + prix;
+          _challengeListSave[i].prixTotalBool = true;
+        }
 
         for (var n = challengeListTest.length - 1; n >= 0; n--) {
           _challengeListSave[i].listeDeTache.add(
@@ -1612,6 +1754,8 @@ class Challengecontroller extends ChangeNotifier {
 
   voidremove2Save(
       {@required String id,
+      @required double prix,
+      @required double cout,
       @required int indexSave,
       @required int index,
       @required String idChallenge,
@@ -1621,6 +1765,15 @@ class Challengecontroller extends ChangeNotifier {
         var additionchallenge = _challengeListSave[i].totalChallenge;
         _challengeListSave[i].totalChallenge =
             (int.parse(additionchallenge) - 1).toString();
+        if (prix > 0) {
+          _challengeListSave[i].previsions =
+              _challengeListSave[i].previsions - prix;
+        }
+        if (cout > 0) {
+          _challengeListSave[i].coutTotal =
+              _challengeListSave[i].coutTotal - cout;
+          _challengeListSave[i].restePaiement = _challengeListSave[i].coutTotal;
+        }
 
         for (var n = _challengeListSave[i].listeDeTache.length - 1;
             n >= 0;
@@ -1672,47 +1825,105 @@ class Challengecontroller extends ChangeNotifier {
   //     }
   //   }
   // }
-
   void remove2(
       {@required String id,
+      @required double cout,
       @required double prix,
       @required int indexSave,
       @required int index,
       @required String idChallenge,
       @required bool validate}) async {
-    // deActiveCoutBool(prix, index);
-    // deActivePrixBool(prix, index);
-
     if (validate) {
       prixTotalAdd(indexSave, prix);
-      restePaiementTotalRemove(indexSave, prix);
+      restePaiementTotalRemove(indexSave, cout);
     }
-
-    for (var i = _challengeList.length - 1; i >= 0; i--) {
-      if (_challengeList[i].id == idChallenge) {
-        if (!validate) {
-          var additionchallenge = _challengeList[i].totalChallenge;
-          _challengeList[i].totalChallenge =
-              (int.parse(additionchallenge) - 1).toString();
-
-          await voidremove2Save(
-              id: id,
-              indexSave: indexSave,
-              index: index,
-              idChallenge: idChallenge,
-              validate: validate);
-        }
-        // removeChallengelistRacourcci2(
-        //     _challengeList[indexSave].listeDeTache[index].id);
-        _challengeList[i].listeDeTache.removeAt(index);
-        // print('test unitaire remove2');
+    // if (!validate) {
+    //   supprimePrevisionTotalAdd(indexSave, prix, idChallenge);
+    //   supprimeCoutTotal(indexSave, cout, idChallenge);
+    // }
+    if (!validate) {
+      var additionchallenge = _challengeList[indexSave].totalChallenge;
+      _challengeList[indexSave].totalChallenge =
+          (int.parse(additionchallenge) - 1).toString();
+      if (prix > 0) {
+        _challengeList[indexSave].previsions =
+            _challengeList[indexSave].previsions - prix;
       }
+      if (cout > 0) {
+        _challengeList[indexSave].coutTotal =
+            _challengeList[indexSave].coutTotal - cout;
+        _challengeList[indexSave].restePaiement =
+            _challengeList[indexSave].coutTotal;
+      }
+
+      await voidremove2Save(
+          cout: cout,
+          prix: prix,
+          id: id,
+          indexSave: indexSave,
+          index: index,
+          idChallenge: idChallenge,
+          validate: validate);
     }
+
+    _challengeList[indexSave].listeDeTache.removeAt(index);
+
     await _save1(remove: true, idChallenge: idChallenge);
 
     _initChallengeList();
     notifyListeners();
   }
+
+  // void remove2(
+  //     {@required String id,
+  //     @required double cout,
+  //     @required double prix,
+  //     @required int indexSave,
+  //     @required int index,
+  //     @required String idChallenge,
+  //     @required bool validate}) async {
+
+  //   if (validate) {
+  //     prixTotalAdd(indexSave, prix);
+  //     restePaiementTotalRemove(indexSave, cout);
+  //   }
+  //   if (!validate) {
+  //     supprimePrevisionTotalAdd(indexSave, prix, idChallenge);
+  //     supprimeCoutTotal(indexSave, cout, idChallenge);
+  //   }
+
+  //   for (var i = _challengeList.length - 1; i >= 0; i--) {
+  //     if (_challengeList[i].id == idChallenge) {
+  //       if (!validate) {
+  //         var additionchallenge = _challengeList[i].totalChallenge;
+  //         _challengeList[i].totalChallenge =
+  //             (int.parse(additionchallenge) - 1).toString();
+  //         if (prix > 0) {
+  //           _challengeList[i].previsions = _challengeList[i].previsions - prix;
+  //         }
+  //         if (cout > 0) {
+  //           _challengeList[i].coutTotal = _challengeList[i].coutTotal - cout;
+  //         }
+
+  //         await voidremove2Save(
+  //             cout: cout,
+  //             prix: prix,
+  //             id: id,
+  //             indexSave: indexSave,
+  //             index: index,
+  //             idChallenge: idChallenge,
+  //             validate: validate);
+  //       }
+
+  //       _challengeList[i].listeDeTache.removeAt(index);
+
+  //     }
+  //   }
+  //   await _save1(remove: true, idChallenge: idChallenge);
+
+  //   _initChallengeList();
+  //   notifyListeners();
+  // }
 
   Future<String> get _localPath async {
     final directory = await getApplicationDocumentsDirectory();
