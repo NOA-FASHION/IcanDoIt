@@ -64,13 +64,14 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
 
     String word2;
 
-    if (word.length > 30) {
+    if (word.length > 25) {
       longLetter = Container(
-        width: MediaQuery.of(context).size.width / 2.55,
+        width: MediaQuery.of(context).size.width / 2,
         color: Colors.transparent,
         child: MarqueeText(
           text: word,
           style: TextStyle(
+            fontWeight: FontWeight.bold,
             color: Colors.black,
           ),
           speed: 30,
