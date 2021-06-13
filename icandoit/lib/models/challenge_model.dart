@@ -181,7 +181,6 @@ class ChallengeModel {
     this.unity,
     this.listeDeTache,
     this.totalChallenge,
-    String notifiaction,
   });
 
   factory ChallengeModel.fromJSON(Map<String, dynamic> json) => ChallengeModel(

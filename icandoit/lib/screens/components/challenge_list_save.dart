@@ -5,7 +5,7 @@ import 'package:icandoit/models/challenge_model.dart';
 import 'package:icandoit/screens/components/resultat_challenge.dart';
 import 'package:item_selector/item_selector.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
-import 'package:top_snackbar_flutter/tap_bounce_container.dart';
+// import 'package:top_snackbar_flutter/tap_bounce_container.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 import 'package:provider/provider.dart';
 // import 'package:slide_drawer/slide_drawer.dart';

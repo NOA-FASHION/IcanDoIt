@@ -43,7 +43,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   // String idChallenge;
   List<String> idNotif = [];
   String dateQuotidien;
-  String notifiaction = "";
+  String notification = "";
   bool animatedpadding = false;
   bool quotidient = false;
   List<String> totalDays = [];
@@ -132,7 +132,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           notificationId: int.parse(idNotif[0]),
           notificationTitle: 'Date Tracker Test',
           notificationBody: 'We are showing notification!',
-          dateNotif: notifiaction);
+          dateNotif: notification);
     }
   }
 
@@ -653,7 +653,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             },
             onSaved: (val) {
               print(val);
-              notifiaction = val;
+              notification = val;
               notificationBool = true;
               quotidient = false;
               hebdoBool = false;
@@ -1266,7 +1266,10 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                             customAlphabet("0123456789", 4));
                                       }
                                     }
-                                    print(idNotif);
+                                    if (unityChallenge == "notification") {
+                                      heureTotal = '';
+                                    }
+
                                     if (unityChallenge == "normal" ||
                                         unityChallenge == "haute") {
                                       animatedpadding = false;
@@ -1275,6 +1278,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                       notificationBool = false;
                                       hebdoBool = false;
                                       idNotif = [];
+                                      heureTotal = '';
                                     }
 
                                     Provider.of<Challengecontroller>(context,

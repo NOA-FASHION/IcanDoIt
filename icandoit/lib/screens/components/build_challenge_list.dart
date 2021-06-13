@@ -192,7 +192,7 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
         ),
       ),
     );
-    if (chalenge.animatedpadding || chalenge.idNotif.isNotEmpty) {
+    if (chalenge.idNotif.isNotEmpty) {
       glow = Shimmer(
         duration: Duration(seconds: 5),
         interval: Duration(seconds: 1),
@@ -408,7 +408,7 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
           child: Dismissible(
             onDismissed: (direction) {
               if (direction == DismissDirection.endToStart) {
-                if (!_challengesList[index].animatedpadding &&
+                if (_challengesList[index].notification.isEmpty &&
                     _challengesList[index].idNotif.isNotEmpty) {
                   for (var n = _challengesList[index].idNotif.length - 1;
                       n >= 0;
@@ -430,8 +430,7 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
               }
 
               if (direction == DismissDirection.startToEnd) {
-                if (_challengesList[index].animatedpadding ||
-                    _challengesList[index].idNotif.isNotEmpty) {
+                if (_challengesList[index].idNotif.isNotEmpty) {
                   for (var n = _challengesList[index].idNotif.length - 1;
                       n >= 0;
                       n--) {

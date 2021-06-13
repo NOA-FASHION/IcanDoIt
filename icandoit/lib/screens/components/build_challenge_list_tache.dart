@@ -79,54 +79,6 @@ class _ChallengesListBuilderTachesState
     return longLetter;
   }
 
-  // Widget paiementEdit(
-  //     Challengecontroller provider, Challengemodel2 item, String description) {
-  //   Widget fomationEdit = SizedBox(
-  //     width: 5.0,
-  //   );
-  //   if (description == "paiement") {
-  //     fomationEdit = IconButton(
-  //       alignment: Alignment.topRight,
-  //       icon: Icon(
-  //         Icons.edit,
-  //         color: Colors.black,
-  //       ),
-  //       onPressed: () {
-  //         Navigator.of(context).push(MaterialPageRoute(
-  //             builder: (context) => ChangeNotifierProvider.value(
-  //                 value: provider,
-  //                 child: PaiementEdit(
-  //                     item: item, indexChallenge: widget.indexChallenge))));
-  //       },
-  //     );
-  //   }
-  //   return fomationEdit;
-  // }
-
-  // Widget achatEdit(
-  //     Challengecontroller provider, Challengemodel2 item, String description) {
-  //   Widget fomationEdit = SizedBox(
-  //     width: 5.0,
-  //   );
-  //   if (description == "achat") {
-  //     fomationEdit = IconButton(
-  //       alignment: Alignment.topRight,
-  //       icon: Icon(
-  //         Icons.edit,
-  //         color: Colors.black,
-  //       ),
-  //       onPressed: () {
-  //         Navigator.of(context).push(MaterialPageRoute(
-  //             builder: (context) => ChangeNotifierProvider.value(
-  //                 value: provider,
-  //                 child: FormationEdit(
-  //                     item: item, indexChallenge: widget.indexChallenge))));
-  //       },
-  //     );
-  //   }
-  //   return fomationEdit;
-  // }
-
   Widget formationEdit(
       Challengecontroller provider, Challengemodel2 item, String description) {
     Widget fomationEdit = SizedBox(

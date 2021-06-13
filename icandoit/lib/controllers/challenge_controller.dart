@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:typed_data';
 import 'package:flutter/services.dart';
-import 'package:nanoid/nanoid.dart';
+// import 'package:nanoid/nanoid.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 import 'package:flutter/foundation.dart';
@@ -612,7 +612,7 @@ class Challengecontroller extends ChangeNotifier {
           idNotif: _challengeListSave[index].idNotif,
           boolId: _challengeListSave[index].boolId,
           id: _challengeListSave[index].id,
-          notifiaction: _challengeListSave[index].notification,
+          notification: _challengeListSave[index].notification,
           date: _challengeListSave[index].date,
           quotidient: _challengeListSave[index].quotidient,
           animatedpadding: _challengeListSave[index].animatedpadding,
@@ -1405,7 +1405,7 @@ class Challengecontroller extends ChangeNotifier {
           idChallenge: idChallenge,
           idNotif: idNotif,
           id: id,
-          notifiaction: notifiaction,
+          notification: notifiaction,
           date: date,
           quotidient: quotidient,
           animatedpadding: animatedpadding,
@@ -1450,6 +1450,43 @@ class Challengecontroller extends ChangeNotifier {
     }
   }
 
+  void restaureSave(int index) async {
+    // _challengeList.removeAt(index);
+    for (var i = _challengeListSave.length - 1; i >= 0; i--) {
+      if (_challengeListSave[i].id == _challengeList[index].id) {
+        _challengeList.add(
+          ChallengeModel(
+              previsions: _challengeListSave[i].previsions,
+              restePaiement: _challengeListSave[i].restePaiement,
+              coutTotalBool: _challengeListSave[i].coutTotalBool,
+              prixTotalBool: _challengeListSave[i].prixTotalBool,
+              prixTotal: _challengeListSave[i].prixTotal,
+              coutTotal: _challengeListSave[i].coutTotal,
+              idChallenge: _challengeListSave[i].idChallenge,
+              idNotif: _challengeListSave[i].idNotif,
+              boolId: _challengeListSave[i].boolId,
+              id: _challengeListSave[i].id,
+              notification: _challengeListSave[i].notification,
+              date: _challengeListSave[i].date,
+              quotidient: _challengeListSave[i].quotidient,
+              animatedpadding: _challengeListSave[i].animatedpadding,
+              totalDays: _challengeListSave[i].totalDays,
+              listeDeTache: _challengeListSave[i].listeDeTache,
+              name: _challengeListSave[i].name,
+              description: _challengeListSave[i].description,
+              totalChallenge: _challengeListSave[i].totalChallenge,
+              unity: _challengeListSave[i].unity),
+        );
+
+        await _save();
+        _initChallengeList();
+        notifyListeners();
+        // print('test unitaire addSlectSave');
+        return;
+      }
+    }
+  }
+
   void addSlectSave() async {
     if (indexSave != null) {
       for (var i = _challengeList.length - 1; i >= 0; i--) {
@@ -1469,7 +1506,7 @@ class Challengecontroller extends ChangeNotifier {
             idNotif: _challengeListSave[indexSave].idNotif,
             boolId: _challengeListSave[indexSave].boolId,
             id: _challengeListSave[indexSave].id,
-            notifiaction: _challengeListSave[indexSave].notification,
+            notification: _challengeListSave[indexSave].notification,
             date: _challengeListSave[indexSave].date,
             quotidient: _challengeListSave[indexSave].quotidient,
             animatedpadding: _challengeListSave[indexSave].animatedpadding,
@@ -1490,7 +1527,7 @@ class Challengecontroller extends ChangeNotifier {
   }
 
   void saveChallengelistId(int index) {
-    if (!_challengeList[index].animatedpadding) {
+    if (_challengeList[index].notification.isEmpty) {
       for (var i = _challengeList[index].listeDeTache.length - 1; i >= 0; i--) {
         saveChallengelistRacourcci(index, i);
       }
@@ -1528,7 +1565,7 @@ class Challengecontroller extends ChangeNotifier {
           idNotif: _challengeList[index].idNotif,
           boolId: _challengeList[index].boolId,
           id: _challengeList[index].id,
-          notifiaction: _challengeList[index].notification,
+          notification: _challengeList[index].notification,
           date: _challengeList[index].date,
           quotidient: _challengeList[index].quotidient,
           animatedpadding: _challengeList[index].animatedpadding,
@@ -1542,6 +1579,7 @@ class Challengecontroller extends ChangeNotifier {
   }
 
   void addListChallengeSaveindex(int index) async {
+    _challengeList[index].animatedpadding = true;
     saveChallengelistId(index);
     for (var i = _challengeListSave.length - 1; i >= 0; i--) {
       if (_challengeListSave[i].id == _challengeList[index].id) {
@@ -1560,7 +1598,7 @@ class Challengecontroller extends ChangeNotifier {
           idNotif: _challengeList[index].idNotif,
           boolId: _challengeList[index].boolId,
           id: _challengeList[index].id,
-          notifiaction: _challengeList[index].notification,
+          notification: _challengeList[index].notification,
           date: _challengeList[index].date,
           quotidient: _challengeList[index].quotidient,
           animatedpadding: _challengeList[index].animatedpadding,
@@ -1593,7 +1631,7 @@ class Challengecontroller extends ChangeNotifier {
               idNotif: _challengeList[i].idNotif,
               boolId: _challengeList[i].boolId,
               id: _challengeList[i].id,
-              notifiaction: _challengeList[i].notification,
+              notification: _challengeList[i].notification,
               date: _challengeList[i].date,
               quotidient: _challengeList[i].quotidient,
               animatedpadding: _challengeList[i].animatedpadding,

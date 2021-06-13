@@ -408,8 +408,18 @@ class _HomeTachesState extends State<HomeTaches> {
           child: AppBar(
             title: Text(something),
             actions: [
+              IconButton(
+                alignment: Alignment.center,
+                icon: Icon(
+                  Icons.restore,
+                  color: Colors.black,
+                ),
+                onPressed: () {
+                  variable.restaureSave(widget.indexChallenge);
+                },
+              ),
               Padding(
-                padding: const EdgeInsets.only(right: 15, top: 10),
+                padding: const EdgeInsets.only(right: 15, left: 15, top: 10),
                 child: SizedBox.fromSize(
                   size: Size(50, 50), // button width and height
                   child: ClipOval(
