@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_list_drag_and_drop/drag_and_drop_list.dart';
+import 'package:icandoit/controllers/adresse.dart';
 // import 'dart:io' as io;
 import 'package:icandoit/models/challenge_model.dart';
 import 'package:icandoit/screens/components/achatEdit.dart';
@@ -416,7 +417,8 @@ class _ChallengesListBuilderTachesState
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => ChangeNotifierProvider.value(
                               value: provider,
-                              child: PlayUrl(nameChallenge: item.name))));
+                              child: AdressMap(
+                                  indexChallenge: widget.indexChallenge))));
                     } else if (item.description
                             .toString()
                             .replaceAll(unityPattern, "") ==
