@@ -408,16 +408,16 @@ class _HomeTachesState extends State<HomeTaches> {
           child: AppBar(
             title: Text(something),
             actions: [
-              IconButton(
-                alignment: Alignment.center,
-                icon: Icon(
-                  Icons.restore,
-                  color: Colors.black,
-                ),
-                onPressed: () {
-                  variable.restaureSave(widget.indexChallenge);
-                },
-              ),
+              // IconButton(
+              //   alignment: Alignment.center,
+              //   icon: Icon(
+              //     Icons.restore,
+              //     color: Colors.black,
+              //   ),
+              //   onPressed: () {
+              //     variable.restaureSave(widget.indexChallenge);
+              //   },
+              // ),
               Padding(
                 padding: const EdgeInsets.only(right: 15, left: 15, top: 10),
                 child: SizedBox.fromSize(

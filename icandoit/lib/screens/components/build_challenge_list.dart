@@ -363,6 +363,25 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
           context: context, builder: (BuildContext context) => baseDialog);
     }
 
+    Widget resrtorButtm(int index, bool anamatingPadding) {
+      Widget restorhButtom = SizedBox(
+        width: 1.0,
+      );
+      if (anamatingPadding) {
+        restorhButtom = IconButton(
+          alignment: Alignment.center,
+          icon: Icon(
+            Icons.restore,
+            color: Colors.black,
+          ),
+          onPressed: () {
+            variable.restaureSave(index);
+          },
+        );
+      }
+      return restorhButtom;
+    }
+
     Widget switchButtm(String id, bool boolId) {
       Widget switchButtom = SizedBox(
         width: 1.0,
@@ -570,6 +589,8 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                         ),
                         switchButtm(_challengesList[index].id,
                             _challengesList[index].boolId),
+                        resrtorButtm(
+                            index, _challengesList[index].animatedpadding)
                       ],
                     ),
                   ),
