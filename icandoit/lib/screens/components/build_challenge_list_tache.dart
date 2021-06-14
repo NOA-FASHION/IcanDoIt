@@ -170,6 +170,11 @@ class _ChallengesListBuilderTachesState
         Icons.comment,
         size: 30.0,
       );
+    } else if (resultat == "informations") {
+      documentJoint = Icon(
+        Icons.perm_device_information,
+        size: 30.0,
+      );
     } else if (resultat == "youtube") {
       documentJoint = Icon(
         Icons.youtube_searched_for_sharp,
@@ -437,6 +442,10 @@ class _ChallengesListBuilderTachesState
                         item.description
                                 .toString()
                                 .replaceAll(unityPattern, "") ==
+                            "informations" ||
+                        item.description
+                                .toString()
+                                .replaceAll(unityPattern, "") ==
                             "tache" ||
                         item.description
                                 .toString()
@@ -469,7 +478,7 @@ class _ChallengesListBuilderTachesState
                             child: Row(
                               children: [
                                 Text(
-                                  "Tache".toUpperCase(),
+                                  "Etape".toUpperCase(),
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       color: Colors.purple),

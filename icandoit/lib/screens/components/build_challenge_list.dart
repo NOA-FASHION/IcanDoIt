@@ -59,12 +59,24 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
     return longLetter;
   }
 
-  Widget maxLetterTitre(String word) {
+  Widget maxLetterTitre(String word, bool animatinpadding) {
     Widget longLetter;
 
     String word2;
-
-    if (word.length > 25) {
+    if (animatinpadding && word.length > 20) {
+      longLetter = Container(
+        width: MediaQuery.of(context).size.width / 2.4,
+        color: Colors.transparent,
+        child: MarqueeText(
+          text: word,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
+          speed: 30,
+        ),
+      );
+    } else if (word.length > 25) {
       longLetter = Container(
         width: MediaQuery.of(context).size.width / 2,
         color: Colors.transparent,
@@ -579,7 +591,8 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                                   width: 5.0,
                                 ),
                                 maxLetterTitre(
-                                    _challengesList[index].name.toUpperCase()),
+                                    _challengesList[index].name.toUpperCase(),
+                                    _challengesList[index].animatedpadding),
                               ],
                             ),
                           ),
@@ -590,7 +603,9 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                         switchButtm(_challengesList[index].id,
                             _challengesList[index].boolId),
                         resrtorButtm(
-                            index, _challengesList[index].animatedpadding)
+                            variable
+                                .returnIndexForName(_challengesList[index].id),
+                            _challengesList[index].animatedpadding)
                       ],
                     ),
                   ),

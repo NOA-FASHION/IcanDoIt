@@ -759,6 +759,19 @@ class _HomeTachesState extends State<HomeTaches> {
                                 ),
                               ),
                               DropdownMenuItem(
+                                value: "informations",
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.perm_device_information,
+                                      size: 30.0,
+                                    ),
+                                    SizedBox(width: 10),
+                                    Text("informations"),
+                                  ],
+                                ),
+                              ),
+                              DropdownMenuItem(
                                 value: "paiement",
                                 child: Row(
                                   children: [

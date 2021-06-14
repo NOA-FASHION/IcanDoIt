@@ -855,6 +855,8 @@ class Challengecontroller extends ChangeNotifier {
       unity = unity_challenge1.paiement;
     } else if (json == "projet") {
       unity = unity_challenge1.projet;
+    } else if (json == "informations") {
+      unity = unity_challenge1.informations;
     }
     return unity;
   }
@@ -1451,9 +1453,9 @@ class Challengecontroller extends ChangeNotifier {
   }
 
   void restaureSave(int index) async {
-    // _challengeList.removeAt(index);
     for (var i = _challengeListSave.length - 1; i >= 0; i--) {
       if (_challengeListSave[i].id == _challengeList[index].id) {
+        _challengeList.removeAt(index);
         _challengeList.add(
           ChallengeModel(
               previsions: _challengeListSave[i].previsions,
@@ -1580,6 +1582,9 @@ class Challengecontroller extends ChangeNotifier {
 
   void addListChallengeSaveindex(int index) async {
     _challengeList[index].animatedpadding = true;
+    await _save();
+    _initChallengeList();
+    notifyListeners();
     saveChallengelistId(index);
     for (var i = _challengeListSave.length - 1; i >= 0; i--) {
       if (_challengeListSave[i].id == _challengeList[index].id) {
@@ -1773,7 +1778,7 @@ class Challengecontroller extends ChangeNotifier {
     }
   }
 
-  //A tester demain
+  ///////////////////////////////////////////////////bug a resoudre
   void removeChallengelistId(int index) {
     if (!_challengeList[index].animatedpadding) {
       for (var i = _challengeList[index].listeDeTache.length - 1; i >= 0; i--) {
@@ -1782,7 +1787,7 @@ class Challengecontroller extends ChangeNotifier {
     }
   }
 
-  void removeChallengelistRacourcci(int index, int index2) {
+  void removeChallengelistRacourcci(int index, int index2) async {
     for (var n = _challengeList.length - 1; n >= 0; n--) {
       for (var i = _challengeList[n].idChallenge.length - 1; i >= 0; i--) {
         if (_challengeList[n].idChallenge[i] ==
@@ -1794,7 +1799,7 @@ class Challengecontroller extends ChangeNotifier {
   }
 
   void remove({@required int index, @required bool validate, String id}) async {
-    removeChallengelistId(index);
+    await removeChallengelistId(index);
     _challengeList.removeAt(index);
     await _save(remove: true);
 
