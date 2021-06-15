@@ -252,6 +252,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 // underline: SizedBox(),
                 onChanged: (String newValue) {
                   setState(() {
+                    date = "";
+                    totalDays = [];
                     dateQuotidien = newValue;
                     heureTotal = newValue;
                     notificationBool = false;
@@ -353,6 +355,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             onSaved: (value) {
               if (value == null) return;
               setState(() {
+                date = "";
+                totalDays = [];
                 _myActivities = value;
                 for (var i = _myActivities.length - 1; i >= 0; i--) {
                   totalDays.add(_myActivities[i].toString());
@@ -493,6 +497,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                     // underline: SizedBox(),
                     onChanged: (String newValue) {
                       setState(() {
+                        totalDays = [];
                         date = newValue;
                         notificationBool = false;
                         quotidient = false;
@@ -652,6 +657,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               return null;
             },
             onSaved: (val) {
+              date = "";
+              totalDays = [];
               print(val);
               notification = val;
               notificationBool = true;
@@ -1272,6 +1279,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
                                     if (unityChallenge == "normal" ||
                                         unityChallenge == "haute") {
+                                      totalDays = [];
+                                      date = "";
                                       animatedpadding = false;
                                       quotidient = false;
                                       dateBool = false;

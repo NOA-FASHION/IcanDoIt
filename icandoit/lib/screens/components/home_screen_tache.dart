@@ -33,6 +33,11 @@ class _HomeTachesState extends State<HomeTaches> {
     duree: 'Duree',
     theoriePratique: 'Theorie-pratique',
   );
+  String nombreEchenace;
+  String nomAdresse;
+  String villeAdresse;
+  String adresse;
+  String paysAdresse;
   String prixProduit;
   String coutPaiment;
   List<String> docPaths;
@@ -268,6 +273,118 @@ class _HomeTachesState extends State<HomeTaches> {
             border:
                 OutlineInputBorder(borderRadius: BorderRadius.circular(15.0))),
       );
+    } else if (resultat == "adresse") {
+      documentJoint = Column(
+        children: [
+          TextFormField(
+            onSaved: (value) {
+              nomAdresse = value;
+            },
+            validator: (value) {
+              if (value.isEmpty) {
+                return "Merci d'entrer un nom";
+              }
+              return null;
+            },
+            decoration: InputDecoration(
+                focusedBorder: OutlineInputBorder(
+                    borderSide:
+                        BorderSide(width: 2.0, color: Colors.blueAccent),
+                    borderRadius: BorderRadius.circular(15.0)),
+                enabledBorder: OutlineInputBorder(
+                    borderSide:
+                        BorderSide(width: 1.0, color: Colors.blueAccent),
+                    borderRadius: BorderRadius.circular(15.0)),
+                contentPadding:
+                    EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                labelText: "Nom",
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15.0))),
+          ),
+          TextFormField(
+            onSaved: (value) {
+              adresse = value;
+            },
+            validator: (value) {
+              if (value.isEmpty) {
+                return "Merci d'entrer une adresse";
+              }
+              return null;
+            },
+            decoration: InputDecoration(
+                focusedBorder: OutlineInputBorder(
+                    borderSide:
+                        BorderSide(width: 2.0, color: Colors.blueAccent),
+                    borderRadius: BorderRadius.circular(15.0)),
+                enabledBorder: OutlineInputBorder(
+                    borderSide:
+                        BorderSide(width: 1.0, color: Colors.blueAccent),
+                    borderRadius: BorderRadius.circular(15.0)),
+                contentPadding:
+                    EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                labelText: "Adresse",
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15.0))),
+          ),
+          TextFormField(
+            onSaved: (value) {
+              villeAdresse = value;
+            },
+            validator: (value) {
+              if (value.isEmpty) {
+                return "Merci d'entrer une ville";
+              }
+              return null;
+            },
+            decoration: InputDecoration(
+                focusedBorder: OutlineInputBorder(
+                    borderSide:
+                        BorderSide(width: 2.0, color: Colors.blueAccent),
+                    borderRadius: BorderRadius.circular(15.0)),
+                enabledBorder: OutlineInputBorder(
+                    borderSide:
+                        BorderSide(width: 1.0, color: Colors.blueAccent),
+                    borderRadius: BorderRadius.circular(15.0)),
+                contentPadding:
+                    EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                labelText: "ville",
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15.0))),
+          ),
+          TextFormField(
+            onSaved: (value) {
+              paysAdresse = value;
+              dataJoin = nomAdresse +
+                  ", " +
+                  adresse +
+                  ", " +
+                  villeAdresse +
+                  ", " +
+                  paysAdresse;
+            },
+            validator: (value) {
+              if (value.isEmpty) {
+                return "Merci d'entrer un pays";
+              }
+              return null;
+            },
+            decoration: InputDecoration(
+                focusedBorder: OutlineInputBorder(
+                    borderSide:
+                        BorderSide(width: 2.0, color: Colors.blueAccent),
+                    borderRadius: BorderRadius.circular(15.0)),
+                enabledBorder: OutlineInputBorder(
+                    borderSide:
+                        BorderSide(width: 1.0, color: Colors.blueAccent),
+                    borderRadius: BorderRadius.circular(15.0)),
+                contentPadding:
+                    EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                labelText: "pays",
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15.0))),
+          )
+        ],
+      );
     } else if (resultat == "youtube") {
       documentJoint = TextFormField(
         onSaved: (value) {
@@ -388,6 +505,72 @@ class _HomeTachesState extends State<HomeTaches> {
           Text("€")
         ],
       );
+    } else if (resultat == "echeancier") {
+      documentJoint = Row(
+        children: [
+          Column(
+            children: [
+              Container(
+                width: 100,
+                child: TextFormField(
+                  onSaved: (value) {
+                    coutPaiment = value;
+                  },
+                  validator: (value) {
+                    if (!isNumericUsingRegularExpression(value)) {
+                      return "Merci le montant d'une échéance";
+                    }
+                    return null;
+                  },
+                  decoration: InputDecoration(
+                      focusedBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(width: 2.0, color: Colors.blueAccent),
+                          borderRadius: BorderRadius.circular(15.0)),
+                      enabledBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(width: 1.0, color: Colors.blueAccent),
+                          borderRadius: BorderRadius.circular(15.0)),
+                      contentPadding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      labelText: "echeance",
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15.0))),
+                ),
+              ),
+              Container(
+                width: 100,
+                child: TextFormField(
+                  onSaved: (value) {
+                    nombreEchenace = value;
+                  },
+                  validator: (value) {
+                    if (!isNumericUsingRegularExpression(value)) {
+                      return "Merci de le nombre d'échéance";
+                    }
+                    return null;
+                  },
+                  decoration: InputDecoration(
+                      focusedBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(width: 2.0, color: Colors.blueAccent),
+                          borderRadius: BorderRadius.circular(15.0)),
+                      enabledBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(width: 1.0, color: Colors.blueAccent),
+                          borderRadius: BorderRadius.circular(15.0)),
+                      contentPadding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      labelText: "Nombre d'échéance",
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15.0))),
+                ),
+              ),
+            ],
+          ),
+          Text("€")
+        ],
+      );
     }
     return documentJoint;
   }
@@ -408,16 +591,6 @@ class _HomeTachesState extends State<HomeTaches> {
           child: AppBar(
             title: Text(something),
             actions: [
-              // IconButton(
-              //   alignment: Alignment.center,
-              //   icon: Icon(
-              //     Icons.restore,
-              //     color: Colors.black,
-              //   ),
-              //   onPressed: () {
-              //     variable.restaureSave(widget.indexChallenge);
-              //   },
-              // ),
               Padding(
                 padding: const EdgeInsets.only(right: 15, left: 15, top: 10),
                 child: SizedBox.fromSize(
@@ -759,6 +932,19 @@ class _HomeTachesState extends State<HomeTaches> {
                                 ),
                               ),
                               DropdownMenuItem(
+                                value: "adresse",
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.living,
+                                      size: 30.0,
+                                    ),
+                                    SizedBox(width: 10),
+                                    Text("adresse"),
+                                  ],
+                                ),
+                              ),
+                              DropdownMenuItem(
                                 value: "informations",
                                 child: Row(
                                   children: [
@@ -781,6 +967,19 @@ class _HomeTachesState extends State<HomeTaches> {
                                     ),
                                     SizedBox(width: 10),
                                     Text("paiement"),
+                                  ],
+                                ),
+                              ),
+                              DropdownMenuItem(
+                                value: "echeancier",
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.payment,
+                                      size: 30.0,
+                                    ),
+                                    SizedBox(width: 10),
+                                    Text("echeancier"),
                                   ],
                                 ),
                               ),
@@ -900,7 +1099,24 @@ class _HomeTachesState extends State<HomeTaches> {
                           selectdropdown(unityChallenge),
                           InkWell(
                               onTap: () {
-                                if (formKeyTache.currentState.validate()) {
+                                if (unityChallenge == "echeancier") {
+                                  if (formKeyTache.currentState.validate()) {
+                                    formKeyTache.currentState.save();
+                                    Provider.of<Challengecontroller>(context,
+                                            listen: false)
+                                        .generateList(widget.id,
+                                      widget.indexChallenge,
+                                      int.parse(nombreEchenace),
+                                      double.parse(coutPaiment),
+                                      unityChallenge,
+                                      targetChallenge,
+                                      formations,
+                                      double.parse(prixProduit),
+                                    );
+                                    Navigator.pop(context);
+                                  }
+                                } else if (formKeyTache.currentState
+                                    .validate()) {
                                   formKeyTache.currentState.save();
                                   setState(() {
                                     Provider.of<Challengecontroller>(context,

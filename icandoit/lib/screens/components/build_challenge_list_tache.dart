@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_list_drag_and_drop/drag_and_drop_list.dart';
-import 'package:icandoit/controllers/adresse.dart';
+import 'package:icandoit/screens/components/adresse.dart';
 // import 'dart:io' as io;
 import 'package:icandoit/models/challenge_model.dart';
 import 'package:icandoit/screens/components/achatEdit.dart';
@@ -100,7 +100,7 @@ class _ChallengesListBuilderTachesState
                       item: item, indexChallenge: widget.indexChallenge))));
         },
       );
-    } else if (description == "paiement") {
+    } else if (description == "paiement" || description == "echeancier") {
       fomationEdit = IconButton(
         alignment: Alignment.topRight,
         icon: Icon(
@@ -202,7 +202,7 @@ class _ChallengesListBuilderTachesState
         Icons.model_training,
         size: 30.0,
       );
-    } else if (resultat == "paiement") {
+    } else if (resultat == "paiement" || resultat == "echeancier") {
       documentJoint = Icon(
         Icons.payment,
         size: 30.0,
@@ -210,6 +210,11 @@ class _ChallengesListBuilderTachesState
     } else if (resultat == "projet") {
       documentJoint = Icon(
         Icons.build,
+        size: 30.0,
+      );
+    } else if (resultat == "adresse") {
+      documentJoint = Icon(
+        Icons.living,
         size: 30.0,
       );
     } else if (resultat == "mission") {
@@ -417,8 +422,15 @@ class _ChallengesListBuilderTachesState
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => ChangeNotifierProvider.value(
                               value: provider,
-                              child: AdressMap(
-                                  indexChallenge: widget.indexChallenge))));
+                              child: PlayUrl(nameChallenge: item.name))));
+                    } else if (item.description
+                            .toString()
+                            .replaceAll(unityPattern, "") ==
+                        "adresse") {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => ChangeNotifierProvider.value(
+                              value: provider,
+                              child: AdressMap(adresse: item.name))));
                     } else if (item.description
                             .toString()
                             .replaceAll(unityPattern, "") ==

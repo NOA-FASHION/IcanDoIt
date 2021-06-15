@@ -22,6 +22,8 @@ enum unity_challenge1 {
   paiement,
   formation,
   projet,
+  adresse,
+  echeancier,
   informations
 }
 choixDesciptionEnum(dynamic json) {
@@ -46,8 +48,12 @@ choixDesciptionEnum(dynamic json) {
     unity = unity_challenge1.url;
   } else if (json['description'] == "unity_challenge1.paiement") {
     unity = unity_challenge1.paiement;
+  } else if (json['description'] == "unity_challenge1.echeancier") {
+    unity = unity_challenge1.echeancier;
   } else if (json['description'] == "unity_challenge1.projet") {
     unity = unity_challenge1.projet;
+  } else if (json['description'] == "unity_challenge1.adresse") {
+    unity = unity_challenge1.adresse;
   } else if (json['description'] == "unity_challenge1.formation") {
     unity = unity_challenge1.formation;
   } else if (json['description'] == "unity_challenge1.informations") {

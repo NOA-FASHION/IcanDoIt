@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:typed_data';
 import 'package:flutter/services.dart';
+import 'package:nanoid/async.dart';
 // import 'package:nanoid/nanoid.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
@@ -849,10 +850,14 @@ class Challengecontroller extends ChangeNotifier {
       unity = unity_challenge1.image;
     } else if (json == "url") {
       unity = unity_challenge1.url;
+    } else if (json == "adresse") {
+      unity = unity_challenge1.adresse;
     } else if (json == "formation") {
       unity = unity_challenge1.formation;
     } else if (json == "paiement") {
       unity = unity_challenge1.paiement;
+    } else if (json == "echeancier") {
+      unity = unity_challenge1.echeancier;
     } else if (json == "projet") {
       unity = unity_challenge1.projet;
     } else if (json == "informations") {
@@ -1348,6 +1353,49 @@ class Challengecontroller extends ChangeNotifier {
     }
   }
 
+  void generateList(
+      String idListChallenge,
+      int index,
+      int nombreEcheance,
+      double cout,
+      String description,
+      String targetChallenge,
+      Formation formation,
+      double prix) async {
+    List<Challengemodel2> challenModel2Generat =
+        List<Challengemodel2>.generate(nombreEcheance, (i) {
+      return Challengemodel2(
+          prix: prix,
+          cout: cout,
+          id: nanoid(10).toString(),
+          name: "",
+          tache: targetChallenge,
+          description: choixDesciptionEnum(description),
+          formation: formation);
+    });
+    for (var i = challenModel2Generat.length - 1; i >= 0; i--) {
+      var additionchallenge = _challengeList[index].totalChallenge;
+      _challengeList[index].totalChallenge =
+          (int.parse(additionchallenge) + 1).toString();
+      coutTotalAdd(index, cout, idListChallenge);
+      previsionTotalAdd(index, prix, idListChallenge);
+      restePaiementTotalAdd(index, cout);
+      activePrixBool(prix, index);
+      activeCoutBool(cout, index);
+      _challengeList[index].listeDeTache.add(Challengemodel2(
+          prix: challenModel2Generat[i].prix,
+          cout: challenModel2Generat[i].cout,
+          id: challenModel2Generat[i].id,
+          name: challenModel2Generat[i].name,
+          tache: challenModel2Generat[i].tache,
+          description: challenModel2Generat[i].description,
+          formation: challenModel2Generat[i].formation));
+    }
+    await _save();
+    _initChallengeList();
+    notifyListeners();
+  }
+
   void addChallenge1({
     @required double prix,
     @required double cout,
@@ -1799,7 +1847,7 @@ class Challengecontroller extends ChangeNotifier {
   }
 
   void remove({@required int index, @required bool validate, String id}) async {
-    await removeChallengelistId(index);
+    // await removeChallengelistId(index);
     _challengeList.removeAt(index);
     await _save(remove: true);
 
