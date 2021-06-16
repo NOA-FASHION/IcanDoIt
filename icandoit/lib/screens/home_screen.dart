@@ -69,18 +69,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     }
   }
 
-  // changeListChallenge(List<ChallengeModel> _challengesList) {
-  //   List<dynamic> changeList;
-
-  //   if (_challengesList != null) {
-  //     for (var i = _challengesList.length - 1; i >= 0; i--) {
-  //       changeList['display'].add(_challengesList[i].id);
-  //       // changeList.add(
-  //       //     {'display': _challengesList[i].id, 'value': _challengesList[i].id});
-  //     }
-  //   }
-  // }
-
   List<String> idCHallengeFirat(String idChalleneString) {
     List<String> idchal = [];
     if (idChalleneString.isNotEmpty) {
@@ -688,6 +676,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   String totalChallenge = "0";
   FancyDrawerController _controller;
   void initState() {
+    // Challengecontroller variable1 =
+    //     Provider.of<Challengecontroller>(context, listen: false);
+    // variable1.initChallengeList();
     super.initState();
     quotidient = false;
     hebdoBool = false;
@@ -729,7 +720,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                         idChallenge1: '',
                         namechallenge: '',
                       ))));
-              setState(() {});
+              // setState(() {});
               // setState(() {});
             },
             child: Row(
@@ -757,7 +748,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => ChangeNotifierProvider.value(
                       value: variable, child: ExampleApp())));
-              setState(() {});
+              // setState(() {});
             },
             child: Row(
               children: [
@@ -1057,7 +1048,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                           ),
                           Offstage(
                             offstage: visibility,
-                            child: TextFormField( textCapitalization: TextCapitalization.sentences,
+                            child: TextFormField(
+                              textCapitalization: TextCapitalization.sentences,
                               onSaved: (value) {
                                 nameChallenge = value;
                               },

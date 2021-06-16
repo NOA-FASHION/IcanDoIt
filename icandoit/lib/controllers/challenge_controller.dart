@@ -105,6 +105,10 @@ class Challengecontroller extends ChangeNotifier {
     notifyListeners();
   }
 
+  void initChallengeList() {
+    _initChallengeList();
+  }
+
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
   AndroidInitializationSettings androidInitializationSettings;
@@ -1717,9 +1721,21 @@ class Challengecontroller extends ChangeNotifier {
 
   void desactivAffichagePrinc(int index, bool boolId) async {
     _challengeList[index].boolId = boolId;
+    if (_challengeList[index].animatedpadding) {
+      desactivAffichagePrincAnimattingPaddind(index, boolId);
+    }
+
     await _save();
     _initChallengeList();
     notifyListeners();
+  }
+
+  void desactivAffichagePrincAnimattingPaddind(int index, bool boolId) {
+    for (var i = _challengeListSave.length - 1; i >= 0; i--) {
+      if (_challengeListSave[i].id == _challengeList[index].id) {
+        _challengeListSave[index].boolId = boolId;
+      }
+    }
   }
 
   void raccourciChallenge(
@@ -1846,7 +1862,11 @@ class Challengecontroller extends ChangeNotifier {
     }
   }
 
-  void remove({@required int index, @required bool validate, String id}) async {
+  void remove(
+      {@required int index,
+      @required bool validate,
+      String id,
+      String idChallenge}) async {
     // await removeChallengelistId(index);
     _challengeList.removeAt(index);
     await _save(remove: true);
@@ -1861,6 +1881,7 @@ class Challengecontroller extends ChangeNotifier {
         }
       }
     }
+    // if (idChallenge.isNotEmpty) {}
 
     _initChallengeList();
     notifyListeners();

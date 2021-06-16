@@ -401,11 +401,11 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
       if (widget.idChallenge.isNotEmpty) {
         print(boolId);
         isSwitched = boolId;
-        int index = variable.returnIndexForName(id);
         switchButtom = Switch(
           value: isSwitched,
           onChanged: (value) {
             setState(() {
+              int index = variable.returnIndexForName(id);
               isSwitched = value;
               print(isSwitched);
               variable.desactivAffichagePrinc(index, isSwitched);
@@ -452,6 +452,7 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                     variable.returnIndexForName(_challengesList[index].id);
                 variable.addnbChallengeVallide();
                 variable.remove(
+                    idChallenge: widget.idChallenge,
                     index: index1,
                     validate: true,
                     id: _challengesList[index].id);
@@ -472,6 +473,7 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                 int index1 =
                     variable.returnIndexForName(_challengesList[index].id);
                 variable.remove(
+                    idChallenge: widget.idChallenge,
                     index: index1,
                     validate: false,
                     id: _challengesList[index].id);
