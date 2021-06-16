@@ -49,9 +49,11 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
         preferredSize: Size.fromHeight(100.0),
         child: SafeArea(
           child: AppBar(
+            title: Text('Vidéo'),
             centerTitle: true,
             flexibleSpace: Container(
-              padding: EdgeInsets.only(right: 30.0),
+              height: 130,
+              padding: EdgeInsets.only(top: 40.0, right: 30.0),
               alignment: Alignment.centerRight,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,

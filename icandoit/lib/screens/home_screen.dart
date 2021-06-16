@@ -252,6 +252,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 // underline: SizedBox(),
                 onChanged: (String newValue) {
                   setState(() {
+                    idNotif = [];
                     date = "";
                     totalDays = [];
                     dateQuotidien = newValue;
@@ -355,6 +356,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             onSaved: (value) {
               if (value == null) return;
               setState(() {
+                idNotif = [];
                 date = "";
                 totalDays = [];
                 _myActivities = value;
@@ -497,6 +499,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                     // underline: SizedBox(),
                     onChanged: (String newValue) {
                       setState(() {
+                        idNotif = [];
                         totalDays = [];
                         date = newValue;
                         notificationBool = false;
@@ -657,6 +660,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               return null;
             },
             onSaved: (val) {
+              idNotif = [];
               date = "";
               totalDays = [];
               print(val);
@@ -1053,7 +1057,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                           ),
                           Offstage(
                             offstage: visibility,
-                            child: TextFormField(
+                            child: TextFormField( textCapitalization: TextCapitalization.sentences,
                               onSaved: (value) {
                                 nameChallenge = value;
                               },
@@ -1088,6 +1092,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                           Offstage(
                             offstage: visibility,
                             child: TextFormField(
+                              textCapitalization: TextCapitalization.sentences,
                               onSaved: (value) {
                                 targetChallenge = value;
                               },

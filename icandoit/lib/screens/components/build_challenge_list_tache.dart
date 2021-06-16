@@ -45,6 +45,40 @@ class _ChallengesListBuilderTachesState
   bool formation = false;
   String chapitre;
 
+  Color colorsDescription(String description) {
+    Color colors = Colors.black;
+    if (description == "evenement") {
+      colors = Colors.blue;
+    } else if (description == "achat") {
+      colors = Colors.red;
+    } else if (description == "tache") {
+      colors = Colors.orange;
+    } else if (description == "mission") {
+      colors = Colors.amber;
+    } else if (description == "youtube") {
+      colors = Colors.cyan;
+    } else if (description == "video") {
+      colors = Colors.lime;
+    } else if (description == "commentaire") {
+      colors = Colors.blueGrey;
+    } else if (description == "image") {
+      colors = Colors.pink;
+    } else if (description == "url") {
+      colors = Colors.teal;
+    } else if (description == "paiement") {
+      colors = Colors.yellow;
+    } else if (description == "echeancier") {
+      colors = Colors.grey;
+    } else if (description == "projet") {
+      colors = Colors.indigo;
+    } else if (description == "adresse") {
+      colors = Colors.lime;
+    } else if (description == "formation") {
+      colors = Colors.green;
+    }
+    return colors;
+  }
+
   Widget maxLetter(String word, String comment) {
     Widget longLetter;
     String word2;
@@ -379,7 +413,7 @@ class _ChallengesListBuilderTachesState
                       if (!await File(item.name).exists()) {
                         final pickedFile =
                             await picker.getVideo(source: ImageSource.gallery);
-
+                        item.name = pickedFile.path;
                         setState(() {
                           if (pickedFile != null) {
                             item.name = pickedFile.path;
@@ -401,7 +435,7 @@ class _ChallengesListBuilderTachesState
                       if (!await File(item.name).exists()) {
                         final pickedFile =
                             await picker.getImage(source: ImageSource.gallery);
-
+                        item.name = pickedFile.path;
                         setState(() {
                           if (pickedFile != null) {
                             item.name = pickedFile.path;
@@ -552,7 +586,10 @@ class _ChallengesListBuilderTachesState
                                             .replaceAll(unityPattern, ""),
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
-                                            color: Colors.blue),
+                                            color: colorsDescription(item
+                                                .description
+                                                .toString()
+                                                .replaceAll(unityPattern, ""))),
                                       ),
                                       SizedBox(
                                         width: 2.0,

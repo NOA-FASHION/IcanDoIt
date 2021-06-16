@@ -1,21 +1,3 @@
-// import 'package:flutter/material.dart';
-// import 'package:webview_flutter/webview_flutter.dart';
-// import 'dart:async';
-
-// class PlayYoutubeScreen extends StatefulWidget {
-//   final String nameChallenge;
-//   const PlayYoutubeScreen({Key key, this.nameChallenge}) : super(key: key);
-
-//   @override
-//   _PlayYoutubeScreenState createState() => _PlayYoutubeScreenState();
-// }
-
-// class _PlayYoutubeScreenState extends State<PlayYoutubeScreen> {
-//   @override
-//   Widget build(BuildContext context) {
-//     final Completer<WebViewController> _controller =
-//         Completer<WebViewController>();
-
 import 'package:flutter/material.dart';
 import 'package:flutter_youtube_view/flutter_youtube_view.dart';
 import 'package:youtube_parser/youtube_parser.dart';
@@ -75,7 +57,34 @@ class _PlayYoutubeScreenState extends State<PlayYoutubeScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: const Text('Default UI')),
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(100.0),
+          child: SafeArea(
+            child: AppBar(
+              title: Text("Youtube"),
+              centerTitle: true,
+              flexibleSpace: Container(
+                height: 130,
+                padding: EdgeInsets.only(top: 40.0, right: 30.0),
+                alignment: Alignment.centerRight,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Image.asset(
+                      'assets/logo.png',
+                      width: 60,
+                    ),
+                  ],
+                ),
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
+                        colors: <Color>[Colors.purple, Colors.blue])),
+              ),
+            ),
+          ),
+        ),
         body: Stack(
           children: <Widget>[
             Container(
@@ -87,20 +96,40 @@ class _PlayYoutubeScreenState extends State<PlayYoutubeScreen>
                 showUI: true,
                 startSeconds: 5 * 60.0,
                 showYoutube: false,
-                showFullScreen: false,
+                showFullScreen: true,
               ),
             )),
             Center(
                 child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text(
-                  'Current state: $_playerState',
-                  style: TextStyle(color: Colors.blue),
+                Container(
+                  margin: EdgeInsets.only(top: 40),
+                  child: IconButton(
+                    alignment: Alignment.topRight,
+                    icon: Icon(
+                      Icons.repeat,
+                      color: Colors.white,
+                      size: 60,
+                    ),
+                    onPressed: () {
+                      _loadOrCueVideo();
+                    },
+                  ),
                 ),
-                RaisedButton(
-                  onPressed: _loadOrCueVideo,
-                  child: Text('Click reload video'),
+                Container(
+                  margin: EdgeInsets.only(bottom: 40),
+                  child: Text(
+                    _playerState,
+                    style: TextStyle(color: Colors.blue),
+                  ),
                 ),
+
+                // RaisedButton(
+                //   onPressed: _loadOrCueVideo,
+                //   child: Text('Click reload video'),
+                // ),
               ],
             ))
           ],

@@ -277,6 +277,7 @@ class _HomeTachesState extends State<HomeTaches> {
       documentJoint = Column(
         children: [
           TextFormField(
+            textCapitalization: TextCapitalization.sentences,
             onSaved: (value) {
               nomAdresse = value;
             },
@@ -302,6 +303,7 @@ class _HomeTachesState extends State<HomeTaches> {
                     borderRadius: BorderRadius.circular(15.0))),
           ),
           TextFormField(
+            textCapitalization: TextCapitalization.sentences,
             onSaved: (value) {
               adresse = value;
             },
@@ -327,6 +329,7 @@ class _HomeTachesState extends State<HomeTaches> {
                     borderRadius: BorderRadius.circular(15.0))),
           ),
           TextFormField(
+            textCapitalization: TextCapitalization.sentences,
             onSaved: (value) {
               villeAdresse = value;
             },
@@ -352,6 +355,7 @@ class _HomeTachesState extends State<HomeTaches> {
                     borderRadius: BorderRadius.circular(15.0))),
           ),
           TextFormField(
+            textCapitalization: TextCapitalization.sentences,
             onSaved: (value) {
               paysAdresse = value;
               dataJoin = nomAdresse +
@@ -413,6 +417,7 @@ class _HomeTachesState extends State<HomeTaches> {
         width: 200.0,
         height: 300.0,
         child: TextFormField(
+          textCapitalization: TextCapitalization.sentences,
           maxLines: 30,
           onSaved: (value) {
             dataJoin = value;
@@ -1067,6 +1072,7 @@ class _HomeTachesState extends State<HomeTaches> {
                             height: 15.0,
                           ),
                           TextFormField(
+                            textCapitalization: TextCapitalization.sentences,
                             onSaved: (value) {
                               targetChallenge = value;
                             },
@@ -1104,7 +1110,8 @@ class _HomeTachesState extends State<HomeTaches> {
                                     formKeyTache.currentState.save();
                                     Provider.of<Challengecontroller>(context,
                                             listen: false)
-                                        .generateList(widget.id,
+                                        .generateList(
+                                      widget.id,
                                       widget.indexChallenge,
                                       int.parse(nombreEchenace),
                                       double.parse(coutPaiment),
