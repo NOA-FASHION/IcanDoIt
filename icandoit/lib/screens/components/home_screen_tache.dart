@@ -14,8 +14,8 @@ import 'package:nanoid/nanoid.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 
-import '../../main.dart';
-import '../home_screen.dart';
+// import '../../main.dart';
+// import '../home_screen.dart';
 
 class HomeTaches extends StatefulWidget {
   final String id;
@@ -36,6 +36,7 @@ class _HomeTachesState extends State<HomeTaches> {
     duree: 'Duree',
     theoriePratique: 'Theorie-pratique',
   );
+  String idChallenge1;
   String nombreEchenace;
   String nomAdresse;
   String villeAdresse;
@@ -138,11 +139,35 @@ class _HomeTachesState extends State<HomeTaches> {
     return numericRegex.hasMatch(string);
   }
 
+  bool idChallengeBool(List<ChallengeModel> _challengeList) {
+    bool idCallenge = false;
+    for (var i = _challengeList.length - 1; i >= 0; i--) {
+      if (_challengeList[i].id == widget.id) {
+        idCallenge = _challengeList[i].prixTotalBool;
+      }
+    }
+    print(idCallenge);
+    return idCallenge;
+  }
+
+  bool idChallengePaimentBool(List<ChallengeModel> _challengeList) {
+    bool idCallenge = false;
+    for (var i = _challengeList.length - 1; i >= 0; i--) {
+      if (_challengeList[i].id == widget.id) {
+        idCallenge = _challengeList[i].coutTotalBool;
+      }
+    }
+    print(idCallenge);
+    return idCallenge;
+  }
+
   void initState() {
+    // Challengecontroller variable = Provider.of<Challengecontroller>(context);
+    // idChallenge1 = variable.getChallenges()[widget.indexChallenge].id;
     super.initState();
     coutPaiment = "0";
     prixProduit = "0";
-    courBool = false;
+    // courBool = false;
     paimentBool = false;
   }
 
@@ -174,8 +199,6 @@ class _HomeTachesState extends State<HomeTaches> {
       width: 1.0,
     );
     if (resultat == "video") {
-      // _visibility1 = true;
-      // wait = "assets/wait.json";
       documentJoint = Column(
         children: [
           Offstage(
@@ -192,7 +215,6 @@ class _HomeTachesState extends State<HomeTaches> {
               InkWell(
                   onTap: () async {
                     getVideoGallery();
-                    // _playVideo(_video);
                   },
                   child: Container(
                       width: 120.0,
@@ -204,7 +226,6 @@ class _HomeTachesState extends State<HomeTaches> {
               InkWell(
                   onTap: () async {
                     getVideoCamera();
-                    // _playVideo(_video);
                   },
                   child: Container(
                       width: 120.0,
@@ -215,8 +236,6 @@ class _HomeTachesState extends State<HomeTaches> {
         ],
       );
     } else if (resultat == "image") {
-      // _visibility1 = true;
-      // wait = "assets/wait.json";
       documentJoint = Column(
         children: [
           Offstage(
@@ -595,15 +614,16 @@ class _HomeTachesState extends State<HomeTaches> {
     return documentJoint;
   }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   @override
   @override
   Widget build(BuildContext context) {
     Challengecontroller variable = Provider.of<Challengecontroller>(context);
     List<ChallengeModel> _challengesListget = variable.getChallenges();
 
-    if (_challengesListget[widget.indexChallenge].coutTotal > 0) {
-      courBool = true;
-    }
+    // if (_challengesListget[widget.indexChallenge].coutTotal > 0) {
+    //   courBool = true;
+    // }
     return Scaffold(
       key: scaffoldkeyTache,
       appBar: PreferredSize(
@@ -657,7 +677,22 @@ class _HomeTachesState extends State<HomeTaches> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  _challengesListget[widget.indexChallenge].prixTotalBool
+                  // IconButton(
+                  //   alignment: Alignment.topRight,
+                  //   icon: Icon(
+                  //     Icons.money,
+                  //     color: Colors.black,
+                  //   ),
+                  //   onPressed: () {
+                  //     print(_challengesListget[widget.indexChallenge].name);
+                  //     print(
+                  //         _challengesListget[widget.indexChallenge].prixTotal);
+                  //     print(_challengesListget[widget.indexChallenge]
+                  //         .prixTotalBool);
+                  //   },
+                  // ),
+                  idChallengeBool(_challengesListget)
+                      // _challengesListget[widget.indexChallenge].prixTotalBool
                       ? Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
@@ -733,7 +768,22 @@ class _HomeTachesState extends State<HomeTaches> {
                     'assets/logo.png',
                     width: 55,
                   ),
-                  _challengesListget[widget.indexChallenge].coutTotalBool
+                  // IconButton(
+                  //   alignment: Alignment.topRight,
+                  //   icon: Icon(
+                  //     Icons.paid_outlined,
+                  //     color: Colors.black,
+                  //   ),
+                  //   onPressed: () {
+                  //     print(_challengesListget[widget.indexChallenge].name);
+                  //     print(
+                  //         _challengesListget[widget.indexChallenge].coutTotal);
+                  //     print(_challengesListget[widget.indexChallenge]
+                  //         .coutTotalBool);
+                  //   },
+                  // ),
+                  // _challengesListget[widget.indexChallenge].coutTotalBool
+                  idChallengePaimentBool(_challengesListget)
                       ? Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[

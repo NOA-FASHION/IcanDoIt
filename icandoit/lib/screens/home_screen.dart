@@ -1,5 +1,3 @@
-// import 'package:colour/colour.dart';
-
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:fancy_drawer/fancy_drawer.dart';
 import 'package:flutter/material.dart';
@@ -11,8 +9,6 @@ import 'package:nanoid/nanoid.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 import 'package:lottie/lottie.dart';
-// import 'package:flutter_document_picker/flutter_document_picker.dart';
-// import 'package:slide_drawer/slide_drawer.dart';
 
 import 'components/challenge_list_save.dart';
 import 'components/resultat_challenge.dart';
@@ -42,7 +38,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   bool hebdoBool;
   List<String> idChallenge = [];
   bool boolid = true;
-  // String idChallenge;
   List<String> idNotif = [];
   String dateQuotidien;
   String notification = "";
@@ -157,7 +152,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 OutlineInputBorder(borderRadius: BorderRadius.circular(15.0)),
             title: Text("Choix"),
             autovalidate: false,
-            // titleText: 'My workouts',
             validator: (value) {
               if (value.isEmpty) {
                 return "Merci d'entrer un nom pour le challenge";
@@ -175,8 +169,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             valueField: 'value',
             okButtonLabel: 'OK',
             cancelButtonLabel: 'CANCEL',
-            // required: true,
-            // hintText: 'Please choose one or more',
             initialValue: _changeLiatChall,
             onSaved: (value) {
               if (value == null) return;
@@ -185,22 +177,14 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 for (var i = _changeLiatChall.length - 1; i >= 0; i--) {
                   totalChangeListChal.add(_changeLiatChall[i].toString());
                 }
-
-                // animatedpadding = true;
               });
             },
           ),
-          // Container(
-          //   padding: EdgeInsets.all(16),
-          //   child: Text(_myChangeListChall),
-          // ),
         ],
       );
     } else if (resultat == "raccourci") {
       retour();
     } else if (resultat == "quotidien") {
-      // _visibility1 = true;
-      // wait = "assets/wait.json";
       visibility = false;
       documentJoint = Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -239,7 +223,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 value: dateQuotidien,
                 icon: Icon(Icons.keyboard_arrow_down),
                 iconSize: 30,
-                // underline: SizedBox(),
                 onChanged: (String newValue) {
                   setState(() {
                     idNotif = [];
@@ -289,8 +272,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         ],
       );
     } else if (resultat == "hebdomadaire") {
-      // _visibility1 = true;
-      // wait = "assets/wait.json";
       visibility = false;
       documentJoint = Column(
         children: [
@@ -299,7 +280,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 OutlineInputBorder(borderRadius: BorderRadius.circular(15.0)),
             title: Text("Choix"),
             autovalidate: false,
-            // titleText: 'My workouts',
             validator: (value) {
               if (value.isEmpty) {
                 return "Merci d'entrer un nom pour le challenge";
@@ -340,8 +320,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             valueField: 'value',
             okButtonLabel: 'OK',
             cancelButtonLabel: 'CANCEL',
-            // required: true,
-            // hintText: 'Please choose one or more',
             initialValue: _myActivities,
             onSaved: (value) {
               if (value == null) return;
@@ -402,7 +380,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                     value: heure,
                     icon: Icon(Icons.keyboard_arrow_down),
                     iconSize: 30,
-                    // underline: SizedBox(),
                     onChanged: (String newValue) {
                       setState(() {
                         heure = newValue;
@@ -486,7 +463,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                     value: date1,
                     icon: Icon(Icons.keyboard_arrow_down),
                     iconSize: 30,
-                    // underline: SizedBox(),
                     onChanged: (String newValue) {
                       setState(() {
                         idNotif = [];
@@ -578,7 +554,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                     value: dateQuotidien,
                     icon: Icon(Icons.keyboard_arrow_down),
                     iconSize: 30,
-                    // underline: SizedBox(),
                     onChanged: (String newValue) {
                       setState(() {
                         dateQuotidien = newValue;
@@ -637,7 +612,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             dateLabelText: 'Date',
             timeLabelText: "Hour",
             selectableDayPredicate: (date) {
-              // Disable weekend days to select from the calendar
               if (date.weekday == 6 || date.weekday == 7) {
                 return false;
               }
@@ -678,10 +652,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   String totalChallenge = "0";
   FancyDrawerController _controller;
   void initState() {
-    // Challengecontroller variable1 =
-    //     Provider.of<Challengecontroller>(context, listen: false);
-    // variable1.initChallengeList();
     super.initState();
+
     quotidient = false;
     hebdoBool = false;
     dateBool = false;
@@ -712,8 +684,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         drawerItems: <Widget>[
           InkWell(
             onTap: () {
-              // Navigator.of(context).pop();
-
               Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => ChangeNotifierProvider.value(
                       value: variable,
@@ -723,8 +693,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                         namechallenge: '',
                         returnRaccourci: false,
                       ))));
-              // setState(() {});
-              // setState(() {});
             },
             child: Row(
               children: [
@@ -746,12 +714,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           SizedBox(height: 5.0),
           InkWell(
             onTap: () {
-              // Navigator.of(context).pop();
-
               Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => ChangeNotifierProvider.value(
                       value: variable, child: ExampleApp())));
-              // setState(() {});
             },
             child: Row(
               children: [
@@ -773,12 +738,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           SizedBox(height: 5.0),
           InkWell(
             onTap: () {
-              // Navigator.of(context).pop();
-
               Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => ChangeNotifierProvider.value(
                       value: variable, child: ResultaChallenge())));
-              setState(() {});
             },
             child: Row(
               children: [
@@ -799,12 +761,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           ),
           SizedBox(height: 5.0),
           InkWell(
-            onTap: () {
-              // Navigator.of(context).push(MaterialPageRoute(
-              //     builder: (context) => ChangeNotifierProvider.value(
-              //         value: variable, child: ExampleApp())));
-              // setState(() {});
-            },
+            onTap: () {},
             child: Row(
               children: [
                 Icon(Icons.support),
@@ -824,12 +781,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           ),
           SizedBox(height: 5.0),
           InkWell(
-            onTap: () {
-              // Navigator.of(context).push(MaterialPageRoute(
-              //     builder: (context) => ChangeNotifierProvider.value(
-              //         value: variable, child: Home())));
-              // setState(() {});
-            },
+            onTap: () {},
             child: Row(
               children: [
                 Icon(Icons.policy),
@@ -848,117 +800,49 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             ),
           ),
         ],
-        child: WillPopScope(
-          onWillPop: () async {
-            Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => ChangeNotifierProvider.value(
-                    value: variable,
-                    child: Home(
-                      returnRaccourci: true,
-                      id: "",
-                      idChallenge1: '',
-                      namechallenge: '',
-                    ))));
-
-            return false;
-          },
-          child: Scaffold(
-            key: scaffoldkey,
-            appBar: PreferredSize(
-              preferredSize: Size.fromHeight(100.0),
-              child: SafeArea(
-                child: AppBar(
-                  title: Text(
-                      widget.idChallenge1.isEmpty ? "" : widget.namechallenge),
-                  actions: [
-                    Padding(
-                      padding: const EdgeInsets.only(right: 15, top: 10),
-                      child: SizedBox.fromSize(
-                        size: Size(50, 50), // button width and height
-                        child: ClipOval(
-                          child: Material(
-                            color: Colors.purple, // button color
-                            child: InkWell(
-                              // splash color
-                              splashColor: Colors.white,
-                              onTap: () {
-                                variable.uploadChallenge();
-                              }, // button pressed
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Icon(
-                                    Icons.upload_sharp,
-                                    size: 20,
-                                    color: Colors.white,
-                                  ), // icon
-                                  Text(
-                                    "Upload",
-                                    style: TextStyle(
-                                        fontSize: 10, color: Colors.white),
-                                  ), // text
-                                ],
-                              ),
+        child: Scaffold(
+          key: scaffoldkey,
+          appBar: PreferredSize(
+            preferredSize: Size.fromHeight(100.0),
+            child: SafeArea(
+              child: AppBar(
+                title: Text(
+                    widget.idChallenge1.isEmpty ? "" : widget.namechallenge),
+                actions: [
+                  Padding(
+                    padding: const EdgeInsets.only(right: 15, top: 10),
+                    child: SizedBox.fromSize(
+                      size: Size(50, 50), // button width and height
+                      child: ClipOval(
+                        child: Material(
+                          color: Colors.purple, // button color
+                          child: InkWell(
+                            // splash color
+                            splashColor: Colors.white,
+                            onTap: () {
+                              variable.uploadChallenge();
+                            }, // button pressed
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Icon(
+                                  Icons.upload_sharp,
+                                  size: 20,
+                                  color: Colors.white,
+                                ), // icon
+                                Text(
+                                  "Upload",
+                                  style: TextStyle(
+                                      fontSize: 10, color: Colors.white),
+                                ), // text
+                              ],
                             ),
                           ),
                         ),
                       ),
                     ),
-                    widget.idChallenge1.isNotEmpty
-                        ? IconButton(
-                            alignment: Alignment.topRight,
-                            icon: Icon(
-                              Icons.menu,
-                              color: Colors.black,
-                            ),
-                            onPressed: () {
-                              _controller.toggle();
-                            },
-                          )
-                        : IconButton(
-                            alignment: Alignment.topRight,
-                            icon: Icon(
-                              Icons.schedule,
-                              color: Colors.black,
-                            ),
-                            onPressed: () {
-                              variable.testSchedule();
-                            },
-                          ),
-                    IconButton(
-                      alignment: Alignment.topRight,
-                      icon: Icon(
-                        Icons.notifications,
-                        color: Colors.black,
-                      ),
-                      onPressed: () {
-                        variable.cancelAllNotifications();
-                        // variable.scheduledNotification(
-                        //     channelID: 'Channel ID',
-                        //     channelName: 'Channel Name',
-                        //     channelDesc: 'Channel Description',
-                        //     notificationId: 1,
-                        //     notificationTitle: 'Date Tracker Test',
-                        //     notificationBody: 'We are showing notification!',
-                        //     // change to any time you want
-                        //     notificationTime:
-                        //         DateTime.now().add(Duration(seconds: 1)));
-                      },
-                    ),
-                    const Divider(),
-                    IconButton(
-                      alignment: Alignment.topRight,
-                      icon: Icon(
-                        Icons.notifications_off,
-                        color: Colors.black,
-                      ),
-                      onPressed: () {
-                        variable.checkPendingNotificationRequests(context);
-                        // variable..cancelAllNotifications();
-                      },
-                    ),
-                  ],
-                  leading: widget.idChallenge1.isEmpty
+                  ),
+                  widget.idChallenge1.isNotEmpty
                       ? IconButton(
                           alignment: Alignment.topRight,
                           icon: Icon(
@@ -969,48 +853,89 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                             _controller.toggle();
                           },
                         )
-                      : null,
-                  centerTitle: true,
-                  flexibleSpace: Container(
-                    padding: EdgeInsets.only(top: 40.0, right: 30.0),
-                    alignment: Alignment.center,
-                    child: Image.asset(
-                      'assets/logo.png',
-                      width: 55,
-                      height: 130,
+                      : IconButton(
+                          alignment: Alignment.topRight,
+                          icon: Icon(
+                            Icons.schedule,
+                            color: Colors.black,
+                          ),
+                          onPressed: () {
+                            variable.testSchedule();
+                          },
+                        ),
+                  IconButton(
+                    alignment: Alignment.topRight,
+                    icon: Icon(
+                      Icons.notifications,
+                      color: Colors.black,
                     ),
-                    decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                            begin: Alignment.centerLeft,
-                            end: Alignment.centerRight,
-                            colors: <Color>[Colors.purple, Colors.blue])),
+                    onPressed: () {
+                      variable.cancelAllNotifications();
+                    },
                   ),
+                  const Divider(),
+                  IconButton(
+                    alignment: Alignment.topRight,
+                    icon: Icon(
+                      Icons.notifications_off,
+                      color: Colors.black,
+                    ),
+                    onPressed: () {
+                      variable.checkPendingNotificationRequests(context);
+                    },
+                  ),
+                ],
+                leading: widget.idChallenge1.isEmpty
+                    ? IconButton(
+                        alignment: Alignment.topRight,
+                        icon: Icon(
+                          Icons.menu,
+                          color: Colors.black,
+                        ),
+                        onPressed: () {
+                          _controller.toggle();
+                        },
+                      )
+                    : null,
+                centerTitle: true,
+                flexibleSpace: Container(
+                  padding: EdgeInsets.only(top: 40.0, right: 30.0),
+                  alignment: Alignment.center,
+                  child: Image.asset(
+                    'assets/logo.png',
+                    width: 55,
+                    height: 130,
+                  ),
+                  decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight,
+                          colors: <Color>[Colors.purple, Colors.blue])),
                 ),
               ),
             ),
-            body: Shimmer(
-              duration: Duration(seconds: 3),
-              interval: Duration(seconds: 5),
-              color: Colors.white,
-              enabled: true,
-              direction: ShimmerDirection.fromLTRB(),
-              child: Container(
-                decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                        begin: Alignment.centerLeft,
-                        end: Alignment.centerRight,
-                        colors: [Colors.purple, Colors.blue])),
-                child: ChallengesListBuilder(
-                  idChallenge: widget.idChallenge1,
-                  selectbool: false,
-                ),
-              ),
-            ),
-            // backgroundColor: Color(0xff414a4c),
-            floatingActionButtonLocation:
-                FloatingActionButtonLocation.centerFloat,
-            floatingActionButton: buildBottomSheet(),
           ),
+          body: Shimmer(
+            duration: Duration(seconds: 3),
+            interval: Duration(seconds: 5),
+            color: Colors.white,
+            enabled: true,
+            direction: ShimmerDirection.fromLTRB(),
+            child: Container(
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
+                      colors: [Colors.purple, Colors.blue])),
+              child: ChallengesListBuilder(
+                idChallenge: widget.idChallenge1,
+                selectbool: false,
+              ),
+            ),
+          ),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerFloat,
+          floatingActionButton: buildBottomSheet(),
         ),
       ),
     );
@@ -1238,16 +1163,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                               ),
                               DropdownMenuItem(
                                 value: "raccourci",
-                                // child: Row(
-                                //   children: [
-                                //     Icon(
-                                //       Icons.schedule,
-                                //       size: 30.0,
-                                //     ),
-                                //     SizedBox(width: 10),
-                                //     Text("notification"),
-                                //   ],
-                                // ),
                                 child: selectraccourci(),
                               )
                             ],

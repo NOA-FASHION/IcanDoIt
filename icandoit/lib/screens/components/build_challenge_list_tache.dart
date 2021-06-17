@@ -278,9 +278,6 @@ class _ChallengesListBuilderTachesState
     List<Challengemodel2> _challengesList =
         providerType.challengelist2(widget.id);
 
-    // List<Challengemodel2> _challengesList =
-    //     challengelist2(challengeListCharge, widget.nameChallenge);
-
     final Challengecontroller provider =
         Provider.of<Challengecontroller>(context);
     if (_challengesList.isEmpty) {
@@ -384,7 +381,6 @@ class _ChallengesListBuilderTachesState
             child: Container(
               decoration: BoxDecoration(
                 boxShadow: [
-                  //background color of box
                   BoxShadow(
                     color: Colors.black,
                     blurRadius: 45.0, // soften the shadow
@@ -536,9 +532,6 @@ class _ChallengesListBuilderTachesState
                                   width: 5.0,
                                 ),
                                 Text(item.index),
-                                // SizedBox(
-                                //   width: 5.0,
-                                // ),
                               ],
                             ),
                           ),

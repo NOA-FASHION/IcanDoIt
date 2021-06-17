@@ -23,7 +23,6 @@ class ChallengesListBuilder extends StatefulWidget {
 class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
   bool isSwitched = false;
   double percentage(int listeTache, int totalChallenge) {
-    // print(listeTache);
     double percent1;
     if (listeTache != 0 && listeTache == totalChallenge) {
       percent1 = 0.00;
@@ -107,10 +106,6 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           color: Colors.white,
-          // border: Border.all(
-          //   color: Colour('#C4AB4D'),
-          //   width: 2,
-          // ),
         ),
         child: Card(
           shape: RoundedRectangleBorder(
@@ -138,12 +133,7 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                           SizedBox(
                             width: 5.0,
                           ),
-
                           maxLetter(chalenge.description),
-
-                          // SizedBox(
-                          //   width: 1.0,
-                          // ),
                         ],
                       ),
                     ),
@@ -186,7 +176,6 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                     child: new CircularPercentIndicator(
                       radius: 60.0,
                       lineWidth: 5.0,
-                      // percent: 1.0,
                       percent: percentage(chalenge.listeDeTache.length,
                           int.parse(chalenge.totalChallenge)),
                       center: new Text((percentage(chalenge.listeDeTache.length,
@@ -222,10 +211,6 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
               ),
               borderRadius: BorderRadius.circular(20),
               color: Colors.white,
-              // border: Border.all(
-              //   color: Colour('#C4AB4D'),
-              //   width: 2,
-              // ),
             ),
             child: Card(
               shape: RoundedRectangleBorder(
@@ -254,9 +239,6 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                                 width: 5.0,
                               ),
                               maxLetter(chalenge.description),
-                              // SizedBox(
-                              //   width: 1.0,
-                              // ),
                             ],
                           ),
                         ),
@@ -299,7 +281,6 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                         child: new CircularPercentIndicator(
                           radius: 60.0,
                           lineWidth: 5.0,
-                          // percent: 1.0,
                           percent: percentage(chalenge.listeDeTache.length,
                               int.parse(chalenge.totalChallenge)),
                           center: new Text((percentage(
@@ -346,17 +327,9 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
           .where((c) => c.idChallenge.contains(widget.idChallenge))
           .toList();
     } else {
-      // _challengesList = variable.getChallenges();
-      // for (var i = _challengesList.length - 1; i >= 0; i--) {
-      //   print(_challengesList[i].boolId);
-
-      // }
-
       _challengesList =
           _challengesListget.where((c) => c.boolId == true).toList();
     }
-
-    // List<ChallengeModel> _challengesList = variable.getChallenges();
     _confirmRegister(String id) {
       int index = variable.returnIndexForName(id);
       var baseDialog = BaseAlertDialog(
@@ -418,8 +391,6 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
       return switchButtom;
     }
 
-    // final Challengecontroller provider =
-    //     Provider.of<Challengecontroller>(context);
     if (_challengesList.isEmpty) {
       return Container(
         alignment: Alignment.center,
@@ -537,7 +508,6 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
             child: Container(
               decoration: BoxDecoration(
                 boxShadow: [
-                  //background color of box
                   BoxShadow(
                     color: Colors.black,
                     blurRadius: 45.0, // soften the shadow
