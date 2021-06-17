@@ -1075,13 +1075,27 @@ class Challengecontroller extends ChangeNotifier {
     }
   }
 
-  void restePaiementTotalRemove(int index, double cout) async {
-    if (cout > 0) {
+  void restePaiementTotalRemove(
+      int index, double cout, String unityChallenge) async {
+    if (cout > 0 && unityChallenge != "echeancier") {
       _challengeList[index].restePaiement =
           _challengeList[index].restePaiement - cout;
       for (var i = _challengeListSave.length - 1; i >= 0; i--) {
         if (_challengeListSave[i].id == _challengeList[index].id) {
           _challengeListSave[i].restePaiement = _challengeList[index].coutTotal;
+
+          await _saveSauvegarde();
+          _initChallengeList();
+          return;
+        }
+      }
+    } else if (cout > 0 && unityChallenge == "echeancier") {
+      _challengeList[index].restePaiement =
+          _challengeList[index].restePaiement - cout;
+      for (var i = _challengeListSave.length - 1; i >= 0; i--) {
+        if (_challengeListSave[i].id == _challengeList[index].id) {
+          _challengeListSave[i].restePaiement =
+              _challengeList[index].restePaiement;
 
           await _saveSauvegarde();
           _initChallengeList();
@@ -1781,6 +1795,7 @@ class Challengecontroller extends ChangeNotifier {
 
   void remove2(
       {@required String id,
+      @required String unitChallenge,
       @required double cout,
       @required double prix,
       @required int indexSave,
@@ -1789,7 +1804,7 @@ class Challengecontroller extends ChangeNotifier {
       @required bool validate}) async {
     if (validate) {
       prixTotalAdd(indexSave, prix);
-      restePaiementTotalRemove(indexSave, cout);
+      restePaiementTotalRemove(indexSave, cout,unitChallenge);
     }
     if (!validate) {
       var additionchallenge = _challengeList[indexSave].totalChallenge;

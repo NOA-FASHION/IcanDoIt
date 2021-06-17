@@ -303,6 +303,9 @@ class _ChallengesListBuilderTachesState
                     content: "La tâche a bien été validé",
                     lotties: 'assets/challenge.json'));
                 provider.remove2(
+                    unitChallenge: item.description
+                        .toString()
+                        .replaceAll(unityPattern, ""),
                     cout: item.cout,
                     prix: item.prix,
                     id: item.id,
@@ -317,6 +320,9 @@ class _ChallengesListBuilderTachesState
                     content: "La mission a bien ete supprime",
                     lotties: 'assets/trash.json'));
                 provider.remove2(
+                    unitChallenge: item.description
+                        .toString()
+                        .replaceAll(unityPattern, ""),
                     cout: item.cout,
                     prix: item.prix,
                     id: item.id,
