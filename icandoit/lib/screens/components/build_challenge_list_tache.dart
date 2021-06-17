@@ -504,14 +504,14 @@ class _ChallengesListBuilderTachesState
                                 .replaceAll(unityPattern, "") ==
                             "mission") {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) =>
-                              ChangeNotifierProvider<Challengecontroller>(
-                                  create: (context) => Challengecontroller(),
-                                  child: Home(
-                                    id: widget.id,
-                                    idChallenge1: item.id,
-                                    namechallenge: item.tache,
-                                  ))));
+                          builder: (context) => ChangeNotifierProvider.value(
+                              value: provider,
+                              child: Home(
+                                returnRaccourci: false,
+                                id: widget.id,
+                                idChallenge1: item.id,
+                                namechallenge: item.tache,
+                              ))));
                     }
                   },
                   title: Container(

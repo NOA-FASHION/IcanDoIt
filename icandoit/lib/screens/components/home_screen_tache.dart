@@ -604,250 +604,238 @@ class _HomeTachesState extends State<HomeTaches> {
     if (_challengesListget[widget.indexChallenge].coutTotal > 0) {
       courBool = true;
     }
-    return WillPopScope(
-      onWillPop: () async {
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => IcanDoIt()));
-
-        return false;
-      },
-      child: Scaffold(
-        key: scaffoldkeyTache,
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(100.0),
-          child: SafeArea(
-            child: AppBar(
-              title: Text(something),
-              actions: [
-                Padding(
-                  padding: const EdgeInsets.only(right: 15, left: 15, top: 10),
-                  child: SizedBox.fromSize(
-                    size: Size(50, 50), // button width and height
-                    child: ClipOval(
-                      child: Material(
-                        color: Colors.purple, // button color
-                        child: InkWell(
-                          // splash color
-                          splashColor: Colors.white,
-                          onTap: () {
-                            Provider.of<Challengecontroller>(context,
-                                    listen: false)
-                                .writeContent(id: widget.id);
-                          }, // button pressed
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Icon(
-                                Icons.share_rounded,
-                                size: 20,
-                                color: Colors.white,
-                              ), // icon
-                              Text(
-                                "Share",
-                                style: TextStyle(
-                                    fontSize: 10, color: Colors.white),
-                              ), // text
-                            ],
-                          ),
+    return Scaffold(
+      key: scaffoldkeyTache,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(100.0),
+        child: SafeArea(
+          child: AppBar(
+            title: Text(something),
+            actions: [
+              Padding(
+                padding: const EdgeInsets.only(right: 15, left: 15, top: 10),
+                child: SizedBox.fromSize(
+                  size: Size(50, 50), // button width and height
+                  child: ClipOval(
+                    child: Material(
+                      color: Colors.purple, // button color
+                      child: InkWell(
+                        // splash color
+                        splashColor: Colors.white,
+                        onTap: () {
+                          Provider.of<Challengecontroller>(context,
+                                  listen: false)
+                              .writeContent(id: widget.id);
+                        }, // button pressed
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Icon(
+                              Icons.share_rounded,
+                              size: 20,
+                              color: Colors.white,
+                            ), // icon
+                            Text(
+                              "Share",
+                              style:
+                                  TextStyle(fontSize: 10, color: Colors.white),
+                            ), // text
+                          ],
                         ),
                       ),
                     ),
                   ),
                 ),
-              ],
-              backgroundColor: Colors.blue,
-              centerTitle: true,
-              flexibleSpace: Container(
-                padding: EdgeInsets.only(top: 40.0, right: 30.0),
-                alignment: Alignment.center,
-                height: 130,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    _challengesListget[widget.indexChallenge].prixTotalBool
-                        ? Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Card(
-                                color: Colors.transparent,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(5.0),
-                                ),
-                                elevation: 25.0,
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      decoration: BoxDecoration(
-                                          color: Colors.blue,
-                                          borderRadius:
-                                              BorderRadius.circular(5)),
-                                      padding: EdgeInsets.all(4),
-                                      margin: EdgeInsets.only(right: 7),
-                                      child: Column(
-                                        children: [
-                                          Text(
-                                            _challengesListget[
-                                                        widget.indexChallenge]
-                                                    .previsions
-                                                    .toStringAsFixed(2) +
-                                                "€",
-                                            style: TextStyle(
-                                                fontSize: 10,
-                                                color: Colors.black),
-                                          ),
-                                          Text(
-                                            "previsions",
-                                            style: TextStyle(
-                                                fontSize: 10,
-                                                color: Colors.black),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Container(
-                                      decoration: BoxDecoration(
-                                          color: Colors.blue,
-                                          borderRadius:
-                                              BorderRadius.circular(5)),
-                                      padding: EdgeInsets.all(4),
-                                      child: Column(
-                                        children: [
-                                          Text(
-                                            _challengesListget[
-                                                        widget.indexChallenge]
-                                                    .prixTotal
-                                                    .toStringAsFixed(2) +
-                                                "€",
-                                            style: TextStyle(
-                                                fontSize: 10,
-                                                color: Colors.black),
-                                          ),
-                                          Text(
-                                            "prix total",
-                                            style: TextStyle(
-                                                fontSize: 10,
-                                                color: Colors.black),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ), // icon
-                              // text
-                            ],
-                          )
-                        : SizedBox(width: 10),
-                    Image.asset(
-                      'assets/logo.png',
-                      width: 55,
-                    ),
-                    _challengesListget[widget.indexChallenge].coutTotalBool
-                        ? Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Card(
-                                color: Colors.transparent,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(5.0),
-                                ),
-                                elevation: 25.0,
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      decoration: BoxDecoration(
-                                          color: Colors.blue,
-                                          borderRadius:
-                                              BorderRadius.circular(5)),
-                                      padding: EdgeInsets.all(4),
-                                      margin: EdgeInsets.only(right: 7),
-                                      child: Column(
-                                        children: [
-                                          Text(
-                                            _challengesListget[indexChallenge]
-                                                    .coutTotal
-                                                    .toStringAsFixed(2) +
-                                                "€",
-                                            style: TextStyle(
-                                                fontSize: 10,
-                                                color: Colors.black),
-                                          ),
-                                          Text(
-                                            "Total paiment",
-                                            style: TextStyle(
-                                                fontSize: 10,
-                                                color: Colors.black),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Container(
-                                      decoration: BoxDecoration(
-                                          color: Colors.blue,
-                                          borderRadius:
-                                              BorderRadius.circular(5)),
-                                      padding: EdgeInsets.all(4),
-                                      child: Column(
-                                        children: [
-                                          Text(
-                                            _challengesListget[indexChallenge]
-                                                    .restePaiement
-                                                    .toStringAsFixed(2) +
-                                                "€",
-                                            style: TextStyle(
-                                                fontSize: 10,
-                                                color: Colors.black),
-                                          ),
-                                          Text(
-                                            "reste a payer",
-                                            style: TextStyle(
-                                                fontSize: 10,
-                                                color: Colors.black),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ), // icon
-                              // text
-                            ],
-                          )
-                        : SizedBox(width: 10),
-                  ],
-                ),
-                decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                        begin: Alignment.centerLeft,
-                        end: Alignment.centerRight,
-                        colors: <Color>[Colors.purple, Colors.blue])),
               ),
+            ],
+            backgroundColor: Colors.blue,
+            centerTitle: true,
+            flexibleSpace: Container(
+              padding: EdgeInsets.only(top: 40.0, right: 30.0),
+              alignment: Alignment.center,
+              height: 130,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  _challengesListget[widget.indexChallenge].prixTotalBool
+                      ? Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Card(
+                              color: Colors.transparent,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5.0),
+                              ),
+                              elevation: 25.0,
+                              child: Row(
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                        color: Colors.blue,
+                                        borderRadius: BorderRadius.circular(5)),
+                                    padding: EdgeInsets.all(4),
+                                    margin: EdgeInsets.only(right: 7),
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          _challengesListget[
+                                                      widget.indexChallenge]
+                                                  .previsions
+                                                  .toStringAsFixed(2) +
+                                              "€",
+                                          style: TextStyle(
+                                              fontSize: 10,
+                                              color: Colors.black),
+                                        ),
+                                        Text(
+                                          "previsions",
+                                          style: TextStyle(
+                                              fontSize: 10,
+                                              color: Colors.black),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Container(
+                                    decoration: BoxDecoration(
+                                        color: Colors.blue,
+                                        borderRadius: BorderRadius.circular(5)),
+                                    padding: EdgeInsets.all(4),
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          _challengesListget[
+                                                      widget.indexChallenge]
+                                                  .prixTotal
+                                                  .toStringAsFixed(2) +
+                                              "€",
+                                          style: TextStyle(
+                                              fontSize: 10,
+                                              color: Colors.black),
+                                        ),
+                                        Text(
+                                          "prix total",
+                                          style: TextStyle(
+                                              fontSize: 10,
+                                              color: Colors.black),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ), // icon
+                            // text
+                          ],
+                        )
+                      : SizedBox(width: 10),
+                  Image.asset(
+                    'assets/logo.png',
+                    width: 55,
+                  ),
+                  _challengesListget[widget.indexChallenge].coutTotalBool
+                      ? Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Card(
+                              color: Colors.transparent,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5.0),
+                              ),
+                              elevation: 25.0,
+                              child: Row(
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                        color: Colors.blue,
+                                        borderRadius: BorderRadius.circular(5)),
+                                    padding: EdgeInsets.all(4),
+                                    margin: EdgeInsets.only(right: 7),
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          _challengesListget[indexChallenge]
+                                                  .coutTotal
+                                                  .toStringAsFixed(2) +
+                                              "€",
+                                          style: TextStyle(
+                                              fontSize: 10,
+                                              color: Colors.black),
+                                        ),
+                                        Text(
+                                          "Total paiment",
+                                          style: TextStyle(
+                                              fontSize: 10,
+                                              color: Colors.black),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Container(
+                                    decoration: BoxDecoration(
+                                        color: Colors.blue,
+                                        borderRadius: BorderRadius.circular(5)),
+                                    padding: EdgeInsets.all(4),
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          _challengesListget[indexChallenge]
+                                                  .restePaiement
+                                                  .toStringAsFixed(2) +
+                                              "€",
+                                          style: TextStyle(
+                                              fontSize: 10,
+                                              color: Colors.black),
+                                        ),
+                                        Text(
+                                          "reste a payer",
+                                          style: TextStyle(
+                                              fontSize: 10,
+                                              color: Colors.black),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ), // icon
+                            // text
+                          ],
+                        )
+                      : SizedBox(width: 10),
+                ],
+              ),
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
+                      colors: <Color>[Colors.purple, Colors.blue])),
             ),
           ),
         ),
-        body: Shimmer(
-          duration: Duration(seconds: 3),
-          interval: Duration(seconds: 5),
-          color: Colors.white,
-          enabled: true,
-          direction: ShimmerDirection.fromLTRB(),
-          child: Container(
-            decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    begin: Alignment.centerLeft,
-                    end: Alignment.centerRight,
-                    colors: [Colors.purple, Colors.blue])),
-            child: ChallengesListBuilderTaches(
-              id: widget.id,
-              indexChallenge: indexChallenge,
-              nameChallenge: something,
-            ),
-          ),
-        ),
-        backgroundColor: Color(0xff414a4c),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: buildBottomSheet(),
       ),
+      body: Shimmer(
+        duration: Duration(seconds: 3),
+        interval: Duration(seconds: 5),
+        color: Colors.white,
+        enabled: true,
+        direction: ShimmerDirection.fromLTRB(),
+        child: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                  colors: [Colors.purple, Colors.blue])),
+          child: ChallengesListBuilderTaches(
+            id: widget.id,
+            indexChallenge: indexChallenge,
+            nameChallenge: something,
+          ),
+        ),
+      ),
+      backgroundColor: Color(0xff414a4c),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: buildBottomSheet(),
     );
   }
 

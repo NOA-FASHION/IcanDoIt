@@ -100,6 +100,7 @@ class _ResultaChallengeState extends State<ResultaChallenge>
                   builder: (context) => ChangeNotifierProvider.value(
                       value: variable2,
                       child: Home(
+                        returnRaccourci: false,
                         id: "",
                         idChallenge1: '',
                         namechallenge: '',

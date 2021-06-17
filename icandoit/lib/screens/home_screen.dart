@@ -21,8 +21,10 @@ class Home extends StatefulWidget {
   final String id;
   final String namechallenge;
   final String idChallenge1;
+  final bool returnRaccourci;
   Home(
-      {@required this.namechallenge,
+      {@required this.returnRaccourci,
+      @required this.namechallenge,
       @required this.id,
       @required this.idChallenge1});
   @override
@@ -719,6 +721,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                         id: "",
                         idChallenge1: '',
                         namechallenge: '',
+                        returnRaccourci: false,
                       ))));
               // setState(() {});
               // setState(() {});
@@ -845,49 +848,117 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             ),
           ),
         ],
-        child: Scaffold(
-          key: scaffoldkey,
-          appBar: PreferredSize(
-            preferredSize: Size.fromHeight(100.0),
-            child: SafeArea(
-              child: AppBar(
-                title: Text(
-                    widget.idChallenge1.isEmpty ? "" : widget.namechallenge),
-                actions: [
-                  Padding(
-                    padding: const EdgeInsets.only(right: 15, top: 10),
-                    child: SizedBox.fromSize(
-                      size: Size(50, 50), // button width and height
-                      child: ClipOval(
-                        child: Material(
-                          color: Colors.purple, // button color
-                          child: InkWell(
-                            // splash color
-                            splashColor: Colors.white,
-                            onTap: () {
-                              variable.uploadChallenge();
-                            }, // button pressed
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Icon(
-                                  Icons.upload_sharp,
-                                  size: 20,
-                                  color: Colors.white,
-                                ), // icon
-                                Text(
-                                  "Upload",
-                                  style: TextStyle(
-                                      fontSize: 10, color: Colors.white),
-                                ), // text
-                              ],
+        child: WillPopScope(
+          onWillPop: () async {
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => ChangeNotifierProvider.value(
+                    value: variable,
+                    child: Home(
+                      returnRaccourci: true,
+                      id: "",
+                      idChallenge1: '',
+                      namechallenge: '',
+                    ))));
+
+            return false;
+          },
+          child: Scaffold(
+            key: scaffoldkey,
+            appBar: PreferredSize(
+              preferredSize: Size.fromHeight(100.0),
+              child: SafeArea(
+                child: AppBar(
+                  title: Text(
+                      widget.idChallenge1.isEmpty ? "" : widget.namechallenge),
+                  actions: [
+                    Padding(
+                      padding: const EdgeInsets.only(right: 15, top: 10),
+                      child: SizedBox.fromSize(
+                        size: Size(50, 50), // button width and height
+                        child: ClipOval(
+                          child: Material(
+                            color: Colors.purple, // button color
+                            child: InkWell(
+                              // splash color
+                              splashColor: Colors.white,
+                              onTap: () {
+                                variable.uploadChallenge();
+                              }, // button pressed
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Icon(
+                                    Icons.upload_sharp,
+                                    size: 20,
+                                    color: Colors.white,
+                                  ), // icon
+                                  Text(
+                                    "Upload",
+                                    style: TextStyle(
+                                        fontSize: 10, color: Colors.white),
+                                  ), // text
+                                ],
+                              ),
                             ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                  widget.idChallenge1.isNotEmpty
+                    widget.idChallenge1.isNotEmpty
+                        ? IconButton(
+                            alignment: Alignment.topRight,
+                            icon: Icon(
+                              Icons.menu,
+                              color: Colors.black,
+                            ),
+                            onPressed: () {
+                              _controller.toggle();
+                            },
+                          )
+                        : IconButton(
+                            alignment: Alignment.topRight,
+                            icon: Icon(
+                              Icons.schedule,
+                              color: Colors.black,
+                            ),
+                            onPressed: () {
+                              variable.testSchedule();
+                            },
+                          ),
+                    IconButton(
+                      alignment: Alignment.topRight,
+                      icon: Icon(
+                        Icons.notifications,
+                        color: Colors.black,
+                      ),
+                      onPressed: () {
+                        variable.cancelAllNotifications();
+                        // variable.scheduledNotification(
+                        //     channelID: 'Channel ID',
+                        //     channelName: 'Channel Name',
+                        //     channelDesc: 'Channel Description',
+                        //     notificationId: 1,
+                        //     notificationTitle: 'Date Tracker Test',
+                        //     notificationBody: 'We are showing notification!',
+                        //     // change to any time you want
+                        //     notificationTime:
+                        //         DateTime.now().add(Duration(seconds: 1)));
+                      },
+                    ),
+                    const Divider(),
+                    IconButton(
+                      alignment: Alignment.topRight,
+                      icon: Icon(
+                        Icons.notifications_off,
+                        color: Colors.black,
+                      ),
+                      onPressed: () {
+                        variable.checkPendingNotificationRequests(context);
+                        // variable..cancelAllNotifications();
+                      },
+                    ),
+                  ],
+                  leading: widget.idChallenge1.isEmpty
                       ? IconButton(
                           alignment: Alignment.topRight,
                           icon: Icon(
@@ -898,101 +969,48 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                             _controller.toggle();
                           },
                         )
-                      : IconButton(
-                          alignment: Alignment.topRight,
-                          icon: Icon(
-                            Icons.schedule,
-                            color: Colors.black,
-                          ),
-                          onPressed: () {
-                            variable.testSchedule();
-                          },
-                        ),
-                  IconButton(
-                    alignment: Alignment.topRight,
-                    icon: Icon(
-                      Icons.notifications,
-                      color: Colors.black,
+                      : null,
+                  centerTitle: true,
+                  flexibleSpace: Container(
+                    padding: EdgeInsets.only(top: 40.0, right: 30.0),
+                    alignment: Alignment.center,
+                    child: Image.asset(
+                      'assets/logo.png',
+                      width: 55,
+                      height: 130,
                     ),
-                    onPressed: () {
-                      variable.cancelAllNotifications();
-                      // variable.scheduledNotification(
-                      //     channelID: 'Channel ID',
-                      //     channelName: 'Channel Name',
-                      //     channelDesc: 'Channel Description',
-                      //     notificationId: 1,
-                      //     notificationTitle: 'Date Tracker Test',
-                      //     notificationBody: 'We are showing notification!',
-                      //     // change to any time you want
-                      //     notificationTime:
-                      //         DateTime.now().add(Duration(seconds: 1)));
-                    },
+                    decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                            begin: Alignment.centerLeft,
+                            end: Alignment.centerRight,
+                            colors: <Color>[Colors.purple, Colors.blue])),
                   ),
-                  const Divider(),
-                  IconButton(
-                    alignment: Alignment.topRight,
-                    icon: Icon(
-                      Icons.notifications_off,
-                      color: Colors.black,
-                    ),
-                    onPressed: () {
-                      variable.checkPendingNotificationRequests(context);
-                      // variable..cancelAllNotifications();
-                    },
-                  ),
-                ],
-                leading: widget.idChallenge1.isEmpty
-                    ? IconButton(
-                        alignment: Alignment.topRight,
-                        icon: Icon(
-                          Icons.menu,
-                          color: Colors.black,
-                        ),
-                        onPressed: () {
-                          _controller.toggle();
-                        },
-                      )
-                    : null,
-                centerTitle: true,
-                flexibleSpace: Container(
-                  padding: EdgeInsets.only(top: 40.0, right: 30.0),
-                  alignment: Alignment.center,
-                  child: Image.asset(
-                    'assets/logo.png',
-                    width: 55,
-                    height: 130,
-                  ),
-                  decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                          begin: Alignment.centerLeft,
-                          end: Alignment.centerRight,
-                          colors: <Color>[Colors.purple, Colors.blue])),
                 ),
               ),
             ),
-          ),
-          body: Shimmer(
-            duration: Duration(seconds: 3),
-            interval: Duration(seconds: 5),
-            color: Colors.white,
-            enabled: true,
-            direction: ShimmerDirection.fromLTRB(),
-            child: Container(
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      begin: Alignment.centerLeft,
-                      end: Alignment.centerRight,
-                      colors: [Colors.purple, Colors.blue])),
-              child: ChallengesListBuilder(
-                idChallenge: widget.idChallenge1,
-                selectbool: false,
+            body: Shimmer(
+              duration: Duration(seconds: 3),
+              interval: Duration(seconds: 5),
+              color: Colors.white,
+              enabled: true,
+              direction: ShimmerDirection.fromLTRB(),
+              child: Container(
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
+                        colors: [Colors.purple, Colors.blue])),
+                child: ChallengesListBuilder(
+                  idChallenge: widget.idChallenge1,
+                  selectbool: false,
+                ),
               ),
             ),
+            // backgroundColor: Color(0xff414a4c),
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerFloat,
+            floatingActionButton: buildBottomSheet(),
           ),
-          // backgroundColor: Color(0xff414a4c),
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerFloat,
-          floatingActionButton: buildBottomSheet(),
         ),
       ),
     );
