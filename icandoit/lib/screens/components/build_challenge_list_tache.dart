@@ -50,13 +50,13 @@ class _ChallengesListBuilderTachesState
     if (description == "evenement") {
       colors = Colors.blue;
     } else if (description == "achat") {
-      colors = Colors.red;
+      colors = Colors.cyan;
     } else if (description == "tache") {
       colors = Colors.orange;
     } else if (description == "mission") {
       colors = Colors.amber;
     } else if (description == "youtube") {
-      colors = Colors.cyan;
+      colors = Colors.red;
     } else if (description == "video") {
       colors = Colors.lime;
     } else if (description == "commentaire") {
