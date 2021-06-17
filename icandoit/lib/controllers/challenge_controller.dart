@@ -1348,6 +1348,7 @@ class Challengecontroller extends ChangeNotifier {
     );
 
     if (animatedpadding == true) {
+      await delay(200);
       addListChallengeSave(id);
     }
 
@@ -1603,10 +1604,14 @@ class Challengecontroller extends ChangeNotifier {
     notifyListeners();
   }
 
-  void desactivAffichagePrincAnimattingPaddind(int index, bool boolId) {
+  void desactivAffichagePrincAnimattingPaddind(int index, bool boolId) async {
     for (var i = _challengeListSave.length - 1; i >= 0; i--) {
       if (_challengeListSave[i].id == _challengeList[index].id) {
-        _challengeListSave[index].boolId = boolId;
+        _challengeListSave[i].boolId = boolId;
+        await _saveSauvegarde();
+        _initChallengeList();
+        notifyListeners();
+        return;
       }
     }
   }
@@ -1698,6 +1703,18 @@ class Challengecontroller extends ChangeNotifier {
   }
 
   void removeSave({@required int index}) async {
+    if (_challengeListSave[index].idNotif.isNotEmpty) {
+      for (var n = _challengeListSave[index].idNotif.length - 1; n >= 0; n--) {
+        cancelNotificationById(int.parse(_challengeListSave[index].idNotif[n]));
+      }
+      for (var i = _challengeList.length - 1; i >= 0; i--) {
+        if (_challengeList[i].id == _challengeListSave[index].id) {
+          _challengeList[i].idNotif = [];
+          _challengeList[i].animatedpadding = false;
+          await _save();
+        }
+      }
+    }
     _challengeListSave.removeAt(index);
     await _saveSauvegarde(remove: true);
     _initChallengeList();
@@ -1804,7 +1821,7 @@ class Challengecontroller extends ChangeNotifier {
       @required bool validate}) async {
     if (validate) {
       prixTotalAdd(indexSave, prix);
-      restePaiementTotalRemove(indexSave, cout,unitChallenge);
+      restePaiementTotalRemove(indexSave, cout, unitChallenge);
     }
     if (!validate) {
       var additionchallenge = _challengeList[indexSave].totalChallenge;

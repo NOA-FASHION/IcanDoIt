@@ -916,8 +916,8 @@ class _HomeTachesState extends State<HomeTaches> {
                           DropdownButtonFormField(
                             decoration: InputDecoration(
                                 focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        width: 2.0, color: Colors.blueAccent),
+                                    // borderSide: BorderSide(
+                                    //     width: 2.0, color: Colors.blueAccent),
                                     borderRadius: BorderRadius.circular(15.0)),
                                 enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
@@ -1151,19 +1151,20 @@ class _HomeTachesState extends State<HomeTaches> {
                               return null;
                             },
                             decoration: InputDecoration(
-                                focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        width: 2.0, color: Colors.blueAccent),
-                                    borderRadius: BorderRadius.circular(15.0)),
-                                enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        width: 1.0, color: Colors.blueAccent),
-                                    borderRadius: BorderRadius.circular(15.0)),
-                                contentPadding: EdgeInsets.symmetric(
-                                    horizontal: 20, vertical: 10),
-                                labelText: "Description",
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(15.0))),
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      width: 2.0, color: Colors.blueAccent),
+                                  borderRadius: BorderRadius.circular(15.0)),
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      width: 1.0, color: Colors.blueAccent),
+                                  borderRadius: BorderRadius.circular(15.0)),
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 10),
+                              labelText: "Description",
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15.0)),
+                            ),
                           ),
                           SizedBox(
                             height: 15.0,

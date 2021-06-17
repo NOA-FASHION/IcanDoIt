@@ -372,7 +372,7 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
         width: 1.0,
       );
       if (widget.idChallenge.isNotEmpty) {
-        print(boolId);
+        // print(boolId);
         isSwitched = boolId;
         switchButtom = Switch(
           value: isSwitched,
@@ -380,7 +380,7 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
             setState(() {
               int index = variable.returnIndexForName(id);
               isSwitched = value;
-              print(isSwitched);
+              // print(isSwitched);
               variable.desactivAffichagePrinc(index, isSwitched);
             });
           },
