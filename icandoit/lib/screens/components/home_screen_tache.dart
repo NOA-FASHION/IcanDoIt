@@ -1178,6 +1178,7 @@ class _HomeTachesState extends State<HomeTaches> {
                                     Provider.of<Challengecontroller>(context,
                                             listen: false)
                                         .generateList(
+                                      widget.animatedpadding,
                                       widget.id,
                                       widget.indexChallenge,
                                       int.parse(nombreEchenace),
