@@ -64,23 +64,23 @@ class _ResultaChallengeState extends State<ResultaChallenge>
         variable2.getChallengeyesterday();
     List<VBarChartModel> bardata = [
       VBarChartModel(
+        label: "Challenges validés",
         index: 0,
-        label: "Challenge vallide",
         colors: [Colors.orange, Colors.deepOrange],
         jumlah: double.parse(challengeDaysResult.nbchallengeVallide),
         tooltip: "${challengeDaysResult.nbchallengeVallide}",
       ),
       VBarChartModel(
+        label: "tâches validés",
         index: 1,
-        label: "Tache vallide",
-        colors: [Colors.orange, Colors.deepOrange],
+        colors: [Colors.black, Colors.deepOrange],
         jumlah: double.parse(challengeDaysResult.nbtacheVallide),
         tooltip: "${challengeDaysResult.nbtacheVallide}",
       ),
       VBarChartModel(
+        label: "challenges en cours",
         index: 2,
-        label: "Challenge en cours",
-        colors: [Colors.teal, Colors.indigo],
+        colors: [Colors.teal, Colors.deepOrange],
         jumlah: double.parse(challengeDaysResult.nbChallengeEnCours),
         tooltip: "${challengeDaysResult.nbChallengeEnCours}",
       ),
@@ -289,8 +289,10 @@ class _ResultaChallengeState extends State<ResultaChallenge>
                       child: Column(
                         children: [
                           Container(
+                            color: Colors.transparent,
                             margin: EdgeInsets.all(15),
                             child: Card(
+                              color: Colors.blue,
                               elevation: 25.0,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10.0),
@@ -317,6 +319,7 @@ class _ResultaChallengeState extends State<ResultaChallenge>
                             child: Column(
                               children: [
                                 Card(
+                                  color: Colors.blue,
                                   elevation: 25.0,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10.0),
@@ -369,7 +372,7 @@ class _ResultaChallengeState extends State<ResultaChallenge>
                                                 padding:
                                                     const EdgeInsets.all(8.0),
                                                 child: Text(
-                                                    "${challengeyesterdayResult.nbtacheVallide} taches valide",
+                                                    "${challengeyesterdayResult.nbtacheVallide} tâches validés",
                                                     textAlign:
                                                         TextAlign.center),
                                               )
@@ -404,7 +407,7 @@ class _ResultaChallengeState extends State<ResultaChallenge>
                                                 padding:
                                                     const EdgeInsets.all(8.0),
                                                 child: Text(
-                                                    "${challengeyesterdayResult.nbchallengeVallide} challenges valide",
+                                                    "${challengeyesterdayResult.nbchallengeVallide} challenges validés",
                                                     textAlign:
                                                         TextAlign.center),
                                               )
@@ -417,6 +420,7 @@ class _ResultaChallengeState extends State<ResultaChallenge>
                                 ),
                                 SizedBox(height: 25.0),
                                 Card(
+                                  color: Colors.blue,
                                   elevation: 25.0,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10.0),
@@ -439,6 +443,7 @@ class _ResultaChallengeState extends State<ResultaChallenge>
                                   child: Column(
                                     children: [
                                       Card(
+                                        color: Colors.blue,
                                         elevation: 25.0,
                                         shape: RoundedRectangleBorder(
                                           borderRadius:
@@ -472,6 +477,7 @@ class _ResultaChallengeState extends State<ResultaChallenge>
                                                       3,
                                                   height: 140,
                                                   child: Card(
+                                                    color: Colors.blue,
                                                     elevation: 25.0,
                                                     shape:
                                                         RoundedRectangleBorder(
@@ -493,6 +499,7 @@ class _ResultaChallengeState extends State<ResultaChallenge>
                                                       3,
                                                   height: 140,
                                                   child: Card(
+                                                    color: Colors.blue,
                                                     elevation: 25.0,
                                                     shape:
                                                         RoundedRectangleBorder(
@@ -515,7 +522,7 @@ class _ResultaChallengeState extends State<ResultaChallenge>
                                                               const EdgeInsets
                                                                   .all(8.0),
                                                           child: Text(
-                                                              "${challengeDaysResult.nbChallengeEnCours} challenge en cours",
+                                                              "${challengeDaysResult.nbChallengeEnCours} challenges en cours",
                                                               textAlign:
                                                                   TextAlign
                                                                       .center),
@@ -542,6 +549,7 @@ class _ResultaChallengeState extends State<ResultaChallenge>
                                                       3,
                                                   height: 140,
                                                   child: Card(
+                                                    color: Colors.blue,
                                                     elevation: 25.0,
                                                     shape:
                                                         RoundedRectangleBorder(
@@ -564,7 +572,7 @@ class _ResultaChallengeState extends State<ResultaChallenge>
                                                               const EdgeInsets
                                                                   .all(8.0),
                                                           child: Text(
-                                                              "${challengeDaysResult.nbtacheVallide}  taches valide",
+                                                              "${challengeDaysResult.nbtacheVallide}  tâches validés",
                                                               textAlign:
                                                                   TextAlign
                                                                       .center),
@@ -580,6 +588,7 @@ class _ResultaChallengeState extends State<ResultaChallenge>
                                                       3,
                                                   height: 140,
                                                   child: Card(
+                                                    color: Colors.blue,
                                                     elevation: 5.0,
                                                     shape:
                                                         RoundedRectangleBorder(
@@ -597,7 +606,7 @@ class _ResultaChallengeState extends State<ResultaChallenge>
                                                               const EdgeInsets
                                                                   .all(8.0),
                                                           child: Text(
-                                                              "${challengeDaysResult.nbchallengeVallide} challenges valide",
+                                                              "${challengeDaysResult.nbchallengeVallide} challenges validés",
                                                               textAlign:
                                                                   TextAlign
                                                                       .center),
@@ -623,7 +632,7 @@ class _ResultaChallengeState extends State<ResultaChallenge>
                                         width: 1,
                                       ),
                                     ),
-                                    width: mediaQueryData.size.width / 1.2,
+                                    width: mediaQueryData.size.width / 0.9,
                                     child: Column(
                                       children: [
                                         _buildGrafik(bardata),
@@ -647,11 +656,14 @@ class _ResultaChallengeState extends State<ResultaChallenge>
 
   Widget _buildGrafik(List<VBarChartModel> bardata) {
     return VerticalBarchart(
-      labelSizeFactor: 10,
+      showBackdrop: true,
+      barStyle: BarStyle.CIRCLE,
       tooltipColor: Colors.white,
       labelColor: Colors.white,
       background: Colors.transparent,
-      maxX: 100,
+      tooltipSize: 20,
+      maxX: 40.0,
+      labelSizeFactor: 1,
       data: bardata,
       showLegend: true,
       legend: [
@@ -659,19 +671,19 @@ class _ResultaChallengeState extends State<ResultaChallenge>
           textColor: Colors.white,
           isSquare: false,
           color: Colors.orange,
-          text: "Challenge vallide",
-        ),
-        Vlegend(
-          textColor: Colors.white,
-          isSquare: false,
-          color: Colors.teal,
-          text: "tache vallide",
+          text: "Challenges validés",
         ),
         Vlegend(
           textColor: Colors.white,
           isSquare: false,
           color: Colors.black,
-          text: "challenge en cours",
+          text: "tâches validés",
+        ),
+        Vlegend(
+          textColor: Colors.white,
+          isSquare: false,
+          color: Colors.teal,
+          text: "challenges en cours",
         )
       ],
     );
