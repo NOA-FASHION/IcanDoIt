@@ -726,14 +726,14 @@ class Challengecontroller extends ChangeNotifier {
         int.parse(challengeDays.nbchallengeVallide);
     if (nbtacheVallide1 == 0) {
       challengeDays.commentaire =
-          "Vous n'avez pas validé de challenge ou de tâche";
+          "Vous n'avez pas validé de challenge ou de tâche...";
     } else if (nbtacheVallide1 > 9) {
-      challengeDays.commentaire = "Extraordinaire, rien ne vous arrête.";
+      challengeDays.commentaire = "Extraordinaire, rien ne vous arrête!";
     } else if (nbtacheVallide1 > 6) {
-      challengeDays.commentaire = "Bravo, vos efforts ont été récompensés";
+      challengeDays.commentaire = "Bravo, vos efforts ont été récompensés!";
     } else if (nbtacheVallide1 > 0) {
       challengeDays.commentaire =
-          " Encore un effort et vos objectifs seront atteints";
+          " Encore un effort et vos objectifs seront atteints!";
     }
     await _saveChallendays();
     _initChallengeListStartChallenge();
