@@ -726,14 +726,14 @@ class Challengecontroller extends ChangeNotifier {
         int.parse(challengeDays.nbchallengeVallide);
     if (nbtacheVallide1 == 0) {
       challengeDays.commentaire =
-          "Vous n'avez pas validé de challenge ou de tache";
+          "Vous n'avez pas validé de challenge ou de tâche";
     } else if (nbtacheVallide1 > 9) {
-      challengeDays.commentaire = "Extraordinaire, rien ne vous arrètes.";
+      challengeDays.commentaire = "Extraordinaire, rien ne vous arrête.";
     } else if (nbtacheVallide1 > 6) {
-      challengeDays.commentaire = "Bravo, vos éffort ont ete récompensé";
+      challengeDays.commentaire = "Bravo, vos efforts ont été récompensés";
     } else if (nbtacheVallide1 > 0) {
       challengeDays.commentaire =
-          " Encore un éffort et vos objectifs seront atteint";
+          " Encore un effort et vos objectifs seront atteints";
     }
     await _saveChallendays();
     _initChallengeListStartChallenge();
@@ -839,8 +839,8 @@ class Challengecontroller extends ChangeNotifier {
       unity = unity_challenge1.echeancier;
     } else if (json == "projet") {
       unity = unity_challenge1.projet;
-    } else if (json == "informations") {
-      unity = unity_challenge1.informations;
+    } else if (json == "information") {
+      unity = unity_challenge1.information;
     }
     return unity;
   }

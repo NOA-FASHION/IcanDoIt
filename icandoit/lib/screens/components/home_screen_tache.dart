@@ -33,8 +33,8 @@ class HomeTaches extends StatefulWidget {
 class _HomeTachesState extends State<HomeTaches> {
   Formation formations = Formation(
     chapitre: 'Chapitre',
-    duree: 'Duree',
-    theoriePratique: 'Theorie-pratique',
+    duree: 'Durée',
+    theoriePratique: 'Théorie-pratique',
   );
   String idChallenge1;
   String nombreEchenace;
@@ -59,6 +59,8 @@ class _HomeTachesState extends State<HomeTaches> {
 
     setState(() {
       if (pickedFile != null) {
+        coutPaiment = "0";
+        prixProduit = "0";
         dataJoin = pickedFile.path;
         _image = pickedFile.path;
         _bottomSheetController.setState(() {
@@ -78,6 +80,8 @@ class _HomeTachesState extends State<HomeTaches> {
 
     setState(() {
       if (pickedFile != null) {
+        coutPaiment = "0";
+        prixProduit = "0";
         dataJoin = pickedFile.path;
         _image = pickedFile.path;
         _bottomSheetController.setState(() {
@@ -97,6 +101,8 @@ class _HomeTachesState extends State<HomeTaches> {
 
     setState(() {
       if (pickedFile != null) {
+        coutPaiment = "0";
+        prixProduit = "0";
         dataJoin = pickedFile.path;
         _video = pickedFile.path;
         _bottomSheetController.setState(() {
@@ -116,6 +122,8 @@ class _HomeTachesState extends State<HomeTaches> {
 
     setState(() {
       if (pickedFile != null) {
+        coutPaiment = "0";
+        prixProduit = "0";
         dataJoin = pickedFile.path;
         _video = pickedFile.path;
         _bottomSheetController.setState(() {
@@ -275,6 +283,8 @@ class _HomeTachesState extends State<HomeTaches> {
     } else if (resultat == "url") {
       documentJoint = TextFormField(
         onSaved: (value) {
+          coutPaiment = "0";
+          prixProduit = "0";
           dataJoin = value;
         },
         validator: (value) {
@@ -291,7 +301,7 @@ class _HomeTachesState extends State<HomeTaches> {
                 borderSide: BorderSide(width: 1.0, color: Colors.blueAccent),
                 borderRadius: BorderRadius.circular(15.0)),
             contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            labelText: "url",
+            labelText: "Url",
             border:
                 OutlineInputBorder(borderRadius: BorderRadius.circular(15.0))),
       );
@@ -301,6 +311,8 @@ class _HomeTachesState extends State<HomeTaches> {
           TextFormField(
             textCapitalization: TextCapitalization.sentences,
             onSaved: (value) {
+              coutPaiment = "0";
+              prixProduit = "0";
               nomAdresse = value;
             },
             validator: (value) {
@@ -378,7 +390,7 @@ class _HomeTachesState extends State<HomeTaches> {
                     borderRadius: BorderRadius.circular(15.0)),
                 contentPadding:
                     EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                labelText: "ville",
+                labelText: "Ville",
                 border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15.0))),
           ),
@@ -414,7 +426,7 @@ class _HomeTachesState extends State<HomeTaches> {
                     borderRadius: BorderRadius.circular(15.0)),
                 contentPadding:
                     EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                labelText: "pays",
+                labelText: "Pays",
                 border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15.0))),
           )
@@ -423,6 +435,8 @@ class _HomeTachesState extends State<HomeTaches> {
     } else if (resultat == "youtube") {
       documentJoint = TextFormField(
         onSaved: (value) {
+          coutPaiment = "0";
+          prixProduit = "0";
           dataJoin = value;
         },
         validator: (value) {
@@ -439,7 +453,7 @@ class _HomeTachesState extends State<HomeTaches> {
                 borderSide: BorderSide(width: 1.0, color: Colors.blueAccent),
                 borderRadius: BorderRadius.circular(15.0)),
             contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            labelText: "youtube",
+            labelText: "Youtube",
             border:
                 OutlineInputBorder(borderRadius: BorderRadius.circular(15.0))),
       );
@@ -451,6 +465,8 @@ class _HomeTachesState extends State<HomeTaches> {
           textCapitalization: TextCapitalization.sentences,
           maxLines: 30,
           onSaved: (value) {
+            coutPaiment = "0";
+            prixProduit = "0";
             dataJoin = value;
           },
           validator: (value) {
@@ -468,7 +484,7 @@ class _HomeTachesState extends State<HomeTaches> {
                   borderRadius: BorderRadius.circular(15.0)),
               contentPadding:
                   EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              labelText: "commentaire",
+              labelText: "Commentaire",
               border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(15.0))),
         ),
@@ -480,11 +496,13 @@ class _HomeTachesState extends State<HomeTaches> {
             width: 100,
             child: TextFormField(
               onSaved: (value) {
+                coutPaiment = "0";
+
                 prixProduit = value;
               },
               validator: (value) {
                 if (!isNumericUsingRegularExpression(value)) {
-                  return "rentrer un prix";
+                  return "Rentrer un prix";
                 }
                 return null;
               },
@@ -499,7 +517,7 @@ class _HomeTachesState extends State<HomeTaches> {
                       borderRadius: BorderRadius.circular(15.0)),
                   contentPadding:
                       EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  labelText: "achat",
+                  labelText: "Achat",
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15.0))),
             ),
@@ -514,11 +532,12 @@ class _HomeTachesState extends State<HomeTaches> {
             width: 100,
             child: TextFormField(
               onSaved: (value) {
+                prixProduit = "0";
                 coutPaiment = value;
               },
               validator: (value) {
                 if (!isNumericUsingRegularExpression(value)) {
-                  return "rentrer un montant";
+                  return "Rentrer un montant";
                 }
                 return null;
               },
@@ -533,7 +552,7 @@ class _HomeTachesState extends State<HomeTaches> {
                       borderRadius: BorderRadius.circular(15.0)),
                   contentPadding:
                       EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  labelText: "paiment",
+                  labelText: "Paiement",
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15.0))),
             ),
@@ -550,11 +569,12 @@ class _HomeTachesState extends State<HomeTaches> {
                 width: 100,
                 child: TextFormField(
                   onSaved: (value) {
+                    prixProduit = "0";
                     coutPaiment = value;
                   },
                   validator: (value) {
                     if (!isNumericUsingRegularExpression(value)) {
-                      return "montant d'une échéance";
+                      return "Montant d'une échéance";
                     }
                     return null;
                   },
@@ -569,7 +589,7 @@ class _HomeTachesState extends State<HomeTaches> {
                           borderRadius: BorderRadius.circular(15.0)),
                       contentPadding:
                           EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                      labelText: "echeance",
+                      labelText: "Échéance",
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15.0))),
                 ),
@@ -585,7 +605,7 @@ class _HomeTachesState extends State<HomeTaches> {
                   },
                   validator: (value) {
                     if (!isNumericUsingRegularExpression(value)) {
-                      return "nombre d'échéance";
+                      return "Nombre d'échéance";
                     }
                     return null;
                   },
@@ -656,7 +676,7 @@ class _HomeTachesState extends State<HomeTaches> {
                               color: Colors.white,
                             ), // icon
                             Text(
-                              "Share",
+                              "partage",
                               style:
                                   TextStyle(fontSize: 10, color: Colors.white),
                             ), // text
@@ -723,7 +743,7 @@ class _HomeTachesState extends State<HomeTaches> {
                                               color: Colors.black),
                                         ),
                                         Text(
-                                          "previsions",
+                                          "Prévisions",
                                           style: TextStyle(
                                               fontSize: 10,
                                               color: Colors.black),
@@ -749,7 +769,7 @@ class _HomeTachesState extends State<HomeTaches> {
                                               color: Colors.black),
                                         ),
                                         Text(
-                                          "prix total",
+                                          "Prix total",
                                           style: TextStyle(
                                               fontSize: 10,
                                               color: Colors.black),
@@ -813,7 +833,7 @@ class _HomeTachesState extends State<HomeTaches> {
                                               color: Colors.black),
                                         ),
                                         Text(
-                                          "Total paiment",
+                                          "Total paiement",
                                           style: TextStyle(
                                               fontSize: 10,
                                               color: Colors.black),
@@ -838,7 +858,7 @@ class _HomeTachesState extends State<HomeTaches> {
                                               color: Colors.black),
                                         ),
                                         Text(
-                                          "reste a payer",
+                                          "Reste à payer",
                                           style: TextStyle(
                                               fontSize: 10,
                                               color: Colors.black),
@@ -946,7 +966,7 @@ class _HomeTachesState extends State<HomeTaches> {
                                       size: 30.0,
                                     ),
                                     SizedBox(width: 10),
-                                    Text("evenement"),
+                                    Text("Évènement"),
                                   ],
                                 ),
                               ),
@@ -959,7 +979,7 @@ class _HomeTachesState extends State<HomeTaches> {
                                       size: 30.0,
                                     ),
                                     SizedBox(width: 10),
-                                    Text("achat"),
+                                    Text("Achat"),
                                   ],
                                 ),
                               ),
@@ -972,7 +992,7 @@ class _HomeTachesState extends State<HomeTaches> {
                                       size: 30.0,
                                     ),
                                     SizedBox(width: 10),
-                                    Text("tache"),
+                                    Text("Tâche"),
                                   ],
                                 ),
                               ),
@@ -985,7 +1005,7 @@ class _HomeTachesState extends State<HomeTaches> {
                                       size: 30.0,
                                     ),
                                     SizedBox(width: 10),
-                                    Text("mission"),
+                                    Text("Mission"),
                                   ],
                                 ),
                               ),
@@ -998,7 +1018,7 @@ class _HomeTachesState extends State<HomeTaches> {
                                       size: 30.0,
                                     ),
                                     SizedBox(width: 10),
-                                    Text("projet"),
+                                    Text("Projet"),
                                   ],
                                 ),
                               ),
@@ -1011,12 +1031,12 @@ class _HomeTachesState extends State<HomeTaches> {
                                       size: 30.0,
                                     ),
                                     SizedBox(width: 10),
-                                    Text("adresse"),
+                                    Text("Adresse"),
                                   ],
                                 ),
                               ),
                               DropdownMenuItem(
-                                value: "informations",
+                                value: "information",
                                 child: Row(
                                   children: [
                                     Icon(
@@ -1024,7 +1044,7 @@ class _HomeTachesState extends State<HomeTaches> {
                                       size: 30.0,
                                     ),
                                     SizedBox(width: 10),
-                                    Text("informations"),
+                                    Text("Information"),
                                   ],
                                 ),
                               ),
@@ -1037,7 +1057,7 @@ class _HomeTachesState extends State<HomeTaches> {
                                       size: 30.0,
                                     ),
                                     SizedBox(width: 10),
-                                    Text("paiement"),
+                                    Text("Paiement"),
                                   ],
                                 ),
                               ),
@@ -1050,7 +1070,7 @@ class _HomeTachesState extends State<HomeTaches> {
                                       size: 30.0,
                                     ),
                                     SizedBox(width: 10),
-                                    Text("echeancier"),
+                                    Text("Échéancier"),
                                   ],
                                 ),
                               ),
@@ -1063,7 +1083,7 @@ class _HomeTachesState extends State<HomeTaches> {
                                       size: 30.0,
                                     ),
                                     SizedBox(width: 10),
-                                    Text("formation"),
+                                    Text("Formation"),
                                   ],
                                 ),
                               ),
@@ -1076,7 +1096,7 @@ class _HomeTachesState extends State<HomeTaches> {
                                       size: 30.0,
                                     ),
                                     SizedBox(width: 10),
-                                    Text("youtube"),
+                                    Text("Youtube"),
                                   ],
                                 ),
                               ),
@@ -1089,7 +1109,7 @@ class _HomeTachesState extends State<HomeTaches> {
                                       size: 30.0,
                                     ),
                                     SizedBox(width: 10),
-                                    Text("commentaire"),
+                                    Text("Commentaire"),
                                   ],
                                 ),
                               ),
@@ -1102,7 +1122,7 @@ class _HomeTachesState extends State<HomeTaches> {
                                       size: 30.0,
                                     ),
                                     SizedBox(width: 10),
-                                    Text("video"),
+                                    Text("Vidéo"),
                                   ],
                                 ),
                               ),
@@ -1115,7 +1135,7 @@ class _HomeTachesState extends State<HomeTaches> {
                                       size: 30.0,
                                     ),
                                     SizedBox(width: 10),
-                                    Text("image"),
+                                    Text("Image"),
                                   ],
                                 ),
                               ),
@@ -1128,7 +1148,7 @@ class _HomeTachesState extends State<HomeTaches> {
                                       size: 30.0,
                                     ),
                                     SizedBox(width: 10),
-                                    Text("url"),
+                                    Text("Url"),
                                   ],
                                 ),
                               ),
@@ -1146,7 +1166,7 @@ class _HomeTachesState extends State<HomeTaches> {
                               if (value.isEmpty) {
                                 return "Merci d'entrer une description pour la mission";
                               } else if (value.length > 35) {
-                                return "pas plus de 50 caracteres";
+                                return "Pas plus de 50 caractères";
                               }
                               return null;
                             },

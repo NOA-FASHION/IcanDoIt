@@ -143,7 +143,7 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                       child: Row(
                         children: [
                           Text(
-                            "Priorite",
+                            "Priorité",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Colors.blue),
@@ -248,7 +248,7 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                           child: Row(
                             children: [
                               Text(
-                                "Priorite",
+                                "Priorité",
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Colors.blue),
@@ -333,8 +333,8 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
     _confirmRegister(String id) {
       int index = variable.returnIndexForName(id);
       var baseDialog = BaseAlertDialog(
-          title: "Confirmez la sauvegarde",
-          content: "Une sauvegarde va être éffectué",
+          title: "Confirmer la sauvegarde",
+          content: "Une sauvegarde va être effectuée",
           yesOnPressed: () {
             variable.addListChallengeSaveindex(index);
             Navigator.pop(context, false);
@@ -342,8 +342,8 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
           noOnPressed: () {
             Navigator.pop(context);
           },
-          yes: "oui",
-          no: "non");
+          yes: "Oui",
+          no: "Non");
       showDialog(
           context: context, builder: (BuildContext context) => baseDialog);
     }
@@ -428,7 +428,7 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                     validate: true,
                     id: _challengesList[index].id);
                 Scaffold.of(context).showSnackBar(_buildSnackBar(
-                    content: "Le challenge a bien ete valide",
+                    content: "Le challenge a bien été validé",
                     lotties: 'assets/challenge.json'));
               }
 
@@ -449,7 +449,7 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                     validate: false,
                     id: _challengesList[index].id);
                 Scaffold.of(context).showSnackBar(_buildSnackBar(
-                    content: "La mission a bien ete supprime",
+                    content: "La mission a bien été supprimée",
                     lotties: 'assets/trash.json'));
               }
             },
@@ -463,7 +463,7 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                           "Confirmation",
                           style: TextStyle(color: Colors.blue),
                         ),
-                        content: Text("Voulez vous suprimmez la mission"),
+                        content: Text("Voulez vous supprimer la mission"),
                         actions: [
                           RaisedButton(
                             onPressed: () {
@@ -475,7 +475,7 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                             onPressed: () {
                               Navigator.pop(context, false);
                             },
-                            child: Text("Nom"),
+                            child: Text("Non"),
                           )
                         ],
                       );

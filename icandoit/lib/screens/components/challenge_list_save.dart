@@ -266,7 +266,7 @@ class _ExampleAppState extends State<ExampleApp>
                               ),
 
                               Text(
-                                "restaurer",
+                                "Restaurer",
                                 style: TextStyle(
                                     fontSize: 10, color: Colors.white),
                               ), // text
@@ -289,7 +289,7 @@ class _ExampleAppState extends State<ExampleApp>
                                   size: 30,
                                   color: Colors.white,
                                 ),
-                                message: "Sauvegarde éffacer avec succes.",
+                                message: "Sauvegarde effacée avec succes.",
                               ),
                             );
                             // Scaffold.of(context).showSnackBar(_buildSnackBar(
@@ -306,7 +306,7 @@ class _ExampleAppState extends State<ExampleApp>
                               // Lottie.asset('assets/trash.json',
                               //     width: 40.0, height: 40), // icon
                               Text(
-                                "Delete",
+                                "Supprimer",
                                 style: TextStyle(
                                     fontSize: 10, color: Colors.white),
                               ), // text

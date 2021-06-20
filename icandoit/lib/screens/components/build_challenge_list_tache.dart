@@ -45,6 +45,40 @@ class _ChallengesListBuilderTachesState
   bool formation = false;
   String chapitre;
 
+  String modifDescription(String description) {
+    String modifDecription1 = "Évènement";
+
+    if (description == "achat") {
+      modifDecription1 = "Achat";
+    } else if (description == "tache") {
+      modifDecription1 = "Tâche";
+    } else if (description == "mission") {
+      modifDecription1 = "Mission";
+    } else if (description == "youtube") {
+      modifDecription1 = "Youtube";
+    } else if (description == "video") {
+      modifDecription1 = "Vidéo";
+    } else if (description == "commentaire") {
+      modifDecription1 = "Commentaire";
+    } else if (description == "image") {
+      modifDecription1 = "Image";
+    } else if (description == "url") {
+      modifDecription1 = "Url";
+    } else if (description == "paiement") {
+      modifDecription1 = "Paiement";
+    } else if (description == "echeancier") {
+      modifDecription1 = "Échéancier";
+    } else if (description == "projet") {
+      modifDecription1 = "Projet";
+    } else if (description == "adresse") {
+      modifDecription1 = "Adresse";
+    } else if (description == "formation") {
+      modifDecription1 = "Formation";
+    }
+
+    return modifDecription1;
+  }
+
   Color colorsDescription(String description) {
     Color colors = Colors.black;
     if (description == "evenement") {
@@ -205,7 +239,7 @@ class _ChallengesListBuilderTachesState
         Icons.comment,
         size: 30.0,
       );
-    } else if (resultat == "informations") {
+    } else if (resultat == "information") {
       documentJoint = Icon(
         Icons.perm_device_information,
         size: 30.0,
@@ -492,7 +526,7 @@ class _ChallengesListBuilderTachesState
                         item.description
                                 .toString()
                                 .replaceAll(unityPattern, "") ==
-                            "informations" ||
+                            "information" ||
                         item.description
                                 .toString()
                                 .replaceAll(unityPattern, "") ==
@@ -581,9 +615,9 @@ class _ChallengesListBuilderTachesState
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        item.description
+                                        modifDescription(item.description
                                             .toString()
-                                            .replaceAll(unityPattern, ""),
+                                            .replaceAll(unityPattern, "")),
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                             color: colorsDescription(item

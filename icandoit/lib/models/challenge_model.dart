@@ -24,7 +24,7 @@ enum unity_challenge1 {
   projet,
   adresse,
   echeancier,
-  informations
+  information
 }
 choixDesciptionEnum(dynamic json) {
   unity_challenge1 unity;
@@ -56,8 +56,8 @@ choixDesciptionEnum(dynamic json) {
     unity = unity_challenge1.adresse;
   } else if (json['description'] == "unity_challenge1.formation") {
     unity = unity_challenge1.formation;
-  } else if (json['description'] == "unity_challenge1.informations") {
-    unity = unity_challenge1.informations;
+  } else if (json['description'] == "unity_challenge1.information") {
+    unity = unity_challenge1.information;
   }
   return unity;
 }

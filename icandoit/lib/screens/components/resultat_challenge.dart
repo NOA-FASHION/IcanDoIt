@@ -71,14 +71,14 @@ class _ResultaChallengeState extends State<ResultaChallenge>
         tooltip: "${challengeDaysResult.nbchallengeVallide}",
       ),
       VBarChartModel(
-        label: "tâches validés",
+        label: "Tâches validés",
         index: 1,
         colors: [Colors.black, Colors.deepOrange],
         jumlah: double.parse(challengeDaysResult.nbtacheVallide),
         tooltip: "${challengeDaysResult.nbtacheVallide}",
       ),
       VBarChartModel(
-        label: "challenges en cours",
+        label: "Challenges en cours",
         index: 2,
         colors: [Colors.teal, Colors.deepOrange],
         jumlah: double.parse(challengeDaysResult.nbChallengeEnCours),
@@ -326,7 +326,7 @@ class _ResultaChallengeState extends State<ResultaChallenge>
                                   ),
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
-                                    child: Text("hier"),
+                                    child: Text("HIER"),
                                   ),
                                 ),
                                 SizedBox(height: 5.0),
@@ -427,7 +427,7 @@ class _ResultaChallengeState extends State<ResultaChallenge>
                                   ),
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
-                                    child: Text("Aujourdhui"),
+                                    child: Text("AUJOURD'HUI"),
                                   ),
                                 ),
                                 SizedBox(height: 5.0),
@@ -452,7 +452,7 @@ class _ResultaChallengeState extends State<ResultaChallenge>
                                         child: Padding(
                                           padding: const EdgeInsets.all(8.0),
                                           child: Text(
-                                            challengeDaysResult.commentaire,
+                                            challengeDaysResult.commentaire.toUpperCase(),
                                             textAlign: TextAlign.center,
                                           ),
                                         ),
@@ -677,13 +677,13 @@ class _ResultaChallengeState extends State<ResultaChallenge>
           textColor: Colors.white,
           isSquare: false,
           color: Colors.black,
-          text: "tâches validés",
+          text: "Tâches validés",
         ),
         Vlegend(
           textColor: Colors.white,
           isSquare: false,
           color: Colors.teal,
-          text: "challenges en cours",
+          text: "Challenges en cours",
         )
       ],
     );

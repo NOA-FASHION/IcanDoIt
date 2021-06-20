@@ -131,7 +131,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             size: 30.0,
           ),
           SizedBox(width: 10),
-          Text("raccourci"),
+          Text("Raccourci"),
         ],
       );
     }
@@ -198,7 +198,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             ),
             margin: EdgeInsets.only(left: 15.0),
             child: Text(
-              'heure',
+              'Heure',
               style: TextStyle(fontSize: 17),
             ),
           ),
@@ -355,7 +355,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 ),
                 margin: EdgeInsets.only(left: 15.0),
                 child: Text(
-                  'heure',
+                  'Heure',
                   style: TextStyle(fontSize: 17),
                 ),
               ),
@@ -529,7 +529,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 ),
                 margin: EdgeInsets.only(left: 15.0),
                 child: Text(
-                  'heure',
+                  'Heure',
                   style: TextStyle(fontSize: 17),
                 ),
               ),
@@ -610,7 +610,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             lastDate: DateTime(2100),
             icon: Icon(Icons.event),
             dateLabelText: 'Date',
-            timeLabelText: "Hour",
+            timeLabelText: "Heure",
             selectableDayPredicate: (date) {
               if (date.weekday == 6 || date.weekday == 7) {
                 return false;
@@ -701,7 +701,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   width: 5.0,
                 ),
                 Text(
-                  "Go to home",
+                  "Menu",
                   style: TextStyle(
                     fontSize: 18,
                     color: Colors.purple,
@@ -725,7 +725,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   width: 5.0,
                 ),
                 Text(
-                  "Sauvegare challenge",
+                  "Sauvegarde challenge",
                   style: TextStyle(
                     fontSize: 18,
                     color: Colors.purple,
@@ -749,7 +749,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   width: 5.0,
                 ),
                 Text(
-                  "score des challenges",
+                  "Score des challenges",
                   style: TextStyle(
                     fontSize: 18,
                     color: Colors.purple,
@@ -769,7 +769,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   width: 5.0,
                 ),
                 Text(
-                  "Support us",
+                  "Support",
                   style: TextStyle(
                     fontSize: 18,
                     color: Colors.purple,
@@ -789,7 +789,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   width: 5.0,
                 ),
                 Text(
-                  "About us",
+                  "À propos",
                   style: TextStyle(
                     fontSize: 18,
                     color: Colors.purple,
@@ -1035,7 +1035,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                 if (value.isEmpty) {
                                   return "Merci d'entrer une description pour la mission";
                                 } else if (value.length > 35) {
-                                  return "pas plus de 50 caracteres";
+                                  return "Pas plus de 50 caractères";
                                 }
                                 return null;
                               },
@@ -1092,7 +1092,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                       size: 30.0,
                                     ),
                                     SizedBox(width: 10),
-                                    Text("haute"),
+                                    Text("Haute"),
                                   ],
                                 ),
                               ),
@@ -1105,7 +1105,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                       size: 30.0,
                                     ),
                                     SizedBox(width: 10),
-                                    Text("normal"),
+                                    Text("Normal"),
                                   ],
                                 ),
                               ),
@@ -1118,7 +1118,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                       size: 30.0,
                                     ),
                                     SizedBox(width: 10),
-                                    Text("quotidien"),
+                                    Text("Quotidien"),
                                   ],
                                 ),
                               ),
@@ -1131,7 +1131,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                       size: 30.0,
                                     ),
                                     SizedBox(width: 10),
-                                    Text("hebdomadaire"),
+                                    Text("Hebdomadaire"),
                                   ],
                                 ),
                               ),
@@ -1144,7 +1144,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                       size: 30.0,
                                     ),
                                     SizedBox(width: 10),
-                                    Text("mensuel"),
+                                    Text("Mensuel"),
                                   ],
                                 ),
                               ),
@@ -1157,7 +1157,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                       size: 30.0,
                                     ),
                                     SizedBox(width: 10),
-                                    Text("notification"),
+                                    Text("Notification"),
                                   ],
                                 ),
                               ),
