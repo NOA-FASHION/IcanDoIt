@@ -300,7 +300,7 @@ class _ResultaChallengeState extends State<ResultaChallenge>
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Text(
-                                  "Score des challenges",
+                                  "Score des challenges".toUpperCase(),
                                   style: TextStyle(fontSize: 20),
                                 ),
                               ),
@@ -372,7 +372,7 @@ class _ResultaChallengeState extends State<ResultaChallenge>
                                                 padding:
                                                     const EdgeInsets.all(8.0),
                                                 child: Text(
-                                                    "${challengeyesterdayResult.nbtacheVallide} tâches validés",
+                                                    "${challengeyesterdayResult.nbtacheVallide} tâches validées",
                                                     textAlign:
                                                         TextAlign.center),
                                               )
@@ -452,7 +452,8 @@ class _ResultaChallengeState extends State<ResultaChallenge>
                                         child: Padding(
                                           padding: const EdgeInsets.all(8.0),
                                           child: Text(
-                                            challengeDaysResult.commentaire.toUpperCase(),
+                                            challengeDaysResult.commentaire
+                                                .toUpperCase(),
                                             textAlign: TextAlign.center,
                                           ),
                                         ),
@@ -572,7 +573,7 @@ class _ResultaChallengeState extends State<ResultaChallenge>
                                                               const EdgeInsets
                                                                   .all(8.0),
                                                           child: Text(
-                                                              "${challengeDaysResult.nbtacheVallide}  tâches validés",
+                                                              "${challengeDaysResult.nbtacheVallide}  tâches validées",
                                                               textAlign:
                                                                   TextAlign
                                                                       .center),
@@ -677,7 +678,7 @@ class _ResultaChallengeState extends State<ResultaChallenge>
           textColor: Colors.white,
           isSquare: false,
           color: Colors.black,
-          text: "Tâches validés",
+          text: "Tâches validées",
         ),
         Vlegend(
           textColor: Colors.white,
