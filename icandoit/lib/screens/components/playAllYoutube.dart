@@ -26,38 +26,9 @@ class PlayAllYoutubeScreen extends StatefulWidget {
 class _PlayAllYoutubeScreenState extends State<PlayAllYoutubeScreen> {
   YoutubePlayerController _controller;
 
-  // String unityPattern = "unity_challenge1.";
-
-  // void listeDeYoutube() {
-  //   Challengecontroller variable = Provider.of<Challengecontroller>(context);
-  //   List<ChallengeModel> _challengesListget = variable.getChallenges();
-  //   List<String> youtubeList;
-  //   if (_challengesListget[widget.idChallenge].id == widget.idChallenge) {
-  //     for (var n =
-  //             _challengesListget[widget.idChallenge].listeDeTache.length - 1;
-  //         n >= 0;
-  //         n--) {
-  //       print(_challengesListget[widget.idChallenge]
-  //           .listeDeTache[n]
-  //           .description
-  //           .toString());
-  //       if (_challengesListget[widget.idChallenge]
-  //               .listeDeTache[n]
-  //               .description
-  //               .toString()
-  //               .replaceAll(unityPattern, "") ==
-  //           "youtube") {
-  //         youtubeList.add(getIdFromUrl(
-  //             _challengesListget[widget.idChallenge].listeDeTache[n].name));
-  //       }
-  //     }
-  //   }
-  // }
-
   @override
   void initState() {
     super.initState();
-   
 
     _controller = YoutubePlayerController(
       initialVideoId: widget.listeDeYoutube[0],

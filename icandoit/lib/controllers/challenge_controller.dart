@@ -1158,6 +1158,63 @@ class Challengecontroller extends ChangeNotifier {
     }
   }
 
+  void ajoutEcheance(int index) async {
+    _challengeList[index].restePaiement = _challengeList[index].restePaiement +
+        _challengeList[index].listeDeTache[0].cout;
+    _challengeList[index]
+        .listeDeTache
+        .add(_challengeList[index].listeDeTache[0]);
+    await _save();
+    _initChallengeList();
+    notifyListeners();
+    if (_challengeList[index].animatedpadding) {
+      for (var i = _challengeListSave.length - 1; i >= 0; i--) {
+        if (_challengeListSave[i].id == _challengeList[index].id) {
+          for (var n = _challengeListSave[i].listeDeTache.length - 1;
+              n >= 0;
+              n--) {
+            _challengeListSave[i].restePaiement =
+                _challengeList[index].restePaiement;
+
+            _challengeListSave[i]
+                .listeDeTache
+                .add(_challengeListSave[i].listeDeTache[0]);
+            await _saveSauvegarde();
+            return;
+          }
+        }
+      }
+    }
+  }
+
+  void retraitEcheance(int index) async {
+    _challengeList[index].restePaiement = _challengeList[index].restePaiement -
+        _challengeList[index].listeDeTache[0].cout;
+    _challengeList[indexSave].listeDeTache.removeAt(0);
+
+    await _save(remove: true);
+
+    _initChallengeList();
+    notifyListeners();
+    if (_challengeList[index].animatedpadding) {
+      for (var i = _challengeListSave.length - 1; i >= 0; i--) {
+        if (_challengeListSave[i].id == _challengeList[index].id) {
+          for (var n = _challengeListSave[i].listeDeTache.length - 1;
+              n >= 0;
+              n--) {
+            _challengeListSave[i].restePaiement =
+                _challengeList[index].restePaiement;
+
+            _challengeListSave[i].listeDeTache.removeAt(0);
+            await _save1Sauvegarde(
+                remove: true, idChallenge: _challengeList[index].id);
+            return;
+          }
+        }
+      }
+    }
+  }
+
   void addChallenge2({
     @required double cout,
     @required double prix,
@@ -1727,6 +1784,20 @@ class Challengecontroller extends ChangeNotifier {
     }
   }
 
+  void raccourciChallengeSave(
+      {List<String> raccourci, String name, String idChallenge}) async {
+    for (var i = _challengeListSave.length - 1; i >= 0; i--) {
+      for (var n = raccourci.length - 1; n >= 0; n--) {
+        if (_challengeListSave[i].id == raccourci[n]) {
+          _challengeListSave[i].idChallenge.add(idChallenge);
+        }
+      }
+    }
+    await _saveSauvegarde();
+    _initChallengeList();
+    notifyListeners();
+  }
+
   void raccourciChallenge(
       {List<String> raccourci, String name, String idChallenge}) async {
     for (var i = _challengeList.length - 1; i >= 0; i--) {
@@ -1736,6 +1807,8 @@ class Challengecontroller extends ChangeNotifier {
         }
       }
     }
+    raccourciChallengeSave(
+        raccourci: raccourci, name: name, idChallenge: idChallenge);
     await _save();
     _initChallengeList();
     notifyListeners();

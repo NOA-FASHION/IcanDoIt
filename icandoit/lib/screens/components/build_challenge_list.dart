@@ -181,7 +181,7 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                       center: new Text((percentage(chalenge.listeDeTache.length,
                                       int.parse(chalenge.totalChallenge)) *
                                   100)
-                              .toStringAsFixed(2) +
+                              .toStringAsFixed(0) +
                           "%"),
                       progressColor: Colors.green,
                     ),
@@ -287,7 +287,7 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                                           chalenge.listeDeTache.length,
                                           int.parse(chalenge.totalChallenge)) *
                                       100)
-                                  .toStringAsFixed(2) +
+                                  .toStringAsFixed(0) +
                               "%"),
                           progressColor: Colors.green,
                         ),

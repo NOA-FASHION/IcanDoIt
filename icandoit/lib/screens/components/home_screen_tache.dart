@@ -14,6 +14,8 @@ import 'package:lottie/lottie.dart';
 import 'package:nanoid/nanoid.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 import 'package:youtube_parser/youtube_parser.dart';
 
 // import '../../main.dart';
@@ -172,19 +174,18 @@ class _HomeTachesState extends State<HomeTaches> {
 
   bool idAllPlayYoutubeBool(List<ChallengeModel> _challengeList) {
     bool playYoutube = false;
-    for (var i = _challengeList.length - 1; i >= 0; i--) {
-      if (_challengeList[i].id == widget.id) {
-        for (var n = _challengeList[i].listeDeTache.length - 1; n >= 0; n--) {
-          if (_challengeList[i]
-                  .listeDeTache[n]
-                  .description
-                  .toString()
-                  .replaceAll(unityPattern, "") ==
-              "youtube") {
-            playYoutube = true;
-            return playYoutube;
-          }
-        }
+
+    for (var n = _challengeList[widget.indexChallenge].listeDeTache.length - 1;
+        n >= 0;
+        n--) {
+      if (_challengeList[widget.indexChallenge]
+              .listeDeTache[n]
+              .description
+              .toString()
+              .replaceAll(unityPattern, "") ==
+          "youtube") {
+        playYoutube = true;
+        return playYoutube;
       }
     }
     // print(idCallenge);
@@ -746,7 +747,8 @@ class _HomeTachesState extends State<HomeTaches> {
                               onTap: () {
                                 Navigator.of(context).push(MaterialPageRoute(
                                     builder: (context) => PlayAllYoutubeScreen(
-                                           variable.listeDeYoutube(widget.indexChallenge),
+                                          variable.listeDeYoutube(
+                                              widget.indexChallenge),
                                           widget.indexChallenge,
                                         )));
                               }, // button pressed
@@ -779,22 +781,103 @@ class _HomeTachesState extends State<HomeTaches> {
               alignment: Alignment.center,
               height: 130,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  // IconButton(
-                  //   alignment: Alignment.topRight,
-                  //   icon: Icon(
-                  //     Icons.money,
-                  //     color: Colors.black,
-                  //   ),
-                  //   onPressed: () {
-                  //     print(_challengesListget[widget.indexChallenge].name);
-                  //     print(
-                  //         _challengesListget[widget.indexChallenge].prixTotal);
-                  //     print(_challengesListget[widget.indexChallenge]
-                  //         .prixTotalBool);
-                  //   },
-                  // ),
+                  idChallengePaimentBool(_challengesListget)
+                      ? Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  right: 5, left: 5, top: 10),
+                              child: SizedBox.fromSize(
+                                size: Size(40, 40), // button width and height
+                                child: ClipOval(
+                                  child: Material(
+                                    color: Colors.blue, // button color
+                                    child: InkWell(
+                                      // splash color
+                                      splashColor: Colors.white,
+                                      onTap: () {
+                                        Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    PlayAllYoutubeScreen(
+                                                      variable.listeDeYoutube(
+                                                          widget
+                                                              .indexChallenge),
+                                                      widget.indexChallenge,
+                                                    )));
+                                      }, // button pressed
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: <Widget>[
+                                          Icon(
+                                            Icons.add,
+                                            size: 15,
+                                            color: Colors.white,
+                                          ), // icon
+                                          Text(
+                                            "Ajout",
+                                            style: TextStyle(
+                                                fontSize: 10,
+                                                color: Colors.white),
+                                          ), // text
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  right: 5, left: 5, top: 10),
+                              child: SizedBox.fromSize(
+                                size: Size(40, 40), // button width and height
+                                child: ClipOval(
+                                  child: Material(
+                                    color: Colors.blue, // button color
+                                    child: InkWell(
+                                      // splash color
+                                      splashColor: Colors.white,
+                                      onTap: () {
+                                        Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    PlayAllYoutubeScreen(
+                                                      variable.listeDeYoutube(
+                                                          widget
+                                                              .indexChallenge),
+                                                      widget.indexChallenge,
+                                                    )));
+                                      }, // button pressed
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: <Widget>[
+                                          Icon(
+                                            Icons.remove,
+                                            size: 15,
+                                            color: Colors.white,
+                                          ), // icon
+                                          Text(
+                                            "retrait",
+                                            style: TextStyle(
+                                                fontSize: 10,
+                                                color: Colors.white),
+                                          ), // text
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        )
+                      : SizedBox(width: 10),
                   idChallengeBool(_challengesListget)
                       // _challengesListget[widget.indexChallenge].prixTotalBool
                       ? Column(
@@ -1298,6 +1381,46 @@ class _HomeTachesState extends State<HomeTaches> {
                                     .validate()) {
                                   formKeyTache.currentState.save();
                                   setState(() {
+                                    Challengecontroller variable =
+                                        Provider.of<Challengecontroller>(
+                                            context,
+                                            listen: false);
+                                    List<ChallengeModel> _challengesListget =
+                                        variable.getChallenges();
+                                    if (idChallengeBool(_challengesListget) &&
+                                        double.parse(coutPaiment) > 0) {
+                                      showTopSnackBar(
+                                        context,
+                                        CustomSnackBar.success(
+                                          backgroundColor: Colors.blue,
+                                          icon: Icon(
+                                            Icons.delete,
+                                            size: 30,
+                                            color: Colors.white,
+                                          ),
+                                          message:
+                                              "vous ne pouvez pas mélanger un challenge paiement avec un challenge prix.",
+                                        ),
+                                      );
+                                      return;
+                                    } else if (idChallengePaimentBool(
+                                            _challengesListget) &&
+                                        double.parse(prixProduit) > 0) {
+                                      showTopSnackBar(
+                                        context,
+                                        CustomSnackBar.success(
+                                          backgroundColor: Colors.blue,
+                                          icon: Icon(
+                                            Icons.delete,
+                                            size: 30,
+                                            color: Colors.white,
+                                          ),
+                                          message:
+                                              "vous ne pouvez pas mélanger un challenge paiement avec un challenge prix.",
+                                        ),
+                                      );
+                                      return;
+                                    }
                                     Provider.of<Challengecontroller>(context,
                                             listen: false)
                                         .addChallenge2(
