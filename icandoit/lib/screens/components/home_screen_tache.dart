@@ -8,11 +8,13 @@ import 'package:icandoit/models/challenge_model.dart';
 // import 'package:icandoit/models/challenge_model.dart';
 import 'package:icandoit/screens/components/build_challenge_list_tache.dart';
 import 'package:icandoit/controllers/challenge_controller.dart';
+import 'package:icandoit/screens/components/playAllYoutube.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lottie/lottie.dart';
 import 'package:nanoid/nanoid.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
+import 'package:youtube_parser/youtube_parser.dart';
 
 // import '../../main.dart';
 // import '../home_screen.dart';
@@ -36,6 +38,7 @@ class _HomeTachesState extends State<HomeTaches> {
     duree: 'Durée',
     theoriePratique: 'Théorie-pratique',
   );
+  String unityPattern = "unity_challenge1.";
   String idChallenge1;
   String nombreEchenace;
   String nomAdresse;
@@ -147,6 +150,47 @@ class _HomeTachesState extends State<HomeTaches> {
     return numericRegex.hasMatch(string);
   }
 
+  List<String> listeDeYoutube(List<ChallengeModel> _challengeList) {
+    List<String> youtubeList = [];
+    for (var i = _challengeList.length - 1; i >= 0; i--) {
+      if (_challengeList[i].id == widget.id) {
+        for (var n = _challengeList[i].listeDeTache.length - 1; n >= 0; n--) {
+          if (_challengeList[i]
+                  .listeDeTache[n]
+                  .description
+                  .toString()
+                  .replaceAll(unityPattern, "") ==
+              "youtube") {
+            youtubeList
+                .add(getIdFromUrl(_challengeList[i].listeDeTache[n].name));
+          }
+        }
+      }
+    }
+    return youtubeList;
+  }
+
+  bool idAllPlayYoutubeBool(List<ChallengeModel> _challengeList) {
+    bool playYoutube = false;
+    for (var i = _challengeList.length - 1; i >= 0; i--) {
+      if (_challengeList[i].id == widget.id) {
+        for (var n = _challengeList[i].listeDeTache.length - 1; n >= 0; n--) {
+          if (_challengeList[i]
+                  .listeDeTache[n]
+                  .description
+                  .toString()
+                  .replaceAll(unityPattern, "") ==
+              "youtube") {
+            playYoutube = true;
+            return playYoutube;
+          }
+        }
+      }
+    }
+    // print(idCallenge);
+    return playYoutube;
+  }
+
   bool idChallengeBool(List<ChallengeModel> _challengeList) {
     bool idCallenge = false;
     for (var i = _challengeList.length - 1; i >= 0; i--) {
@@ -154,7 +198,7 @@ class _HomeTachesState extends State<HomeTaches> {
         idCallenge = _challengeList[i].prixTotalBool;
       }
     }
-    print(idCallenge);
+    // print(idCallenge);
     return idCallenge;
   }
 
@@ -687,6 +731,46 @@ class _HomeTachesState extends State<HomeTaches> {
                   ),
                 ),
               ),
+              idAllPlayYoutubeBool(_challengesListget)
+                  ? Padding(
+                      padding:
+                          const EdgeInsets.only(right: 15, left: 15, top: 10),
+                      child: SizedBox.fromSize(
+                        size: Size(50, 50), // button width and height
+                        child: ClipOval(
+                          child: Material(
+                            color: Colors.purple, // button color
+                            child: InkWell(
+                              // splash color
+                              splashColor: Colors.white,
+                              onTap: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => PlayAllYoutubeScreen(
+                                           variable.listeDeYoutube(widget.indexChallenge),
+                                          widget.indexChallenge,
+                                        )));
+                              }, // button pressed
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Icon(
+                                    Icons.playlist_play,
+                                    size: 20,
+                                    color: Colors.white,
+                                  ), // icon
+                                  Text(
+                                    "Play",
+                                    style: TextStyle(
+                                        fontSize: 10, color: Colors.white),
+                                  ), // text
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    )
+                  : SizedBox(width: 10),
             ],
             backgroundColor: Colors.blue,
             centerTitle: true,

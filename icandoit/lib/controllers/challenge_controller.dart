@@ -15,6 +15,7 @@ import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 import 'package:share/share.dart';
+import 'package:youtube_parser/youtube_parser.dart';
 
 const String keyAcces = "challengeList";
 const String keyAccesSAve = "challengeListSAve";
@@ -1669,6 +1670,28 @@ class Challengecontroller extends ChangeNotifier {
         return;
       }
     }
+  }
+
+  List<String> listeDeYoutube(int index) {
+    List<String> youtubeList = [];
+    print(_challengeList[index].id);
+    for (var n = _challengeList[index].listeDeTache.length - 1; n >= 0; n--) {
+      print(_challengeList[index]
+          .listeDeTache[n]
+          .description
+          .toString()
+          .replaceAll(unityPattern, ""));
+      if (_challengeList[index]
+              .listeDeTache[n]
+              .description
+              .toString()
+              .replaceAll(unityPattern, "") ==
+          "unity_challenge1.youtube") {
+        youtubeList
+            .add(getIdFromUrl(_challengeList[index].listeDeTache[n].name));
+      }
+    }
+    return youtubeList;
   }
 
   int returnIndexForName(String id) {
