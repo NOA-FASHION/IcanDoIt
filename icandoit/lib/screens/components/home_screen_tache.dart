@@ -1381,46 +1381,46 @@ class _HomeTachesState extends State<HomeTaches> {
                                     .validate()) {
                                   formKeyTache.currentState.save();
                                   setState(() {
-                                    Challengecontroller variable =
-                                        Provider.of<Challengecontroller>(
-                                            context,
-                                            listen: false);
-                                    List<ChallengeModel> _challengesListget =
-                                        variable.getChallenges();
-                                    if (idChallengeBool(_challengesListget) &&
-                                        double.parse(coutPaiment) > 0) {
-                                      showTopSnackBar(
-                                        context,
-                                        CustomSnackBar.success(
-                                          backgroundColor: Colors.blue,
-                                          icon: Icon(
-                                            Icons.delete,
-                                            size: 30,
-                                            color: Colors.white,
-                                          ),
-                                          message:
-                                              "vous ne pouvez pas mélanger un challenge paiement avec un challenge prix.",
-                                        ),
-                                      );
-                                      return;
-                                    } else if (idChallengePaimentBool(
-                                            _challengesListget) &&
-                                        double.parse(prixProduit) > 0) {
-                                      showTopSnackBar(
-                                        context,
-                                        CustomSnackBar.success(
-                                          backgroundColor: Colors.blue,
-                                          icon: Icon(
-                                            Icons.delete,
-                                            size: 30,
-                                            color: Colors.white,
-                                          ),
-                                          message:
-                                              "vous ne pouvez pas mélanger un challenge paiement avec un challenge prix.",
-                                        ),
-                                      );
-                                      return;
-                                    }
+                                    // Challengecontroller variable =
+                                    //     Provider.of<Challengecontroller>(
+                                    //         context,
+                                    //         listen: false);
+                                    // List<ChallengeModel> _challengesListget =
+                                    //     variable.getChallenges();
+                                    // if (idChallengeBool(_challengesListget) &&
+                                    //     double.parse(coutPaiment) > 0) {
+                                    //   showTopSnackBar(
+                                    //     context,
+                                    //     CustomSnackBar.success(
+                                    //       backgroundColor: Colors.blue,
+                                    //       icon: Icon(
+                                    //         Icons.delete,
+                                    //         size: 30,
+                                    //         color: Colors.white,
+                                    //       ),
+                                    //       message:
+                                    //           "vous ne pouvez pas mélanger un challenge paiement avec un challenge prix.",
+                                    //     ),
+                                    //   );
+                                    //   return;
+                                    // } else if (idChallengePaimentBool(
+                                    //         _challengesListget) &&
+                                    //     double.parse(prixProduit) > 0) {
+                                    //   showTopSnackBar(
+                                    //     context,
+                                    //     CustomSnackBar.success(
+                                    //       backgroundColor: Colors.blue,
+                                    //       icon: Icon(
+                                    //         Icons.delete,
+                                    //         size: 30,
+                                    //         color: Colors.white,
+                                    //       ),
+                                    //       message:
+                                    //           "vous ne pouvez pas mélanger un challenge paiement avec un challenge prix.",
+                                    //     ),
+                                    //   );
+                                    //   return;
+                                    // }
                                     Provider.of<Challengecontroller>(context,
                                             listen: false)
                                         .addChallenge2(
