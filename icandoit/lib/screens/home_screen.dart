@@ -79,6 +79,10 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     Challengecontroller variable1 =
         Provider.of<Challengecontroller>(context, listen: false);
     if (quotidient) {
+      print("quotidien:" + quotidient.toString());
+      print(nom);
+      print(description);
+      print(dateQuotidien);
       variable1.scheduleQuotidiendNotification(
           channelID: idNotif[0],
           channelName: nom,
@@ -88,6 +92,14 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           notificationBody: 'We are showing notification!',
           hours: int.parse(dateQuotidien));
     } else if (hebdoBool) {
+      print("hebdoBool:" + hebdoBool.toString());
+      print(nom);
+      print(description);
+      print(heure);
+      for (var n = totalDays.length - 1; n >= 0; n--) {
+        print(totalDays[n]);
+        print(idNotif[n]);
+      }
       for (var n = totalDays.length - 1; n >= 0; n--) {
         variable1.scheduleHebdodNotification(
             channelID: idNotif[n],
@@ -100,6 +112,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             hours: int.parse(heure));
       }
     } else if (dateBool) {
+      print("dateBool:" + dateBool.toString());
       variable1.scheduleMonthdNotification(
           channelID: idNotif[0],
           channelName: nom,
@@ -110,6 +123,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           days: int.parse(date),
           hours: int.parse(dateQuotidien));
     } else if (notificationBool) {
+      print("notificationBool:" + notificationBool.toString());
       variable1.scheduledNotifNotification(
           channelID: idNotif[0],
           channelName: nom,
@@ -225,16 +239,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 iconSize: 30,
                 onChanged: (String newValue) {
                   setState(() {
-                    idNotif = [];
-                    date = "";
-                    totalDays = [];
                     dateQuotidien = newValue;
                     heureTotal = newValue;
-                    notificationBool = false;
-                    hebdoBool = false;
-                    dateBool = false;
-                    quotidient = true;
-                    animatedpadding = true;
                   });
                 },
                 items: <String>[
@@ -1190,6 +1196,29 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                 } else if (formKey.currentState.validate()) {
                                   formKey.currentState.save();
                                   {
+                                    if (unityChallenge == "notification") {
+                                      heureTotal = '';
+                                    } else if (unityChallenge == "quotidien") {
+                                      idNotif = [];
+                                      date = "";
+                                      totalDays = [];
+                                      notificationBool = false;
+                                      hebdoBool = false;
+                                      dateBool = false;
+                                      quotidient = true;
+                                      animatedpadding = true;
+                                    } else if (unityChallenge == "normal" ||
+                                        unityChallenge == "haute") {
+                                      totalDays = [];
+                                      date = "";
+                                      animatedpadding = false;
+                                      quotidient = false;
+                                      dateBool = false;
+                                      notificationBool = false;
+                                      hebdoBool = false;
+                                      idNotif = [];
+                                      heureTotal = '';
+                                    }
                                     if (quotidient ||
                                         dateBool ||
                                         notificationBool) {
@@ -1202,22 +1231,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                         idNotif.add(
                                             customAlphabet("0123456789", 4));
                                       }
-                                    }
-                                    if (unityChallenge == "notification") {
-                                      heureTotal = '';
-                                    }
-
-                                    if (unityChallenge == "normal" ||
-                                        unityChallenge == "haute") {
-                                      totalDays = [];
-                                      date = "";
-                                      animatedpadding = false;
-                                      quotidient = false;
-                                      dateBool = false;
-                                      notificationBool = false;
-                                      hebdoBool = false;
-                                      idNotif = [];
-                                      heureTotal = '';
                                     }
 
                                     Provider.of<Challengecontroller>(context,

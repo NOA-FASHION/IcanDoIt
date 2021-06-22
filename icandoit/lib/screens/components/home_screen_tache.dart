@@ -40,12 +40,14 @@ class _HomeTachesState extends State<HomeTaches> {
     duree: 'Durée',
     theoriePratique: 'Théorie-pratique',
   );
+  bool isSwitched = false;
   String unityPattern = "unity_challenge1.";
   String idChallenge1;
   String nombreEchenace;
   String nomAdresse;
   String villeAdresse;
   String adresse;
+  String telephone;
   String paysAdresse;
   String prixProduit;
   String coutPaiment;
@@ -247,11 +249,73 @@ class _HomeTachesState extends State<HomeTaches> {
     return percent1;
   }
 
-  Widget selectdropdown(String resultat) {
+  void interditecheance2(List<ChallengeModel> _challengeList, dynamic context) {
+    if (_challengeList[widget.indexChallenge].listeDeTache.length > 0 &&
+        _challengeList[widget.indexChallenge]
+                .listeDeTache[0]
+                .description
+                .toString()
+                .replaceAll(unityPattern, "") !=
+            "echeancier") {
+      showTopSnackBar(
+        context,
+        CustomSnackBar.success(
+          backgroundColor: Colors.blue,
+          icon: Icon(
+            Icons.delete,
+            size: 30,
+            color: Colors.white,
+          ),
+          message:
+              "vous ne pouvez pas mélanger un challenge ordinaire avec un challenge échéancier.",
+        ),
+      );
+      retour();
+    }
+  }
+
+  void interditecheance(List<ChallengeModel> _challengeList, dynamic context) {
+    if (_challengeList[widget.indexChallenge].listeDeTache.length > 0 &&
+        _challengeList[widget.indexChallenge]
+                .listeDeTache[0]
+                .description
+                .toString()
+                .replaceAll(unityPattern, "") ==
+            "echeancier") {
+      showTopSnackBar(
+        context,
+        CustomSnackBar.success(
+          backgroundColor: Colors.blue,
+          icon: Icon(
+            Icons.delete,
+            size: 30,
+            color: Colors.white,
+          ),
+          message:
+              "vous ne pouvez pas mélanger un challenge échéancier avec un challenge ordinaire.",
+        ),
+      );
+      retour();
+    }
+  }
+
+  Future<Null> delay(int milliseconds) {
+    return new Future.delayed(new Duration(milliseconds: milliseconds));
+  }
+
+  retour() async {
+    await delay(500);
+    Navigator.pop(context);
+    unityChallenge = "evenement";
+  }
+
+  Widget selectdropdown(
+      String resultat, List<ChallengeModel> _challengeList, dynamic context) {
     Widget documentJoint = SizedBox(
       width: 1.0,
     );
     if (resultat == "video") {
+      interditecheance(_challengeList, context);
       documentJoint = Column(
         children: [
           Offstage(
@@ -289,6 +353,7 @@ class _HomeTachesState extends State<HomeTaches> {
         ],
       );
     } else if (resultat == "image") {
+      interditecheance(_challengeList, context);
       documentJoint = Column(
         children: [
           Offstage(
@@ -326,6 +391,7 @@ class _HomeTachesState extends State<HomeTaches> {
         ],
       );
     } else if (resultat == "url") {
+      interditecheance(_challengeList, context);
       documentJoint = TextFormField(
         onSaved: (value) {
           coutPaiment = "0";
@@ -351,6 +417,7 @@ class _HomeTachesState extends State<HomeTaches> {
                 OutlineInputBorder(borderRadius: BorderRadius.circular(15.0))),
       );
     } else if (resultat == "adresse") {
+      // interditecheance(_challengeList, context);
       documentJoint = Column(
         children: [
           TextFormField(
@@ -378,6 +445,35 @@ class _HomeTachesState extends State<HomeTaches> {
                 contentPadding:
                     EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 labelText: "Nom",
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15.0))),
+          ),
+          SizedBox(
+            height: 7.0,
+          ),
+          TextFormField(
+            textCapitalization: TextCapitalization.sentences,
+            onSaved: (value) {
+              telephone = value;
+            },
+            validator: (value) {
+              if (value.isEmpty) {
+                return "Merci d'entrer un numéro de téléphone";
+              }
+              return null;
+            },
+            decoration: InputDecoration(
+                focusedBorder: OutlineInputBorder(
+                    borderSide:
+                        BorderSide(width: 2.0, color: Colors.blueAccent),
+                    borderRadius: BorderRadius.circular(15.0)),
+                enabledBorder: OutlineInputBorder(
+                    borderSide:
+                        BorderSide(width: 1.0, color: Colors.blueAccent),
+                    borderRadius: BorderRadius.circular(15.0)),
+                contentPadding:
+                    EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                labelText: "Téléphone",
                 border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15.0))),
           ),
@@ -446,12 +542,15 @@ class _HomeTachesState extends State<HomeTaches> {
             textCapitalization: TextCapitalization.sentences,
             onSaved: (value) {
               paysAdresse = value;
+
               dataJoin = nomAdresse +
-                  ", " +
+                  "/ " +
+                  telephone +
+                  "/ " +
                   adresse +
-                  ", " +
+                  "/ " +
                   villeAdresse +
-                  ", " +
+                  "/ " +
                   paysAdresse;
             },
             validator: (value) {
@@ -478,6 +577,7 @@ class _HomeTachesState extends State<HomeTaches> {
         ],
       );
     } else if (resultat == "youtube") {
+      interditecheance(_challengeList, context);
       documentJoint = TextFormField(
         onSaved: (value) {
           coutPaiment = "0";
@@ -503,6 +603,7 @@ class _HomeTachesState extends State<HomeTaches> {
                 OutlineInputBorder(borderRadius: BorderRadius.circular(15.0))),
       );
     } else if (resultat == "commentaire") {
+      interditecheance(_challengeList, context);
       documentJoint = SizedBox(
         width: 200.0,
         height: 300.0,
@@ -535,6 +636,7 @@ class _HomeTachesState extends State<HomeTaches> {
         ),
       );
     } else if (resultat == "achat") {
+      interditecheance(_challengeList, context);
       documentJoint = Row(
         children: [
           Container(
@@ -562,7 +664,7 @@ class _HomeTachesState extends State<HomeTaches> {
                       borderRadius: BorderRadius.circular(15.0)),
                   contentPadding:
                       EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  labelText: "Achat",
+                  labelText: "Prix",
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15.0))),
             ),
@@ -571,10 +673,11 @@ class _HomeTachesState extends State<HomeTaches> {
         ],
       );
     } else if (resultat == "paiement") {
+      interditecheance(_challengeList, context);
       documentJoint = Row(
         children: [
           Container(
-            width: 100,
+            width: 110,
             child: TextFormField(
               onSaved: (value) {
                 prixProduit = "0";
@@ -597,7 +700,7 @@ class _HomeTachesState extends State<HomeTaches> {
                       borderRadius: BorderRadius.circular(15.0)),
                   contentPadding:
                       EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  labelText: "Paiement",
+                  labelText: "Montant",
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15.0))),
             ),
@@ -606,12 +709,13 @@ class _HomeTachesState extends State<HomeTaches> {
         ],
       );
     } else if (resultat == "echeancier") {
+      interditecheance2(_challengeList, context);
       documentJoint = Row(
         children: [
           Column(
             children: [
               Container(
-                width: 100,
+                width: 120,
                 child: TextFormField(
                   onSaved: (value) {
                     prixProduit = "0";
@@ -643,7 +747,7 @@ class _HomeTachesState extends State<HomeTaches> {
                 height: 7.0,
               ),
               Container(
-                width: 100,
+                width: 200,
                 child: TextFormField(
                   onSaved: (value) {
                     nombreEchenace = value;
@@ -697,6 +801,28 @@ class _HomeTachesState extends State<HomeTaches> {
           child: AppBar(
             title: Text(something),
             actions: [
+              idChallengePaimentBool(_challengesListget)
+                  ? Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Switch(
+                          value: isSwitched,
+                          onChanged: (value) {
+                            setState(() {
+                              isSwitched = value;
+                              variable.activeEcheance(value);
+                            });
+                          },
+                          activeTrackColor: Colors.yellow,
+                          activeColor: Colors.orangeAccent,
+                        ),
+                        Text(
+                          "Prélèvement auto",
+                          style: TextStyle(fontSize: 6, color: Colors.white),
+                        ),
+                      ],
+                    )
+                  : SizedBox(width: 10),
               Padding(
                 padding: const EdgeInsets.only(right: 15, left: 15, top: 10),
                 child: SizedBox.fromSize(
@@ -784,6 +910,80 @@ class _HomeTachesState extends State<HomeTaches> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   idChallengePaimentBool(_challengesListget)
+                      ? Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Card(
+                              color: Colors.transparent,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5.0),
+                              ),
+                              elevation: 25.0,
+                              child: Row(
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                        color: Colors.blue,
+                                        borderRadius: BorderRadius.circular(5)),
+                                    padding: EdgeInsets.all(4),
+                                    margin: EdgeInsets.only(right: 7),
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          _challengesListget[indexChallenge]
+                                                  .coutTotal
+                                                  .toStringAsFixed(2) +
+                                              "€",
+                                          style: TextStyle(
+                                              fontSize: 10,
+                                              color: Colors.black),
+                                        ),
+                                        Text(
+                                          "Total paiement",
+                                          style: TextStyle(
+                                              fontSize: 10,
+                                              color: Colors.black),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Container(
+                                    decoration: BoxDecoration(
+                                        color: Colors.blue,
+                                        borderRadius: BorderRadius.circular(5)),
+                                    padding: EdgeInsets.all(4),
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          _challengesListget[indexChallenge]
+                                                  .restePaiement
+                                                  .toStringAsFixed(2) +
+                                              "€",
+                                          style: TextStyle(
+                                              fontSize: 10,
+                                              color: Colors.black),
+                                        ),
+                                        Text(
+                                          "Reste à payer",
+                                          style: TextStyle(
+                                              fontSize: 10,
+                                              color: Colors.black),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ), // icon
+                            // text
+                          ],
+                        )
+                      : SizedBox(width: 10),
+                  Image.asset(
+                    'assets/logo.png',
+                    width: 55,
+                  ),
+                  idChallengePaimentBool(_challengesListget)
                       ? Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
@@ -791,7 +991,7 @@ class _HomeTachesState extends State<HomeTaches> {
                               padding: const EdgeInsets.only(
                                   right: 5, left: 5, top: 10),
                               child: SizedBox.fromSize(
-                                size: Size(40, 40), // button width and height
+                                size: Size(30, 30), // button width and height
                                 child: ClipOval(
                                   child: Material(
                                     color: Colors.blue, // button color
@@ -815,13 +1015,13 @@ class _HomeTachesState extends State<HomeTaches> {
                                         children: <Widget>[
                                           Icon(
                                             Icons.add,
-                                            size: 15,
+                                            size: 10,
                                             color: Colors.white,
                                           ), // icon
                                           Text(
                                             "Ajout",
                                             style: TextStyle(
-                                                fontSize: 10,
+                                                fontSize: 7,
                                                 color: Colors.white),
                                           ), // text
                                         ],
@@ -835,7 +1035,7 @@ class _HomeTachesState extends State<HomeTaches> {
                               padding: const EdgeInsets.only(
                                   right: 5, left: 5, top: 10),
                               child: SizedBox.fromSize(
-                                size: Size(40, 40), // button width and height
+                                size: Size(30, 30), // button width and height
                                 child: ClipOval(
                                   child: Material(
                                     color: Colors.blue, // button color
@@ -859,13 +1059,13 @@ class _HomeTachesState extends State<HomeTaches> {
                                         children: <Widget>[
                                           Icon(
                                             Icons.remove,
-                                            size: 15,
+                                            size: 10,
                                             color: Colors.white,
                                           ), // icon
                                           Text(
                                             "retrait",
                                             style: TextStyle(
-                                                fontSize: 10,
+                                                fontSize: 7,
                                                 color: Colors.white),
                                           ), // text
                                         ],
@@ -951,95 +1151,6 @@ class _HomeTachesState extends State<HomeTaches> {
                           ],
                         )
                       : SizedBox(width: 10),
-                  Image.asset(
-                    'assets/logo.png',
-                    width: 55,
-                  ),
-                  // IconButton(
-                  //   alignment: Alignment.topRight,
-                  //   icon: Icon(
-                  //     Icons.paid_outlined,
-                  //     color: Colors.black,
-                  //   ),
-                  //   onPressed: () {
-                  //     print(_challengesListget[widget.indexChallenge].name);
-                  //     print(
-                  //         _challengesListget[widget.indexChallenge].coutTotal);
-                  //     print(_challengesListget[widget.indexChallenge]
-                  //         .coutTotalBool);
-                  //   },
-                  // ),
-                  // _challengesListget[widget.indexChallenge].coutTotalBool
-                  idChallengePaimentBool(_challengesListget)
-                      ? Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Card(
-                              color: Colors.transparent,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5.0),
-                              ),
-                              elevation: 25.0,
-                              child: Row(
-                                children: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        color: Colors.blue,
-                                        borderRadius: BorderRadius.circular(5)),
-                                    padding: EdgeInsets.all(4),
-                                    margin: EdgeInsets.only(right: 7),
-                                    child: Column(
-                                      children: [
-                                        Text(
-                                          _challengesListget[indexChallenge]
-                                                  .coutTotal
-                                                  .toStringAsFixed(2) +
-                                              "€",
-                                          style: TextStyle(
-                                              fontSize: 10,
-                                              color: Colors.black),
-                                        ),
-                                        Text(
-                                          "Total paiement",
-                                          style: TextStyle(
-                                              fontSize: 10,
-                                              color: Colors.black),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        color: Colors.blue,
-                                        borderRadius: BorderRadius.circular(5)),
-                                    padding: EdgeInsets.all(4),
-                                    child: Column(
-                                      children: [
-                                        Text(
-                                          _challengesListget[indexChallenge]
-                                                  .restePaiement
-                                                  .toStringAsFixed(2) +
-                                              "€",
-                                          style: TextStyle(
-                                              fontSize: 10,
-                                              color: Colors.black),
-                                        ),
-                                        Text(
-                                          "Reste à payer",
-                                          style: TextStyle(
-                                              fontSize: 10,
-                                              color: Colors.black),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ), // icon
-                            // text
-                          ],
-                        )
-                      : SizedBox(width: 10),
                 ],
               ),
               decoration: BoxDecoration(
@@ -1083,6 +1194,8 @@ class _HomeTachesState extends State<HomeTaches> {
   }
 
   FloatingActionButton buildBottomSheet() {
+    Challengecontroller variable = Provider.of<Challengecontroller>(context);
+    List<ChallengeModel> _challengesListget = variable.getChallenges();
     return FloatingActionButton(
         child: Icon(Icons.add),
         backgroundColor: Colors.orange[900],
@@ -1356,7 +1469,8 @@ class _HomeTachesState extends State<HomeTaches> {
                           SizedBox(
                             height: 15.0,
                           ),
-                          selectdropdown(unityChallenge),
+                          selectdropdown(
+                              unityChallenge, _challengesListget, context),
                           InkWell(
                               onTap: () {
                                 if (unityChallenge == "echeancier") {
@@ -1381,46 +1495,6 @@ class _HomeTachesState extends State<HomeTaches> {
                                     .validate()) {
                                   formKeyTache.currentState.save();
                                   setState(() {
-                                    // Challengecontroller variable =
-                                    //     Provider.of<Challengecontroller>(
-                                    //         context,
-                                    //         listen: false);
-                                    // List<ChallengeModel> _challengesListget =
-                                    //     variable.getChallenges();
-                                    // if (idChallengeBool(_challengesListget) &&
-                                    //     double.parse(coutPaiment) > 0) {
-                                    //   showTopSnackBar(
-                                    //     context,
-                                    //     CustomSnackBar.success(
-                                    //       backgroundColor: Colors.blue,
-                                    //       icon: Icon(
-                                    //         Icons.delete,
-                                    //         size: 30,
-                                    //         color: Colors.white,
-                                    //       ),
-                                    //       message:
-                                    //           "vous ne pouvez pas mélanger un challenge paiement avec un challenge prix.",
-                                    //     ),
-                                    //   );
-                                    //   return;
-                                    // } else if (idChallengePaimentBool(
-                                    //         _challengesListget) &&
-                                    //     double.parse(prixProduit) > 0) {
-                                    //   showTopSnackBar(
-                                    //     context,
-                                    //     CustomSnackBar.success(
-                                    //       backgroundColor: Colors.blue,
-                                    //       icon: Icon(
-                                    //         Icons.delete,
-                                    //         size: 30,
-                                    //         color: Colors.white,
-                                    //       ),
-                                    //       message:
-                                    //           "vous ne pouvez pas mélanger un challenge paiement avec un challenge prix.",
-                                    //     ),
-                                    //   );
-                                    //   return;
-                                    // }
                                     Provider.of<Challengecontroller>(context,
                                             listen: false)
                                         .addChallenge2(

@@ -17,7 +17,7 @@ class AdressMap extends StatefulWidget {
 class _AdressMapState extends State<AdressMap> {
   @override
   Widget build(BuildContext context) {
-    List<String> result = widget.adresse.split(", ");
+    List<String> result = widget.adresse.split("/ ");
     void _launchMapsUrl() async {
       // final url =
       //     'comgooglemaps://?daddr=${Uri.encodeFull("genipa,ducos,centre commercial")}&directionsmode=driving';
@@ -85,27 +85,49 @@ class _AdressMapState extends State<AdressMap> {
                   padding: EdgeInsets.all(4),
                   margin: EdgeInsets.all(10),
                   child: Text("Nom: " + result[0])),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                      decoration: BoxDecoration(
+                          color: Colors.blue,
+                          borderRadius: BorderRadius.circular(5)),
+                      padding: EdgeInsets.all(4),
+                      margin: EdgeInsets.all(10),
+                      child: Text("Téléphone: " + result[1])),
+                  IconButton(
+                    alignment: Alignment.topRight,
+                    icon: Icon(
+                      Icons.phone,
+                      color: Colors.black,
+                    ),
+                    onPressed: () {
+                      launch("tel://${result[1]}");
+                    },
+                  ),
+                ],
+              ),
               Container(
                   decoration: BoxDecoration(
                       color: Colors.blue,
                       borderRadius: BorderRadius.circular(5)),
                   padding: EdgeInsets.all(4),
                   margin: EdgeInsets.all(10),
-                  child: Text("Adresse: " + result[1])),
+                  child: Text("Adresse: " + result[2])),
               Container(
                   decoration: BoxDecoration(
                       color: Colors.blue,
                       borderRadius: BorderRadius.circular(5)),
                   padding: EdgeInsets.all(4),
                   margin: EdgeInsets.all(10),
-                  child: Text("Commune: " + result[2])),
+                  child: Text("Commune: " + result[3])),
               Container(
                   decoration: BoxDecoration(
                       color: Colors.blue,
                       borderRadius: BorderRadius.circular(5)),
                   padding: EdgeInsets.all(4),
                   margin: EdgeInsets.all(10),
-                  child: Text("Pays: " + result[3])),
+                  child: Text("Pays: " + result[4])),
               Container(
                 margin: EdgeInsets.only(top: 40),
                 child: InkWell(

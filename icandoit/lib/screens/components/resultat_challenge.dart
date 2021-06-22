@@ -24,6 +24,7 @@ class _ResultaChallengeState extends State<ResultaChallenge>
     with SingleTickerProviderStateMixin {
   // ChallengeDays challengeDaysResult;
   // Challengeyesterday challengeyesterdayResult;
+  bool isSwitched;
   String resultaChallenge(int nbchallengeValide) {
     String resultat = "assets/succes0.json";
     if (nbchallengeValide == 0) {
@@ -36,6 +37,22 @@ class _ResultaChallengeState extends State<ResultaChallenge>
       resultat = "assets/succes1.json";
     }
     return resultat;
+  }
+
+  void activeNotif(Challengecontroller variable2, bool isSwitch) {
+    if (isSwitch) {
+      variable2.scheduleQuotidiendNotification(
+          channelID: "10098273472",
+          channelName: "ChallenDays",
+          channelDesc: "Résutats de votre journée",
+          notificationId: 10098273472,
+          notificationTitle: 'Date Tracker Test',
+          notificationBody: 'We are showing notification!',
+          hours: 19);
+    } else if (isSwitch) {
+    } else if (isSwitch) {
+      variable2.cancelNotificationById(10098273472);
+    }
   }
 
   int currentPage = 0;
@@ -252,7 +269,7 @@ class _ResultaChallengeState extends State<ResultaChallenge>
                     padding: EdgeInsets.only(right: 30.0),
                     alignment: Alignment.centerRight,
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Image.asset(
                           'assets/logo.png',
@@ -297,12 +314,50 @@ class _ResultaChallengeState extends State<ResultaChallenge>
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  "Score des challenges".toUpperCase(),
-                                  style: TextStyle(fontSize: 20),
-                                ),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    height: 70,
+                                    padding: EdgeInsets.only(right: 22),
+                                    child: Card(
+                                      color: Colors.blue,
+                                      elevation: 25.0,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      ),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Switch(
+                                            value: isSwitched,
+                                            onChanged: (value) {
+                                              setState(() {
+                                                isSwitched = value;
+                                              });
+                                            },
+                                            activeTrackColor: Colors.yellow,
+                                            activeColor: Colors.orangeAccent,
+                                          ),
+                                          Text(
+                                            "Notification",
+                                            style: TextStyle(
+                                                fontSize: 7,
+                                                color: Colors.white),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      "Score des challenges".toUpperCase(),
+                                      style: TextStyle(fontSize: 20),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ),

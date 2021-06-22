@@ -286,9 +286,10 @@ class Challengecontroller extends ChangeNotifier {
     return scheduledDate;
   }
 
-  tz.TZDateTime _nextInstanceOfMondayTenAM(int hours, String Weekdays) {
+  tz.TZDateTime _nextInstanceOfMondayTenAM(int hours, String weekdays) {
+    print(transformDate(weekdays));
     tz.TZDateTime scheduledDate = _nextInstanceOfTenAM(hours);
-    while (scheduledDate.weekday != transformDate(Weekdays)) {
+    while (scheduledDate.weekday != transformDate(weekdays)) {
       scheduledDate = scheduledDate.add(const Duration(days: 1));
     }
     return scheduledDate;
@@ -495,19 +496,26 @@ class Challengecontroller extends ChangeNotifier {
     return daysFinal;
   }
 
+  void activeEcheance(bool isSwitch) {
+    bool activeEcehance1;
+    activeEcehance1 = isSwitch;
+  }
+
   void removeEcheance() async {
     for (var i = _challengeListSave.length - 1; i >= 0; i--) {
       if (_challengeListSave[i].coutTotal > 0) {
-        print(_challengeListSave[i].listeDeTache[0].description.toString());
-        if (_challengeListSave[i].listeDeTache[0].description.toString() ==
-            "unity_challenge1.echeancier") {
-          _challengeListSave[i].restePaiement =
-              _challengeListSave[i].restePaiement -
-                  _challengeListSave[i].listeDeTache[0].cout;
-          _challengeListSave[i].listeDeTache.removeAt(0);
-          await _save1Sauvegarde(
-              remove: true, idChallenge: _challengeListSave[i].id);
-          return;
+        if (_challengeListSave[i].listeDeTache.length > 0) {
+          print(_challengeListSave[i].listeDeTache[0].description.toString());
+          if (_challengeListSave[i].listeDeTache[0].description.toString() ==
+              "unity_challenge1.echeancier") {
+            _challengeListSave[i].restePaiement =
+                _challengeListSave[i].restePaiement -
+                    _challengeListSave[i].listeDeTache[0].cout;
+            _challengeListSave[i].listeDeTache.removeAt(0);
+            await _save1Sauvegarde(
+                remove: true, idChallenge: _challengeListSave[i].id);
+            return;
+          }
         }
       }
     }
