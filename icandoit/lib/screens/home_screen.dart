@@ -968,7 +968,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
   FloatingActionButton buildBottomSheet() {
     return FloatingActionButton(
-        child: Lottie.asset('assets/float.json'),
+        // child: Lottie.asset('assets/float.json'),
+        child: Icon(Icons.add),
+        backgroundColor: Colors.orange[900],
         onPressed: () {
           _bottomSheetController = scaffoldkey.currentState.showBottomSheet(
             (context) {
