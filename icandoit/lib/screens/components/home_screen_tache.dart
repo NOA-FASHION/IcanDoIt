@@ -216,6 +216,17 @@ class _HomeTachesState extends State<HomeTaches> {
     return idCallenge;
   }
 
+  bool idChallengeEcheanceBool(List<ChallengeModel> _challengeList) {
+    bool idCallenge = false;
+    for (var i = _challengeList.length - 1; i >= 0; i--) {
+      if (_challengeList[i].id == widget.id) {
+        idCallenge = _challengeList[i].echeancierBoll;
+      }
+    }
+    print(idCallenge);
+    return idCallenge;
+  }
+
   void initState() {
     // Challengecontroller variable = Provider.of<Challengecontroller>(context);
     // idChallenge1 = variable.getChallenges()[widget.indexChallenge].id;
@@ -789,7 +800,7 @@ class _HomeTachesState extends State<HomeTaches> {
   Widget build(BuildContext context) {
     Challengecontroller variable = Provider.of<Challengecontroller>(context);
     List<ChallengeModel> _challengesListget = variable.getChallenges();
-
+    isSwitched = _challengesListget[widget.indexChallenge].prelevementAutoBool;
     // if (_challengesListget[widget.indexChallenge].coutTotal > 0) {
     //   courBool = true;
     // }
@@ -801,7 +812,7 @@ class _HomeTachesState extends State<HomeTaches> {
           child: AppBar(
             title: Text(something),
             actions: [
-              idChallengePaimentBool(_challengesListget)
+              idChallengeEcheanceBool(_challengesListget)
                   ? Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
@@ -810,7 +821,8 @@ class _HomeTachesState extends State<HomeTaches> {
                           onChanged: (value) {
                             setState(() {
                               isSwitched = value;
-                              variable.activeEcheance(value);
+                              variable.activeEcheance(
+                                  value, widget.indexChallenge);
                             });
                           },
                           activeTrackColor: Colors.yellow,
@@ -983,7 +995,7 @@ class _HomeTachesState extends State<HomeTaches> {
                     'assets/logo.png',
                     width: 55,
                   ),
-                  idChallengePaimentBool(_challengesListget)
+                  idChallengeEcheanceBool(_challengesListget)
                       ? Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
@@ -999,15 +1011,8 @@ class _HomeTachesState extends State<HomeTaches> {
                                       // splash color
                                       splashColor: Colors.white,
                                       onTap: () {
-                                        Navigator.of(context).push(
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    PlayAllYoutubeScreen(
-                                                      variable.listeDeYoutube(
-                                                          widget
-                                                              .indexChallenge),
-                                                      widget.indexChallenge,
-                                                    )));
+                                        variable.ajoutEcheance(
+                                            widget.indexChallenge);
                                       }, // button pressed
                                       child: Column(
                                         mainAxisAlignment:
@@ -1043,15 +1048,8 @@ class _HomeTachesState extends State<HomeTaches> {
                                       // splash color
                                       splashColor: Colors.white,
                                       onTap: () {
-                                        Navigator.of(context).push(
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    PlayAllYoutubeScreen(
-                                                      variable.listeDeYoutube(
-                                                          widget
-                                                              .indexChallenge),
-                                                      widget.indexChallenge,
-                                                    )));
+                                        variable.retraitEcheance(
+                                            widget.indexChallenge);
                                       }, // button pressed
                                       child: Column(
                                         mainAxisAlignment:
@@ -1471,8 +1469,15 @@ class _HomeTachesState extends State<HomeTaches> {
                           ),
                           selectdropdown(
                               unityChallenge, _challengesListget, context),
-                          InkWell(
-                              onTap: () {
+                          Center(
+                            child: IconButton(
+                              iconSize: 50,
+                              alignment: Alignment.topRight,
+                              icon: Icon(
+                                Icons.save,
+                                color: Colors.orange,
+                              ),
+                              onPressed: () {
                                 if (unityChallenge == "echeancier") {
                                   if (formKeyTache.currentState.validate()) {
                                     formKeyTache.currentState.save();
@@ -1513,10 +1518,54 @@ class _HomeTachesState extends State<HomeTaches> {
                                   Navigator.pop(context);
                                 }
                               },
-                              child: Container(
-                                  width: 120.0,
-                                  height: 120.0,
-                                  child: Lottie.asset('assets/save1.json'))),
+                            ),
+                          ),
+                          // InkWell(
+                          //     onTap: () {
+                          //       if (unityChallenge == "echeancier") {
+                          //         if (formKeyTache.currentState.validate()) {
+                          //           formKeyTache.currentState.save();
+                          //           Provider.of<Challengecontroller>(context,
+                          //                   listen: false)
+                          //               .generateList(
+                          //             widget.animatedpadding,
+                          //             widget.id,
+                          //             widget.indexChallenge,
+                          //             int.parse(nombreEchenace),
+                          //             double.parse(coutPaiment),
+                          //             unityChallenge,
+                          //             targetChallenge,
+                          //             formations,
+                          //             double.parse(prixProduit),
+                          //           );
+                          //           Navigator.pop(context);
+                          //         }
+                          //       } else if (formKeyTache.currentState
+                          //           .validate()) {
+                          //         formKeyTache.currentState.save();
+                          //         setState(() {
+                          //           Provider.of<Challengecontroller>(context,
+                          //                   listen: false)
+                          //               .addChallenge2(
+                          //                   prix: double.parse(prixProduit),
+                          //                   cout: double.parse(coutPaiment),
+                          //                   id: nanoid(10),
+                          //                   index: widget.indexChallenge,
+                          //                   animatedpadding: animatedpadding,
+                          //                   totalChallenge: '1',
+                          //                   idListChallenge: widget.id,
+                          //                   name: dataJoin,
+                          //                   description: unityChallenge,
+                          //                   tache: targetChallenge,
+                          //                   formation: formations);
+                          //         });
+                          //         Navigator.pop(context);
+                          //       }
+                          //     },
+                          //     child: Container(
+                          //         width: 120.0,
+                          //         height: 120.0,
+                          //         child: Lottie.asset('assets/save1.json'))),
                         ],
                       ),
                     ),

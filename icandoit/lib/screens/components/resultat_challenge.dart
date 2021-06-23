@@ -39,22 +39,6 @@ class _ResultaChallengeState extends State<ResultaChallenge>
     return resultat;
   }
 
-  void activeNotif(Challengecontroller variable2, bool isSwitch) {
-    if (isSwitch) {
-      variable2.scheduleQuotidiendNotification(
-          channelID: "10098273472",
-          channelName: "ChallenDays",
-          channelDesc: "Résutats de votre journée",
-          notificationId: 10098273472,
-          notificationTitle: 'Date Tracker Test',
-          notificationBody: 'We are showing notification!',
-          hours: 19);
-    } else if (isSwitch) {
-    } else if (isSwitch) {
-      variable2.cancelNotificationById(10098273472);
-    }
-  }
-
   int currentPage = 0;
   FancyDrawerController _controller;
   void initState() {
@@ -79,6 +63,8 @@ class _ResultaChallengeState extends State<ResultaChallenge>
     ChallengeDays challengeDaysResult = variable2.getChallengeDays();
     Challengeyesterday challengeyesterdayResult =
         variable2.getChallengeyesterday();
+    isSwitched = challengeDaysResult.notifcationResultBool;
+    print(challengeDaysResult.notifcationResultBool);
     List<VBarChartModel> bardata = [
       VBarChartModel(
         label: "Challenges validés",
@@ -159,7 +145,7 @@ class _ResultaChallengeState extends State<ResultaChallenge>
                   width: 5.0,
                 ),
                 Text(
-                  "Sauvegare challenge",
+                  "Sauvegarde challenge",
                   style: TextStyle(
                     fontSize: 18,
                     color: Colors.purple,
@@ -335,6 +321,8 @@ class _ResultaChallengeState extends State<ResultaChallenge>
                                             onChanged: (value) {
                                               setState(() {
                                                 isSwitched = value;
+                                                variable2
+                                                    .activeResultat(isSwitched);
                                               });
                                             },
                                             activeTrackColor: Colors.yellow,

@@ -496,26 +496,68 @@ class Challengecontroller extends ChangeNotifier {
     return daysFinal;
   }
 
-  void activeEcheance(bool isSwitch) {
-    bool activeEcehance1;
-    activeEcehance1 = isSwitch;
+  void activeEcheance(bool isSwitch, int index) async {
+    _challengeList[index].prelevementAutoBool = isSwitch;
+    await _save();
+    _initChallengeList();
+    notifyListeners();
   }
 
+  void activeResultat(bool isSwitch) async {
+    challengeDays.notifcationResultBool = isSwitch;
+    await _saveChallendays();
+    _initChallengeListStartChallenge();
+    activeNotif();
+  }
+
+  void activeNotif() {
+    if (challengeDays.notifcationResultBool) {
+      scheduleQuotidiendNotification(
+          channelID: "10098273",
+          channelName: "ChallenDays",
+          channelDesc: "Résutats de votre journée",
+          notificationId: 10098273,
+          notificationTitle: 'Date Tracker Test',
+          notificationBody: 'We are showing notification!',
+          hours: 19);
+    } else if (!challengeDays.notifcationResultBool) {
+      cancelNotificationById(10098273);
+    }
+  }
+
+  // void removeEcheance() async {
+  //   for (var i = _challengeListSave.length - 1; i >= 0; i--) {
+  //     if (_challengeListSave[i].coutTotal > 0) {
+  //       if (_challengeListSave[i].listeDeTache.length > 0) {
+  //         print(_challengeListSave[i].listeDeTache[0].description.toString());
+  //         if (_challengeListSave[i].listeDeTache[0].description.toString() ==
+  //             "unity_challenge1.echeancier") {
+  //           _challengeListSave[i].restePaiement =
+  //               _challengeListSave[i].restePaiement -
+  //                   _challengeListSave[i].listeDeTache[0].cout;
+  //           _challengeListSave[i].listeDeTache.removeAt(0);
+  //           await _save1Sauvegarde(
+  //               remove: true, idChallenge: _challengeListSave[i].id);
+  //           return;
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
   void removeEcheance() async {
     for (var i = _challengeListSave.length - 1; i >= 0; i--) {
       if (_challengeListSave[i].coutTotal > 0) {
-        if (_challengeListSave[i].listeDeTache.length > 0) {
-          print(_challengeListSave[i].listeDeTache[0].description.toString());
-          if (_challengeListSave[i].listeDeTache[0].description.toString() ==
-              "unity_challenge1.echeancier") {
-            _challengeListSave[i].restePaiement =
-                _challengeListSave[i].restePaiement -
-                    _challengeListSave[i].listeDeTache[0].cout;
-            _challengeListSave[i].listeDeTache.removeAt(0);
-            await _save1Sauvegarde(
-                remove: true, idChallenge: _challengeListSave[i].id);
-            return;
-          }
+        if (_challengeListSave[i].echeancierBoll &&
+            _challengeListSave[i].prelevementAutoBool) {
+          // print(_challengeListSave[i].listeDeTache[0].description.toString());
+
+          _challengeListSave[i].restePaiement =
+              _challengeListSave[i].restePaiement -
+                  _challengeListSave[i].listeDeTache[0].cout;
+          _challengeListSave[i].listeDeTache.removeAt(0);
+          await _save1Sauvegarde(
+              remove: true, idChallenge: _challengeListSave[i].id);
+          return;
         }
       }
     }
@@ -612,6 +654,8 @@ class Challengecontroller extends ChangeNotifier {
   void challegListSaveShedule(int index) async {
     _challengeList.add(
       ChallengeModel(
+          prelevementAutoBool: _challengeListSave[index].prelevementAutoBool,
+          echeancierBoll: _challengeListSave[index].echeancierBoll,
           previsions: _challengeListSave[index].previsions,
           restePaiement: _challengeListSave[index].restePaiement,
           coutTotalBool: _challengeListSave[index].coutTotalBool,
@@ -670,7 +714,9 @@ class Challengecontroller extends ChangeNotifier {
 
   void startChallendays() async {
     DateTime today = new DateTime.now();
-    if (challengeDays == null) {
+    if (challengeDays.date == null) {
+      print("startChallengeDay");
+      challengeDays.notifcationResultBool = false;
       challengeDays.date = DateFormat('EEEE, d MMM, yyyy').format(today);
       challengeDays.nbChallengeEnCours = "0";
       challengeDays.nbTacheEnCours = "0";
@@ -1356,6 +1402,8 @@ class Challengecontroller extends ChangeNotifier {
       var additionchallenge = _challengeList[index].totalChallenge;
       _challengeList[index].totalChallenge =
           (int.parse(additionchallenge) + 1).toString();
+      _challengeList[index].echeancierBoll = true;
+      _challengeList[index].prelevementAutoBool = true;
       coutTotalAdd(index, cout, idListChallenge);
       previsionTotalAdd(index, prix, idListChallenge);
       restePaiementTotalAdd(index, cout);
@@ -1370,14 +1418,20 @@ class Challengecontroller extends ChangeNotifier {
           description: challenModel2Generat[i].description,
           formation: challenModel2Generat[i].formation));
     }
+    await _save();
+    _initChallengeList();
+    notifyListeners();
     if (_challengeList[index].animatedpadding) {
       for (var i = _challengeListSave.length - 1; i >= 0; i--) {
         if (_challengeListSave[i].id == _challengeList[index].id) {
           _challengeListSave.removeAt(i);
         }
       }
+
       _challengeListSave.add(
         ChallengeModel(
+            prelevementAutoBool: _challengeList[index].prelevementAutoBool,
+            echeancierBoll: _challengeList[index].echeancierBoll,
             previsions: _challengeList[index].previsions,
             restePaiement: _challengeList[index].restePaiement,
             coutTotalBool: _challengeList[index].coutTotalBool,
@@ -1403,9 +1457,6 @@ class Challengecontroller extends ChangeNotifier {
       _initChallengeList();
       notifyListeners();
     }
-    await _save();
-    _initChallengeList();
-    notifyListeners();
   }
 
   void addChallenge1({
@@ -1435,7 +1486,9 @@ class Challengecontroller extends ChangeNotifier {
   }
 
   void addChallenge(
-      {@required double previsions,
+      {@required bool prelevementAutoBool,
+      @required bool echeancierBoll,
+      @required double previsions,
       @required double restePaiement,
       @required bool coutTotalBool,
       @required bool prixTotalBool,
@@ -1457,6 +1510,8 @@ class Challengecontroller extends ChangeNotifier {
       @required List<Challengemodel2> challengeListTache}) async {
     _challengeList.add(
       ChallengeModel(
+          prelevementAutoBool: prelevementAutoBool,
+          echeancierBoll: echeancierBoll,
           previsions: previsions,
           restePaiement: restePaiement,
           coutTotalBool: coutTotalBool,
@@ -1518,6 +1573,8 @@ class Challengecontroller extends ChangeNotifier {
         _challengeList.removeAt(index);
         _challengeList.add(
           ChallengeModel(
+              prelevementAutoBool: _challengeListSave[i].prelevementAutoBool,
+              echeancierBoll: _challengeListSave[i].echeancierBoll,
               previsions: _challengeListSave[i].previsions,
               restePaiement: _challengeListSave[i].restePaiement,
               coutTotalBool: _challengeListSave[i].coutTotalBool,
@@ -1558,6 +1615,9 @@ class Challengecontroller extends ChangeNotifier {
       }
       _challengeList.add(
         ChallengeModel(
+            prelevementAutoBool:
+                _challengeListSave[indexSave].prelevementAutoBool,
+            echeancierBoll: _challengeListSave[indexSave].echeancierBoll,
             previsions: _challengeListSave[indexSave].previsions,
             restePaiement: _challengeListSave[indexSave].restePaiement,
             coutTotalBool: _challengeListSave[indexSave].coutTotalBool,
@@ -1617,6 +1677,8 @@ class Challengecontroller extends ChangeNotifier {
     }
     _challengeListSave.add(
       ChallengeModel(
+          prelevementAutoBool: _challengeList[index].prelevementAutoBool,
+          echeancierBoll: _challengeList[index].echeancierBoll,
           previsions: _challengeList[index].previsions,
           restePaiement: _challengeList[index].restePaiement,
           coutTotalBool: _challengeList[index].coutTotalBool,
@@ -1653,6 +1715,8 @@ class Challengecontroller extends ChangeNotifier {
     }
     _challengeListSave.add(
       ChallengeModel(
+          prelevementAutoBool: _challengeList[index].prelevementAutoBool,
+          echeancierBoll: _challengeList[index].echeancierBoll,
           previsions: _challengeList[index].previsions,
           restePaiement: _challengeList[index].restePaiement,
           coutTotalBool: _challengeList[index].coutTotalBool,
@@ -1708,6 +1772,8 @@ class Challengecontroller extends ChangeNotifier {
       if (_challengeList[i].id == id) {
         _challengeListSave.add(
           ChallengeModel(
+              prelevementAutoBool: _challengeList[i].prelevementAutoBool,
+              echeancierBoll: _challengeList[i].echeancierBoll,
               previsions: _challengeList[i].previsions,
               restePaiement: _challengeList[i].restePaiement,
               coutTotalBool: _challengeList[i].coutTotalBool,
@@ -2128,6 +2194,8 @@ class Challengecontroller extends ChangeNotifier {
       uploadFileChallenge = ChallengeModel.fromJSON(_jsonDecodeuploadFile);
       saveNotification(uploadFileChallenge);
       addChallenge(
+          prelevementAutoBool: uploadFileChallenge.prelevementAutoBool,
+          echeancierBoll: uploadFileChallenge.echeancierBoll,
           previsions: uploadFileChallenge.previsions,
           restePaiement: uploadFileChallenge.restePaiement,
           coutTotalBool: uploadFileChallenge.prixTotalBool,

@@ -148,6 +148,8 @@ class Challengemodel2 {
 }
 
 class ChallengeModel {
+  bool echeancierBoll;
+  bool prelevementAutoBool;
   bool prixTotalBool;
   bool coutTotalBool;
   double prixTotal;
@@ -170,6 +172,8 @@ class ChallengeModel {
   String totalChallenge;
 
   ChallengeModel({
+    this.echeancierBoll,
+    this.prelevementAutoBool,
     this.previsions,
     this.restePaiement,
     this.coutTotalBool,
@@ -193,6 +197,8 @@ class ChallengeModel {
   });
 
   factory ChallengeModel.fromJSON(Map<String, dynamic> json) => ChallengeModel(
+        echeancierBoll: json['echeancierBoll'],
+        prelevementAutoBool: json['prelevementAutoBool'],
         previsions: json['previsions'],
         restePaiement: json['restePaiement'],
         coutTotalBool: json['coutTotalBool'],
@@ -219,6 +225,8 @@ class ChallengeModel {
 
   Map<String, dynamic> toJson() {
     return {
+      "echeancierBoll": echeancierBoll,
+      "prelevementAutoBool": prelevementAutoBool,
       "previsions": previsions,
       "restePaiement": restePaiement,
       "coutTotalBool": coutTotalBool,
@@ -244,6 +252,7 @@ class ChallengeModel {
 }
 
 class ChallengeDays {
+  bool notifcationResultBool;
   String date;
   String nbTacheEnCours;
   String nbChallengeEnCours;
@@ -251,7 +260,8 @@ class ChallengeDays {
   String nbchallengeVallide;
   String nbtacheVallide;
   ChallengeDays(
-      {this.date,
+      {this.notifcationResultBool,
+      this.date,
       this.nbChallengeEnCours,
       this.commentaire,
       this.nbchallengeVallide,
@@ -259,7 +269,8 @@ class ChallengeDays {
       this.nbtacheVallide});
 
   ChallengeDays.fromJSON(Map<String, dynamic> json)
-      : date = json['date'],
+      : notifcationResultBool = json['notifcationResultBool'],
+        date = json['date'],
         nbChallengeEnCours = json['nbChallengeEnCours'],
         nbchallengeVallide = json['nbchallengeVallide'],
         nbtacheVallide = json['nbtacheVallide'],
@@ -268,6 +279,7 @@ class ChallengeDays {
 
   Map<String, dynamic> toJson() {
     return {
+      "notifcationResultBool": notifcationResultBool,
       "date": date,
       "nbchallengeVallide": nbchallengeVallide,
       "nbtacheVallide": nbtacheVallide,
