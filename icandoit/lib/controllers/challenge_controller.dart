@@ -501,6 +501,16 @@ class Challengecontroller extends ChangeNotifier {
     await _save();
     _initChallengeList();
     notifyListeners();
+    if (_challengeList[index].animatedpadding) {
+      for (var i = _challengeListSave.length - 1; i >= 0; i--) {
+        if (_challengeListSave[i].id == _challengeList[index].id) {
+          _challengeListSave[i].prelevementAutoBool = isSwitch;
+          await _saveSauvegarde();
+          _initChallengeList();
+          return;
+        }
+      }
+    }
   }
 
   void activeResultat(bool isSwitch) async {
@@ -515,7 +525,7 @@ class Challengecontroller extends ChangeNotifier {
       scheduleQuotidiendNotification(
           channelID: "10098273",
           channelName: "ChallenDays",
-          channelDesc: "Résutats de votre journée",
+          channelDesc: "challengeDays.commentaire",
           notificationId: 10098273,
           notificationTitle: 'Date Tracker Test',
           notificationBody: 'We are showing notification!',
@@ -525,7 +535,24 @@ class Challengecontroller extends ChangeNotifier {
     }
   }
 
-  // void removeEcheance() async {
+  void removeEcheance() async {
+    for (var i = _challengeListSave.length - 1; i >= 0; i--) {
+      if (_challengeListSave[i].echeancierBoll &&
+          _challengeListSave[i].prelevementAutoBool) {
+        // print(_challengeListSave[i].listeDeTache[0].description.toString());
+
+        _challengeListSave[i].restePaiement =
+            _challengeListSave[i].restePaiement -
+                _challengeListSave[i].listeDeTache[0].cout;
+        _challengeListSave[i].listeDeTache.removeAt(0);
+        await _save1Sauvegarde(
+            remove: true, idChallenge: _challengeListSave[i].id);
+        return;
+      }
+    }
+  }
+
+// void removeEcheance() async {
   //   for (var i = _challengeListSave.length - 1; i >= 0; i--) {
   //     if (_challengeListSave[i].coutTotal > 0) {
   //       if (_challengeListSave[i].listeDeTache.length > 0) {
@@ -544,31 +571,12 @@ class Challengecontroller extends ChangeNotifier {
   //     }
   //   }
   // }
-  void removeEcheance() async {
-    for (var i = _challengeListSave.length - 1; i >= 0; i--) {
-      if (_challengeListSave[i].coutTotal > 0) {
-        if (_challengeListSave[i].echeancierBoll &&
-            _challengeListSave[i].prelevementAutoBool) {
-          // print(_challengeListSave[i].listeDeTache[0].description.toString());
-
-          _challengeListSave[i].restePaiement =
-              _challengeListSave[i].restePaiement -
-                  _challengeListSave[i].listeDeTache[0].cout;
-          _challengeListSave[i].listeDeTache.removeAt(0);
-          await _save1Sauvegarde(
-              remove: true, idChallenge: _challengeListSave[i].id);
-          return;
-        }
-      }
-    }
-  }
-
   void mensuelSave() {
     DateTime today = new DateTime.now();
     for (var i = _challengeListSave.length - 1; i >= 0; i--) {
       if (_challengeListSave[i].date.isNotEmpty) {
         if (_challengeListSave[i].date == DateFormat('d').format(today)) {
-          removeEcheance();
+          // removeEcheance();
           challegListSaveShedule(i);
         }
       }
@@ -609,7 +617,7 @@ class Challengecontroller extends ChangeNotifier {
           print(_challengeList[i].totalDays.length);
           if (translateDays(_challengeListSave[i].totalDays[n]) ==
               DateFormat('EEEE').format(today)) {
-            removeEcheance();
+            // removeEcheance();
             challegListSaveShedule(i);
           }
         }
@@ -770,6 +778,7 @@ class Challengecontroller extends ChangeNotifier {
       challengeDays.nbtacheVallide = "0";
       challengeDays.nbchallengeVallide = "0";
       challengeDays.commentaire = "";
+      print("test");
       await _saveChallendays();
       _initChallengeListStartChallenge();
       notifyListeners();
@@ -1213,28 +1222,32 @@ class Challengecontroller extends ChangeNotifier {
   }
 
   void ajoutEcheance(int index) async {
-    _challengeList[index].restePaiement = _challengeList[index].restePaiement +
-        _challengeList[index].listeDeTache[0].cout;
-    _challengeList[index]
-        .listeDeTache
-        .add(_challengeList[index].listeDeTache[0]);
-    await _save();
-    _initChallengeList();
-    notifyListeners();
-    if (_challengeList[index].animatedpadding) {
-      for (var i = _challengeListSave.length - 1; i >= 0; i--) {
-        if (_challengeListSave[i].id == _challengeList[index].id) {
-          for (var n = _challengeListSave[i].listeDeTache.length - 1;
-              n >= 0;
-              n--) {
-            _challengeListSave[i].restePaiement =
-                _challengeList[index].restePaiement;
+    if (_challengeList[index].coutTotal > _challengeList[index].restePaiement &&
+        _challengeList[index].restePaiement > 0) {
+      _challengeList[index].restePaiement =
+          _challengeList[index].restePaiement +
+              _challengeList[index].listeDeTache[0].cout;
+      _challengeList[index]
+          .listeDeTache
+          .add(_challengeList[index].listeDeTache[0]);
+      await _save();
+      _initChallengeList();
+      notifyListeners();
+      if (_challengeList[index].animatedpadding) {
+        for (var i = _challengeListSave.length - 1; i >= 0; i--) {
+          if (_challengeListSave[i].id == _challengeList[index].id) {
+            for (var n = _challengeListSave[i].listeDeTache.length - 1;
+                n >= 0;
+                n--) {
+              _challengeListSave[i].restePaiement =
+                  _challengeList[index].restePaiement;
 
-            _challengeListSave[i]
-                .listeDeTache
-                .add(_challengeListSave[i].listeDeTache[0]);
-            await _saveSauvegarde();
-            return;
+              _challengeListSave[i]
+                  .listeDeTache
+                  .add(_challengeListSave[i].listeDeTache[0]);
+              await _saveSauvegarde();
+              return;
+            }
           }
         }
       }
@@ -1242,27 +1255,30 @@ class Challengecontroller extends ChangeNotifier {
   }
 
   void retraitEcheance(int index) async {
-    _challengeList[index].restePaiement = _challengeList[index].restePaiement -
-        _challengeList[index].listeDeTache[0].cout;
-    _challengeList[indexSave].listeDeTache.removeAt(0);
+    if (_challengeList[index].restePaiement > 0) {
+      _challengeList[index].restePaiement =
+          _challengeList[index].restePaiement -
+              _challengeList[index].listeDeTache[0].cout;
+      _challengeList[index].listeDeTache.removeAt(0);
 
-    await _save(remove: true);
+      await _save1(remove: true, idChallenge: _challengeList[index].id);
 
-    _initChallengeList();
-    notifyListeners();
-    if (_challengeList[index].animatedpadding) {
-      for (var i = _challengeListSave.length - 1; i >= 0; i--) {
-        if (_challengeListSave[i].id == _challengeList[index].id) {
-          for (var n = _challengeListSave[i].listeDeTache.length - 1;
-              n >= 0;
-              n--) {
-            _challengeListSave[i].restePaiement =
-                _challengeList[index].restePaiement;
+      _initChallengeList();
+      notifyListeners();
+      if (_challengeList[index].animatedpadding) {
+        for (var i = _challengeListSave.length - 1; i >= 0; i--) {
+          if (_challengeListSave[i].id == _challengeList[index].id) {
+            for (var n = _challengeListSave[i].listeDeTache.length - 1;
+                n >= 0;
+                n--) {
+              _challengeListSave[i].restePaiement =
+                  _challengeList[index].restePaiement;
 
-            _challengeListSave[i].listeDeTache.removeAt(0);
-            await _save1Sauvegarde(
-                remove: true, idChallenge: _challengeList[index].id);
-            return;
+              _challengeListSave[i].listeDeTache.removeAt(0);
+              await _save1Sauvegarde(
+                  remove: true, idChallenge: _challengeList[index].id);
+              return;
+            }
           }
         }
       }
@@ -2016,7 +2032,8 @@ class Challengecontroller extends ChangeNotifier {
     // await removeChallengelistId(index);
     _challengeList.removeAt(index);
     await _save(remove: true);
-
+    _initChallengeList();
+    notifyListeners();
     if (!validate) {
       for (var i = _challengeListSave.length - 1; i >= 0; i--) {
         if (_challengeListSave[i].id == id &&
@@ -2027,9 +2044,6 @@ class Challengecontroller extends ChangeNotifier {
         }
       }
     }
-
-    _initChallengeList();
-    notifyListeners();
   }
 
   voidremove2Save(

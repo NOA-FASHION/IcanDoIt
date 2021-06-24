@@ -869,16 +869,16 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                             variable.testSchedule();
                           },
                         ),
-                  IconButton(
-                    alignment: Alignment.topRight,
-                    icon: Icon(
-                      Icons.notifications,
-                      color: Colors.black,
-                    ),
-                    onPressed: () {
-                      variable.cancelAllNotifications();
-                    },
-                  ),
+                  // IconButton(
+                  //   alignment: Alignment.topRight,
+                  //   icon: Icon(
+                  //     Icons.notifications,
+                  //     color: Colors.black,
+                  //   ),
+                  //   onPressed: () {
+                  //     variable.cancelAllNotifications();
+                  //   },
+                  // ),
                   const Divider(),
                   IconButton(
                     alignment: Alignment.topRight,
@@ -905,7 +905,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                     : null,
                 centerTitle: true,
                 flexibleSpace: Container(
-                  padding: EdgeInsets.only(top: 40.0, right: 30.0),
+                  padding: EdgeInsets.only(top: 40.0),
                   alignment: Alignment.center,
                   child: Image.asset(
                     'assets/logo.png',
@@ -1184,11 +1184,11 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                   .getChallenges()),
                           Center(
                             child: IconButton(
-                              iconSize: 50,
+                              iconSize: 60,
                               alignment: Alignment.topRight,
                               icon: Icon(
-                                Icons.save,
-                                color: Colors.orange,
+                                Icons.check_circle,
+                                color: Colors.orange[900],
                               ),
                               onPressed: () {
                                 if (unityChallenge == "raccourci") {

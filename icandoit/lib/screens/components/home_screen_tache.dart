@@ -227,6 +227,18 @@ class _HomeTachesState extends State<HomeTaches> {
     return idCallenge;
   }
 
+  bool idChalEcheanceAutoBool(List<ChallengeModel> _challengeList) {
+    bool idCallenge = false;
+    for (var i = _challengeList.length - 1; i >= 0; i--) {
+      if (_challengeList[i].id == widget.id &&
+          _challengeList[i].animatedpadding) {
+        idCallenge = _challengeList[i].echeancierBoll;
+      }
+    }
+    print(idCallenge);
+    return idCallenge;
+  }
+
   void initState() {
     // Challengecontroller variable = Provider.of<Challengecontroller>(context);
     // idChallenge1 = variable.getChallenges()[widget.indexChallenge].id;
@@ -812,7 +824,7 @@ class _HomeTachesState extends State<HomeTaches> {
           child: AppBar(
             title: Text(something),
             actions: [
-              idChallengeEcheanceBool(_challengesListget)
+              idChalEcheanceAutoBool(_challengesListget)
                   ? Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
@@ -915,15 +927,15 @@ class _HomeTachesState extends State<HomeTaches> {
             backgroundColor: Colors.blue,
             centerTitle: true,
             flexibleSpace: Container(
-              padding: EdgeInsets.only(top: 40.0, right: 30.0),
+              padding: EdgeInsets.only(top: 40.0),
               alignment: Alignment.center,
               height: 130,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   idChallengePaimentBool(_challengesListget)
                       ? Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.end,
                           children: <Widget>[
                             Card(
                               color: Colors.transparent,
@@ -991,9 +1003,18 @@ class _HomeTachesState extends State<HomeTaches> {
                           ],
                         )
                       : SizedBox(width: 10),
-                  Image.asset(
-                    'assets/logo.png',
-                    width: 55,
+                  idChallengeBool(_challengesListget)
+                      // _challengesListget[widget.indexChallenge].prixTotalBool
+                      ? SizedBox(width: 90)
+                      : SizedBox(width: 1),
+                  Container(
+                    margin: idChallengeEcheanceBool(_challengesListget)
+                        ? EdgeInsets.only(right: 25)
+                        : EdgeInsets.only(right: 0),
+                    child: Image.asset(
+                      'assets/logo.png',
+                      width: 55,
+                    ),
                   ),
                   idChallengeEcheanceBool(_challengesListget)
                       ? Row(
@@ -1038,7 +1059,7 @@ class _HomeTachesState extends State<HomeTaches> {
                             ),
                             Padding(
                               padding: const EdgeInsets.only(
-                                  right: 5, left: 5, top: 10),
+                                  right: 35, left: 5, top: 10),
                               child: SizedBox.fromSize(
                                 size: Size(30, 30), // button width and height
                                 child: ClipOval(
@@ -1079,7 +1100,8 @@ class _HomeTachesState extends State<HomeTaches> {
                   idChallengeBool(_challengesListget)
                       // _challengesListget[widget.indexChallenge].prixTotalBool
                       ? Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.end,
                           children: <Widget>[
                             Card(
                               color: Colors.transparent,
@@ -1088,6 +1110,7 @@ class _HomeTachesState extends State<HomeTaches> {
                               ),
                               elevation: 25.0,
                               child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   Container(
                                     decoration: BoxDecoration(
@@ -1471,11 +1494,11 @@ class _HomeTachesState extends State<HomeTaches> {
                               unityChallenge, _challengesListget, context),
                           Center(
                             child: IconButton(
-                              iconSize: 50,
+                              iconSize: 60,
                               alignment: Alignment.topRight,
                               icon: Icon(
-                                Icons.save,
-                                color: Colors.orange,
+                                Icons.check_circle,
+                                color: Colors.orange[900],
                               ),
                               onPressed: () {
                                 if (unityChallenge == "echeancier") {
