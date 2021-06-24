@@ -249,6 +249,7 @@ class _HomeTachesState extends State<HomeTaches> {
         if (_challengeList[i].animatedpadding) {
           idChalEcheanceAutoBool1 = _challengeList[i].echeancierBoll;
         }
+        return;
       }
     }
   }
