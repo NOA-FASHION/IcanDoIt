@@ -813,9 +813,10 @@ class _HomeTachesState extends State<HomeTaches> {
     Challengecontroller variable = Provider.of<Challengecontroller>(context);
     List<ChallengeModel> _challengesListget = variable.getChallenges();
     isSwitched = _challengesListget[widget.indexChallenge].prelevementAutoBool;
-    // if (_challengesListget[widget.indexChallenge].coutTotal > 0) {
-    //   courBool = true;
-    // }
+
+    courBool = idChallengeEcheanceBool(_challengesListget);
+    paimentBool = idChallengeBool(_challengesListget);
+
     return Scaffold(
       key: scaffoldkeyTache,
       appBar: PreferredSize(
@@ -1003,12 +1004,12 @@ class _HomeTachesState extends State<HomeTaches> {
                           ],
                         )
                       : SizedBox(width: 10),
-                  idChallengeBool(_challengesListget)
+                  paimentBool(_challengesListget)
                       // _challengesListget[widget.indexChallenge].prixTotalBool
                       ? SizedBox(width: 90)
                       : SizedBox(width: 1),
                   Container(
-                    margin: idChallengeEcheanceBool(_challengesListget)
+                    margin: courBool
                         ? EdgeInsets.only(right: 25)
                         : EdgeInsets.only(right: 0),
                     child: Image.asset(
@@ -1016,7 +1017,7 @@ class _HomeTachesState extends State<HomeTaches> {
                       width: 55,
                     ),
                   ),
-                  idChallengeEcheanceBool(_challengesListget)
+                  courBool
                       ? Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
@@ -1097,7 +1098,7 @@ class _HomeTachesState extends State<HomeTaches> {
                           ],
                         )
                       : SizedBox(width: 10),
-                  idChallengeBool(_challengesListget)
+                  paimentBool
                       // _challengesListget[widget.indexChallenge].prixTotalBool
                       ? Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
