@@ -194,49 +194,63 @@ class _HomeTachesState extends State<HomeTaches> {
     return playYoutube;
   }
 
-  bool idChallengeBool(List<ChallengeModel> _challengeList) {
-    bool idCallenge = false;
+  // bool idChallengeBool(List<ChallengeModel> _challengeList) {
+  //   bool idCallenge = false;
+  //   for (var i = _challengeList.length - 1; i >= 0; i--) {
+  //     if (_challengeList[i].id == widget.id) {
+  //       idCallenge = _challengeList[i].prixTotalBool;
+  //     }
+  //   }
+
+  //   return idCallenge;
+  // }
+
+  // bool idChallengePaimentBool(List<ChallengeModel> _challengeList) {
+  //   bool idCallenge = false;
+  //   for (var i = _challengeList.length - 1; i >= 0; i--) {
+  //     if (_challengeList[i].id == widget.id) {
+  //       idCallenge = _challengeList[i].coutTotalBool;
+  //     }
+  //   }
+  //   print(idCallenge);
+  //   return idCallenge;
+  // }
+
+  // bool idChallengeEcheanceBool(List<ChallengeModel> _challengeList) {
+  //   bool idCallenge = false;
+  //   for (var i = _challengeList.length - 1; i >= 0; i--) {
+  //     if (_challengeList[i].id == widget.id) {
+  //       idCallenge = _challengeList[i].echeancierBoll;
+  //     }
+  //   }
+  //   print(idCallenge);
+  //   return idCallenge;
+  // }
+
+  // bool idChalEcheanceAutoBool(List<ChallengeModel> _challengeList) {
+  //   bool idCallenge = false;
+  //   for (var i = _challengeList.length - 1; i >= 0; i--) {
+  //     if (_challengeList[i].id == widget.id &&
+  //         _challengeList[i].animatedpadding) {
+  //       idCallenge = _challengeList[i].echeancierBoll;
+  //     }
+  //   }
+  //   print(idCallenge);
+  //   return idCallenge;
+  // }
+
+  void challengeBoolAppBar(List<ChallengeModel> _challengeList) {
+    idChalEcheanceAutoBool1 = false;
     for (var i = _challengeList.length - 1; i >= 0; i--) {
       if (_challengeList[i].id == widget.id) {
-        idCallenge = _challengeList[i].prixTotalBool;
+        idChallengeBool1 = _challengeList[i].prixTotalBool;
+        idChallengePaimentBool1 = _challengeList[i].coutTotalBool;
+        idChallengeEcheanceBool1 = _challengeList[i].echeancierBoll;
+        if (_challengeList[i].animatedpadding) {
+          idChalEcheanceAutoBool1 = _challengeList[i].echeancierBoll;
+        }
       }
     }
-    // print(idCallenge);
-    return idCallenge;
-  }
-
-  bool idChallengePaimentBool(List<ChallengeModel> _challengeList) {
-    bool idCallenge = false;
-    for (var i = _challengeList.length - 1; i >= 0; i--) {
-      if (_challengeList[i].id == widget.id) {
-        idCallenge = _challengeList[i].coutTotalBool;
-      }
-    }
-    print(idCallenge);
-    return idCallenge;
-  }
-
-  bool idChallengeEcheanceBool(List<ChallengeModel> _challengeList) {
-    bool idCallenge = false;
-    for (var i = _challengeList.length - 1; i >= 0; i--) {
-      if (_challengeList[i].id == widget.id) {
-        idCallenge = _challengeList[i].echeancierBoll;
-      }
-    }
-    print(idCallenge);
-    return idCallenge;
-  }
-
-  bool idChalEcheanceAutoBool(List<ChallengeModel> _challengeList) {
-    bool idCallenge = false;
-    for (var i = _challengeList.length - 1; i >= 0; i--) {
-      if (_challengeList[i].id == widget.id &&
-          _challengeList[i].animatedpadding) {
-        idCallenge = _challengeList[i].echeancierBoll;
-      }
-    }
-    print(idCallenge);
-    return idCallenge;
   }
 
   void initState() {
@@ -246,11 +260,15 @@ class _HomeTachesState extends State<HomeTaches> {
     coutPaiment = "0";
     prixProduit = "0";
     // courBool = false;
-    paimentBool = false;
+    // paimentBool = false;
   }
 
-  var courBool;
-  var paimentBool;
+  bool idChallengeBool1;
+  bool idChallengePaimentBool1;
+  bool idChallengeEcheanceBool1;
+  bool idChalEcheanceAutoBool1;
+  // var courBool;
+  // var paimentBool;
   final bool animatedpadding;
   final String something;
   final int indexChallenge;
@@ -813,10 +831,7 @@ class _HomeTachesState extends State<HomeTaches> {
     Challengecontroller variable = Provider.of<Challengecontroller>(context);
     List<ChallengeModel> _challengesListget = variable.getChallenges();
     isSwitched = _challengesListget[widget.indexChallenge].prelevementAutoBool;
-
-    courBool = idChallengeEcheanceBool(_challengesListget);
-    paimentBool = idChallengeBool(_challengesListget);
-
+    challengeBoolAppBar(_challengesListget);
     return Scaffold(
       key: scaffoldkeyTache,
       appBar: PreferredSize(
@@ -825,7 +840,7 @@ class _HomeTachesState extends State<HomeTaches> {
           child: AppBar(
             title: Text(something),
             actions: [
-              idChalEcheanceAutoBool(_challengesListget)
+              idChalEcheanceAutoBool1
                   ? Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
@@ -934,7 +949,7 @@ class _HomeTachesState extends State<HomeTaches> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  idChallengePaimentBool(_challengesListget)
+                  idChallengePaimentBool1
                       ? Column(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: <Widget>[
@@ -1004,12 +1019,12 @@ class _HomeTachesState extends State<HomeTaches> {
                           ],
                         )
                       : SizedBox(width: 10),
-                  paimentBool(_challengesListget)
+                  idChallengeBool1
                       // _challengesListget[widget.indexChallenge].prixTotalBool
                       ? SizedBox(width: 90)
                       : SizedBox(width: 1),
                   Container(
-                    margin: courBool
+                    margin: idChallengeEcheanceBool1
                         ? EdgeInsets.only(right: 25)
                         : EdgeInsets.only(right: 0),
                     child: Image.asset(
@@ -1017,7 +1032,7 @@ class _HomeTachesState extends State<HomeTaches> {
                       width: 55,
                     ),
                   ),
-                  courBool
+                  idChallengeEcheanceBool1
                       ? Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
@@ -1098,7 +1113,7 @@ class _HomeTachesState extends State<HomeTaches> {
                           ],
                         )
                       : SizedBox(width: 10),
-                  paimentBool
+                  idChallengeBool1
                       // _challengesListget[widget.indexChallenge].prixTotalBool
                       ? Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
