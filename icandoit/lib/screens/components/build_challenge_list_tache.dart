@@ -44,6 +44,9 @@ class _ChallengesListBuilderTachesState
   final picker = ImagePicker();
   bool formation = false;
   String chapitre;
+  var modifDecription1;
+  var colors;
+  var documentJoint;
 
   String modifDescription(String description) {
     String modifDecription1 = "Évènement";
@@ -111,6 +114,115 @@ class _ChallengesListBuilderTachesState
       colors = Colors.green;
     }
     return colors;
+  }
+
+  void modifcolorTextIcon(String description) {
+    if (description == "evenement") {
+      documentJoint = Icon(
+        Icons.event,
+        size: 30.0,
+      );
+      colors = Colors.blue;
+      modifDecription1 = "Évènement";
+    } else if (description == "achat") {
+      documentJoint = Icon(
+        Icons.shopping_cart,
+        size: 30.0,
+      );
+      colors = Colors.cyan;
+      modifDecription1 = "Achat";
+    } else if (description == "tache") {
+      documentJoint = Icon(
+        Icons.event_available,
+        size: 30.0,
+      );
+      colors = Colors.orange;
+      modifDecription1 = "Tâche";
+    } else if (description == "mission") {
+      documentJoint = Icon(
+        Icons.assignment,
+        size: 30.0,
+      );
+      modifDecription1 = "Mission";
+      colors = Colors.amber;
+    } else if (description == "youtube") {
+      documentJoint = Icon(
+        Icons.youtube_searched_for_sharp,
+        size: 30.0,
+      );
+      colors = Colors.red;
+      modifDecription1 = "Youtube";
+    } else if (description == "video") {
+      documentJoint = Icon(
+        Icons.video_call,
+        size: 30.0,
+      );
+      colors = Colors.lime;
+      modifDecription1 = "Vidéo";
+    } else if (description == "commentaire") {
+      documentJoint = Icon(
+        Icons.comment,
+        size: 30.0,
+      );
+      colors = Colors.blueGrey;
+      modifDecription1 = "Commentaire";
+    } else if (description == "image") {
+      documentJoint = Icon(
+        Icons.photo_size_select_large,
+        size: 30.0,
+      );
+      colors = Colors.pink;
+      modifDecription1 = "Image";
+    } else if (description == "url") {
+      documentJoint = Icon(
+        Icons.cloud,
+        size: 30.0,
+      );
+      colors = Colors.teal;
+      modifDecription1 = "Url";
+    } else if (description == "paiement") {
+      documentJoint = Icon(
+        Icons.payment,
+        size: 30.0,
+      );
+      colors = Colors.yellow;
+      modifDecription1 = "Paiement";
+    } else if (description == "echeancier") {
+      documentJoint = Icon(
+        Icons.payment,
+        size: 30.0,
+      );
+      colors = Colors.grey;
+      modifDecription1 = "Échéancier";
+    } else if (description == "projet") {
+      documentJoint = Icon(
+        Icons.build,
+        size: 30.0,
+      );
+      colors = Colors.indigo;
+      modifDecription1 = "Projet";
+    } else if (description == "adresse") {
+      documentJoint = Icon(
+        Icons.living,
+        size: 30.0,
+      );
+      colors = Colors.lime;
+      modifDecription1 = "Adresse";
+    } else if (description == "formation") {
+      formation = true;
+      documentJoint = Icon(
+        Icons.model_training,
+        size: 30.0,
+      );
+      colors = Colors.green;
+      modifDecription1 = "Formation";
+    } else if (description == "information") {
+      colors = Colors.black;
+      documentJoint = Icon(
+        Icons.perm_device_information,
+        size: 30.0,
+      );
+    }
   }
 
   Widget maxLetter(String word, String comment) {
@@ -312,8 +424,8 @@ class _ChallengesListBuilderTachesState
     List<Challengemodel2> _challengesList =
         providerType.challengelist2(widget.id);
 
-    final Challengecontroller provider =
-        Provider.of<Challengecontroller>(context);
+    // final Challengecontroller provider =
+    //     Provider.of<Challengecontroller>(context);
     if (_challengesList.isEmpty) {
       return Container(
         alignment: Alignment.center,
@@ -332,11 +444,11 @@ class _ChallengesListBuilderTachesState
           child: Dismissible(
             onDismissed: (direction) {
               if (direction == DismissDirection.endToStart) {
-                provider.addnbtacheVallide();
+                providerType.addnbtacheVallide();
                 Scaffold.of(context).showSnackBar(_buildSnackBar(
                     content: "La tâche a bien été validé",
                     lotties: 'assets/challenge.json'));
-                provider.remove2(
+                providerType.remove2(
                     unitChallenge: item.description
                         .toString()
                         .replaceAll(unityPattern, ""),
@@ -353,7 +465,7 @@ class _ChallengesListBuilderTachesState
                 Scaffold.of(context).showSnackBar(_buildSnackBar(
                     content: "La mission a bien ete supprime",
                     lotties: 'assets/trash.json'));
-                provider.remove2(
+                providerType.remove2(
                     unitChallenge: item.description
                         .toString()
                         .replaceAll(unityPattern, ""),
@@ -461,7 +573,7 @@ class _ChallengesListBuilderTachesState
                       }
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => ChangeNotifierProvider.value(
-                              value: provider,
+                              value: providerType,
                               child: VideoPlayerScreen(
                                   nameChallenge: item.name))));
                     } else if (item.description
@@ -483,7 +595,7 @@ class _ChallengesListBuilderTachesState
                       }
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => ChangeNotifierProvider.value(
-                              value: provider,
+                              value: providerType,
                               child: PlayPicture(nameChallenge: item.name))));
                     } else if (item.description
                             .toString()
@@ -491,7 +603,7 @@ class _ChallengesListBuilderTachesState
                         "url") {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => ChangeNotifierProvider.value(
-                              value: provider,
+                              value: providerType,
                               child: PlayUrl(nameChallenge: item.name))));
                     } else if (item.description
                             .toString()
@@ -499,7 +611,7 @@ class _ChallengesListBuilderTachesState
                         "adresse") {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => ChangeNotifierProvider.value(
-                              value: provider,
+                              value: providerType,
                               child: AdressMap(adresse: item.name))));
                     } else if (item.description
                             .toString()
@@ -507,7 +619,7 @@ class _ChallengesListBuilderTachesState
                         "commentaire") {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => ChangeNotifierProvider.value(
-                              value: provider,
+                              value: providerType,
                               child:
                                   PlayCommentaire(nameChallenge: item.name))));
                     } else if (item.description
@@ -516,7 +628,7 @@ class _ChallengesListBuilderTachesState
                         "youtube") {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => ChangeNotifierProvider.value(
-                              value: provider,
+                              value: providerType,
                               child: PlayYoutubeScreen(
                                   nameChallenge: item.name))));
                     } else if (item.description
@@ -541,7 +653,7 @@ class _ChallengesListBuilderTachesState
                             "mission") {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => ChangeNotifierProvider.value(
-                              value: provider,
+                              value: providerType,
                               child: Home(
                                 returnRaccourci: false,
                                 id: widget.id,
@@ -577,7 +689,7 @@ class _ChallengesListBuilderTachesState
                           ),
                         ),
                         formationEdit(
-                            provider,
+                            providerType,
                             item,
                             item.description
                                 .toString()
@@ -712,8 +824,8 @@ class _ChallengesListBuilderTachesState
         Challengemodel2 data = _challengesList[before];
         _challengesList.removeAt(before);
         _challengesList.insert(after, data);
-        provider.save();
-        provider.deplacelistSAve(widget.indexChallenge, widget.id);
+        providerType.save();
+        providerType.deplacelistSAve(widget.indexChallenge, widget.id);
       },
       canBeDraggedTo: (one, two) => true,
       dragElevation: 8.0,

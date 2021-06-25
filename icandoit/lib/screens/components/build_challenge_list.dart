@@ -575,8 +575,8 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                         switchButtm(_challengesList[index].id,
                             _challengesList[index].boolId),
                         resrtorButtm(
-                            variable
-                                .returnIndexForName(_challengesList[index].id),
+                            variable.returnIndexForName(
+                                _challengesList[index].id),
                             _challengesList[index].animatedpadding)
                       ],
                     ),
