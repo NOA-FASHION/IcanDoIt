@@ -3,12 +3,10 @@ import 'dart:developer';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:icandoit/controllers/challenge_controller.dart';
-import 'package:icandoit/models/challenge_model.dart';
+
 import 'package:icandoit/screens/components/play_pause_button_bar.dart';
 import 'package:icandoit/screens/components/volume_slider.dart';
-import 'package:provider/provider.dart';
-import 'package:youtube_parser/youtube_parser.dart';
+
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 import 'meta_data_section.dart';
@@ -33,6 +31,7 @@ class _PlayAllYoutubeScreenState extends State<PlayAllYoutubeScreen> {
     _controller = YoutubePlayerController(
       initialVideoId: widget.listeDeYoutube[0],
       params: YoutubePlayerParams(
+        origin: "https://youtu.be/",
         playlist: widget.listeDeYoutube,
         startAt: const Duration(minutes: 1, seconds: 36),
         showControls: true,
