@@ -116,114 +116,114 @@ class _ChallengesListBuilderTachesState
     return colors;
   }
 
-  void modifcolorTextIcon(String description) {
-    if (description == "evenement") {
-      documentJoint = Icon(
-        Icons.event,
-        size: 30.0,
-      );
-      colors = Colors.blue;
-      modifDecription1 = "Évènement";
-    } else if (description == "achat") {
-      documentJoint = Icon(
-        Icons.shopping_cart,
-        size: 30.0,
-      );
-      colors = Colors.cyan;
-      modifDecription1 = "Achat";
-    } else if (description == "tache") {
-      documentJoint = Icon(
-        Icons.event_available,
-        size: 30.0,
-      );
-      colors = Colors.orange;
-      modifDecription1 = "Tâche";
-    } else if (description == "mission") {
-      documentJoint = Icon(
-        Icons.assignment,
-        size: 30.0,
-      );
-      modifDecription1 = "Mission";
-      colors = Colors.amber;
-    } else if (description == "youtube") {
-      documentJoint = Icon(
-        Icons.youtube_searched_for_sharp,
-        size: 30.0,
-      );
-      colors = Colors.red;
-      modifDecription1 = "Youtube";
-    } else if (description == "video") {
-      documentJoint = Icon(
-        Icons.video_call,
-        size: 30.0,
-      );
-      colors = Colors.lime;
-      modifDecription1 = "Vidéo";
-    } else if (description == "commentaire") {
-      documentJoint = Icon(
-        Icons.comment,
-        size: 30.0,
-      );
-      colors = Colors.blueGrey;
-      modifDecription1 = "Commentaire";
-    } else if (description == "image") {
-      documentJoint = Icon(
-        Icons.photo_size_select_large,
-        size: 30.0,
-      );
-      colors = Colors.pink;
-      modifDecription1 = "Image";
-    } else if (description == "url") {
-      documentJoint = Icon(
-        Icons.cloud,
-        size: 30.0,
-      );
-      colors = Colors.teal;
-      modifDecription1 = "Url";
-    } else if (description == "paiement") {
-      documentJoint = Icon(
-        Icons.payment,
-        size: 30.0,
-      );
-      colors = Colors.yellow;
-      modifDecription1 = "Paiement";
-    } else if (description == "echeancier") {
-      documentJoint = Icon(
-        Icons.payment,
-        size: 30.0,
-      );
-      colors = Colors.grey;
-      modifDecription1 = "Échéancier";
-    } else if (description == "projet") {
-      documentJoint = Icon(
-        Icons.build,
-        size: 30.0,
-      );
-      colors = Colors.indigo;
-      modifDecription1 = "Projet";
-    } else if (description == "adresse") {
-      documentJoint = Icon(
-        Icons.living,
-        size: 30.0,
-      );
-      colors = Colors.lime;
-      modifDecription1 = "Adresse";
-    } else if (description == "formation") {
-      formation = true;
-      documentJoint = Icon(
-        Icons.model_training,
-        size: 30.0,
-      );
-      colors = Colors.green;
-      modifDecription1 = "Formation";
-    } else if (description == "information") {
-      colors = Colors.black;
-      documentJoint = Icon(
-        Icons.perm_device_information,
-        size: 30.0,
-      );
-    }
-  }
+  // void modifcolorTextIcon(String description) {
+  //   if (description == "evenement") {
+  //     documentJoint = Icon(
+  //       Icons.event,
+  //       size: 30.0,
+  //     );
+  //     colors = Colors.blue;
+  //     modifDecription1 = "Évènement";
+  //   } else if (description == "achat") {
+  //     documentJoint = Icon(
+  //       Icons.shopping_cart,
+  //       size: 30.0,
+  //     );
+  //     colors = Colors.cyan;
+  //     modifDecription1 = "Achat";
+  //   } else if (description == "tache") {
+  //     documentJoint = Icon(
+  //       Icons.event_available,
+  //       size: 30.0,
+  //     );
+  //     colors = Colors.orange;
+  //     modifDecription1 = "Tâche";
+  //   } else if (description == "mission") {
+  //     documentJoint = Icon(
+  //       Icons.assignment,
+  //       size: 30.0,
+  //     );
+  //     modifDecription1 = "Mission";
+  //     colors = Colors.amber;
+  //   } else if (description == "youtube") {
+  //     documentJoint = Icon(
+  //       Icons.youtube_searched_for_sharp,
+  //       size: 30.0,
+  //     );
+  //     colors = Colors.red;
+  //     modifDecription1 = "Youtube";
+  //   } else if (description == "video") {
+  //     documentJoint = Icon(
+  //       Icons.video_call,
+  //       size: 30.0,
+  //     );
+  //     colors = Colors.lime;
+  //     modifDecription1 = "Vidéo";
+  //   } else if (description == "commentaire") {
+  //     documentJoint = Icon(
+  //       Icons.comment,
+  //       size: 30.0,
+  //     );
+  //     colors = Colors.blueGrey;
+  //     modifDecription1 = "Commentaire";
+  //   } else if (description == "image") {
+  //     documentJoint = Icon(
+  //       Icons.photo_size_select_large,
+  //       size: 30.0,
+  //     );
+  //     colors = Colors.pink;
+  //     modifDecription1 = "Image";
+  //   } else if (description == "url") {
+  //     documentJoint = Icon(
+  //       Icons.cloud,
+  //       size: 30.0,
+  //     );
+  //     colors = Colors.teal;
+  //     modifDecription1 = "Url";
+  //   } else if (description == "paiement") {
+  //     documentJoint = Icon(
+  //       Icons.payment,
+  //       size: 30.0,
+  //     );
+  //     colors = Colors.yellow;
+  //     modifDecription1 = "Paiement";
+  //   } else if (description == "echeancier") {
+  //     documentJoint = Icon(
+  //       Icons.payment,
+  //       size: 30.0,
+  //     );
+  //     colors = Colors.grey;
+  //     modifDecription1 = "Échéancier";
+  //   } else if (description == "projet") {
+  //     documentJoint = Icon(
+  //       Icons.build,
+  //       size: 30.0,
+  //     );
+  //     colors = Colors.indigo;
+  //     modifDecription1 = "Projet";
+  //   } else if (description == "adresse") {
+  //     documentJoint = Icon(
+  //       Icons.living,
+  //       size: 30.0,
+  //     );
+  //     colors = Colors.lime;
+  //     modifDecription1 = "Adresse";
+  //   } else if (description == "formation") {
+  //     formation = true;
+  //     documentJoint = Icon(
+  //       Icons.model_training,
+  //       size: 30.0,
+  //     );
+  //     colors = Colors.green;
+  //     modifDecription1 = "Formation";
+  //   } else if (description == "information") {
+  //     colors = Colors.black;
+  //     documentJoint = Icon(
+  //       Icons.perm_device_information,
+  //       size: 30.0,
+  //     );
+  //   }
+  // }
 
   Widget maxLetter(String word, String comment) {
     Widget longLetter;

@@ -3,6 +3,7 @@ import 'package:icandoit/models/challenge_model.dart';
 // import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import 'package:marquee_text/marquee_text.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
@@ -330,6 +331,7 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
       _challengesList =
           _challengesListget.where((c) => c.boolId == true).toList();
     }
+
     _confirmRegister(String id) {
       int index = variable.returnIndexForName(id);
       var baseDialog = BaseAlertDialog(
@@ -540,6 +542,13 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                                     _challengesList[index].id),
                                 _challengesList[index].name,
                                 _challengesList[index].animatedpadding))));
+
+                    // Navigator.of(context).push( PageTransition(type: PageTransitionType.fade, child: HomeTaches(
+                    // _challengesList[index].id,
+                    // variable.returnIndexForName(
+                    //     _challengesList[index].id),
+                    // _challengesList[index].name,
+                    // _challengesList[index].animatedpadding)));
                   },
                   title: Container(
                     child: Row(
@@ -575,8 +584,8 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                         switchButtm(_challengesList[index].id,
                             _challengesList[index].boolId),
                         resrtorButtm(
-                            variable.returnIndexForName(
-                                _challengesList[index].id),
+                            variable
+                                .returnIndexForName(_challengesList[index].id),
                             _challengesList[index].animatedpadding)
                       ],
                     ),
