@@ -164,6 +164,16 @@ class Challengecontroller extends ChangeNotifier {
     return null;
   }
 
+  getNotificationId1(String title) async {
+    List<PendingNotificationRequest> pendingNotifcationRequests =
+        await flutterLocalNotificationsPlugin?.pendingNotificationRequests();
+    final notification = pendingNotifcationRequests?.firstWhere(
+      (item) => item.title == title,
+      orElse: () => null,
+    );
+    if (notification != null) print(notification.id);
+  }
+
   Future<void> _configureLocalTimeZone() async {
     tz.initializeTimeZones();
     final String timeZoneName =
@@ -288,6 +298,7 @@ class Challengecontroller extends ChangeNotifier {
 
   tz.TZDateTime _nextInstanceOfMondayTenAM(int hours, String weekdays) {
     print(transformDate(weekdays));
+    print(hours);
     tz.TZDateTime scheduledDate = _nextInstanceOfTenAM(hours);
     while (scheduledDate.weekday != transformDate(weekdays)) {
       scheduledDate = scheduledDate.add(const Duration(days: 1));
@@ -525,7 +536,7 @@ class Challengecontroller extends ChangeNotifier {
       scheduleQuotidiendNotification(
           channelID: "10098273",
           channelName: "ChallenDays",
-          channelDesc: "challengeDays.commentaire",
+          channelDesc: challengeDays.commentaire,
           notificationId: 10098273,
           notificationTitle: 'Date Tracker Test',
           notificationBody: 'We are showing notification!',
