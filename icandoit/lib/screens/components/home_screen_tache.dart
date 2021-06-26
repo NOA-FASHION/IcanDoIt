@@ -9,6 +9,7 @@ import 'package:icandoit/models/challenge_model.dart';
 import 'package:icandoit/screens/components/build_challenge_list_tache.dart';
 import 'package:icandoit/controllers/challenge_controller.dart';
 import 'package:icandoit/screens/components/playAllYoutube.dart';
+import 'package:icandoit/screens/components/playYoutube2.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lottie/lottie.dart';
 import 'package:nanoid/nanoid.dart';
@@ -913,7 +914,7 @@ class _HomeTachesState extends State<HomeTaches> {
                               splashColor: Colors.white,
                               onTap: () {
                                 Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => PlayAllYoutubeScreen(
+                                    builder: (context) => PlayYoutubeScreen1(
                                           variable.listeDeYoutube(
                                               widget.indexChallenge),
                                           widget.indexChallenge,
