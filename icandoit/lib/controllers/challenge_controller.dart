@@ -297,8 +297,6 @@ class Challengecontroller extends ChangeNotifier {
   }
 
   tz.TZDateTime _nextInstanceOfMondayTenAM(int hours, String weekdays) {
-    print(transformDate(weekdays));
-    print(hours);
     tz.TZDateTime scheduledDate = _nextInstanceOfTenAM(hours);
     while (scheduledDate.weekday != transformDate(weekdays)) {
       scheduledDate = scheduledDate.add(const Duration(days: 1));
