@@ -15,6 +15,7 @@ import 'package:icandoit/screens/playUrl.dart';
 import 'package:icandoit/screens/playVideo.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lottie/lottie.dart';
+import 'package:page_transition/page_transition.dart';
 
 import 'package:provider/provider.dart';
 import '../../controllers/challenge_controller.dart';
@@ -53,30 +54,43 @@ class _ChallengesListBuilderTachesState
 
     if (description == "achat") {
       modifDecription1 = "Achat";
+      return modifDecription1;
     } else if (description == "tache") {
       modifDecription1 = "Tâche";
+      return modifDecription1;
     } else if (description == "mission") {
       modifDecription1 = "Mission";
+      return modifDecription1;
     } else if (description == "youtube") {
       modifDecription1 = "Youtube";
+      return modifDecription1;
     } else if (description == "video") {
       modifDecription1 = "Vidéo";
+      return modifDecription1;
     } else if (description == "commentaire") {
       modifDecription1 = "Commentaire";
+      return modifDecription1;
     } else if (description == "image") {
       modifDecription1 = "Image";
+      return modifDecription1;
     } else if (description == "url") {
       modifDecription1 = "Url";
+      return modifDecription1;
     } else if (description == "paiement") {
       modifDecription1 = "Paiement";
+      return modifDecription1;
     } else if (description == "echeancier") {
       modifDecription1 = "Échéancier";
+      return modifDecription1;
     } else if (description == "projet") {
       modifDecription1 = "Projet";
+      return modifDecription1;
     } else if (description == "adresse") {
       modifDecription1 = "Adresse";
+      return modifDecription1;
     } else if (description == "formation") {
       modifDecription1 = "Formation";
+      return modifDecription1;
     }
 
     return modifDecription1;
@@ -86,32 +100,46 @@ class _ChallengesListBuilderTachesState
     Color colors = Colors.black;
     if (description == "evenement") {
       colors = Colors.blue;
+      return colors;
     } else if (description == "achat") {
       colors = Colors.cyan;
+      return colors;
     } else if (description == "tache") {
       colors = Colors.orange;
+      return colors;
     } else if (description == "mission") {
       colors = Colors.amber;
+      return colors;
     } else if (description == "youtube") {
       colors = Colors.red;
+      return colors;
     } else if (description == "video") {
       colors = Colors.lime;
+      return colors;
     } else if (description == "commentaire") {
       colors = Colors.blueGrey;
+      return colors;
     } else if (description == "image") {
       colors = Colors.pink;
+      return colors;
     } else if (description == "url") {
       colors = Colors.teal;
+      return colors;
     } else if (description == "paiement") {
       colors = Colors.yellow;
+      return colors;
     } else if (description == "echeancier") {
       colors = Colors.grey;
+      return colors;
     } else if (description == "projet") {
       colors = Colors.indigo;
+      return colors;
     } else if (description == "adresse") {
       colors = Colors.lime;
+      return colors;
     } else if (description == "formation") {
       colors = Colors.green;
+      return colors;
     }
     return colors;
   }
@@ -241,6 +269,7 @@ class _ChallengesListBuilderTachesState
           speed: 30,
         ),
       );
+      return longLetter;
     } else if (word.length > 20 && comment.length > 5) {
       longLetter = Container(
         width: MediaQuery.of(context).size.width / 2.55,
@@ -273,13 +302,23 @@ class _ChallengesListBuilderTachesState
           color: Colors.black,
         ),
         onPressed: () {
-          Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => ChangeNotifierProvider.value(
-                  value: provider,
-                  child: FormationEdit(
-                      item: item, indexChallenge: widget.indexChallenge))));
+          Navigator.push(
+              context,
+              PageTransition(
+                  type: PageTransitionType.bottomToTop,
+                  child: ChangeNotifierProvider.value(
+                      value: provider,
+                      child: FormationEdit(
+                          item: item, indexChallenge: widget.indexChallenge))));
+
+          // Navigator.of(context).push(MaterialPageRoute(
+          //     builder: (context) => ChangeNotifierProvider.value(
+          //         value: provider,
+          //         child: FormationEdit(
+          //             item: item, indexChallenge: widget.indexChallenge))));
         },
       );
+      return fomationEdit;
     } else if (description == "paiement" || description == "echeancier") {
       fomationEdit = IconButton(
         alignment: Alignment.topRight,
@@ -288,13 +327,22 @@ class _ChallengesListBuilderTachesState
           color: Colors.black,
         ),
         onPressed: () {
-          Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => ChangeNotifierProvider.value(
-                  value: provider,
-                  child: PaiementEdit(
-                      item: item, indexChallenge: widget.indexChallenge))));
+          Navigator.push(
+              context,
+              PageTransition(
+                  type: PageTransitionType.bottomToTop,
+                  child: ChangeNotifierProvider.value(
+                      value: provider,
+                      child: PaiementEdit(
+                          item: item, indexChallenge: widget.indexChallenge))));
+          // Navigator.of(context).push(MaterialPageRoute(
+          //     builder: (context) => ChangeNotifierProvider.value(
+          //         value: provider,
+          //         child: PaiementEdit(
+          //             item: item, indexChallenge: widget.indexChallenge))));
         },
       );
+      return fomationEdit;
     } else if (description == "achat") {
       fomationEdit = IconButton(
         alignment: Alignment.topRight,
@@ -303,13 +351,22 @@ class _ChallengesListBuilderTachesState
           color: Colors.black,
         ),
         onPressed: () {
-          Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => ChangeNotifierProvider.value(
-                  value: provider,
-                  child: AchatEdit(
-                      item: item, indexChallenge: widget.indexChallenge))));
+          Navigator.push(
+              context,
+              PageTransition(
+                  type: PageTransitionType.bottomToTop,
+                  child: ChangeNotifierProvider.value(
+                      value: provider,
+                      child: AchatEdit(
+                          item: item, indexChallenge: widget.indexChallenge))));
+          // Navigator.of(context).push(MaterialPageRoute(
+          //     builder: (context) => ChangeNotifierProvider.value(
+          //         value: provider,
+          //         child: AchatEdit(
+          //             item: item, indexChallenge: widget.indexChallenge))));
         },
       );
+      return fomationEdit;
     }
     return fomationEdit;
   }
@@ -320,6 +377,7 @@ class _ChallengesListBuilderTachesState
     );
     if (prix > 0) {
       prixCout1 = Text("Prix : " + prix.toString() + "€");
+      return prixCout1;
     } else if (cout > 0) {
       prixCout1 = Text("Montant : " + cout.toString() + "€");
     }
@@ -336,36 +394,43 @@ class _ChallengesListBuilderTachesState
         Icons.video_call,
         size: 30.0,
       );
+      return documentJoint;
     } else if (resultat == "image") {
       documentJoint = Icon(
         Icons.photo_size_select_large,
         size: 30.0,
       );
+      return documentJoint;
     } else if (resultat == "url") {
       documentJoint = Icon(
         Icons.cloud,
         size: 30.0,
       );
+      return documentJoint;
     } else if (resultat == "commentaire") {
       documentJoint = Icon(
         Icons.comment,
         size: 30.0,
       );
+      return documentJoint;
     } else if (resultat == "information") {
       documentJoint = Icon(
         Icons.perm_device_information,
         size: 30.0,
       );
+      return documentJoint;
     } else if (resultat == "youtube") {
       documentJoint = Icon(
         Icons.youtube_searched_for_sharp,
         size: 30.0,
       );
+      return documentJoint;
     } else if (resultat == "evenement") {
       documentJoint = Icon(
         Icons.event,
         size: 30.0,
       );
+      return documentJoint;
     } else if (resultat == "achat") {
       documentJoint = Icon(
         Icons.shopping_cart,
@@ -376,32 +441,38 @@ class _ChallengesListBuilderTachesState
         Icons.event_available,
         size: 30.0,
       );
+      return documentJoint;
     } else if (resultat == "formation") {
       formation = true;
       documentJoint = Icon(
         Icons.model_training,
         size: 30.0,
       );
+      return documentJoint;
     } else if (resultat == "paiement" || resultat == "echeancier") {
       documentJoint = Icon(
         Icons.payment,
         size: 30.0,
       );
+      return documentJoint;
     } else if (resultat == "projet") {
       documentJoint = Icon(
         Icons.build,
         size: 30.0,
       );
+      return documentJoint;
     } else if (resultat == "adresse") {
       documentJoint = Icon(
         Icons.living,
         size: 30.0,
       );
+      return documentJoint;
     } else if (resultat == "mission") {
       documentJoint = Icon(
         Icons.assignment,
         size: 30.0,
       );
+      return documentJoint;
     }
 
     return documentJoint;
@@ -571,11 +642,19 @@ class _ChallengesListBuilderTachesState
                         });
                         return;
                       }
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => ChangeNotifierProvider.value(
-                              value: providerType,
-                              child: VideoPlayerScreen(
-                                  nameChallenge: item.name))));
+                      Navigator.push(
+                          context,
+                          PageTransition(
+                              type: PageTransitionType.bottomToTop,
+                              child: ChangeNotifierProvider.value(
+                                  value: providerType,
+                                  child: VideoPlayerScreen(
+                                      nameChallenge: item.name))));
+                      // Navigator.of(context).push(MaterialPageRoute(
+                      //     builder: (context) => ChangeNotifierProvider.value(
+                      //         value: providerType,
+                      //         child: VideoPlayerScreen(
+                      //             nameChallenge: item.name))));
                     } else if (item.description
                             .toString()
                             .replaceAll(unityPattern, "") ==
@@ -593,44 +672,86 @@ class _ChallengesListBuilderTachesState
                         });
                         return;
                       }
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => ChangeNotifierProvider.value(
-                              value: providerType,
-                              child: PlayPicture(nameChallenge: item.name))));
+                      Navigator.push(
+                          context,
+                          PageTransition(
+                              type: PageTransitionType.bottomToTop,
+                              child: ChangeNotifierProvider.value(
+                                  value: providerType,
+                                  child:
+                                      PlayPicture(nameChallenge: item.name))));
+                      // Navigator.of(context).push(MaterialPageRoute(
+                      //     builder: (context) => ChangeNotifierProvider.value(
+                      //         value: providerType,
+                      //         child: PlayPicture(nameChallenge: item.name))));
                     } else if (item.description
                             .toString()
                             .replaceAll(unityPattern, "") ==
                         "url") {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => ChangeNotifierProvider.value(
-                              value: providerType,
-                              child: PlayUrl(nameChallenge: item.name))));
+                      Navigator.push(
+                          context,
+                          PageTransition(
+                              type: PageTransitionType.bottomToTop,
+                              child: ChangeNotifierProvider.value(
+                                  value: providerType,
+                                  child: PlayUrl(nameChallenge: item.name))));
+
+                      // Navigator.of(context).push(MaterialPageRoute(
+                      //     builder: (context) => ChangeNotifierProvider.value(
+                      //         value: providerType,
+                      //         child: PlayUrl(nameChallenge: item.name))));
                     } else if (item.description
                             .toString()
                             .replaceAll(unityPattern, "") ==
                         "adresse") {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => ChangeNotifierProvider.value(
-                              value: providerType,
-                              child: AdressMap(adresse: item.name))));
+                      Navigator.push(
+                          context,
+                          PageTransition(
+                              type: PageTransitionType.bottomToTop,
+                              child: ChangeNotifierProvider.value(
+                                  value: providerType,
+                                  child: AdressMap(adresse: item.name))));
+
+                      // Navigator.of(context).push(MaterialPageRoute(
+                      //     builder: (context) => ChangeNotifierProvider.value(
+                      //         value: providerType,
+                      //         child: AdressMap(adresse: item.name))));
                     } else if (item.description
                             .toString()
                             .replaceAll(unityPattern, "") ==
                         "commentaire") {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => ChangeNotifierProvider.value(
-                              value: providerType,
-                              child:
-                                  PlayCommentaire(nameChallenge: item.name))));
+                      Navigator.push(
+                          context,
+                          PageTransition(
+                              type: PageTransitionType.bottomToTop,
+                              child: ChangeNotifierProvider.value(
+                                  value: providerType,
+                                  child: PlayCommentaire(
+                                      nameChallenge: item.name))));
+
+                      // Navigator.of(context).push(MaterialPageRoute(
+                      //     builder: (context) => ChangeNotifierProvider.value(
+                      //         value: providerType,
+                      //         child:
+                      //             PlayCommentaire(nameChallenge: item.name))));
                     } else if (item.description
                             .toString()
                             .replaceAll(unityPattern, "") ==
                         "youtube") {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => ChangeNotifierProvider.value(
-                              value: providerType,
-                              child: PlayYoutubeScreen(
-                                  nameChallenge: item.name))));
+                      Navigator.push(
+                          context,
+                          PageTransition(
+                              type: PageTransitionType.bottomToTop,
+                              child: ChangeNotifierProvider.value(
+                                  value: providerType,
+                                  child: PlayYoutubeScreen(
+                                      nameChallenge: item.name))));
+
+                      // Navigator.of(context).push(MaterialPageRoute(
+                      //     builder: (context) => ChangeNotifierProvider.value(
+                      //         value: providerType,
+                      //         child: PlayYoutubeScreen(
+                      //             nameChallenge: item.name))));
                     } else if (item.description
                                 .toString()
                                 .replaceAll(unityPattern, "") ==
@@ -651,15 +772,28 @@ class _ChallengesListBuilderTachesState
                                 .toString()
                                 .replaceAll(unityPattern, "") ==
                             "mission") {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => ChangeNotifierProvider.value(
-                              value: providerType,
-                              child: Home(
-                                returnRaccourci: false,
-                                id: widget.id,
-                                idChallenge1: item.id,
-                                namechallenge: item.tache,
-                              ))));
+                      Navigator.push(
+                          context,
+                          PageTransition(
+                              type: PageTransitionType.bottomToTop,
+                              child: ChangeNotifierProvider.value(
+                                  value: providerType,
+                                  child: Home(
+                                    returnRaccourci: false,
+                                    id: widget.id,
+                                    idChallenge1: item.id,
+                                    namechallenge: item.tache,
+                                  ))));
+
+                      // Navigator.of(context).push(MaterialPageRoute(
+                      //     builder: (context) => ChangeNotifierProvider.value(
+                      //         value: providerType,
+                      //         child: Home(
+                      //           returnRaccourci: false,
+                      //           id: widget.id,
+                      //           idChallenge1: item.id,
+                      //           namechallenge: item.tache,
+                      //         ))));
                     }
                   },
                   title: Container(

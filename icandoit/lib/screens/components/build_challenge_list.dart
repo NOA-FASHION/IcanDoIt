@@ -27,8 +27,10 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
     double percent1;
     if (listeTache != 0 && listeTache == totalChallenge) {
       percent1 = 0.00;
+      return percent1;
     } else if (listeTache != 0 && listeTache != totalChallenge) {
       percent1 = (1 - (listeTache / totalChallenge));
+      return percent1;
     } else {
       percent1 = 0.00;
     }
@@ -52,6 +54,7 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
           speed: 30,
         ),
       );
+      return longLetter;
     } else {
       word2 = word;
       longLetter = Text(word2);
@@ -76,6 +79,7 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
           speed: 30,
         ),
       );
+      return longLetter;
     } else if (word.length > 25) {
       longLetter = Container(
         width: MediaQuery.of(context).size.width / 2,
@@ -89,6 +93,7 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
           speed: 30,
         ),
       );
+      return longLetter;
     } else {
       word2 = word;
       longLetter = Text(
@@ -309,8 +314,10 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
     Color colors;
     if (challengeListeColors == "normal") {
       colors = Colors.green;
+      return colors;
     } else if (challengeListeColors == "haute") {
       colors = Colors.red;
+      return colors;
     } else {
       colors = Colors.orange;
     }
@@ -532,23 +539,37 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                   onLongPress: () {
                     _confirmRegister(_challengesList[index].id);
                   },
-                  onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => ChangeNotifierProvider.value(
-                            value: variable,
-                            child: HomeTaches(
-                                _challengesList[index].id,
-                                variable.returnIndexForName(
-                                    _challengesList[index].id),
-                                _challengesList[index].name,
-                                _challengesList[index].animatedpadding))));
+                  onTap: () async {
+                    // Navigator.of(context).push(MaterialPageRoute(
+                    //     builder: (context) => ChangeNotifierProvider.value(
+                    //         value: variable,
+                    //         child: HomeTaches(
+                    //             _challengesList[index].id,
+                    //             variable.returnIndexForName(
+                    //                 _challengesList[index].id),
+                    //             _challengesList[index].name,
+                    //             _challengesList[index].animatedpadding))));
 
-                    // Navigator.of(context).push( PageTransition(type: PageTransitionType.fade, child: HomeTaches(
-                    // _challengesList[index].id,
-                    // variable.returnIndexForName(
-                    //     _challengesList[index].id),
-                    // _challengesList[index].name,
-                    // _challengesList[index].animatedpadding)));
+                    Navigator.push(
+                        context,
+                        PageTransition(
+                            type: PageTransitionType.bottomToTop,
+                            child: ChangeNotifierProvider.value(
+                                value: variable,
+                                child: HomeTaches(
+                                    _challengesList[index].id,
+                                    variable.returnIndexForName(
+                                        _challengesList[index].id),
+                                    _challengesList[index].name,
+                                    _challengesList[index].animatedpadding))));
+
+                    // var HomeTaches1 =
+                    //     await buildPageAsync(_challengesList, variable, index);
+                    // Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //         builder: (context) => ChangeNotifierProvider.value(
+                    //             value: variable, child: HomeTaches1)));
                   },
                   title: Container(
                     child: Row(
@@ -620,4 +641,41 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
       ),
     );
   }
+
+  Future<Widget> buildPageAsync(List<ChallengeModel> challengesList,
+      Challengecontroller variable, int index) async {
+    return Future.microtask(() {
+      return HomeTaches(
+          challengesList[index].id,
+          variable.returnIndexForName(challengesList[index].id),
+          challengesList[index].name,
+          challengesList[index].animatedpadding);
+    });
+  }
+}
+
+class SizeTransition3 extends PageRouteBuilder {
+  final Widget page;
+
+  SizeTransition3(this.page)
+      : super(
+          pageBuilder: (context, animation, anotherAnimation) => page,
+          transitionDuration: Duration(milliseconds: 1000),
+          reverseTransitionDuration: Duration(milliseconds: 200),
+          transitionsBuilder: (context, animation, anotherAnimation, child) {
+            animation = CurvedAnimation(
+                curve: Curves.fastLinearToSlowEaseIn,
+                parent: animation,
+                reverseCurve: Curves.fastOutSlowIn);
+            return Align(
+              alignment: Alignment.center,
+              child: SizeTransition(
+                axis: Axis.horizontal,
+                sizeFactor: animation,
+                child: page,
+                axisAlignment: 0,
+              ),
+            );
+          },
+        );
 }

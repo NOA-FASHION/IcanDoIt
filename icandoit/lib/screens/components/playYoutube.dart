@@ -119,7 +119,7 @@ class _PlayYoutubeScreenState extends State<PlayYoutubeScreen>
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(bottom: 40),
+                  margin: EdgeInsets.only(bottom: 90),
                   child: Text(
                     _playerState,
                     style: TextStyle(color: Colors.blue),

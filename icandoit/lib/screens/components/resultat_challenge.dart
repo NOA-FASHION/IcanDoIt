@@ -706,7 +706,7 @@ class _ResultaChallengeState extends State<ResultaChallenge>
       labelColor: Colors.white,
       background: Colors.transparent,
       tooltipSize: 20,
-      maxX: 40.0,
+      maxX: 100.0,
       labelSizeFactor: 1,
       data: bardata,
       showLegend: true,

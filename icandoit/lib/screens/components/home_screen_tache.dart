@@ -13,6 +13,7 @@ import 'package:icandoit/screens/components/playYoutube2.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lottie/lottie.dart';
 import 'package:nanoid/nanoid.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
@@ -177,21 +178,21 @@ class _HomeTachesState extends State<HomeTaches> {
 
   bool idAllPlayYoutubeBool(List<ChallengeModel> _challengeList) {
     bool playYoutube = false;
-
-    for (var n = _challengeList[widget.indexChallenge].listeDeTache.length - 1;
-        n >= 0;
-        n--) {
-      if (_challengeList[widget.indexChallenge]
-              .listeDeTache[n]
-              .description
-              .toString()
-              .replaceAll(unityPattern, "") ==
-          "youtube") {
-        playYoutube = true;
-        return playYoutube;
+    for (var i = _challengeList.length - 1; i >= 0; i--) {
+      if (_challengeList[i].id == widget.id) {
+        for (var n = _challengeList[i].listeDeTache.length - 1; n >= 0; n--) {
+          if (_challengeList[i]
+                  .listeDeTache[n]
+                  .description
+                  .toString()
+                  .replaceAll(unityPattern, "") ==
+              "youtube") {
+            playYoutube = true;
+            return playYoutube;
+          }
+        }
       }
     }
-    // print(idCallenge);
     return playYoutube;
   }
 
@@ -244,6 +245,7 @@ class _HomeTachesState extends State<HomeTaches> {
     idChalEcheanceAutoBool1 = false;
     for (var i = _challengeList.length - 1; i >= 0; i--) {
       if (_challengeList[i].id == widget.id) {
+        isSwitched = _challengeList[i].prelevementAutoBool;
         idChallengeBool1 = _challengeList[i].prixTotalBool;
         idChallengePaimentBool1 = _challengeList[i].coutTotalBool;
         idChallengeEcheanceBool1 = _challengeList[i].echeancierBoll;
@@ -256,21 +258,16 @@ class _HomeTachesState extends State<HomeTaches> {
   }
 
   void initState() {
-    // Challengecontroller variable = Provider.of<Challengecontroller>(context);
-    // idChallenge1 = variable.getChallenges()[widget.indexChallenge].id;
     super.initState();
     coutPaiment = "0";
     prixProduit = "0";
-    // courBool = false;
-    // paimentBool = false;
   }
 
   bool idChallengeBool1;
   bool idChallengePaimentBool1;
   bool idChallengeEcheanceBool1;
   bool idChalEcheanceAutoBool1;
-  // var courBool;
-  // var paimentBool;
+
   final bool animatedpadding;
   final String something;
   final int indexChallenge;
@@ -832,7 +829,7 @@ class _HomeTachesState extends State<HomeTaches> {
   Widget build(BuildContext context) {
     Challengecontroller variable = Provider.of<Challengecontroller>(context);
     List<ChallengeModel> _challengesListget = variable.getChallenges();
-    isSwitched = _challengesListget[widget.indexChallenge].prelevementAutoBool;
+    // isSwitched = _challengesListget[widget.indexChallenge].prelevementAutoBool;
     challengeBoolAppBar(_challengesListget);
     return Scaffold(
       key: scaffoldkeyTache,
@@ -913,12 +910,13 @@ class _HomeTachesState extends State<HomeTaches> {
                               // splash color
                               splashColor: Colors.white,
                               onTap: () {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => PlayYoutubeScreen1(
-                                          variable.listeDeYoutube(
-                                              widget.indexChallenge),
-                                          widget.indexChallenge,
-                                        )));
+                                Navigator.of(context).push(PageTransition(
+                                    type: PageTransitionType.bottomToTop,
+                                    child: PlayYoutubeScreen1(
+                                      variable.listeDeYoutube(
+                                          widget.indexChallenge),
+                                      widget.indexChallenge,
+                                    )));
                               }, // button pressed
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,

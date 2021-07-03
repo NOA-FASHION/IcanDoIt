@@ -298,9 +298,12 @@ class Challengecontroller extends ChangeNotifier {
 
   tz.TZDateTime _nextInstanceOfMondayTenAM(int hours, String weekdays) {
     tz.TZDateTime scheduledDate = _nextInstanceOfTenAM(hours);
-    while (scheduledDate.weekday != transformDate(weekdays)) {
-      scheduledDate = scheduledDate.add(const Duration(days: 1));
+    if (transformDate(weekdays) != null) {
+      while (scheduledDate.weekday != transformDate(weekdays)) {
+        scheduledDate = scheduledDate.add(const Duration(days: 1));
+      }
     }
+
     return scheduledDate;
   }
 
@@ -327,21 +330,28 @@ class Challengecontroller extends ChangeNotifier {
   }
 
   int transformDate(String days) {
-    int daysFinal = 1;
+    int daysFinal;
     if (days == "Lundi") {
       daysFinal = DateTime.monday;
+      return daysFinal;
     } else if (days == "Mardi") {
       daysFinal = DateTime.tuesday;
+      return daysFinal;
     } else if (days == "Mercredi") {
       daysFinal = DateTime.wednesday;
+      return daysFinal;
     } else if (days == "Jeudi") {
       daysFinal = DateTime.thursday;
+      return daysFinal;
     } else if (days == "Vendredi") {
       daysFinal = DateTime.friday;
+      return daysFinal;
     } else if (days == "Samedi") {
       daysFinal = DateTime.saturday;
+      return daysFinal;
     } else if (days == "Dimanche") {
       daysFinal = DateTime.sunday;
+      return daysFinal;
     }
     return daysFinal;
   }
@@ -486,23 +496,30 @@ class Challengecontroller extends ChangeNotifier {
   }
 
   String translateDays(String days) {
-    String daysFinal = "";
+    String daysFinal;
     if (days == "Lundi") {
       daysFinal = "Monday";
+      return daysFinal;
     } else if (days == "Mardi") {
       daysFinal = "Tuesday";
+      return daysFinal;
     } else if (days == "Mercredi") {
       daysFinal = "Wednesday";
+      return daysFinal;
     } else if (days == "Jeudi") {
       daysFinal = "Thursday";
+      return daysFinal;
     } else if (days == "Vendredi") {
       daysFinal = "Friday";
+      return daysFinal;
     } else if (days == "Samedi") {
       daysFinal = "Saturday";
+      return daysFinal;
     } else if (days == "Dimanche") {
       daysFinal = "Sunday";
+      return daysFinal;
     }
-    return daysFinal;
+    return null;
   }
 
   void activeEcheance(bool isSwitch, int index) async {
@@ -800,13 +817,17 @@ class Challengecontroller extends ChangeNotifier {
     if (nbtacheVallide1 == 0) {
       challengeDays.commentaire =
           "Vous n'avez pas validé de challenge ou de tâche...";
+      activeNotif();
     } else if (nbtacheVallide1 > 9) {
       challengeDays.commentaire = "Extraordinaire, rien ne vous arrête!";
+      activeNotif();
     } else if (nbtacheVallide1 > 6) {
       challengeDays.commentaire = "Bravo, vos efforts ont été récompensés!";
+      activeNotif();
     } else if (nbtacheVallide1 > 0) {
       challengeDays.commentaire =
           " Encore un effort et vos objectifs seront atteints!";
+      activeNotif();
     }
     await _saveChallendays();
     _initChallengeListStartChallenge();
@@ -886,54 +907,75 @@ class Challengecontroller extends ChangeNotifier {
     unity_challenge1 unity;
     if (json == "evenement") {
       unity = unity_challenge1.evenement;
+      return unity;
     } else if (json == "achat") {
       unity = unity_challenge1.achat;
+      return unity;
     } else if (json == "tache") {
       unity = unity_challenge1.tache;
+      return unity;
     } else if (json == "mission") {
       unity = unity_challenge1.mission;
+      return unity;
     } else if (json == "youtube") {
       unity = unity_challenge1.youtube;
+      return unity;
     } else if (json == "video") {
       unity = unity_challenge1.video;
+      return unity;
     } else if (json == "commentaire") {
       unity = unity_challenge1.commentaire;
+      return unity;
     } else if (json == "image") {
       unity = unity_challenge1.image;
+      return unity;
     } else if (json == "url") {
       unity = unity_challenge1.url;
+      return unity;
     } else if (json == "adresse") {
       unity = unity_challenge1.adresse;
+      return unity;
     } else if (json == "formation") {
       unity = unity_challenge1.formation;
+      return unity;
     } else if (json == "paiement") {
       unity = unity_challenge1.paiement;
+      return unity;
     } else if (json == "echeancier") {
       unity = unity_challenge1.echeancier;
+      return unity;
     } else if (json == "projet") {
       unity = unity_challenge1.projet;
+      return unity;
     } else if (json == "information") {
       unity = unity_challenge1.information;
+      return unity;
     }
-    return unity;
+    return null;
   }
 
   unity_challenge choixDesciptionEnum1(dynamic json) {
     unity_challenge unity;
     if (json == "haute") {
       unity = unity_challenge.haute;
+      return unity;
     } else if (json == "normal") {
       unity = unity_challenge.normal;
+      return unity;
     } else if (json == "quotidien") {
       unity = unity_challenge.quotidien;
+      return unity;
     } else if (json == "hebdomadaire") {
       unity = unity_challenge.hebdomadaire;
+      return unity;
     } else if (json == "mensuel") {
       unity = unity_challenge.mensuel;
+      return unity;
     } else if (json == "notification") {
       unity = unity_challenge.notification;
+      return unity;
     }
-    return unity;
+    return null;
   }
 
   void addformationChapitre(
@@ -1855,9 +1897,10 @@ class Challengecontroller extends ChangeNotifier {
     for (var i = _challengeList.length - 1; i >= 0; i--) {
       if (_challengeList[i].id == id) {
         index = i;
+        return index;
       }
     }
-    return index;
+    return null;
   }
 
   void desactivAffichagePrinc(int index, bool boolId) async {
