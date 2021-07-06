@@ -578,32 +578,40 @@ class Challengecontroller extends ChangeNotifier {
     }
   }
 
-// void removeEcheance() async {
-  //   for (var i = _challengeListSave.length - 1; i >= 0; i--) {
-  //     if (_challengeListSave[i].coutTotal > 0) {
-  //       if (_challengeListSave[i].listeDeTache.length > 0) {
-  //         print(_challengeListSave[i].listeDeTache[0].description.toString());
-  //         if (_challengeListSave[i].listeDeTache[0].description.toString() ==
-  //             "unity_challenge1.echeancier") {
-  //           _challengeListSave[i].restePaiement =
-  //               _challengeListSave[i].restePaiement -
-  //                   _challengeListSave[i].listeDeTache[0].cout;
-  //           _challengeListSave[i].listeDeTache.removeAt(0);
-  //           await _save1Sauvegarde(
-  //               remove: true, idChallenge: _challengeListSave[i].id);
-  //           return;
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
+  void majMensuelSave(ChallengeModel challengeListSave) {
+    DateTime today = new DateTime.now();
+    DateTime lastDay =
+        DateFormat('EEEE, d MMM, yyyy').parseStrict(challengeDays.date);
+    if (today.month == lastDay.month &&
+        lastDay.day < int.parse(challengeListSave.date) &&
+        today.day > int.parse(challengeListSave.date)) {}
+  }
+
   void mensuelSave() {
     DateTime today = new DateTime.now();
+    DateTime lastDay =
+        DateFormat('EEEE, d MMM, yyyy').parseStrict(challengeDays.date);
     for (var i = _challengeListSave.length - 1; i >= 0; i--) {
       if (_challengeListSave[i].date.isNotEmpty) {
         if (_challengeListSave[i].date == DateFormat('d').format(today)) {
           // removeEcheance();
           challegListSaveShedule(i);
+        }
+        if (today.month == lastDay.month &&
+            lastDay.day < int.parse(_challengeListSave[i].date) &&
+            today.day > int.parse(_challengeListSave[i].date)) {
+          challegListSaveShedule(i);
+          // removeEcheance();
+        }
+        if (today.year == lastDay.year && today.month > lastDay.month) {
+          for (var i = today.month - lastDay.month; i >= 0; i--) {
+            // removeEcheance();
+          }
+        }
+        if (today.year > lastDay.year) {
+          for (var i = today.month + (12 - lastDay.month); i >= 0; i--) {
+            // removeEcheance();
+          }
         }
       }
     }
@@ -749,7 +757,6 @@ class Challengecontroller extends ChangeNotifier {
   void startChallendays() async {
     DateTime today = new DateTime.now();
     if (challengeDays.date == null) {
-      print("startChallengeDay");
       challengeDays.notifcationResultBool = false;
       challengeDays.date = DateFormat('EEEE, d MMM, yyyy').format(today);
       challengeDays.nbChallengeEnCours = "0";
