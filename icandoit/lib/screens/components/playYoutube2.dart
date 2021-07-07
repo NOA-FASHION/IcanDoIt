@@ -6,8 +6,6 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-import 'video_list.dart';
-
 class PlayYoutubeScreen1 extends StatefulWidget {
   final List<String> listeDeYoutube;
   final int idChallenge;

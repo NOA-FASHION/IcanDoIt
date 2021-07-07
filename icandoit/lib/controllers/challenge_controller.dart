@@ -212,6 +212,7 @@ class Challengecontroller extends ChangeNotifier {
         android: androidInitializationSettings, iOS: iosInitializationSettings);
     await flutterLocalNotificationsPlugin?.initialize(initializationSettings,
         onSelectNotification: onSelectNotification);
+
     await updateNotificationCount();
   }
 
@@ -474,9 +475,9 @@ class Challengecontroller extends ChangeNotifier {
       channelID,
       channelName,
       channelDesc,
-      priority: Priority.high,
-      importance: Importance.max,
-      ticker: '$channelName',
+      // priority: Priority.high,
+      // importance: Importance.max,
+      // ticker: '$channelName',
     );
 
     IOSNotificationDetails iosNotificationDetails = IOSNotificationDetails();
@@ -493,6 +494,34 @@ class Challengecontroller extends ChangeNotifier {
         uiLocalNotificationDateInterpretation:
             UILocalNotificationDateInterpretation.absoluteTime,
         matchDateTimeComponents: DateTimeComponents.time);
+  }
+
+  Future<void> scheduleDailyTenAMNotification() async {
+    await flutterLocalNotificationsPlugin.zonedSchedule(
+        0,
+        'daily scheduled notification title',
+        'daily scheduled notification body',
+        _nextInstanceOfTenAM2(),
+        const NotificationDetails(
+          android: AndroidNotificationDetails(
+              'daily notification channel id',
+              'daily notification channel name',
+              'daily notification description'),
+        ),
+        androidAllowWhileIdle: true,
+        uiLocalNotificationDateInterpretation:
+            UILocalNotificationDateInterpretation.absoluteTime,
+        matchDateTimeComponents: DateTimeComponents.time);
+  }
+
+  tz.TZDateTime _nextInstanceOfTenAM2() {
+    final tz.TZDateTime now = tz.TZDateTime.now(tz.local);
+    tz.TZDateTime scheduledDate =
+        tz.TZDateTime(tz.local, now.year, now.month, now.day, 10);
+    if (scheduledDate.isBefore(now)) {
+      scheduledDate = scheduledDate.add(const Duration(days: 1));
+    }
+    return scheduledDate;
   }
 
   String translateDays(String days) {

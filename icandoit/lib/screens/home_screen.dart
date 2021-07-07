@@ -866,7 +866,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                             color: Colors.black,
                           ),
                           onPressed: () {
-                            variable.testSchedule();
+                            variable.scheduleDailyTenAMNotification();
                           },
                         ),
                   // IconButton(
