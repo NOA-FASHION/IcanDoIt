@@ -771,7 +771,11 @@ class _ChallengesListBuilderTachesState
                         item.description
                                 .toString()
                                 .replaceAll(unityPattern, "") ==
-                            "mission") {
+                            "mission" ||
+                        item.description
+                                .toString()
+                                .replaceAll(unityPattern, "") ==
+                            "paiement") {
                       Navigator.push(
                           context,
                           PageTransition(
