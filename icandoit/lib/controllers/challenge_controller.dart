@@ -698,23 +698,23 @@ class Challengecontroller extends ChangeNotifier {
     for (var i = _challengeListSave.length - 1; i >= 0; i--) {
       if (_challengeListSave[i].date.isNotEmpty) {
         if (_challengeListSave[i].date == DateFormat('d').format(today)) {
-          // removeEcheance();
+          removeEcheance();
           challegListSaveShedule(i);
         }
         if (today.month == lastDay.month &&
             lastDay.day < int.parse(_challengeListSave[i].date) &&
             today.day > int.parse(_challengeListSave[i].date)) {
           challegListSaveShedule(i);
-          // removeEcheance();
+          removeEcheance();
         }
         if (today.year == lastDay.year && today.month > lastDay.month) {
           for (var i = today.month - lastDay.month; i >= 0; i--) {
-            // removeEcheance();
+            removeEcheance();
           }
         }
         if (today.year > lastDay.year) {
           for (var i = today.month + (12 - lastDay.month); i >= 0; i--) {
-            // removeEcheance();
+            removeEcheance();
           }
         }
       }
@@ -791,7 +791,7 @@ class Challengecontroller extends ChangeNotifier {
   void initialiseQuotidient() {
     for (var i = _challengeListSave.length - 1; i >= 0; i--) {
       if (_challengeListSave[i].quotidient == true) {
-        removeEcheance();
+        // removeEcheance();
         challegListSaveShedule(i);
       }
     }
