@@ -869,27 +869,27 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                             variable.scheduleDailyTenAMNotification();
                           },
                         ),
-                  // IconButton(
-                  //   alignment: Alignment.topRight,
-                  //   icon: Icon(
-                  //     Icons.notifications,
-                  //     color: Colors.black,
-                  //   ),
-                  //   onPressed: () {
-                  //     variable.cancelAllNotifications();
-                  //   },
-                  // ),
-                  const Divider(),
                   IconButton(
                     alignment: Alignment.topRight,
                     icon: Icon(
-                      Icons.notifications_off,
+                      Icons.notifications,
                       color: Colors.black,
                     ),
                     onPressed: () {
-                      variable.checkPendingNotificationRequests(context);
+                      variable.cancelAllNotifications();
                     },
                   ),
+                  const Divider(),
+                  // IconButton(
+                  //   alignment: Alignment.topRight,
+                  //   icon: Icon(
+                  //     Icons.notifications_off,
+                  //     color: Colors.black,
+                  //   ),
+                  //   onPressed: () {
+                  //     variable.checkPendingNotificationRequests(context);
+                  //   },
+                  // ),
                 ],
                 leading: widget.idChallenge1.isEmpty
                     ? IconButton(
