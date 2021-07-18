@@ -859,16 +859,17 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                             _controller.toggle();
                           },
                         )
-                      : IconButton(
-                          alignment: Alignment.topRight,
-                          icon: Icon(
-                            Icons.schedule,
-                            color: Colors.black,
-                          ),
-                          onPressed: () {
-                            variable.scheduleDailyTenAMNotification();
-                          },
-                        ),
+                      : null,
+                  // : IconButton(
+                  //     alignment: Alignment.topRight,
+                  //     icon: Icon(
+                  //       Icons.schedule,
+                  //       color: Colors.black,
+                  //     ),
+                  //     onPressed: () {
+                  //       variable.scheduleDailyTenAMNotification();
+                  //     },
+                  //   ),
                   IconButton(
                     alignment: Alignment.topRight,
                     icon: Icon(
@@ -891,18 +892,18 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                     },
                   ),
                 ],
-                // leading: widget.idChallenge1.isEmpty
-                //     ? IconButton(
-                //         alignment: Alignment.topRight,
-                //         icon: Icon(
-                //           Icons.menu,
-                //           color: Colors.black,
-                //         ),
-                //         onPressed: () {
-                //           _controller.toggle();
-                //         },
-                //       )
-                //     : null,
+                leading: widget.idChallenge1.isEmpty
+                    ? IconButton(
+                        alignment: Alignment.topRight,
+                        icon: Icon(
+                          Icons.menu,
+                          color: Colors.black,
+                        ),
+                        onPressed: () {
+                          _controller.toggle();
+                        },
+                      )
+                    : null,
                 centerTitle: true,
                 flexibleSpace: Container(
                   padding: EdgeInsets.only(top: 40.0),
