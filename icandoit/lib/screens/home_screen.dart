@@ -880,29 +880,29 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                     },
                   ),
                   const Divider(),
-                  // IconButton(
-                  //   alignment: Alignment.topRight,
-                  //   icon: Icon(
-                  //     Icons.notifications_off,
-                  //     color: Colors.black,
-                  //   ),
-                  //   onPressed: () {
-                  //     variable.checkPendingNotificationRequests(context);
-                  //   },
-                  // ),
+                  IconButton(
+                    alignment: Alignment.topRight,
+                    icon: Icon(
+                      Icons.notifications_off,
+                      color: Colors.black,
+                    ),
+                    onPressed: () {
+                      variable.checkPendingNotificationRequests(context);
+                    },
+                  ),
                 ],
-                leading: widget.idChallenge1.isEmpty
-                    ? IconButton(
-                        alignment: Alignment.topRight,
-                        icon: Icon(
-                          Icons.menu,
-                          color: Colors.black,
-                        ),
-                        onPressed: () {
-                          _controller.toggle();
-                        },
-                      )
-                    : null,
+                // leading: widget.idChallenge1.isEmpty
+                //     ? IconButton(
+                //         alignment: Alignment.topRight,
+                //         icon: Icon(
+                //           Icons.menu,
+                //           color: Colors.black,
+                //         ),
+                //         onPressed: () {
+                //           _controller.toggle();
+                //         },
+                //       )
+                //     : null,
                 centerTitle: true,
                 flexibleSpace: Container(
                   padding: EdgeInsets.only(top: 40.0),
