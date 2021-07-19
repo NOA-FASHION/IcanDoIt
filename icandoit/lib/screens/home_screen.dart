@@ -859,17 +859,16 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                             _controller.toggle();
                           },
                         )
-                      : null,
-                  // : IconButton(
-                  //     alignment: Alignment.topRight,
-                  //     icon: Icon(
-                  //       Icons.schedule,
-                  //       color: Colors.black,
-                  //     ),
-                  //     onPressed: () {
-                  //       variable.scheduleDailyTenAMNotification();
-                  //     },
-                  //   ),
+                      : IconButton(
+                          alignment: Alignment.topRight,
+                          icon: Icon(
+                            Icons.schedule,
+                            color: Colors.black,
+                          ),
+                          onPressed: () {
+                            variable.scheduleDailyTenAMNotification();
+                          },
+                        ),
                   IconButton(
                     alignment: Alignment.topRight,
                     icon: Icon(

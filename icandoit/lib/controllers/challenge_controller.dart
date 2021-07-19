@@ -448,7 +448,7 @@ class Challengecontroller extends ChangeNotifier {
         androidAllowWhileIdle: true,
         uiLocalNotificationDateInterpretation:
             UILocalNotificationDateInterpretation.absoluteTime,
-        matchDateTimeComponents: DateTimeComponents.dayOfWeekAndTime);
+        matchDateTimeComponents: DateTimeComponents.time);
   }
 
   Future<void> scheduleHebdodNotification(
