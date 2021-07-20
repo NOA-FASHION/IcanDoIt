@@ -1232,13 +1232,13 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                         dateBool ||
                                         notificationBool) {
                                       idNotif
-                                          .add(customAlphabet("0123456789", 4));
+                                          .add(customAlphabet("0123456789", 2));
                                     } else if (hebdoBool) {
                                       for (var n = totalDays.length - 1;
                                           n >= 0;
                                           n--) {
                                         idNotif.add(
-                                            customAlphabet("0123456789", 4));
+                                            customAlphabet("0123456789", 2));
                                       }
                                     }
 
@@ -1279,98 +1279,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                               },
                             ),
                           ),
-                          // InkWell(
-                          //     onTap: () {
-                          //       if (unityChallenge == "raccourci") {
-                          //         Provider.of<
-                          //                     Challengecontroller>(context,
-                          //                 listen: false)
-                          //             .raccourciChallenge(
-                          //                 raccourci: totalChangeListChal
-                          //                     .toSet()
-                          //                     .toList(),
-                          //                 name: nameChallenge,
-                          //                 idChallenge: widget.idChallenge1);
-                          //         Navigator.pop(context);
-                          //       } else if (formKey.currentState.validate()) {
-                          //         formKey.currentState.save();
-                          //         {
-                          //           if (unityChallenge == "notification") {
-                          //             heureTotal = '';
-                          //           } else if (unityChallenge == "quotidien") {
-                          //             idNotif = [];
-                          //             date = "";
-                          //             totalDays = [];
-                          //             notificationBool = false;
-                          //             hebdoBool = false;
-                          //             dateBool = false;
-                          //             quotidient = true;
-                          //             animatedpadding = true;
-                          //           } else if (unityChallenge == "normal" ||
-                          //               unityChallenge == "haute") {
-                          //             totalDays = [];
-                          //             date = "";
-                          //             animatedpadding = false;
-                          //             quotidient = false;
-                          //             dateBool = false;
-                          //             notificationBool = false;
-                          //             hebdoBool = false;
-                          //             idNotif = [];
-                          //             heureTotal = '';
-                          //           }
-                          //           if (quotidient ||
-                          //               dateBool ||
-                          //               notificationBool) {
-                          //             idNotif
-                          //                 .add(customAlphabet("0123456789", 4));
-                          //           } else if (hebdoBool) {
-                          //             for (var n = totalDays.length - 1;
-                          //                 n >= 0;
-                          //                 n--) {
-                          //               idNotif.add(
-                          //                   customAlphabet("0123456789", 4));
-                          //             }
-                          //           }
-
-                          //           Provider.of<Challengecontroller>(context,
-                          //                   listen: false)
-                          //               .addChallenge(
-                          //                   prelevementAutoBool: false,
-                          //                   echeancierBoll: false,
-                          //                   restePaiement: 0,
-                          //                   previsions: 0,
-                          //                   coutTotalBool: false,
-                          //                   prixTotalBool: false,
-                          //                   prixTotal: 0,
-                          //                   coutTotal: 0,
-                          //                   boolId: true,
-                          //                   idNotif: idNotif,
-                          //                   idChallenge: idCHallengeFirat(
-                          //                       widget.idChallenge1),
-                          //                   id: nanoid(11),
-                          //                   notifiaction: heureTotal,
-                          //                   date: date,
-                          //                   totalDays:
-                          //                       totalDays.toSet().toList(),
-                          //                   quotidient: quotidient,
-                          //                   animatedpadding: animatedpadding,
-                          //                   name: nameChallenge,
-                          //                   totalChallenge: totalChallenge,
-                          //                   description: targetChallenge,
-                          //                   unity: unityChallenge,
-                          //                   challengeListTache:
-                          //                       challengeListTache);
-                          //           saveNotification(nameChallenge,
-                          //               targetChallenge, idNotif);
-
-                          //           Navigator.pop(context);
-                          //         }
-                          //       }
-                          //     },
-                          //     child: Container(
-                          //         width: 120.0,
-                          //         height: 120.0,
-                          //         child: Lottie.asset('assets/save1.json'))),
                         ],
                       ),
                     ),
