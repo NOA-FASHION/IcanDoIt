@@ -8,7 +8,7 @@ import 'package:icandoit/models/challenge_model.dart';
 // import 'package:icandoit/models/challenge_model.dart';
 import 'package:icandoit/screens/components/build_challenge_list_tache.dart';
 import 'package:icandoit/controllers/challenge_controller.dart';
-import 'package:icandoit/screens/components/playAllYoutube.dart';
+// import 'package:icandoit/screens/components/playAllYoutube.dart';
 import 'package:icandoit/screens/components/playYoutube2.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lottie/lottie.dart';
@@ -19,7 +19,7 @@ import 'package:shimmer_animation/shimmer_animation.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 import 'package:youtube_parser/youtube_parser.dart';
-
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 // import '../../main.dart';
 // import '../home_screen.dart';
 
@@ -195,51 +195,6 @@ class _HomeTachesState extends State<HomeTaches> {
     }
     return playYoutube;
   }
-
-  // bool idChallengeBool(List<ChallengeModel> _challengeList) {
-  //   bool idCallenge = false;
-  //   for (var i = _challengeList.length - 1; i >= 0; i--) {
-  //     if (_challengeList[i].id == widget.id) {
-  //       idCallenge = _challengeList[i].prixTotalBool;
-  //     }
-  //   }
-
-  //   return idCallenge;
-  // }
-
-  // bool idChallengePaimentBool(List<ChallengeModel> _challengeList) {
-  //   bool idCallenge = false;
-  //   for (var i = _challengeList.length - 1; i >= 0; i--) {
-  //     if (_challengeList[i].id == widget.id) {
-  //       idCallenge = _challengeList[i].coutTotalBool;
-  //     }
-  //   }
-  //   print(idCallenge);
-  //   return idCallenge;
-  // }
-
-  // bool idChallengeEcheanceBool(List<ChallengeModel> _challengeList) {
-  //   bool idCallenge = false;
-  //   for (var i = _challengeList.length - 1; i >= 0; i--) {
-  //     if (_challengeList[i].id == widget.id) {
-  //       idCallenge = _challengeList[i].echeancierBoll;
-  //     }
-  //   }
-  //   print(idCallenge);
-  //   return idCallenge;
-  // }
-
-  // bool idChalEcheanceAutoBool(List<ChallengeModel> _challengeList) {
-  //   bool idCallenge = false;
-  //   for (var i = _challengeList.length - 1; i >= 0; i--) {
-  //     if (_challengeList[i].id == widget.id &&
-  //         _challengeList[i].animatedpadding) {
-  //       idCallenge = _challengeList[i].echeancierBoll;
-  //     }
-  //   }
-  //   print(idCallenge);
-  //   return idCallenge;
-  // }
 
   void challengeBoolAppBar(List<ChallengeModel> _challengeList) {
     idChalEcheanceAutoBool1 = false;
@@ -626,7 +581,7 @@ class _HomeTachesState extends State<HomeTaches> {
         },
         validator: (value) {
           if (value.isEmpty) {
-            return "Merci d'entrer l'url";
+            return "Merci d'entrer l'url youtube";
           }
           return null;
         },
@@ -638,7 +593,8 @@ class _HomeTachesState extends State<HomeTaches> {
                 borderSide: BorderSide(width: 1.0, color: Colors.blueAccent),
                 borderRadius: BorderRadius.circular(15.0)),
             contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            labelText: "Youtube",
+            labelText:
+                "URL de Youtube : exemple:https://www.youtube.com/watch?v=8yFVBuGcOe8",
             border:
                 OutlineInputBorder(borderRadius: BorderRadius.circular(15.0))),
       );
@@ -1409,7 +1365,7 @@ class _HomeTachesState extends State<HomeTaches> {
                                 child: Row(
                                   children: [
                                     Icon(
-                                      Icons.youtube_searched_for_outlined,
+                                      FontAwesomeIcons.youtube,
                                       size: 30.0,
                                     ),
                                     SizedBox(width: 10),

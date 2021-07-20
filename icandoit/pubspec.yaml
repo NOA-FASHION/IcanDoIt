@@ -62,6 +62,7 @@ dependencies:
   url_launcher: ^6.0.6
   page_transition: "^2.0.2"
   youtube_player_flutter: ^8.0.0
+  font_awesome_flutter: ^9.1.0
   
   
  

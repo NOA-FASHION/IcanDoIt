@@ -19,8 +19,6 @@ class _AdressMapState extends State<AdressMap> {
   Widget build(BuildContext context) {
     List<String> result = widget.adresse.split("/ ");
     void _launchMapsUrl() async {
-      // final url =
-      //     'comgooglemaps://?daddr=${Uri.encodeFull("genipa,ducos,centre commercial")}&directionsmode=driving';
       final url =
           "https://www.google.com/maps/search/${Uri.encodeFull(widget.adresse)}";
       if (await canLaunch(url)) {

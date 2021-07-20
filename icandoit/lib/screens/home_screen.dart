@@ -8,7 +8,8 @@ import 'package:multiselect_formfield/multiselect_formfield.dart';
 import 'package:nanoid/nanoid.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
-import 'package:lottie/lottie.dart';
+import 'package:url_launcher/url_launcher.dart';
+// import 'package:lottie/lottie.dart';
 
 import 'components/challenge_list_save.dart';
 import 'components/resultat_challenge.dart';
@@ -679,6 +680,15 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     super.dispose();
   }
 
+  void _launchMapsUrl() async {
+    final url = "https://easytodo.fr";
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     Challengecontroller variable = Provider.of<Challengecontroller>(context);
@@ -767,7 +777,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           ),
           SizedBox(height: 5.0),
           InkWell(
-            onTap: () {},
+            onTap: () {
+              _launchMapsUrl();
+            },
             child: Row(
               children: [
                 Icon(Icons.support),
@@ -787,7 +799,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           ),
           SizedBox(height: 5.0),
           InkWell(
-            onTap: () {},
+            onTap: () {
+              _launchMapsUrl();
+            },
             child: Row(
               children: [
                 Icon(Icons.policy),

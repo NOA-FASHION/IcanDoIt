@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class PlayYoutubeScreen1 extends StatefulWidget {
@@ -134,6 +135,25 @@ class _PlayYoutubeScreen1State extends State<PlayYoutubeScreen1> {
           preferredSize: Size.fromHeight(100.0),
           child: SafeArea(
             child: AppBar(
+              actions: [
+                Container(
+                  margin: EdgeInsets.only(right: 19),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Icon(
+                        FontAwesomeIcons.youtube,
+                        size: 20,
+                        color: Colors.red,
+                      ), // icon
+                      Text(
+                        "Youtube",
+                        style: TextStyle(fontSize: 10, color: Colors.white),
+                      ), // text
+                    ],
+                  ),
+                )
+              ],
               title: Text("Youtube"),
               centerTitle: true,
               flexibleSpace: Container(
