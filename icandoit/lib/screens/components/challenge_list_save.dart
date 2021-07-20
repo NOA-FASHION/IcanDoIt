@@ -1,5 +1,6 @@
 import 'package:fancy_drawer/fancy_drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:icandoit/controllers/challenge_controller.dart';
 import 'package:icandoit/models/challenge_model.dart';
 import 'package:icandoit/screens/components/resultat_challenge.dart';
@@ -8,6 +9,7 @@ import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 // import 'package:top_snackbar_flutter/tap_bounce_container.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 // import 'package:slide_drawer/slide_drawer.dart';
 
 import '../home_screen.dart';
@@ -52,6 +54,15 @@ class _ExampleAppState extends State<ExampleApp>
           });
   }
 
+  void _launchMapsUrl() async {
+    final url = "https://easytodo.fr";
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   @override
   void dispose() {
     _controller.dispose();
@@ -92,7 +103,7 @@ class _ExampleAppState extends State<ExampleApp>
                   width: 5.0,
                 ),
                 Text(
-                  "Go to home",
+                  "Menu",
                   style: TextStyle(
                     fontSize: 18,
                     color: Colors.purple,
@@ -141,12 +152,12 @@ class _ExampleAppState extends State<ExampleApp>
             },
             child: Row(
               children: [
-                Icon(Icons.save_rounded),
+                Icon(FontAwesomeIcons.play),
                 SizedBox(
                   width: 5.0,
                 ),
                 Text(
-                  "score des challenges",
+                  "Score des challenges",
                   style: TextStyle(
                     fontSize: 18,
                     color: Colors.purple,
@@ -159,10 +170,7 @@ class _ExampleAppState extends State<ExampleApp>
           SizedBox(height: 5.0),
           InkWell(
             onTap: () {
-              // Navigator.of(context).push(MaterialPageRoute(
-              //     builder: (context) => ChangeNotifierProvider.value(
-              //         value: variable, child: ExampleApp())));
-              // setState(() {});
+              _launchMapsUrl();
             },
             child: Row(
               children: [
@@ -184,10 +192,7 @@ class _ExampleAppState extends State<ExampleApp>
           SizedBox(height: 5.0),
           InkWell(
             onTap: () {
-              // Navigator.of(context).push(MaterialPageRoute(
-              //     builder: (context) => ChangeNotifierProvider.value(
-              //         value: variable, child: Home())));
-              // setState(() {});
+              _launchMapsUrl();
             },
             child: Row(
               children: [

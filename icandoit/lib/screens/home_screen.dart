@@ -1,6 +1,7 @@
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:fancy_drawer/fancy_drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:icandoit/models/challenge_model.dart';
 import 'package:icandoit/screens/components/build_challenge_list.dart';
 import 'package:icandoit/controllers/challenge_controller.dart';
@@ -760,7 +761,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             },
             child: Row(
               children: [
-                Icon(Icons.save_rounded),
+                Icon(FontAwesomeIcons.play),
                 SizedBox(
                   width: 5.0,
                 ),
@@ -873,16 +874,17 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                             _controller.toggle();
                           },
                         )
-                      : IconButton(
-                          alignment: Alignment.topRight,
-                          icon: Icon(
-                            Icons.schedule,
-                            color: Colors.black,
-                          ),
-                          onPressed: () {
-                            variable.scheduleDailyTenAMNotification();
-                          },
-                        ),
+                      : SizedBox(width: 10),
+                  // : IconButton(
+                  //     alignment: Alignment.topRight,
+                  //     icon: Icon(
+                  //       Icons.schedule,
+                  //       color: Colors.black,
+                  //     ),
+                  //     onPressed: () {
+                  //       variable.scheduleDailyTenAMNotification();
+                  //     },
+                  //   ),
                   IconButton(
                     alignment: Alignment.topRight,
                     icon: Icon(

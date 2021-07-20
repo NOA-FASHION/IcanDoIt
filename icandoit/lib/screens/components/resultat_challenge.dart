@@ -2,10 +2,12 @@ import 'dart:ui';
 
 import 'package:fancy_drawer/fancy_drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:icandoit/controllers/challenge_controller.dart';
 import 'package:icandoit/models/challenge_model.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:vertical_barchart/vertical-barchart.dart';
 import 'package:vertical_barchart/vertical-barchartmodel.dart';
 import 'package:vertical_barchart/vertical-legend.dart';
@@ -48,6 +50,15 @@ class _ResultaChallengeState extends State<ResultaChallenge>
           ..addListener(() {
             setState(() {});
           });
+  }
+
+  void _launchMapsUrl() async {
+    final url = "https://easytodo.fr";
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 
   @override
@@ -118,7 +129,7 @@ class _ResultaChallengeState extends State<ResultaChallenge>
                   width: 5.0,
                 ),
                 Text(
-                  "Go to home",
+                  "Menu",
                   style: TextStyle(
                     fontSize: 18,
                     color: Colors.purple,
@@ -167,12 +178,12 @@ class _ResultaChallengeState extends State<ResultaChallenge>
             },
             child: Row(
               children: [
-                Icon(Icons.save_rounded),
+                Icon(FontAwesomeIcons.play),
                 SizedBox(
                   width: 5.0,
                 ),
                 Text(
-                  "score des challenges",
+                  "Score des challenges",
                   style: TextStyle(
                     fontSize: 18,
                     color: Colors.purple,
@@ -185,10 +196,7 @@ class _ResultaChallengeState extends State<ResultaChallenge>
           SizedBox(height: 5.0),
           InkWell(
             onTap: () {
-              // Navigator.of(context).push(MaterialPageRoute(
-              //     builder: (context) => ChangeNotifierProvider.value(
-              //         value: variable, child: ExampleApp())));
-              // setState(() {});
+              _launchMapsUrl();
             },
             child: Row(
               children: [
@@ -197,7 +205,7 @@ class _ResultaChallengeState extends State<ResultaChallenge>
                   width: 5.0,
                 ),
                 Text(
-                  "Support us",
+                  "Support",
                   style: TextStyle(
                     fontSize: 18,
                     color: Colors.purple,
@@ -210,10 +218,7 @@ class _ResultaChallengeState extends State<ResultaChallenge>
           SizedBox(height: 5.0),
           InkWell(
             onTap: () {
-              // Navigator.of(context).push(MaterialPageRoute(
-              //     builder: (context) => ChangeNotifierProvider.value(
-              //         value: variable, child: Home())));
-              // setState(() {});
+              _launchMapsUrl();
             },
             child: Row(
               children: [
@@ -222,7 +227,7 @@ class _ResultaChallengeState extends State<ResultaChallenge>
                   width: 5.0,
                 ),
                 Text(
-                  "About us",
+                  "A propos",
                   style: TextStyle(
                     fontSize: 18,
                     color: Colors.purple,
