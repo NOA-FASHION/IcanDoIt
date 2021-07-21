@@ -34,6 +34,7 @@ class _IcanDoItState extends State<IcanDoIt> {
             id: "",
             idChallenge1: '',
             namechallenge: '',
+            returnRaccourci: false,
           )),
     );
   }

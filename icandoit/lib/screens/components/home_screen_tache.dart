@@ -1234,12 +1234,15 @@ class _HomeTachesState extends State<HomeTaches> {
                                 value: "evenement",
                                 child: Row(
                                   children: [
-                                    Icon(
-                                      Icons.event,
-                                      size: 30.0,
-                                    ),
+                                    Icon(Icons.event,
+                                        size: 30.0, color: Colors.blue),
                                     SizedBox(width: 10),
-                                    Text("Évènement"),
+                                    Text(
+                                      "Évènement",
+                                      style: TextStyle(
+                                        color: Colors.blue,
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -1247,12 +1250,15 @@ class _HomeTachesState extends State<HomeTaches> {
                                 value: "achat",
                                 child: Row(
                                   children: [
-                                    Icon(
-                                      Icons.shopping_cart,
-                                      size: 30.0,
-                                    ),
+                                    Icon(Icons.shopping_cart,
+                                        size: 30.0, color: Colors.cyan),
                                     SizedBox(width: 10),
-                                    Text("Achat"),
+                                    Text(
+                                      "Achat",
+                                      style: TextStyle(
+                                        color: Colors.cyan,
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -1260,12 +1266,15 @@ class _HomeTachesState extends State<HomeTaches> {
                                 value: "tache",
                                 child: Row(
                                   children: [
-                                    Icon(
-                                      Icons.event_available,
-                                      size: 30.0,
-                                    ),
+                                    Icon(Icons.event_available,
+                                        size: 30.0, color: Colors.orange),
                                     SizedBox(width: 10),
-                                    Text("Tâche"),
+                                    Text(
+                                      "Tâche",
+                                      style: TextStyle(
+                                        color: Colors.orange,
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -1273,12 +1282,15 @@ class _HomeTachesState extends State<HomeTaches> {
                                 value: "mission",
                                 child: Row(
                                   children: [
-                                    Icon(
-                                      Icons.assignment,
-                                      size: 30.0,
-                                    ),
+                                    Icon(Icons.assignment,
+                                        size: 30.0, color: Colors.amber),
                                     SizedBox(width: 10),
-                                    Text("Mission"),
+                                    Text(
+                                      "Mission",
+                                      style: TextStyle(
+                                        color: Colors.amber,
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -1286,12 +1298,15 @@ class _HomeTachesState extends State<HomeTaches> {
                                 value: "projet",
                                 child: Row(
                                   children: [
-                                    Icon(
-                                      Icons.build,
-                                      size: 30.0,
-                                    ),
+                                    Icon(Icons.build,
+                                        size: 30.0, color: Colors.indigo),
                                     SizedBox(width: 10),
-                                    Text("Projet"),
+                                    Text(
+                                      "Projet",
+                                      style: TextStyle(
+                                        color: Colors.indigo,
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -1299,12 +1314,15 @@ class _HomeTachesState extends State<HomeTaches> {
                                 value: "adresse",
                                 child: Row(
                                   children: [
-                                    Icon(
-                                      Icons.living,
-                                      size: 30.0,
-                                    ),
+                                    Icon(Icons.living,
+                                        size: 30.0, color: Colors.lime),
                                     SizedBox(width: 10),
-                                    Text("Adresse"),
+                                    Text(
+                                      "Adresse",
+                                      style: TextStyle(
+                                        color: Colors.lime,
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -1325,12 +1343,15 @@ class _HomeTachesState extends State<HomeTaches> {
                                 value: "paiement",
                                 child: Row(
                                   children: [
-                                    Icon(
-                                      Icons.payment,
-                                      size: 30.0,
-                                    ),
+                                    Icon(Icons.payment,
+                                        size: 30.0, color: Colors.yellow),
                                     SizedBox(width: 10),
-                                    Text("Paiement"),
+                                    Text(
+                                      "Paiement",
+                                      style: TextStyle(
+                                        color: Colors.yellow,
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -1338,12 +1359,15 @@ class _HomeTachesState extends State<HomeTaches> {
                                 value: "echeancier",
                                 child: Row(
                                   children: [
-                                    Icon(
-                                      Icons.payment,
-                                      size: 30.0,
-                                    ),
+                                    Icon(Icons.payment,
+                                        size: 30.0, color: Colors.yellow),
                                     SizedBox(width: 10),
-                                    Text("Échéancier"),
+                                    Text(
+                                      "Échéancier",
+                                      style: TextStyle(
+                                        color: Colors.yellow,
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -1351,12 +1375,15 @@ class _HomeTachesState extends State<HomeTaches> {
                                 value: "formation",
                                 child: Row(
                                   children: [
-                                    Icon(
-                                      Icons.model_training,
-                                      size: 30.0,
-                                    ),
+                                    Icon(Icons.model_training,
+                                        size: 30.0, color: Colors.green),
                                     SizedBox(width: 10),
-                                    Text("Formation"),
+                                    Text(
+                                      "Formation",
+                                      style: TextStyle(
+                                        color: Colors.green,
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -1364,12 +1391,15 @@ class _HomeTachesState extends State<HomeTaches> {
                                 value: "youtube",
                                 child: Row(
                                   children: [
-                                    Icon(
-                                      FontAwesomeIcons.youtube,
-                                      size: 30.0,
-                                    ),
+                                    Icon(FontAwesomeIcons.youtube,
+                                        size: 30.0, color: Colors.red),
                                     SizedBox(width: 10),
-                                    Text("Youtube"),
+                                    Text(
+                                      "Youtube",
+                                      style: TextStyle(
+                                        color: Colors.red,
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -1377,12 +1407,15 @@ class _HomeTachesState extends State<HomeTaches> {
                                 value: "commentaire",
                                 child: Row(
                                   children: [
-                                    Icon(
-                                      Icons.comment,
-                                      size: 30.0,
-                                    ),
+                                    Icon(Icons.comment,
+                                        size: 30.0, color: Colors.blueGrey),
                                     SizedBox(width: 10),
-                                    Text("Commentaire"),
+                                    Text(
+                                      "Commentaire",
+                                      style: TextStyle(
+                                        color: Colors.blueGrey,
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -1393,9 +1426,15 @@ class _HomeTachesState extends State<HomeTaches> {
                                     Icon(
                                       Icons.video_label,
                                       size: 30.0,
+                                      color: Colors.lime,
                                     ),
                                     SizedBox(width: 10),
-                                    Text("Vidéo"),
+                                    Text(
+                                      "Vidéo",
+                                      style: TextStyle(
+                                        color: Colors.lime,
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -1403,12 +1442,15 @@ class _HomeTachesState extends State<HomeTaches> {
                                 value: "image",
                                 child: Row(
                                   children: [
-                                    Icon(
-                                      Icons.text_fields,
-                                      size: 30.0,
-                                    ),
+                                    Icon(Icons.text_fields,
+                                        size: 30.0, color: Colors.pink),
                                     SizedBox(width: 10),
-                                    Text("Image"),
+                                    Text(
+                                      "Image",
+                                      style: TextStyle(
+                                        color: Colors.pink,
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -1416,12 +1458,15 @@ class _HomeTachesState extends State<HomeTaches> {
                                 value: "url",
                                 child: Row(
                                   children: [
-                                    Icon(
-                                      Icons.cloud,
-                                      size: 30.0,
-                                    ),
+                                    Icon(Icons.cloud,
+                                        size: 30.0, color: Colors.teal),
                                     SizedBox(width: 10),
-                                    Text("Url"),
+                                    Text(
+                                      "Url",
+                                      style: TextStyle(
+                                        color: Colors.teal,
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),

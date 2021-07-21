@@ -368,7 +368,7 @@ class _ChallengesListBuilderTachesState
       documentJoint = Icon(
         Icons.living,
         size: 30.0,
-        color: Colors.lime,
+          color: Colors.lime,
       );
       return documentJoint;
     } else if (resultat == "mission") {

@@ -29,6 +29,7 @@ def keystoreProperties = new Properties()
 def keystorePropertiesFile = rootProject.file('../key.properties')
 if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+    
 }
 
 
@@ -59,11 +60,17 @@ android {
         storePassword keystoreProperties['storePassword']
     }
 }
-buildTypes {
-    release {
+// buildTypes {
+//     release {
+//         signingConfig signingConfigs.release
+//     }
+// }
+  buildTypes {
+   release {
+        shrinkResources false
+        minifyEnabled false
         signingConfig signingConfigs.release
-    }
-}
+   }}
 
     // buildTypes {
     //     release {

@@ -567,7 +567,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                         dateQuotidien = newValue;
                         heureTotal = newValue;
                         print(dateQuotidien);
-                        ;
                       });
                     },
                     items: <String>[
@@ -885,27 +884,28 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   //       variable.scheduleDailyTenAMNotification();
                   //     },
                   //   ),
-                  IconButton(
-                    alignment: Alignment.topRight,
-                    icon: Icon(
-                      Icons.notifications,
-                      color: Colors.black,
-                    ),
-                    onPressed: () {
-                      variable.cancelAllNotifications();
-                    },
-                  ),
-                  const Divider(),
-                  IconButton(
-                    alignment: Alignment.topRight,
-                    icon: Icon(
-                      Icons.notifications_off,
-                      color: Colors.black,
-                    ),
-                    onPressed: () {
-                      variable.checkPendingNotificationRequests(context);
-                    },
-                  ),
+
+                  // IconButton(
+                  //   alignment: Alignment.topRight,
+                  //   icon: Icon(
+                  //     Icons.notifications,
+                  //     color: Colors.black,
+                  //   ),
+                  //   onPressed: () {
+                  //     variable.cancelAllNotifications();
+                  //   },
+                  // ),
+                  // const Divider(),
+                  // IconButton(
+                  //   alignment: Alignment.topRight,
+                  //   icon: Icon(
+                  //     Icons.notifications_off,
+                  //     color: Colors.black,
+                  //   ),
+                  //   onPressed: () {
+                  //     variable.checkPendingNotificationRequests(context);
+                  //   },
+                  // ),
                 ],
                 leading: widget.idChallenge1.isEmpty
                     ? IconButton(
@@ -1111,12 +1111,11 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                 value: "haute",
                                 child: Row(
                                   children: [
-                                    Icon(
-                                      Icons.update,
-                                      size: 30.0,
-                                    ),
+                                    Icon(Icons.update,
+                                        size: 30.0, color: Colors.red),
                                     SizedBox(width: 10),
-                                    Text("Haute"),
+                                    Text("Haute",
+                                        style: TextStyle(color: Colors.red)),
                                   ],
                                 ),
                               ),
@@ -1124,12 +1123,13 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                 value: "normal",
                                 child: Row(
                                   children: [
-                                    Icon(
-                                      Icons.auto_fix_normal,
-                                      size: 30.0,
-                                    ),
+                                    Icon(Icons.auto_fix_normal,
+                                        size: 30.0, color: Colors.green),
                                     SizedBox(width: 10),
-                                    Text("Normal"),
+                                    Text(
+                                      "Normal",
+                                      style: TextStyle(color: Colors.green),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -1137,12 +1137,11 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                 value: "quotidien",
                                 child: Row(
                                   children: [
-                                    Icon(
-                                      Icons.view_day,
-                                      size: 30.0,
-                                    ),
+                                    Icon(Icons.view_day,
+                                        size: 30.0, color: Colors.orange),
                                     SizedBox(width: 10),
-                                    Text("Quotidien"),
+                                    Text("Quotidien",
+                                        style: TextStyle(color: Colors.orange)),
                                   ],
                                 ),
                               ),
@@ -1150,12 +1149,11 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                 value: "hebdomadaire",
                                 child: Row(
                                   children: [
-                                    Icon(
-                                      Icons.view_week,
-                                      size: 30.0,
-                                    ),
+                                    Icon(Icons.view_week,
+                                        size: 30.0, color: Colors.orange),
                                     SizedBox(width: 10),
-                                    Text("Hebdomadaire"),
+                                    Text("Hebdomadaire",
+                                        style: TextStyle(color: Colors.orange)),
                                   ],
                                 ),
                               ),
@@ -1163,12 +1161,11 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                 value: "mensuel",
                                 child: Row(
                                   children: [
-                                    Icon(
-                                      Icons.date_range,
-                                      size: 30.0,
-                                    ),
+                                    Icon(Icons.date_range,
+                                        size: 30.0, color: Colors.orange),
                                     SizedBox(width: 10),
-                                    Text("Mensuel"),
+                                    Text("Mensuel",
+                                        style: TextStyle(color: Colors.orange)),
                                   ],
                                 ),
                               ),
