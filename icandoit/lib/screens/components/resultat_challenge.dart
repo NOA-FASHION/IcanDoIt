@@ -156,7 +156,7 @@ class _ResultaChallengeState extends State<ResultaChallenge>
                   width: 5.0,
                 ),
                 Text(
-                  "Sauvegarde challenge",
+                  "Sauvegarde",
                   style: TextStyle(
                     fontSize: 18,
                     color: Colors.purple,
@@ -183,7 +183,7 @@ class _ResultaChallengeState extends State<ResultaChallenge>
                   width: 5.0,
                 ),
                 Text(
-                  "Score des challenges",
+                  "Score",
                   style: TextStyle(
                     fontSize: 18,
                     color: Colors.purple,

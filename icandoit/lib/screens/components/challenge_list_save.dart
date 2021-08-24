@@ -130,7 +130,7 @@ class _ExampleAppState extends State<ExampleApp>
                   width: 5.0,
                 ),
                 Text(
-                  "Sauvegare challenge",
+                  "Sauvegare",
                   style: TextStyle(
                     fontSize: 18,
                     color: Colors.purple,
@@ -157,7 +157,7 @@ class _ExampleAppState extends State<ExampleApp>
                   width: 5.0,
                 ),
                 Text(
-                  "Score des challenges",
+                  "Score",
                   style: TextStyle(
                     fontSize: 18,
                     color: Colors.purple,
