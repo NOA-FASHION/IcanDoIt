@@ -387,43 +387,8 @@ class Challengecontroller extends ChangeNotifier {
         androidAllowWhileIdle: true,
         uiLocalNotificationDateInterpretation:
             UILocalNotificationDateInterpretation.absoluteTime,
-        matchDateTimeComponents: DateTimeComponents.dayOfWeekAndTime);
+        matchDateTimeComponents: DateTimeComponents.time);
   }
-
-  // Future<void> scheduleMonthdNotification(
-  //     {@required String channelID,
-  //     @required String channelName,
-  //     @required String channelDesc,
-  //     @required String notificationTitle,
-  //     int notificationId,
-  //     @required String notificationBody,
-  //     @required int days,
-  //     @required int hours}) async {
-  //   AndroidNotificationDetails androidNotificationDetails =
-  //       AndroidNotificationDetails(
-  //     channelID,
-  //     channelName,
-  //     channelDesc,
-  //     priority: Priority.high,
-  //     importance: Importance.max,
-  //     ticker: '$channelName',
-  //   );
-
-  //   IOSNotificationDetails iosNotificationDetails = IOSNotificationDetails();
-  //   NotificationDetails notificationDetails = NotificationDetails(
-  //       android: androidNotificationDetails, iOS: iosNotificationDetails);
-
-  //   await flutterLocalNotificationsPlugin.zonedSchedule(
-  //       notificationId,
-  //       channelName,
-  //       channelDesc,
-  //       _nextInstancDayeOfTenAM(days, hours),
-  //       notificationDetails,
-  //       androidAllowWhileIdle: true,
-  //       uiLocalNotificationDateInterpretation:
-  //           UILocalNotificationDateInterpretation.absoluteTime,
-  //       matchDateTimeComponents: DateTimeComponents.dayOfWeekAndTime);
-  // }
 
   Future<void> scheduleMonthdNotification(
       {@required String channelID,
@@ -476,75 +441,6 @@ class Challengecontroller extends ChangeNotifier {
             UILocalNotificationDateInterpretation.absoluteTime,
         matchDateTimeComponents: DateTimeComponents.dayOfWeekAndTime);
   }
-
-  // Future<void> scheduleHebdodNotification(
-  //     {@required String channelID,
-  //     @required String channelName,
-  //     @required String channelDesc,
-  //     @required String notificationTitle,
-  //     int notificationId,
-  //     @required String notificationBody,
-  //     @required int hours,
-  //     @required String weekdays}) async {
-  //   AndroidNotificationDetails androidNotificationDetails =
-  //       AndroidNotificationDetails(
-  //     channelID,
-  //     channelName,
-  //     channelDesc,
-  //     priority: Priority.high,
-  //     importance: Importance.max,
-  //     ticker: '$channelName',
-  //   );
-
-  //   IOSNotificationDetails iosNotificationDetails = IOSNotificationDetails();
-  //   NotificationDetails notificationDetails = NotificationDetails(
-  //       android: androidNotificationDetails, iOS: iosNotificationDetails);
-
-  //   await flutterLocalNotificationsPlugin.zonedSchedule(
-  //       notificationId,
-  //       channelName,
-  //       channelDesc,
-  //       _nextInstanceOfMondayTenAM(hours, weekdays),
-  //       notificationDetails,
-  //       androidAllowWhileIdle: true,
-  //       uiLocalNotificationDateInterpretation:
-  //           UILocalNotificationDateInterpretation.absoluteTime,
-  //       matchDateTimeComponents: DateTimeComponents.dayOfWeekAndTime);
-  // }
-
-  // Future<void> scheduleQuotidiendNotification(
-  //     {@required String channelID,
-  //     @required String channelName,
-  //     @required String channelDesc,
-  //     @required String notificationTitle,
-  //     int notificationId,
-  //     @required String notificationBody,
-  //     @required int hours}) async {
-  //   AndroidNotificationDetails androidNotificationDetails =
-  //       AndroidNotificationDetails(
-  //     channelID,
-  //     channelName,
-  //     channelDesc,
-  //     // priority: Priority.high,
-  //     // importance: Importance.max,
-  //     // ticker: '$channelName',
-  //   );
-
-  //   IOSNotificationDetails iosNotificationDetails = IOSNotificationDetails();
-  //   NotificationDetails notificationDetails = NotificationDetails(
-  //       android: androidNotificationDetails, iOS: iosNotificationDetails);
-
-  //   await flutterLocalNotificationsPlugin.zonedSchedule(
-  //       notificationId,
-  //       channelName,
-  //       channelDesc,
-  //       _nextInstanceOfTenAM(hours),
-  //       notificationDetails,
-  //       androidAllowWhileIdle: true,
-  //       uiLocalNotificationDateInterpretation:
-  //           UILocalNotificationDateInterpretation.absoluteTime,
-  //       matchDateTimeComponents: DateTimeComponents.time);
-  // }
 
   Future<void> scheduleQuotidiendNotification(
       {@required String channelID,

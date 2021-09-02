@@ -202,12 +202,6 @@ class _ChallengesListBuilderTachesState
                       value: provider,
                       child: FormationEdit(
                           item: item, indexChallenge: widget.indexChallenge))));
-
-          // Navigator.of(context).push(MaterialPageRoute(
-          //     builder: (context) => ChangeNotifierProvider.value(
-          //         value: provider,
-          //         child: FormationEdit(
-          //             item: item, indexChallenge: widget.indexChallenge))));
         },
       );
       return fomationEdit;
@@ -227,11 +221,6 @@ class _ChallengesListBuilderTachesState
                       value: provider,
                       child: PaiementEdit(
                           item: item, indexChallenge: widget.indexChallenge))));
-          // Navigator.of(context).push(MaterialPageRoute(
-          //     builder: (context) => ChangeNotifierProvider.value(
-          //         value: provider,
-          //         child: PaiementEdit(
-          //             item: item, indexChallenge: widget.indexChallenge))));
         },
       );
       return fomationEdit;
@@ -251,11 +240,6 @@ class _ChallengesListBuilderTachesState
                       value: provider,
                       child: AchatEdit(
                           item: item, indexChallenge: widget.indexChallenge))));
-          // Navigator.of(context).push(MaterialPageRoute(
-          //     builder: (context) => ChangeNotifierProvider.value(
-          //         value: provider,
-          //         child: AchatEdit(
-          //             item: item, indexChallenge: widget.indexChallenge))));
         },
       );
       return fomationEdit;
@@ -368,7 +352,7 @@ class _ChallengesListBuilderTachesState
       documentJoint = Icon(
         Icons.living,
         size: 30.0,
-          color: Colors.lime,
+        color: Colors.lime,
       );
       return documentJoint;
     } else if (resultat == "mission") {
