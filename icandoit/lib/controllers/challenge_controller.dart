@@ -317,10 +317,28 @@ class Challengecontroller extends ChangeNotifier {
     return scheduledDate;
   }
 
+  tz.TZDateTime _nextInstancNotifeOfTenAM1(String dateNotif) {
+    final tz.TZDateTime now = tz.TZDateTime.now(tz.local);
+
+    final date2 = DateTime.now();
+
+    tz.TZDateTime scheduledDate = tz.TZDateTime.parse(tz.local, dateNotif);
+    var difference = scheduledDate.difference(date2).inDays + 1;
+    scheduledDate = scheduledDate.add(Duration(
+        days: difference,
+        hours: tz.TZDateTime.parse(tz.local, dateNotif).hour,
+        minutes: tz.TZDateTime.parse(tz.local, dateNotif).minute));
+    print("difference : " + difference.toString());
+    if (scheduledDate.isBefore(now)) {
+      scheduledDate = scheduledDate.add(const Duration(days: 1));
+    }
+
+    return scheduledDate;
+  }
+
   tz.TZDateTime _nextInstancNotifeOfTenAM(String dateNotif) {
     final tz.TZDateTime now = tz.TZDateTime.now(tz.local);
     tz.TZDateTime scheduledDate = tz.TZDateTime.parse(tz.local, dateNotif);
-
     if (scheduledDate.isBefore(now)) {
       scheduledDate = scheduledDate.add(const Duration(days: 1));
     }
@@ -382,7 +400,7 @@ class Challengecontroller extends ChangeNotifier {
         notificationId,
         channelName,
         channelDesc,
-        _nextInstancNotifeOfTenAM(dateNotif),
+        _nextInstancNotifeOfTenAM1(dateNotif),
         notificationDetails,
         androidAllowWhileIdle: true,
         uiLocalNotificationDateInterpretation:

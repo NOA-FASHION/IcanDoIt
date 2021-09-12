@@ -618,19 +618,18 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             icon: Icon(Icons.event),
             dateLabelText: 'Date',
             timeLabelText: "Heure",
-            selectableDayPredicate: (date) {
-              if (date.weekday == 6 || date.weekday == 7) {
-                return false;
-              }
+            // selectableDayPredicate: (date) {
+            //   if (date.weekday == 6 || date.weekday == 7) {
+            //     return false;
+            //   }
 
-              return true;
-            },
+            //   return true;
+            // },
             onChanged: (val) => print(val),
             validator: (val) {
-              print(val);
               return null;
             },
-            onSaved: (val) {
+            onSaved: (val) async {
               idNotif = [];
               date = "";
               totalDays = [];
