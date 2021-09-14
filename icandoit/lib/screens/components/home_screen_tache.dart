@@ -1560,52 +1560,6 @@ class _HomeTachesState extends State<HomeTaches> {
                               },
                             ),
                           ),
-                          // InkWell(
-                          //     onTap: () {
-                          //       if (unityChallenge == "echeancier") {
-                          //         if (formKeyTache.currentState.validate()) {
-                          //           formKeyTache.currentState.save();
-                          //           Provider.of<Challengecontroller>(context,
-                          //                   listen: false)
-                          //               .generateList(
-                          //             widget.animatedpadding,
-                          //             widget.id,
-                          //             widget.indexChallenge,
-                          //             int.parse(nombreEchenace),
-                          //             double.parse(coutPaiment),
-                          //             unityChallenge,
-                          //             targetChallenge,
-                          //             formations,
-                          //             double.parse(prixProduit),
-                          //           );
-                          //           Navigator.pop(context);
-                          //         }
-                          //       } else if (formKeyTache.currentState
-                          //           .validate()) {
-                          //         formKeyTache.currentState.save();
-                          //         setState(() {
-                          //           Provider.of<Challengecontroller>(context,
-                          //                   listen: false)
-                          //               .addChallenge2(
-                          //                   prix: double.parse(prixProduit),
-                          //                   cout: double.parse(coutPaiment),
-                          //                   id: nanoid(10),
-                          //                   index: widget.indexChallenge,
-                          //                   animatedpadding: animatedpadding,
-                          //                   totalChallenge: '1',
-                          //                   idListChallenge: widget.id,
-                          //                   name: dataJoin,
-                          //                   description: unityChallenge,
-                          //                   tache: targetChallenge,
-                          //                   formation: formations);
-                          //         });
-                          //         Navigator.pop(context);
-                          //       }
-                          //     },
-                          //     child: Container(
-                          //         width: 120.0,
-                          //         height: 120.0,
-                          //         child: Lottie.asset('assets/save1.json'))),
                         ],
                       ),
                     ),
