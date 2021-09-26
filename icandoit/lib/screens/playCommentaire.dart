@@ -44,7 +44,7 @@ class PlayCommentaire extends StatelessWidget {
                 showCursor: true,
                 toolbarOptions: ToolbarOptions(
                     copy: true, selectAll: true, cut: false, paste: false),
-                style: Theme.of(context).textTheme.body2)),
+                style: Theme.of(context).textTheme.bodyText2)),
       ),
     );
   }
