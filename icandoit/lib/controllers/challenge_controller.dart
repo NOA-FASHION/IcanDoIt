@@ -400,12 +400,11 @@ class Challengecontroller extends ChangeNotifier {
         notificationId,
         channelName,
         channelDesc,
-        _nextInstancNotifeOfTenAM1(dateNotif),
+        _nextInstancNotifeOfTenAM(dateNotif),
         notificationDetails,
         androidAllowWhileIdle: true,
         uiLocalNotificationDateInterpretation:
-            UILocalNotificationDateInterpretation.absoluteTime,
-        matchDateTimeComponents: DateTimeComponents.time);
+            UILocalNotificationDateInterpretation.absoluteTime);
   }
 
   Future<void> scheduleMonthdNotification(
