@@ -10,6 +10,7 @@ import 'package:icandoit/screens/components/build_challenge_list_tache.dart';
 import 'package:icandoit/controllers/challenge_controller.dart';
 // import 'package:icandoit/screens/components/playAllYoutube.dart';
 import 'package:icandoit/screens/components/playYoutube2.dart';
+import 'package:icandoit/screens/components/sreen_achat.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lottie/lottie.dart';
 import 'package:nanoid/nanoid.dart';
@@ -244,55 +245,55 @@ class _HomeTachesState extends State<HomeTaches> {
     return percent1;
   }
 
-  void interditecheance2(List<ChallengeModel> _challengeList, dynamic context) {
-    if (_challengeList[widget.indexChallenge].listeDeTache.length > 0 &&
-        _challengeList[widget.indexChallenge]
-                .listeDeTache[0]
-                .description
-                .toString()
-                .replaceAll(unityPattern, "") !=
-            "echeancier") {
-      showTopSnackBar(
-        context,
-        CustomSnackBar.success(
-          backgroundColor: Colors.blue,
-          icon: Icon(
-            Icons.delete,
-            size: 30,
-            color: Colors.white,
-          ),
-          message:
-              "vous ne pouvez pas mélanger un challenge ordinaire avec un challenge échéancier.",
-        ),
-      );
-      retour();
-    }
-  }
+  // void interditecheance2(List<ChallengeModel> _challengeList, dynamic context) {
+  //   if (_challengeList[widget.indexChallenge].listeDeTache.length > 0 &&
+  //       _challengeList[widget.indexChallenge]
+  //               .listeDeTache[0]
+  //               .description
+  //               .toString()
+  //               .replaceAll(unityPattern, "") !=
+  //           "echeancier") {
+  //     showTopSnackBar(
+  //       context,
+  //       CustomSnackBar.success(
+  //         backgroundColor: Colors.blue,
+  //         icon: Icon(
+  //           Icons.delete,
+  //           size: 30,
+  //           color: Colors.white,
+  //         ),
+  //         message:
+  //             "vous ne pouvez pas mélanger un challenge ordinaire avec un challenge échéancier.",
+  //       ),
+  //     );
+  //     retour();
+  //   }
+  // }
 
-  void interditecheance(List<ChallengeModel> _challengeList, dynamic context) {
-    if (_challengeList[widget.indexChallenge].listeDeTache.length > 0 &&
-        _challengeList[widget.indexChallenge]
-                .listeDeTache[0]
-                .description
-                .toString()
-                .replaceAll(unityPattern, "") ==
-            "echeancier") {
-      showTopSnackBar(
-        context,
-        CustomSnackBar.success(
-          backgroundColor: Colors.blue,
-          icon: Icon(
-            Icons.delete,
-            size: 30,
-            color: Colors.white,
-          ),
-          message:
-              "vous ne pouvez pas mélanger un challenge échéancier avec un challenge ordinaire.",
-        ),
-      );
-      retour();
-    }
-  }
+  // void interditecheance(List<ChallengeModel> _challengeList, dynamic context) {
+  //   if (_challengeList[widget.indexChallenge].listeDeTache.length > 0 &&
+  //       _challengeList[widget.indexChallenge]
+  //               .listeDeTache[0]
+  //               .description
+  //               .toString()
+  //               .replaceAll(unityPattern, "") ==
+  //           "echeancier") {
+  //     showTopSnackBar(
+  //       context,
+  //       CustomSnackBar.success(
+  //         backgroundColor: Colors.blue,
+  //         icon: Icon(
+  //           Icons.delete,
+  //           size: 30,
+  //           color: Colors.white,
+  //         ),
+  //         message:
+  //             "vous ne pouvez pas mélanger un challenge échéancier avec un challenge ordinaire.",
+  //       ),
+  //     );
+  //     retour();
+  //   }
+  // }
 
   Future<Null> delay(int milliseconds) {
     return new Future.delayed(new Duration(milliseconds: milliseconds));
@@ -310,7 +311,7 @@ class _HomeTachesState extends State<HomeTaches> {
       width: 1.0,
     );
     if (resultat == "video") {
-      interditecheance(_challengeList, context);
+      // interditecheance(_challengeList, context);
       documentJoint = Column(
         children: [
           Offstage(
@@ -348,7 +349,7 @@ class _HomeTachesState extends State<HomeTaches> {
         ],
       );
     } else if (resultat == "image") {
-      interditecheance(_challengeList, context);
+      // interditecheance(_challengeList, context);
       documentJoint = Column(
         children: [
           Offstage(
@@ -386,7 +387,7 @@ class _HomeTachesState extends State<HomeTaches> {
         ],
       );
     } else if (resultat == "url") {
-      interditecheance(_challengeList, context);
+      // interditecheance(_challengeList, context);
       documentJoint = TextFormField(
         onSaved: (value) {
           coutPaiment = "0";
@@ -572,7 +573,7 @@ class _HomeTachesState extends State<HomeTaches> {
         ],
       );
     } else if (resultat == "youtube") {
-      interditecheance(_challengeList, context);
+      // interditecheance(_challengeList, context);
       documentJoint = TextFormField(
         onSaved: (value) {
           coutPaiment = "0";
@@ -599,7 +600,7 @@ class _HomeTachesState extends State<HomeTaches> {
                 OutlineInputBorder(borderRadius: BorderRadius.circular(15.0))),
       );
     } else if (resultat == "commentaire") {
-      interditecheance(_challengeList, context);
+      // interditecheance(_challengeList, context);
       documentJoint = SizedBox(
         width: 200.0,
         height: 300.0,
@@ -632,7 +633,7 @@ class _HomeTachesState extends State<HomeTaches> {
         ),
       );
     } else if (resultat == "achat") {
-      interditecheance(_challengeList, context);
+      // interditecheance(_challengeList, context);
       documentJoint = Row(
         children: [
           Container(
@@ -668,114 +669,116 @@ class _HomeTachesState extends State<HomeTaches> {
           Text("€")
         ],
       );
-    } else if (resultat == "paiement") {
-      interditecheance(_challengeList, context);
-      documentJoint = Row(
-        children: [
-          Container(
-            width: 110,
-            child: TextFormField(
-              onSaved: (value) {
-                prixProduit = "0";
-                coutPaiment = value;
-              },
-              validator: (value) {
-                if (!isNumericUsingRegularExpression(value)) {
-                  return "Rentrer un montant";
-                }
-                return null;
-              },
-              decoration: InputDecoration(
-                  focusedBorder: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(width: 2.0, color: Colors.blueAccent),
-                      borderRadius: BorderRadius.circular(15.0)),
-                  enabledBorder: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(width: 1.0, color: Colors.blueAccent),
-                      borderRadius: BorderRadius.circular(15.0)),
-                  contentPadding:
-                      EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  labelText: "Montant",
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15.0))),
-            ),
-          ),
-          Text("€")
-        ],
-      );
-    } else if (resultat == "echeancier") {
-      interditecheance2(_challengeList, context);
-      documentJoint = Row(
-        children: [
-          Column(
-            children: [
-              Container(
-                width: 120,
-                child: TextFormField(
-                  onSaved: (value) {
-                    prixProduit = "0";
-                    coutPaiment = value;
-                  },
-                  validator: (value) {
-                    if (!isNumericUsingRegularExpression(value)) {
-                      return "Montant d'une échéance";
-                    }
-                    return null;
-                  },
-                  decoration: InputDecoration(
-                      focusedBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(width: 2.0, color: Colors.blueAccent),
-                          borderRadius: BorderRadius.circular(15.0)),
-                      enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(width: 1.0, color: Colors.blueAccent),
-                          borderRadius: BorderRadius.circular(15.0)),
-                      contentPadding:
-                          EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                      labelText: "Échéance",
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15.0))),
-                ),
-              ),
-              SizedBox(
-                height: 7.0,
-              ),
-              Container(
-                width: 200,
-                child: TextFormField(
-                  onSaved: (value) {
-                    nombreEchenace = value;
-                  },
-                  validator: (value) {
-                    if (!isNumericUsingRegularExpression(value)) {
-                      return "Nombre d'échéance";
-                    }
-                    return null;
-                  },
-                  decoration: InputDecoration(
-                      focusedBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(width: 2.0, color: Colors.blueAccent),
-                          borderRadius: BorderRadius.circular(15.0)),
-                      enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(width: 1.0, color: Colors.blueAccent),
-                          borderRadius: BorderRadius.circular(15.0)),
-                      contentPadding:
-                          EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                      labelText: "Nombre d'échéance",
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15.0))),
-                ),
-              ),
-            ],
-          ),
-          Text("€")
-        ],
-      );
     }
+    // else if (resultat == "paiement") {
+    //   // interditecheance(_challengeList, context);
+    //   documentJoint = Row(
+    //     children: [
+    //       Container(
+    //         width: 110,
+    //         child: TextFormField(
+    //           onSaved: (value) {
+    //             prixProduit = "0";
+    //             coutPaiment = value;
+    //           },
+    //           validator: (value) {
+    //             if (!isNumericUsingRegularExpression(value)) {
+    //               return "Rentrer un montant";
+    //             }
+    //             return null;
+    //           },
+    //           decoration: InputDecoration(
+    //               focusedBorder: OutlineInputBorder(
+    //                   borderSide:
+    //                       BorderSide(width: 2.0, color: Colors.blueAccent),
+    //                   borderRadius: BorderRadius.circular(15.0)),
+    //               enabledBorder: OutlineInputBorder(
+    //                   borderSide:
+    //                       BorderSide(width: 1.0, color: Colors.blueAccent),
+    //                   borderRadius: BorderRadius.circular(15.0)),
+    //               contentPadding:
+    //                   EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+    //               labelText: "Montant",
+    //               border: OutlineInputBorder(
+    //                   borderRadius: BorderRadius.circular(15.0))),
+    //         ),
+    //       ),
+    //       Text("€")
+    //     ],
+    //   );
+    // }
+    // else if (resultat == "echeancier") {
+    //   interditecheance2(_challengeList, context);
+    //   documentJoint = Row(
+    //     children: [
+    //       Column(
+    //         children: [
+    //           Container(
+    //             width: 120,
+    //             child: TextFormField(
+    //               onSaved: (value) {
+    //                 prixProduit = "0";
+    //                 coutPaiment = value;
+    //               },
+    //               validator: (value) {
+    //                 if (!isNumericUsingRegularExpression(value)) {
+    //                   return "Montant d'une échéance";
+    //                 }
+    //                 return null;
+    //               },
+    //               decoration: InputDecoration(
+    //                   focusedBorder: OutlineInputBorder(
+    //                       borderSide:
+    //                           BorderSide(width: 2.0, color: Colors.blueAccent),
+    //                       borderRadius: BorderRadius.circular(15.0)),
+    //                   enabledBorder: OutlineInputBorder(
+    //                       borderSide:
+    //                           BorderSide(width: 1.0, color: Colors.blueAccent),
+    //                       borderRadius: BorderRadius.circular(15.0)),
+    //                   contentPadding:
+    //                       EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+    //                   labelText: "Échéance",
+    //                   border: OutlineInputBorder(
+    //                       borderRadius: BorderRadius.circular(15.0))),
+    //             ),
+    //           ),
+    //           SizedBox(
+    //             height: 7.0,
+    //           ),
+    //           Container(
+    //             width: 200,
+    //             child: TextFormField(
+    //               onSaved: (value) {
+    //                 nombreEchenace = value;
+    //               },
+    //               validator: (value) {
+    //                 if (!isNumericUsingRegularExpression(value)) {
+    //                   return "Nombre d'échéance";
+    //                 }
+    //                 return null;
+    //               },
+    //               decoration: InputDecoration(
+    //                   focusedBorder: OutlineInputBorder(
+    //                       borderSide:
+    //                           BorderSide(width: 2.0, color: Colors.blueAccent),
+    //                       borderRadius: BorderRadius.circular(15.0)),
+    //                   enabledBorder: OutlineInputBorder(
+    //                       borderSide:
+    //                           BorderSide(width: 1.0, color: Colors.blueAccent),
+    //                       borderRadius: BorderRadius.circular(15.0)),
+    //                   contentPadding:
+    //                       EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+    //                   labelText: "Nombre d'échéance",
+    //                   border: OutlineInputBorder(
+    //                       borderRadius: BorderRadius.circular(15.0))),
+    //             ),
+    //           ),
+    //         ],
+    //       ),
+    //       Text("€")
+    //     ],
+    //   );
+    // }
     return documentJoint;
   }
 
@@ -790,34 +793,37 @@ class _HomeTachesState extends State<HomeTaches> {
     return Scaffold(
       key: scaffoldkeyTache,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(100.0),
+        preferredSize: _challengesListget[widget.indexChallenge].prixTotalBool
+            ? Size.fromHeight(236.0)
+            : Size.fromHeight(130.0),
         child: SafeArea(
           child: AppBar(
+            elevation: 0,
             title: Text(something),
             actions: [
-              idChalEcheanceAutoBool1
-                  ? Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Switch(
-                          value: isSwitched,
-                          onChanged: (value) {
-                            setState(() {
-                              isSwitched = value;
-                              variable.activeEcheance(
-                                  value, widget.indexChallenge);
-                            });
-                          },
-                          activeTrackColor: Colors.yellow,
-                          activeColor: Colors.orangeAccent,
-                        ),
-                        Text(
-                          "Prélèvement auto",
-                          style: TextStyle(fontSize: 6, color: Colors.white),
-                        ),
-                      ],
-                    )
-                  : SizedBox(width: 10),
+              // idChalEcheanceAutoBool1
+              //     ? Column(
+              //         mainAxisAlignment: MainAxisAlignment.start,
+              //         children: [
+              //           Switch(
+              //             value: isSwitched,
+              //             onChanged: (value) {
+              //               setState(() {
+              //                 isSwitched = value;
+              //                 variable.activeEcheance(
+              //                     value, widget.indexChallenge);
+              //               });
+              //             },
+              //             activeTrackColor: Colors.yellow,
+              //             activeColor: Colors.orangeAccent,
+              //           ),
+              //           Text(
+              //             "Prélèvement auto",
+              //             style: TextStyle(fontSize: 6, color: Colors.white),
+              //           ),
+              //         ],
+              //       )
+              //     : SizedBox(width: 10),
               Padding(
                 padding: const EdgeInsets.only(right: 15, left: 15, top: 10),
                 child: SizedBox.fromSize(
@@ -898,260 +904,278 @@ class _HomeTachesState extends State<HomeTaches> {
             ],
             backgroundColor: Colors.blue,
             centerTitle: true,
-            flexibleSpace: Container(
-              padding: EdgeInsets.only(top: 40.0),
-              alignment: Alignment.center,
-              height: 130,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  idChallengePaimentBool1
-                      ? Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: <Widget>[
-                            Card(
-                              color: Colors.transparent,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5.0),
-                              ),
-                              elevation: 25.0,
-                              child: Row(
-                                children: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        color: Colors.blue,
-                                        borderRadius: BorderRadius.circular(5)),
-                                    padding: EdgeInsets.all(4),
-                                    margin: EdgeInsets.only(right: 7),
-                                    child: Column(
-                                      children: [
-                                        Text(
-                                          _challengesListget[indexChallenge]
-                                                  .coutTotal
-                                                  .toStringAsFixed(2) +
-                                              "€",
-                                          style: TextStyle(
-                                              fontSize: 10,
-                                              color: Colors.black),
-                                        ),
-                                        Text(
-                                          "Total paiement",
-                                          style: TextStyle(
-                                              fontSize: 10,
-                                              color: Colors.black),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        color: Colors.blue,
-                                        borderRadius: BorderRadius.circular(5)),
-                                    padding: EdgeInsets.all(4),
-                                    child: Column(
-                                      children: [
-                                        Text(
-                                          _challengesListget[indexChallenge]
-                                                  .restePaiement
-                                                  .toStringAsFixed(2) +
-                                              "€",
-                                          style: TextStyle(
-                                              fontSize: 10,
-                                              color: Colors.black),
-                                        ),
-                                        Text(
-                                          "Reste à payer",
-                                          style: TextStyle(
-                                              fontSize: 10,
-                                              color: Colors.black),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ), // icon
-                            // text
-                          ],
-                        )
-                      : SizedBox(width: 10),
-                  idChallengeBool1
-                      // _challengesListget[widget.indexChallenge].prixTotalBool
-                      ? SizedBox(width: 90)
-                      : SizedBox(width: 1),
-                  Container(
-                    margin: idChallengeEcheanceBool1
-                        ? EdgeInsets.only(right: 25)
-                        : EdgeInsets.only(right: 0),
-                    child: Image.asset(
-                      'assets/logo.png',
-                      width: 55,
-                    ),
-                  ),
-                  idChallengeEcheanceBool1
-                      ? Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  right: 5, left: 5, top: 10),
-                              child: SizedBox.fromSize(
-                                size: Size(30, 30), // button width and height
-                                child: ClipOval(
-                                  child: Material(
-                                    color: Colors.blue, // button color
-                                    child: InkWell(
-                                      // splash color
-                                      splashColor: Colors.white,
-                                      onTap: () {
-                                        variable.ajoutEcheance(
-                                            widget.indexChallenge);
-                                      }, // button pressed
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: <Widget>[
-                                          Icon(
-                                            Icons.add,
-                                            size: 10,
-                                            color: Colors.white,
-                                          ), // icon
-                                          Text(
-                                            "Ajout",
-                                            style: TextStyle(
-                                                fontSize: 7,
-                                                color: Colors.white),
-                                          ), // text
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  right: 35, left: 5, top: 10),
-                              child: SizedBox.fromSize(
-                                size: Size(30, 30), // button width and height
-                                child: ClipOval(
-                                  child: Material(
-                                    color: Colors.blue, // button color
-                                    child: InkWell(
-                                      // splash color
-                                      splashColor: Colors.white,
-                                      onTap: () {
-                                        variable.retraitEcheance(
-                                            widget.indexChallenge);
-                                      }, // button pressed
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: <Widget>[
-                                          Icon(
-                                            Icons.remove,
-                                            size: 10,
-                                            color: Colors.white,
-                                          ), // icon
-                                          Text(
-                                            "retrait",
-                                            style: TextStyle(
-                                                fontSize: 7,
-                                                color: Colors.white),
-                                          ), // text
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        )
-                      : SizedBox(width: 10),
-                  idChallengeBool1
-                      // _challengesListget[widget.indexChallenge].prixTotalBool
-                      ? Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: <Widget>[
-                            Card(
-                              color: Colors.transparent,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5.0),
-                              ),
-                              elevation: 25.0,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        color: Colors.blue,
-                                        borderRadius: BorderRadius.circular(5)),
-                                    padding: EdgeInsets.all(4),
-                                    margin: EdgeInsets.only(right: 7),
-                                    child: Column(
-                                      children: [
-                                        Text(
-                                          _challengesListget[
-                                                      widget.indexChallenge]
-                                                  .previsions
-                                                  .toStringAsFixed(2) +
-                                              "€",
-                                          style: TextStyle(
-                                              fontSize: 10,
-                                              color: Colors.black),
-                                        ),
-                                        Text(
-                                          "Prévisions",
-                                          style: TextStyle(
-                                              fontSize: 10,
-                                              color: Colors.black),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        color: Colors.blue,
-                                        borderRadius: BorderRadius.circular(5)),
-                                    padding: EdgeInsets.all(4),
-                                    child: Column(
-                                      children: [
-                                        Text(
-                                          _challengesListget[
-                                                      widget.indexChallenge]
-                                                  .prixTotal
-                                                  .toStringAsFixed(2) +
-                                              "€",
-                                          style: TextStyle(
-                                              fontSize: 10,
-                                              color: Colors.black),
-                                        ),
-                                        Text(
-                                          "Prix total",
-                                          style: TextStyle(
-                                              fontSize: 10,
-                                              color: Colors.black),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ), // icon
-                            // text
-                          ],
-                        )
-                      : SizedBox(width: 10),
-                ],
+            flexibleSpace: Column(children: [
+              Container(
+                padding: EdgeInsets.only(top: 40.0),
+                alignment: Alignment.center,
+                height: 100,
+
+                // idChallengePaimentBool1
+                //     ? Column(
+                //         mainAxisAlignment: MainAxisAlignment.end,
+                //         children: <Widget>[
+                //           Card(
+                //             color: Colors.transparent,
+                //             shape: RoundedRectangleBorder(
+                //               borderRadius: BorderRadius.circular(5.0),
+                //             ),
+                //             elevation: 25.0,
+                //             child: Row(
+                //               children: [
+                //                 Container(
+                //                   decoration: BoxDecoration(
+                //                       color: Colors.blue,
+                //                       borderRadius: BorderRadius.circular(5)),
+                //                   padding: EdgeInsets.all(4),
+                //                   margin: EdgeInsets.only(right: 7),
+                //                   child: Column(
+                //                     children: [
+                //                       Text(
+                //                         _challengesListget[indexChallenge]
+                //                                 .coutTotal
+                //                                 .toStringAsFixed(2) +
+                //                             "€",
+                //                         style: TextStyle(
+                //                             fontSize: 10,
+                //                             color: Colors.black),
+                //                       ),
+                //                       Text(
+                //                         "Total paiement",
+                //                         style: TextStyle(
+                //                             fontSize: 10,
+                //                             color: Colors.black),
+                //                       ),
+                //                     ],
+                //                   ),
+                //                 ),
+                //                 Container(
+                //                   decoration: BoxDecoration(
+                //                       color: Colors.blue,
+                //                       borderRadius: BorderRadius.circular(5)),
+                //                   padding: EdgeInsets.all(4),
+                //                   child: Column(
+                //                     children: [
+                //                       Text(
+                //                         _challengesListget[indexChallenge]
+                //                                 .restePaiement
+                //                                 .toStringAsFixed(2) +
+                //                             "€",
+                //                         style: TextStyle(
+                //                             fontSize: 10,
+                //                             color: Colors.black),
+                //                       ),
+                //                       Text(
+                //                         "Reste à payer",
+                //                         style: TextStyle(
+                //                             fontSize: 10,
+                //                             color: Colors.black),
+                //                       ),
+                //                     ],
+                //                   ),
+                //                 ),
+                //               ],
+                //             ),
+                //           ), // icon
+                //           // text
+                //         ],
+                //       )
+                //     : SizedBox(width: 10),
+
+                margin: idChallengeEcheanceBool1
+                    ? EdgeInsets.only(right: 25)
+                    : EdgeInsets.only(right: 0),
+                child: Image.asset(
+                  'assets/logo.png',
+                  width: 55,
+                ),
+
+                // idChallengeEcheanceBool1
+                //     ? Row(
+                //         mainAxisAlignment: MainAxisAlignment.start,
+                //         children: [
+                //           Padding(
+                //             padding: const EdgeInsets.only(
+                //                 right: 5, left: 5, top: 10),
+                //             child: SizedBox.fromSize(
+                //               size: Size(30, 30), // button width and height
+                //               child: ClipOval(
+                //                 child: Material(
+                //                   color: Colors.blue, // button color
+                //                   child: InkWell(
+                //                     // splash color
+                //                     splashColor: Colors.white,
+                //                     onTap: () {
+                //                       variable.ajoutEcheance(
+                //                           widget.indexChallenge);
+                //                     }, // button pressed
+                //                     child: Column(
+                //                       mainAxisAlignment:
+                //                           MainAxisAlignment.center,
+                //                       children: <Widget>[
+                //                         Icon(
+                //                           Icons.add,
+                //                           size: 10,
+                //                           color: Colors.white,
+                //                         ), // icon
+                //                         Text(
+                //                           "Ajout",
+                //                           style: TextStyle(
+                //                               fontSize: 7,
+                //                               color: Colors.white),
+                //                         ), // text
+                //                       ],
+                //                     ),
+                //                   ),
+                //                 ),
+                //               ),
+                //             ),
+                //           ),
+                //           Padding(
+                //             padding: const EdgeInsets.only(
+                //                 right: 35, left: 5, top: 10),
+                //             child: SizedBox.fromSize(
+                //               size: Size(30, 30), // button width and height
+                //               child: ClipOval(
+                //                 child: Material(
+                //                   color: Colors.blue, // button color
+                //                   child: InkWell(
+                //                     // splash color
+                //                     splashColor: Colors.white,
+                //                     onTap: () {
+                //                       variable.retraitEcheance(
+                //                           widget.indexChallenge);
+                //                     }, // button pressed
+                //                     child: Column(
+                //                       mainAxisAlignment:
+                //                           MainAxisAlignment.center,
+                //                       children: <Widget>[
+                //                         Icon(
+                //                           Icons.remove,
+                //                           size: 10,
+                //                           color: Colors.white,
+                //                         ), // icon
+                //                         Text(
+                //                           "retrait",
+                //                           style: TextStyle(
+                //                               fontSize: 7,
+                //                               color: Colors.white),
+                //                         ), // text
+                //                       ],
+                //                     ),
+                //                   ),
+                //                 ),
+                //               ),
+                //             ),
+                //           ),
+                //         ],
+                //       )
+                //     : SizedBox(width: 10),
+                // idChallengeBool1
+                // _challengesListget[widget.indexChallenge].prixTotalBool
+                // ? Column(
+                //     crossAxisAlignment: CrossAxisAlignment.center,
+                //     mainAxisAlignment: MainAxisAlignment.end,
+                //     children: <Widget>[
+                //       Card(
+                //         color: Colors.transparent,
+                //         shape: RoundedRectangleBorder(
+                //           borderRadius: BorderRadius.circular(5.0),
+                //         ),
+                //         elevation: 25.0,
+                // child: Row(
+                //   mainAxisAlignment: MainAxisAlignment.end,
+                //   children: [
+                //     Container(
+                //       decoration: BoxDecoration(
+                //           color: Colors.blue,
+                //           borderRadius: BorderRadius.circular(5)),
+                //       padding: EdgeInsets.all(4),
+                //       margin: EdgeInsets.only(right: 7),
+                //       child: Column(
+                //         children: [
+                //           Text(
+                //             _challengesListget[
+                //                         widget.indexChallenge]
+                //                     .previsions
+                //                     .toStringAsFixed(2) +
+                //                 "€",
+                //             style: TextStyle(
+                //                 fontSize: 10,
+                //                 color: Colors.black),
+                //           ),
+                //           Text(
+                //             "Prévisions",
+                //             style: TextStyle(
+                //                 fontSize: 10,
+                //                 color: Colors.black),
+                //           ),
+                //         ],
+                //       ),
+                //     ),
+                //     Container(
+                //       decoration: BoxDecoration(
+                //           color: Colors.blue,
+                //           borderRadius: BorderRadius.circular(5)),
+                //       padding: EdgeInsets.all(4),
+                //       child: Column(
+                //         children: [
+                //           Text(
+                //             _challengesListget[
+                //                         widget.indexChallenge]
+                //                     .prixTotal
+                //                     .toStringAsFixed(2) +
+                //                 "€",
+                //             style: TextStyle(
+                //                 fontSize: 10,
+                //                 color: Colors.black),
+                //           ),
+                //           Text(
+                //             "Prix total",
+                //             style: TextStyle(
+                //                 fontSize: 10,
+                //                 color: Colors.black),
+                //           ),
+                //         ],
+                //       ),
+                //     ),
+                //   ],
+                // ),
+                // ), // icon
+                // text
+                //     ],
+                //   )
+                // : SizedBox(width: 10),
+
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
+                        colors: <Color>[Colors.purple, Colors.blue])),
               ),
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      begin: Alignment.centerLeft,
-                      end: Alignment.centerRight,
-                      colors: <Color>[Colors.purple, Colors.blue])),
-            ),
+              _challengesListget[widget.indexChallenge].prixTotalBool
+                  ? Container(
+                      padding: EdgeInsets.only(top: 10.0),
+                      alignment: Alignment.center,
+                      child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: ScreenAchat(
+                            achats: _challengesListget[widget.indexChallenge]
+                                    .prixTotal
+                                    .toStringAsFixed(2) +
+                                "€",
+                            previsons: _challengesListget[widget.indexChallenge]
+                                    .previsions
+                                    .toStringAsFixed(2) +
+                                "€",
+                          )),
+                      decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                              begin: Alignment.centerLeft,
+                              end: Alignment.centerRight,
+                              colors: <Color>[Colors.purple, Colors.blue])),
+                    )
+                  : SizedBox(width: 10),
+            ]),
           ),
         ),
       ),
@@ -1339,38 +1363,38 @@ class _HomeTachesState extends State<HomeTaches> {
                                   ],
                                 ),
                               ),
-                              DropdownMenuItem(
-                                value: "paiement",
-                                child: Row(
-                                  children: [
-                                    Icon(Icons.payment,
-                                        size: 30.0, color: Colors.yellow),
-                                    SizedBox(width: 10),
-                                    Text(
-                                      "Paiement",
-                                      style: TextStyle(
-                                        color: Colors.yellow,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              DropdownMenuItem(
-                                value: "echeancier",
-                                child: Row(
-                                  children: [
-                                    Icon(Icons.payment,
-                                        size: 30.0, color: Colors.yellow),
-                                    SizedBox(width: 10),
-                                    Text(
-                                      "Échéancier",
-                                      style: TextStyle(
-                                        color: Colors.yellow,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
+                              // DropdownMenuItem(
+                              //   value: "paiement",
+                              //   child: Row(
+                              //     children: [
+                              //       Icon(Icons.payment,
+                              //           size: 30.0, color: Colors.yellow),
+                              //       SizedBox(width: 10),
+                              //       Text(
+                              //         "Paiement",
+                              //         style: TextStyle(
+                              //           color: Colors.yellow,
+                              //         ),
+                              //       ),
+                              //     ],
+                              //   ),
+                              // ),
+                              // DropdownMenuItem(
+                              //   value: "echeancier",
+                              //   child: Row(
+                              //     children: [
+                              //       Icon(Icons.payment,
+                              //           size: 30.0, color: Colors.yellow),
+                              //       SizedBox(width: 10),
+                              //       Text(
+                              //         "Échéancier",
+                              //         style: TextStyle(
+                              //           color: Colors.yellow,
+                              //         ),
+                              //       ),
+                              //     ],
+                              //   ),
+                              // ),
                               DropdownMenuItem(
                                 value: "formation",
                                 child: Row(
@@ -1518,26 +1542,26 @@ class _HomeTachesState extends State<HomeTaches> {
                                 color: Colors.orange[900],
                               ),
                               onPressed: () {
-                                if (unityChallenge == "echeancier") {
-                                  if (formKeyTache.currentState.validate()) {
-                                    formKeyTache.currentState.save();
-                                    Provider.of<Challengecontroller>(context,
-                                            listen: false)
-                                        .generateList(
-                                      widget.animatedpadding,
-                                      widget.id,
-                                      widget.indexChallenge,
-                                      int.parse(nombreEchenace),
-                                      double.parse(coutPaiment),
-                                      unityChallenge,
-                                      targetChallenge,
-                                      formations,
-                                      double.parse(prixProduit),
-                                    );
-                                    Navigator.pop(context);
-                                  }
-                                } else if (formKeyTache.currentState
-                                    .validate()) {
+                                // if (unityChallenge == "echeancier") {
+                                //   if (formKeyTache.currentState.validate()) {
+                                //     formKeyTache.currentState.save();
+                                //     Provider.of<Challengecontroller>(context,
+                                //             listen: false)
+                                //         .generateList(
+                                //       widget.animatedpadding,
+                                //       widget.id,
+                                //       widget.indexChallenge,
+                                //       int.parse(nombreEchenace),
+                                //       double.parse(coutPaiment),
+                                //       unityChallenge,
+                                //       targetChallenge,
+                                //       formations,
+                                //       double.parse(prixProduit),
+                                //     );
+                                //     Navigator.pop(context);
+                                //   }
+                                // }
+                                if (formKeyTache.currentState.validate()) {
                                   formKeyTache.currentState.save();
                                   setState(() {
                                     Provider.of<Challengecontroller>(context,

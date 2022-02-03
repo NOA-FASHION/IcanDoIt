@@ -167,7 +167,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             border:
                 OutlineInputBorder(borderRadius: BorderRadius.circular(15.0)),
             title: Text("Choix"),
-            autovalidate: false,
+            autovalidate: AutovalidateMode.disabled,
             validator: (value) {
               if (value.isEmpty) {
                 return "Merci d'entrer un nom pour le challenge";
@@ -287,7 +287,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             border:
                 OutlineInputBorder(borderRadius: BorderRadius.circular(15.0)),
             title: Text("Choix"),
-            autovalidate: false,
+            autovalidate: AutovalidateMode.disabled,
             validator: (value) {
               if (value.isEmpty) {
                 return "Merci d'entrer un nom pour le challenge";
@@ -873,38 +873,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                           },
                         )
                       : SizedBox(width: 10),
-                  // : IconButton(
-                  //     alignment: Alignment.topRight,
-                  //     icon: Icon(
-                  //       Icons.schedule,
-                  //       color: Colors.black,
-                  //     ),
-                  //     onPressed: () {
-                  //       variable.scheduleDailyTenAMNotification();
-                  //     },
-                  //   ),
-
-                  // IconButton(
-                  //   alignment: Alignment.topRight,
-                  //   icon: Icon(
-                  //     Icons.notifications,
-                  //     color: Colors.black,
-                  //   ),
-                  //   onPressed: () {
-                  //     variable.cancelAllNotifications();
-                  //   },
-                  // ),
-                  // const Divider(),
-                  // IconButton(
-                  //   alignment: Alignment.topRight,
-                  //   icon: Icon(
-                  //     Icons.notifications_off,
-                  //     color: Colors.black,
-                  //   ),
-                  //   onPressed: () {
-                  //     variable.checkPendingNotificationRequests(context);
-                  //   },
-                  // ),
                 ],
                 leading: widget.idChallenge1.isEmpty
                     ? IconButton(

@@ -48,7 +48,7 @@ dependencies:
   flutter_document_picker: ^4.0.1
   video_player: ^2.2.5
   top_snackbar_flutter: ^1.0.1
-  multiselect_formfield: ^0.1.6
+  multiselect_formfield: ^0.1.7
   date_time_picker: ^2.1.0
   avatar_glow: ^2.0.1
   marquee_text: ^2.0.0

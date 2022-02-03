@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:typed_data';
 import 'package:flutter/services.dart';
-import 'package:nanoid/async.dart';
+// import 'package:nanoid/async.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 import 'package:flutter/foundation.dart';
@@ -17,6 +17,7 @@ import 'dart:io';
 import 'package:share/share.dart';
 import 'package:youtube_parser/youtube_parser.dart';
 
+/////////////////////////////////////// /////////////////////////////////////// /////////////////////////////////////// packages
 const String keyAcces = "challengeList";
 const String keyAccesSAve = "challengeListSAve";
 const String keyAccesChallengeDay = "challengeDay";
@@ -64,6 +65,7 @@ class Challengecontroller extends ChangeNotifier {
     _configureLocalTimeZone();
   }
 
+/////////////////////////////////////// /////////////////////////////////////// /////////////////////////////////////// initialisaton
   void _initChallengeList() async {
     _localData = await SharedPreferences.getInstance();
     List<Map<String, dynamic>> _jsonDecodeList;
@@ -101,10 +103,14 @@ class Challengecontroller extends ChangeNotifier {
     notifyListeners();
   }
 
+/////////////////////////////////////// /////////////////////////////////////// /////////////////////////////////////// fin initialisaton
+  ///
+  ///
   void initChallengeList() {
     _initChallengeList();
   }
 
+/////////////////////////////////////// /////////////////////////////////////// /////////////////////////////////////// notification
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
   AndroidInitializationSettings androidInitializationSettings;
@@ -538,24 +544,28 @@ class Challengecontroller extends ChangeNotifier {
     }
     return null;
   }
+/////////////////////////////////////// /////////////////////////////////////// /////////////////////////////////////// fin notification
+  ///
+  ///
+  ///
+  // void activeEcheance(bool isSwitch, int index) async {
+  //   _challengeList[index].prelevementAutoBool = isSwitch;
+  //   await _save();
+  //   _initChallengeList();
+  //   notifyListeners();
+  //   if (_challengeList[index].animatedpadding) {
+  //     for (var i = _challengeListSave.length - 1; i >= 0; i--) {
+  //       if (_challengeListSave[i].id == _challengeList[index].id) {
+  //         _challengeListSave[i].prelevementAutoBool = isSwitch;
+  //         await _saveSauvegarde();
+  //         _initChallengeList();
+  //         return;
+  //       }
+  //     }
+  //   }
+  // }
 
-  void activeEcheance(bool isSwitch, int index) async {
-    _challengeList[index].prelevementAutoBool = isSwitch;
-    await _save();
-    _initChallengeList();
-    notifyListeners();
-    if (_challengeList[index].animatedpadding) {
-      for (var i = _challengeListSave.length - 1; i >= 0; i--) {
-        if (_challengeListSave[i].id == _challengeList[index].id) {
-          _challengeListSave[i].prelevementAutoBool = isSwitch;
-          await _saveSauvegarde();
-          _initChallengeList();
-          return;
-        }
-      }
-    }
-  }
-
+/////////////////////////////////////// /////////////////////////////////////// /////////////////////////////////////// active notif score
   void activeResultat(bool isSwitch) async {
     challengeDays.notifcationResultBool = isSwitch;
     await _saveChallendays();
@@ -578,22 +588,24 @@ class Challengecontroller extends ChangeNotifier {
     }
   }
 
-  void removeEcheance() async {
-    for (var i = _challengeListSave.length - 1; i >= 0; i--) {
-      if (_challengeListSave[i].echeancierBoll &&
-          _challengeListSave[i].prelevementAutoBool) {
-        // print(_challengeListSave[i].listeDeTache[0].description.toString());
+/////////////////////////////////////// /////////////////////////////////////// /////////////////////////////////////// fin active notif score
+  ///
+  // void removeEcheance() async {
+  //   for (var i = _challengeListSave.length - 1; i >= 0; i--) {
+  //     if (_challengeListSave[i].echeancierBoll &&
+  //         _challengeListSave[i].prelevementAutoBool) {
+  //       // print(_challengeListSave[i].listeDeTache[0].description.toString());
 
-        _challengeListSave[i].restePaiement =
-            _challengeListSave[i].restePaiement -
-                _challengeListSave[i].listeDeTache[0].cout;
-        _challengeListSave[i].listeDeTache.removeAt(0);
-        await _save1Sauvegarde(
-            remove: true, idChallenge: _challengeListSave[i].id);
-        return;
-      }
-    }
-  }
+  //       _challengeListSave[i].restePaiement =
+  //           _challengeListSave[i].restePaiement -
+  //               _challengeListSave[i].listeDeTache[0].cout;
+  //       _challengeListSave[i].listeDeTache.removeAt(0);
+  //       await _save1Sauvegarde(
+  //           remove: true, idChallenge: _challengeListSave[i].id);
+  //       return;
+  //     }
+  //   }
+  // }
 
   void majMensuelSave(ChallengeModel challengeListSave) {
     DateTime today = new DateTime.now();
@@ -604,6 +616,7 @@ class Challengecontroller extends ChangeNotifier {
         today.day > int.parse(challengeListSave.date)) {}
   }
 
+/////////////////////////////////////// /////////////////////////////////////// /////////////////////////////////////// maj auto des chalenges
   void mensuelSave() {
     DateTime today = new DateTime.now();
     DateTime lastDay =
@@ -611,25 +624,25 @@ class Challengecontroller extends ChangeNotifier {
     for (var i = _challengeListSave.length - 1; i >= 0; i--) {
       if (_challengeListSave[i].date.isNotEmpty) {
         if (_challengeListSave[i].date == DateFormat('d').format(today)) {
-          removeEcheance();
+          // removeEcheance();
           challegListSaveShedule(i);
         }
         if (today.month == lastDay.month &&
             lastDay.day < int.parse(_challengeListSave[i].date) &&
             today.day > int.parse(_challengeListSave[i].date)) {
           challegListSaveShedule(i);
-          removeEcheance();
+          // removeEcheance();
         }
-        if (today.year == lastDay.year && today.month > lastDay.month) {
-          for (var i = today.month - lastDay.month; i >= 0; i--) {
-            removeEcheance();
-          }
-        }
-        if (today.year > lastDay.year) {
-          for (var i = today.month + (12 - lastDay.month); i >= 0; i--) {
-            removeEcheance();
-          }
-        }
+        // if (today.year == lastDay.year && today.month > lastDay.month) {
+        //   for (var i = today.month - lastDay.month; i >= 0; i--) {
+        //     removeEcheance();
+        //   }
+        // }
+        // if (today.year > lastDay.year) {
+        //   for (var i = today.month + (12 - lastDay.month); i >= 0; i--) {
+        //     removeEcheance();
+        //   }
+        // }
       }
     }
   }
@@ -710,6 +723,7 @@ class Challengecontroller extends ChangeNotifier {
     }
   }
 
+/////////////////////////////////////// /////////////////////////////////////// /////////////////////////////////////// fin maj auto des chalenges
   void challegListSaveShedule(int index) async {
     _challengeList.add(
       ChallengeModel(
@@ -743,6 +757,7 @@ class Challengecontroller extends ChangeNotifier {
     // return;
   }
 
+/////////////////////////////////////// /////////////////////////////////////// /////////////////////////////////////// initialisation score challenge
   void _initChallengeListStartChallenge() async {
     _localDataChallengeDay = await SharedPreferences.getInstance();
     Map _jsonDecodeListChallenge;
@@ -893,6 +908,8 @@ class Challengecontroller extends ChangeNotifier {
     return false;
   }
 
+  /////////////////////////////////////// /////////////////////////////////////// /////////////////////////////////////// fin initialisation score challenge
+
   List<ChallengeModel> getChallenges2() {
     return _challengeListSave;
   }
@@ -1001,6 +1018,8 @@ class Challengecontroller extends ChangeNotifier {
     }
     return null;
   }
+
+  /////////////////////////////////////// /////////////////////////////////////// /////////////////////////////////////// module formation
 
   void addformationChapitre(
       {@required int indexChallenge,
@@ -1118,6 +1137,9 @@ class Challengecontroller extends ChangeNotifier {
     }
   }
 
+  /////////////////////////////////////// /////////////////////////////////////// /////////////////////////////////////// module formation
+
+  /////////////////////////////////////// /////////////////////////////////////// /////////////////////////////////////// modification prix
   void modifAchat(
       {@required int indexChallenge,
       @required int index,
@@ -1165,55 +1187,57 @@ class Challengecontroller extends ChangeNotifier {
     }
   }
 
-  void modifPaiement(
-      {@required int indexChallenge,
-      @required int index,
-      @required double cout}) async {
-    _challengeList[indexChallenge].coutTotal =
-        _challengeList[indexChallenge].coutTotal -
-            _challengeList[indexChallenge].listeDeTache[index].cout;
-    _challengeList[indexChallenge].listeDeTache[index].cout = cout;
-    _challengeList[indexChallenge].coutTotal =
-        _challengeList[indexChallenge].coutTotal + cout;
-    _challengeList[indexChallenge].restePaiement =
-        _challengeList[indexChallenge].coutTotal;
-    modifPaiementPratique(
-      idlistTache: _challengeList[indexChallenge].listeDeTache[index].id,
-      id: _challengeList[indexChallenge].id,
-      cout: cout,
-    );
-    await _save();
-    _initChallengeList();
-    notifyListeners();
-  }
+  /////////////////////////////////////// /////////////////////////////////////// /////////////////////////////////////// fin modification prix
 
-  void modifPaiementPratique({
-    @required double cout,
-    @required String idlistTache,
-    @required String id,
-  }) async {
-    await delay(500);
-    for (var i = _challengeListSave.length - 1; i >= 0; i--) {
-      if (_challengeListSave[i].id == id) {
-        for (var n = _challengeListSave[i].listeDeTache.length - 1;
-            n >= 0;
-            n--) {
-          if (_challengeListSave[i].listeDeTache[n].id == idlistTache) {
-            _challengeListSave[i].coutTotal = _challengeListSave[i].coutTotal -
-                _challengeListSave[i].listeDeTache[n].cout;
-            _challengeListSave[i].listeDeTache[n].cout = cout;
-            _challengeListSave[i].coutTotal =
-                _challengeListSave[i].coutTotal + cout;
-            _challengeListSave[i].restePaiement =
-                _challengeListSave[i].coutTotal;
-            await _saveSauvegarde();
-            _initChallengeList();
-            return;
-          }
-        }
-      }
-    }
-  }
+  // void modifPaiement(
+  //     {@required int indexChallenge,
+  //     @required int index,
+  //     @required double cout}) async {
+  //   _challengeList[indexChallenge].coutTotal =
+  //       _challengeList[indexChallenge].coutTotal -
+  //           _challengeList[indexChallenge].listeDeTache[index].cout;
+  //   _challengeList[indexChallenge].listeDeTache[index].cout = cout;
+  //   _challengeList[indexChallenge].coutTotal =
+  //       _challengeList[indexChallenge].coutTotal + cout;
+  //   _challengeList[indexChallenge].restePaiement =
+  //       _challengeList[indexChallenge].coutTotal;
+  //   modifPaiementPratique(
+  //     idlistTache: _challengeList[indexChallenge].listeDeTache[index].id,
+  //     id: _challengeList[indexChallenge].id,
+  //     cout: cout,
+  //   );
+  //   await _save();
+  //   _initChallengeList();
+  //   notifyListeners();
+  // }
+
+  // void modifPaiementPratique({
+  //   @required double cout,
+  //   @required String idlistTache,
+  //   @required String id,
+  // }) async {
+  //   await delay(500);
+  //   for (var i = _challengeListSave.length - 1; i >= 0; i--) {
+  //     if (_challengeListSave[i].id == id) {
+  //       for (var n = _challengeListSave[i].listeDeTache.length - 1;
+  //           n >= 0;
+  //           n--) {
+  //         if (_challengeListSave[i].listeDeTache[n].id == idlistTache) {
+  //           _challengeListSave[i].coutTotal = _challengeListSave[i].coutTotal -
+  //               _challengeListSave[i].listeDeTache[n].cout;
+  //           _challengeListSave[i].listeDeTache[n].cout = cout;
+  //           _challengeListSave[i].coutTotal =
+  //               _challengeListSave[i].coutTotal + cout;
+  //           _challengeListSave[i].restePaiement =
+  //               _challengeListSave[i].coutTotal;
+  //           await _saveSauvegarde();
+  //           _initChallengeList();
+  //           return;
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
 
   void prixTotalAdd(int index, double prix) {
     if (prix > 0) {
@@ -1228,59 +1252,59 @@ class Challengecontroller extends ChangeNotifier {
     }
   }
 
-  void restePaiementTotalAdd(int index, double cout) {
-    if (cout > 0) {
-      _challengeList[index].restePaiement =
-          _challengeList[index].restePaiement + cout;
-    }
-  }
+  // void restePaiementTotalAdd(int index, double cout) {
+  //   if (cout > 0) {
+  //     _challengeList[index].restePaiement =
+  //         _challengeList[index].restePaiement + cout;
+  //   }
+  // }
 
-  void restePaiementTotalRemove(int index, double cout, String unityChallenge,
-      String id, String idChallenge) async {
-    if (cout > 0 && unityChallenge != "echeancier") {
-      _challengeList[index].restePaiement =
-          _challengeList[index].restePaiement - cout;
-      for (var i = _challengeListSave.length - 1; i >= 0; i--) {
-        if (_challengeListSave[i].id == _challengeList[index].id) {
-          _challengeListSave[i].restePaiement =
-              _challengeListSave[index].coutTotal;
+  // void restePaiementTotalRemove(int index, double cout, String unityChallenge,
+  //     String id, String idChallenge) async {
+  //   if (cout > 0 && unityChallenge != "echeancier") {
+  //     _challengeList[index].restePaiement =
+  //         _challengeList[index].restePaiement - cout;
+  //     for (var i = _challengeListSave.length - 1; i >= 0; i--) {
+  //       if (_challengeListSave[i].id == _challengeList[index].id) {
+  //         _challengeListSave[i].restePaiement =
+  //             _challengeListSave[index].coutTotal;
 
-          await _saveSauvegarde();
-          _initChallengeList();
+  //         await _saveSauvegarde();
+  //         _initChallengeList();
 
-          return;
-        }
-      }
-    } else if (cout > 0 && unityChallenge == "echeancier") {
-      _challengeList[index].restePaiement =
-          _challengeList[index].restePaiement - cout;
-      for (var i = _challengeListSave.length - 1; i >= 0; i--) {
-        if (_challengeListSave[i].id == _challengeList[index].id) {
-          _challengeListSave[i].restePaiement =
-              _challengeList[index].restePaiement;
+  //         return;
+  //       }
+  //     }
+  //   } else if (cout > 0 && unityChallenge == "echeancier") {
+  //     _challengeList[index].restePaiement =
+  //         _challengeList[index].restePaiement - cout;
+  //     for (var i = _challengeListSave.length - 1; i >= 0; i--) {
+  //       if (_challengeListSave[i].id == _challengeList[index].id) {
+  //         _challengeListSave[i].restePaiement =
+  //             _challengeList[index].restePaiement;
 
-          await _saveSauvegarde();
-          _initChallengeList();
-          for (var n = _challengeListSave[i].listeDeTache.length - 1;
-              n >= 0;
-              n--) {
-            if (_challengeListSave[i].listeDeTache[n].id == id) {
-              _challengeListSave[i].listeDeTache.removeAt(n);
-              await _save1Sauvegarde(remove: true, idChallenge: idChallenge);
-              return;
-            }
-          }
-          return;
-        }
-      }
-    }
-  }
+  //         await _saveSauvegarde();
+  //         _initChallengeList();
+  //         for (var n = _challengeListSave[i].listeDeTache.length - 1;
+  //             n >= 0;
+  //             n--) {
+  //           if (_challengeListSave[i].listeDeTache[n].id == id) {
+  //             _challengeListSave[i].listeDeTache.removeAt(n);
+  //             await _save1Sauvegarde(remove: true, idChallenge: idChallenge);
+  //             return;
+  //           }
+  //         }
+  //         return;
+  //       }
+  //     }
+  //   }
+  // }
 
-  void coutTotalAdd(int index, double cout, String idChallenge) async {
-    if (cout > 0) {
-      _challengeList[index].coutTotal = _challengeList[index].coutTotal + cout;
-    }
-  }
+  // void coutTotalAdd(int index, double cout, String idChallenge) async {
+  //   if (cout > 0) {
+  //     _challengeList[index].coutTotal = _challengeList[index].coutTotal + cout;
+  //   }
+  // }
 
   void activePrixBool(double prix, int index) {
     if (prix > 0) {
@@ -1289,76 +1313,76 @@ class Challengecontroller extends ChangeNotifier {
     }
   }
 
-  void activeCoutBool(double cout, int index) {
-    if (cout > 0) {
-      _challengeList[index].coutTotalBool = true;
-      return;
-    }
-  }
+  // void activeCoutBool(double cout, int index) {
+  //   if (cout > 0) {
+  //     _challengeList[index].coutTotalBool = true;
+  //     return;
+  //   }
+  // }
 
-  void ajoutEcheance(int index) async {
-    if (_challengeList[index].coutTotal > _challengeList[index].restePaiement &&
-        _challengeList[index].restePaiement > 0) {
-      _challengeList[index].restePaiement =
-          _challengeList[index].restePaiement +
-              _challengeList[index].listeDeTache[0].cout;
-      _challengeList[index]
-          .listeDeTache
-          .add(_challengeList[index].listeDeTache[0]);
-      await _save();
-      _initChallengeList();
-      notifyListeners();
-      if (_challengeList[index].animatedpadding) {
-        for (var i = _challengeListSave.length - 1; i >= 0; i--) {
-          if (_challengeListSave[i].id == _challengeList[index].id) {
-            for (var n = _challengeListSave[i].listeDeTache.length - 1;
-                n >= 0;
-                n--) {
-              _challengeListSave[i].restePaiement =
-                  _challengeList[index].restePaiement;
+  // void ajoutEcheance(int index) async {
+  //   if (_challengeList[index].coutTotal > _challengeList[index].restePaiement &&
+  //       _challengeList[index].restePaiement > 0) {
+  //     _challengeList[index].restePaiement =
+  //         _challengeList[index].restePaiement +
+  //             _challengeList[index].listeDeTache[0].cout;
+  //     _challengeList[index]
+  //         .listeDeTache
+  //         .add(_challengeList[index].listeDeTache[0]);
+  //     await _save();
+  //     _initChallengeList();
+  //     notifyListeners();
+  //     if (_challengeList[index].animatedpadding) {
+  //       for (var i = _challengeListSave.length - 1; i >= 0; i--) {
+  //         if (_challengeListSave[i].id == _challengeList[index].id) {
+  //           for (var n = _challengeListSave[i].listeDeTache.length - 1;
+  //               n >= 0;
+  //               n--) {
+  //             _challengeListSave[i].restePaiement =
+  //                 _challengeList[index].restePaiement;
 
-              _challengeListSave[i]
-                  .listeDeTache
-                  .add(_challengeListSave[i].listeDeTache[0]);
-              await _saveSauvegarde();
-              return;
-            }
-          }
-        }
-      }
-    }
-  }
+  //             _challengeListSave[i]
+  //                 .listeDeTache
+  //                 .add(_challengeListSave[i].listeDeTache[0]);
+  //             await _saveSauvegarde();
+  //             return;
+  //           }
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
 
-  void retraitEcheance(int index) async {
-    if (_challengeList[index].restePaiement > 0) {
-      _challengeList[index].restePaiement =
-          _challengeList[index].restePaiement -
-              _challengeList[index].listeDeTache[0].cout;
-      _challengeList[index].listeDeTache.removeAt(0);
+  // void retraitEcheance(int index) async {
+  //   if (_challengeList[index].restePaiement > 0) {
+  //     _challengeList[index].restePaiement =
+  //         _challengeList[index].restePaiement -
+  //             _challengeList[index].listeDeTache[0].cout;
+  //     _challengeList[index].listeDeTache.removeAt(0);
 
-      await _save1(remove: true, idChallenge: _challengeList[index].id);
+  //     await _save1(remove: true, idChallenge: _challengeList[index].id);
 
-      _initChallengeList();
-      notifyListeners();
-      if (_challengeList[index].animatedpadding) {
-        for (var i = _challengeListSave.length - 1; i >= 0; i--) {
-          if (_challengeListSave[i].id == _challengeList[index].id) {
-            for (var n = _challengeListSave[i].listeDeTache.length - 1;
-                n >= 0;
-                n--) {
-              _challengeListSave[i].restePaiement =
-                  _challengeList[index].restePaiement;
+  //     _initChallengeList();
+  //     notifyListeners();
+  //     if (_challengeList[index].animatedpadding) {
+  //       for (var i = _challengeListSave.length - 1; i >= 0; i--) {
+  //         if (_challengeListSave[i].id == _challengeList[index].id) {
+  //           for (var n = _challengeListSave[i].listeDeTache.length - 1;
+  //               n >= 0;
+  //               n--) {
+  //             _challengeListSave[i].restePaiement =
+  //                 _challengeList[index].restePaiement;
 
-              _challengeListSave[i].listeDeTache.removeAt(0);
-              await _save1Sauvegarde(
-                  remove: true, idChallenge: _challengeList[index].id);
-              return;
-            }
-          }
-        }
-      }
-    }
-  }
+  //             _challengeListSave[i].listeDeTache.removeAt(0);
+  //             await _save1Sauvegarde(
+  //                 remove: true, idChallenge: _challengeList[index].id);
+  //             return;
+  //           }
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
 
   void addChallenge2({
     @required double cout,
@@ -1373,11 +1397,11 @@ class Challengecontroller extends ChangeNotifier {
     @required String tache,
     @required String description,
   }) async {
-    coutTotalAdd(index, cout, idListChallenge);
+    // coutTotalAdd(index, cout, idListChallenge);
     previsionTotalAdd(index, prix, idListChallenge);
-    restePaiementTotalAdd(index, cout);
+    // restePaiementTotalAdd(index, cout);
     activePrixBool(prix, index);
-    activeCoutBool(cout, index);
+    // activeCoutBool(cout, index);
     _challengeList3 = [];
     _challengeList3.add(Challengemodel2(
         id: id,
@@ -1468,87 +1492,87 @@ class Challengecontroller extends ChangeNotifier {
     }
   }
 
-  void generateList(
-      bool animatingPadding,
-      String idListChallenge,
-      int index,
-      int nombreEcheance,
-      double cout,
-      String description,
-      String targetChallenge,
-      Formation formation,
-      double prix) async {
-    List<Challengemodel2> challenModel2Generat =
-        List<Challengemodel2>.generate(nombreEcheance, (i) {
-      return Challengemodel2(
-          prix: prix,
-          cout: cout,
-          id: nanoid(10).toString(),
-          name: "",
-          tache: targetChallenge,
-          description: choixDesciptionEnum(description),
-          formation: formation);
-    });
-    for (var i = challenModel2Generat.length - 1; i >= 0; i--) {
-      var additionchallenge = _challengeList[index].totalChallenge;
-      _challengeList[index].totalChallenge =
-          (int.parse(additionchallenge) + 1).toString();
-      _challengeList[index].echeancierBoll = true;
-      _challengeList[index].prelevementAutoBool = true;
-      coutTotalAdd(index, cout, idListChallenge);
-      previsionTotalAdd(index, prix, idListChallenge);
-      restePaiementTotalAdd(index, cout);
-      activePrixBool(prix, index);
-      activeCoutBool(cout, index);
-      _challengeList[index].listeDeTache.add(Challengemodel2(
-          prix: challenModel2Generat[i].prix,
-          cout: challenModel2Generat[i].cout,
-          id: challenModel2Generat[i].id,
-          name: challenModel2Generat[i].name,
-          tache: challenModel2Generat[i].tache,
-          description: challenModel2Generat[i].description,
-          formation: challenModel2Generat[i].formation));
-    }
-    await _save();
-    _initChallengeList();
-    notifyListeners();
-    if (_challengeList[index].animatedpadding) {
-      for (var i = _challengeListSave.length - 1; i >= 0; i--) {
-        if (_challengeListSave[i].id == _challengeList[index].id) {
-          _challengeListSave.removeAt(i);
-        }
-      }
+  // void generateList(
+  //     bool animatingPadding,
+  //     String idListChallenge,
+  //     int index,
+  //     int nombreEcheance,
+  //     double cout,
+  //     String description,
+  //     String targetChallenge,
+  //     Formation formation,
+  //     double prix) async {
+  //   List<Challengemodel2> challenModel2Generat =
+  //       List<Challengemodel2>.generate(nombreEcheance, (i) {
+  //     return Challengemodel2(
+  //         prix: prix,
+  //         cout: cout,
+  //         id: nanoid(10).toString(),
+  //         name: "",
+  //         tache: targetChallenge,
+  //         description: choixDesciptionEnum(description),
+  //         formation: formation);
+  //   });
+  //   for (var i = challenModel2Generat.length - 1; i >= 0; i--) {
+  //     var additionchallenge = _challengeList[index].totalChallenge;
+  //     _challengeList[index].totalChallenge =
+  //         (int.parse(additionchallenge) + 1).toString();
+  //     _challengeList[index].echeancierBoll = true;
+  //     _challengeList[index].prelevementAutoBool = true;
+  //     // coutTotalAdd(index, cout, idListChallenge);
+  //     previsionTotalAdd(index, prix, idListChallenge);
+  //     // restePaiementTotalAdd(index, cout);
+  //     activePrixBool(prix, index);
+  //     // activeCoutBool(cout, index);
+  //     _challengeList[index].listeDeTache.add(Challengemodel2(
+  //         prix: challenModel2Generat[i].prix,
+  //         cout: challenModel2Generat[i].cout,
+  //         id: challenModel2Generat[i].id,
+  //         name: challenModel2Generat[i].name,
+  //         tache: challenModel2Generat[i].tache,
+  //         description: challenModel2Generat[i].description,
+  //         formation: challenModel2Generat[i].formation));
+  //   }
+  //   await _save();
+  //   _initChallengeList();
+  //   notifyListeners();
+  //   if (_challengeList[index].animatedpadding) {
+  //     for (var i = _challengeListSave.length - 1; i >= 0; i--) {
+  //       if (_challengeListSave[i].id == _challengeList[index].id) {
+  //         _challengeListSave.removeAt(i);
+  //       }
+  //     }
 
-      _challengeListSave.add(
-        ChallengeModel(
-            prelevementAutoBool: _challengeList[index].prelevementAutoBool,
-            echeancierBoll: _challengeList[index].echeancierBoll,
-            previsions: _challengeList[index].previsions,
-            restePaiement: _challengeList[index].restePaiement,
-            coutTotalBool: _challengeList[index].coutTotalBool,
-            prixTotalBool: _challengeList[index].prixTotalBool,
-            prixTotal: _challengeList[index].prixTotal,
-            coutTotal: _challengeList[index].coutTotal,
-            idChallenge: _challengeList[index].idChallenge,
-            idNotif: _challengeList[index].idNotif,
-            boolId: _challengeList[index].boolId,
-            id: _challengeList[index].id,
-            notification: _challengeList[index].notification,
-            date: _challengeList[index].date,
-            quotidient: _challengeList[index].quotidient,
-            animatedpadding: _challengeList[index].animatedpadding,
-            totalDays: _challengeList[index].totalDays,
-            listeDeTache: _challengeList[index].listeDeTache,
-            name: _challengeList[index].name,
-            description: _challengeList[index].description,
-            totalChallenge: _challengeList[index].totalChallenge,
-            unity: _challengeList[index].unity),
-      );
-      await _saveSauvegarde();
-      _initChallengeList();
-      notifyListeners();
-    }
-  }
+  //     _challengeListSave.add(
+  //       ChallengeModel(
+  //           prelevementAutoBool: _challengeList[index].prelevementAutoBool,
+  //           echeancierBoll: _challengeList[index].echeancierBoll,
+  //           previsions: _challengeList[index].previsions,
+  //           restePaiement: _challengeList[index].restePaiement,
+  //           coutTotalBool: _challengeList[index].coutTotalBool,
+  //           prixTotalBool: _challengeList[index].prixTotalBool,
+  //           prixTotal: _challengeList[index].prixTotal,
+  //           coutTotal: _challengeList[index].coutTotal,
+  //           idChallenge: _challengeList[index].idChallenge,
+  //           idNotif: _challengeList[index].idNotif,
+  //           boolId: _challengeList[index].boolId,
+  //           id: _challengeList[index].id,
+  //           notification: _challengeList[index].notification,
+  //           date: _challengeList[index].date,
+  //           quotidient: _challengeList[index].quotidient,
+  //           animatedpadding: _challengeList[index].animatedpadding,
+  //           totalDays: _challengeList[index].totalDays,
+  //           listeDeTache: _challengeList[index].listeDeTache,
+  //           name: _challengeList[index].name,
+  //           description: _challengeList[index].description,
+  //           totalChallenge: _challengeList[index].totalChallenge,
+  //           unity: _challengeList[index].unity),
+  //     );
+  //     await _saveSauvegarde();
+  //     _initChallengeList();
+  //     notifyListeners();
+  //   }
+  // }
 
   void addChallenge1({
     @required double prix,
@@ -2176,7 +2200,7 @@ class Challengecontroller extends ChangeNotifier {
       @required bool validate}) async {
     if (validate) {
       prixTotalAdd(indexSave, prix);
-      restePaiementTotalRemove(indexSave, cout, unitChallenge, id, idChallenge);
+      // restePaiementTotalRemove(indexSave, cout, unitChallenge, id, idChallenge);
     }
     if (!validate) {
       var additionchallenge = _challengeList[indexSave].totalChallenge;

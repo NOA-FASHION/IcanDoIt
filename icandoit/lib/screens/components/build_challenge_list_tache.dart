@@ -8,7 +8,7 @@ import 'package:icandoit/screens/components/adresse.dart';
 // import 'dart:io' as io;
 import 'package:icandoit/models/challenge_model.dart';
 import 'package:icandoit/screens/components/achatEdit.dart';
-import 'package:icandoit/screens/components/paiementEdit.dart';
+// import 'package:icandoit/screens/components/paiementEdit.dart';
 import 'package:icandoit/screens/components/playYoutube.dart';
 import 'package:icandoit/screens/formationEdit.dart';
 import 'package:icandoit/screens/playPicture.dart';
@@ -205,26 +205,28 @@ class _ChallengesListBuilderTachesState
         },
       );
       return fomationEdit;
-    } else if (description == "paiement" || description == "echeancier") {
-      fomationEdit = IconButton(
-        alignment: Alignment.topRight,
-        icon: Icon(
-          Icons.edit,
-          color: Colors.black,
-        ),
-        onPressed: () {
-          Navigator.push(
-              context,
-              PageTransition(
-                  type: PageTransitionType.bottomToTop,
-                  child: ChangeNotifierProvider.value(
-                      value: provider,
-                      child: PaiementEdit(
-                          item: item, indexChallenge: widget.indexChallenge))));
-        },
-      );
-      return fomationEdit;
-    } else if (description == "achat") {
+    }
+    //  else if (description == "paiement" || description == "echeancier") {
+    //   fomationEdit = IconButton(
+    //     alignment: Alignment.topRight,
+    //     icon: Icon(
+    //       Icons.edit,
+    //       color: Colors.black,
+    //     ),
+    //     onPressed: () {
+    //       Navigator.push(
+    //           context,
+    //           PageTransition(
+    //               type: PageTransitionType.bottomToTop,
+    //               child: ChangeNotifierProvider.value(
+    //                   value: provider,
+    //                   child: PaiementEdit(
+    //                       item: item, indexChallenge: widget.indexChallenge))));
+    //     },
+    //   );
+    //   return fomationEdit;
+    // }
+    else if (description == "achat") {
       fomationEdit = IconButton(
         alignment: Alignment.topRight,
         icon: Icon(
@@ -254,8 +256,6 @@ class _ChallengesListBuilderTachesState
     if (prix > 0) {
       prixCout1 = Text("Prix : " + prix.toString() + "€");
       return prixCout1;
-    } else if (cout > 0) {
-      prixCout1 = Text("Montant : " + cout.toString() + "€");
     }
     return prixCout1;
   }
@@ -334,14 +334,16 @@ class _ChallengesListBuilderTachesState
         color: Colors.green,
       );
       return documentJoint;
-    } else if (resultat == "paiement" || resultat == "echeancier") {
-      documentJoint = Icon(
-        Icons.payment,
-        size: 30.0,
-        color: Colors.yellow,
-      );
-      return documentJoint;
-    } else if (resultat == "projet") {
+    }
+    // else if (resultat == "paiement" || resultat == "echeancier") {
+    //   documentJoint = Icon(
+    //     Icons.payment,
+    //     size: 30.0,
+    //     color: Colors.yellow,
+    //   );
+    //   return documentJoint;
+    // }
+    else if (resultat == "projet") {
       documentJoint = Icon(
         Icons.build,
         size: 30.0,
@@ -539,11 +541,7 @@ class _ChallengesListBuilderTachesState
                                   value: providerType,
                                   child: VideoPlayerScreen(
                                       nameChallenge: item.name))));
-                      // Navigator.of(context).push(MaterialPageRoute(
-                      //     builder: (context) => ChangeNotifierProvider.value(
-                      //         value: providerType,
-                      //         child: VideoPlayerScreen(
-                      //             nameChallenge: item.name))));
+
                     } else if (item.description
                             .toString()
                             .replaceAll(unityPattern, "") ==
@@ -569,10 +567,6 @@ class _ChallengesListBuilderTachesState
                                   value: providerType,
                                   child:
                                       PlayPicture(nameChallenge: item.name))));
-                      // Navigator.of(context).push(MaterialPageRoute(
-                      //     builder: (context) => ChangeNotifierProvider.value(
-                      //         value: providerType,
-                      //         child: PlayPicture(nameChallenge: item.name))));
                     } else if (item.description
                             .toString()
                             .replaceAll(unityPattern, "") ==
@@ -584,11 +578,6 @@ class _ChallengesListBuilderTachesState
                               child: ChangeNotifierProvider.value(
                                   value: providerType,
                                   child: PlayUrl(nameChallenge: item.name))));
-
-                      // Navigator.of(context).push(MaterialPageRoute(
-                      //     builder: (context) => ChangeNotifierProvider.value(
-                      //         value: providerType,
-                      //         child: PlayUrl(nameChallenge: item.name))));
                     } else if (item.description
                             .toString()
                             .replaceAll(unityPattern, "") ==
@@ -600,11 +589,6 @@ class _ChallengesListBuilderTachesState
                               child: ChangeNotifierProvider.value(
                                   value: providerType,
                                   child: AdressMap(adresse: item.name))));
-
-                      // Navigator.of(context).push(MaterialPageRoute(
-                      //     builder: (context) => ChangeNotifierProvider.value(
-                      //         value: providerType,
-                      //         child: AdressMap(adresse: item.name))));
                     } else if (item.description
                             .toString()
                             .replaceAll(unityPattern, "") ==
@@ -617,12 +601,6 @@ class _ChallengesListBuilderTachesState
                                   value: providerType,
                                   child: PlayCommentaire(
                                       nameChallenge: item.name))));
-
-                      // Navigator.of(context).push(MaterialPageRoute(
-                      //     builder: (context) => ChangeNotifierProvider.value(
-                      //         value: providerType,
-                      //         child:
-                      //             PlayCommentaire(nameChallenge: item.name))));
                     } else if (item.description
                             .toString()
                             .replaceAll(unityPattern, "") ==
@@ -635,12 +613,6 @@ class _ChallengesListBuilderTachesState
                                   value: providerType,
                                   child: PlayYoutubeScreen(
                                       nameChallenge: item.name))));
-
-                      // Navigator.of(context).push(MaterialPageRoute(
-                      //     builder: (context) => ChangeNotifierProvider.value(
-                      //         value: providerType,
-                      //         child: PlayYoutubeScreen(
-                      //             nameChallenge: item.name))));
                     } else if (item.description
                                 .toString()
                                 .replaceAll(unityPattern, "") ==
@@ -677,16 +649,6 @@ class _ChallengesListBuilderTachesState
                                     idChallenge1: item.id,
                                     namechallenge: item.tache,
                                   ))));
-
-                      // Navigator.of(context).push(MaterialPageRoute(
-                      //     builder: (context) => ChangeNotifierProvider.value(
-                      //         value: providerType,
-                      //         child: Home(
-                      //           returnRaccourci: false,
-                      //           id: widget.id,
-                      //           idChallenge1: item.id,
-                      //           namechallenge: item.tache,
-                      //         ))));
                     }
                   },
                   title: Container(
