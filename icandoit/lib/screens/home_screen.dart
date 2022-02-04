@@ -825,6 +825,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             preferredSize: Size.fromHeight(100.0),
             child: SafeArea(
               child: AppBar(
+                elevation: 0,
                 title: Text(
                     widget.idChallenge1.isEmpty ? "" : widget.namechallenge),
                 actions: [
@@ -994,6 +995,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                 return null;
                               },
                               decoration: InputDecoration(
+                                  helperText: "Exemple : 'Tâche quotidienne '",
                                   focusedBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
                                           width: 2.0, color: Colors.blueAccent),
@@ -1031,6 +1033,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                 return null;
                               },
                               decoration: InputDecoration(
+                                  helperText: "Exemple : 'Liste des tâches'",
                                   focusedBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
                                           width: 2.0, color: Colors.blueAccent),

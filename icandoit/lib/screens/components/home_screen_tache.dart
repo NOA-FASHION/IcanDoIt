@@ -401,6 +401,7 @@ class _HomeTachesState extends State<HomeTaches> {
           return null;
         },
         decoration: InputDecoration(
+            helperText: "Exemple : 'https://pub.dev/ '",
             focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(width: 2.0, color: Colors.blueAccent),
                 borderRadius: BorderRadius.circular(15.0)),
@@ -430,6 +431,7 @@ class _HomeTachesState extends State<HomeTaches> {
               return null;
             },
             decoration: InputDecoration(
+                helperText: "Exemple : 'Dumont'",
                 focusedBorder: OutlineInputBorder(
                     borderSide:
                         BorderSide(width: 2.0, color: Colors.blueAccent),
@@ -459,6 +461,7 @@ class _HomeTachesState extends State<HomeTaches> {
               return null;
             },
             decoration: InputDecoration(
+                helperText: "Exemple : '0596563355'",
                 focusedBorder: OutlineInputBorder(
                     borderSide:
                         BorderSide(width: 2.0, color: Colors.blueAccent),
@@ -488,6 +491,7 @@ class _HomeTachesState extends State<HomeTaches> {
               return null;
             },
             decoration: InputDecoration(
+                helperText: "Exemple : '10 lotissement la fleur'",
                 focusedBorder: OutlineInputBorder(
                     borderSide:
                         BorderSide(width: 2.0, color: Colors.blueAccent),
@@ -517,6 +521,7 @@ class _HomeTachesState extends State<HomeTaches> {
               return null;
             },
             decoration: InputDecoration(
+                helperText: "Exemple : 'Bordeaux'",
                 focusedBorder: OutlineInputBorder(
                     borderSide:
                         BorderSide(width: 2.0, color: Colors.blueAccent),
@@ -556,6 +561,7 @@ class _HomeTachesState extends State<HomeTaches> {
               return null;
             },
             decoration: InputDecoration(
+                helperText: "Exemple : 'France'",
                 focusedBorder: OutlineInputBorder(
                     borderSide:
                         BorderSide(width: 2.0, color: Colors.blueAccent),
@@ -587,6 +593,9 @@ class _HomeTachesState extends State<HomeTaches> {
           return null;
         },
         decoration: InputDecoration(
+            helperStyle: TextStyle(fontSize: 10),
+            helperText:
+                "Exemple : 'https://www.youtube.com/watch?v=8yFVBuGcOe8'",
             focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(width: 2.0, color: Colors.blueAccent),
                 borderRadius: BorderRadius.circular(15.0)),
@@ -594,8 +603,7 @@ class _HomeTachesState extends State<HomeTaches> {
                 borderSide: BorderSide(width: 1.0, color: Colors.blueAccent),
                 borderRadius: BorderRadius.circular(15.0)),
             contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            labelText:
-                "URL de Youtube : exemple:https://www.youtube.com/watch?v=8yFVBuGcOe8",
+            labelText: "URL de Youtube ",
             border:
                 OutlineInputBorder(borderRadius: BorderRadius.circular(15.0))),
       );
@@ -619,6 +627,7 @@ class _HomeTachesState extends State<HomeTaches> {
             return null;
           },
           decoration: InputDecoration(
+              helperText: "Exemple : 'Dimension total:25cm'",
               focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(width: 2.0, color: Colors.blueAccent),
                   borderRadius: BorderRadius.circular(15.0)),
@@ -637,7 +646,7 @@ class _HomeTachesState extends State<HomeTaches> {
       documentJoint = Row(
         children: [
           Container(
-            width: 100,
+            width: 120,
             child: TextFormField(
               onSaved: (value) {
                 coutPaiment = "0";
@@ -651,6 +660,8 @@ class _HomeTachesState extends State<HomeTaches> {
                 return null;
               },
               decoration: InputDecoration(
+                  helperStyle: TextStyle(fontSize: 10),
+                  helperText: "Exemple: '15€'",
                   focusedBorder: OutlineInputBorder(
                       borderSide:
                           BorderSide(width: 2.0, color: Colors.blueAccent),
@@ -795,7 +806,7 @@ class _HomeTachesState extends State<HomeTaches> {
       appBar: PreferredSize(
         preferredSize: _challengesListget[widget.indexChallenge].prixTotalBool
             ? Size.fromHeight(236.0)
-            : Size.fromHeight(130.0),
+            : Size.fromHeight(100.0),
         child: SafeArea(
           child: AppBar(
             elevation: 0,
@@ -1513,6 +1524,8 @@ class _HomeTachesState extends State<HomeTaches> {
                               return null;
                             },
                             decoration: InputDecoration(
+                              helperText:
+                                  "Exemple : 'Tuto recette du gateau au chocolat'",
                               focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                       width: 2.0, color: Colors.blueAccent),

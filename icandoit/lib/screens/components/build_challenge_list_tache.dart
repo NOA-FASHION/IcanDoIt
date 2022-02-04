@@ -92,6 +92,9 @@ class _ChallengesListBuilderTachesState
     } else if (description == "formation") {
       modifDecription1 = "Formation";
       return modifDecription1;
+    } else if (description == "information") {
+      modifDecription1 = "Information";
+      return modifDecription1;
     }
 
     return modifDecription1;
@@ -541,7 +544,6 @@ class _ChallengesListBuilderTachesState
                                   value: providerType,
                                   child: VideoPlayerScreen(
                                       nameChallenge: item.name))));
-
                     } else if (item.description
                             .toString()
                             .replaceAll(unityPattern, "") ==
