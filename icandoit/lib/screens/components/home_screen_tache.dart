@@ -3,6 +3,7 @@
 // import 'package:flutter/foundation.dart';
 // import 'package:colour/colour.dart';
 
+import 'package:currency_textfield/currency_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:icandoit/models/challenge_model.dart';
 // import 'package:icandoit/models/challenge_model.dart';
@@ -60,7 +61,8 @@ class _HomeTachesState extends State<HomeTaches> {
   String wait = "assets/wait.json";
   final picker = ImagePicker();
   bool _visibility1 = true;
-
+  var controller = CurrencyTextFieldController(
+      rightSymbol: "€", decimalSymbol: ".", thousandSymbol: ",");
   Future getImageCamera() async {
     _bottomSheetController.setState(() {
       _changeVisibility(false);
@@ -648,13 +650,14 @@ class _HomeTachesState extends State<HomeTaches> {
           Container(
             width: 120,
             child: TextFormField(
+              controller: controller,
               onSaved: (value) {
                 coutPaiment = "0";
 
-                prixProduit = value;
+                prixProduit = controller.doubleValue.toString();
               },
               validator: (value) {
-                if (!isNumericUsingRegularExpression(value)) {
+                if (value.isEmpty) {
                   return "Rentrer un prix";
                 }
                 return null;
@@ -681,115 +684,7 @@ class _HomeTachesState extends State<HomeTaches> {
         ],
       );
     }
-    // else if (resultat == "paiement") {
-    //   // interditecheance(_challengeList, context);
-    //   documentJoint = Row(
-    //     children: [
-    //       Container(
-    //         width: 110,
-    //         child: TextFormField(
-    //           onSaved: (value) {
-    //             prixProduit = "0";
-    //             coutPaiment = value;
-    //           },
-    //           validator: (value) {
-    //             if (!isNumericUsingRegularExpression(value)) {
-    //               return "Rentrer un montant";
-    //             }
-    //             return null;
-    //           },
-    //           decoration: InputDecoration(
-    //               focusedBorder: OutlineInputBorder(
-    //                   borderSide:
-    //                       BorderSide(width: 2.0, color: Colors.blueAccent),
-    //                   borderRadius: BorderRadius.circular(15.0)),
-    //               enabledBorder: OutlineInputBorder(
-    //                   borderSide:
-    //                       BorderSide(width: 1.0, color: Colors.blueAccent),
-    //                   borderRadius: BorderRadius.circular(15.0)),
-    //               contentPadding:
-    //                   EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-    //               labelText: "Montant",
-    //               border: OutlineInputBorder(
-    //                   borderRadius: BorderRadius.circular(15.0))),
-    //         ),
-    //       ),
-    //       Text("€")
-    //     ],
-    //   );
-    // }
-    // else if (resultat == "echeancier") {
-    //   interditecheance2(_challengeList, context);
-    //   documentJoint = Row(
-    //     children: [
-    //       Column(
-    //         children: [
-    //           Container(
-    //             width: 120,
-    //             child: TextFormField(
-    //               onSaved: (value) {
-    //                 prixProduit = "0";
-    //                 coutPaiment = value;
-    //               },
-    //               validator: (value) {
-    //                 if (!isNumericUsingRegularExpression(value)) {
-    //                   return "Montant d'une échéance";
-    //                 }
-    //                 return null;
-    //               },
-    //               decoration: InputDecoration(
-    //                   focusedBorder: OutlineInputBorder(
-    //                       borderSide:
-    //                           BorderSide(width: 2.0, color: Colors.blueAccent),
-    //                       borderRadius: BorderRadius.circular(15.0)),
-    //                   enabledBorder: OutlineInputBorder(
-    //                       borderSide:
-    //                           BorderSide(width: 1.0, color: Colors.blueAccent),
-    //                       borderRadius: BorderRadius.circular(15.0)),
-    //                   contentPadding:
-    //                       EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-    //                   labelText: "Échéance",
-    //                   border: OutlineInputBorder(
-    //                       borderRadius: BorderRadius.circular(15.0))),
-    //             ),
-    //           ),
-    //           SizedBox(
-    //             height: 7.0,
-    //           ),
-    //           Container(
-    //             width: 200,
-    //             child: TextFormField(
-    //               onSaved: (value) {
-    //                 nombreEchenace = value;
-    //               },
-    //               validator: (value) {
-    //                 if (!isNumericUsingRegularExpression(value)) {
-    //                   return "Nombre d'échéance";
-    //                 }
-    //                 return null;
-    //               },
-    //               decoration: InputDecoration(
-    //                   focusedBorder: OutlineInputBorder(
-    //                       borderSide:
-    //                           BorderSide(width: 2.0, color: Colors.blueAccent),
-    //                       borderRadius: BorderRadius.circular(15.0)),
-    //                   enabledBorder: OutlineInputBorder(
-    //                       borderSide:
-    //                           BorderSide(width: 1.0, color: Colors.blueAccent),
-    //                       borderRadius: BorderRadius.circular(15.0)),
-    //                   contentPadding:
-    //                       EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-    //                   labelText: "Nombre d'échéance",
-    //                   border: OutlineInputBorder(
-    //                       borderRadius: BorderRadius.circular(15.0))),
-    //             ),
-    //           ),
-    //         ],
-    //       ),
-    //       Text("€")
-    //     ],
-    //   );
-    // }
+
     return documentJoint;
   }
 
@@ -812,29 +707,6 @@ class _HomeTachesState extends State<HomeTaches> {
             elevation: 0,
             title: Text(something),
             actions: [
-              // idChalEcheanceAutoBool1
-              //     ? Column(
-              //         mainAxisAlignment: MainAxisAlignment.start,
-              //         children: [
-              //           Switch(
-              //             value: isSwitched,
-              //             onChanged: (value) {
-              //               setState(() {
-              //                 isSwitched = value;
-              //                 variable.activeEcheance(
-              //                     value, widget.indexChallenge);
-              //               });
-              //             },
-              //             activeTrackColor: Colors.yellow,
-              //             activeColor: Colors.orangeAccent,
-              //           ),
-              //           Text(
-              //             "Prélèvement auto",
-              //             style: TextStyle(fontSize: 6, color: Colors.white),
-              //           ),
-              //         ],
-              //       )
-              //     : SizedBox(width: 10),
               Padding(
                 padding: const EdgeInsets.only(right: 15, left: 15, top: 10),
                 child: SizedBox.fromSize(
@@ -920,78 +792,6 @@ class _HomeTachesState extends State<HomeTaches> {
                 padding: EdgeInsets.only(top: 40.0),
                 alignment: Alignment.center,
                 height: 100,
-
-                // idChallengePaimentBool1
-                //     ? Column(
-                //         mainAxisAlignment: MainAxisAlignment.end,
-                //         children: <Widget>[
-                //           Card(
-                //             color: Colors.transparent,
-                //             shape: RoundedRectangleBorder(
-                //               borderRadius: BorderRadius.circular(5.0),
-                //             ),
-                //             elevation: 25.0,
-                //             child: Row(
-                //               children: [
-                //                 Container(
-                //                   decoration: BoxDecoration(
-                //                       color: Colors.blue,
-                //                       borderRadius: BorderRadius.circular(5)),
-                //                   padding: EdgeInsets.all(4),
-                //                   margin: EdgeInsets.only(right: 7),
-                //                   child: Column(
-                //                     children: [
-                //                       Text(
-                //                         _challengesListget[indexChallenge]
-                //                                 .coutTotal
-                //                                 .toStringAsFixed(2) +
-                //                             "€",
-                //                         style: TextStyle(
-                //                             fontSize: 10,
-                //                             color: Colors.black),
-                //                       ),
-                //                       Text(
-                //                         "Total paiement",
-                //                         style: TextStyle(
-                //                             fontSize: 10,
-                //                             color: Colors.black),
-                //                       ),
-                //                     ],
-                //                   ),
-                //                 ),
-                //                 Container(
-                //                   decoration: BoxDecoration(
-                //                       color: Colors.blue,
-                //                       borderRadius: BorderRadius.circular(5)),
-                //                   padding: EdgeInsets.all(4),
-                //                   child: Column(
-                //                     children: [
-                //                       Text(
-                //                         _challengesListget[indexChallenge]
-                //                                 .restePaiement
-                //                                 .toStringAsFixed(2) +
-                //                             "€",
-                //                         style: TextStyle(
-                //                             fontSize: 10,
-                //                             color: Colors.black),
-                //                       ),
-                //                       Text(
-                //                         "Reste à payer",
-                //                         style: TextStyle(
-                //                             fontSize: 10,
-                //                             color: Colors.black),
-                //                       ),
-                //                     ],
-                //                   ),
-                //                 ),
-                //               ],
-                //             ),
-                //           ), // icon
-                //           // text
-                //         ],
-                //       )
-                //     : SizedBox(width: 10),
-
                 margin: idChallengeEcheanceBool1
                     ? EdgeInsets.only(right: 25)
                     : EdgeInsets.only(right: 0),
@@ -999,164 +799,6 @@ class _HomeTachesState extends State<HomeTaches> {
                   'assets/logo.png',
                   width: 55,
                 ),
-
-                // idChallengeEcheanceBool1
-                //     ? Row(
-                //         mainAxisAlignment: MainAxisAlignment.start,
-                //         children: [
-                //           Padding(
-                //             padding: const EdgeInsets.only(
-                //                 right: 5, left: 5, top: 10),
-                //             child: SizedBox.fromSize(
-                //               size: Size(30, 30), // button width and height
-                //               child: ClipOval(
-                //                 child: Material(
-                //                   color: Colors.blue, // button color
-                //                   child: InkWell(
-                //                     // splash color
-                //                     splashColor: Colors.white,
-                //                     onTap: () {
-                //                       variable.ajoutEcheance(
-                //                           widget.indexChallenge);
-                //                     }, // button pressed
-                //                     child: Column(
-                //                       mainAxisAlignment:
-                //                           MainAxisAlignment.center,
-                //                       children: <Widget>[
-                //                         Icon(
-                //                           Icons.add,
-                //                           size: 10,
-                //                           color: Colors.white,
-                //                         ), // icon
-                //                         Text(
-                //                           "Ajout",
-                //                           style: TextStyle(
-                //                               fontSize: 7,
-                //                               color: Colors.white),
-                //                         ), // text
-                //                       ],
-                //                     ),
-                //                   ),
-                //                 ),
-                //               ),
-                //             ),
-                //           ),
-                //           Padding(
-                //             padding: const EdgeInsets.only(
-                //                 right: 35, left: 5, top: 10),
-                //             child: SizedBox.fromSize(
-                //               size: Size(30, 30), // button width and height
-                //               child: ClipOval(
-                //                 child: Material(
-                //                   color: Colors.blue, // button color
-                //                   child: InkWell(
-                //                     // splash color
-                //                     splashColor: Colors.white,
-                //                     onTap: () {
-                //                       variable.retraitEcheance(
-                //                           widget.indexChallenge);
-                //                     }, // button pressed
-                //                     child: Column(
-                //                       mainAxisAlignment:
-                //                           MainAxisAlignment.center,
-                //                       children: <Widget>[
-                //                         Icon(
-                //                           Icons.remove,
-                //                           size: 10,
-                //                           color: Colors.white,
-                //                         ), // icon
-                //                         Text(
-                //                           "retrait",
-                //                           style: TextStyle(
-                //                               fontSize: 7,
-                //                               color: Colors.white),
-                //                         ), // text
-                //                       ],
-                //                     ),
-                //                   ),
-                //                 ),
-                //               ),
-                //             ),
-                //           ),
-                //         ],
-                //       )
-                //     : SizedBox(width: 10),
-                // idChallengeBool1
-                // _challengesListget[widget.indexChallenge].prixTotalBool
-                // ? Column(
-                //     crossAxisAlignment: CrossAxisAlignment.center,
-                //     mainAxisAlignment: MainAxisAlignment.end,
-                //     children: <Widget>[
-                //       Card(
-                //         color: Colors.transparent,
-                //         shape: RoundedRectangleBorder(
-                //           borderRadius: BorderRadius.circular(5.0),
-                //         ),
-                //         elevation: 25.0,
-                // child: Row(
-                //   mainAxisAlignment: MainAxisAlignment.end,
-                //   children: [
-                //     Container(
-                //       decoration: BoxDecoration(
-                //           color: Colors.blue,
-                //           borderRadius: BorderRadius.circular(5)),
-                //       padding: EdgeInsets.all(4),
-                //       margin: EdgeInsets.only(right: 7),
-                //       child: Column(
-                //         children: [
-                //           Text(
-                //             _challengesListget[
-                //                         widget.indexChallenge]
-                //                     .previsions
-                //                     .toStringAsFixed(2) +
-                //                 "€",
-                //             style: TextStyle(
-                //                 fontSize: 10,
-                //                 color: Colors.black),
-                //           ),
-                //           Text(
-                //             "Prévisions",
-                //             style: TextStyle(
-                //                 fontSize: 10,
-                //                 color: Colors.black),
-                //           ),
-                //         ],
-                //       ),
-                //     ),
-                //     Container(
-                //       decoration: BoxDecoration(
-                //           color: Colors.blue,
-                //           borderRadius: BorderRadius.circular(5)),
-                //       padding: EdgeInsets.all(4),
-                //       child: Column(
-                //         children: [
-                //           Text(
-                //             _challengesListget[
-                //                         widget.indexChallenge]
-                //                     .prixTotal
-                //                     .toStringAsFixed(2) +
-                //                 "€",
-                //             style: TextStyle(
-                //                 fontSize: 10,
-                //                 color: Colors.black),
-                //           ),
-                //           Text(
-                //             "Prix total",
-                //             style: TextStyle(
-                //                 fontSize: 10,
-                //                 color: Colors.black),
-                //           ),
-                //         ],
-                //       ),
-                //     ),
-                //   ],
-                // ),
-                // ), // icon
-                // text
-                //     ],
-                //   )
-                // : SizedBox(width: 10),
-
                 decoration: BoxDecoration(
                     gradient: LinearGradient(
                         begin: Alignment.centerLeft,

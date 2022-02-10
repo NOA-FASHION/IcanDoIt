@@ -1,4 +1,5 @@
 import 'package:advance_text_field/advance_text_field.dart';
+import 'package:currency_textfield/currency_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:icandoit/controllers/challenge_controller.dart';
 import 'package:icandoit/models/challenge_model.dart';
@@ -16,6 +17,8 @@ class AchatEdit extends StatefulWidget {
 }
 
 class _AchatEditState extends State<AchatEdit> {
+  var controller = CurrencyTextFieldController(
+      rightSymbol: "€", decimalSymbol: ".", thousandSymbol: ",");
   @override
   Widget build(BuildContext context) {
     final Challengecontroller provider =
@@ -64,6 +67,7 @@ class _AchatEditState extends State<AchatEdit> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 AdvanceTextField(
+                  controller: controller,
                   type: AdvanceTextFieldType.EDIT,
                   editLabel: Icon(
                     Icons.edit,
@@ -80,7 +84,8 @@ class _AchatEditState extends State<AchatEdit> {
                     provider.modifAchat(
                         indexChallenge: widget.indexChallenge,
                         index: int.parse(widget.item.index),
-                        prix: double.parse(text));
+                        // prix: double.parse(text));
+                        prix: controller.doubleValue);
                   },
                 ),
               ],

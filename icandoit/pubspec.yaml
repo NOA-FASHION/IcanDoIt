@@ -63,7 +63,7 @@ dependencies:
   page_transition: ^2.0.4
   youtube_player_flutter: ^8.0.0
   font_awesome_flutter: ^9.1.0
-  
+  currency_textfield: ^2.0.0
   
  
   
