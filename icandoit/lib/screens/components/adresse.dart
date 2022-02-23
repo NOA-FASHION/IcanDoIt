@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:icandoit/controllers/challenge_controller.dart';
-import 'package:icandoit/models/challenge_model.dart';
-import 'package:provider/provider.dart';
+// import 'package:icandoit/controllers/challenge_controller.dart';
+// import 'package:icandoit/models/challenge_model.dart';
+// import 'package:provider/provider.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -19,13 +19,13 @@ class _AdressMapState extends State<AdressMap> {
   Widget build(BuildContext context) {
     List<String> result = widget.adresse.split("/ ");
     void _launchMapsUrl() async {
-      final url =
-          "https://www.google.com/maps/search/${Uri.encodeFull(widget.adresse)}";
-      if (await canLaunch(url)) {
-        await launch(url);
-      } else {
-        throw 'Could not launch $url';
-      }
+      final url = Uri.encodeFull(
+          "https://www.google.com/maps/search/${widget.adresse}");
+      // if (await canLaunch(url)) {
+      await launch(url);
+      // } else {
+      //   throw 'Could not launch $url';
+      // }
     }
 
     // final Challengecontroller provider =

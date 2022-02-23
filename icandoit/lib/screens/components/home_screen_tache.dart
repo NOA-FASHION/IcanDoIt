@@ -247,55 +247,6 @@ class _HomeTachesState extends State<HomeTaches> {
     return percent1;
   }
 
-  // void interditecheance2(List<ChallengeModel> _challengeList, dynamic context) {
-  //   if (_challengeList[widget.indexChallenge].listeDeTache.length > 0 &&
-  //       _challengeList[widget.indexChallenge]
-  //               .listeDeTache[0]
-  //               .description
-  //               .toString()
-  //               .replaceAll(unityPattern, "") !=
-  //           "echeancier") {
-  //     showTopSnackBar(
-  //       context,
-  //       CustomSnackBar.success(
-  //         backgroundColor: Colors.blue,
-  //         icon: Icon(
-  //           Icons.delete,
-  //           size: 30,
-  //           color: Colors.white,
-  //         ),
-  //         message:
-  //             "vous ne pouvez pas mélanger un challenge ordinaire avec un challenge échéancier.",
-  //       ),
-  //     );
-  //     retour();
-  //   }
-  // }
-
-  // void interditecheance(List<ChallengeModel> _challengeList, dynamic context) {
-  //   if (_challengeList[widget.indexChallenge].listeDeTache.length > 0 &&
-  //       _challengeList[widget.indexChallenge]
-  //               .listeDeTache[0]
-  //               .description
-  //               .toString()
-  //               .replaceAll(unityPattern, "") ==
-  //           "echeancier") {
-  //     showTopSnackBar(
-  //       context,
-  //       CustomSnackBar.success(
-  //         backgroundColor: Colors.blue,
-  //         icon: Icon(
-  //           Icons.delete,
-  //           size: 30,
-  //           color: Colors.white,
-  //         ),
-  //         message:
-  //             "vous ne pouvez pas mélanger un challenge échéancier avec un challenge ordinaire.",
-  //       ),
-  //     );
-  //     retour();
-  //   }
-  // }
 
   Future<Null> delay(int milliseconds) {
     return new Future.delayed(new Duration(milliseconds: milliseconds));
@@ -1016,38 +967,7 @@ class _HomeTachesState extends State<HomeTaches> {
                                   ],
                                 ),
                               ),
-                              // DropdownMenuItem(
-                              //   value: "paiement",
-                              //   child: Row(
-                              //     children: [
-                              //       Icon(Icons.payment,
-                              //           size: 30.0, color: Colors.yellow),
-                              //       SizedBox(width: 10),
-                              //       Text(
-                              //         "Paiement",
-                              //         style: TextStyle(
-                              //           color: Colors.yellow,
-                              //         ),
-                              //       ),
-                              //     ],
-                              //   ),
-                              // ),
-                              // DropdownMenuItem(
-                              //   value: "echeancier",
-                              //   child: Row(
-                              //     children: [
-                              //       Icon(Icons.payment,
-                              //           size: 30.0, color: Colors.yellow),
-                              //       SizedBox(width: 10),
-                              //       Text(
-                              //         "Échéancier",
-                              //         style: TextStyle(
-                              //           color: Colors.yellow,
-                              //         ),
-                              //       ),
-                              //     ],
-                              //   ),
-                              // ),
+                             
                               DropdownMenuItem(
                                 value: "formation",
                                 child: Row(
@@ -1167,7 +1087,7 @@ class _HomeTachesState extends State<HomeTaches> {
                             },
                             decoration: InputDecoration(
                               helperText:
-                                  "Exemple : 'Tuto recette du gateau au chocolat'",
+                                  "Exemple : 'Recette du gateau au chocolat'",
                               focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                       width: 2.0, color: Colors.blueAccent),
