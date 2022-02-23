@@ -157,7 +157,7 @@ class _ChallengesListBuilderTachesState
         width: MediaQuery.of(context).size.width / 2.55,
         color: Colors.transparent,
         child: MarqueeText(
-          text: word,
+           text: TextSpan(text:word ),
           style: TextStyle(
             color: Colors.black,
           ),
@@ -170,7 +170,7 @@ class _ChallengesListBuilderTachesState
         width: MediaQuery.of(context).size.width / 2.55,
         color: Colors.transparent,
         child: MarqueeText(
-          text: word,
+          text: TextSpan(text:word ),
           style: TextStyle(
             color: Colors.black,
           ),

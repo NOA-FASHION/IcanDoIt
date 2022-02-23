@@ -47,7 +47,7 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
         width: MediaQuery.of(context).size.width / 2.9,
         color: Colors.transparent,
         child: MarqueeText(
-          text: word,
+          text: TextSpan(text: word),
           style: TextStyle(
             color: Colors.black,
           ),
@@ -71,7 +71,7 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
         width: MediaQuery.of(context).size.width / 2.4,
         color: Colors.transparent,
         child: MarqueeText(
-          text: word,
+          text: TextSpan(text: word),
           style: TextStyle(
             fontWeight: FontWeight.bold,
             color: Colors.black,
@@ -82,10 +82,10 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
       return longLetter;
     } else if (word.length > 25) {
       longLetter = Container(
-        width: MediaQuery.of(context).size.width / 2,
+        width: MediaQuery.of(context).size.width / 2.1,
         color: Colors.transparent,
         child: MarqueeText(
-          text: word,
+          text: TextSpan(text: word),
           style: TextStyle(
             fontWeight: FontWeight.bold,
             color: Colors.black,
@@ -126,7 +126,7 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                 Column(
                   children: [
                     Container(
-                      width: MediaQuery.of(context).size.width / 1.8,
+                      width: MediaQuery.of(context).size.width / 1.6,
                       height: 25.0,
                       child: Row(
                         children: [
@@ -383,18 +383,23 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
       if (widget.idChallenge.isNotEmpty) {
         // print(boolId);
         isSwitched = boolId;
-        switchButtom = Switch(
-          value: isSwitched,
-          onChanged: (value) {
-            setState(() {
-              int index = variable.returnIndexForName(id);
-              isSwitched = value;
-              // print(isSwitched);
-              variable.desactivAffichagePrinc(index, isSwitched);
-            });
-          },
-          activeTrackColor: Colors.yellow,
-          activeColor: Colors.orangeAccent,
+        switchButtom = Row(
+          children: [
+            Switch(
+              value: isSwitched,
+              onChanged: (value) {
+                setState(() {
+                  int index = variable.returnIndexForName(id);
+                  isSwitched = value;
+                  // print(isSwitched);
+                  variable.desactivAffichagePrinc(index, isSwitched);
+                });
+              },
+              activeTrackColor: Colors.yellow,
+              activeColor: Colors.orangeAccent,
+            ),
+            Icon(Icons.remove_red_eye_outlined)
+          ],
         );
       }
       return switchButtom;
