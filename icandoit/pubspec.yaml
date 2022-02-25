@@ -64,6 +64,8 @@ dependencies:
   youtube_player_flutter: ^8.0.0
   font_awesome_flutter: ^9.1.0
   currency_textfield: ^2.0.0
+  intro_screen_onboarding_flutter: ^0.1.5
+  introduction_screen: ^3.0.0
   
  
   
