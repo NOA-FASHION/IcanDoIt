@@ -140,9 +140,7 @@ class HomeScreen extends StatelessWidget {
                 SizedBox(
                   height: 10,
                 ),
-                Text(
-                    "Ci joint le lien pour la procédure de création d'une mission quotidienne",
-                    style: bodyStyle),
+                Text("Ci joint le lien pour la procédure", style: bodyStyle),
                 SizedBox(
                   height: 10,
                 ),
@@ -156,7 +154,13 @@ class HomeScreen extends StatelessWidget {
                   height: 10,
                 ),
                 Text(
-                    "Ce type de mission est accompagné de plusieurs options récurrentes qui vous aidera dans la réalisation de vos tâches quotidiennes.",
+                    "Sélectionner ensuite la mission que vous venez de créer, puis confectionnez des éléments illustrant les taches que vous pensez réalisez quotidiennement. ",
+                    style: bodyStyle),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                    "Vous disposez de plusieurs options récurrentes, pour vous accompagnez.",
                     style: bodyStyle),
                 SizedBox(
                   height: 10,
@@ -168,20 +172,14 @@ class HomeScreen extends StatelessWidget {
                   height: 10,
                 ),
                 Text(
-                    "Chaque tache quotidienne que vous allez associer a votre mission quotidienne sera sauvegardée et restaurée chaque jour automatiquement.",
-                    style: bodyStyle),
-                SizedBox(
-                  height: 10,
-                ),
-                Text(
-                    "Chaque taches validé quotidiennement sera restaurer le jour suivant. Une notification quotidienne sera active pour vous rappeler et vous encourager dans vos taches quotidiennes.",
+                    "Chaque tache quotidienne que vous allez associer a votre mission sera sauvegardée et restaurée chaque jour automatiquement.",
                     style: bodyStyle),
                 SizedBox(
                   height: 10,
                 ),
                 Text(
                     "Exemple: Imaginez que vous avez validé les  tache 1, 2 et 5  aujourd'hui",
-                    style: bodyStyle),
+                    style: TextStyle(fontSize: 16, color: Colors.green)),
                 SizedBox(
                   height: 10,
                 ),
@@ -189,21 +187,46 @@ class HomeScreen extends StatelessWidget {
                   width: 200,
                   image: AssetImage('assets/quotidienne1.png'),
                 ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text("Les taches validées seront restaurées le jour suivant. ",
+                    style: bodyStyle),
                 SizedBox(
                   height: 10,
                 ),
                 Text(
-                    "Chaque taches validé quotidiennement sera restauré le jour suivant Une notification quotidienne sera active pour vous rappeler et vous encourager dans vos taches quotidiennes.",
+                    "Une notification quotidienne sera active pour vous rappeler et vous encourager dans vos taches quotidiennes.",
                     style: bodyStyle),
                 SizedBox(
                   height: 10,
                 ),
                 Image(
                   width: 200,
-                  image: AssetImage('assets/quotidienne1.png'),
+                  image: AssetImage('assets/quotidienne2.png'),
                 ),
                 SizedBox(
                   height: 15,
+                ),
+                Image(
+                  width: 200,
+                  image: AssetImage('assets/lister.gif'),
+                ),
+                SizedBox(
+                  height: 18,
+                ),
+                Text(
+                    "Chaque élément qui compose la mission peut être commentaire, un lien youtube, un prix, une informations. ",
+                    style: bodyStyle),
+                SizedBox(
+                  height: 10,
+                ),
+                Image(
+                  width: 200,
+                  image: AssetImage('assets/docs.png'),
+                ),
+                SizedBox(
+                  height: 10,
                 ),
                 Image(
                   width: 200,
