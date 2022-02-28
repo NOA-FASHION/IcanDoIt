@@ -807,7 +807,7 @@ class Challengecontroller extends ChangeNotifier {
       challengeyesterday.date = DateFormat('EEEE, d MMM, yyyy').format(today);
       challengeyesterday.nbChallengeEnCours = "0";
       challengeyesterday.nbTacheEnCours = "0";
-      challengeyesterday.commentaire = "";
+      challengeyesterday.commentaire = "true";
       challengeyesterday.nbchallengeVallide = "0";
       challengeyesterday.nbtacheVallide = "0";
       await _saveChallenyesterday();
@@ -822,7 +822,6 @@ class Challengecontroller extends ChangeNotifier {
       challengeyesterday.date = DateFormat('EEEE, d MMM, yyyy').format(today);
       challengeyesterday.nbChallengeEnCours = challengeDays.nbChallengeEnCours;
       challengeyesterday.nbTacheEnCours = challengeDays.nbTacheEnCours;
-      challengeyesterday.commentaire = challengeDays.commentaire;
       challengeyesterday.nbchallengeVallide = challengeDays.nbchallengeVallide;
       challengeyesterday.nbtacheVallide = challengeDays.nbtacheVallide;
       await _saveChallenyesterday();
@@ -908,6 +907,13 @@ class Challengecontroller extends ChangeNotifier {
     return false;
   }
 
+  switchIntro(String switchBoll) {
+    if (switchBoll == "true" || switchBoll == "") {
+      challengeyesterday.commentaire = "false";
+    } else {
+      challengeyesterday.commentaire = "true";
+    }
+  }
   /////////////////////////////////////// /////////////////////////////////////// /////////////////////////////////////// fin initialisation score challenge
 
   List<ChallengeModel> getChallenges2() {

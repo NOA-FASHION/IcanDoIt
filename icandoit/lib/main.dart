@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:icandoit/Switch.dart';
 import 'package:icandoit/controllers/challenge_controller.dart';
 import 'package:icandoit/screens/components/challenge_list_save.dart';
 import 'package:introduction_screen/introduction_screen.dart';
@@ -71,7 +72,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const bodyStyle = TextStyle(fontSize: 19.0);
+    const bodyStyle = TextStyle(fontSize: 17.0);
     Challengecontroller variable = Provider.of<Challengecontroller>(context);
     const pageDecoration = const PageDecoration(
       titleTextStyle: TextStyle(fontSize: 28.0, fontWeight: FontWeight.w700),
@@ -88,10 +89,8 @@ class HomeScreen extends StatelessWidget {
         globalHeader: Align(
           alignment: Alignment.topRight,
           child: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.only(top: 16, right: 16),
-              child: _buildImage('logo.png', 100),
-            ),
+            child: ChangeNotifierProvider.value(
+                value: variable, child: SwitchEdit()),
           ),
         ),
         globalFooter: SizedBox(
@@ -121,11 +120,105 @@ class HomeScreen extends StatelessWidget {
         ),
         pages: [
           PageViewModel(
-            title: "Fractional shares",
-            body:
-                "Instead of having to buy an entire share, invest any amount you want.",
-            image: _buildImage('FaireGateauxAuChocoalat1.gif', 150),
-            decoration: pageDecoration,
+            useScrollView: true,
+            title: "Les meilleurs pratiques",
+            bodyWidget: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                Padding(
+                  padding: EdgeInsets.only(top: 35),
+                  child: Text("Lister vos taches quotidiennes",
+                      style:
+                          TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                    "La meilleur pratique est la suivante: Créer une mission quotidienne:",
+                    style: bodyStyle),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                    "Ci joint le lien pour la procédure de création d'une mission quotidienne",
+                    style: bodyStyle),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                    "https://newaccount1626188315630.freshdesk.com/support/solutions/articles/69000513695-cr%C3%A9er-challenge-quotidien",
+                    style: TextStyle(
+                        color: Colors.blue,
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold)),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                    "Ce type de mission est accompagné de plusieurs options récurrentes qui vous aidera dans la réalisation de vos tâches quotidiennes.",
+                    style: bodyStyle),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(" Comment cela fonctionne t'il?",
+                    style:
+                        TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                    "Chaque tache quotidienne que vous allez associer a votre mission quotidienne sera sauvegardée et restaurée chaque jour automatiquement.",
+                    style: bodyStyle),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                    "Chaque taches validé quotidiennement sera restaurer le jour suivant. Une notification quotidienne sera active pour vous rappeler et vous encourager dans vos taches quotidiennes.",
+                    style: bodyStyle),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                    "Exemple: Imaginez que vous avez validé les  tache 1, 2 et 5  aujourd'hui",
+                    style: bodyStyle),
+                SizedBox(
+                  height: 10,
+                ),
+                Image(
+                  width: 200,
+                  image: AssetImage('assets/quotidienne1.png'),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                    "Chaque taches validé quotidiennement sera restauré le jour suivant Une notification quotidienne sera active pour vous rappeler et vous encourager dans vos taches quotidiennes.",
+                    style: bodyStyle),
+                SizedBox(
+                  height: 10,
+                ),
+                Image(
+                  width: 200,
+                  image: AssetImage('assets/quotidienne1.png'),
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                Image(
+                  width: 200,
+                  image: AssetImage('assets/liste3.gif'),
+                ),
+              ],
+            ),
+            decoration: pageDecoration.copyWith(
+              bodyFlex: 2,
+              imageFlex: 4,
+              bodyAlignment: Alignment.bottomCenter,
+              imageAlignment: Alignment.topCenter,
+            ),
+            // image: _buildImage('logo.png', 100),
+            reverse: true,
           ),
           PageViewModel(
             title: "Learn as you go",
