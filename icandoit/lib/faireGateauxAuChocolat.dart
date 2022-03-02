@@ -1,16 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class FaireGateauxAuChaocolat extends StatelessWidget {
   const FaireGateauxAuChaocolat({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    void _launchMapsUrl(String lien) async {
+      final url = lien;
+      if (await canLaunch(url)) {
+        await launch(url);
+      } else {
+        throw 'Could not launch $url';
+      }
+    }
+
     const bodyStyle = TextStyle(fontSize: 17.0);
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: const [
+      children: [
         Padding(
-          padding: EdgeInsets.only(top: 35),
+          padding: EdgeInsets.only(top: 70),
           child: Text("Faire un gâteau aux chocolat",
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
         ),
@@ -23,16 +33,16 @@ class FaireGateauxAuChaocolat extends StatelessWidget {
         ),
         Text("Ci joint le lien pour la procédure",
             style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
-        SizedBox(
-          height: 10,
-        ),
-        Text(
-            "https://newaccount1626188315630.freshdesk.com/support/solutions/articles/69000509155-cr%C3%A9er-un-challenge",
-            style: TextStyle(
-                color: Colors.blue, fontSize: 15, fontWeight: FontWeight.bold)),
-        SizedBox(
-          height: 10,
-        ),
+        IconButton(
+            onPressed: () {
+              _launchMapsUrl(
+                  "https://newaccount1626188315630.freshdesk.com/support/solutions/articles/69000509155-cr%C3%A9er-un-challenge");
+            },
+            icon: Icon(
+              Icons.link,
+              size: 40,
+              color: Colors.blue,
+            )),
         Text(
             "Sélectionner votre mission pour rentrer les différentes tâches et documents associer à la recette de votre gâteaux.",
             style: bodyStyle),
@@ -47,16 +57,16 @@ class FaireGateauxAuChaocolat extends StatelessWidget {
         ),
         Text("Ci joint le lien pour créer une tâche ou un commentaire",
             style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
-        SizedBox(
-          height: 10,
-        ),
-        Text(
-            "https://newaccount1626188315630.freshdesk.com/support/solutions/articles/69000513812-documentation-possible",
-            style: TextStyle(
-                color: Colors.blue, fontSize: 15, fontWeight: FontWeight.bold)),
-        SizedBox(
-          height: 10,
-        ),
+        IconButton(
+            onPressed: () {
+              _launchMapsUrl(
+                  "https://newaccount1626188315630.freshdesk.com/support/solutions/articles/69000513812-documentation-possible");
+            },
+            icon: Icon(
+              Icons.link,
+              size: 40,
+              color: Colors.blue,
+            )),
         Text(
             "Créer un élément de type photo ou vidéo par exemple pour associer a votre recette un élément visuel important durant la phase de préparation de votre gâteaux.",
             style: bodyStyle),
@@ -78,16 +88,16 @@ class FaireGateauxAuChaocolat extends StatelessWidget {
         Text(
             " Ci joint le lien pour créer une un élément de type youtube, photo, lien internet et vidéo",
             style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
-        SizedBox(
-          height: 10,
-        ),
-        Text(
-            "https://newaccount1626188315630.freshdesk.com/support/solutions/articles/69000513812-documentation-possible",
-            style: TextStyle(
-                color: Colors.blue, fontSize: 15, fontWeight: FontWeight.bold)),
-        SizedBox(
-          height: 10,
-        ),
+        IconButton(
+            onPressed: () {
+              _launchMapsUrl(
+                  "https://newaccount1626188315630.freshdesk.com/support/solutions/articles/69000513812-documentation-possible");
+            },
+            icon: Icon(
+              Icons.link,
+              size: 40,
+              color: Colors.blue,
+            )),
         Image(
           width: 200,
           image: AssetImage('assets/docs.png'),

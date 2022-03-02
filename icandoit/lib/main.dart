@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:icandoit/Switch.dart';
 import 'package:icandoit/controllers/challenge_controller.dart';
 import 'package:icandoit/listTacheQuotidienne.dart';
+import 'package:icandoit/listeDeCourse.dart';
 import 'package:icandoit/screens/components/challenge_list_save.dart';
+import 'package:icandoit/screens/components/formations.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -148,23 +150,30 @@ class HomeScreen extends StatelessWidget {
             reverse: true,
           ),
           PageViewModel(
-            title: "Kids and teens",
-            body:
-                "Kids and teens can track their stocks 24/7 and place trades that you approve.",
-            image: _buildImage('FaireGateauxAuChocoalat2.gif'),
-            decoration: pageDecoration,
+            useScrollView: true,
+            title: "Les meilleurs pratiques",
+            bodyWidget: Formations(),
+            decoration: pageDecoration.copyWith(
+              bodyFlex: 2,
+              imageFlex: 4,
+              bodyAlignment: Alignment.bottomCenter,
+              imageAlignment: Alignment.topCenter,
+            ),
+            // image: _buildImage('logo.png', 100),
+            reverse: true,
           ),
           PageViewModel(
-            title: "Full Screen Page",
-            body:
-                "Pages can be full screen as well.\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id euismod lectus, non tempor felis. Nam rutrum rhoncus est ac venenatis.",
-            image: _buildFullscreenImage(),
+            useScrollView: true,
+            title: "Les meilleurs pratiques",
+            bodyWidget: ListeDeCourses(),
             decoration: pageDecoration.copyWith(
-              contentMargin: const EdgeInsets.symmetric(horizontal: 16),
-              fullScreen: true,
               bodyFlex: 2,
-              imageFlex: 3,
+              imageFlex: 4,
+              bodyAlignment: Alignment.bottomCenter,
+              imageAlignment: Alignment.topCenter,
             ),
+            // image: _buildImage('logo.png', 100),
+            reverse: true,
           ),
           PageViewModel(
             title: "Another title page",

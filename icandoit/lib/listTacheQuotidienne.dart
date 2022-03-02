@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ListeTacheQuotidienne extends StatelessWidget {
   const ListeTacheQuotidienne({
@@ -7,12 +8,21 @@ class ListeTacheQuotidienne extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void _launchMapsUrl(String lien) async {
+      final url = lien;
+      if (await canLaunch(url)) {
+        await launch(url);
+      } else {
+        throw 'Could not launch $url';
+      }
+    }
+
     const bodyStyle = TextStyle(fontSize: 17.0);
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: const [
+      children: [
         Padding(
-          padding: EdgeInsets.only(top: 35),
+          padding: EdgeInsets.only(top: 70),
           child: Text("Lister vos taches quotidiennes",
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
         ),
@@ -27,16 +37,16 @@ class ListeTacheQuotidienne extends StatelessWidget {
         ),
         Text("Ci joint le lien pour la procédure",
             style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
-        SizedBox(
-          height: 10,
-        ),
-        Text(
-            "https://newaccount1626188315630.freshdesk.com/support/solutions/articles/69000513695-cr%C3%A9er-challenge-quotidien",
-            style: TextStyle(
-                color: Colors.blue, fontSize: 15, fontWeight: FontWeight.bold)),
-        SizedBox(
-          height: 10,
-        ),
+        IconButton(
+            onPressed: () {
+              _launchMapsUrl(
+                  "https://newaccount1626188315630.freshdesk.com/support/solutions/articles/69000513695-cr%C3%A9er-challenge-quotidien");
+            },
+            icon: Icon(
+              Icons.link,
+              size: 40,
+              color: Colors.blue,
+            )),
         Text(
             "Sélectionner ensuite la mission que vous venez de créer, puis confectionnez des éléments illustrant les tâches que vous pensez réalisez quotidiennement. ",
             style: bodyStyle),
@@ -45,16 +55,16 @@ class ListeTacheQuotidienne extends StatelessWidget {
         ),
         Text("Ci joint le lien pour la procédure",
             style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
-        SizedBox(
-          height: 10,
-        ),
-        Text(
-            "https://newaccount1626188315630.freshdesk.com/support/solutions/articles/69000513812-documentation-possible",
-            style: TextStyle(
-                color: Colors.blue, fontSize: 15, fontWeight: FontWeight.bold)),
-        SizedBox(
-          height: 10,
-        ),
+        IconButton(
+            onPressed: () {
+              _launchMapsUrl(
+                  "https://newaccount1626188315630.freshdesk.com/support/solutions/articles/69000513812-documentation-possible");
+            },
+            icon: Icon(
+              Icons.link,
+              size: 40,
+              color: Colors.blue,
+            )),
         Text(
             "Vous disposez de plusieurs options récurrentes, pour vous accompagnez.",
             style: bodyStyle),
