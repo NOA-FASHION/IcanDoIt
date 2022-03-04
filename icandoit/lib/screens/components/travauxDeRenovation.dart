@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class ListeDeCourses extends StatelessWidget {
-  const ListeDeCourses({Key key}) : super(key: key);
+class TravauxDeRenovation extends StatelessWidget {
+  const TravauxDeRenovation({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class ListeDeCourses extends StatelessWidget {
       children: [
         Padding(
           padding: EdgeInsets.only(top: 70),
-          child: Text("Faire une liste de course",
+          child: Text("Travaux de rénovation",
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
         ),
         SizedBox(
@@ -44,71 +44,81 @@ class ListeDeCourses extends StatelessWidget {
               color: Colors.blue,
             )),
         Text(
-            "Sélectionner votre mission pour rentrer les différents articles avec leur prix que vous allez acheter.",
+            "Sélectionner votre mission pour rentrer les différentes informations et documents associé aux travaux que vous devez effectuer. ",
             style: bodyStyle),
         SizedBox(
           height: 10,
         ),
         Text(
-            "Créer un élément de type 'achat' pour chaque articles que vous souhaitez rentrer.",
-            style: bodyStyle),
-        SizedBox(
-          height: 10,
-        ),
-        Text("Ci joint le lien pour créer une tâche ou un commentaire",
-            style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
-        IconButton(
-            onPressed: () {
-              _launchMapsUrl(
-                  "https://newaccount1626188315630.freshdesk.com/support/solutions/articles/69000513812-documentation-possible");
-            },
-            icon: Icon(
-              Icons.link,
-              size: 40,
-              color: Colors.blue,
-            )),
-        Text(
-            "Un compteur apparait avec les informations suivantes: achats et prévisions.",
+            "Créer un élément de type 'projet' pour chaque pièce de la maison, par exemple:",
             style: bodyStyle),
         SizedBox(
           height: 10,
         ),
         Text(
-            "Les chiffres de vos prévisions d'achat ainsi que l'addition total en live de vos achat valider apparaisse en haut de votre écran.",
+            "Projet chambre ,Projet salle à manger,Projet salle de bain,Projet cuisine,Projet salon,Projet terrasse",
             style: bodyStyle),
         SizedBox(
           height: 10,
         ),
         Text(
-            "Les prévisions représentes l'addition du prix tous les articles crées et les achats sont le total de ceux que vous avez validé.",
+            'Sélectionner un des projet  par exemple "Chambres" et créer un ensemble de documentations et de taches concernant ce projet.',
+            style: bodyStyle),
+        SizedBox(
+          height: 10,
+        ),
+        Text("Par exemples:", style: bodyStyle),
+        SizedBox(
+          height: 10,
+        ),
+        Text(
+            "Une liste de tutoriel concernant des travaux en relation avec le projet chambre.",
+            style: bodyStyle),
+        SizedBox(
+          height: 10,
+        ),
+        Text(
+            "Une autre liste de photos et videos de meuble ou matériaux avec leur ref et leur prix.",
+            style: bodyStyle),
+        SizedBox(
+          height: 10,
+        ),
+        Text(
+            "une autre liste  du prix des matériaux et objets  a acheter pour le  projet chambre.",
+            style: bodyStyle),
+        SizedBox(
+          height: 10,
+        ),
+        Text(
+            "une liste  des choses a réaliser des choses a réaliser pour le projet chambre.",
+            style: bodyStyle),
+        SizedBox(
+          height: 10,
+        ),
+        Text("Les taches validées seront restaurées le jour suivant. ",
+            style: bodyStyle),
+        SizedBox(
+          height: 10,
+        ),
+        Text(
+            "Une notification quotidienne sera active pour vous rappeler et vous encourager dans vos taches quotidiennes.",
             style: bodyStyle),
         SizedBox(
           height: 10,
         ),
         Image(
           width: 200,
-          image: AssetImage('assets/listeDeCourse.gif'),
+          image: AssetImage('assets/travaux1.png'),
         ),
         SizedBox(
-          height: 10,
-        ),
-        Text(" Il y a la possibilité de modifier le prix de l'article.",
-            style: bodyStyle),
-        SizedBox(
-          height: 19,
+          height: 15,
         ),
         Image(
           width: 200,
-          image: AssetImage('assets/listedecourse2.gif'),
+          image: AssetImage('assets/travaux.gif'),
         ),
         SizedBox(
-          height: 19,
-        ),
-        Text(
-            "Vous pouvez faire une sauvegarde de votre liste d'article pour réutilisez cette liste d'article le mois prochain",
-            style: bodyStyle),
-        SizedBox(
-          height: 10,
+          height: 18,
         ),
       ],
     );

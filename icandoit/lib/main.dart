@@ -6,6 +6,8 @@ import 'package:icandoit/listTacheQuotidienne.dart';
 import 'package:icandoit/listeDeCourse.dart';
 import 'package:icandoit/screens/components/challenge_list_save.dart';
 import 'package:icandoit/screens/components/formations.dart';
+import 'package:icandoit/screens/components/listeDeMusics.dart';
+import 'package:icandoit/screens/components/travauxDeRenovation.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -176,45 +178,22 @@ class HomeScreen extends StatelessWidget {
             reverse: true,
           ),
           PageViewModel(
-            title: "Another title page",
-            body: "Another beautiful body text for this example onboarding",
-            image: _buildImage('FaireGateauxAuChocoalat2.gif'),
-            footer: ElevatedButton(
-              onPressed: () {
-                introKey.currentState?.animateScroll(0);
-              },
-              child: const Text(
-                'FooButton',
-                style: TextStyle(color: Colors.white),
-              ),
-              style: ElevatedButton.styleFrom(
-                primary: Colors.lightBlue,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
-              ),
+            useScrollView: true,
+            title: "Les meilleurs pratiques",
+            bodyWidget: TravauxDeRenovation(),
+            decoration: pageDecoration.copyWith(
+              bodyFlex: 2,
+              imageFlex: 4,
+              bodyAlignment: Alignment.bottomCenter,
+              imageAlignment: Alignment.topCenter,
             ),
-            decoration: pageDecoration,
+            // image: _buildImage('logo.png', 100),
+            reverse: true,
           ),
           PageViewModel(
             useScrollView: true,
-            title: "Title of last page - reversed",
-            bodyWidget: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Text("Click on ", style: bodyStyle),
-                Icon(Icons.edit),
-                Text(" to edit a post", style: bodyStyle),
-                Image(
-                  width: 200,
-                  image: AssetImage('assets/FaireGateauxAuChocoalat2.gif'),
-                ),
-                Image(
-                  width: 200,
-                  image: AssetImage('assets/FaireGateauxAuChocoalat2.gif'),
-                )
-              ],
-            ),
+            title: "Les meilleurs pratiques",
+            bodyWidget: ListeDeMusics(),
             decoration: pageDecoration.copyWith(
               bodyFlex: 2,
               imageFlex: 4,
