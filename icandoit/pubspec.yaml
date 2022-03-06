@@ -66,6 +66,7 @@ dependencies:
   currency_textfield: ^2.0.0
   intro_screen_onboarding_flutter: ^0.1.5
   introduction_screen: ^3.0.0
+  card_flip: ^0.0.4
   
  
   

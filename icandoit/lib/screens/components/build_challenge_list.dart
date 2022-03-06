@@ -68,7 +68,7 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
     String word2;
     if (animatinpadding && word.length > 20) {
       longLetter = Container(
-        width: MediaQuery.of(context).size.width / 2.4,
+        width: MediaQuery.of(context).size.width / 2.65,
         color: Colors.transparent,
         child: MarqueeText(
           text: TextSpan(text: word),

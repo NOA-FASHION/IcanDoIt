@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:icandoit/Switch.dart';
 import 'package:icandoit/controllers/challenge_controller.dart';
+import 'package:icandoit/filp_main.dart';
 import 'package:icandoit/listTacheQuotidienne.dart';
 import 'package:icandoit/listeDeCourse.dart';
 import 'package:icandoit/screens/components/challenge_list_save.dart';
@@ -130,6 +131,7 @@ class HomeScreen extends StatelessWidget {
             title: "Les meilleurs pratiques",
             bodyWidget: ListeTacheQuotidienne(),
             decoration: pageDecoration.copyWith(
+              pageColor: Color.fromARGB(195, 113, 4, 146),
               bodyFlex: 2,
               imageFlex: 4,
               bodyAlignment: Alignment.bottomCenter,
