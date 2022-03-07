@@ -8,6 +8,7 @@ import 'widget_factory.dart';
 class FlipLayoutDemo extends StatelessWidget {
   final String etape;
   final String typeChallenge;
+  final String typeChallenge1;
   final String lottiesChallenge;
   final String assetPictureChallengeeCreer;
   final String titreChallenge;
@@ -17,18 +18,20 @@ class FlipLayoutDemo extends StatelessWidget {
   final String actionChallenge2;
   final String pictureChallenge;
   final String titreChallenge2;
-  FlipLayoutDemo(
-      {this.etape,
-      this.typeChallenge,
-      this.lottiesChallenge,
-      this.assetPictureChallengeeCreer,
-      this.titreChallenge,
-      this.descriptionChallenge,
-      this.prioriteChallenge,
-      this.actionChallenge,
-      this.actionChallenge2,
-      this.pictureChallenge,
-      this.titreChallenge2});
+  FlipLayoutDemo({
+    this.etape,
+    this.typeChallenge,
+    this.lottiesChallenge,
+    this.typeChallenge1,
+    this.assetPictureChallengeeCreer,
+    this.titreChallenge,
+    this.descriptionChallenge,
+    this.prioriteChallenge,
+    this.actionChallenge,
+    this.actionChallenge2,
+    this.pictureChallenge,
+    this.titreChallenge2,
+  });
   @override
   Widget build(BuildContext context) {
     return FlipLayout(
@@ -38,13 +41,14 @@ class FlipLayoutDemo extends StatelessWidget {
           component2(assetPictureChallengeeCreer, titreChallenge,
               descriptionChallenge, prioriteChallenge, titreChallenge2),
           component3(actionChallenge2),
-          component4(assetPictureChallengeeCreer),
-          component5(actionChallenge),
+          component4(assetPictureChallengeeCreer, context),
+          // component5(actionChallenge),
           component6(),
         ],
         foldChild: FoldCard(
           etape: etape,
           typeChallenge: typeChallenge,
+          typeChallenge1: typeChallenge1,
           lottiesChallenge: lottiesChallenge,
         ));
   }
@@ -90,31 +94,21 @@ class FlipLayoutDemo extends StatelessWidget {
               ],
             ),
           ),
-          Stack(
-            children: [
-              Image.asset(
-                assetPictureChallengeeCreer,
-                width: double.infinity,
-                height: 121,
-                fit: BoxFit.cover,
+          Container(
+            height: 150,
+            decoration: BoxDecoration(
+                borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+                gradient: LinearGradient(
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                    colors: [Colors.orange, Colors.blue])),
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Text(
+                actionChallenge,
+                textAlign: TextAlign.justify,
               ),
-              Positioned.fill(
-                bottom: 12,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    explainText('Titre', titreChallenge,
-                        subtitleColor: Colors.white),
-                    explainText('Description', descriptionChallenge,
-                        subtitleColor: Colors.white),
-                    explainText('Priorité', prioriteChallenge,
-                        subtitleColor: Colors.white),
-                  ],
-                ),
-              ),
-            ],
+            ),
           )
         ],
       ),
@@ -172,22 +166,6 @@ class FlipLayoutDemo extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                        // RatingBar.builder(
-                        //   initialRating: 3,
-                        //   minRating: 1,
-                        //   itemSize: 14,
-                        //   direction: Axis.horizontal,
-                        //   allowHalfRating: true,
-                        //   itemCount: 5,
-                        //   itemPadding: EdgeInsets.symmetric(horizontal: 0),
-                        //   itemBuilder: (ctx, _) => Icon(
-                        //     Icons.star,
-                        //     color: Colors.amber,
-                        //   ),
-                        //   onRatingUpdate: (double value) {
-                        //     print(value);
-                        //   },
-                        // ),
                         SizedBox(
                           width: 4,
                         ),
@@ -219,15 +197,25 @@ class FlipLayoutDemo extends StatelessWidget {
     );
   }
 
-  Widget component4(String assetPictureChallengeeCreer) {
+  Widget component4(String assetPictureChallengeeCreer, BuildContext context) {
     return Container(
-      color: Colors.white,
+      width: double.infinity,
+      decoration: BoxDecoration(
+          borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(8), topRight: Radius.circular(8)),
+          gradient: LinearGradient(
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+              colors: [Colors.orange, Colors.blue])),
       padding: const EdgeInsets.all(10),
       child: Column(
         children: [
           Image.asset(
             assetPictureChallengeeCreer,
             width: 180,
+          ),
+          SizedBox(
+            height: 30,
           ),
         ],
       ),
@@ -264,7 +252,13 @@ class FlipLayoutDemo extends StatelessWidget {
   /// 组件 5
   Widget component5(String actionChallenge) {
     return Container(
-      color: Colors.white,
+      decoration: BoxDecoration(
+          borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(8), topRight: Radius.circular(8)),
+          gradient: LinearGradient(
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+              colors: [Colors.orange, Colors.blue])),
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
       child: Row(
         children: [
@@ -283,8 +277,15 @@ class FlipLayoutDemo extends StatelessWidget {
     return ClipRRect(
       borderRadius: const BorderRadius.vertical(bottom: Radius.circular(8)),
       child: Container(
+        decoration: BoxDecoration(
+            borderRadius: const BorderRadius.only(
+                bottomLeft: Radius.circular(8),
+                bottomRight: Radius.circular(8)),
+            gradient: LinearGradient(
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+                colors: [Colors.orange, Colors.blue])),
         width: double.infinity,
-        color: Colors.white,
         padding: const EdgeInsets.all(10),
         child: Column(
           children: [
@@ -313,12 +314,12 @@ class FlipLayoutDemo extends StatelessWidget {
             const SizedBox(
               height: 4,
             ),
-            const Text('5 people have sent a request',
-                style: TextStyle(
-                  color: Colors.grey,
-                  fontSize: 12,
-                  fontWeight: FontWeight.w500,
-                ))
+            // const Text('5 people have sent a request',
+            //     style: TextStyle(
+            //       color: Colors.grey,
+            //       fontSize: 12,
+            //       fontWeight: FontWeight.w500,
+            //     ))
           ],
         ),
       ),

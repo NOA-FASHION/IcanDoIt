@@ -131,7 +131,7 @@ class HomeScreen extends StatelessWidget {
             title: "Les meilleurs pratiques",
             bodyWidget: ListeTacheQuotidienne(),
             decoration: pageDecoration.copyWith(
-              pageColor: Color.fromARGB(195, 113, 4, 146),
+              pageColor: Colors.transparent,
               bodyFlex: 2,
               imageFlex: 4,
               bodyAlignment: Alignment.bottomCenter,

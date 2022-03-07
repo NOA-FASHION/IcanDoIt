@@ -21,16 +21,18 @@ class FoldCard extends StatelessWidget {
   final String etape;
   final String typeChallenge;
   final String lottiesChallenge;
+  final String typeChallenge1;
 
   FoldCard({
     this.etape,
     this.typeChallenge,
     this.lottiesChallenge,
+    this.typeChallenge1,
   });
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      child: component1(etape, typeChallenge, lottiesChallenge),
+      child: component1(etape, typeChallenge, lottiesChallenge, typeChallenge1),
       onTap: () {
         FlipLayout.of(context).toggle();
       },
@@ -40,7 +42,8 @@ class FoldCard extends StatelessWidget {
 
 /// component form https://github.com/FlutterDance/folding_cell/blob/master/lib/cell_content.dart
 /// 组件 1
-Widget component1(String etape, String typeChallenge, String lottiesChallenge) {
+Widget component1(String etape, String typeChallenge, String lottiesChallenge,
+    String typeChallenge1) {
   double height = 165.0;
   return ClipRRect(
     borderRadius: const BorderRadius.all(Radius.circular(8.0)),
@@ -49,8 +52,12 @@ Widget component1(String etape, String typeChallenge, String lottiesChallenge) {
       child: Row(
         children: [
           Container(
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                    colors: [Colors.orange, Colors.blue])),
             width: 88,
-            color: HexColor.fromHex('5D4A99'),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -62,41 +69,17 @@ Widget component1(String etape, String typeChallenge, String lottiesChallenge) {
                     color: Colors.white,
                   ),
                 ),
-                // Text.rich(
-                //   TextSpan(
-                //     style: TextStyle(),
-                //     children: [
-                //       TextSpan(
-                //         text: '   Créer    ',
-                //         style: TextStyle(
-                //           color: Colors.grey,
-                //           fontSize: 10,
-                //         ),
-                //       ),
-                //       TextSpan(
-                //         text: 'Un challenge',
-                //         style: TextStyle(
-                //           color: Colors.white,
-                //           fontSize: 13,
-                //         ),
-                //       ),
-                //       TextSpan(
-                //         text: '  quotidien',
-                //         style: TextStyle(
-                //           color: Colors.white,
-                //           fontSize: 13,
-                //         ),
-                //       ),
-                //     ],
-                //   ),
-                // )
               ],
             ),
           ),
           Expanded(
             child: Container(
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
+                      colors: [Colors.blue, Colors.orange])),
               height: double.infinity,
-              color: Colors.white,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -120,8 +103,9 @@ Widget component1(String etape, String typeChallenge, String lottiesChallenge) {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            const Text(
-                              'Créer un challenge',
+                            Text(
+                              typeChallenge1,
+                              textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontWeight: FontWeight.w500,
                                 fontSize: 16,
@@ -135,6 +119,7 @@ Widget component1(String etape, String typeChallenge, String lottiesChallenge) {
                             ),
                             Text(
                               typeChallenge,
+                              textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontWeight: FontWeight.w500,
                                 fontSize: 16,
