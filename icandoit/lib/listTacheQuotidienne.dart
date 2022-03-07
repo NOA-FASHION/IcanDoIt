@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:icandoit/filp_main.dart';
+import 'package:lottie/lottie.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ListeTacheQuotidienne extends StatelessWidget {
@@ -12,7 +13,38 @@ class ListeTacheQuotidienne extends StatelessWidget {
     return Column(
       children: [
         SizedBox(height: 70),
+        Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+                colors: [Colors.orange, Colors.blue]),
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(
+              color: Colors.blue,
+              width: 4,
+            ),
+          ),
+          child: Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  "Lister vos évenements quotidien",
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Lottie.asset("assets/sheduleDays.json", width: 60),
+              ),
+            ],
+          ),
+        ),
+        SizedBox(height: 30),
         FlipLayoutDemo(
+            lienInternet:
+                "https://newaccount1626188315630.freshdesk.com/support/solutions/articles/69000513695-cr%C3%A9er-challenge-quotidien",
             etape: 'Etape 1',
             typeChallenge1: ' Créer un challenge',
             typeChallenge: 'de type "quotidien"',
@@ -23,15 +55,17 @@ class ListeTacheQuotidienne extends StatelessWidget {
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge:
-                "Sélectionner ensuite la mission que vous venez de créer. ",
+                "Pour lister éfficacement les évenements importants de votre journée. Vous devez d'abord créer un challenge de type quotidien. Ce type de challenge comporte des options adapter au type de liste que vous souhaitez utiliser ",
             actionChallenge2: 'Créer un challenge quotidien',
             pictureChallenge: 'assets/challengeQuotidien.png'),
         SizedBox(height: 30),
         FlipLayoutDemo(
+            lienInternet:
+                "https://newaccount1626188315630.freshdesk.com/support/solutions/articles/69000513812-documentation-possible",
             etape: 'Etape 2',
             typeChallenge1: ' Créer la liste de toutes',
-            typeChallenge: ' les Etapes de votre recette',
-            lottiesChallenge: "assets/challengeQuotidien.json",
+            typeChallenge: ' les Etapes de votre journée',
+            lottiesChallenge: "assets/etapeJournee.json",
             assetPictureChallengeeCreer: 'assets/tacheQuotidienne.png',
             titreChallenge: 'Challenges quotidien',
             titreChallenge2: 'Lister vos taches quotidiennes',
@@ -43,10 +77,12 @@ class ListeTacheQuotidienne extends StatelessWidget {
             pictureChallenge: 'assets/challengeQuotidien.png'),
         SizedBox(height: 30),
         FlipLayoutDemo(
+            lienInternet:
+                "https://newaccount1626188315630.freshdesk.com/support/solutions/articles/69000804234-sauvegarde-et-restauaration-automatique",
             etape: 'Fonction',
             typeChallenge1: ' Les tâches associer à votre mission seront',
             typeChallenge: ' Sauvegardez et restaurez quotidiennement"',
-            lottiesChallenge: "assets/challengeQuotidien.json",
+            lottiesChallenge: "assets/backup.json",
             assetPictureChallengeeCreer: 'assets/lister.gif',
             titreChallenge: 'Challenges quotidien',
             titreChallenge2: 'Lister vos taches quotidiennes',
@@ -58,10 +94,12 @@ class ListeTacheQuotidienne extends StatelessWidget {
             pictureChallenge: 'assets/assets/lister.gif'),
         SizedBox(height: 30),
         FlipLayoutDemo(
+            lienInternet:
+                "https://newaccount1626188315630.freshdesk.com/support/solutions/articles/69000513812-documentation-possible",
             etape: 'Option',
             typeChallenge1: 'Types de documenations',
             typeChallenge: "qu'il est possible de créer ",
-            lottiesChallenge: "assets/challengeQuotidien.json",
+            lottiesChallenge: "assets/digital.json",
             assetPictureChallengeeCreer: 'assets/docs.png',
             titreChallenge: 'Challenges quotidien',
             titreChallenge2: 'Lister vos taches quotidiennes',

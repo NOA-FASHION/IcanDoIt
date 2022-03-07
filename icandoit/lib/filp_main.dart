@@ -2,10 +2,12 @@ import 'package:card_flip/card_flip.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:icandoit/colorss.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'widget_factory.dart';
 
 class FlipLayoutDemo extends StatelessWidget {
+  final String lienInternet;
   final String etape;
   final String typeChallenge;
   final String typeChallenge1;
@@ -19,6 +21,7 @@ class FlipLayoutDemo extends StatelessWidget {
   final String pictureChallenge;
   final String titreChallenge2;
   FlipLayoutDemo({
+    this.lienInternet,
     this.etape,
     this.typeChallenge,
     this.lottiesChallenge,
@@ -181,11 +184,17 @@ class FlipLayoutDemo extends StatelessWidget {
                   ],
                 ),
                 const Spacer(),
-                const Icon(
-                  Icons.arrow_forward_ios,
-                  size: 16,
-                  color: Colors.grey,
-                )
+                Builder(builder: (context) {
+                  return IconButton(
+                      onPressed: () {
+                        _launchMapsUrl(lienInternet);
+                      },
+                      icon: Icon(
+                        Icons.arrow_forward_ios,
+                        size: 16,
+                        color: Colors.grey,
+                      ));
+                }),
               ],
             ),
             Divider(
@@ -388,14 +397,12 @@ class FlipLayoutDemo extends StatelessWidget {
     );
   }
 }
-// class FoldBoxDemo extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return FoldingBox(
-//         foldState: true,
-//         children: List.generate(3, (index) {
-//           return itemWidget(index);
-//         }),
-//         foldChild: FoldCard());
-//   }
-// }
+
+void _launchMapsUrl(String lien) async {
+  final url = lien;
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
+  }
+}
