@@ -12,34 +12,41 @@ class ListeTacheQuotidienne extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(height: 70),
-        Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-                colors: [Colors.orange, Colors.blue]),
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(
-              color: Colors.blue,
-              width: 4,
-            ),
-          ),
-          child: Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  "Lister vos évenements quotidien",
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+        SizedBox(height: 60),
+        Stack(
+          children: [
+            Container(
+              padding: EdgeInsets.only(top: 10),
+              margin: EdgeInsets.only(top: 45),
+              height: 70,
+              width: MediaQuery.of(context).size.width / 1.2,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                    colors: [Colors.orange, Colors.blue]),
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(
+                  color: Colors.blue,
+                  width: 4,
                 ),
               ),
-              Padding(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  "Lister vos évenements quotidiens",
+                  style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.topRight,
+              child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Lottie.asset("assets/sheduleDays.json", width: 60),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
         SizedBox(height: 30),
         FlipLayoutDemo(
