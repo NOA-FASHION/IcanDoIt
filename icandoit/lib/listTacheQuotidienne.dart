@@ -53,7 +53,7 @@ class ListeTacheQuotidienne extends StatelessWidget {
             lienInternet:
                 "https://newaccount1626188315630.freshdesk.com/support/solutions/articles/69000513695-cr%C3%A9er-challenge-quotidien",
             etape: 'Etape 1',
-            typeChallenge1: ' Créer un challenge',
+            typeChallenge1: ' Créer une mission',
             typeChallenge: 'de type "quotidien"',
             lottiesChallenge: "assets/challengeQuotidien.json",
             assetPictureChallengeeCreer: 'assets/challengeQuotidien.png',
