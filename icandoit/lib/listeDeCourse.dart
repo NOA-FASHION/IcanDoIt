@@ -8,7 +8,7 @@ class ListeDeCourses extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     return Column(
+    return Column(
       children: [
         SizedBox(height: 60),
         Stack(
@@ -32,7 +32,7 @@ class ListeDeCourses extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  "Faire un gâteau aux chocolat",
+                  "Faire une liste de course",
                   style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
                 ),
               ),
@@ -54,13 +54,13 @@ class ListeDeCourses extends StatelessWidget {
             typeChallenge1: ' Créer une mission',
             typeChallenge: ' de type "Normal"',
             lottiesChallenge: "assets/missionNormal.json",
-            assetPictureChallengeeCreer: 'assets/gateauxAuChocolat.png',
+            assetPictureChallengeeCreer: 'assets/courses.png',
             titreChallenge: 'Challenges Normal',
-            titreChallenge2: 'Faire un gâteau aux chocolat',
+            titreChallenge2: 'Faire une liste de course',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge:
-                "Pour lister éfficacement les évenements importants de votre recette. Vous devez d'abord créer un challenge de type normal. ",
+                "Pour lister les articles que vous souhaitez acquérir. Vous devez d'abord créer un challenge de type normal. ",
             actionChallenge2: 'Créer un challenge Normal',
             pictureChallenge: 'assets/challengeQuotidien.png'),
         SizedBox(height: 30),
@@ -68,16 +68,16 @@ class ListeDeCourses extends StatelessWidget {
             lienInternet:
                 "https://newaccount1626188315630.freshdesk.com/support/solutions/articles/69000513812-documentation-possible",
             etape: 'Etape 2',
-            typeChallenge1: ' Créer la liste de toutes',
-            typeChallenge: ' les Etapes de votre recette',
+            typeChallenge1: ' Créer la liste de tous',
+            typeChallenge: ' les articles',
             lottiesChallenge: "assets/recetteEtape.json",
-            assetPictureChallengeeCreer: 'assets/listeRecette.png',
+            assetPictureChallengeeCreer: 'assets/listecourses.png',
             titreChallenge: 'Challenges quotidien',
-            titreChallenge2: 'Faire un gâteau aux chocolat',
+            titreChallenge2: 'Faire une liste de course',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge:
-                "Rentrer les différentes tâches et documents associer à la recette de votre gâteaux. Par exemple cela pourra être un élément de type tâche ou de type commentaire ,ou encore un élément de type photo,youtube, lien internet ou vidéo pour associer a votre recette un élément visuel ou auditif.",
+                "Créer un élément de type 'achat' pour chaque articles que vous souhaitez acheter.",
             actionChallenge2: 'documentations  possibles',
             pictureChallenge: 'assets/challengeQuotidien.png'),
         SizedBox(height: 30),
@@ -85,16 +85,16 @@ class ListeDeCourses extends StatelessWidget {
             lienInternet:
                 "https://newaccount1626188315630.freshdesk.com/support/solutions/articles/69000513812-documentation-possible",
             etape: 'Etape 3',
-            typeChallenge1: 'Validation des étapes',
-            typeChallenge: "importante de votre recette",
+            typeChallenge1: 'Validation en live ',
+            typeChallenge: "des achats effectuer ",
             lottiesChallenge: "assets/validateRecette.json",
-            assetPictureChallengeeCreer: 'assets/fairegateauxauchocolat3.gif',
+            assetPictureChallengeeCreer: 'assets/validateFormation.gif',
             titreChallenge: 'Challenges quotidien',
-            titreChallenge2: 'Faire un gâteau aux chocolat',
+            titreChallenge2: 'Faire une liste de course',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge:
-                "Lors de la réalisation de votre recette valider chaque étape par un swipe vers la gauche, ou consulter a tout moment la documentation visuel ou auditive associer a votre mission",
+                "Lors de la création de votre liste de courses, valider chaque achat par un swipe vers la gauche.",
             actionChallenge2: 'Documentations possibles',
             pictureChallenge: 'assets/assets/lister.gif'),
         SizedBox(height: 30),
@@ -102,17 +102,34 @@ class ListeDeCourses extends StatelessWidget {
             lienInternet:
                 "https://newaccount1626188315630.freshdesk.com/support/solutions/articles/69000513812-documentation-possible",
             etape: 'Fonction',
-            typeChallenge1: ' Accéder facilement',
-            typeChallenge: '  à la documentation ',
+            typeChallenge1: ' Acces aux informations ',
+            typeChallenge: " d'achats et de prévisions.",
             lottiesChallenge: "assets/accederDoc.json",
-            assetPictureChallengeeCreer: 'assets/FaireGateauxAuChocoalat2.gif',
+            assetPictureChallengeeCreer: 'assets/assets/listeDeCourse.gif',
             titreChallenge: 'Challenges quotidien',
-            titreChallenge2: 'Faire un gâteau aux chocolat',
+            titreChallenge2: 'Faire une liste de course',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge:
-                "Pour accéder a la documentions que vous avez associer a votre recette , il suffit de sélectionner l'élément et vous y aurez accès. ",
+                "Un compteur apparait avec les informations suivantes: achats et prévisions. le compteur achart repésente la somme de vos achats et le compteur prévision représente la somme de vos prévision d'achat.",
             actionChallenge2: 'Documentations  possibles',
+            pictureChallenge: 'assets/assets/lister.gif'),
+        SizedBox(height: 30),
+         FlipLayoutDemo(
+            lienInternet:
+                "https://newaccount1626188315630.freshdesk.com/a/solutions/articles/69000513743",
+            etape: 'Option',
+            typeChallenge1: 'Modification en live',
+            typeChallenge: "du prix des articles",
+            lottiesChallenge: "assets/backup.json",
+            assetPictureChallengeeCreer: 'assets/assets/listedecourse2.gif',
+            titreChallenge: 'Challenges quotidien',
+            titreChallenge2: 'Faire une liste de course',
+            descriptionChallenge: 'Liste des challenges',
+            prioriteChallenge: 'Quotidien',
+            actionChallenge:
+                "Vous avez la possibilité de modifier le prix des articles, ce qui aura pour conséquence de modifier le compteur d'achat et de prévision en live.",
+            actionChallenge2: 'Documentations possibles',
             pictureChallenge: 'assets/assets/lister.gif'),
         SizedBox(height: 30),
         FlipLayoutDemo(
@@ -124,11 +141,11 @@ class ListeDeCourses extends StatelessWidget {
             lottiesChallenge: "assets/backup.json",
             assetPictureChallengeeCreer: 'assets/FaireGateauxAuChocoalat1.gif',
             titreChallenge: 'Challenges quotidien',
-            titreChallenge2: 'Faire un gâteau aux chocolat',
+            titreChallenge2: 'Faire une liste de course',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge:
-                "Avant de valider chaque étape, il est conseillé de faire une sauvegarde de la mission en faisant un appuie long sur la mission.",
+                "Avant de valider chaque achats, il est conseillé de faire une sauvegarde de votre liste de course. Cela vous permettra de la réétuliser le mois prochain.",
             actionChallenge2: 'Documentations possibles',
             pictureChallenge: 'assets/assets/lister.gif'),
         SizedBox(height: 30),
@@ -141,11 +158,11 @@ class ListeDeCourses extends StatelessWidget {
             lottiesChallenge: "assets/backup.json",
             assetPictureChallengeeCreer: 'assets/FaireGateauxAuChocoalat1.gif',
             titreChallenge: 'Challenges quotidien',
-            titreChallenge2: 'Faire un gâteau aux chocolat',
+            titreChallenge2: 'Faire une liste de course',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge:
-                " Vous pourrez a tout moment effectuer une restauration manuelle des procès enregistrés",
+                " Vous pourrez a tout moment effectuer une restauration manuelle des articles enregistrés",
             actionChallenge2: 'Documentations possibles',
             pictureChallenge: 'assets/assets/lister.gif'),
         SizedBox(height: 70),
