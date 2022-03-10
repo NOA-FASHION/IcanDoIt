@@ -69,7 +69,7 @@ class Formations extends StatelessWidget {
                 "https://newaccount1626188315630.freshdesk.com/support/solutions/articles/69000513812-documentation-possible",
             etape: 'Etape 2',
             typeChallenge1: ' Créer la liste de toutes',
-            typeChallenge: ' les formations que vous étudiez',
+            typeChallenge: ' vos formations ',
             lottiesChallenge: "assets/listeFomation.json",
             assetPictureChallengeeCreer: 'assets/listeFormation.png',
             titreChallenge: 'Challenges quotidien',
@@ -80,25 +80,24 @@ class Formations extends StatelessWidget {
                 "Rentrer les différentes formations que vous étudiez en créant un évenement de type formations. Ce type d'évenement comporte des options adapté a ce type de liste.",
             actionChallenge2: 'Eléments et documentations  possibles',
             pictureChallenge: 'assets/challengeQuotidien.png'),
-            SizedBox(height: 30),
+        SizedBox(height: 30),
         FlipLayoutDemo(
             lienInternet:
                 "https://newaccount1626188315630.freshdesk.com/support/solutions/articles/69000513812-documentation-possible",
             etape: 'Etape 3',
-            typeChallenge1: 'Validation des étapes',
-            typeChallenge: "importante de vos formations",
+            typeChallenge1: "Validation de l'avancé",
+            typeChallenge: "de vos formations",
             lottiesChallenge: "assets/validateRecette.json",
             assetPictureChallengeeCreer: 'assets/validEtape.gif',
             titreChallenge: 'Challenges quotidien',
-            titreChallenge2: 'Faire un gâteau aux chocolat', 
+            titreChallenge2: 'Faire un gâteau aux chocolat',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge:
                 "A chaque formation suivi, vous pouvez par un swipe vers la gauche valider que cette formation a ete faite. ",
             actionChallenge2: 'Documentations possibles',
-            pictureChallenge: 'assets/assets/lister.gif'),
+            pictureChallenge: 'assets/lister.gif'),
         SizedBox(height: 30),
-        
         FlipLayoutDemo(
             lienInternet:
                 "https://newaccount1626188315630.freshdesk.com/support/solutions/articles/69000804234-sauvegarde-et-restauaration-automatique",
@@ -123,7 +122,7 @@ class Formations extends StatelessWidget {
             typeChallenge1: "Modifier l'état de votre ",
             typeChallenge: "parcours de formation ",
             lottiesChallenge: "assets/modifierEtat.json",
-            assetPictureChallengeeCreer: 'assets/assets/formation.gif',
+            assetPictureChallengeeCreer: 'assets/formation.gif',
             titreChallenge: 'Challenges quotidien',
             titreChallenge2: 'Liste de formations',
             descriptionChallenge: 'Liste des challenges',
@@ -132,8 +131,7 @@ class Formations extends StatelessWidget {
                 "Vous pouvez aussi a tout moment modifier l'état de votre parcours de formation en sélectionnant en forme de crayon. Cela vous permettra de reprendre exactement l'endroit ou vous avez arrêter votre formation la dernière fois. ",
             actionChallenge2: 'Documentations possibles',
             pictureChallenge: 'assets/formation1.gif'),
-
-            SizedBox(height: 30),
+        SizedBox(height: 30),
         FlipLayoutDemo(
             lienInternet:
                 "https://newaccount1626188315630.freshdesk.com/support/solutions/articles/69000513812-documentation-possible",
