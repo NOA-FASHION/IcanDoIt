@@ -31,7 +31,7 @@ class ShareChallenge extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  "Quelques fonctions intéressant",
+                  "Quelques fonctions intéressantes",
                   style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
                 ),
               ),
