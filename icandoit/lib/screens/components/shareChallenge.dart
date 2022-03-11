@@ -53,7 +53,7 @@ class ShareChallenge extends StatelessWidget {
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(2.0),
-                  child: Lottie.asset("assets/fonctions1.json", width: 50),
+                  child: Lottie.asset("assets/fonctions1.json", width: 60),
                 ),
               ),
             ),
