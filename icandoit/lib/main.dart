@@ -205,6 +205,32 @@ class HomeScreen extends StatelessWidget {
             // image: _buildImage('logo.png', 100),
             reverse: true,
           ),
+          PageViewModel(
+            useScrollView: true,
+            title: "Les meilleurs pratiques",
+            bodyWidget: RestaurantList(),
+            decoration: pageDecoration.copyWith(
+              bodyFlex: 2,
+              imageFlex: 4,
+              bodyAlignment: Alignment.bottomCenter,
+              imageAlignment: Alignment.topCenter,
+            ),
+            // image: _buildImage('logo.png', 100),
+            reverse: true,
+          ),
+          PageViewModel(
+            useScrollView: true,
+            title: "Les meilleurs pratiques",
+            bodyWidget: ShareChallenge(),
+            decoration: pageDecoration.copyWith(
+              bodyFlex: 2,
+              imageFlex: 4,
+              bodyAlignment: Alignment.bottomCenter,
+              imageAlignment: Alignment.topCenter,
+            ),
+            // image: _buildImage('logo.png', 100),
+            reverse: true,
+          ),
         ],
         onDone: () {
           // _onIntroEnd(context, variable);

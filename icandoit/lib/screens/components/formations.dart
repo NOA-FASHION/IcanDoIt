@@ -41,7 +41,7 @@ class Formations extends StatelessWidget {
               alignment: Alignment.topRight,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Lottie.asset("assets/listeFomation.json", width: 60),
+                child: Lottie.asset("assets/school.json", width: 60),
               ),
             ),
           ],

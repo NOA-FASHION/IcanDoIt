@@ -41,7 +41,7 @@ class ListeDeCourses extends StatelessWidget {
               alignment: Alignment.topRight,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Lottie.asset("assets/gateaux.json", width: 60),
+                child: Lottie.asset("assets/courseList1.json", width: 60),
               ),
             ),
           ],
@@ -68,8 +68,8 @@ class ListeDeCourses extends StatelessWidget {
             lienInternet:
                 "https://newaccount1626188315630.freshdesk.com/support/solutions/articles/69000513812-documentation-possible",
             etape: 'Etape 2',
-            typeChallenge1: ' Créer la liste de tous',
-            typeChallenge: ' les articles',
+            typeChallenge1: ' Créer la liste de ',
+            typeChallenge: ' tous les articles',
             lottiesChallenge: "assets/recetteEtape.json",
             assetPictureChallengeeCreer: 'assets/listecourses.png',
             titreChallenge: 'Challenges quotidien',
@@ -121,7 +121,7 @@ class ListeDeCourses extends StatelessWidget {
             etape: 'Option',
             typeChallenge1: 'Modification en live',
             typeChallenge: "du prix des articles",
-            lottiesChallenge: "assets/backup.json",
+            lottiesChallenge: "assets/calculator.json",
             assetPictureChallengeeCreer: 'assets/assets/listedecourse2.gif',
             titreChallenge: 'Challenges quotidien',
             titreChallenge2: 'Faire une liste de course',
