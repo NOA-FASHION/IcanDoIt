@@ -12,12 +12,12 @@ class ListeTacheQuotidienne extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(height: 60),
+        SizedBox(height: 70),
         Stack(
           children: [
             Container(
               padding: EdgeInsets.only(top: 10),
-              margin: EdgeInsets.only(top: 45),
+              margin: EdgeInsets.only(top: 35),
               height: 70,
               width: MediaQuery.of(context).size.width / 1.2,
               decoration: BoxDecoration(
@@ -41,9 +41,23 @@ class ListeTacheQuotidienne extends StatelessWidget {
             ),
             Align(
               alignment: Alignment.topRight,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Lottie.asset("assets/sheduleDays.json", width: 60),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  // gradient: LinearGradient(
+                  //     begin: Alignment.centerLeft,
+                  //     end: Alignment.centerRight,
+                  //     colors: [Colors.orange, Colors.blue]),
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(
+                    color: Colors.blue,
+                    width: 2,
+                  ),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Lottie.asset("assets/sheduleDays.json", width: 50),
+                ),
               ),
             ),
           ],
@@ -62,7 +76,7 @@ class ListeTacheQuotidienne extends StatelessWidget {
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge:
-                "Pour lister éfficacement les évenements importants de votre journée. Vous devez d'abord créer un challenge de type quotidien. Ce type de challenge comporte des options adapter au type de liste que vous souhaitez utiliser ",
+                "Pour lister éfficacement les évenements importants de votre journée. Vous devez d'abord créer un challenge de type quotidien.",
             actionChallenge2: 'Créer un challenge quotidien',
             pictureChallenge: 'assets/challengeQuotidien.png'),
         SizedBox(height: 30),
@@ -70,8 +84,8 @@ class ListeTacheQuotidienne extends StatelessWidget {
             lienInternet:
                 "https://newaccount1626188315630.freshdesk.com/support/solutions/articles/69000513812-documentation-possible",
             etape: 'Etape 2',
-            typeChallenge1: ' Créer la liste de toutes',
-            typeChallenge: ' les Etapes de votre journée',
+            typeChallenge1: 'Créer la liste de chaque',
+            typeChallenge: 'Etapes de votre journée',
             lottiesChallenge: "assets/etapeJournee.json",
             assetPictureChallengeeCreer: 'assets/tacheQuotidienne.png',
             titreChallenge: 'Challenges quotidien',
@@ -80,15 +94,32 @@ class ListeTacheQuotidienne extends StatelessWidget {
             prioriteChallenge: 'Quotidien',
             actionChallenge:
                 "confectionnez des éléments illustrant les tâches que vous pensez réalisez quotidiennement",
-            actionChallenge2: 'Eléments et documentations  possibles',
+            actionChallenge2: 'Eléments et documentations',
             pictureChallenge: 'assets/challengeQuotidien.png'),
+        SizedBox(height: 30),
+        FlipLayoutDemo(
+            lienInternet:
+                "https://newaccount1626188315630.freshdesk.com/support/solutions/articles/69000513812-documentation-possible",
+            etape: 'Etape 3',
+            typeChallenge1: 'Validation des étapes',
+            typeChallenge: "importante de votre recette",
+            lottiesChallenge: "assets/validateRecette.json",
+            assetPictureChallengeeCreer: 'assets/fairegateauxauchocolat3.gif',
+            titreChallenge: 'Challenges quotidien',
+            titreChallenge2: 'Faire un gâteau aux chocolat',
+            descriptionChallenge: 'Liste des challenges',
+            prioriteChallenge: 'Quotidien',
+            actionChallenge:
+                "Lors de la réalisation de vos tâches quotidienne, valider chaque étape par un swipe vers la gauche, ou consulter a tout moment la documentation visuel ou auditive associé.",
+            actionChallenge2: 'Documentations possibles',
+            pictureChallenge: 'assets/assets/lister.gif'),
         SizedBox(height: 30),
         FlipLayoutDemo(
             lienInternet:
                 "https://newaccount1626188315630.freshdesk.com/support/solutions/articles/69000804234-sauvegarde-et-restauaration-automatique",
             etape: 'Fonction',
-            typeChallenge1: ' Les tâches associer à votre mission seront',
-            typeChallenge: ' Sauvegardez et restaurez quotidiennement"',
+            typeChallenge1: 'Sauvegarde et restauration',
+            typeChallenge: ' automatique quotidiennne',
             lottiesChallenge: "assets/backup.json",
             assetPictureChallengeeCreer: 'assets/lister.gif',
             titreChallenge: 'Challenges quotidien',
@@ -96,8 +127,8 @@ class ListeTacheQuotidienne extends StatelessWidget {
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge:
-                "Imaginez que vous avez validé les  tache 1, 2 et 5  aujourd'hui. Les taches validées seront restaurées le jour suivant.",
-            actionChallenge2: 'Sauvegarde et restauration automatique',
+                "Imaginez que vous avez validé les  évenenements 1, 2 et 5  aujourd'hui. Le jour suivant la totalité des évenements seront restauré à leur état initial",
+            actionChallenge2: 'Sauvegarde et restauration ',
             pictureChallenge: 'assets/assets/lister.gif'),
         SizedBox(height: 30),
         FlipLayoutDemo(

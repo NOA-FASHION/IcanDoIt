@@ -10,12 +10,12 @@ class Formations extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(height: 60),
+        SizedBox(height: 70),
         Stack(
           children: [
             Container(
               padding: EdgeInsets.only(top: 10),
-              margin: EdgeInsets.only(top: 45),
+              margin: EdgeInsets.only(top: 35),
               height: 70,
               width: MediaQuery.of(context).size.width / 1.2,
               decoration: BoxDecoration(
@@ -39,9 +39,23 @@ class Formations extends StatelessWidget {
             ),
             Align(
               alignment: Alignment.topRight,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Lottie.asset("assets/school.json", width: 60),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  // gradient: LinearGradient(
+                  //     begin: Alignment.centerLeft,
+                  //     end: Alignment.centerRight,
+                  //     colors: [Colors.orange, Colors.blue]),
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(
+                    color: Colors.blue,
+                    width: 2,
+                  ),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Lottie.asset("assets/school.json", width: 40),
+                ),
               ),
             ),
           ],
@@ -49,10 +63,10 @@ class Formations extends StatelessWidget {
         SizedBox(height: 30),
         FlipLayoutDemo(
             lienInternet:
-                "https://newaccount1626188315630.freshdesk.com/support/solutions/articles/69000509155-cr%C3%A9er-un-challenge",
+                "https://newaccount1626188315630.freshdesk.com/a/solutions/articles/69000513695",
             etape: 'Etape 1',
-            typeChallenge1: ' Créer une mission',
-            typeChallenge: 'de type "hebdomadaire"',
+            typeChallenge1: ' Créer une mission de',
+            typeChallenge: ' type "hebdomadaire"',
             lottiesChallenge: "assets/challengeQuotidien.json",
             assetPictureChallengeeCreer: 'assets/listeHebdo.png',
             titreChallenge: 'Challenges quotidien',
@@ -60,7 +74,7 @@ class Formations extends StatelessWidget {
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge:
-                "Imaginez que vous avez une liste de formation ou de matière a travailler régulièrement et que vous souhaitez avoir un suivi précis des avancements. Easytodo vous assistera pleinement dans cette tâche. Créer une mission hebdomadaire que vous nommerez Formation et sélectionner les jours de la semaine que vous avez réservé pour étudier.",
+                "Imaginez que vous avez une liste de formation ou de matière a travailler régulièrement et que vous souhaitez avoir un suivi précis de votre progression.Vous devez créer une mission hebdomadaire que vous nommerez Formation et sélectionner les jours de la semaine que vous avez réservé pour étudier.",
             actionChallenge2: 'Créer un challenge quotidien',
             pictureChallenge: 'assets/challengeQuotidien.png'),
         SizedBox(height: 30),
@@ -68,8 +82,8 @@ class Formations extends StatelessWidget {
             lienInternet:
                 "https://newaccount1626188315630.freshdesk.com/support/solutions/articles/69000513812-documentation-possible",
             etape: 'Etape 2',
-            typeChallenge1: ' Créer la liste de toutes',
-            typeChallenge: ' vos formations ',
+            typeChallenge1: ' Créer la liste  ',
+            typeChallenge: ' de vos formations ',
             lottiesChallenge: "assets/listeFomation.json",
             assetPictureChallengeeCreer: 'assets/listeFormation.png',
             titreChallenge: 'Challenges quotidien',
@@ -77,16 +91,16 @@ class Formations extends StatelessWidget {
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge:
-                "Rentrer les différentes formations que vous étudiez en créant un évenement de type formations. Ce type d'évenement comporte des options adapté a ce type de liste.",
-            actionChallenge2: 'Eléments et documentations  possibles',
+                "Rentrer les différentes formations que vous étudiez en créant pour chaque matière un évenement de type formations.",
+            actionChallenge2: 'Eléments et documentations ',
             pictureChallenge: 'assets/challengeQuotidien.png'),
         SizedBox(height: 30),
         FlipLayoutDemo(
             lienInternet:
                 "https://newaccount1626188315630.freshdesk.com/support/solutions/articles/69000513812-documentation-possible",
             etape: 'Etape 3',
-            typeChallenge1: "Validation de l'avancé",
-            typeChallenge: "de vos formations",
+            typeChallenge1: " Validation de l'état",
+            typeChallenge: ' de votre progression',
             lottiesChallenge: "assets/validateRecette.json",
             assetPictureChallengeeCreer: 'assets/validEtape.gif',
             titreChallenge: 'Challenges quotidien',
@@ -94,7 +108,7 @@ class Formations extends StatelessWidget {
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge:
-                "A chaque formation suivi, vous pouvez par un swipe vers la gauche valider que cette formation a ete faite. ",
+                "Vous pouvez par un swipe vers la gauche valider l'assimilation de chaque étape de votre formation. ",
             actionChallenge2: 'Documentations possibles',
             pictureChallenge: 'assets/lister.gif'),
         SizedBox(height: 30),
@@ -102,8 +116,8 @@ class Formations extends StatelessWidget {
             lienInternet:
                 "https://newaccount1626188315630.freshdesk.com/support/solutions/articles/69000804234-sauvegarde-et-restauaration-automatique",
             etape: 'Fonction',
-            typeChallenge1: " Vérifier l'état d'avancement",
-            typeChallenge: ' de votre formation',
+            typeChallenge1: " vérification de l'état",
+            typeChallenge: ' de votre progression',
             lottiesChallenge: "assets/verifyEtat.json",
             assetPictureChallengeeCreer: 'assets/etatAvancement.png',
             titreChallenge: 'Challenges quotidien',
@@ -111,8 +125,8 @@ class Formations extends StatelessWidget {
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge:
-                "En cliquant sur une des formation existante vous avez la possibilité de vérifier l'avancement de chaque formation. ",
-            actionChallenge2: 'Sauvegarde et restauration automatique',
+                "En cliquant sur une des formation existante vous avez la possibilité de vérifier votre progression . ",
+            actionChallenge2: 'visualiser votre progression',
             pictureChallenge: 'assets/assets/lister.gif'),
         SizedBox(height: 30),
         FlipLayoutDemo(
@@ -128,7 +142,7 @@ class Formations extends StatelessWidget {
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge:
-                "Vous pouvez aussi a tout moment modifier l'état de votre parcours de formation en sélectionnant en forme de crayon. Cela vous permettra de reprendre exactement l'endroit ou vous avez arrêter votre formation la dernière fois. ",
+                "Vous pouvez aussi a tout moment modifier la progression de votre parcours de formation en sélectionnant l'icone en forme de crayon. Cela vous permettra de reprendre votre formation exactement à l'endroit ou vous vous êtes arreter la dernière fois. ",
             actionChallenge2: 'Documentations possibles',
             pictureChallenge: 'assets/formation1.gif'),
         SizedBox(height: 30),
@@ -145,7 +159,7 @@ class Formations extends StatelessWidget {
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge:
-                "Chaque tâches valider sera restaurer les jours que vous avez sélectionner, en gardant en mémoire l'état d'avancement de votre derniere connexion ",
+                "la totalité des évenements seront restauré à leur état initial a chaque journé de la semaine que vous avez choisi, lors de la création de votre mission hebdomadaire.",
             actionChallenge2: 'Documentations possibles',
             pictureChallenge: 'assets/formation1.gif'),
         SizedBox(height: 70),

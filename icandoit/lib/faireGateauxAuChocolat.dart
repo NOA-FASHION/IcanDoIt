@@ -11,12 +11,12 @@ class FaireGateauxAuChaocolat extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(height: 60),
+        SizedBox(height: 70),
         Stack(
           children: [
             Container(
               padding: EdgeInsets.only(top: 10),
-              margin: EdgeInsets.only(top: 45),
+              margin: EdgeInsets.only(top: 35),
               height: 70,
               width: MediaQuery.of(context).size.width / 1.2,
               decoration: BoxDecoration(
@@ -40,9 +40,23 @@ class FaireGateauxAuChaocolat extends StatelessWidget {
             ),
             Align(
               alignment: Alignment.topRight,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Lottie.asset("assets/gateaux.json", width: 60),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  // gradient: LinearGradient(
+                  //     begin: Alignment.centerLeft,
+                  //     end: Alignment.centerRight,
+                  //     colors: [Colors.orange, Colors.blue]),
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(
+                    color: Colors.blue,
+                    width: 2,
+                  ),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Lottie.asset("assets/gateaux.json", width: 50),
+                ),
               ),
             ),
           ],
@@ -69,8 +83,8 @@ class FaireGateauxAuChaocolat extends StatelessWidget {
             lienInternet:
                 "https://newaccount1626188315630.freshdesk.com/support/solutions/articles/69000513812-documentation-possible",
             etape: 'Etape 2',
-            typeChallenge1: ' Créer la liste de toutes',
-            typeChallenge: ' les Etapes de votre recette',
+            typeChallenge1: ' Créer la liste de chaque',
+            typeChallenge: '  Etapes de votre recette',
             lottiesChallenge: "assets/recetteEtape.json",
             assetPictureChallengeeCreer: 'assets/listeRecette.png',
             titreChallenge: 'Challenges quotidien',
@@ -78,7 +92,7 @@ class FaireGateauxAuChaocolat extends StatelessWidget {
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge:
-                "Rentrer les différentes tâches et documents associer à la recette de votre gâteaux. Par exemple cela pourra être un élément de type tâche ou de type commentaire ,ou encore un élément de type photo,youtube, lien internet ou vidéo pour associer a votre recette un élément visuel ou auditif.",
+                "Rentrer les différentes tâches et documents associer à la recette de votre gâteaux. Par exemple cela pourra être un élément de type tâche ou de type commentaire. Il est possible aussi de créer des éléments visuels ou auditifs comme une photo, un lien youtube, un lien internet ou une vidéo.",
             actionChallenge2: 'documentations  possibles',
             pictureChallenge: 'assets/challengeQuotidien.png'),
         SizedBox(height: 30),
@@ -95,7 +109,7 @@ class FaireGateauxAuChaocolat extends StatelessWidget {
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge:
-                "Lors de la réalisation de votre recette valider chaque étape par un swipe vers la gauche, ou consulter a tout moment la documentation visuel ou auditive associer a votre mission",
+                "Lors de la réalisation de votre recette valider chaque étape par un swipe vers la gauche.",
             actionChallenge2: 'Documentations possibles',
             pictureChallenge: 'assets/assets/lister.gif'),
         SizedBox(height: 30),
@@ -120,10 +134,10 @@ class FaireGateauxAuChaocolat extends StatelessWidget {
             lienInternet:
                 "https://newaccount1626188315630.freshdesk.com/a/solutions/articles/69000513743",
             etape: 'Option',
-            typeChallenge1: 'Réaliser une',
-            typeChallenge: "Sauvegarde manuelle",
+            typeChallenge1: 'Comment réaliser une',
+            typeChallenge: "Sauvegarde manuelle ?",
             lottiesChallenge: "assets/backup.json",
-            assetPictureChallengeeCreer: 'assets/FaireGateauxAuChocoalat1.gif',
+            assetPictureChallengeeCreer: 'assets/appuielong.png',
             titreChallenge: 'Challenges quotidien',
             titreChallenge2: 'Faire un gâteau aux chocolat',
             descriptionChallenge: 'Liste des challenges',
@@ -137,7 +151,7 @@ class FaireGateauxAuChaocolat extends StatelessWidget {
             lienInternet:
                 "https://newaccount1626188315630.freshdesk.com/a/solutions/articles/69000804380",
             etape: 'Option',
-            typeChallenge1: 'Réaliser une',
+            typeChallenge1: 'Comment réaliser une',
             typeChallenge: "Restauration manuelle",
             lottiesChallenge: "assets/backup.json",
             assetPictureChallengeeCreer: 'assets/FaireGateauxAuChocoalat1.gif',
