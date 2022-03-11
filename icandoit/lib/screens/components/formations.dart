@@ -97,7 +97,7 @@ class Formations extends StatelessWidget {
         SizedBox(height: 30),
         FlipLayoutDemo(
             lienInternet:
-                "https://newaccount1626188315630.freshdesk.com/support/solutions/articles/69000513812-documentation-possible",
+                "https://newaccount1626188315630.freshdesk.com/a/solutions/articles/69000804649",
             etape: 'Etape 3',
             typeChallenge1: " Validation de l'état",
             typeChallenge: ' de votre progression',
@@ -114,7 +114,7 @@ class Formations extends StatelessWidget {
         SizedBox(height: 30),
         FlipLayoutDemo(
             lienInternet:
-                "https://newaccount1626188315630.freshdesk.com/support/solutions/articles/69000804234-sauvegarde-et-restauaration-automatique",
+                "https://newaccount1626188315630.freshdesk.com/a/solutions/articles/69000804652",
             etape: 'Fonction',
             typeChallenge1: " vérification de l'état",
             typeChallenge: ' de votre progression',
@@ -131,7 +131,7 @@ class Formations extends StatelessWidget {
         SizedBox(height: 30),
         FlipLayoutDemo(
             lienInternet:
-                "https://newaccount1626188315630.freshdesk.com/support/solutions/articles/69000513812-documentation-possible",
+                "https://newaccount1626188315630.freshdesk.com/a/solutions/articles/69000804653",
             etape: 'Option',
             typeChallenge1: "Modifier l'état de votre ",
             typeChallenge: "parcours de formation ",
@@ -148,10 +148,10 @@ class Formations extends StatelessWidget {
         SizedBox(height: 30),
         FlipLayoutDemo(
             lienInternet:
-                "https://newaccount1626188315630.freshdesk.com/support/solutions/articles/69000513812-documentation-possible",
+                "https://newaccount1626188315630.freshdesk.com/a/solutions/articles/69000804234",
             etape: 'Option',
-            typeChallenge1: "Une sauvegarde et une reatauration",
-            typeChallenge: ' hebdomadaire se fera automatiquement',
+            typeChallenge1: "Sauvegarde et restauration",
+            typeChallenge: ' hebdomadaire auto',
             lottiesChallenge: "assets/backup.json",
             assetPictureChallengeeCreer: 'assets/bacup.gif',
             titreChallenge: 'Challenges quotidien',

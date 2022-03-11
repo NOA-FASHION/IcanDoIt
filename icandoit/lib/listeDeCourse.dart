@@ -10,12 +10,12 @@ class ListeDeCourses extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(height: 60),
+        SizedBox(height: 70),
         Stack(
           children: [
             Container(
               padding: EdgeInsets.only(top: 10),
-              margin: EdgeInsets.only(top: 45),
+              margin: EdgeInsets.only(top: 35),
               height: 70,
               width: MediaQuery.of(context).size.width / 1.2,
               decoration: BoxDecoration(
@@ -39,9 +39,23 @@ class ListeDeCourses extends StatelessWidget {
             ),
             Align(
               alignment: Alignment.topRight,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Lottie.asset("assets/courseList1.json", width: 60),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  // gradient: LinearGradient(
+                  //     begin: Alignment.centerLeft,
+                  //     end: Alignment.centerRight,
+                  //     colors: [Colors.orange, Colors.blue]),
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(
+                    color: Colors.blue,
+                    width: 2,
+                  ),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Lottie.asset("assets/courseList1.json", width: 45),
+                ),
               ),
             ),
           ],
@@ -60,7 +74,7 @@ class ListeDeCourses extends StatelessWidget {
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge:
-                "Pour lister les articles que vous souhaitez acquérir. Vous devez d'abord créer un challenge de type normal. ",
+                "Pour lister les articles que vous pensez acheter. Vous devez d'abord créer un challenge de type normal. ",
             actionChallenge2: 'Créer un challenge Normal',
             pictureChallenge: 'assets/challengeQuotidien.png'),
         SizedBox(height: 30),
@@ -77,16 +91,16 @@ class ListeDeCourses extends StatelessWidget {
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge:
-                "Créer un élément de type 'achat' pour chaque articles que vous souhaitez acheter.",
+                "Créer un élément de type 'achat' pour chaque articles que se trouve dans votre cadie.",
             actionChallenge2: 'documentations  possibles',
             pictureChallenge: 'assets/challengeQuotidien.png'),
         SizedBox(height: 30),
         FlipLayoutDemo(
             lienInternet:
-                "https://newaccount1626188315630.freshdesk.com/support/solutions/articles/69000513812-documentation-possible",
+                "https://newaccount1626188315630.freshdesk.com/a/solutions/articles/69000804649",
             etape: 'Etape 3',
-            typeChallenge1: 'Validation en live ',
-            typeChallenge: "des achats effectuer ",
+            typeChallenge1: 'Validation en live',
+            typeChallenge: "des achats effectués",
             lottiesChallenge: "assets/validateRecette.json",
             assetPictureChallengeeCreer: 'assets/validateFormation.gif',
             titreChallenge: 'Challenges quotidien',
@@ -100,7 +114,7 @@ class ListeDeCourses extends StatelessWidget {
         SizedBox(height: 30),
         FlipLayoutDemo(
             lienInternet:
-                "https://newaccount1626188315630.freshdesk.com/support/solutions/articles/69000513812-documentation-possible",
+                "https://newaccount1626188315630.freshdesk.com/a/solutions/articles/69000804659",
             etape: 'Fonction',
             typeChallenge1: ' Acces aux informations ',
             typeChallenge: " d'achats et de prévisions.",
@@ -111,13 +125,13 @@ class ListeDeCourses extends StatelessWidget {
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge:
-                "Un compteur apparait avec les informations suivantes: achats et prévisions. le compteur achart repésente la somme de vos achats et le compteur prévision représente la somme de vos prévision d'achat.",
+                "Un compteur apparait avec les informations suivantes: achats et prévisions. le compteur achat repésente la somme de vos achats et le compteur prévision représente la somme de vos prévision d'achat.",
             actionChallenge2: 'Documentations  possibles',
             pictureChallenge: 'assets/lister.gif'),
         SizedBox(height: 30),
         FlipLayoutDemo(
             lienInternet:
-                "https://newaccount1626188315630.freshdesk.com/a/solutions/articles/69000513743",
+                "https://newaccount1626188315630.freshdesk.com/a/solutions/articles/69000804653",
             etape: 'Option',
             typeChallenge1: 'Modification en live',
             typeChallenge: "du prix des articles",
@@ -128,16 +142,16 @@ class ListeDeCourses extends StatelessWidget {
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge:
-                "Vous avez la possibilité de modifier le prix des articles, ce qui aura pour conséquence de modifier le compteur d'achat et de prévision en live.",
-            actionChallenge2: 'Documentations possibles',
+                "Vous avez la possibilité de modifier le prix des articles, ce qui aura pour conséquence de modifier les valeurs du compteur d'achat et du comteur de prévision en live.",
+            actionChallenge2: 'Modifier ',
             pictureChallenge: 'assets/lister.gif'),
         SizedBox(height: 30),
         FlipLayoutDemo(
             lienInternet:
                 "https://newaccount1626188315630.freshdesk.com/a/solutions/articles/69000513743",
             etape: 'Option',
-            typeChallenge1: 'Réaliser une',
-            typeChallenge: "Sauvegarde manuelle",
+            typeChallenge1: 'Réaliser facilement une',
+            typeChallenge: " Sauvegarde manuelle",
             lottiesChallenge: "assets/backup.json",
             assetPictureChallengeeCreer: 'assets/FaireGateauxAuChocoalat1.gif',
             titreChallenge: 'Challenges quotidien',
@@ -145,7 +159,7 @@ class ListeDeCourses extends StatelessWidget {
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge:
-                "Avant de valider chaque achats, il est conseillé de faire une sauvegarde de votre liste de course. Cela vous permettra de la réétuliser le mois prochain.",
+                "Avant de valider chaque achats, il est conseillé de faire une sauvegarde de votre liste de course. Cela vous permettra de la réétuliser le mois d'apres.",
             actionChallenge2: 'Documentations possibles',
             pictureChallenge: 'assets/lister.gif'),
         SizedBox(height: 30),
@@ -153,7 +167,7 @@ class ListeDeCourses extends StatelessWidget {
             lienInternet:
                 "https://newaccount1626188315630.freshdesk.com/a/solutions/articles/69000804380",
             etape: 'Option',
-            typeChallenge1: 'Réaliser une',
+            typeChallenge1: 'Réaliser facilement une',
             typeChallenge: "Restauration manuelle",
             lottiesChallenge: "assets/backup.json",
             assetPictureChallengeeCreer: 'assets/FaireGateauxAuChocoalat1.gif',
@@ -162,7 +176,7 @@ class ListeDeCourses extends StatelessWidget {
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge:
-                " Vous pourrez a tout moment effectuer une restauration manuelle des articles enregistrés",
+                " Vous pourrez à tout moment effectuer une restauration manuelle des articles enregistrés",
             actionChallenge2: 'Documentations possibles',
             pictureChallenge: 'assets/lister.gif'),
         SizedBox(height: 70),
