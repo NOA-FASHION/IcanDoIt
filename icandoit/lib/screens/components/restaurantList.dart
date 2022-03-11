@@ -60,8 +60,13 @@ class RestaurantList extends StatelessWidget {
             titreChallenge2: 'Lister vos restaurants préférées',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
-            actionChallenge:
-                "Vous pouvez lister vos restaurants préférée et y associer une documentation ciblée. Cela est très simple a réaliser.Créer une mission Normal",
+            actionChallenge: Column(
+              children: [
+                Text(
+                    "Vous pouvez lister vos restaurants préférée et y associer une documentation ciblée. "),
+                Text("Cela est très simple a réaliser.Créer une mission Normal")
+              ],
+            ),
             actionChallenge2: 'Créer un challenge Normal',
             pictureChallenge: 'assets/challengeQuotidien.png'),
         SizedBox(height: 30),
@@ -77,8 +82,21 @@ class RestaurantList extends StatelessWidget {
             titreChallenge2: 'Lister vos restaurants préférées',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
-            actionChallenge:
-                "Ensuite listez vos restaurants par Catégorie en créant des objets de type information, par exemple: 'Restaurant chinois, fast food , restaurant chic.'",
+            actionChallenge: Column(children: [
+              Text(
+                  "Ensuite listez vos restaurants par Catégorie en créant des objets de type information, par exemple:"),
+              new ListTile(
+                leading: Icon(Icons.fiber_manual_record),
+                title: new Text('Restaurant chinois'),
+              ),
+              new ListTile(
+                leading: Icon(Icons.fiber_manual_record),
+                title: new Text('fast food '),
+              ),
+              new ListTile(
+                  leading: Icon(Icons.fiber_manual_record),
+                  title: new Text('restaurant chic'))
+            ]),
             actionChallenge2: 'documentations  possibles',
             pictureChallenge: 'assets/challengeQuotidien.png'),
         SizedBox(height: 30),
@@ -94,8 +112,8 @@ class RestaurantList extends StatelessWidget {
             titreChallenge2: 'Lister vos restaurants préférées',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
-            actionChallenge:
-                "pour chaque catégorie créer un mission normal avec le nom du restaurant  ",
+            actionChallenge: Text(
+                "pour chaque catégorie créer un mission normal avec le nom du restaurant  "),
             actionChallenge2: 'Documentations possibles',
             pictureChallenge: 'assets/assets/lister.gif'),
         SizedBox(height: 30),
@@ -111,8 +129,27 @@ class RestaurantList extends StatelessWidget {
             titreChallenge2: 'Lister vos restaurants préférées',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
-            actionChallenge:
-                "rentrer et associer y les documents importants tel que l'adresse, les photos  et videos , des liens avec des avis , des video youtube ",
+            actionChallenge: Column(
+              children: [
+                Text("rentrer et associer y les documents importants tel que:"),
+                new ListTile(
+                  leading: Icon(Icons.fiber_manual_record),
+                  title: new Text("l'adresse, les photos"),
+                ),
+                new ListTile(
+                  leading: Icon(Icons.fiber_manual_record),
+                  title: new Text('des videos'),
+                ),
+                new ListTile(
+                  leading: Icon(Icons.fiber_manual_record),
+                  title: new Text('des liens internet avec des avis'),
+                ),
+                new ListTile(
+                  leading: Icon(Icons.fiber_manual_record),
+                  title: new Text('des video youtube'),
+                )
+              ],
+            ),
             actionChallenge2: 'Documentations  possibles',
             pictureChallenge: 'assets/assets/lister.gif'),
         SizedBox(height: 70),

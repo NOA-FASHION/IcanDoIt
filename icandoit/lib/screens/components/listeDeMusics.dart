@@ -1,7 +1,9 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:icandoit/filp_main.dart';
 import 'package:lottie/lottie.dart';
-import 'package:url_launcher/url_launcher.dart';
+
 
 class ListeDeMusics extends StatelessWidget {
   const ListeDeMusics({Key key}) : super(key: key);
@@ -59,8 +61,14 @@ class ListeDeMusics extends StatelessWidget {
             titreChallenge2: 'Créer ma playlist de music',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
-            actionChallenge:
-                "Si vous souhaitez enregistré une liste de music ou de reportage youtube. Pour créer votre playliste,vous devez d'abord créer un challenge de type normal. ",
+            actionChallenge: Column(
+              children: [
+                Text(
+                    "Si vous souhaitez enregistré une liste de music ou de reportage youtube."),
+                Text(
+                    " Pour créer votre playliste,vous devez d'abord créer un challenge de type normal. ")
+              ],
+            ),
             actionChallenge2: 'Créer un challenge Normal',
             pictureChallenge: 'assets/challengeQuotidien.png'),
         SizedBox(height: 30),
@@ -76,8 +84,8 @@ class ListeDeMusics extends StatelessWidget {
             titreChallenge2: 'Créer ma playlist de music',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
-            actionChallenge:
-                "crér un élément de type youtube pour chaque music que vous souhaitez écouter.",
+            actionChallenge: Text(
+                "créer un élément de type youtube pour chaque music que vous souhaitez écouter."),
             actionChallenge2: 'documentations  possibles',
             pictureChallenge: 'assets/challengeQuotidien.png'),
         SizedBox(height: 30),
@@ -93,8 +101,8 @@ class ListeDeMusics extends StatelessWidget {
             titreChallenge2: 'Créer ma playlist de music',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
-            actionChallenge:
-                "Lors de la réalisation de votre recette valider chaque étape par un swipe vers la gauche, ou consulter a tout moment la documentation visuel ou auditive associer a votre mission",
+            actionChallenge: Text(
+                "Lors de la réalisation de votre recette valider chaque étape par un swipe vers la gauche, ou consulter a tout moment la documentation visuel ou auditive associer a votre mission"),
             actionChallenge2: 'Documentations possibles',
             pictureChallenge: 'assets/assets/lister.gif'),
         SizedBox(height: 30),
@@ -110,8 +118,8 @@ class ListeDeMusics extends StatelessWidget {
             titreChallenge2: 'Créer ma playlist de music',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
-            actionChallenge:
-                "Automatiquement une icône youtube apparaît en haut a gauche de votre Ecran vous donnant la possibilité d'écouter votre liste de musique l'un a la suite de l'autre. ",
+            actionChallenge: Text(
+                "Automatiquement une icône youtube apparaît en haut a gauche de votre Ecran vous donnant la possibilité d'écouter votre liste de musique l'un a la suite de l'autre. "),
             actionChallenge2: 'Documentations  possibles',
             pictureChallenge: 'assets/lister.gif'),
         SizedBox(height: 30),
@@ -127,8 +135,8 @@ class ListeDeMusics extends StatelessWidget {
             titreChallenge2: 'Créer ma playlist de music',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
-            actionChallenge:
-                "Il est conseillé de faire une sauvegarde de votre playListe en faisant un appuie long sur la mission.",
+            actionChallenge: Text(
+                "Il est conseillé de faire une sauvegarde de votre playListe en faisant un appuie long sur la mission."),
             actionChallenge2: 'Documentations possibles',
             pictureChallenge: 'assets/lister.gif'),
         SizedBox(height: 30),
@@ -144,8 +152,13 @@ class ListeDeMusics extends StatelessWidget {
             titreChallenge2: 'Créer ma playlist de music',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
-            actionChallenge:
-                " Vous pouvez partagez votre liste a quelqu'un facilement en sélectionnant l'icône de partage en haut a droite de votre liste d'étape. Vous aurez le choix de l'envoyer par email, watsapp ,etc",
+            actionChallenge: Column(
+              children: [
+                Text(
+                    " Vous pouvez partagez votre liste a quelqu'un facilement en sélectionnant l'icône de partage en haut a droite de votre liste d'étape."),
+                Text("Vous aurez le choix de l'envoyer par email, watsapp ,etc")
+              ],
+            ),
             actionChallenge2: 'Documentations possibles',
             pictureChallenge: 'assets/music1.gif'),
         SizedBox(height: 30),
@@ -161,8 +174,8 @@ class ListeDeMusics extends StatelessWidget {
             titreChallenge2: 'Créer ma playlist de music',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
-            actionChallenge:
-                " Vous pouvez uoploader une liste qu'un de vos amies vous a envoyé.",
+            actionChallenge: Text(
+                " Vous pouvez uoploader une liste qu'un de vos amies vous a envoyé."),
             actionChallenge2: 'Documentations possibles',
             pictureChallenge: 'assets/music1.gif'),
         SizedBox(height: 70),

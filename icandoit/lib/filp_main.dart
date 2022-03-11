@@ -16,7 +16,7 @@ class FlipLayoutDemo extends StatelessWidget {
   final String titreChallenge;
   final String descriptionChallenge;
   final String prioriteChallenge;
-  final String actionChallenge;
+  final Widget actionChallenge;
   final String actionChallenge2;
   final String pictureChallenge;
   final String titreChallenge2;
@@ -106,12 +106,7 @@ class FlipLayoutDemo extends StatelessWidget {
                     end: Alignment.centerRight,
                     colors: [Colors.orange, Colors.blue])),
             child: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Text(
-                actionChallenge,
-                textAlign: TextAlign.justify,
-              ),
-            ),
+                padding: const EdgeInsets.all(12.0), child: actionChallenge),
           )
         ],
       ),

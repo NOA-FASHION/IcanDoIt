@@ -73,8 +73,12 @@ class ListeDeCourses extends StatelessWidget {
             titreChallenge2: 'Faire une liste de course',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
-            actionChallenge:
-                "Pour lister les articles que vous pensez acheter. Vous devez d'abord créer un challenge de type normal. ",
+            actionChallenge: Column(
+              children: [
+                Text("Pour lister les articles que vous pensez acheter."),
+                Text("Vous devez d'abord créer un challenge de type normal. ")
+              ],
+            ),
             actionChallenge2: 'Créer un challenge Normal',
             pictureChallenge: 'assets/challengeQuotidien.png'),
         SizedBox(height: 30),
@@ -90,8 +94,8 @@ class ListeDeCourses extends StatelessWidget {
             titreChallenge2: 'Faire une liste de course',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
-            actionChallenge:
-                "Créer un élément de type 'achat' pour chaque articles que se trouve dans votre cadie.",
+            actionChallenge: Text(
+                "Créer un élément de type 'achat' pour chaque articles que se trouve dans votre cadie."),
             actionChallenge2: 'documentations  possibles',
             pictureChallenge: 'assets/challengeQuotidien.png'),
         SizedBox(height: 30),
@@ -107,8 +111,8 @@ class ListeDeCourses extends StatelessWidget {
             titreChallenge2: 'Faire une liste de course',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
-            actionChallenge:
-                "Lors de la création de votre liste de courses, valider chaque achat par un swipe vers la gauche.",
+            actionChallenge: Text(
+                "Lors de la création de votre liste de courses, valider chaque achat par un swipe vers la gauche."),
             actionChallenge2: 'Documentations possibles',
             pictureChallenge: 'assets/lister.gif'),
         SizedBox(height: 30),
@@ -124,8 +128,19 @@ class ListeDeCourses extends StatelessWidget {
             titreChallenge2: 'Faire une liste de course',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
-            actionChallenge:
-                "Un compteur apparait avec les informations suivantes: achats et prévisions. le compteur achat repésente la somme de vos achats et le compteur prévision représente la somme de vos prévision d'achat.",
+            actionChallenge: Column(children: [
+              Text(
+                  "Un compteur apparait avec les informations suivantes: achats et prévisions."),
+              new ListTile(
+                leading: Icon(Icons.fiber_manual_record),
+                title: new Text(
+                    '  le compteur achat repésente la somme de vos achats'),
+              ),
+              new ListTile(
+                  leading: Icon(Icons.fiber_manual_record),
+                  title: new Text(
+                      "le compteur prévision représente la somme de vos prévision d'achat."))
+            ]),
             actionChallenge2: 'Documentations  possibles',
             pictureChallenge: 'assets/lister.gif'),
         SizedBox(height: 30),
@@ -141,8 +156,14 @@ class ListeDeCourses extends StatelessWidget {
             titreChallenge2: 'Faire une liste de course',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
-            actionChallenge:
-                "Vous avez la possibilité de modifier le prix des articles, ce qui aura pour conséquence de modifier les valeurs du compteur d'achat et du comteur de prévision en live.",
+            actionChallenge: Column(
+              children: [
+                Text(
+                    "Vous avez la possibilité de modifier le prix des articles. "),
+                Text(
+                    "    Ce qui aura pour conséquence la modification en live les valeurs du compteur d'achat et du compteur de prévision "),
+              ],
+            ),
             actionChallenge2: 'Modifier ',
             pictureChallenge: 'assets/lister.gif'),
         SizedBox(height: 30),
@@ -158,8 +179,13 @@ class ListeDeCourses extends StatelessWidget {
             titreChallenge2: 'Faire une liste de course',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
-            actionChallenge:
-                "Avant de valider chaque achats, il est conseillé de faire une sauvegarde de votre liste de course. Cela vous permettra de la réétuliser le mois d'apres.",
+            actionChallenge: Column(
+              children: [
+                Text(
+                    "Avant de valider chaque achats, il est conseillé de faire une sauvegarde de votre liste de course."),
+                Text("Cela vous permettra de la réétuliser le mois d'apres."),
+              ],
+            ),
             actionChallenge2: 'Documentations possibles',
             pictureChallenge: 'assets/lister.gif'),
         SizedBox(height: 30),
@@ -175,8 +201,8 @@ class ListeDeCourses extends StatelessWidget {
             titreChallenge2: 'Faire une liste de course',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
-            actionChallenge:
-                " Vous pourrez à tout moment effectuer une restauration manuelle des articles enregistrés",
+            actionChallenge: Text(
+                " Vous pourrez à tout moment effectuer une restauration manuelle des articles enregistrés"),
             actionChallenge2: 'Documentations possibles',
             pictureChallenge: 'assets/lister.gif'),
         SizedBox(height: 70),

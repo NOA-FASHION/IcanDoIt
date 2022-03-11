@@ -57,8 +57,14 @@ class ShareChallenge extends StatelessWidget {
             titreChallenge2: "Quelques fonctions intéressant",
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
-            actionChallenge:
-                " Vous pouvez partagez votre liste a quelqu'un facilement en sélectionnant l'icône de partage en haut a droite de votre liste d'étape. Vous aurez le choix de l'envoyer par email, watsapp ,etc",
+            actionChallenge: Column(
+              children: [
+                Text(
+                    " Vous pouvez partagez votre liste a quelqu'un facilement en sélectionnant l'icône de partage en haut a droite de votre liste d'étape."),
+                Text(
+                    " Vous aurez le choix de l'envoyer par email, watsapp ,etc")
+              ],
+            ),
             actionChallenge2: 'Documentations possibles',
             pictureChallenge: 'assets/music1.gif'),
         SizedBox(height: 30),
@@ -74,8 +80,8 @@ class ShareChallenge extends StatelessWidget {
             titreChallenge2: "Quelques fonctions intéressant",
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
-            actionChallenge:
-                " Vous pouvez uoploader une liste qu'un de vos amies vous a envoyé.",
+            actionChallenge: Text(
+                " Vous pouvez uoploader une liste qu'un de vos amies vous a envoyé."),
             actionChallenge2: 'Documentations possibles',
             pictureChallenge: 'assets/music1.gif'),
         FlipLayoutDemo(
@@ -90,8 +96,12 @@ class ShareChallenge extends StatelessWidget {
             titreChallenge2: "Quelques fonctions intéressant",
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
-            actionChallenge:
-                "lorsque vous réalisez une structure complexe pour une todolist composé de plusieurs arborescences, comme par exemple 'travaux de rénovation', vous pouvez deesactivé la vue principal de vos missions ",
+            actionChallenge: Column(
+              children: [
+                Text(
+                    "lorsque vous réalisez une structure complexe pour une todolist composé de plusieurs arborescences, comme par exemple 'travaux de rénovation', vous pouvez deesactivé la vue principal de vos missions ")
+              ],
+            ),
             actionChallenge2: 'Documentations  possibles',
             pictureChallenge: 'assets/assets/lister.gif'),
         SizedBox(height: 30),
@@ -107,8 +117,8 @@ class ShareChallenge extends StatelessWidget {
             titreChallenge2: "Quelques fonctions intéressant",
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
-            actionChallenge:
-                "Visualisez en live vos performances concernant la réalisation de vos challenges en cours.",
+            actionChallenge: Text(
+                "Visualisez en live vos performances concernant la réalisation de vos challenges en cours."),
             actionChallenge2: 'Documentations possibles',
             pictureChallenge: 'assets/assets/lister.gif'),
         SizedBox(height: 30),
@@ -124,8 +134,8 @@ class ShareChallenge extends StatelessWidget {
             titreChallenge2: "Quelques fonctions intéressant",
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
-            actionChallenge:
-                "Selon votre choix périodique, Une notification automatique e sera active pour vous rappeler et vous encourager dans vos taches quotidiennes.. ",
+            actionChallenge: Text(
+                "Selon votre choix périodique, Une notification automatique e sera active pour vous rappeler et vous encourager dans vos taches quotidiennes.. "),
             actionChallenge2: 'Documentations possibles',
             pictureChallenge: 'assets/music1.gif'),
         SizedBox(height: 30),

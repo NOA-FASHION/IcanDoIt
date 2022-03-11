@@ -8,14 +8,14 @@ class TravauxDeRenovation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     return Column(
+    return Column(
       children: [
-        SizedBox(height: 60),
+        SizedBox(height: 70),
         Stack(
           children: [
             Container(
               padding: EdgeInsets.only(top: 10),
-              margin: EdgeInsets.only(top: 45),
+              margin: EdgeInsets.only(top: 35),
               height: 70,
               width: MediaQuery.of(context).size.width / 1.2,
               decoration: BoxDecoration(
@@ -39,9 +39,23 @@ class TravauxDeRenovation extends StatelessWidget {
             ),
             Align(
               alignment: Alignment.topRight,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Lottie.asset("assets/renovation12.json", width: 60),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  // gradient: LinearGradient(
+                  //     begin: Alignment.centerLeft,
+                  //     end: Alignment.centerRight,
+                  //     colors: [Colors.orange, Colors.blue]),
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(
+                    color: Colors.blue,
+                    width: 2,
+                  ),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Lottie.asset("assets/renovation12.json", width: 40),
+                ),
               ),
             ),
           ],
@@ -59,8 +73,8 @@ class TravauxDeRenovation extends StatelessWidget {
             titreChallenge2: 'Projet de rénovation',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
-            actionChallenge:
-                "Pour lister les éléments importants de votre projet de rénovation. Vous devez d'abord créer un challenge de type normal. ",
+            actionChallenge: Text(
+                "Pour lister les éléments importants de votre projet de rénovation. Vous devez d'abord créer un challenge de type normal. "),
             actionChallenge2: 'Créer un challenge Normal',
             pictureChallenge: 'assets/challengeQuotidien.png'),
         SizedBox(height: 30),
@@ -68,23 +82,23 @@ class TravauxDeRenovation extends StatelessWidget {
             lienInternet:
                 "https://newaccount1626188315630.freshdesk.com/support/solutions/articles/69000513812-documentation-possible",
             etape: 'Etape 2',
-            typeChallenge1: ' Créer la liste de toutes',
-            typeChallenge: ' les Etapes de votre projet',
+            typeChallenge1: ' Créer la liste des',
+            typeChallenge: ' étapes de votre projet',
             lottiesChallenge: "assets/recetteEtape.json",
             assetPictureChallengeeCreer: 'assets/listerenovation.png',
             titreChallenge: 'Challenges quotidien',
             titreChallenge2: 'Projet de rénovation',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
-            actionChallenge:
-                "Créer un élément de type 'projet' pour chaque pièce de la maison.Rentrer ensuite les différentes informations et documents associé aux travaux que vous devez effectuer dans chaque pièces de la maison,une liste  des choses a réaliser des choses a réaliser",
+            actionChallenge: Text(
+                "Créer un élément de type 'projet' pour chaque pièce de la maison."),
             actionChallenge2: 'documentations  possibles',
             pictureChallenge: 'assets/challengeQuotidien.png'),
         SizedBox(height: 30),
         FlipLayoutDemo(
             lienInternet:
                 "https://newaccount1626188315630.freshdesk.com/support/solutions/articles/69000513812-documentation-possible",
-            etape: 'Structure',
+            etape: 'Etape 3',
             typeChallenge1: 'Exemple de structure',
             typeChallenge: "pour un projet de rénovation",
             lottiesChallenge: "assets/structure.json",
@@ -93,8 +107,21 @@ class TravauxDeRenovation extends StatelessWidget {
             titreChallenge2: 'Projet de rénovation',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
-            actionChallenge:
-                "Pour bien structuré votre projet créer pour chaque pièce un ensemble de documentations et de taches concernant ce projet, par exemple: liste de tutoriel concernant des travaux, liste de photos et videos de meuble ou matériaux avec leur ref et leur prix,liste  du prix des matériaux et objets  a acheter, ",
+            actionChallenge: Column(
+              children: [
+                Text("Créer pour chaque pièce de votre maison, "),
+                new ListTile(
+                  leading: Icon(Icons.fiber_manual_record),
+                  title: new Text(
+                      'une mission tutoriel dans laquel sera placé une liste de tutoriel'),
+                ),
+                new ListTile(
+                  leading: Icon(Icons.fiber_manual_record),
+                  title: new Text(
+                      ' une autre mission Média dans le quel sera placé une liste de photos et videos de meuble ou matériaux avec leur ref et leur prix,etc., '),
+                )
+              ],
+            ),
             actionChallenge2: 'Documentations possibles',
             pictureChallenge: 'assets/assets/lister.gif'),
         SizedBox(height: 30),
@@ -110,8 +137,8 @@ class TravauxDeRenovation extends StatelessWidget {
             titreChallenge2: 'Projet de rénovation',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
-            actionChallenge:
-                "Pour accéder a la documentions que vous avez associer a votre projet , il suffit de sélectionner l'élément et vous y aurez accès. ",
+            actionChallenge: Text(
+                "Pour accéder a la documentions que vous avez associer a votre projet , il suffit de sélectionner l'élément et vous y aurez accès. "),
             actionChallenge2: 'Documentations  possibles',
             pictureChallenge: 'assets/assets/lister.gif'),
         SizedBox(height: 70),

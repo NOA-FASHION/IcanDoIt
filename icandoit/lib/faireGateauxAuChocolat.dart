@@ -1,6 +1,8 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:url_launcher/url_launcher.dart';
+
 
 import 'filp_main.dart';
 
@@ -74,8 +76,13 @@ class FaireGateauxAuChaocolat extends StatelessWidget {
             titreChallenge2: 'Faire un gâteau aux chocolat',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
-            actionChallenge:
-                "Pour lister éfficacement les évenements importants de votre recette. Vous devez d'abord créer un challenge de type normal. ",
+            actionChallenge: Column(
+              children: [
+                Text(
+                    "Pour lister éfficacement les évenements importants de votre recette."),
+                Text(" Vous devez d'abord créer un challenge de type normal. ")
+              ],
+            ),
             actionChallenge2: 'Créer un challenge Normal',
             pictureChallenge: 'assets/challengeQuotidien.png'),
         SizedBox(height: 30),
@@ -91,8 +98,36 @@ class FaireGateauxAuChaocolat extends StatelessWidget {
             titreChallenge2: 'Faire un gâteau aux chocolat',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
-            actionChallenge:
-                "Rentrer les différentes tâches et documents associer à la recette de votre gâteaux. Par exemple cela pourra être un élément de type tâche ou de type commentaire. Il est possible aussi de créer des éléments visuels ou auditifs comme une photo, un lien youtube, un lien internet ou une vidéo.",
+            actionChallenge: Column(
+              children: [
+                Text(
+                    "Rentrer les différentes tâches et documents associer à la recette de votre gâteaux."),
+                Text("  Par exemple cela pourra être"),
+                new ListTile(
+                  leading: Icon(Icons.fiber_manual_record),
+                  title: new Text(
+                      ' un élément de type tâche ou de type commentaire.'),
+                ),
+                Text(
+                    " Il est possible aussi de créer des éléments visuels ou auditifs comme"),
+                new ListTile(
+                  leading: Icon(Icons.fiber_manual_record),
+                  title: new Text(' une photo'),
+                ),
+                new ListTile(
+                  leading: Icon(Icons.fiber_manual_record),
+                  title: new Text(' un lien youtube'),
+                ),
+                new ListTile(
+                  leading: Icon(Icons.fiber_manual_record),
+                  title: new Text(' un lien internet'),
+                ),
+                new ListTile(
+                  leading: Icon(Icons.fiber_manual_record),
+                  title: new Text(' une vidéo'),
+                )
+              ],
+            ),
             actionChallenge2: 'documentations  possibles',
             pictureChallenge: 'assets/challengeQuotidien.png'),
         SizedBox(height: 30),
@@ -108,8 +143,8 @@ class FaireGateauxAuChaocolat extends StatelessWidget {
             titreChallenge2: 'Faire un gâteau aux chocolat',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
-            actionChallenge:
-                "Lors de la réalisation de votre recette valider chaque étape par un swipe vers la gauche.",
+            actionChallenge: Text(
+                "Lors de la réalisation de votre recette valider chaque étape par un swipe vers la gauche."),
             actionChallenge2: 'Documentations possibles',
             pictureChallenge: 'assets/assets/lister.gif'),
         SizedBox(height: 30),
@@ -125,8 +160,8 @@ class FaireGateauxAuChaocolat extends StatelessWidget {
             titreChallenge2: 'Faire un gâteau aux chocolat',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
-            actionChallenge:
-                "Pour accéder a la documentions que vous avez associer a votre recette , il suffit de sélectionner l'élément et vous y aurez accès. ",
+            actionChallenge: Text(
+                "Pour accéder a la documentions que vous avez associer a votre recette , il suffit de sélectionner l'élément et vous y aurez accès. "),
             actionChallenge2: 'Documentations  possibles',
             pictureChallenge: 'assets/assets/lister.gif'),
         SizedBox(height: 30),
@@ -142,8 +177,8 @@ class FaireGateauxAuChaocolat extends StatelessWidget {
             titreChallenge2: 'Faire un gâteau aux chocolat',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
-            actionChallenge:
-                "Avant de valider chaque étape, il est conseillé de faire une sauvegarde de la mission en faisant un appuie long sur la mission.",
+            actionChallenge: Text(
+                "Avant de valider chaque étape, il est conseillé de faire une sauvegarde de la mission en faisant un appuie long sur la mission."),
             actionChallenge2: 'Documentations possibles',
             pictureChallenge: 'assets/assets/lister.gif'),
         SizedBox(height: 30),
@@ -159,8 +194,8 @@ class FaireGateauxAuChaocolat extends StatelessWidget {
             titreChallenge2: 'Faire un gâteau aux chocolat',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
-            actionChallenge:
-                " Vous pourrez a tout moment effectuer une restauration manuelle des procès enregistrés",
+            actionChallenge: Text(
+                " Vous pourrez a tout moment effectuer une restauration manuelle des procès enregistrés"),
             actionChallenge2: 'Documentations possibles',
             pictureChallenge: 'assets/assets/lister.gif'),
         SizedBox(height: 70),

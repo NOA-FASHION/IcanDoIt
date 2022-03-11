@@ -1,7 +1,9 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:icandoit/filp_main.dart';
 import 'package:lottie/lottie.dart';
-import 'package:url_launcher/url_launcher.dart';
+
 
 class ListeTacheQuotidienne extends StatelessWidget {
   const ListeTacheQuotidienne({
@@ -75,8 +77,14 @@ class ListeTacheQuotidienne extends StatelessWidget {
             titreChallenge2: 'Lister vos taches quotidiennes',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
-            actionChallenge:
-                "Pour lister éfficacement les évenements importants de votre journée. Vous devez d'abord créer un challenge de type quotidien.",
+            actionChallenge: Column(
+              children: [
+                Text(
+                    "Pour lister éfficacement les évenements importants de votre journée."),
+                Text(
+                    "  Vous devez d'abord créer un challenge de type quotidien.")
+              ],
+            ),
             actionChallenge2: 'Créer un challenge quotidien',
             pictureChallenge: 'assets/challengeQuotidien.png'),
         SizedBox(height: 30),
@@ -92,8 +100,8 @@ class ListeTacheQuotidienne extends StatelessWidget {
             titreChallenge2: 'Lister vos taches quotidiennes',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
-            actionChallenge:
-                "confectionnez des éléments illustrant les tâches que vous pensez réalisez quotidiennement",
+            actionChallenge: Text(
+                "confectionnez des éléments illustrant les tâches que vous pensez réalisez quotidiennement"),
             actionChallenge2: 'Eléments et documentations',
             pictureChallenge: 'assets/challengeQuotidien.png'),
         SizedBox(height: 30),
@@ -109,8 +117,8 @@ class ListeTacheQuotidienne extends StatelessWidget {
             titreChallenge2: 'Faire un gâteau aux chocolat',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
-            actionChallenge:
-                "Lors de la réalisation de vos tâches quotidienne, valider chaque étape par un swipe vers la gauche, ou consulter a tout moment la documentation visuel ou auditive associé.",
+            actionChallenge: Text(
+                "Lors de la réalisation de vos tâches quotidienne, valider chaque étape par un swipe vers la gauche, ou consulter a tout moment la documentation visuel ou auditive associé."),
             actionChallenge2: 'Documentations possibles',
             pictureChallenge: 'assets/assets/lister.gif'),
         SizedBox(height: 30),
@@ -126,8 +134,8 @@ class ListeTacheQuotidienne extends StatelessWidget {
             titreChallenge2: 'Lister vos taches quotidiennes',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
-            actionChallenge:
-                "Imaginez que vous avez validé les  évenenements 1, 2 et 5  aujourd'hui. Le jour suivant la totalité des évenements seront restauré à leur état initial",
+            actionChallenge: Text(
+                "Imaginez que vous avez validé les  évenenements 1, 2 et 5  aujourd'hui, le jour suivant la totalité des évenements seront restauré à leur état initial"),
             actionChallenge2: 'Sauvegarde et restauration ',
             pictureChallenge: 'assets/assets/lister.gif'),
         SizedBox(height: 30),
@@ -143,8 +151,8 @@ class ListeTacheQuotidienne extends StatelessWidget {
             titreChallenge2: 'Lister vos taches quotidiennes',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
-            actionChallenge:
-                "Chaque élément qui compose la mission peut être un commentaire, un lien youtube, un prix, une informations.",
+            actionChallenge: Text(
+                "Chaque élément qui compose la mission peut être un commentaire, un lien youtube, un prix, une informations."),
             actionChallenge2: 'Documentations possibles',
             pictureChallenge: 'assets/assets/lister.gif'),
         SizedBox(height: 70),

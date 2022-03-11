@@ -73,8 +73,14 @@ class Formations extends StatelessWidget {
             titreChallenge2: 'Liste de formations',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
-            actionChallenge:
-                "Imaginez que vous avez une liste de formation ou de matière a travailler régulièrement et que vous souhaitez avoir un suivi précis de votre progression.Vous devez créer une mission hebdomadaire que vous nommerez Formation et sélectionner les jours de la semaine que vous avez réservé pour étudier.",
+            actionChallenge: Column(
+              children: [
+                Text(
+                    "Imaginez que vous avez une liste de formation ou de matière a travailler régulièrement et que vous souhaitez avoir un suivi précis de votre progression."),
+                Text(
+                    "Vous devez créer une mission hebdomadaire que vous nommerez Formation et sélectionner les jours de la semaine que vous avez réservé pour étudier."),
+              ],
+            ),
             actionChallenge2: 'Créer un challenge quotidien',
             pictureChallenge: 'assets/challengeQuotidien.png'),
         SizedBox(height: 30),
@@ -90,8 +96,8 @@ class Formations extends StatelessWidget {
             titreChallenge2: 'Liste de formations',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
-            actionChallenge:
-                "Rentrer les différentes formations que vous étudiez en créant pour chaque matière un évenement de type formations.",
+            actionChallenge: Text(
+                "Rentrer les différentes formations que vous étudiez en créant pour chaque matière un évenement de type formations."),
             actionChallenge2: 'Eléments et documentations ',
             pictureChallenge: 'assets/challengeQuotidien.png'),
         SizedBox(height: 30),
@@ -107,8 +113,8 @@ class Formations extends StatelessWidget {
             titreChallenge2: 'Faire un gâteau aux chocolat',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
-            actionChallenge:
-                "Vous pouvez par un swipe vers la gauche valider l'assimilation de chaque étape de votre formation. ",
+            actionChallenge: Text(
+                "Vous pouvez par un swipe vers la gauche valider l'assimilation de chaque étape de votre formation. "),
             actionChallenge2: 'Documentations possibles',
             pictureChallenge: 'assets/lister.gif'),
         SizedBox(height: 30),
@@ -124,8 +130,8 @@ class Formations extends StatelessWidget {
             titreChallenge2: 'Liste de formations',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
-            actionChallenge:
-                "En cliquant sur une des formation existante vous avez la possibilité de vérifier votre progression . ",
+            actionChallenge: Text(
+                "En cliquant sur une des formation existante vous avez la possibilité de vérifier votre progression . "),
             actionChallenge2: 'visualiser votre progression',
             pictureChallenge: 'assets/assets/lister.gif'),
         SizedBox(height: 30),
@@ -141,8 +147,14 @@ class Formations extends StatelessWidget {
             titreChallenge2: 'Liste de formations',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
-            actionChallenge:
-                "Vous pouvez aussi a tout moment modifier la progression de votre parcours de formation en sélectionnant l'icone en forme de crayon. Cela vous permettra de reprendre votre formation exactement à l'endroit ou vous vous êtes arreter la dernière fois. ",
+            actionChallenge: Column(
+              children: [
+                Text(
+                    "Vous pouvez aussi a tout moment modifier la progression de votre parcours de formation en sélectionnant l'icone en forme de crayon. "),
+                Text(
+                    "Cela vous permettra de reprendre votre formation exactement à l'endroit ou vous vous êtes arreter la dernière fois. ")
+              ],
+            ),
             actionChallenge2: 'Documentations possibles',
             pictureChallenge: 'assets/formation1.gif'),
         SizedBox(height: 30),
@@ -158,8 +170,8 @@ class Formations extends StatelessWidget {
             titreChallenge2: 'Liste de formations',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
-            actionChallenge:
-                "la totalité des évenements seront restauré à leur état initial a chaque journé de la semaine que vous avez choisi, lors de la création de votre mission hebdomadaire.",
+            actionChallenge: Text(
+                "la totalité des évenements seront restauré à leur état initial a chaque journé de la semaine que vous avez choisi, lors de la création de votre mission hebdomadaire."),
             actionChallenge2: 'Documentations possibles',
             pictureChallenge: 'assets/formation1.gif'),
         SizedBox(height: 70),
