@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:icandoit/filp_main.dart';
+import 'package:lottie/lottie.dart';
 
 class ShareChallenge extends StatelessWidget {
   const ShareChallenge({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-      return Column(
+    return Column(
       children: [
         SizedBox(height: 60),
         Stack(
@@ -44,33 +45,33 @@ class ShareChallenge extends StatelessWidget {
             ),
           ],
         ),
-          FlipLayoutDemo(
+        FlipLayoutDemo(
             lienInternet:
                 "https://newaccount1626188315630.freshdesk.com/a/solutions/articles/69000804380",
             etape: 'Option',
             typeChallenge1: 'Partager facilement',
             typeChallenge: "  votre playlist",
-           lottiesChallenge: "assets/share2.json",
+            lottiesChallenge: "assets/share2.json",
             assetPictureChallengeeCreer: 'assets/music1.gif',
             titreChallenge: 'Challenges quotidien',
-            titreChallenge2: "Quelques fonctions intéressant",,
+            titreChallenge2: "Quelques fonctions intéressant",
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge:
                 " Vous pouvez partagez votre liste a quelqu'un facilement en sélectionnant l'icône de partage en haut a droite de votre liste d'étape. Vous aurez le choix de l'envoyer par email, watsapp ,etc",
             actionChallenge2: 'Documentations possibles',
             pictureChallenge: 'assets/music1.gif'),
-             SizedBox(height: 30),
+        SizedBox(height: 30),
         FlipLayoutDemo(
             lienInternet:
                 "https://newaccount1626188315630.freshdesk.com/a/solutions/articles/69000804380",
             etape: 'Option',
             typeChallenge1: 'Uploader facilement',
             typeChallenge: "  votre playlist",
-           lottiesChallenge: "assets/upload3.json",
+            lottiesChallenge: "assets/upload3.json",
             assetPictureChallengeeCreer: 'assets/uploadMusic.gif',
             titreChallenge: 'Challenges quotidien',
-            titreChallenge2: "Quelques fonctions intéressant",,
+            titreChallenge2: "Quelques fonctions intéressant",
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge:
@@ -86,7 +87,7 @@ class ShareChallenge extends StatelessWidget {
             lottiesChallenge: "assets/verifyEtat.json",
             assetPictureChallengeeCreer: 'assets/restaurant2.gif',
             titreChallenge: 'Challenges quotidien',
-            titreChallenge2: "Quelques fonctions intéressant",,
+            titreChallenge2: "Quelques fonctions intéressant",
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge:
@@ -103,7 +104,7 @@ class ShareChallenge extends StatelessWidget {
             lottiesChallenge: "assets/succes2.json",
             assetPictureChallengeeCreer: 'assets/score.png',
             titreChallenge: 'Challenges quotidien',
-            titreChallenge2: "Quelques fonctions intéressant",,
+            titreChallenge2: "Quelques fonctions intéressant",
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge:
@@ -120,15 +121,14 @@ class ShareChallenge extends StatelessWidget {
             lottiesChallenge: "assets/notification.json",
             assetPictureChallengeeCreer: 'assets/music1.gif',
             titreChallenge: 'Challenges quotidien',
-            titreChallenge2: "Quelques fonctions intéressant",,
+            titreChallenge2: "Quelques fonctions intéressant",
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge:
                 "Selon votre choix périodique, Une notification automatique e sera active pour vous rappeler et vous encourager dans vos taches quotidiennes.. ",
             actionChallenge2: 'Documentations possibles',
             pictureChallenge: 'assets/music1.gif'),
-             SizedBox(height: 30),
-       
+        SizedBox(height: 30),
         SizedBox(height: 70),
       ],
     );

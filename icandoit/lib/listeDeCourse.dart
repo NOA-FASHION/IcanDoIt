@@ -96,7 +96,7 @@ class ListeDeCourses extends StatelessWidget {
             actionChallenge:
                 "Lors de la création de votre liste de courses, valider chaque achat par un swipe vers la gauche.",
             actionChallenge2: 'Documentations possibles',
-            pictureChallenge: 'assets/assets/lister.gif'),
+            pictureChallenge: 'assets/lister.gif'),
         SizedBox(height: 30),
         FlipLayoutDemo(
             lienInternet:
@@ -105,7 +105,7 @@ class ListeDeCourses extends StatelessWidget {
             typeChallenge1: ' Acces aux informations ',
             typeChallenge: " d'achats et de prévisions.",
             lottiesChallenge: "assets/accederDoc.json",
-            assetPictureChallengeeCreer: 'assets/assets/listeDeCourse.gif',
+            assetPictureChallengeeCreer: 'assets/listeDeCourse.gif',
             titreChallenge: 'Challenges quotidien',
             titreChallenge2: 'Faire une liste de course',
             descriptionChallenge: 'Liste des challenges',
@@ -113,16 +113,16 @@ class ListeDeCourses extends StatelessWidget {
             actionChallenge:
                 "Un compteur apparait avec les informations suivantes: achats et prévisions. le compteur achart repésente la somme de vos achats et le compteur prévision représente la somme de vos prévision d'achat.",
             actionChallenge2: 'Documentations  possibles',
-            pictureChallenge: 'assets/assets/lister.gif'),
+            pictureChallenge: 'assets/lister.gif'),
         SizedBox(height: 30),
-         FlipLayoutDemo(
+        FlipLayoutDemo(
             lienInternet:
                 "https://newaccount1626188315630.freshdesk.com/a/solutions/articles/69000513743",
             etape: 'Option',
             typeChallenge1: 'Modification en live',
             typeChallenge: "du prix des articles",
             lottiesChallenge: "assets/calculator.json",
-            assetPictureChallengeeCreer: 'assets/assets/listedecourse2.gif',
+            assetPictureChallengeeCreer: 'assets/listedecourse2.gif',
             titreChallenge: 'Challenges quotidien',
             titreChallenge2: 'Faire une liste de course',
             descriptionChallenge: 'Liste des challenges',
@@ -130,7 +130,7 @@ class ListeDeCourses extends StatelessWidget {
             actionChallenge:
                 "Vous avez la possibilité de modifier le prix des articles, ce qui aura pour conséquence de modifier le compteur d'achat et de prévision en live.",
             actionChallenge2: 'Documentations possibles',
-            pictureChallenge: 'assets/assets/lister.gif'),
+            pictureChallenge: 'assets/lister.gif'),
         SizedBox(height: 30),
         FlipLayoutDemo(
             lienInternet:
@@ -147,7 +147,7 @@ class ListeDeCourses extends StatelessWidget {
             actionChallenge:
                 "Avant de valider chaque achats, il est conseillé de faire une sauvegarde de votre liste de course. Cela vous permettra de la réétuliser le mois prochain.",
             actionChallenge2: 'Documentations possibles',
-            pictureChallenge: 'assets/assets/lister.gif'),
+            pictureChallenge: 'assets/lister.gif'),
         SizedBox(height: 30),
         FlipLayoutDemo(
             lienInternet:
@@ -164,7 +164,7 @@ class ListeDeCourses extends StatelessWidget {
             actionChallenge:
                 " Vous pourrez a tout moment effectuer une restauration manuelle des articles enregistrés",
             actionChallenge2: 'Documentations possibles',
-            pictureChallenge: 'assets/assets/lister.gif'),
+            pictureChallenge: 'assets/lister.gif'),
         SizedBox(height: 70),
       ],
     );

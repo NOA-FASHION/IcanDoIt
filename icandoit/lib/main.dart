@@ -8,6 +8,8 @@ import 'package:icandoit/listeDeCourse.dart';
 import 'package:icandoit/screens/components/challenge_list_save.dart';
 import 'package:icandoit/screens/components/formations.dart';
 import 'package:icandoit/screens/components/listeDeMusics.dart';
+import 'package:icandoit/screens/components/restaurantList.dart';
+import 'package:icandoit/screens/components/shareChallenge.dart';
 import 'package:icandoit/screens/components/travauxDeRenovation.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:page_transition/page_transition.dart';

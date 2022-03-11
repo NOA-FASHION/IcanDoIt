@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../../filp_main.dart';
 
 class RestaurantList extends StatelessWidget {
   const RestaurantList({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-     return Column(
+    return Column(
       children: [
         SizedBox(height: 60),
         Stack(
@@ -39,7 +42,7 @@ class RestaurantList extends StatelessWidget {
               alignment: Alignment.topRight,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Lottie.asset("assets/restaurant3.json", width: 60),
+                child: Lottie.asset("assets/restaurant4.json", width: 60),
               ),
             ),
           ],
@@ -80,7 +83,7 @@ class RestaurantList extends StatelessWidget {
             pictureChallenge: 'assets/challengeQuotidien.png'),
         SizedBox(height: 30),
         FlipLayoutDemo(
-             lienInternet:
+            lienInternet:
                 "https://newaccount1626188315630.freshdesk.com/support/solutions/articles/69000509155-cr%C3%A9er-un-challenge",
             etape: 'Etape 3',
             typeChallenge1: 'Créer une mission',

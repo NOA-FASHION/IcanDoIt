@@ -41,7 +41,7 @@ class ListeDeMusics extends StatelessWidget {
               alignment: Alignment.topRight,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Lottie.asset("assets/music2.gif", width: 60),
+                child: Lottie.asset("assets/music1.json", width: 60),
               ),
             ),
           ],
@@ -113,7 +113,7 @@ class ListeDeMusics extends StatelessWidget {
             actionChallenge:
                 "Automatiquement une icône youtube apparaît en haut a gauche de votre Ecran vous donnant la possibilité d'écouter votre liste de musique l'un a la suite de l'autre. ",
             actionChallenge2: 'Documentations  possibles',
-            pictureChallenge: 'assets/assets/lister.gif'),
+            pictureChallenge: 'assets/lister.gif'),
         SizedBox(height: 30),
         FlipLayoutDemo(
             lienInternet:
@@ -130,7 +130,7 @@ class ListeDeMusics extends StatelessWidget {
             actionChallenge:
                 "Il est conseillé de faire une sauvegarde de votre playListe en faisant un appuie long sur la mission.",
             actionChallenge2: 'Documentations possibles',
-            pictureChallenge: 'assets/assets/lister.gif'),
+            pictureChallenge: 'assets/lister.gif'),
         SizedBox(height: 30),
         FlipLayoutDemo(
             lienInternet:
@@ -148,7 +148,7 @@ class ListeDeMusics extends StatelessWidget {
                 " Vous pouvez partagez votre liste a quelqu'un facilement en sélectionnant l'icône de partage en haut a droite de votre liste d'étape. Vous aurez le choix de l'envoyer par email, watsapp ,etc",
             actionChallenge2: 'Documentations possibles',
             pictureChallenge: 'assets/music1.gif'),
-             SizedBox(height: 30),
+        SizedBox(height: 30),
         FlipLayoutDemo(
             lienInternet:
                 "https://newaccount1626188315630.freshdesk.com/a/solutions/articles/69000804380",
