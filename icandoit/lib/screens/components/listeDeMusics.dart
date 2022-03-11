@@ -1,9 +1,6 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:icandoit/filp_main.dart';
 import 'package:lottie/lottie.dart';
-
 
 class ListeDeMusics extends StatelessWidget {
   const ListeDeMusics({Key key}) : super(key: key);
@@ -12,12 +9,12 @@ class ListeDeMusics extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(height: 60),
+        SizedBox(height: 70),
         Stack(
           children: [
             Container(
               padding: EdgeInsets.only(top: 10),
-              margin: EdgeInsets.only(top: 45),
+              margin: EdgeInsets.only(top: 35),
               height: 70,
               width: MediaQuery.of(context).size.width / 1.2,
               decoration: BoxDecoration(
@@ -41,9 +38,23 @@ class ListeDeMusics extends StatelessWidget {
             ),
             Align(
               alignment: Alignment.topRight,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Lottie.asset("assets/music1.json", width: 60),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  // gradient: LinearGradient(
+                  //     begin: Alignment.centerLeft,
+                  //     end: Alignment.centerRight,
+                  //     colors: [Colors.orange, Colors.blue]),
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(
+                    color: Colors.blue,
+                    width: 2,
+                  ),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Lottie.asset("assets/music1.json", width: 45),
+                ),
               ),
             ),
           ],
@@ -66,7 +77,7 @@ class ListeDeMusics extends StatelessWidget {
                 Text(
                     "Si vous souhaitez enregistré une liste de music ou de reportage youtube."),
                 Text(
-                    " Pour créer votre playliste,vous devez d'abord créer un challenge de type normal. ")
+                    "Créer votre playliste,vous devez d'abord créer un challenge de type normal. ")
               ],
             ),
             actionChallenge2: 'Créer un challenge Normal',
@@ -84,14 +95,21 @@ class ListeDeMusics extends StatelessWidget {
             titreChallenge2: 'Créer ma playlist de music',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
-            actionChallenge: Text(
-                "créer un élément de type youtube pour chaque music que vous souhaitez écouter."),
+            actionChallenge: Column(
+              children: [
+                Text(
+                    "créer un élément de type youtube pour chaque music que vous souhaitez écouter."),
+                SizedBox(
+                  height: 20,
+                )
+              ],
+            ),
             actionChallenge2: 'documentations  possibles',
             pictureChallenge: 'assets/challengeQuotidien.png'),
         SizedBox(height: 30),
         FlipLayoutDemo(
             lienInternet:
-                "https://newaccount1626188315630.freshdesk.com/support/solutions/articles/69000513812-documentation-possible",
+                "https://newaccount1626188315630.freshdesk.com/a/solutions/articles/69000804649",
             etape: 'Etape 3',
             typeChallenge1: 'Validation des étapes',
             typeChallenge: "importante de votre recette",
@@ -103,7 +121,7 @@ class ListeDeMusics extends StatelessWidget {
             prioriteChallenge: 'Quotidien',
             actionChallenge: Text(
                 "Lors de la réalisation de votre recette valider chaque étape par un swipe vers la gauche, ou consulter a tout moment la documentation visuel ou auditive associer a votre mission"),
-            actionChallenge2: 'Documentations possibles',
+            actionChallenge2: 'Validation des challenges',
             pictureChallenge: 'assets/assets/lister.gif'),
         SizedBox(height: 30),
         FlipLayoutDemo(
@@ -127,7 +145,7 @@ class ListeDeMusics extends StatelessWidget {
             lienInternet:
                 "https://newaccount1626188315630.freshdesk.com/a/solutions/articles/69000513743",
             etape: 'Option',
-            typeChallenge1: 'Réaliser une',
+            typeChallenge1: 'Réaliser facilement une',
             typeChallenge: "Sauvegarde manuelle",
             lottiesChallenge: "assets/backup.json",
             assetPictureChallengeeCreer: 'assets/FaireGateauxAuChocoalat1.gif',
@@ -137,12 +155,12 @@ class ListeDeMusics extends StatelessWidget {
             prioriteChallenge: 'Quotidien',
             actionChallenge: Text(
                 "Il est conseillé de faire une sauvegarde de votre playListe en faisant un appuie long sur la mission."),
-            actionChallenge2: 'Documentations possibles',
+            actionChallenge2: 'Sauvegarde manuelle',
             pictureChallenge: 'assets/lister.gif'),
         SizedBox(height: 30),
         FlipLayoutDemo(
             lienInternet:
-                "https://newaccount1626188315630.freshdesk.com/a/solutions/articles/69000804380",
+                "https://newaccount1626188315630.freshdesk.com/a/solutions/articles/69000513740",
             etape: 'Option',
             typeChallenge1: 'Partager facilement',
             typeChallenge: "  votre playlist",
@@ -150,7 +168,7 @@ class ListeDeMusics extends StatelessWidget {
             assetPictureChallengeeCreer: 'assets/music1.gif',
             titreChallenge: 'Challenges quotidien',
             titreChallenge2: 'Créer ma playlist de music',
-            descriptionChallenge: 'Liste des challenges',
+            descriptionChallenge: 'Partager un challenge',
             prioriteChallenge: 'Quotidien',
             actionChallenge: Column(
               children: [
@@ -159,12 +177,12 @@ class ListeDeMusics extends StatelessWidget {
                 Text("Vous aurez le choix de l'envoyer par email, watsapp ,etc")
               ],
             ),
-            actionChallenge2: 'Documentations possibles',
+            actionChallenge2: 'Partager un challenge',
             pictureChallenge: 'assets/music1.gif'),
         SizedBox(height: 30),
         FlipLayoutDemo(
             lienInternet:
-                "https://newaccount1626188315630.freshdesk.com/a/solutions/articles/69000804380",
+                "https://newaccount1626188315630.freshdesk.com/a/solutions/articles/69000513841",
             etape: 'Option',
             typeChallenge1: 'Uploader facilement',
             typeChallenge: "  votre playlist",
@@ -174,9 +192,16 @@ class ListeDeMusics extends StatelessWidget {
             titreChallenge2: 'Créer ma playlist de music',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
-            actionChallenge: Text(
-                " Vous pouvez uoploader une liste qu'un de vos amies vous a envoyé."),
-            actionChallenge2: 'Documentations possibles',
+            actionChallenge: Column(
+              children: [
+                Text(
+                    " Vous pouvez uoploader une liste qu'un de vos amies vous a envoyé."),
+                SizedBox(
+                  height: 20,
+                )
+              ],
+            ),
+            actionChallenge2: 'Uploader un challenge',
             pictureChallenge: 'assets/music1.gif'),
         SizedBox(height: 70),
       ],

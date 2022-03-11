@@ -1,9 +1,6 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:icandoit/filp_main.dart';
 import 'package:lottie/lottie.dart';
-
 
 class ListeTacheQuotidienne extends StatelessWidget {
   const ListeTacheQuotidienne({
@@ -81,8 +78,7 @@ class ListeTacheQuotidienne extends StatelessWidget {
               children: [
                 Text(
                     "Pour lister éfficacement les évenements importants de votre journée."),
-                Text(
-                    "  Vous devez d'abord créer un challenge de type quotidien.")
+                Text("Vous devez d'abord créer un challenge de type quotidien.")
               ],
             ),
             actionChallenge2: 'Créer un challenge quotidien',
@@ -151,8 +147,39 @@ class ListeTacheQuotidienne extends StatelessWidget {
             titreChallenge2: 'Lister vos taches quotidiennes',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
-            actionChallenge: Text(
-                "Chaque élément qui compose la mission peut être un commentaire, un lien youtube, un prix, une informations."),
+            actionChallenge: Column(
+              children: [
+                Text("Chaque élément qui compose la mission peut être:"),
+                Row(
+                  children: [
+                    Text('\u2022'),
+                    SizedBox(width: 5),
+                    Expanded(child: Text('un commentaire.')),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Text('\u2022'),
+                    SizedBox(width: 5),
+                    Expanded(child: Text('un lien youtube.')),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Text('\u2022'),
+                    SizedBox(width: 5),
+                    Expanded(child: Text('un prix.')),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Text('\u2022'),
+                    SizedBox(width: 5),
+                    Expanded(child: Text('une informations.')),
+                  ],
+                ),
+              ],
+            ),
             actionChallenge2: 'Documentations possibles',
             pictureChallenge: 'assets/assets/lister.gif'),
         SizedBox(height: 70),

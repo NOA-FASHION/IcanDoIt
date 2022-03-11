@@ -90,8 +90,15 @@ class TravauxDeRenovation extends StatelessWidget {
             titreChallenge2: 'Projet de rénovation',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
-            actionChallenge: Text(
-                "Créer un élément de type 'projet' pour chaque pièce de la maison."),
+            actionChallenge: Column(
+              children: [
+                Text(
+                    "Créer un élément de type 'projet' pour chaque pièce de la maison."),
+                SizedBox(
+                  height: 20,
+                )
+              ],
+            ),
             actionChallenge2: 'documentations  possibles',
             pictureChallenge: 'assets/challengeQuotidien.png'),
         SizedBox(height: 30),
@@ -99,8 +106,8 @@ class TravauxDeRenovation extends StatelessWidget {
             lienInternet:
                 "https://newaccount1626188315630.freshdesk.com/support/solutions/articles/69000513812-documentation-possible",
             etape: 'Etape 3',
-            typeChallenge1: 'Exemple de structure',
-            typeChallenge: "pour un projet de rénovation",
+            typeChallenge1: 'Exemple de structure pour',
+            typeChallenge: "un projet de rénovation",
             lottiesChallenge: "assets/structure.json",
             assetPictureChallengeeCreer: 'assets/travaux1.png',
             titreChallenge: 'Challenges quotidien',
@@ -110,16 +117,22 @@ class TravauxDeRenovation extends StatelessWidget {
             actionChallenge: Column(
               children: [
                 Text("Créer pour chaque pièce de votre maison, "),
-                new ListTile(
-                  leading: Icon(Icons.fiber_manual_record),
-                  title: new Text(
-                      'une mission tutoriel dans laquel sera placé une liste de tutoriel'),
+                Row(
+                  children: [
+                    Text('\u2022'),
+                    SizedBox(width: 5),
+                    Expanded(child: Text('une mission de type tutoriel')),
+                  ],
                 ),
-                new ListTile(
-                  leading: Icon(Icons.fiber_manual_record),
-                  title: new Text(
-                      ' une autre mission Média dans le quel sera placé une liste de photos et videos de meuble ou matériaux avec leur ref et leur prix,etc., '),
-                )
+                Row(
+                  children: [
+                    Text('\u2022'),
+                    SizedBox(width: 5),
+                    Expanded(
+                        child: Text(
+                            'une mission de type  photos ou videos des meubles ou matériaux avec leur ref et leur prix,etc.')),
+                  ],
+                ),
               ],
             ),
             actionChallenge2: 'Documentations possibles',

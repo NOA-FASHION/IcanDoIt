@@ -75,7 +75,7 @@ class RestaurantList extends StatelessWidget {
                 "https://newaccount1626188315630.freshdesk.com/support/solutions/articles/69000513812-documentation-possible",
             etape: 'Etape 2',
             typeChallenge1: ' Créer une liste de catégorie',
-            typeChallenge: ' pour chaque type de restaurant',
+            typeChallenge: ' par type de restaurant',
             lottiesChallenge: "assets/recetteEtape.json",
             assetPictureChallengeeCreer: 'assets/listerestau.png',
             titreChallenge: 'Challenges quotidien',
@@ -85,17 +85,27 @@ class RestaurantList extends StatelessWidget {
             actionChallenge: Column(children: [
               Text(
                   "Ensuite listez vos restaurants par Catégorie en créant des objets de type information, par exemple:"),
-              new ListTile(
-                leading: Icon(Icons.fiber_manual_record),
-                title: new Text('Restaurant chinois'),
+              Row(
+                children: [
+                  Text('\u2022'),
+                  SizedBox(width: 5),
+                  Expanded(child: Text('Restaurant chinois.')),
+                ],
               ),
-              new ListTile(
-                leading: Icon(Icons.fiber_manual_record),
-                title: new Text('fast food '),
+              Row(
+                children: [
+                  Text('\u2022'),
+                  SizedBox(width: 5),
+                  Expanded(child: Text('fast food.')),
+                ],
               ),
-              new ListTile(
-                  leading: Icon(Icons.fiber_manual_record),
-                  title: new Text('restaurant chic'))
+              Row(
+                children: [
+                  Text('\u2022'),
+                  SizedBox(width: 5),
+                  Expanded(child: Text('restaurant chic.')),
+                ],
+              ),
             ]),
             actionChallenge2: 'documentations  possibles',
             pictureChallenge: 'assets/challengeQuotidien.png'),
@@ -112,8 +122,15 @@ class RestaurantList extends StatelessWidget {
             titreChallenge2: 'Lister vos restaurants préférées',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
-            actionChallenge: Text(
-                "pour chaque catégorie créer un mission normal avec le nom du restaurant  "),
+            actionChallenge: Column(
+              children: [
+                Text(
+                    "pour chaque catégorie créer un mission normal avec le nom du restaurant  "),
+                SizedBox(
+                  height: 20,
+                )
+              ],
+            ),
             actionChallenge2: 'Documentations possibles',
             pictureChallenge: 'assets/assets/lister.gif'),
         SizedBox(height: 30),
@@ -121,8 +138,8 @@ class RestaurantList extends StatelessWidget {
             lienInternet:
                 "https://newaccount1626188315630.freshdesk.com/support/solutions/articles/69000513812-documentation-possible",
             etape: 'Etape 4',
-            typeChallenge1: ' créer la liste de caractéristique',
-            typeChallenge: '  importantes de vos restaurants ',
+            typeChallenge1: 'Lister les caractéristique',
+            typeChallenge: ' de vos restaurants ',
             lottiesChallenge: "assets/digital.json",
             assetPictureChallengeeCreer: 'assets/restaurant1.gif',
             titreChallenge: 'Challenges quotidien',
@@ -132,22 +149,41 @@ class RestaurantList extends StatelessWidget {
             actionChallenge: Column(
               children: [
                 Text("rentrer et associer y les documents importants tel que:"),
-                new ListTile(
-                  leading: Icon(Icons.fiber_manual_record),
-                  title: new Text("l'adresse, les photos"),
+                Row(
+                  children: [
+                    Text('\u2022'),
+                    SizedBox(width: 5),
+                    Expanded(child: Text("l'adresse")),
+                  ],
                 ),
-                new ListTile(
-                  leading: Icon(Icons.fiber_manual_record),
-                  title: new Text('des videos'),
+                Row(
+                  children: [
+                    Text('\u2022'),
+                    SizedBox(width: 5),
+                    Expanded(child: Text('les photos.')),
+                  ],
                 ),
-                new ListTile(
-                  leading: Icon(Icons.fiber_manual_record),
-                  title: new Text('des liens internet avec des avis'),
+                Row(
+                  children: [
+                    Text('\u2022'),
+                    SizedBox(width: 5),
+                    Expanded(child: Text('des videos.')),
+                  ],
                 ),
-                new ListTile(
-                  leading: Icon(Icons.fiber_manual_record),
-                  title: new Text('des video youtube'),
-                )
+                Row(
+                  children: [
+                    Text('\u2022'),
+                    SizedBox(width: 5),
+                    Expanded(child: Text('des liens internet avec des avis.')),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Text('\u2022'),
+                    SizedBox(width: 5),
+                    Expanded(child: Text('des video youtube.')),
+                  ],
+                ),
               ],
             ),
             actionChallenge2: 'Documentations  possibles',

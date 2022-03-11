@@ -98,7 +98,6 @@ class FlipLayoutDemo extends StatelessWidget {
             ),
           ),
           Container(
-            height: 150,
             decoration: BoxDecoration(
                 borderRadius: const BorderRadius.all(Radius.circular(8.0)),
                 gradient: LinearGradient(

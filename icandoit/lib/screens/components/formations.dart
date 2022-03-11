@@ -115,7 +115,7 @@ class Formations extends StatelessWidget {
             prioriteChallenge: 'Quotidien',
             actionChallenge: Text(
                 "Vous pouvez par un swipe vers la gauche valider l'assimilation de chaque étape de votre formation. "),
-            actionChallenge2: 'Documentations possibles',
+            actionChallenge2: 'Validation des challenges',
             pictureChallenge: 'assets/lister.gif'),
         SizedBox(height: 30),
         FlipLayoutDemo(
@@ -155,7 +155,7 @@ class Formations extends StatelessWidget {
                     "Cela vous permettra de reprendre votre formation exactement à l'endroit ou vous vous êtes arreter la dernière fois. ")
               ],
             ),
-            actionChallenge2: 'Documentations possibles',
+            actionChallenge2: 'Modification progression',
             pictureChallenge: 'assets/formation1.gif'),
         SizedBox(height: 30),
         FlipLayoutDemo(
@@ -172,7 +172,7 @@ class Formations extends StatelessWidget {
             prioriteChallenge: 'Quotidien',
             actionChallenge: Text(
                 "la totalité des évenements seront restauré à leur état initial a chaque journé de la semaine que vous avez choisi, lors de la création de votre mission hebdomadaire."),
-            actionChallenge2: 'Documentations possibles',
+            actionChallenge2: 'Sauvegarde et restauration',
             pictureChallenge: 'assets/formation1.gif'),
         SizedBox(height: 70),
       ],

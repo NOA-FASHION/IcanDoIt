@@ -9,12 +9,12 @@ class ShareChallenge extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(height: 60),
+        SizedBox(height: 70),
         Stack(
           children: [
             Container(
               padding: EdgeInsets.only(top: 10),
-              margin: EdgeInsets.only(top: 45),
+              margin: EdgeInsets.only(top: 35),
               height: 70,
               width: MediaQuery.of(context).size.width / 1.2,
               decoration: BoxDecoration(
@@ -38,13 +38,28 @@ class ShareChallenge extends StatelessWidget {
             ),
             Align(
               alignment: Alignment.topRight,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Lottie.asset("assets/fonctions1.json", width: 60),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  // gradient: LinearGradient(
+                  //     begin: Alignment.centerLeft,
+                  //     end: Alignment.centerRight,
+                  //     colors: [Colors.orange, Colors.blue]),
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(
+                    color: Colors.blue,
+                    width: 2,
+                  ),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Lottie.asset("assets/fonctions1.json", width: 50),
+                ),
               ),
             ),
           ],
         ),
+        SizedBox(height: 30),
         FlipLayoutDemo(
             lienInternet:
                 "https://newaccount1626188315630.freshdesk.com/a/solutions/articles/69000804380",
@@ -80,10 +95,18 @@ class ShareChallenge extends StatelessWidget {
             titreChallenge2: "Quelques fonctions intéressant",
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
-            actionChallenge: Text(
-                " Vous pouvez uoploader une liste qu'un de vos amies vous a envoyé."),
+            actionChallenge: Column(
+              children: [
+                Text(
+                    " Vous pouvez uploader une liste qu'un de vos amies vous a envoyé."),
+                SizedBox(
+                  height: 20,
+                )
+              ],
+            ),
             actionChallenge2: 'Documentations possibles',
             pictureChallenge: 'assets/music1.gif'),
+        SizedBox(height: 30),
         FlipLayoutDemo(
             lienInternet:
                 "https://newaccount1626188315630.freshdesk.com/support/solutions/articles/69000513812-documentation-possible",
@@ -126,8 +149,8 @@ class ShareChallenge extends StatelessWidget {
             lienInternet:
                 "https://newaccount1626188315630.freshdesk.com/a/solutions/articles/69000513704",
             etape: 'Option',
-            typeChallenge1: 'Paramétrez facilement des',
-            typeChallenge: "  notifications pour vos tâches.",
+            typeChallenge1: 'Paramétrez facilement ',
+            typeChallenge: " des notifications .",
             lottiesChallenge: "assets/notification.json",
             assetPictureChallengeeCreer: 'assets/music1.gif',
             titreChallenge: 'Challenges quotidien',

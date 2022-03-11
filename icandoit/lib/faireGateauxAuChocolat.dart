@@ -1,8 +1,5 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-
 
 import 'filp_main.dart';
 
@@ -103,29 +100,50 @@ class FaireGateauxAuChaocolat extends StatelessWidget {
                 Text(
                     "Rentrer les différentes tâches et documents associer à la recette de votre gâteaux."),
                 Text("  Par exemple cela pourra être"),
-                new ListTile(
-                  leading: Icon(Icons.fiber_manual_record),
-                  title: new Text(
-                      ' un élément de type tâche ou de type commentaire.'),
+                Row(
+                  children: [
+                    Text('\u2022'),
+                    SizedBox(width: 5),
+                    Expanded(child: Text('un élément de type tâche.')),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Text('\u2022'),
+                    SizedBox(width: 5),
+                    Expanded(child: Text('un élément de type commentaire.')),
+                  ],
                 ),
                 Text(
-                    " Il est possible aussi de créer des éléments visuels ou auditifs comme"),
-                new ListTile(
-                  leading: Icon(Icons.fiber_manual_record),
-                  title: new Text(' une photo'),
+                    "Il est possible aussi de créer des éléments visuels ou auditifs comme"),
+                Row(
+                  children: [
+                    Text('\u2022'),
+                    SizedBox(width: 5),
+                    Expanded(child: Text('une photo')),
+                  ],
                 ),
-                new ListTile(
-                  leading: Icon(Icons.fiber_manual_record),
-                  title: new Text(' un lien youtube'),
+                Row(
+                  children: [
+                    Text('\u2022'),
+                    SizedBox(width: 5),
+                    Expanded(child: Text('un lien youtube')),
+                  ],
                 ),
-                new ListTile(
-                  leading: Icon(Icons.fiber_manual_record),
-                  title: new Text(' un lien internet'),
+                Row(
+                  children: [
+                    Text('\u2022'),
+                    SizedBox(width: 5),
+                    Expanded(child: Text('un lien internet')),
+                  ],
                 ),
-                new ListTile(
-                  leading: Icon(Icons.fiber_manual_record),
-                  title: new Text(' une vidéo'),
-                )
+                Row(
+                  children: [
+                    Text('\u2022'),
+                    SizedBox(width: 5),
+                    Expanded(child: Text('une vidéo')),
+                  ],
+                ),
               ],
             ),
             actionChallenge2: 'documentations  possibles',
@@ -143,8 +161,15 @@ class FaireGateauxAuChaocolat extends StatelessWidget {
             titreChallenge2: 'Faire un gâteau aux chocolat',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
-            actionChallenge: Text(
-                "Lors de la réalisation de votre recette valider chaque étape par un swipe vers la gauche."),
+            actionChallenge: Column(
+              children: [
+                Text(
+                    "Lors de la réalisation de votre recette valider chaque étape par un swipe vers la gauche."),
+                SizedBox(
+                  height: 20,
+                )
+              ],
+            ),
             actionChallenge2: 'Documentations possibles',
             pictureChallenge: 'assets/assets/lister.gif'),
         SizedBox(height: 30),
@@ -179,7 +204,7 @@ class FaireGateauxAuChaocolat extends StatelessWidget {
             prioriteChallenge: 'Quotidien',
             actionChallenge: Text(
                 "Avant de valider chaque étape, il est conseillé de faire une sauvegarde de la mission en faisant un appuie long sur la mission."),
-            actionChallenge2: 'Documentations possibles',
+            actionChallenge2: 'Sauvegarde manuelle',
             pictureChallenge: 'assets/assets/lister.gif'),
         SizedBox(height: 30),
         FlipLayoutDemo(
@@ -194,9 +219,16 @@ class FaireGateauxAuChaocolat extends StatelessWidget {
             titreChallenge2: 'Faire un gâteau aux chocolat',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
-            actionChallenge: Text(
-                " Vous pourrez a tout moment effectuer une restauration manuelle des procès enregistrés"),
-            actionChallenge2: 'Documentations possibles',
+            actionChallenge: Column(
+              children: [
+                Text(
+                    " Vous pourrez a tout moment effectuer une restauration manuelle des procès enregistrés"),
+                SizedBox(
+                  height: 20,
+                )
+              ],
+            ),
+            actionChallenge2: 'Restauration manuelle',
             pictureChallenge: 'assets/assets/lister.gif'),
         SizedBox(height: 70),
       ],

@@ -94,8 +94,15 @@ class ListeDeCourses extends StatelessWidget {
             titreChallenge2: 'Faire une liste de course',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
-            actionChallenge: Text(
-                "Créer un élément de type 'achat' pour chaque articles que se trouve dans votre cadie."),
+            actionChallenge: Column(
+              children: [
+                Text(
+                    "Créer un élément de type 'achat' pour chaque articles que se trouve dans votre cadie."),
+                SizedBox(
+                  height: 20,
+                )
+              ],
+            ),
             actionChallenge2: 'documentations  possibles',
             pictureChallenge: 'assets/challengeQuotidien.png'),
         SizedBox(height: 30),
@@ -113,7 +120,7 @@ class ListeDeCourses extends StatelessWidget {
             prioriteChallenge: 'Quotidien',
             actionChallenge: Text(
                 "Lors de la création de votre liste de courses, valider chaque achat par un swipe vers la gauche."),
-            actionChallenge2: 'Documentations possibles',
+            actionChallenge2: 'Validation des challenges',
             pictureChallenge: 'assets/lister.gif'),
         SizedBox(height: 30),
         FlipLayoutDemo(
@@ -131,17 +138,26 @@ class ListeDeCourses extends StatelessWidget {
             actionChallenge: Column(children: [
               Text(
                   "Un compteur apparait avec les informations suivantes: achats et prévisions."),
-              new ListTile(
-                leading: Icon(Icons.fiber_manual_record),
-                title: new Text(
-                    '  le compteur achat repésente la somme de vos achats'),
+              Row(
+                children: [
+                  Text('\u2022'),
+                  SizedBox(width: 5),
+                  Expanded(
+                      child: Text(
+                          'le compteur achat repésente la somme de vos achats.')),
+                ],
               ),
-              new ListTile(
-                  leading: Icon(Icons.fiber_manual_record),
-                  title: new Text(
-                      "le compteur prévision représente la somme de vos prévision d'achat."))
+              Row(
+                children: [
+                  Text('\u2022'),
+                  SizedBox(width: 5),
+                  Expanded(
+                      child: Text(
+                          "le compteur prévision représente la somme de vos prévision d'achat.")),
+                ],
+              ),
             ]),
-            actionChallenge2: 'Documentations  possibles',
+            actionChallenge2: 'Compteur achat',
             pictureChallenge: 'assets/lister.gif'),
         SizedBox(height: 30),
         FlipLayoutDemo(
@@ -161,10 +177,10 @@ class ListeDeCourses extends StatelessWidget {
                 Text(
                     "Vous avez la possibilité de modifier le prix des articles. "),
                 Text(
-                    "    Ce qui aura pour conséquence la modification en live les valeurs du compteur d'achat et du compteur de prévision "),
+                    "Ce qui aura pour conséquence la modification en live les valeurs du compteur d'achat et du compteur de prévision "),
               ],
             ),
-            actionChallenge2: 'Modifier ',
+            actionChallenge2: 'Modification prix ',
             pictureChallenge: 'assets/lister.gif'),
         SizedBox(height: 30),
         FlipLayoutDemo(
@@ -186,7 +202,7 @@ class ListeDeCourses extends StatelessWidget {
                 Text("Cela vous permettra de la réétuliser le mois d'apres."),
               ],
             ),
-            actionChallenge2: 'Documentations possibles',
+            actionChallenge2: 'Sauvegarde manuelle',
             pictureChallenge: 'assets/lister.gif'),
         SizedBox(height: 30),
         FlipLayoutDemo(
@@ -201,9 +217,16 @@ class ListeDeCourses extends StatelessWidget {
             titreChallenge2: 'Faire une liste de course',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
-            actionChallenge: Text(
-                " Vous pourrez à tout moment effectuer une restauration manuelle des articles enregistrés"),
-            actionChallenge2: 'Documentations possibles',
+            actionChallenge: Column(
+              children: [
+                Text(
+                    " Vous pourrez à tout moment effectuer une restauration manuelle des articles enregistrés"),
+                SizedBox(
+                  height: 20,
+                )
+              ],
+            ),
+            actionChallenge2: 'Restauration manuelle',
             pictureChallenge: 'assets/lister.gif'),
         SizedBox(height: 70),
       ],
