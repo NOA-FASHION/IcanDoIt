@@ -74,8 +74,9 @@ class _ResultaChallengeState extends State<ResultaChallenge>
     var mediaQueryData = MediaQuery.of(context);
     Challengecontroller variable2 = Provider.of<Challengecontroller>(context);
     ChallengeDays challengeDaysResult = variable2.getChallengeDays();
-    Challengeyesterday challengeyesterdayResult =
-        variable2.getChallengeyesterday();
+
+    // Challengeyesterday challengeyesterdayResult =
+    //     variable2.getChallengeyesterday();
     isSwitched = challengeDaysResult.notifcationResultBool;
     print(challengeDaysResult.notifcationResultBool);
     List<VBarChartModel> bardata = [
@@ -368,20 +369,14 @@ class _ResultaChallengeState extends State<ResultaChallenge>
                             child: Column(
                               children: [
                                 ScoreChallengeWidget(
-                                    mediaQueryData: mediaQueryData,
-                                    challengeDayResult: challengeDaysResult
-                                        .commentaire
-                                        .toUpperCase(),
-                                    lottiesString: resultaChallenge(
-                                      int.parse(challengeDaysResult
-                                          .nbchallengeVallide),
-                                      nmbreChalleneEnCours:
-                                          "${challengeDaysResult.nbChallengeEnCours} challenges en cours",
-                                    ),
-                                    nbtacheVallide:
-                                        "${challengeDaysResult.nbtacheVallide}  tâches validées",
-                                    nbchallengeVallide:
-                                        "${challengeDaysResult.nbchallengeVallide} challenges validés"),
+                                  "${challengeDaysResult.nbchallengeVallide} challenges validés",
+                                  mediaQueryData,
+                                  challengeDaysResult.commentaire.toUpperCase(),
+                                  "${challengeDaysResult.nbChallengeEnCours} challenges en cours",
+                                  resultaChallenge(int.parse(
+                                      challengeDaysResult.nbchallengeVallide)),
+                                  "${challengeDaysResult.nbtacheVallide}  tâches validées",
+                                ),
                                 // Card(
                                 //   color: Colors.blue,
                                 //   elevation: 25.0,

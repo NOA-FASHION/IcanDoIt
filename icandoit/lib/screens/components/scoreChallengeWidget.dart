@@ -5,16 +5,16 @@ class ScoreChallengeWidget extends StatefulWidget {
   final MediaQueryData mediaQueryData;
   final String challengeDayResult;
   final String nmbreChalleneEnCours;
-  final lottiesString;
-  final String nbchallengeVallide;
+  final String lottiesString;
+  final String nombchallengeVallide;
   final String nbtacheVallide;
   ScoreChallengeWidget(
-      {this.nbchallengeVallide,
+      this.nombchallengeVallide,
       this.mediaQueryData,
       this.nbtacheVallide,
       this.challengeDayResult,
       this.lottiesString,
-      this.nmbreChalleneEnCours});
+      this.nmbreChalleneEnCours);
 
   @override
   State<ScoreChallengeWidget> createState() => _ScoreChallengeWidgetState();
@@ -23,6 +23,8 @@ class ScoreChallengeWidget extends StatefulWidget {
 class _ScoreChallengeWidgetState extends State<ScoreChallengeWidget> {
   @override
   Widget build(BuildContext context) {
+    print(widget.nmbreChalleneEnCours);
+    print("test");
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -156,7 +158,7 @@ class _ScoreChallengeWidgetState extends State<ScoreChallengeWidget> {
                                               ])),
                                       padding: const EdgeInsets.all(8.0),
                                       child: Text(
-                                        widget.challengeDayResult,
+                                        widget.nbtacheVallide,
                                         textAlign: TextAlign.center,
                                       ),
                                     ),
@@ -249,7 +251,9 @@ class _ScoreChallengeWidgetState extends State<ScoreChallengeWidget> {
                                                       padding:
                                                           const EdgeInsets.all(
                                                               8.0),
-                                                      child: Text("test",
+                                                      child: Text(
+                                                          widget
+                                                              .challengeDayResult,
                                                           textAlign:
                                                               TextAlign.center),
                                                     )
@@ -311,7 +315,8 @@ class _ScoreChallengeWidgetState extends State<ScoreChallengeWidget> {
                                                           const EdgeInsets.all(
                                                               8.0),
                                                       child: Text(
-                                                          widget.nbtacheVallide,
+                                                          widget
+                                                              .nmbreChalleneEnCours,
                                                           textAlign:
                                                               TextAlign.center),
                                                     )
@@ -358,7 +363,7 @@ class _ScoreChallengeWidgetState extends State<ScoreChallengeWidget> {
                                                               8.0),
                                                       child: Text(
                                                           widget
-                                                              .nbchallengeVallide,
+                                                              .nombchallengeVallide,
                                                           textAlign:
                                                               TextAlign.center),
                                                     )
@@ -378,7 +383,18 @@ class _ScoreChallengeWidgetState extends State<ScoreChallengeWidget> {
                         ),
                       ),
                     ),
-              
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Card(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
+                        elevation: 15.0,
+                        child: Column(
+                          children: [],
+                        ),
+                      ),
+                    )
                   ],
                 ))),
       ],
