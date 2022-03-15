@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:icandoit/controllers/challenge_controller.dart';
 import 'package:icandoit/models/challenge_model.dart';
+import 'package:icandoit/screens/components/scoreChallengeWidget.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -27,7 +28,8 @@ class _ResultaChallengeState extends State<ResultaChallenge>
   // ChallengeDays challengeDaysResult;
   // Challengeyesterday challengeyesterdayResult;
   bool isSwitched;
-  String resultaChallenge(int nbchallengeValide) {
+  String resultaChallenge(int nbchallengeValide,
+      {String nmbreChalleneEnCours}) {
     String resultat = "assets/succes0.json";
     if (nbchallengeValide == 0) {
       resultat = "assets/succes0.json";
@@ -300,7 +302,6 @@ class _ResultaChallengeState extends State<ResultaChallenge>
                             color: Colors.transparent,
                             margin: EdgeInsets.all(15),
                             child: Card(
-                              color: Colors.blue,
                               elevation: 25.0,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10.0),
@@ -366,312 +367,327 @@ class _ResultaChallengeState extends State<ResultaChallenge>
                             padding: EdgeInsets.all(15.0),
                             child: Column(
                               children: [
-                                Card(
-                                  color: Colors.blue,
-                                  elevation: 25.0,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text("HIER"),
-                                  ),
-                                ),
-                                SizedBox(height: 5.0),
-                                Container(
-                                  padding: EdgeInsets.all(8.0),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    border: Border.all(
-                                      color: Colors.white,
-                                      width: 1,
+                                ScoreChallengeWidget(
+                                    mediaQueryData: mediaQueryData,
+                                    challengeDayResult: challengeDaysResult
+                                        .commentaire
+                                        .toUpperCase(),
+                                    lottiesString: resultaChallenge(
+                                      int.parse(challengeDaysResult
+                                          .nbchallengeVallide),
+                                      nmbreChalleneEnCours:
+                                          "${challengeDaysResult.nbChallengeEnCours} challenges en cours",
                                     ),
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(10.0),
-                                          border: Border.all(
-                                            color: Colors.white,
-                                            width: 1,
-                                          ),
-                                        ),
-                                        width: mediaQueryData.size.width / 2.5,
-                                        child: Card(
-                                          color: Colors.transparent,
-                                          elevation: 25.0,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(20.0),
-                                          ),
-                                          child: Column(
-                                            children: [
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.all(10.0),
-                                                child: Lottie.asset(
-                                                    'assets/task.json',
-                                                    width: 30.0),
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
-                                                child: Text(
-                                                    "${challengeyesterdayResult.nbtacheVallide} tâches validées",
-                                                    textAlign:
-                                                        TextAlign.center),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(width: 15.0),
-                                      Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(10.0),
-                                          border: Border.all(
-                                            color: Colors.white,
-                                            width: 1,
-                                          ),
-                                        ),
-                                        width: mediaQueryData.size.width / 2.5,
-                                        child: Card(
-                                          color: Colors.transparent,
-                                          elevation: 25.0,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(30.0),
-                                          ),
-                                          child: Column(
-                                            children: [
-                                              Lottie.asset(
-                                                  'assets/challenge.json',
-                                                  width: 50),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
-                                                child: Text(
-                                                    "${challengeyesterdayResult.nbchallengeVallide} challenges validés",
-                                                    textAlign:
-                                                        TextAlign.center),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                                SizedBox(height: 25.0),
-                                Card(
-                                  color: Colors.blue,
-                                  elevation: 25.0,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text("AUJOURD'HUI"),
-                                  ),
-                                ),
-                                SizedBox(height: 5.0),
-                                Container(
-                                  padding: EdgeInsets.all(8.0),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    border: Border.all(
-                                      color: Colors.white,
-                                      width: 1,
-                                    ),
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Card(
-                                        color: Colors.blue,
-                                        elevation: 25.0,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10.0),
-                                        ),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Text(
-                                            challengeDaysResult.commentaire
-                                                .toUpperCase(),
-                                            textAlign: TextAlign.center,
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(height: 25.0),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                        children: [
-                                          Container(
-                                            width:
-                                                mediaQueryData.size.width / 2.5,
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        10.0)),
-                                            child: Column(
-                                              children: [
-                                                Container(
-                                                  width: mediaQueryData
-                                                          .size.width /
-                                                      3,
-                                                  height: 140,
-                                                  child: Card(
-                                                    color: Colors.blue,
-                                                    elevation: 25.0,
-                                                    shape:
-                                                        RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              20.0),
-                                                    ),
-                                                    child: Lottie.asset(
-                                                        resultaChallenge(int.parse(
-                                                            challengeDaysResult
-                                                                .nbchallengeVallide)),
-                                                        width: 90),
-                                                  ),
-                                                ),
-                                                SizedBox(height: 25.0),
-                                                Container(
-                                                  width: mediaQueryData
-                                                          .size.width /
-                                                      3,
-                                                  height: 140,
-                                                  child: Card(
-                                                    color: Colors.blue,
-                                                    elevation: 25.0,
-                                                    shape:
-                                                        RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              20.0),
-                                                    ),
-                                                    child: Column(
-                                                      children: [
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(8.0),
-                                                          child: Lottie.asset(
-                                                              'assets/progress.json',
-                                                              width: 60),
-                                                        ),
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(8.0),
-                                                          child: Text(
-                                                              "${challengeDaysResult.nbChallengeEnCours} challenges en cours",
-                                                              textAlign:
-                                                                  TextAlign
-                                                                      .center),
-                                                        )
-                                                      ],
-                                                    ),
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                          Container(
-                                            width:
-                                                mediaQueryData.size.width / 2.5,
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        10.0)),
-                                            child: Column(
-                                              children: [
-                                                Container(
-                                                  width: mediaQueryData
-                                                          .size.width /
-                                                      3,
-                                                  height: 140,
-                                                  child: Card(
-                                                    color: Colors.blue,
-                                                    elevation: 25.0,
-                                                    shape:
-                                                        RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              20.0),
-                                                    ),
-                                                    child: Column(
-                                                      children: [
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(10.0),
-                                                          child: Lottie.asset(
-                                                              'assets/task.json',
-                                                              width: 60.0),
-                                                        ),
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(8.0),
-                                                          child: Text(
-                                                              "${challengeDaysResult.nbtacheVallide}  tâches validées",
-                                                              textAlign:
-                                                                  TextAlign
-                                                                      .center),
-                                                        )
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ),
-                                                SizedBox(height: 25.0),
-                                                Container(
-                                                  width: mediaQueryData
-                                                          .size.width /
-                                                      3,
-                                                  height: 140,
-                                                  child: Card(
-                                                    color: Colors.blue,
-                                                    elevation: 5.0,
-                                                    shape:
-                                                        RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              20.0),
-                                                    ),
-                                                    child: Column(
-                                                      children: [
-                                                        Lottie.asset(
-                                                            'assets/challenge.json',
-                                                            width: 80),
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(8.0),
-                                                          child: Text(
-                                                              "${challengeDaysResult.nbchallengeVallide} challenges validés",
-                                                              textAlign:
-                                                                  TextAlign
-                                                                      .center),
-                                                        )
-                                                      ],
-                                                    ),
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
+                                    nbtacheVallide:
+                                        "${challengeDaysResult.nbtacheVallide}  tâches validées",
+                                    nbchallengeVallide:
+                                        "${challengeDaysResult.nbchallengeVallide} challenges validés"),
+                                // Card(
+                                //   color: Colors.blue,
+                                //   elevation: 25.0,
+                                //   shape: RoundedRectangleBorder(
+                                //     borderRadius: BorderRadius.circular(10.0),
+                                //   ),
+                                //   child: Padding(
+                                //     padding: const EdgeInsets.all(8.0),
+                                //     child: Text("HIER"),
+                                //   ),
+                                // ),
+                                // SizedBox(height: 5.0),
+                                // Container(
+                                //   padding: EdgeInsets.all(8.0),
+                                //   decoration: BoxDecoration(
+                                //     borderRadius: BorderRadius.circular(10.0),
+                                //     border: Border.all(
+                                //       color: Colors.white,
+                                //       width: 1,
+                                //     ),
+                                //   ),
+                                //   child: Row(
+                                //     mainAxisAlignment: MainAxisAlignment.center,
+                                //     children: [
+                                //       Container(
+                                //         decoration: BoxDecoration(
+                                //           borderRadius:
+                                //               BorderRadius.circular(10.0),
+                                //           border: Border.all(
+                                //             color: Colors.white,
+                                //             width: 1,
+                                //           ),
+                                //         ),
+                                //         width: mediaQueryData.size.width / 2.5,
+                                //         child: Card(
+                                //           color: Colors.transparent,
+                                //           elevation: 25.0,
+                                //           shape: RoundedRectangleBorder(
+                                //             borderRadius:
+                                //                 BorderRadius.circular(20.0),
+                                //           ),
+                                //           child: Column(
+                                //             children: [
+                                //               Padding(
+                                //                 padding:
+                                //                     const EdgeInsets.all(10.0),
+                                //                 child: Lottie.asset(
+                                //                     'assets/task.json',
+                                //                     width: 30.0),
+                                //               ),
+                                //               Padding(
+                                //                 padding:
+                                //                     const EdgeInsets.all(8.0),
+                                //                 child: Text(
+                                //                     "${challengeyesterdayResult.nbtacheVallide} tâches validées",
+                                //                     textAlign:
+                                //                         TextAlign.center),
+                                //               )
+                                //             ],
+                                //           ),
+                                //         ),
+                                //       ),
+                                //       SizedBox(width: 15.0),
+                                //       Container(
+                                //         decoration: BoxDecoration(
+                                //           borderRadius:
+                                //               BorderRadius.circular(10.0),
+                                //           border: Border.all(
+                                //             color: Colors.white,
+                                //             width: 1,
+                                //           ),
+                                //         ),
+                                //         width: mediaQueryData.size.width / 2.5,
+                                //         child: Card(
+                                //           color: Colors.transparent,
+                                //           elevation: 25.0,
+                                //           shape: RoundedRectangleBorder(
+                                //             borderRadius:
+                                //                 BorderRadius.circular(30.0),
+                                //           ),
+                                //           child: Column(
+                                //             children: [
+                                //               Lottie.asset(
+                                //                   'assets/challenge.json',
+                                //                   width: 50),
+                                //               Padding(
+                                //                 padding:
+                                //                     const EdgeInsets.all(8.0),
+                                //                 child: Text(
+                                //                     "${challengeyesterdayResult.nbchallengeVallide} challenges validés",
+                                //                     textAlign:
+                                //                         TextAlign.center),
+                                //               )
+                                //             ],
+                                //           ),
+                                //         ),
+                                //       )
+                                //     ],
+                                //   ),
+                                // ),
+                                // SizedBox(height: 25.0),
+                                // Card(
+                                //   color: Colors.blue,
+                                //   elevation: 25.0,
+                                //   shape: RoundedRectangleBorder(
+                                //     borderRadius: BorderRadius.circular(10.0),
+                                //   ),
+                                //   child: Padding(
+                                //     padding: const EdgeInsets.all(8.0),
+                                //     child: Text("AUJOURD'HUI"),
+                                //   ),
+                                // ),
+
+                                // Container(
+                                //   padding: EdgeInsets.all(8.0),
+                                //   decoration: BoxDecoration(
+                                //     borderRadius: BorderRadius.circular(10.0),
+                                //     border: Border.all(
+                                //       color: Colors.white,
+                                //       width: 1,
+                                //     ),
+                                //   ),
+                                //   child: Column(
+                                //     children: [
+                                //       Card(
+                                //         color: Colors.blue,
+                                //         elevation: 25.0,
+                                //         shape: RoundedRectangleBorder(
+                                //           borderRadius:
+                                //               BorderRadius.circular(10.0),
+                                //         ),
+                                //         child: Padding(
+                                //           padding: const EdgeInsets.all(8.0),
+                                //           child: Text(
+                                //             challengeDaysResult.commentaire
+                                //                 .toUpperCase(),
+                                //             textAlign: TextAlign.center,
+                                //           ),
+                                //         ),
+                                //       ),
+                                //       SizedBox(height: 25.0),
+                                //       Row(
+                                //         mainAxisAlignment:
+                                //             MainAxisAlignment.spaceAround,
+                                //         children: [
+                                //           Container(
+                                //             width:
+                                //                 mediaQueryData.size.width / 2.5,
+                                //             decoration: BoxDecoration(
+                                //                 borderRadius:
+                                //                     BorderRadius.circular(
+                                //                         10.0)),
+                                //             child: Column(
+                                //               children: [
+                                //                 Container(
+                                //                   width: mediaQueryData
+                                //                           .size.width /
+                                //                       3,
+                                //                   height: 140,
+                                //                   child: Card(
+                                //                     color: Colors.blue,
+                                //                     elevation: 25.0,
+                                //                     shape:
+                                //                         RoundedRectangleBorder(
+                                //                       borderRadius:
+                                //                           BorderRadius.circular(
+                                //                               20.0),
+                                //                     ),
+                                //                     child: Lottie.asset(
+                                //                         resultaChallenge(int.parse(
+                                //                             challengeDaysResult
+                                //                                 .nbchallengeVallide)),
+                                //                         width: 90),
+                                //                   ),
+                                //                 ),
+                                //                 SizedBox(height: 25.0),
+                                //                 Container(
+                                //                   width: mediaQueryData
+                                //                           .size.width /
+                                //                       3,
+                                //                   height: 140,
+                                //                   child: Card(
+                                //                     color: Colors.blue,
+                                //                     elevation: 25.0,
+                                //                     shape:
+                                //                         RoundedRectangleBorder(
+                                //                       borderRadius:
+                                //                           BorderRadius.circular(
+                                //                               20.0),
+                                //                     ),
+                                //                     child: Column(
+                                //                       children: [
+                                //                         Padding(
+                                //                           padding:
+                                //                               const EdgeInsets
+                                //                                   .all(8.0),
+                                //                           child: Lottie.asset(
+                                //                               'assets/progress.json',
+                                //                               width: 60),
+                                //                         ),
+                                //                         Padding(
+                                //                           padding:
+                                //                               const EdgeInsets
+                                //                                   .all(8.0),
+                                //                           child: Text(
+                                //                               "${challengeDaysResult.nbChallengeEnCours} challenges en cours",
+                                //                               textAlign:
+                                //                                   TextAlign
+                                //                                       .center),
+                                //                         )
+                                //                       ],
+                                //                     ),
+                                //                   ),
+                                //                 )
+                                //               ],
+                                //             ),
+                                //           ),
+                                //           Container(
+                                //             width:
+                                //                 mediaQueryData.size.width / 2.5,
+                                //             decoration: BoxDecoration(
+                                //                 borderRadius:
+                                //                     BorderRadius.circular(
+                                //                         10.0)),
+                                //             child: Column(
+                                //               children: [
+                                //                 Container(
+                                //                   width: mediaQueryData
+                                //                           .size.width /
+                                //                       3,
+                                //                   height: 140,
+                                //                   child: Card(
+                                //                     color: Colors.blue,
+                                //                     elevation: 25.0,
+                                //                     shape:
+                                //                         RoundedRectangleBorder(
+                                //                       borderRadius:
+                                //                           BorderRadius.circular(
+                                //                               20.0),
+                                //                     ),
+                                //                     child: Column(
+                                //                       children: [
+                                //                         Padding(
+                                //                           padding:
+                                //                               const EdgeInsets
+                                //                                   .all(10.0),
+                                //                           child: Lottie.asset(
+                                //                               'assets/task.json',
+                                //                               width: 60.0),
+                                //                         ),
+                                //                         Padding(
+                                //                           padding:
+                                //                               const EdgeInsets
+                                //                                   .all(8.0),
+                                //                           child: Text(
+                                //                               "${challengeDaysResult.nbtacheVallide}  tâches validées",
+                                //                               textAlign:
+                                //                                   TextAlign
+                                //                                       .center),
+                                //                         )
+                                //                       ],
+                                //                     ),
+                                //                   ),
+                                //                 ),
+                                //                 SizedBox(height: 25.0),
+                                //                 Container(
+                                //                   width: mediaQueryData
+                                //                           .size.width /
+                                //                       3,
+                                //                   height: 140,
+                                //                   child: Card(
+                                //                     color: Colors.blue,
+                                //                     elevation: 5.0,
+                                //                     shape:
+                                //                         RoundedRectangleBorder(
+                                //                       borderRadius:
+                                //                           BorderRadius.circular(
+                                //                               20.0),
+                                //                     ),
+                                //                     child: Column(
+                                //                       children: [
+                                //                         Lottie.asset(
+                                //                             'assets/challenge.json',
+                                //                             width: 80),
+                                //                         Padding(
+                                //                           padding:
+                                //                               const EdgeInsets
+                                //                                   .all(8.0),
+                                //                           child: Text(
+                                //                               "${challengeDaysResult.nbchallengeVallide} challenges validés",
+                                //                               textAlign:
+                                //                                   TextAlign
+                                //                                       .center),
+                                //                         )
+                                //                       ],
+                                //                     ),
+                                //                   ),
+                                //                 )
+                                //               ],
+                                //             ),
+                                //           )
+                                //         ],
+                                //       ),
+                                //     ],
+                                //   ),
+                                // ),
                                 SizedBox(height: 25.0),
                                 Container(
                                     decoration: BoxDecoration(
@@ -682,10 +698,20 @@ class _ResultaChallengeState extends State<ResultaChallenge>
                                       ),
                                     ),
                                     width: mediaQueryData.size.width / 0.9,
-                                    child: Column(
-                                      children: [
-                                        _buildGrafik(bardata),
-                                      ],
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Card(
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(15.0),
+                                        ),
+                                        elevation: 15.0,
+                                        child: Column(
+                                          children: [
+                                            _buildGrafik(bardata),
+                                          ],
+                                        ),
+                                      ),
                                     ))
                               ],
                             ),
@@ -707,8 +733,8 @@ class _ResultaChallengeState extends State<ResultaChallenge>
     return VerticalBarchart(
       showBackdrop: true,
       barStyle: BarStyle.CIRCLE,
-      tooltipColor: Colors.white,
-      labelColor: Colors.white,
+      tooltipColor: Colors.black,
+      labelColor: Colors.black,
       background: Colors.transparent,
       tooltipSize: 20,
       maxX: 100.0,
@@ -717,19 +743,19 @@ class _ResultaChallengeState extends State<ResultaChallenge>
       showLegend: true,
       legend: [
         Vlegend(
-          textColor: Colors.white,
+          textColor: Colors.black,
           isSquare: false,
           color: Colors.orange,
           text: "Challenges validés",
         ),
         Vlegend(
-          textColor: Colors.white,
+          textColor: Colors.black,
           isSquare: false,
           color: Colors.black,
           text: "Tâches validées",
         ),
         Vlegend(
-          textColor: Colors.white,
+          textColor: Colors.black,
           isSquare: false,
           color: Colors.teal,
           text: "Challenges en cours",
