@@ -115,13 +115,17 @@ class TravauxDeRenovation extends StatelessWidget {
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Créer pour chaque pièce de votre maison, "),
+                Text(
+                    "Créer pour chaque pièce de votre maison, plusieurs types de missions visuels ou auditives incluant des tutos ou des meubles ou des matériaux intérréssant que vous aurez trouvé: "),
                 Row(
                   children: [
                     Text('\u2022'),
                     SizedBox(width: 5),
-                    Expanded(child: Text('une mission de type tutoriel')),
+                    Expanded(
+                        child: Text(
+                            'une mission de type tutoriel , pour vous aider')),
                   ],
                 ),
                 Row(
@@ -130,7 +134,14 @@ class TravauxDeRenovation extends StatelessWidget {
                     SizedBox(width: 5),
                     Expanded(
                         child: Text(
-                            'une mission de type  photos ou videos des meubles ou matériaux avec leur ref et leur prix,etc.')),
+                            'une mission de type photos avec leur ref et leur prix.')),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Text('\u2022'),
+                    SizedBox(width: 5),
+                    Expanded(child: Text('une mission de type videos ')),
                   ],
                 ),
               ],

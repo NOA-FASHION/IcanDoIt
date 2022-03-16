@@ -84,7 +84,7 @@ class RestaurantList extends StatelessWidget {
             prioriteChallenge: 'Quotidien',
             actionChallenge: Column(children: [
               Text(
-                  "Ensuite listez vos restaurants par Catégorie en créant des objets de type information, par exemple:"),
+                  "Ensuite listez vos restaurants par Catégorie en créant des objets de type information, par exemple lister les information suivantes :"),
               Row(
                 children: [
                   Text('\u2022'),
@@ -148,7 +148,8 @@ class RestaurantList extends StatelessWidget {
             prioriteChallenge: 'Quotidien',
             actionChallenge: Column(
               children: [
-                Text("rentrer et associer y les documents importants tel que:"),
+                Text(
+                    "rentrer et associer y les documents et les informations importants tel que :"),
                 Row(
                   children: [
                     Text('\u2022'),
@@ -160,14 +161,14 @@ class RestaurantList extends StatelessWidget {
                   children: [
                     Text('\u2022'),
                     SizedBox(width: 5),
-                    Expanded(child: Text('les photos.')),
+                    Expanded(child: Text('les photos du menu.')),
                   ],
                 ),
                 Row(
                   children: [
                     Text('\u2022'),
                     SizedBox(width: 5),
-                    Expanded(child: Text('des videos.')),
+                    Expanded(child: Text('des videos du lieu.')),
                   ],
                 ),
                 Row(
@@ -181,7 +182,7 @@ class RestaurantList extends StatelessWidget {
                   children: [
                     Text('\u2022'),
                     SizedBox(width: 5),
-                    Expanded(child: Text('des video youtube.')),
+                    Expanded(child: Text("des video youtube de l'ambiance.")),
                   ],
                 ),
               ],

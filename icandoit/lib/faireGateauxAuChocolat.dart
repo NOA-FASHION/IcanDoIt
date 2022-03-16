@@ -96,15 +96,24 @@ class FaireGateauxAuChaocolat extends StatelessWidget {
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(
                     "Rentrer les différentes tâches et documents associer à la recette de votre gâteaux."),
-                Text("  Par exemple cela pourra être"),
+                SizedBox(
+                  height: 3,
+                ),
+                Text(
+                  "Par exemple cela pourra être: ",
+                  textAlign: TextAlign.start,
+                ),
+                SizedBox(height: 4),
                 Row(
                   children: [
                     Text('\u2022'),
                     SizedBox(width: 5),
-                    Expanded(child: Text('un élément de type tâche.')),
+                    Expanded(child: Text(' un élément de type tâche.')),
                   ],
                 ),
                 Row(
@@ -114,8 +123,14 @@ class FaireGateauxAuChaocolat extends StatelessWidget {
                     Expanded(child: Text('un élément de type commentaire.')),
                   ],
                 ),
+                SizedBox(
+                  height: 3,
+                ),
                 Text(
-                    "Il est possible aussi de créer des éléments visuels ou auditifs comme"),
+                    "Il est possible aussi de créer des éléments visuels ou auditifs comme: "),
+                SizedBox(
+                  height: 3,
+                ),
                 Row(
                   children: [
                     Text('\u2022'),
