@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -11,7 +12,7 @@ class RestaurantList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(height: 60),
+        SizedBox(height: 80),
         Stack(
           children: [
             Container(
@@ -33,8 +34,10 @@ class RestaurantList extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  "Lister vos restaurants préférées",
-                  style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
+                  "Lister vos restaurants préférés".toUpperCase(),
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.playfairDisplay(
+                      fontSize: 14, fontWeight: FontWeight.bold),
                 ),
               ),
             ),
@@ -57,14 +60,13 @@ class RestaurantList extends StatelessWidget {
             lottiesChallenge: "assets/missionNormal.json",
             assetPictureChallengeeCreer: 'assets/restaurant2.png',
             titreChallenge: 'Challenges Normal',
-            titreChallenge2: 'Lister vos restaurants préférées',
+            titreChallenge2: 'Lister vos restaurants préférés',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge: Column(
               children: [
                 Text(
-                    "Vous pouvez lister vos restaurants préférée et y associer une documentation ciblée. "),
-                Text("Cela est très simple a réaliser.Créer une mission Normal")
+                    "Vous pouvez lister vos restaurants préférés et y associer une documentation ciblée, pour cela créer une mission de type 'normal'. "),
               ],
             ),
             actionChallenge2: 'Créer un challenge Normal',
@@ -79,31 +81,31 @@ class RestaurantList extends StatelessWidget {
             lottiesChallenge: "assets/recetteEtape.json",
             assetPictureChallengeeCreer: 'assets/listerestau.png',
             titreChallenge: 'Challenges quotidien',
-            titreChallenge2: 'Lister vos restaurants préférées',
+            titreChallenge2: 'Lister vos restaurants préférés',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge: Column(children: [
               Text(
-                  "Ensuite listez vos restaurants par Catégorie en créant des objets de type information, par exemple lister les information suivantes :"),
+                  "Ensuite listez vos restaurants par catégorie en créant des objets de type 'information', afin de lister les informations suivantes :"),
               Row(
                 children: [
                   Text('\u2022'),
                   SizedBox(width: 5),
-                  Expanded(child: Text('Restaurant chinois.')),
+                  Expanded(child: Text('Restaurant chinois')),
                 ],
               ),
               Row(
                 children: [
                   Text('\u2022'),
                   SizedBox(width: 5),
-                  Expanded(child: Text('fast food.')),
+                  Expanded(child: Text('Fast food')),
                 ],
               ),
               Row(
                 children: [
                   Text('\u2022'),
                   SizedBox(width: 5),
-                  Expanded(child: Text('restaurant chic.')),
+                  Expanded(child: Text('Restaurant chic...')),
                 ],
               ),
             ]),
@@ -119,13 +121,13 @@ class RestaurantList extends StatelessWidget {
             lottiesChallenge: "assets/missionNormal.json",
             assetPictureChallengeeCreer: 'assets/listerestaurant4.png',
             titreChallenge: 'Challenges quotidien',
-            titreChallenge2: 'Lister vos restaurants préférées',
+            titreChallenge2: 'Lister vos restaurants préférés',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge: Column(
               children: [
                 Text(
-                    "pour chaque catégorie créer un mission normal avec le nom du restaurant  "),
+                    "Pour chaque catégorie créer un mission normale avec le nom du restaurant  "),
                 SizedBox(
                   height: 20,
                 )
@@ -138,51 +140,51 @@ class RestaurantList extends StatelessWidget {
             lienInternet:
                 "https://newaccount1626188315630.freshdesk.com/support/solutions/articles/69000513812-documentation-possible",
             etape: 'Etape 4',
-            typeChallenge1: 'Lister les caractéristique',
+            typeChallenge1: 'Lister les caractéristiques',
             typeChallenge: ' de vos restaurants ',
             lottiesChallenge: "assets/digital.json",
             assetPictureChallengeeCreer: 'assets/restaurant1.gif',
             titreChallenge: 'Challenges quotidien',
-            titreChallenge2: 'Lister vos restaurants préférées',
+            titreChallenge2: 'Lister vos restaurants préférés',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge: Column(
               children: [
                 Text(
-                    "rentrer et associer y les documents et les informations importants tel que :"),
+                    "Rentrer et associer y les documents et les informations importantes telles que :"),
                 Row(
                   children: [
                     Text('\u2022'),
                     SizedBox(width: 5),
-                    Expanded(child: Text("l'adresse")),
+                    Expanded(child: Text("L'adresse")),
                   ],
                 ),
                 Row(
                   children: [
                     Text('\u2022'),
                     SizedBox(width: 5),
-                    Expanded(child: Text('les photos du menu.')),
+                    Expanded(child: Text('Les photos du menu.')),
                   ],
                 ),
                 Row(
                   children: [
                     Text('\u2022'),
                     SizedBox(width: 5),
-                    Expanded(child: Text('des videos du lieu.')),
+                    Expanded(child: Text('Des videos du lieu.')),
                   ],
                 ),
                 Row(
                   children: [
                     Text('\u2022'),
                     SizedBox(width: 5),
-                    Expanded(child: Text('des liens internet avec des avis.')),
+                    Expanded(child: Text('Des liens internet avec des avis.')),
                   ],
                 ),
                 Row(
                   children: [
                     Text('\u2022'),
                     SizedBox(width: 5),
-                    Expanded(child: Text("des video youtube de l'ambiance.")),
+                    Expanded(child: Text("Des video youtube de l'ambiance.")),
                   ],
                 ),
               ],

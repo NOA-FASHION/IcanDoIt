@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:icandoit/filp_main.dart';
 import 'package:lottie/lottie.dart';
 
@@ -9,7 +10,7 @@ class ShareChallenge extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(height: 70),
+        SizedBox(height: 95),
         Stack(
           children: [
             Container(
@@ -31,8 +32,10 @@ class ShareChallenge extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  "Quelques fonctions intéressantes",
-                  style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
+                  "Quelques fonctions intéressantes".toUpperCase(),
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.playfairDisplay(
+                      fontSize: 14, fontWeight: FontWeight.bold),
                 ),
               ),
             ),
@@ -69,15 +72,15 @@ class ShareChallenge extends StatelessWidget {
             lottiesChallenge: "assets/share2.json",
             assetPictureChallengeeCreer: 'assets/music1.gif',
             titreChallenge: 'Challenges quotidien',
-            titreChallenge2: "Quelques fonctions intéressant",
+            titreChallenge2: "Quelques fonctions intéressantes",
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge: Column(
               children: [
                 Text(
-                    " Vous pouvez partagez votre liste a quelqu'un facilement en sélectionnant l'icône de partage en haut a droite de votre liste d'étape."),
+                    "Vous pouvez partagez votre liste avec quelqu'un facilement en sélectionnant l'icône de partage en haut à droite de votre liste d'étapes."),
                 Text(
-                    " Vous aurez le choix de l'envoyer par email, watsapp ,etc")
+                    "Vous aurez le choix de l'envoyer par email, watsapp, etc...")
               ],
             ),
             actionChallenge2: 'Documentations possibles',
@@ -92,13 +95,13 @@ class ShareChallenge extends StatelessWidget {
             lottiesChallenge: "assets/upload3.json",
             assetPictureChallengeeCreer: 'assets/uploadMusic.gif',
             titreChallenge: 'Challenges quotidien',
-            titreChallenge2: "Quelques fonctions intéressant",
+            titreChallenge2: "Quelques fonctions intéressantes",
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge: Column(
               children: [
                 Text(
-                    " Vous pouvez uploader une liste qu'un de vos amies vous a envoyé."),
+                    "Vous pouvez uploader une liste qu'un de vos amis vous a envoyé."),
                 SizedBox(
                   height: 20,
                 )
@@ -112,17 +115,17 @@ class ShareChallenge extends StatelessWidget {
                 "https://newaccount1626188315630.freshdesk.com/support/solutions/articles/69000513812-documentation-possible",
             etape: 'Fonction',
             typeChallenge1: ' Désactiver la vue ',
-            typeChallenge: "principal d'une mission ",
+            typeChallenge: "principale d'une mission ",
             lottiesChallenge: "assets/verifyEtat.json",
             assetPictureChallengeeCreer: 'assets/restaurant2.gif',
             titreChallenge: 'Challenges quotidien',
-            titreChallenge2: "Quelques fonctions intéressant",
+            titreChallenge2: "Quelques fonctions intéressantes",
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge: Column(
               children: [
                 Text(
-                    "lorsque vous réalisez une structure complexe pour une todolist composé de plusieurs arborescences, comme par exemple 'travaux de rénovation', vous pouvez deesactivé la vue principal de vos missions ")
+                    "Lorsque vous réalisez une structure complexe pour une todolist composée de plusieurs arborescences, comme par exemple 'travaux de rénovation', vous pouvez désactiver la vue d'un challenge dans la liste principale.")
               ],
             ),
             actionChallenge2: 'Documentations  possibles',
@@ -137,7 +140,7 @@ class ShareChallenge extends StatelessWidget {
             lottiesChallenge: "assets/succes2.json",
             assetPictureChallengeeCreer: 'assets/score.png',
             titreChallenge: 'Challenges quotidien',
-            titreChallenge2: "Quelques fonctions intéressant",
+            titreChallenge2: "Quelques fonctions intéressantes",
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge: Text(
@@ -154,11 +157,11 @@ class ShareChallenge extends StatelessWidget {
             lottiesChallenge: "assets/notification.json",
             assetPictureChallengeeCreer: 'assets/music1.gif',
             titreChallenge: 'Challenges quotidien',
-            titreChallenge2: "Quelques fonctions intéressant",
+            titreChallenge2: "Quelques fonctions intéressantes",
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge: Text(
-                "Selon votre choix périodique, Une notification automatique e sera active pour vous rappeler et vous encourager dans vos taches quotidiennes.. "),
+                "Selon votre choix périodique, Une notification automatique sera active pour vous rappeler et vous encourager dans vos tâches quotidiennes."),
             actionChallenge2: 'Documentations possibles',
             pictureChallenge: 'assets/music1.gif'),
         SizedBox(height: 30),

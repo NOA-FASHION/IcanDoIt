@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:icandoit/filp_main.dart';
 import 'package:lottie/lottie.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -10,7 +11,7 @@ class TravauxDeRenovation extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(height: 70),
+        SizedBox(height: 95),
         Stack(
           children: [
             Container(
@@ -32,8 +33,10 @@ class TravauxDeRenovation extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  "Projet de rénovation",
-                  style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
+                  "Projet de rénovation".toUpperCase(),
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.playfairDisplay(
+                      fontSize: 14, fontWeight: FontWeight.bold),
                 ),
               ),
             ),
@@ -74,7 +77,7 @@ class TravauxDeRenovation extends StatelessWidget {
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge: Text(
-                "Pour lister les éléments importants de votre projet de rénovation. Vous devez d'abord créer un challenge de type normal. "),
+                "Pour lister les éléments importants de votre projet de rénovation, vous devez d'abord créer un challenge de type normal. "),
             actionChallenge2: 'Créer un challenge Normal',
             pictureChallenge: 'assets/challengeQuotidien.png'),
         SizedBox(height: 30),
@@ -118,32 +121,32 @@ class TravauxDeRenovation extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                    "Créer pour chaque pièce de votre maison, plusieurs types de missions visuels ou auditives incluant des tutos ou des meubles ou des matériaux intérréssant que vous aurez trouvé: "),
-                Row(
-                  children: [
-                    Text('\u2022'),
-                    SizedBox(width: 5),
-                    Expanded(
-                        child: Text(
-                            'une mission de type tutoriel , pour vous aider')),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Text('\u2022'),
-                    SizedBox(width: 5),
-                    Expanded(
-                        child: Text(
-                            'une mission de type photos avec leur ref et leur prix.')),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Text('\u2022'),
-                    SizedBox(width: 5),
-                    Expanded(child: Text('une mission de type videos ')),
-                  ],
-                ),
+                    "Pour chaque pièce de votre maison, vous pouvez créer plusieurs missions visuelles ou audios incluant des tutoriels, des photos de meubles ou des vidéos de matériaux. "),
+                // Row(
+                //   children: [
+                //     Text('\u2022'),
+                //     SizedBox(width: 5),
+                //     Expanded(
+                //         child: Text(
+                //             'une mission de type tutoriel , pour avoir des exemples')),
+                //   ],
+                // ),
+                // Row(
+                //   children: [
+                //     Text('\u2022'),
+                //     SizedBox(width: 5),
+                //     Expanded(
+                //         child: Text(
+                //             'une mission de type photos avec leur ref et leur prix.')),
+                //   ],
+                // ),
+                // Row(
+                //   children: [
+                //     Text('\u2022'),
+                //     SizedBox(width: 5),
+                //     Expanded(child: Text('une mission de type videos ')),
+                //   ],
+                // ),
               ],
             ),
             actionChallenge2: 'Documentations possibles',
@@ -162,7 +165,7 @@ class TravauxDeRenovation extends StatelessWidget {
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge: Text(
-                "Pour accéder a la documentions que vous avez associer a votre projet , il suffit de sélectionner l'élément et vous y aurez accès. "),
+                "Pour accéder à la documention que vous avez associé à votre projet, il suffit de sélectionner l'élément et vous y aurez accès. "),
             actionChallenge2: 'Documentations  possibles',
             pictureChallenge: 'assets/assets/lister.gif'),
         SizedBox(height: 70),

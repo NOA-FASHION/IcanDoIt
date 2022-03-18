@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:icandoit/filp_main.dart';
 import 'package:lottie/lottie.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -10,7 +11,7 @@ class ListeDeCourses extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(height: 70),
+        SizedBox(height: 95),
         Stack(
           children: [
             Container(
@@ -32,8 +33,10 @@ class ListeDeCourses extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  "Faire une liste de course",
-                  style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
+                  "Faire une liste de courses".toUpperCase(),
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.playfairDisplay(
+                      fontSize: 14, fontWeight: FontWeight.bold),
                 ),
               ),
             ),
@@ -70,13 +73,14 @@ class ListeDeCourses extends StatelessWidget {
             lottiesChallenge: "assets/missionNormal.json",
             assetPictureChallengeeCreer: 'assets/courses.png',
             titreChallenge: 'Challenges Normal',
-            titreChallenge2: 'Faire une liste de course',
+            titreChallenge2: 'Faire une liste de courses',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge: Column(
               children: [
-                Text("Pour lister les articles que vous pensez acheter."),
-                Text("Vous devez d'abord créer un challenge de type normal. ")
+                Text(
+                    "Pour lister les articles que vous pensez acheter, vous devez d'abord créer un challenge de type normal."),
+                // Text(" ")
               ],
             ),
             actionChallenge2: 'Créer un challenge Normal',
@@ -91,13 +95,13 @@ class ListeDeCourses extends StatelessWidget {
             lottiesChallenge: "assets/recetteEtape.json",
             assetPictureChallengeeCreer: 'assets/listecourses.png',
             titreChallenge: 'Challenges quotidien',
-            titreChallenge2: 'Faire une liste de course',
+            titreChallenge2: 'Faire une liste de courses',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge: Column(
               children: [
                 Text(
-                    "Créer un élément de type 'achat' pour chaque articles que se trouve dans votre cadie."),
+                    "Créer un élément de type 'achat' pour chaque article que se trouve dans votre caddie."),
                 SizedBox(
                   height: 20,
                 )
@@ -115,7 +119,7 @@ class ListeDeCourses extends StatelessWidget {
             lottiesChallenge: "assets/validateRecette.json",
             assetPictureChallengeeCreer: 'assets/validateFormation.gif',
             titreChallenge: 'Challenges quotidien',
-            titreChallenge2: 'Faire une liste de course',
+            titreChallenge2: 'Faire une liste de courses',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge: Text(
@@ -132,19 +136,19 @@ class ListeDeCourses extends StatelessWidget {
             lottiesChallenge: "assets/accederDoc.json",
             assetPictureChallengeeCreer: 'assets/listeDeCourse.gif',
             titreChallenge: 'Challenges quotidien',
-            titreChallenge2: 'Faire une liste de course',
+            titreChallenge2: 'Faire une liste de courses',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge: Column(children: [
               Text(
-                  "Un compteur apparait avec les informations suivantes: achats et prévisions."),
+                  "Un compteur apparait avec les informations suivantes : achats et prévisions."),
               Row(
                 children: [
                   Text('\u2022'),
                   SizedBox(width: 5),
                   Expanded(
                       child: Text(
-                          'le compteur achat repésente la somme de vos achats.')),
+                          'Le compteur achat repésente la somme de vos achats.')),
                 ],
               ),
               Row(
@@ -153,7 +157,7 @@ class ListeDeCourses extends StatelessWidget {
                   SizedBox(width: 5),
                   Expanded(
                       child: Text(
-                          "le compteur prévision représente la somme de vos prévision d'achat.")),
+                          "Le compteur prévision représente la somme de vos prévisions d'achat.")),
                 ],
               ),
             ]),
@@ -169,15 +173,15 @@ class ListeDeCourses extends StatelessWidget {
             lottiesChallenge: "assets/calculator.json",
             assetPictureChallengeeCreer: 'assets/listedecourse2.gif',
             titreChallenge: 'Challenges quotidien',
-            titreChallenge2: 'Faire une liste de course',
+            titreChallenge2: 'Faire une liste de courses',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge: Column(
               children: [
                 Text(
-                    "Vous avez la possibilité de modifier le prix des articles. "),
-                Text(
-                    "Ce qui aura pour conséquence la modification en live les valeurs du compteur d'achat et du compteur de prévision "),
+                    "Vous avez la possibilité de modifier le prix des articles, ce qui aura pour conséquence la modification en live des valeurs du compteur d'achat et du compteur de prévision "),
+                // Text(
+                //     " "),
               ],
             ),
             actionChallenge2: 'Modification prix ',
@@ -188,18 +192,18 @@ class ListeDeCourses extends StatelessWidget {
                 "https://newaccount1626188315630.freshdesk.com/a/solutions/articles/69000513743",
             etape: 'Option',
             typeChallenge1: 'Réaliser facilement une',
-            typeChallenge: " Sauvegarde manuelle",
+            typeChallenge: " sauvegarde manuelle",
             lottiesChallenge: "assets/backup.json",
             assetPictureChallengeeCreer: 'assets/FaireGateauxAuChocoalat1.gif',
             titreChallenge: 'Challenges quotidien',
-            titreChallenge2: 'Faire une liste de course',
+            titreChallenge2: 'Faire une liste de courses',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge: Column(
               children: [
                 Text(
-                    "Avant de valider chaque achats, il est conseillé de faire une sauvegarde de votre liste de course."),
-                Text("Cela vous permettra de la réétuliser le mois d'apres."),
+                    "Avant de valider chaque achat, il est conseillé de faire une sauvegarde de votre liste de courses pour la réétuliser le mois suivant par exemple."),
+                // Text(""),
               ],
             ),
             actionChallenge2: 'Sauvegarde manuelle',
@@ -210,11 +214,11 @@ class ListeDeCourses extends StatelessWidget {
                 "https://newaccount1626188315630.freshdesk.com/a/solutions/articles/69000804380",
             etape: 'Option',
             typeChallenge1: 'Réaliser facilement une',
-            typeChallenge: "Restauration manuelle",
+            typeChallenge: "restauration manuelle",
             lottiesChallenge: "assets/backup.json",
             assetPictureChallengeeCreer: 'assets/FaireGateauxAuChocoalat1.gif',
             titreChallenge: 'Challenges quotidien',
-            titreChallenge2: 'Faire une liste de course',
+            titreChallenge2: 'Faire une liste de courses',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge: Column(
