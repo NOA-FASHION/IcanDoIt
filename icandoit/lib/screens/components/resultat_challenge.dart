@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:fancy_drawer/fancy_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:icandoit/controllers/challenge_controller.dart';
 import 'package:icandoit/models/challenge_model.dart';
 import 'package:icandoit/screens/components/scoreChallengeWidget.dart';
@@ -347,9 +348,12 @@ class _ResultaChallengeState extends State<ResultaChallenge>
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.all(8.0),
-                                    child: Text(
-                                      "Score des challenges".toUpperCase(),
-                                      style: TextStyle(fontSize: 20),
+                                    child: Expanded(
+                                      child: Text(
+                                        "Score des challenges".toUpperCase(),
+                                        style: GoogleFonts.playfairDisplay(
+                                            fontSize: 17),
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -369,13 +373,29 @@ class _ResultaChallengeState extends State<ResultaChallenge>
                             child: Column(
                               children: [
                                 ScoreChallengeWidget(
-                                  "${challengeDaysResult.nbchallengeVallide} challenges validés",
+                                  challengeDaysResult.nbchallengeVallide ==
+                                              '0' ||
+                                          challengeDaysResult
+                                                  .nbchallengeVallide ==
+                                              '1'
+                                      ? "${challengeDaysResult.nbchallengeVallide} challenge validé"
+                                      : "${challengeDaysResult.nbchallengeVallide} challenges validés",
                                   mediaQueryData,
                                   challengeDaysResult.commentaire.toUpperCase(),
-                                  "${challengeDaysResult.nbChallengeEnCours} challenges en cours",
+                                  challengeDaysResult.nbChallengeEnCours ==
+                                              '0' ||
+                                          challengeDaysResult
+                                                  .nbChallengeEnCours ==
+                                              '1'
+                                      ? "${challengeDaysResult.nbChallengeEnCours} challenge en cours"
+                                      : "${challengeDaysResult.nbChallengeEnCours} challenges en cours",
                                   resultaChallenge(int.parse(
                                       challengeDaysResult.nbchallengeVallide)),
-                                  "${challengeDaysResult.nbtacheVallide}  tâches validées",
+                                  challengeDaysResult.nbtacheVallide == '0' ||
+                                          challengeDaysResult.nbtacheVallide ==
+                                              '1'
+                                      ? "${challengeDaysResult.nbtacheVallide}  tâche validée"
+                                      : "${challengeDaysResult.nbtacheVallide}  tâches validées",
                                 ),
                                 // Card(
                                 //   color: Colors.blue,

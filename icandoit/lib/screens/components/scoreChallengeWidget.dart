@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 
 class ScoreChallengeWidget extends StatefulWidget {
@@ -35,30 +36,14 @@ class _ScoreChallengeWidgetState extends State<ScoreChallengeWidget> {
           elevation: 15.0,
           child: Padding(
             padding: const EdgeInsets.all(20.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      height: 30.0,
-                      child: Row(
-                        children: [
-                          Center(
-                            child: Text(
-                              "Aujourd'hui".toUpperCase(),
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.blue),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
+            child: Container(
+              child: Center(
+                child: Text(
+                  "Aujourd'hui".toUpperCase(),
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.playfairDisplay(fontSize: 17),
                 ),
-              ],
+              ),
             ),
           ),
         ),
@@ -158,7 +143,11 @@ class _ScoreChallengeWidgetState extends State<ScoreChallengeWidget> {
                                               ])),
                                       padding: const EdgeInsets.all(8.0),
                                       child: Text(
-                                        widget.nbtacheVallide,
+                                        widget.nbtacheVallide.isEmpty
+                                            ? "Pas d'activité"
+                                            : widget.nbtacheVallide,
+                                        style: GoogleFonts.playfairDisplay(
+                                            fontSize: 14),
                                         textAlign: TextAlign.center,
                                       ),
                                     ),
@@ -254,6 +243,9 @@ class _ScoreChallengeWidgetState extends State<ScoreChallengeWidget> {
                                                       child: Text(
                                                           widget
                                                               .challengeDayResult,
+                                                          style: GoogleFonts
+                                                              .playfairDisplay(
+                                                                  fontSize: 13),
                                                           textAlign:
                                                               TextAlign.center),
                                                     )
@@ -317,6 +309,9 @@ class _ScoreChallengeWidgetState extends State<ScoreChallengeWidget> {
                                                       child: Text(
                                                           widget
                                                               .nmbreChalleneEnCours,
+                                                          style: GoogleFonts
+                                                              .playfairDisplay(
+                                                                  fontSize: 13),
                                                           textAlign:
                                                               TextAlign.center),
                                                     )
@@ -364,6 +359,9 @@ class _ScoreChallengeWidgetState extends State<ScoreChallengeWidget> {
                                                       child: Text(
                                                           widget
                                                               .nombchallengeVallide,
+                                                          style: GoogleFonts
+                                                              .playfairDisplay(
+                                                                  fontSize: 13),
                                                           textAlign:
                                                               TextAlign.center),
                                                     )
