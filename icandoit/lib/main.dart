@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:icandoit/Switch.dart';
 import 'package:icandoit/controllers/challenge_controller.dart';
 
@@ -130,9 +131,14 @@ class HomeScreen extends StatelessWidget {
         pages: [
           PageViewModel(
             useScrollView: true,
-            title: "Les meilleurs pratiques",
+            title: "Les meilleures pratiques".toUpperCase(),
             bodyWidget: ListeTacheQuotidienne(),
             decoration: pageDecoration.copyWith(
+              titlePadding: EdgeInsets.only(top: 22),
+              titleTextStyle: GoogleFonts.playfairDisplay(
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
               pageColor: Colors.transparent,
               bodyFlex: 2,
               imageFlex: 4,
@@ -144,9 +150,15 @@ class HomeScreen extends StatelessWidget {
           ),
           PageViewModel(
             useScrollView: true,
-            title: "Les meilleurs pratiques",
+            title: "Les meilleures pratiques".toUpperCase(),
             bodyWidget: FaireGateauxAuChaocolat(),
             decoration: pageDecoration.copyWith(
+              titlePadding: EdgeInsets.only(top: 22),
+              titleTextStyle: GoogleFonts.playfairDisplay(
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
+              pageColor: Colors.transparent,
               bodyFlex: 2,
               imageFlex: 4,
               bodyAlignment: Alignment.bottomCenter,
@@ -157,9 +169,15 @@ class HomeScreen extends StatelessWidget {
           ),
           PageViewModel(
             useScrollView: true,
-            title: "Les meilleurs pratiques",
+            title: "Les meilleures pratiques".toUpperCase(),
             bodyWidget: Formations(),
             decoration: pageDecoration.copyWith(
+              titlePadding: EdgeInsets.only(top: 22),
+              titleTextStyle: GoogleFonts.playfairDisplay(
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
+              pageColor: Colors.transparent,
               bodyFlex: 2,
               imageFlex: 4,
               bodyAlignment: Alignment.bottomCenter,
@@ -170,9 +188,15 @@ class HomeScreen extends StatelessWidget {
           ),
           PageViewModel(
             useScrollView: true,
-            title: "Les meilleurs pratiques",
+            title: "Les meilleures pratiques".toUpperCase(),
             bodyWidget: ListeDeCourses(),
             decoration: pageDecoration.copyWith(
+              titlePadding: EdgeInsets.only(top: 22),
+              titleTextStyle: GoogleFonts.playfairDisplay(
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
+              pageColor: Colors.transparent,
               bodyFlex: 2,
               imageFlex: 4,
               bodyAlignment: Alignment.bottomCenter,
@@ -183,9 +207,15 @@ class HomeScreen extends StatelessWidget {
           ),
           PageViewModel(
             useScrollView: true,
-            title: "Les meilleurs pratiques",
+            title: "Les meilleures pratiques".toUpperCase(),
             bodyWidget: TravauxDeRenovation(),
             decoration: pageDecoration.copyWith(
+              titlePadding: EdgeInsets.only(top: 22),
+              titleTextStyle: GoogleFonts.playfairDisplay(
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
+              pageColor: Colors.transparent,
               bodyFlex: 2,
               imageFlex: 4,
               bodyAlignment: Alignment.bottomCenter,
@@ -196,9 +226,15 @@ class HomeScreen extends StatelessWidget {
           ),
           PageViewModel(
             useScrollView: true,
-            title: "Les meilleurs pratiques",
+            title: "Les meilleures pratiques".toUpperCase(),
             bodyWidget: ListeDeMusics(),
             decoration: pageDecoration.copyWith(
+              titlePadding: EdgeInsets.only(top: 22),
+              titleTextStyle: GoogleFonts.playfairDisplay(
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
+              pageColor: Colors.transparent,
               bodyFlex: 2,
               imageFlex: 4,
               bodyAlignment: Alignment.bottomCenter,
@@ -209,9 +245,15 @@ class HomeScreen extends StatelessWidget {
           ),
           PageViewModel(
             useScrollView: true,
-            title: "Les meilleurs pratiques",
+            title: "Les meilleures pratiques".toUpperCase(),
             bodyWidget: RestaurantList(),
             decoration: pageDecoration.copyWith(
+              titlePadding: EdgeInsets.only(top: 22),
+              titleTextStyle: GoogleFonts.playfairDisplay(
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
+              pageColor: Colors.transparent,
               bodyFlex: 2,
               imageFlex: 4,
               bodyAlignment: Alignment.bottomCenter,
@@ -222,9 +264,15 @@ class HomeScreen extends StatelessWidget {
           ),
           PageViewModel(
             useScrollView: true,
-            title: "Les meilleurs pratiques",
+            title: "Les meilleures pratiques".toUpperCase(),
             bodyWidget: ShareChallenge(),
             decoration: pageDecoration.copyWith(
+              titlePadding: EdgeInsets.only(top: 22),
+              titleTextStyle: GoogleFonts.playfairDisplay(
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
+              pageColor: Colors.transparent,
               bodyFlex: 2,
               imageFlex: 4,
               bodyAlignment: Alignment.bottomCenter,

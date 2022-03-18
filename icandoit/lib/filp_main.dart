@@ -1,6 +1,7 @@
 import 'package:card_flip/card_flip.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:icandoit/colorss.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -103,7 +104,10 @@ class FlipLayoutDemo extends StatelessWidget {
                 gradient: LinearGradient(
                     begin: Alignment.centerLeft,
                     end: Alignment.centerRight,
-                    colors: [Colors.orange, Colors.blue])),
+                    colors: [
+                      Color.fromARGB(146, 255, 153, 0),
+                      Color.fromARGB(146, 33, 149, 243)
+                    ])),
             child: Padding(
                 padding: const EdgeInsets.all(12.0), child: actionChallenge),
           )
@@ -209,7 +213,10 @@ class FlipLayoutDemo extends StatelessWidget {
           gradient: LinearGradient(
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
-              colors: [Colors.orange, Colors.blue])),
+              colors: [
+                Color.fromARGB(146, 255, 153, 0),
+                Color.fromARGB(146, 33, 149, 243)
+              ])),
       padding: const EdgeInsets.all(10),
       child: Column(
         children: [
@@ -261,13 +268,17 @@ class FlipLayoutDemo extends StatelessWidget {
           gradient: LinearGradient(
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
-              colors: [Colors.orange, Colors.blue])),
+              colors: [
+                Color.fromARGB(146, 255, 153, 0),
+                Color.fromARGB(146, 33, 149, 243)
+              ])),
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
       child: Row(
         children: [
           Expanded(
               child: Text(
             actionChallenge,
+            style: GoogleFonts.playfairDisplay(fontWeight: FontWeight.bold),
             textAlign: TextAlign.center,
           )),
         ],
@@ -287,7 +298,10 @@ class FlipLayoutDemo extends StatelessWidget {
             gradient: LinearGradient(
                 begin: Alignment.centerLeft,
                 end: Alignment.centerRight,
-                colors: [Colors.orange, Colors.blue])),
+                colors: [
+                  Color.fromARGB(146, 255, 153, 0),
+                  Color.fromARGB(146, 33, 149, 243)
+                ])),
         width: double.infinity,
         padding: const EdgeInsets.all(10),
         child: Column(

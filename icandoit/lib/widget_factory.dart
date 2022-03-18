@@ -1,6 +1,7 @@
 import 'package:card_flip/card_flip.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 
 import 'colorss.dart';
@@ -64,9 +65,9 @@ Widget component1(String etape, String typeChallenge, String lottiesChallenge,
                 Text(
                   etape,
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 20,
+                  style: GoogleFonts.greatVibes(
                     color: Colors.white,
+                    fontSize: 26,
                   ),
                 ),
               ],
@@ -106,11 +107,17 @@ Widget component1(String etape, String typeChallenge, String lottiesChallenge,
                             Text(
                               typeChallenge1,
                               textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 16,
+                              style: GoogleFonts.playfairDisplay(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15,
                               ),
                             ),
+
+                            //   TextStyle(
+                            //     fontWeight: FontWeight.w500,
+                            //     fontSize: 16,
+                            //   ),
+                            // ),
                             Container(
                               margin: const EdgeInsets.fromLTRB(0, 8, 10, 8),
                               width: double.infinity,
@@ -120,9 +127,9 @@ Widget component1(String etape, String typeChallenge, String lottiesChallenge,
                             Text(
                               typeChallenge,
                               textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 16,
+                              style: GoogleFonts.playfairDisplay(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15,
                               ),
                             ),
                           ],

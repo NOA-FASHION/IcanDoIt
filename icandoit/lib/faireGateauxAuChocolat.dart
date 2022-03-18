@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 
 import 'filp_main.dart';
@@ -10,7 +11,7 @@ class FaireGateauxAuChaocolat extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(height: 70),
+        SizedBox(height: 95),
         Stack(
           children: [
             Container(
@@ -32,8 +33,10 @@ class FaireGateauxAuChaocolat extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  "Faire un gâteau aux chocolat",
-                  style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
+                  "Faire un gâteau au chocolat".toUpperCase(),
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.playfairDisplay(
+                      fontSize: 14, fontWeight: FontWeight.bold),
                 ),
               ),
             ),
@@ -70,14 +73,14 @@ class FaireGateauxAuChaocolat extends StatelessWidget {
             lottiesChallenge: "assets/missionNormal.json",
             assetPictureChallengeeCreer: 'assets/gateauxAuChocolat.png',
             titreChallenge: 'Challenges Normal',
-            titreChallenge2: 'Faire un gâteau aux chocolat',
+            titreChallenge2: 'Faire un gâteau au chocolat',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge: Column(
               children: [
                 Text(
-                    "Pour lister éfficacement les évenements importants de votre recette."),
-                Text(" Vous devez d'abord créer un challenge de type normal. ")
+                    "Pour lister efficacement les étapes importantes de votre recette, Vous devez d'abord créer un challenge de type normal."),
+                // Text("  ")
               ],
             ),
             actionChallenge2: 'Créer un challenge Normal',
@@ -92,7 +95,7 @@ class FaireGateauxAuChaocolat extends StatelessWidget {
             lottiesChallenge: "assets/recetteEtape.json",
             assetPictureChallengeeCreer: 'assets/listeRecette.png',
             titreChallenge: 'Challenges quotidien',
-            titreChallenge2: 'Faire un gâteau aux chocolat',
+            titreChallenge2: 'Faire un gâteau au chocolat',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge: Column(
@@ -100,12 +103,12 @@ class FaireGateauxAuChaocolat extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(
-                    "Rentrer les différentes tâches et documents associer à la recette de votre gâteaux."),
+                    "Rentrer les différentes tâches et documents associés à la recette de votre gâteau."),
                 SizedBox(
                   height: 3,
                 ),
                 Text(
-                  "Par exemple cela pourra être: ",
+                  "Par exemple cela peut être : ",
                   textAlign: TextAlign.start,
                 ),
                 SizedBox(height: 4),
@@ -113,21 +116,21 @@ class FaireGateauxAuChaocolat extends StatelessWidget {
                   children: [
                     Text('\u2022'),
                     SizedBox(width: 5),
-                    Expanded(child: Text(' un élément de type tâche.')),
+                    Expanded(child: Text('Un élément de type tâche')),
                   ],
                 ),
                 Row(
                   children: [
                     Text('\u2022'),
                     SizedBox(width: 5),
-                    Expanded(child: Text('un élément de type commentaire.')),
+                    Expanded(child: Text('Un élément de type commentaire')),
                   ],
                 ),
                 SizedBox(
                   height: 3,
                 ),
                 Text(
-                    "Il est possible aussi de créer des éléments visuels ou auditifs comme: "),
+                    "Il est possible aussi de créer des éléments visuels ou audios comme : "),
                 SizedBox(
                   height: 3,
                 ),
@@ -135,28 +138,28 @@ class FaireGateauxAuChaocolat extends StatelessWidget {
                   children: [
                     Text('\u2022'),
                     SizedBox(width: 5),
-                    Expanded(child: Text('une photo')),
+                    Expanded(child: Text('Une photo')),
                   ],
                 ),
                 Row(
                   children: [
                     Text('\u2022'),
                     SizedBox(width: 5),
-                    Expanded(child: Text('un lien youtube')),
+                    Expanded(child: Text('Un lien youtube')),
                   ],
                 ),
                 Row(
                   children: [
                     Text('\u2022'),
                     SizedBox(width: 5),
-                    Expanded(child: Text('un lien internet')),
+                    Expanded(child: Text('Un lien internet')),
                   ],
                 ),
                 Row(
                   children: [
                     Text('\u2022'),
                     SizedBox(width: 5),
-                    Expanded(child: Text('une vidéo')),
+                    Expanded(child: Text('Une vidéo')),
                   ],
                 ),
               ],
@@ -173,7 +176,7 @@ class FaireGateauxAuChaocolat extends StatelessWidget {
             lottiesChallenge: "assets/validateRecette.json",
             assetPictureChallengeeCreer: 'assets/fairegateauxauchocolat3.gif',
             titreChallenge: 'Challenges quotidien',
-            titreChallenge2: 'Faire un gâteau aux chocolat',
+            titreChallenge2: 'Faire un gâteau au chocolat',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge: Column(
@@ -197,11 +200,11 @@ class FaireGateauxAuChaocolat extends StatelessWidget {
             lottiesChallenge: "assets/accederDoc.json",
             assetPictureChallengeeCreer: 'assets/FaireGateauxAuChocoalat2.gif',
             titreChallenge: 'Challenges quotidien',
-            titreChallenge2: 'Faire un gâteau aux chocolat',
+            titreChallenge2: 'Faire un gâteau au chocolat',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge: Text(
-                "Pour accéder a la documentions que vous avez associer a votre recette , il suffit de sélectionner l'élément et vous y aurez accès. "),
+                "Pour accéder à la documentions que vous avez associé à votre recette, il suffit de sélectionner l'élément et vous y aurez accès. "),
             actionChallenge2: 'Documentations  possibles',
             pictureChallenge: 'assets/assets/lister.gif'),
         SizedBox(height: 30),
@@ -214,11 +217,11 @@ class FaireGateauxAuChaocolat extends StatelessWidget {
             lottiesChallenge: "assets/backup.json",
             assetPictureChallengeeCreer: 'assets/appuielong.png',
             titreChallenge: 'Challenges quotidien',
-            titreChallenge2: 'Faire un gâteau aux chocolat',
+            titreChallenge2: 'Faire un gâteau au chocolat',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge: Text(
-                "Avant de valider chaque étape, il est conseillé de faire une sauvegarde de la mission en faisant un appuie long sur la mission."),
+                "Avant de valider chaque étape, il est conseillé de faire une sauvegarde de la mission en faisant un appuie long sur celle ci."),
             actionChallenge2: 'Sauvegarde manuelle',
             pictureChallenge: 'assets/assets/lister.gif'),
         SizedBox(height: 30),
@@ -231,13 +234,13 @@ class FaireGateauxAuChaocolat extends StatelessWidget {
             lottiesChallenge: "assets/backup.json",
             assetPictureChallengeeCreer: 'assets/FaireGateauxAuChocoalat1.gif',
             titreChallenge: 'Challenges quotidien',
-            titreChallenge2: 'Faire un gâteau aux chocolat',
+            titreChallenge2: 'Faire un gâteau au chocolat',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge: Column(
               children: [
                 Text(
-                    " Vous pourrez a tout moment effectuer une restauration manuelle des procès enregistrés"),
+                    " Vous pourrez à tout moment effectuer une restauration manuelle des tâches enregistrées."),
                 SizedBox(
                   height: 20,
                 )

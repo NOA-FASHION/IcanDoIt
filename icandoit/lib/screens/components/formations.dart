@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:icandoit/filp_main.dart';
 import 'package:lottie/lottie.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -10,7 +11,7 @@ class Formations extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(height: 70),
+        SizedBox(height: 95),
         Stack(
           children: [
             Container(
@@ -32,8 +33,10 @@ class Formations extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  "Liste et suivi de vos formations",
-                  style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
+                  "Liste et suivi de vos formations".toUpperCase(),
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.playfairDisplay(
+                      fontSize: 14, fontWeight: FontWeight.bold),
                 ),
               ),
             ),
@@ -76,9 +79,9 @@ class Formations extends StatelessWidget {
             actionChallenge: Column(
               children: [
                 Text(
-                    "Imaginez que vous avez une liste de formation ou de matière a travailler régulièrement et que vous souhaitez avoir un suivi précis de votre progression."),
+                    "Imaginez que vous avez une liste de formation ou de matière à travailler régulièrement et que vous souhaitez avoir un suivi précis de votre progression."),
                 Text(
-                    "Vous devez créer une mission hebdomadaire que vous nommerez Formation et sélectionner les jours de la semaine que vous avez réservé pour étudier."),
+                    "Vous devez créer une mission hebdomadaire et sélectionner les jours de la semaine que vous avez réservé pour étudier."),
               ],
             ),
             actionChallenge2: 'Créer un challenge quotidien',
@@ -97,7 +100,7 @@ class Formations extends StatelessWidget {
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge: Text(
-                "Rentrer les différentes formations que vous étudiez en créant pour chaque matière un évenement de type formations."),
+                "Rentrer les différentes formations que vous étudiez en créant pour chaque matière un évènement de type formations."),
             actionChallenge2: 'Eléments et documentations ',
             pictureChallenge: 'assets/challengeQuotidien.png'),
         SizedBox(height: 30),
@@ -110,7 +113,7 @@ class Formations extends StatelessWidget {
             lottiesChallenge: "assets/validateRecette.json",
             assetPictureChallengeeCreer: 'assets/validEtape.gif',
             titreChallenge: 'Challenges quotidien',
-            titreChallenge2: 'Faire un gâteau aux chocolat',
+            titreChallenge2: 'Liste de formations',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge: Text(
@@ -131,7 +134,7 @@ class Formations extends StatelessWidget {
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge: Text(
-                "En cliquant sur une des formation existante vous avez la possibilité de vérifier votre progression . "),
+                "Vous avez la possibilité de vérifier votre progression, en cliquant sur une des formations existante. "),
             actionChallenge2: 'visualiser votre progression',
             pictureChallenge: 'assets/assets/lister.gif'),
         SizedBox(height: 30),
@@ -150,9 +153,9 @@ class Formations extends StatelessWidget {
             actionChallenge: Column(
               children: [
                 Text(
-                    "Vous pouvez aussi a tout moment modifier la progression de votre parcours de formation en sélectionnant l'icone en forme de crayon. "),
+                    "Vous pouvez aussi a tout moment modifier la progression de votre parcours de formation en sélectionnant l'icône en forme de crayon. "),
                 Text(
-                    "Cela vous permettra de reprendre votre formation exactement à l'endroit ou vous vous êtes arreter la dernière fois. ")
+                    "Cela vous permettra de reprendre votre formation exactement à l'endroit ou vous vous êtes arrêté la dernière fois. ")
               ],
             ),
             actionChallenge2: 'Modification progression',
@@ -171,7 +174,7 @@ class Formations extends StatelessWidget {
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge: Text(
-                "la totalité des évenements seront restauré à leur état initial a chaque journé de la semaine que vous avez choisi, lors de la création de votre mission hebdomadaire."),
+                "la totalité des évènements seront restaurés à leurs états initials à chaque journée de la semaine que vous avez choisi lors de la création de votre mission hebdomadaire."),
             actionChallenge2: 'Sauvegarde et restauration',
             pictureChallenge: 'assets/formation1.gif'),
         SizedBox(height: 70),

@@ -67,6 +67,7 @@ dependencies:
   intro_screen_onboarding_flutter: ^0.1.5
   introduction_screen: ^3.0.0
   card_flip: ^0.0.4
+  google_fonts: ^2.3.1
   
  
   

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:icandoit/filp_main.dart';
 import 'package:lottie/lottie.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ListeTacheQuotidienne extends StatelessWidget {
   const ListeTacheQuotidienne({
@@ -11,7 +12,7 @@ class ListeTacheQuotidienne extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(height: 70),
+        SizedBox(height: 95),
         Stack(
           children: [
             Container(
@@ -33,8 +34,10 @@ class ListeTacheQuotidienne extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  "Lister vos évenements quotidiens",
-                  style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
+                  "Lister vos évènements quotidiens".toUpperCase(),
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.playfairDisplay(
+                      fontSize: 14, fontWeight: FontWeight.bold),
                 ),
               ),
             ),
@@ -65,20 +68,23 @@ class ListeTacheQuotidienne extends StatelessWidget {
         FlipLayoutDemo(
             lienInternet:
                 "https://newaccount1626188315630.freshdesk.com/support/solutions/articles/69000513695-cr%C3%A9er-challenge-quotidien",
-            etape: 'Etape 1',
+            etape: 'Étape 1',
             typeChallenge1: ' Créer une mission',
             typeChallenge: 'de type "quotidien"',
             lottiesChallenge: "assets/challengeQuotidien.json",
             assetPictureChallengeeCreer: 'assets/challengeQuotidien.png',
             titreChallenge: 'Challenges quotidien',
-            titreChallenge2: 'Lister vos taches quotidiennes',
+            titreChallenge2: 'Lister vos tâches quotidiennes',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge: Column(
               children: [
                 Text(
-                    "Pour lister éfficacement les évenements importants de votre journée."),
-                Text("Vous devez d'abord créer un challenge de type quotidien.")
+                  "Pour lister efficacement les événements importants de votre journée, vous devez d'abord créer un challenge de type quotidien.",
+                  style: GoogleFonts.playfairDisplay(color: Colors.black87),
+                ),
+
+                // Text("Vous devez d'abord créer un challenge de type quotidien.")
               ],
             ),
             actionChallenge2: 'Créer un challenge quotidien',
@@ -87,34 +93,43 @@ class ListeTacheQuotidienne extends StatelessWidget {
         FlipLayoutDemo(
             lienInternet:
                 "https://newaccount1626188315630.freshdesk.com/support/solutions/articles/69000513812-documentation-possible",
-            etape: 'Etape 2',
+            etape: 'Étape 2',
             typeChallenge1: 'Créer la liste de chaque',
-            typeChallenge: 'Etapes de votre journée',
+            typeChallenge: 'étape de votre journée',
             lottiesChallenge: "assets/etapeJournee.json",
             assetPictureChallengeeCreer: 'assets/tacheQuotidienne.png',
             titreChallenge: 'Challenges quotidien',
-            titreChallenge2: 'Lister vos taches quotidiennes',
+            titreChallenge2: 'Lister vos tâches quotidiennes',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
-            actionChallenge: Text(
-                "confectionnez des éléments illustrant les tâches que vous pensez réalisez quotidiennement"),
+            actionChallenge: Column(
+              children: [
+                Text(
+                  "Créer la liste des tâches que vous pensez réaliser quotidiennement",
+                  style: GoogleFonts.playfairDisplay(color: Colors.black87),
+                ),
+                SizedBox(
+                  height: 15,
+                )
+              ],
+            ),
             actionChallenge2: 'Eléments et documentations',
             pictureChallenge: 'assets/challengeQuotidien.png'),
         SizedBox(height: 30),
         FlipLayoutDemo(
             lienInternet:
                 "https://newaccount1626188315630.freshdesk.com/support/solutions/articles/69000513812-documentation-possible",
-            etape: 'Etape 3',
+            etape: 'Étape 3',
             typeChallenge1: 'Validation des étapes',
-            typeChallenge: "importante de votre recette",
+            typeChallenge: " de votre journée",
             lottiesChallenge: "assets/validateRecette.json",
             assetPictureChallengeeCreer: 'assets/fairegateauxauchocolat3.gif',
             titreChallenge: 'Challenges quotidien',
-            titreChallenge2: 'Faire un gâteau aux chocolat',
+            titreChallenge2: 'Lister vos tâches quotidiennes',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge: Text(
-                "Lors de la réalisation de vos tâches quotidienne, valider chaque étape par un swipe vers la gauche, ou consulter a tout moment la documentation visuel ou auditive associé."),
+                "Lors de la réalisation de vos tâches quotidiennes, valider chaque étape par un swipe vers la gauche, ou consulter à tout moment la documentation visuelle ou audio associée."),
             actionChallenge2: 'Documentations possibles',
             pictureChallenge: 'assets/assets/lister.gif'),
         SizedBox(height: 30),
@@ -127,11 +142,11 @@ class ListeTacheQuotidienne extends StatelessWidget {
             lottiesChallenge: "assets/backup.json",
             assetPictureChallengeeCreer: 'assets/lister.gif',
             titreChallenge: 'Challenges quotidien',
-            titreChallenge2: 'Lister vos taches quotidiennes',
+            titreChallenge2: 'Lister vos tâches quotidiennes',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge: Text(
-                "Imaginez que vous avez validé les  évenenements 1, 2 et 5  aujourd'hui, le jour suivant la totalité des évenements seront restauré à leur état initial"),
+                "Imaginer que vous avez validé les  évènenements 1, 2 et 5  aujourd'hui, le jour suivant la totalité de ceux-ci seront restaurés à leur état initial."),
             actionChallenge2: 'Sauvegarde et restauration ',
             pictureChallenge: 'assets/assets/lister.gif'),
         SizedBox(height: 30),
@@ -144,38 +159,41 @@ class ListeTacheQuotidienne extends StatelessWidget {
             lottiesChallenge: "assets/digital.json",
             assetPictureChallengeeCreer: 'assets/docs.png',
             titreChallenge: 'Challenges quotidien',
-            titreChallenge2: 'Lister vos taches quotidiennes',
+            titreChallenge2: 'Lister vos tâches quotidiennes',
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge: Column(
               children: [
-                Text("Chaque élément qui compose la mission peut être:"),
+                Text("Chaque élément qui compose la mission peut être :"),
+                SizedBox(
+                  height: 5,
+                ),
                 Row(
                   children: [
                     Text('\u2022'),
                     SizedBox(width: 5),
-                    Expanded(child: Text('un commentaire.')),
+                    Expanded(child: Text('un commentaire')),
                   ],
                 ),
                 Row(
                   children: [
                     Text('\u2022'),
                     SizedBox(width: 5),
-                    Expanded(child: Text('un lien youtube.')),
+                    Expanded(child: Text('un lien youtube')),
                   ],
                 ),
                 Row(
                   children: [
                     Text('\u2022'),
                     SizedBox(width: 5),
-                    Expanded(child: Text('un prix.')),
+                    Expanded(child: Text('un prix')),
                   ],
                 ),
                 Row(
                   children: [
                     Text('\u2022'),
                     SizedBox(width: 5),
-                    Expanded(child: Text('une informations.')),
+                    Expanded(child: Text('une information')),
                   ],
                 ),
               ],
