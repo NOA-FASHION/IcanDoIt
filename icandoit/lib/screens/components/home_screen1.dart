@@ -76,7 +76,7 @@ class HomeScreen extends StatelessWidget {
           height: 60,
           child: ElevatedButton(
             child: const Text(
-              'Let\'s go right away!',
+              'Allons-y tout de suite!',
               style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
             ),
             onPressed: () {
