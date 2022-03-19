@@ -6,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:icandoit/controllers/challenge_controller.dart';
 import 'package:icandoit/models/challenge_model.dart';
+import 'package:icandoit/screens/components/home_screen1.dart';
 import 'package:icandoit/screens/components/scoreChallengeWidget.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
@@ -55,8 +56,7 @@ class _ResultaChallengeState extends State<ResultaChallenge>
           });
   }
 
-  void _launchMapsUrl() async {
-    final url = "https://easytodo.fr";
+  void _launchMapsUrl(String url) async {
     if (await canLaunch(url)) {
       await launch(url);
     } else {
@@ -103,7 +103,7 @@ class _ResultaChallengeState extends State<ResultaChallenge>
         tooltip: "${challengeDaysResult.nbChallengeEnCours}",
       ),
     ];
-
+Challengecontroller variable = Provider.of<Challengecontroller>(context);
     return Material(
       child: FancyDrawerWrapper(
         hideOnContentTap: true,
@@ -197,10 +197,12 @@ class _ResultaChallengeState extends State<ResultaChallenge>
               ],
             ),
           ),
+        
           SizedBox(height: 5.0),
           InkWell(
             onTap: () {
-              _launchMapsUrl();
+              _launchMapsUrl(
+                  "https://newaccount1626188315630.freshdesk.com/support/solutions");
             },
             child: Row(
               children: [
@@ -222,7 +224,7 @@ class _ResultaChallengeState extends State<ResultaChallenge>
           SizedBox(height: 5.0),
           InkWell(
             onTap: () {
-              _launchMapsUrl();
+              _launchMapsUrl("https://easytodo.fr");
             },
             child: Row(
               children: [
@@ -231,7 +233,31 @@ class _ResultaChallengeState extends State<ResultaChallenge>
                   width: 5.0,
                 ),
                 Text(
-                  "A propos",
+                  "À propos",
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.purple,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: 5.0),
+          InkWell(
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => ChangeNotifierProvider.value(
+                      value: variable, child: HomeScreen())));
+            },
+            child: Row(
+              children: [
+                Icon(Icons.save_rounded),
+                SizedBox(
+                  width: 5.0,
+                ),
+                Text(
+                  "Intro",
                   style: TextStyle(
                     fontSize: 18,
                     color: Colors.purple,

@@ -680,8 +680,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     super.dispose();
   }
 
-  void _launchMapsUrl() async {
-    final url = "https://easytodo.fr";
+  void _launchMapsUrl(String url) async {
     if (await canLaunch(url)) {
       await launch(url);
     } else {
@@ -778,7 +777,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           SizedBox(height: 5.0),
           InkWell(
             onTap: () {
-              _launchMapsUrl();
+              _launchMapsUrl(
+                  "https://newaccount1626188315630.freshdesk.com/support/solutions");
             },
             child: Row(
               children: [
@@ -800,7 +800,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           SizedBox(height: 5.0),
           InkWell(
             onTap: () {
-              _launchMapsUrl();
+              _launchMapsUrl("https://easytodo.fr");
             },
             child: Row(
               children: [
@@ -819,6 +819,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               ],
             ),
           ),
+          SizedBox(height: 5.0),
           InkWell(
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(
