@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:icandoit/models/challenge_model.dart';
 import 'package:icandoit/screens/components/build_challenge_list.dart';
 import 'package:icandoit/controllers/challenge_controller.dart';
+import 'package:icandoit/screens/components/home_screen1.dart';
 import 'package:multiselect_formfield/multiselect_formfield.dart';
 import 'package:nanoid/nanoid.dart';
 import 'package:provider/provider.dart';
@@ -809,6 +810,29 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 ),
                 Text(
                   "À propos",
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.purple,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          InkWell(
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => ChangeNotifierProvider.value(
+                      value: variable, child: HomeScreen())));
+            },
+            child: Row(
+              children: [
+                Icon(Icons.save_rounded),
+                SizedBox(
+                  width: 5.0,
+                ),
+                Text(
+                  "Intro",
                   style: TextStyle(
                     fontSize: 18,
                     color: Colors.purple,

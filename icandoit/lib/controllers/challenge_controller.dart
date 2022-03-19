@@ -907,12 +907,14 @@ class Challengecontroller extends ChangeNotifier {
     return false;
   }
 
-  switchIntro(String switchBoll) {
+  switchIntro(String switchBoll) async {
     if (switchBoll == "true" || switchBoll == "") {
       challengeyesterday.commentaire = "false";
     } else {
       challengeyesterday.commentaire = "true";
     }
+    await _saveChallenyesterday();
+    _initChallengeListStartChallenge();
   }
   /////////////////////////////////////// /////////////////////////////////////// /////////////////////////////////////// fin initialisation score challenge
 
