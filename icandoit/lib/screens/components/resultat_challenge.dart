@@ -1,4 +1,4 @@
-import 'dart:ui';
+// import 'dart:ui';
 
 import 'package:fancy_drawer/fancy_drawer.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +8,7 @@ import 'package:icandoit/controllers/challenge_controller.dart';
 import 'package:icandoit/models/challenge_model.dart';
 import 'package:icandoit/screens/components/home_screen1.dart';
 import 'package:icandoit/screens/components/scoreChallengeWidget.dart';
-import 'package:lottie/lottie.dart';
+// import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:vertical_barchart/vertical-barchart.dart';

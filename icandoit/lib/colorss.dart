@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:card_flip/card_flip.dart';
+// import 'package:card_flip/card_flip.dart';
 import 'package:flutter/material.dart';
 
 index_color(int index) {
