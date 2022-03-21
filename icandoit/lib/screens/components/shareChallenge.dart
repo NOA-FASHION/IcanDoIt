@@ -65,7 +65,7 @@ class ShareChallenge extends StatelessWidget {
         SizedBox(height: 30),
         FlipLayoutDemo(
             lienInternet:
-                "https://newaccount1626188315630.freshdesk.com/a/solutions/articles/69000804380",
+                "https://newaccount1626188315630.freshdesk.com/a/solutions/articles/69000513740",
             etape: 'Option',
             typeChallenge1: 'Partager facilement',
             typeChallenge: "  votre playlist",
@@ -83,12 +83,12 @@ class ShareChallenge extends StatelessWidget {
                     "Vous aurez le choix de l'envoyer par email, watsapp, etc...")
               ],
             ),
-            actionChallenge2: 'Documentations possibles',
+            actionChallenge2: 'Partager un challenge',
             pictureChallenge: 'assets/music1.gif'),
         SizedBox(height: 30),
         FlipLayoutDemo(
             lienInternet:
-                "https://newaccount1626188315630.freshdesk.com/a/solutions/articles/69000804380",
+                "https://newaccount1626188315630.freshdesk.com/a/solutions/articles/69000513841",
             etape: 'Option',
             typeChallenge1: 'Uploader facilement',
             typeChallenge: "  votre playlist",
@@ -107,12 +107,12 @@ class ShareChallenge extends StatelessWidget {
                 )
               ],
             ),
-            actionChallenge2: 'Documentations possibles',
+            actionChallenge2: 'Uploader un challenge',
             pictureChallenge: 'assets/music1.gif'),
         SizedBox(height: 30),
         FlipLayoutDemo(
             lienInternet:
-                "https://newaccount1626188315630.freshdesk.com/support/solutions/articles/69000513812-documentation-possible",
+                "https://newaccount1626188315630.freshdesk.com/a/solutions/articles/69000805279",
             etape: 'Fonction',
             typeChallenge1: ' Désactiver la vue ',
             typeChallenge: "principale d'une mission ",
@@ -128,7 +128,7 @@ class ShareChallenge extends StatelessWidget {
                     "Lorsque vous réalisez une structure complexe pour une todolist composée de plusieurs arborescences, comme par exemple 'travaux de rénovation', vous pouvez désactiver la vue d'un challenge dans la liste principale.")
               ],
             ),
-            actionChallenge2: 'Documentations  possibles',
+            actionChallenge2: 'Désactiver une vue ',
             pictureChallenge: 'assets/assets/lister.gif'),
         SizedBox(height: 30),
         FlipLayoutDemo(
@@ -145,7 +145,7 @@ class ShareChallenge extends StatelessWidget {
             prioriteChallenge: 'Quotidien',
             actionChallenge: Text(
                 "Visualisez en live vos performances concernant la réalisation de vos challenges en cours."),
-            actionChallenge2: 'Documentations possibles',
+            actionChallenge2: 'Score de vos challenges',
             pictureChallenge: 'assets/assets/lister.gif'),
         SizedBox(height: 30),
         FlipLayoutDemo(
@@ -162,7 +162,7 @@ class ShareChallenge extends StatelessWidget {
             prioriteChallenge: 'Quotidien',
             actionChallenge: Text(
                 "Selon votre choix périodique, Une notification automatique sera active pour vous rappeler et vous encourager dans vos tâches quotidiennes."),
-            actionChallenge2: 'Documentations possibles',
+            actionChallenge2: 'Notifications',
             pictureChallenge: 'assets/music1.gif'),
         SizedBox(height: 30),
         SizedBox(height: 70),

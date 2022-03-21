@@ -66,7 +66,7 @@ class Formations extends StatelessWidget {
         SizedBox(height: 30),
         FlipLayoutDemo(
             lienInternet:
-                "https://newaccount1626188315630.freshdesk.com/a/solutions/articles/69000513695",
+                "https://newaccount1626188315630.freshdesk.com/a/solutions/articles/69000509420",
             etape: 'Etape 1',
             typeChallenge1: ' Créer une mission de',
             typeChallenge: ' type "hebdomadaire"',
@@ -84,7 +84,7 @@ class Formations extends StatelessWidget {
                     "Vous devez créer une mission hebdomadaire et sélectionner les jours de la semaine que vous avez réservé pour étudier."),
               ],
             ),
-            actionChallenge2: 'Créer un challenge quotidien',
+            actionChallenge2: 'Créer un challenge hebdomadaire',
             pictureChallenge: 'assets/challengeQuotidien.png'),
         SizedBox(height: 30),
         FlipLayoutDemo(

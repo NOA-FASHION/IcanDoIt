@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:icandoit/filp_main.dart';
 import 'package:lottie/lottie.dart';
-import 'package:url_launcher/url_launcher.dart';
+
 
 class ListeDeCourses extends StatelessWidget {
   const ListeDeCourses({Key key}) : super(key: key);

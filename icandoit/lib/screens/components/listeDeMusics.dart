@@ -111,12 +111,12 @@ class ListeDeMusics extends StatelessWidget {
         SizedBox(height: 30),
         FlipLayoutDemo(
             lienInternet:
-                "https://newaccount1626188315630.freshdesk.com/a/solutions/articles/69000804649",
+                "https://newaccount1626188315630.freshdesk.com/a/solutions/articles/69000805277",
             etape: 'Etape 3',
             typeChallenge1: 'Choisir un morceau',
             typeChallenge: "dans sa playlist",
             lottiesChallenge: "assets/validateRecette.json",
-            assetPictureChallengeeCreer: 'assets/fairegateauxauchocolat3.gif',
+            assetPictureChallengeeCreer: 'assets/music.gif',
             titreChallenge: 'Challenges quotidien',
             titreChallenge2: 'Créer ma playlist de musique',
             descriptionChallenge: 'Liste des challenges',
@@ -130,12 +130,12 @@ class ListeDeMusics extends StatelessWidget {
                 )
               ],
             ),
-            actionChallenge2: 'Validation des challenges',
+            actionChallenge2: 'Lecture de sa playlist',
             pictureChallenge: 'assets/assets/lister.gif'),
         SizedBox(height: 30),
         FlipLayoutDemo(
             lienInternet:
-                "https://newaccount1626188315630.freshdesk.com/support/solutions/articles/69000513812-documentation-possible",
+                "https://newaccount1626188315630.freshdesk.com/a/solutions/articles/69000805277",
             etape: 'Fonction',
             typeChallenge1: ' Ecouter votre playlist',
             typeChallenge: '  en continue',

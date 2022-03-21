@@ -191,6 +191,30 @@ class RestaurantList extends StatelessWidget {
             ),
             actionChallenge2: 'Documentations  possibles',
             pictureChallenge: 'assets/assets/lister.gif'),
+        SizedBox(height: 30),
+        FlipLayoutDemo(
+            lienInternet:
+                "https://newaccount1626188315630.freshdesk.com/a/solutions/articles/69000805276",
+            etape: 'Etape 3',
+            typeChallenge1: 'Exemple de structure pour',
+            typeChallenge: 'Une liste de restaurant',
+            lottiesChallenge: "assets/missionNormal.json",
+            assetPictureChallengeeCreer: 'assets/restaurant22.png',
+            titreChallenge: 'Challenges quotidien',
+            titreChallenge2: 'Lister vos restaurants préférés',
+            descriptionChallenge: 'Liste des challenges',
+            prioriteChallenge: 'Quotidien',
+            actionChallenge: Column(
+              children: [
+                Text(
+                    "Exemplde de structure complexe pour une liste de restaurant."),
+                SizedBox(
+                  height: 20,
+                )
+              ],
+            ),
+            actionChallenge2: 'Structures complexes',
+            pictureChallenge: 'assets/assets/lister.gif'),
         SizedBox(height: 70),
       ],
     );

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:icandoit/filp_main.dart';
 import 'package:lottie/lottie.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class TravauxDeRenovation extends StatelessWidget {
   const TravauxDeRenovation({Key key}) : super(key: key);
@@ -107,7 +106,7 @@ class TravauxDeRenovation extends StatelessWidget {
         SizedBox(height: 30),
         FlipLayoutDemo(
             lienInternet:
-                "https://newaccount1626188315630.freshdesk.com/support/solutions/articles/69000513812-documentation-possible",
+                "https://newaccount1626188315630.freshdesk.com/a/solutions/articles/69000805276",
             etape: 'Etape 3',
             typeChallenge1: 'Exemple de structure pour',
             typeChallenge: "un projet de rénovation",
@@ -122,34 +121,9 @@ class TravauxDeRenovation extends StatelessWidget {
               children: [
                 Text(
                     "Pour chaque pièce de votre maison, vous pouvez créer plusieurs missions visuelles ou audios incluant des tutoriels, des photos de meubles ou des vidéos de matériaux. "),
-                // Row(
-                //   children: [
-                //     Text('\u2022'),
-                //     SizedBox(width: 5),
-                //     Expanded(
-                //         child: Text(
-                //             'une mission de type tutoriel , pour avoir des exemples')),
-                //   ],
-                // ),
-                // Row(
-                //   children: [
-                //     Text('\u2022'),
-                //     SizedBox(width: 5),
-                //     Expanded(
-                //         child: Text(
-                //             'une mission de type photos avec leur ref et leur prix.')),
-                //   ],
-                // ),
-                // Row(
-                //   children: [
-                //     Text('\u2022'),
-                //     SizedBox(width: 5),
-                //     Expanded(child: Text('une mission de type videos ')),
-                //   ],
-                // ),
               ],
             ),
-            actionChallenge2: 'Documentations possibles',
+            actionChallenge2: 'Structures complexes',
             pictureChallenge: 'assets/assets/lister.gif'),
         SizedBox(height: 30),
         FlipLayoutDemo(
