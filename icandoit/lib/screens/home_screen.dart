@@ -6,11 +6,14 @@ import 'package:icandoit/models/challenge_model.dart';
 import 'package:icandoit/screens/components/build_challenge_list.dart';
 import 'package:icandoit/controllers/challenge_controller.dart';
 import 'package:icandoit/screens/components/home_screen1.dart';
+import 'package:icandoit/screens/components/purchase_app.dart';
+import 'package:icandoit/screens/inn_app_purchase.dart';
 import 'package:multiselect_formfield/multiselect_formfield.dart';
 import 'package:nanoid/nanoid.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 import 'package:url_launcher/url_launcher.dart';
+
 // import 'package:lottie/lottie.dart';
 
 import 'components/challenge_list_save.dart';
@@ -828,12 +831,36 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             },
             child: Row(
               children: [
-                Icon(Icons.save_rounded),
+                Icon(Icons.book),
                 SizedBox(
                   width: 5.0,
                 ),
                 Text(
                   "Intro",
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.purple,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: 5.0),
+          InkWell(
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => ChangeNotifierProvider.value(
+                      value: variable, child: PurchaseApp())));
+            },
+            child: Row(
+              children: [
+                Icon(Icons.store),
+                SizedBox(
+                  width: 5.0,
+                ),
+                Text(
+                  "Acheter",
                   style: TextStyle(
                     fontSize: 18,
                     color: Colors.purple,
