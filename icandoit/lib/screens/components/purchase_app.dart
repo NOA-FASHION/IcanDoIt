@@ -70,31 +70,136 @@ class _PurchaseAppState extends State<PurchaseApp> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        FutureBuilder(
-            future: loadProductsForSale(),
-            builder: (context, AsyncSnapshot<List<ProductDetails>> data) {
-              if (!data.hasData) {
-                return CircularProgressIndicator();
-              }
-              return Flexible(
-                child: ListView.builder(
-                    itemCount: data.data.length,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: EdgeInsets.all(8),
-                        child: ElevatedButton(
-                          onPressed: () {
-                            buyProduct(data.data[index]);
-                          },
-                          child: Text("text " + data.data[index].id.toString()),
-                        ),
-                      );
-                    }),
-              );
-            })
-      ]),
+    return Scaffold(
+      backgroundColor: Colors.purple,
+      body: Container(
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [Colors.purple, Colors.blue])),
+        child: Center(
+          child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+            Container(
+              child: CustomPaint(
+                painter: CurvePainter(),
+                child: Container(
+                  padding: EdgeInsets.all(35),
+                  child: Column(
+                    children: [
+                      HeaderSection(),
+                      // ButtonSection(),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            FutureBuilder(
+                future: loadProductsForSale(),
+                builder: (context, AsyncSnapshot<List<ProductDetails>> data) {
+                  if (!data.hasData) {
+                    return CircularProgressIndicator();
+                  }
+                  return Container(
+                    height: 180,
+                    child: Flexible(
+                      child: ListView.builder(
+                          itemCount: data.data.length,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: EdgeInsets.all(8),
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  buyProduct(data.data[index]);
+                                },
+                                child: Text(
+                                    "text " + data.data[index].id.toString()),
+                              ),
+                            );
+                          }),
+                    ),
+                  );
+                })
+          ]),
+        ),
+      ),
+    );
+  }
+}
+
+class CurvePainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    var paint = Paint();
+    paint.color = Colors.purple;
+    paint.style = PaintingStyle.fill;
+    var path = Path();
+    path.moveTo(0, 300);
+    path.quadraticBezierTo(size.width / 2, 700 / 2, size.width, 300);
+    path.lineTo(size.width, 0);
+    path.lineTo(0, 0);
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return true;
+  }
+}
+
+class HeaderSection extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        SizedBox(height: 30),
+        Icon(
+          Icons.star,
+          color: Colors.amber,
+        ),
+        SizedBox(height: 5),
+        Text(
+          'FLUTTER STORE',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontWeight: FontWeight.w700,
+            color: Colors.grey[200],
+          ),
+        ),
+        SizedBox(height: 5),
+        Text(
+          'Acheter Des Flutter Coins',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 34,
+            fontWeight: FontWeight.w900,
+            color: Colors.white,
+          ),
+        ),
+        SizedBox(height: 5),
+        Text(
+          'Choisissez parmis les offres suivantes et dépensez vos Flutter Coins.',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 17,
+            fontWeight: FontWeight.w300,
+            color: Colors.grey[200],
+          ),
+        ),
+        SizedBox(height: 10),
+        Image.asset('assets/divider.png'),
+        SizedBox(height: 10),
+        Text(
+          'SATISFAIT OU REMBOURSÉ',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 11,
+            fontWeight: FontWeight.w400,
+            color: Colors.grey[200],
+          ),
+        ),
+        SizedBox(height: 70),
+      ],
     );
   }
 }
