@@ -33,6 +33,7 @@ class _IcanDoItState extends State<IcanDoIt> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         brightness: Brightness.light,
         primarySwatch: Colors.blue,

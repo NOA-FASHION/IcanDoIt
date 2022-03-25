@@ -1,7 +1,7 @@
-import 'package:animated_button/animated_button.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
-import 'package:lottie/lottie.dart';
+
 import 'package:vertical_card_pager/vertical_card_pager.dart';
 
 GlobalKey<_PurchaseAppState> myAppKey = GlobalKey();
@@ -50,6 +50,13 @@ class _PurchaseAppState extends State<PurchaseApp> {
     for (var purch in purchases) {
       iap.completePurchase(purch);
     }
+  }
+
+  void restaurProduct(ProductDetails prod) async {
+    // final PurchaseParam purchaseParam = PurchaseParam(productDetails: prod);
+    // iap.buyNonConsumable(purchaseParam: purchaseParam);
+
+    await InAppPurchase.instance.restorePurchases();
   }
 
   void initialize() async {
@@ -102,51 +109,126 @@ class _PurchaseAppState extends State<PurchaseApp> {
       body: Container(
         decoration: BoxDecoration(
             gradient: LinearGradient(
-                begin: Alignment.topCenter,
+                begin: Alignment.center,
                 end: Alignment.bottomCenter,
                 colors: [Colors.purple, Colors.blue])),
-        child: Center(
-          child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-            Container(
-              child: CustomPaint(
-                painter: CurvePainter(),
-                child: Container(
-                  padding: EdgeInsets.all(25),
-                  child: Column(
-                    children: [
-                      HeaderSection(),
-                      // ButtonSection(),
-                    ],
+        child: SingleChildScrollView(
+          child: Center(
+            child:
+                Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+              Container(
+                child: CustomPaint(
+                  painter: CurvePainter(),
+                  child: Container(
+                    padding: EdgeInsets.all(25),
+                    child: Column(
+                      children: [
+                        HeaderSection(),
+                        // ButtonSection(),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-            FutureBuilder(
-                future: loadProductsForSale(),
-                builder: (context, AsyncSnapshot<List<ProductDetails>> data) {
-                  if (!data.hasData) {
-                    return CircularProgressIndicator();
-                  }
-                  return Expanded(
-                    child: Container(
-                        padding: EdgeInsets.all(10.0),
-                        child: VerticalCardPager(
-                          onPageChanged: (page) {
-                            print("page : $page");
-                            setState(() {});
-                          },
-                          onSelectedItem: (page) {
-                            print("page : $page");
-                            if (page == 0) {
-                              buyProduct(data.data[0]);
-                            }
-                          },
-                          images: items,
-                          titles: titles,
-                        )),
-                  );
-                })
-          ]),
+              Card(
+                elevation: 15,
+                borderOnForeground: true,
+                child: Container(
+                  width: MediaQuery.of(context).size.width / 1.18,
+                  child: Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.production_quantity_limits,
+                              color: Colors.blue,
+                            ),
+                            SizedBox(
+                              width: 6,
+                            ),
+                            Text(
+                              "C'est le moment de continuer l'aventure.  ",
+                              style: GoogleFonts.playfairDisplay(),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.settings,
+                              color: Colors.blue,
+                            ),
+                            SizedBox(
+                              width: 6,
+                            ),
+                            Text(
+                              "D'autres fonctionnalités arrivent.",
+                              style: GoogleFonts.playfairDisplay(),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Icon(Icons.lightbulb_rounded, color: Colors.blue),
+                            SizedBox(
+                              width: 6,
+                            ),
+                            Text(
+                              "Vos idées sont aussi les bienvenus.",
+                              style: GoogleFonts.playfairDisplay(),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Icon(Icons.contacts, color: Colors.blue),
+                            SizedBox(
+                              width: 6,
+                            ),
+                            Text(
+                              "Easytodo972@gmail.com.",
+                              style: GoogleFonts.playfairDisplay(),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              // Lottie.asset('assets/achat.json', width: 100),
+              Container(
+                height: 450,
+                child: FutureBuilder(
+                    future: loadProductsForSale(),
+                    builder:
+                        (context, AsyncSnapshot<List<ProductDetails>> data) {
+                      if (!data.hasData) {
+                        return CircularProgressIndicator();
+                      }
+                      return Container(
+                          padding: EdgeInsets.all(10.0),
+                          child: VerticalCardPager(
+                            align: ALIGN.CENTER,
+                            onPageChanged: (page) {
+                              print("page : $page");
+                              setState(() {});
+                            },
+                            onSelectedItem: (page) {
+                              print("page : $page");
+                              if (page == 0) {
+                                buyProduct(data.data[0]);
+                              }
+                            },
+                            images: items,
+                            titles: titles,
+                          ));
+                    }),
+              )
+            ]),
+          ),
         ),
       ),
     );
@@ -205,7 +287,7 @@ class HeaderSection extends StatelessWidget {
         ),
         SizedBox(height: 5),
         Text(
-          "Si vous avez déja eu la chance de l'acheté, et que vous souhaitez l'installer sur un nouveau téléphone, restaurez plutôt votre achat.",
+          "Si vous avez déja eu la chance de l'acheté, et que vous souhaitez l'installer sur un nouveau smartphone, procéder à une restauration d'achat.",
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 17,
