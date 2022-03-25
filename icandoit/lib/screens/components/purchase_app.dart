@@ -1,5 +1,8 @@
+import 'package:animated_button/animated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
+import 'package:lottie/lottie.dart';
+import 'package:vertical_card_pager/vertical_card_pager.dart';
 
 GlobalKey<_PurchaseAppState> myAppKey = GlobalKey();
 
@@ -68,6 +71,30 @@ class _PurchaseAppState extends State<PurchaseApp> {
     setState(() {});
   }
 
+  bool index = true;
+
+  final List<String> titles = [
+    "",
+    "",
+  ];
+
+  final List<Widget> items = [
+    ClipRRect(
+      borderRadius: BorderRadius.circular(20.0),
+      child: Image.asset(
+        'assets/1.png',
+        fit: BoxFit.cover,
+      ),
+    ),
+    ClipRRect(
+      borderRadius: BorderRadius.circular(20.0),
+      child: Image.asset(
+        'assets/2.png',
+        fit: BoxFit.cover,
+      ),
+    ),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -84,7 +111,7 @@ class _PurchaseAppState extends State<PurchaseApp> {
               child: CustomPaint(
                 painter: CurvePainter(),
                 child: Container(
-                  padding: EdgeInsets.all(35),
+                  padding: EdgeInsets.all(25),
                   child: Column(
                     children: [
                       HeaderSection(),
@@ -100,24 +127,23 @@ class _PurchaseAppState extends State<PurchaseApp> {
                   if (!data.hasData) {
                     return CircularProgressIndicator();
                   }
-                  return Container(
-                    height: 180,
-                    child: Flexible(
-                      child: ListView.builder(
-                          itemCount: data.data.length,
-                          itemBuilder: (context, index) {
-                            return Padding(
-                              padding: EdgeInsets.all(8),
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  buyProduct(data.data[index]);
-                                },
-                                child: Text(
-                                    "text " + data.data[index].id.toString()),
-                              ),
-                            );
-                          }),
-                    ),
+                  return Expanded(
+                    child: Container(
+                        padding: EdgeInsets.all(10.0),
+                        child: VerticalCardPager(
+                          onPageChanged: (page) {
+                            print("page : $page");
+                            setState(() {});
+                          },
+                          onSelectedItem: (page) {
+                            print("page : $page");
+                            if (page == 0) {
+                              buyProduct(data.data[0]);
+                            }
+                          },
+                          images: items,
+                          titles: titles,
+                        )),
                   );
                 })
           ]),
@@ -152,14 +178,15 @@ class HeaderSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(height: 30),
-        Icon(
-          Icons.star,
-          color: Colors.amber,
+        SizedBox(height: 10),
+        Image.asset(
+          'assets/logo.png',
+          width: 60,
+          fit: BoxFit.cover,
         ),
         SizedBox(height: 5),
         Text(
-          'FLUTTER STORE',
+          'Easytodo',
           textAlign: TextAlign.center,
           style: TextStyle(
             fontWeight: FontWeight.w700,
@@ -168,7 +195,7 @@ class HeaderSection extends StatelessWidget {
         ),
         SizedBox(height: 5),
         Text(
-          'Acheter Des Flutter Coins',
+          'Activer Easytodo ',
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 34,
@@ -178,7 +205,7 @@ class HeaderSection extends StatelessWidget {
         ),
         SizedBox(height: 5),
         Text(
-          'Choisissez parmis les offres suivantes et dépensez vos Flutter Coins.',
+          "Si vous avez déja eu la chance de l'acheté, et que vous souhaitez l'installer sur un nouveau téléphone, restaurez plutôt votre achat.",
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 17,
@@ -186,19 +213,19 @@ class HeaderSection extends StatelessWidget {
             color: Colors.grey[200],
           ),
         ),
-        SizedBox(height: 10),
+        SizedBox(height: 5),
         Image.asset('assets/divider.png'),
-        SizedBox(height: 10),
-        Text(
-          'SATISFAIT OU REMBOURSÉ',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 11,
-            fontWeight: FontWeight.w400,
-            color: Colors.grey[200],
-          ),
-        ),
-        SizedBox(height: 70),
+        SizedBox(height: 5),
+        // Text(
+        //   'SATISFAIT OU REMBOURSÉ',
+        //   textAlign: TextAlign.center,
+        //   style: TextStyle(
+        //     fontSize: 11,
+        //     fontWeight: FontWeight.w400,
+        //     color: Colors.grey[200],
+        //   ),
+        // ),
+        SizedBox(height: 1),
       ],
     );
   }
