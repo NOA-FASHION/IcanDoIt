@@ -64,6 +64,7 @@ class _PurchaseAppState extends State<PurchaseApp> {
       if (purchase.purchaseID != null) {
         print('purchase: ' + purchase.productID);
         if (purchase.productID == 'in_app_purchase') {
+          variable.switchTrueIntro();
           Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => ChangeNotifierProvider.value(
                   value: variable,
@@ -84,6 +85,7 @@ class _PurchaseAppState extends State<PurchaseApp> {
       if (purchase.purchaseID != null) {
         print('purchase: ' + purchase.productID);
         if (purchase.productID == 'in_app_purchase') {
+          variable.switchTrueIntro();
           Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => ChangeNotifierProvider.value(
                   value: variable,

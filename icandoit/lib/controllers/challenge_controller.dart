@@ -837,6 +837,10 @@ class Challengecontroller extends ChangeNotifier {
     }
   }
 
+  void switchTrueIntro() {
+    challengeyesterday.nbChallengeEnCours = "false";
+  }
+
   void initChallendays() async {
     DateTime today = new DateTime.now();
     if (challengeDays.date != DateFormat('EEEE, d MMM, yyyy').format(today)) {
