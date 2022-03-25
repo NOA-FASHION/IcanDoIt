@@ -809,10 +809,11 @@ class Challengecontroller extends ChangeNotifier {
     //     today.day > int.parse(challengeListSave.date)) {}
 
     DateTime today = new DateTime.now();
-    if (challengeyesterday == null) {
+    if (challengeyesterday.nbTacheEnCours != "false") {
+      print("start:1");
       challengeyesterday.date = DateFormat('EEEE, d MMM, yyyy').format(today);
       challengeyesterday.nbChallengeEnCours = "false";
-      challengeyesterday.nbTacheEnCours = "0";
+      challengeyesterday.nbTacheEnCours = "false";
       challengeyesterday.commentaire = "true";
       challengeyesterday.nbchallengeVallide = "0";
       challengeyesterday.nbtacheVallide = "0";
@@ -826,6 +827,7 @@ class Challengecontroller extends ChangeNotifier {
     DateTime lastDay =
         DateFormat('EEEE, d MMM, yyyy').parseStrict(challengeyesterday.date);
     if ((today.day > (lastDay.day + 1)) || (today.month > lastDay.month)) {
+      print("end:2");
       challengeyesterday.nbChallengeEnCours = "true";
       // challengeyesterday.date = DateFormat('EEEE, d MMM, yyyy').format(today);
       // challengeyesterday.nbChallengeEnCours = challengeDays.nbChallengeEnCours;
