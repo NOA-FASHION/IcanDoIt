@@ -78,11 +78,24 @@ class _PurchaseAppState extends State<PurchaseApp> {
     });
   }
 
-  void restaurProduct(ProductDetails prod) {
-    for (var purch in purchases) {
-      InAppPurchase.instance.restorePurchases();
-      print(purch.status.name);
-    }
+  void restaurProduct(ProductDetails prod, Challengecontroller variable) {
+    iap.restorePurchases();
+    purchases.forEach((purchase) {
+      if (purchase.purchaseID != null) {
+        print('purchase: ' + purchase.productID);
+        if (purchase.productID == 'in_app_purchase') {
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => ChangeNotifierProvider.value(
+                  value: variable,
+                  child: Home(
+                    id: "",
+                    idChallenge1: '',
+                    namechallenge: '',
+                    returnRaccourci: false,
+                  ))));
+        }
+      }
+    });
   }
 
   void initialize() async {
@@ -181,6 +194,7 @@ class _PurchaseAppState extends State<PurchaseApp> {
                             ),
                           ],
                         ),
+                        SizedBox(height: 4),
                         Row(
                           children: [
                             Icon(
@@ -196,6 +210,7 @@ class _PurchaseAppState extends State<PurchaseApp> {
                             ),
                           ],
                         ),
+                        SizedBox(height: 4),
                         Row(
                           children: [
                             Icon(Icons.lightbulb_rounded, color: Colors.blue),
@@ -208,6 +223,7 @@ class _PurchaseAppState extends State<PurchaseApp> {
                             ),
                           ],
                         ),
+                        SizedBox(height: 4),
                         Row(
                           children: [
                             Icon(Icons.contacts, color: Colors.blue),
@@ -247,6 +263,8 @@ class _PurchaseAppState extends State<PurchaseApp> {
                               print("page : $page");
                               if (page == 0) {
                                 buyProduct(data.data[0], variable);
+                              } else if (page == 1) {
+                                restaurProduct(data.data[0], variable);
                               }
                             },
                             images: items,

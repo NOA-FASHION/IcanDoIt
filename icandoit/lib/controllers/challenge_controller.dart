@@ -802,10 +802,16 @@ class Challengecontroller extends ChangeNotifier {
   }
 
   void startChallenyesterday() async {
+    // DateTime lastDay =
+    //     DateFormat('EEEE, d MMM, yyyy').parseStrict(challengeDays.date);
+    // if (today.month == lastDay.month &&
+    //     lastDay.day < int.parse(challengeListSave.date) &&
+    //     today.day > int.parse(challengeListSave.date)) {}
+
     DateTime today = new DateTime.now();
     if (challengeyesterday == null) {
       challengeyesterday.date = DateFormat('EEEE, d MMM, yyyy').format(today);
-      challengeyesterday.nbChallengeEnCours = "0";
+      challengeyesterday.nbChallengeEnCours = "false";
       challengeyesterday.nbTacheEnCours = "0";
       challengeyesterday.commentaire = "true";
       challengeyesterday.nbchallengeVallide = "0";
@@ -817,13 +823,15 @@ class Challengecontroller extends ChangeNotifier {
 
   void initChallengeyesterday() async {
     DateTime today = new DateTime.now();
-    if (challengeyesterday.date !=
-        DateFormat('EEEE, d MMM, yyyy').format(today)) {
-      challengeyesterday.date = DateFormat('EEEE, d MMM, yyyy').format(today);
-      challengeyesterday.nbChallengeEnCours = challengeDays.nbChallengeEnCours;
-      challengeyesterday.nbTacheEnCours = challengeDays.nbTacheEnCours;
-      challengeyesterday.nbchallengeVallide = challengeDays.nbchallengeVallide;
-      challengeyesterday.nbtacheVallide = challengeDays.nbtacheVallide;
+    DateTime lastDay =
+        DateFormat('EEEE, d MMM, yyyy').parseStrict(challengeyesterday.date);
+    if ((today.day > (lastDay.day + 1)) || (today.month > lastDay.month)) {
+      challengeyesterday.nbChallengeEnCours = "true";
+      // challengeyesterday.date = DateFormat('EEEE, d MMM, yyyy').format(today);
+      // challengeyesterday.nbChallengeEnCours = challengeDays.nbChallengeEnCours;
+      // challengeyesterday.nbTacheEnCours = challengeDays.nbTacheEnCours;
+      // challengeyesterday.nbchallengeVallide = challengeDays.nbchallengeVallide;
+      // challengeyesterday.nbtacheVallide = challengeDays.nbtacheVallide;
       await _saveChallenyesterday();
       _initChallengeListStartChallenge();
     }
