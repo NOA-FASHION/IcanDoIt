@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:icandoit/controllers/challenge_controller.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
+import 'package:provider/provider.dart';
 
 import 'package:vertical_card_pager/vertical_card_pager.dart';
+
+import '../home_screen.dart';
 
 GlobalKey<_PurchaseAppState> myAppKey = GlobalKey();
 
@@ -28,6 +32,7 @@ class _PurchaseAppState extends State<PurchaseApp> {
       const Set<String> _kids = {"in_app_purchase"};
       final ProductDetailsResponse responses =
           await iap.queryProductDetails(_kids);
+
       if (responses.notFoundIDs.isNotEmpty) {
         return null;
       }
@@ -44,19 +49,40 @@ class _PurchaseAppState extends State<PurchaseApp> {
     }
   }
 
-  void buyProduct(ProductDetails prod) {
+  void buyProduct(ProductDetails prod, Challengecontroller variable) {
+    print("prod :" + prod.toString());
     final PurchaseParam purchaseParam = PurchaseParam(productDetails: prod);
-    iap.buyNonConsumable(purchaseParam: purchaseParam);
+    Future<bool> boolPurchase =
+        iap.buyNonConsumable(purchaseParam: purchaseParam);
     for (var purch in purchases) {
       iap.completePurchase(purch);
     }
+    bool a = boolPurchase as bool;
+    print("boolPurchase:" + a.toString());
+
+    purchases.forEach((purchase) {
+      if (purchase.purchaseID != null) {
+        print('purchase: ' + purchase.productID);
+        if (purchase.productID == 'in_app_purchase') {
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => ChangeNotifierProvider.value(
+                  value: variable,
+                  child: Home(
+                    id: "",
+                    idChallenge1: '',
+                    namechallenge: '',
+                    returnRaccourci: false,
+                  ))));
+        }
+      }
+    });
   }
 
-  void restaurProduct(ProductDetails prod) async {
-    // final PurchaseParam purchaseParam = PurchaseParam(productDetails: prod);
-    // iap.buyNonConsumable(purchaseParam: purchaseParam);
-
-    await InAppPurchase.instance.restorePurchases();
+  void restaurProduct(ProductDetails prod) {
+    for (var purch in purchases) {
+      InAppPurchase.instance.restorePurchases();
+      print(purch.status.name);
+    }
   }
 
   void initialize() async {
@@ -104,6 +130,7 @@ class _PurchaseAppState extends State<PurchaseApp> {
 
   @override
   Widget build(BuildContext context) {
+    Challengecontroller variable = Provider.of<Challengecontroller>(context);
     return Scaffold(
       backgroundColor: Colors.purple,
       body: Container(
@@ -219,7 +246,7 @@ class _PurchaseAppState extends State<PurchaseApp> {
                             onSelectedItem: (page) {
                               print("page : $page");
                               if (page == 0) {
-                                buyProduct(data.data[0]);
+                                buyProduct(data.data[0], variable);
                               }
                             },
                             images: items,
