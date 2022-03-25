@@ -220,7 +220,7 @@ class _PurchaseAppState extends State<PurchaseApp> {
                               width: 6,
                             ),
                             Text(
-                              "Vos idées sont aussi les bienvenus.",
+                              "Vos idées sont aussi les bienvenues.",
                               style: GoogleFonts.playfairDisplay(),
                             ),
                           ],
@@ -334,7 +334,7 @@ class HeaderSection extends StatelessWidget {
         ),
         SizedBox(height: 5),
         Text(
-          "Si vous avez déja eu la chance de l'acheté, et que vous souhaitez l'installer sur un nouveau smartphone, procéder à une restauration d'achat.",
+          "Si vous avez déja eu la chance de l'er, et que vous souhaitez l'installer sur un nouveau smartphone, procédez à une restauration d'achat.",
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 17,
