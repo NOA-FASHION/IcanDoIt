@@ -3,6 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:icandoit/controllers/challenge_controller.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:provider/provider.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 import 'package:vertical_card_pager/vertical_card_pager.dart';
 
@@ -52,17 +54,17 @@ class _PurchaseAppState extends State<PurchaseApp> {
   void buyProduct(ProductDetails prod, Challengecontroller variable) {
     print("prod :" + prod.toString());
     final PurchaseParam purchaseParam = PurchaseParam(productDetails: prod);
-    Future<bool> boolPurchase =
-        iap.buyNonConsumable(purchaseParam: purchaseParam);
+
+    iap.buyNonConsumable(purchaseParam: purchaseParam);
     for (var purch in purchases) {
       iap.completePurchase(purch);
     }
-    bool a = boolPurchase as bool;
-    print("boolPurchase:" + a.toString());
+    // bool a = boolPurchase as bool;
+    // print("boolPurchase:" + a.toString());
 
     purchases.forEach((purchase) {
       if (purchase.purchaseID != null) {
-        print('purchase: ' + purchase.productID);
+        print('purchase: ' + purchase.status.name);
         if (purchase.productID == 'in_app_purchase') {
           variable.switchTrueIntro();
           Navigator.of(context).push(MaterialPageRoute(
@@ -83,7 +85,19 @@ class _PurchaseAppState extends State<PurchaseApp> {
     iap.restorePurchases();
     purchases.forEach((purchase) {
       if (purchase.purchaseID != null) {
-        print('purchase: ' + purchase.productID);
+        // print('purchase: ' + purchase.productID);
+        showTopSnackBar(
+          context,
+          CustomSnackBar.success(
+            backgroundColor: Colors.blue,
+            icon: Icon(
+              Icons.restore,
+              size: 30,
+              color: Colors.white,
+            ),
+            message: 'purchase: ' + purchase.productID,
+          ),
+        );
         if (purchase.productID == 'in_app_purchase') {
           variable.switchTrueIntro();
           Navigator.of(context).push(MaterialPageRoute(
@@ -96,6 +110,82 @@ class _PurchaseAppState extends State<PurchaseApp> {
                     returnRaccourci: false,
                   ))));
         }
+      }
+    });
+  }
+
+  void errorTest() {
+    purchases.forEach((purchase) {
+      if (purchase.purchaseID != null) {
+        showTopSnackBar(
+          context,
+          CustomSnackBar.success(
+            backgroundColor: Colors.blue,
+            icon: Icon(
+              Icons.restore,
+              size: 30,
+              color: Colors.white,
+            ),
+            message: 'purchase: ' + purchase.error.message,
+          ),
+        );
+      }
+    });
+  }
+
+  void errorTest1() {
+    purchases.forEach((purchase) {
+      if (purchase.purchaseID != null) {
+        showTopSnackBar(
+          context,
+          CustomSnackBar.success(
+            backgroundColor: Colors.blue,
+            icon: Icon(
+              Icons.restore,
+              size: 30,
+              color: Colors.white,
+            ),
+            message: 'purchase: ' + purchase.error.code,
+          ),
+        );
+      }
+    });
+  }
+
+  void errorTest2() {
+    purchases.forEach((purchase) {
+      if (purchase.purchaseID != null) {
+        showTopSnackBar(
+          context,
+          CustomSnackBar.success(
+            backgroundColor: Colors.blue,
+            icon: Icon(
+              Icons.restore,
+              size: 30,
+              color: Colors.white,
+            ),
+            message: 'purchase: ' + purchase.status.name,
+          ),
+        );
+      }
+    });
+  }
+
+  void errorTest3() {
+    purchases.forEach((purchase) {
+      if (purchase.purchaseID != null) {
+        showTopSnackBar(
+          context,
+          CustomSnackBar.success(
+            backgroundColor: Colors.blue,
+            icon: Icon(
+              Icons.restore,
+              size: 30,
+              color: Colors.white,
+            ),
+            message: 'purchase: ' + purchase.purchaseID,
+          ),
+        );
       }
     });
   }
@@ -130,14 +220,14 @@ class _PurchaseAppState extends State<PurchaseApp> {
     ClipRRect(
       borderRadius: BorderRadius.circular(20.0),
       child: Image.asset(
-        'assets/1.png',
+        'assets/2.png',
         fit: BoxFit.cover,
       ),
     ),
     ClipRRect(
       borderRadius: BorderRadius.circular(20.0),
       child: Image.asset(
-        'assets/2.png',
+        'assets/1.png',
         fit: BoxFit.cover,
       ),
     ),
@@ -264,16 +354,82 @@ class _PurchaseAppState extends State<PurchaseApp> {
                             onSelectedItem: (page) {
                               print("page : $page");
                               if (page == 0) {
-                                buyProduct(data.data[0], variable);
-                              } else if (page == 1) {
                                 restaurProduct(data.data[0], variable);
+                              } else if (page == 1) {
+                                buyProduct(data.data[0], variable);
                               }
                             },
                             images: items,
                             titles: titles,
                           ));
                     }),
-              )
+              ),
+
+              Column(
+                children: [
+                  Text("Erreur"),
+                  IconButton(
+                      onPressed: () {
+                        errorTest();
+                      },
+                      icon: Icon(
+                        Icons.error,
+                        size: 50,
+                        semanticLabel: "test",
+                      )),
+                ],
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              Column(
+                children: [
+                  Text("Erreur code"),
+                  IconButton(
+                      onPressed: () {
+                        errorTest1();
+                      },
+                      icon: Icon(
+                        Icons.bedroom_child,
+                        size: 50,
+                      )),
+                ],
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              Column(
+                children: [
+                  Text("status"),
+                  IconButton(
+                      onPressed: () {
+                        errorTest2();
+                      },
+                      icon: Icon(
+                        Icons.start,
+                        size: 50,
+                      )),
+                ],
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              Column(
+                children: [
+                  Text("purchaseId"),
+                  IconButton(
+                      onPressed: () {
+                        errorTest3();
+                      },
+                      icon: Icon(
+                        Icons.airlines,
+                        size: 50,
+                      )),
+                ],
+              ),
+              SizedBox(
+                height: 30,
+              ),
             ]),
           ),
         ),

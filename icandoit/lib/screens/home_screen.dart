@@ -10,6 +10,7 @@ import 'package:icandoit/screens/components/purchase_app.dart';
 import 'package:icandoit/screens/inn_app_purchase.dart';
 import 'package:multiselect_formfield/multiselect_formfield.dart';
 import 'package:nanoid/nanoid.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -849,9 +850,17 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           SizedBox(height: 5.0),
           InkWell(
             onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => ChangeNotifierProvider.value(
-                      value: variable, child: PurchaseApp())));
+                 Navigator.push(
+              context,
+              PageTransition(
+                  type: PageTransitionType.bottomToTop,
+                  child: ChangeNotifierProvider.value(
+                      value: variable,
+                      child: PurchaseApp( ))));
+              // Navigator.of(context).push(MaterialPageRoute(
+              //     builder: (context) => ChangeNotifierProvider.value(
+              //         value: variable, child: PurchaseApp())));
+              // Navigator.pop(context);
             },
             child: Row(
               children: [

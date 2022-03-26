@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:icandoit/controllers/challenge_controller.dart';
-import 'package:icandoit/screens/components/home_screen1.dart';
-import 'package:icandoit/screens/home_screen.dart';
+
 import 'package:provider/provider.dart';
 
+import 'screens/components/guest_screen.dart';
 import 'screens/components/purchase_app.dart';
 
 class GuestScreenStart extends StatefulWidget {
@@ -21,14 +21,7 @@ class _GuestScreenStartState extends State<GuestScreenStart> {
     return Container(
       child: switchIntro == "true" || switchIntro == ""
           ? ChangeNotifierProvider.value(value: variable, child: PurchaseApp())
-          : ChangeNotifierProvider.value(
-              value: variable,
-              child: Home(
-                id: "",
-                idChallenge1: '',
-                namechallenge: '',
-                returnRaccourci: false,
-              )),
+          : ChangeNotifierProvider.value(value: variable, child: GuestScreen()),
     );
   }
 }
