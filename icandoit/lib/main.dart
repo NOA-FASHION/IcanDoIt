@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 // import 'package:google_fonts/google_fonts.dart';
 // import 'package:icandoit/Switch.dart';
 import 'package:icandoit/controllers/challenge_controller.dart';
+import 'package:icandoit/guestscreen1.dart';
 
 // import 'package:icandoit/listTacheQuotidienne.dart';
 // import 'package:icandoit/listeDeCourse.dart';
 import 'package:icandoit/screens/components/challenge_list_save.dart';
 // import 'package:icandoit/screens/components/formations.dart';
-import 'package:icandoit/screens/components/guest_screen.dart';
+
 // import 'package:icandoit/screens/components/listeDeMusics.dart';
 // import 'package:icandoit/screens/components/restaurantList.dart';
 // import 'package:icandoit/screens/components/shareChallenge.dart';
@@ -45,7 +46,8 @@ class _IcanDoItState extends State<IcanDoIt> {
         '/settings': (context) => ExampleApp()
       },
       home: ChangeNotifierProvider<Challengecontroller>(
-          create: (context) => Challengecontroller(), child: GuestScreen()),
+          create: (context) => Challengecontroller(),
+          child: GuestScreenStart()),
     );
   }
 }
