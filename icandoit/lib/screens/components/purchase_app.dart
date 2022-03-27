@@ -91,19 +91,20 @@ class _PurchaseAppState extends State<PurchaseApp> {
     purchases.forEach((purchase) {
       if (purchase.purchaseID != null) {
         // print('purchase: ' + purchase.productID);
-        showTopSnackBar(
-          context,
-          CustomSnackBar.success(
-            backgroundColor: Colors.blue,
-            icon: Icon(
-              Icons.restore,
-              size: 30,
-              color: Colors.white,
-            ),
-            message: 'Achat restauré avec succes',
-          ),
-        );
+
         if (purchase.status == PurchaseStatus.restored) {
+          showTopSnackBar(
+            context,
+            CustomSnackBar.success(
+              backgroundColor: Colors.blue,
+              icon: Icon(
+                Icons.restore,
+                size: 30,
+                color: Colors.white,
+              ),
+              message: 'Achat restauré avec succes',
+            ),
+          );
           variable.switchTrueIntro();
           Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => ChangeNotifierProvider.value(
@@ -114,6 +115,19 @@ class _PurchaseAppState extends State<PurchaseApp> {
                     namechallenge: '',
                     returnRaccourci: false,
                   ))));
+        } else {
+          showTopSnackBar(
+            context,
+            CustomSnackBar.success(
+              backgroundColor: Colors.blue,
+              icon: Icon(
+                Icons.restore,
+                size: 30,
+                color: Colors.white,
+              ),
+              message: "Vous n'avez pas encore acheté cet article",
+            ),
+          );
         }
       }
     });
