@@ -826,7 +826,7 @@ class Challengecontroller extends ChangeNotifier {
     DateTime today = new DateTime.now();
     DateTime lastDay =
         DateFormat('EEEE, d MMM, yyyy').parseStrict(challengeyesterday.date);
-    if ((today.day > (lastDay.day + 1)) || (today.month > lastDay.month)) {
+    if ((today.day >= (lastDay.day + 1)) || (today.month > lastDay.month)) {
       print("end:2");
       challengeyesterday.nbChallengeEnCours = "true";
       // challengeyesterday.date = DateFormat('EEEE, d MMM, yyyy').format(today);
