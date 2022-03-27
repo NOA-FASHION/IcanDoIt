@@ -20,6 +20,10 @@ class PurchaseApp extends StatefulWidget {
 }
 
 class _PurchaseAppState extends State<PurchaseApp> {
+  Future<Null> delay(int milliseconds) {
+    return new Future.delayed(new Duration(milliseconds: milliseconds));
+  }
+
   InAppPurchase iap = InAppPurchase.instance;
   List<ProductDetails> products = [];
   List<PurchaseDetails> purchases = [];
@@ -51,21 +55,21 @@ class _PurchaseAppState extends State<PurchaseApp> {
     }
   }
 
-  void buyProduct(ProductDetails prod, Challengecontroller variable) {
+  void buyProduct(ProductDetails prod, Challengecontroller variable) async {
     print("prod :" + prod.toString());
     final PurchaseParam purchaseParam = PurchaseParam(productDetails: prod);
 
-    iap.buyNonConsumable(purchaseParam: purchaseParam);
+    await iap.buyNonConsumable(purchaseParam: purchaseParam);
     for (var purch in purchases) {
       iap.completePurchase(purch);
     }
     // bool a = boolPurchase as bool;
     // print("boolPurchase:" + a.toString());
-
+    await delay(500);
     purchases.forEach((purchase) {
       if (purchase.purchaseID != null) {
         print('purchase: ' + purchase.status.name);
-        if (purchase.status == PurchaseStatus.restored) {
+        if (purchase.status == PurchaseStatus.purchased) {
           variable.switchTrueIntro();
           Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => ChangeNotifierProvider.value(
@@ -81,8 +85,9 @@ class _PurchaseAppState extends State<PurchaseApp> {
     });
   }
 
-  void restaurProduct(ProductDetails prod, Challengecontroller variable) {
-    iap.restorePurchases();
+  void restaurProduct(ProductDetails prod, Challengecontroller variable) async {
+    await iap.restorePurchases();
+    await delay(500);
     purchases.forEach((purchase) {
       if (purchase.purchaseID != null) {
         // print('purchase: ' + purchase.productID);
@@ -95,10 +100,10 @@ class _PurchaseAppState extends State<PurchaseApp> {
               size: 30,
               color: Colors.white,
             ),
-            message: 'purchase: ' + purchase.productID,
+            message: 'Achat restauré avec succes',
           ),
         );
-        if (purchase.productID == 'in_app_purchase') {
+        if (purchase.status == PurchaseStatus.restored) {
           variable.switchTrueIntro();
           Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => ChangeNotifierProvider.value(
@@ -365,68 +370,68 @@ class _PurchaseAppState extends State<PurchaseApp> {
                     }),
               ),
 
-              Column(
-                children: [
-                  Text("Erreur"),
-                  IconButton(
-                      onPressed: () {
-                        errorTest();
-                      },
-                      icon: Icon(
-                        Icons.error,
-                        size: 50,
-                        semanticLabel: "test",
-                      )),
-                ],
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              Column(
-                children: [
-                  Text("Erreur code"),
-                  IconButton(
-                      onPressed: () {
-                        errorTest1();
-                      },
-                      icon: Icon(
-                        Icons.bedroom_child,
-                        size: 50,
-                      )),
-                ],
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              Column(
-                children: [
-                  Text("status"),
-                  IconButton(
-                      onPressed: () {
-                        errorTest2();
-                      },
-                      icon: Icon(
-                        Icons.start,
-                        size: 50,
-                      )),
-                ],
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              Column(
-                children: [
-                  Text("purchaseId"),
-                  IconButton(
-                      onPressed: () {
-                        errorTest3();
-                      },
-                      icon: Icon(
-                        Icons.airlines,
-                        size: 50,
-                      )),
-                ],
-              ),
+              // Column(
+              //   children: [
+              //     Text("Erreur"),
+              //     IconButton(
+              //         onPressed: () {
+              //           errorTest();
+              //         },
+              //         icon: Icon(
+              //           Icons.error,
+              //           size: 50,
+              //           semanticLabel: "test",
+              //         )),
+              //   ],
+              // ),
+              // SizedBox(
+              //   height: 30,
+              // ),
+              // Column(
+              //   children: [
+              //     Text("Erreur code"),
+              //     IconButton(
+              //         onPressed: () {
+              //           errorTest1();
+              //         },
+              //         icon: Icon(
+              //           Icons.bedroom_child,
+              //           size: 50,
+              //         )),
+              //   ],
+              // ),
+              // SizedBox(
+              //   height: 30,
+              // ),
+              // Column(
+              //   children: [
+              //     Text("status"),
+              //     IconButton(
+              //         onPressed: () {
+              //           errorTest2();
+              //         },
+              //         icon: Icon(
+              //           Icons.start,
+              //           size: 50,
+              //         )),
+              //   ],
+              // ),
+              // SizedBox(
+              //   height: 30,
+              // ),
+              // Column(
+              //   children: [
+              //     Text("purchaseId"),
+              //     IconButton(
+              //         onPressed: () {
+              //           errorTest3();
+              //         },
+              //         icon: Icon(
+              //           Icons.airlines,
+              //           size: 50,
+              //         )),
+              //   ],
+              // ),
               SizedBox(
                 height: 30,
               ),
