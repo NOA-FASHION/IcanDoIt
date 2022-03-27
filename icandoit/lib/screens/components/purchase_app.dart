@@ -65,7 +65,7 @@ class _PurchaseAppState extends State<PurchaseApp> {
     purchases.forEach((purchase) {
       if (purchase.purchaseID != null) {
         print('purchase: ' + purchase.status.name);
-        if (purchase.productID == 'in_app_purchase') {
+        if (purchase.status == PurchaseStatus.restored) {
           variable.switchTrueIntro();
           Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => ChangeNotifierProvider.value(
