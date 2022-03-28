@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:typed_data';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 // import 'package:nanoid/async.dart';
 import 'package:timezone/data/latest.dart' as tz;

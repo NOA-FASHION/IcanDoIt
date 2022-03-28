@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "443665500473",
+    "project_id": "easytodo-c8c1c",
+    "storage_bucket": "easytodo-c8c1c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:443665500473:android:3c772bc94aa3327a8d40e8",
+        "android_client_info": {
+          "package_name": "com.jmndLimited.EasyToDo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "443665500473-jcfup1q5petmslp8iup2t2q4i154fbmg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0R_tOqp-1dF2WU_-KvoLfxmdqgdczg3Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "443665500473-jcfup1q5petmslp8iup2t2q4i154fbmg.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "443665500473-hl6rj91rdq16apc3rfq1siul53echnpr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.jmnd.EasyToDo"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
