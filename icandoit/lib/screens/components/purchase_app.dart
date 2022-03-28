@@ -1,7 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:icandoit/controllers/challenge_controller.dart';
+import 'package:icandoit/guestscreen1.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
@@ -15,8 +19,7 @@ import 'package:in_app_purchase_android/in_app_purchase_android.dart';
 //import for SkuDetailsWrapper
 import 'package:in_app_purchase_android/billing_client_wrappers.dart';
 
-GlobalKey<_PurchaseAppState> myAppKey = GlobalKey();
-
+// GlobalKey<_PurchaseAppState> myAppKey = GlobalKey();
 class PurchaseApp extends StatefulWidget {
   PurchaseApp({Key myAppKey}) : super(key: myAppKey);
 
@@ -25,6 +28,31 @@ class PurchaseApp extends StatefulWidget {
 }
 
 class _PurchaseAppState extends State<PurchaseApp> {
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: Firebase.initializeApp(),
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          return const ErrorFirebase();
+        }
+        if (snapshot.connectionState == ConnectionState.done) {
+          return PurchaseAppStart();
+        }
+        return const Loading();
+      },
+    );
+  }
+}
+
+class PurchaseAppStart extends StatefulWidget {
+  PurchaseAppStart({Key myAppKey}) : super(key: myAppKey);
+
+  @override
+  State<PurchaseAppStart> createState() => _PurchaseAppStartState();
+}
+
+class _PurchaseAppStartState extends State<PurchaseAppStart> {
   Future<Null> delay(int milliseconds) {
     return new Future.delayed(new Duration(milliseconds: milliseconds));
   }
@@ -52,7 +80,7 @@ class _PurchaseAppState extends State<PurchaseApp> {
         return null;
       }
       products = responses.productDetails;
-      myAppKey.currentState?.refreshApp();
+      // myAppKey.currentState?.refreshApp();
       return products;
     } else {
       print('purchasService is not available');
@@ -75,7 +103,7 @@ class _PurchaseAppState extends State<PurchaseApp> {
       if (purchase.purchaseID != null) {
         print('purchase: ' + purchase.status.name);
         if (purchase.status == PurchaseStatus.purchased) {
-          variable.switchTrueIntro();
+          variable.switchTrueIntro(true);
           Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => ChangeNotifierProvider.value(
                   value: variable,
@@ -99,7 +127,7 @@ class _PurchaseAppState extends State<PurchaseApp> {
         // print('purchase: ' + purchase.productID);
 
         if (purchase.status == PurchaseStatus.restored) {
-          variable.switchTrueIntro();
+          variable.switchTrueIntro(true);
           showTopSnackBar(
             context,
             CustomSnackBar.success(
@@ -112,7 +140,7 @@ class _PurchaseAppState extends State<PurchaseApp> {
               message: 'Achat restauré avec succes',
             ),
           );
-          variable.switchTrueIntro();
+
           Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => ChangeNotifierProvider.value(
                   value: variable,
@@ -140,88 +168,88 @@ class _PurchaseAppState extends State<PurchaseApp> {
     });
   }
 
-  void errorTest() {
-    for (var prod in products) {
-      if (prod is GooglePlayProductDetails) {
-        SkuDetailsWrapper skuDetails =
-            (prod as GooglePlayProductDetails).skuDetails;
-        print(skuDetails.introductoryPricePeriod);
-        purchases.forEach((purchase) {
-          if (purchase.purchaseID != null) {
-            showTopSnackBar(
-              context,
-              CustomSnackBar.success(
-                backgroundColor: Colors.blue,
-                icon: Icon(
-                  Icons.restore,
-                  size: 30,
-                  color: Colors.white,
-                ),
-                message: 'skuDetails: ' + skuDetails.subscriptionPeriod,
-              ),
-            );
-          }
-        });
-      }
-    }
-  }
+  // void errorTest() {
+  //   for (var prod in products) {
+  //     if (prod is GooglePlayProductDetails) {
+  //       SkuDetailsWrapper skuDetails =
+  //           (prod as GooglePlayProductDetails).skuDetails;
+  //       print(skuDetails.introductoryPricePeriod);
+  //       purchases.forEach((purchase) {
+  //         if (purchase.purchaseID != null) {
+  //           showTopSnackBar(
+  //             context,
+  //             CustomSnackBar.success(
+  //               backgroundColor: Colors.blue,
+  //               icon: Icon(
+  //                 Icons.restore,
+  //                 size: 30,
+  //                 color: Colors.white,
+  //               ),
+  //               message: 'skuDetails: ' + skuDetails.subscriptionPeriod,
+  //             ),
+  //           );
+  //         }
+  //       });
+  //     }
+  //   }
+  // }
 
-  void errorTest1() {
-    purchases.forEach((purchase) {
-      if (purchase.purchaseID != null) {
-        showTopSnackBar(
-          context,
-          CustomSnackBar.success(
-            backgroundColor: Colors.blue,
-            icon: Icon(
-              Icons.restore,
-              size: 30,
-              color: Colors.white,
-            ),
-            message: 'purchase: ' + purchase.error.code,
-          ),
-        );
-      }
-    });
-  }
+  // void errorTest1() {
+  //   purchases.forEach((purchase) {
+  //     if (purchase.purchaseID != null) {
+  //       showTopSnackBar(
+  //         context,
+  //         CustomSnackBar.success(
+  //           backgroundColor: Colors.blue,
+  //           icon: Icon(
+  //             Icons.restore,
+  //             size: 30,
+  //             color: Colors.white,
+  //           ),
+  //           message: 'purchase: ' + purchase.error.code,
+  //         ),
+  //       );
+  //     }
+  //   });
+  // }
 
-  void errorTest2() {
-    purchases.forEach((purchase) {
-      if (purchase.purchaseID != null) {
-        showTopSnackBar(
-          context,
-          CustomSnackBar.success(
-            backgroundColor: Colors.blue,
-            icon: Icon(
-              Icons.restore,
-              size: 30,
-              color: Colors.white,
-            ),
-            message: 'purchase: ' + purchase.status.name,
-          ),
-        );
-      }
-    });
-  }
+  // void errorTest2() {
+  //   purchases.forEach((purchase) {
+  //     if (purchase.purchaseID != null) {
+  //       showTopSnackBar(
+  //         context,
+  //         CustomSnackBar.success(
+  //           backgroundColor: Colors.blue,
+  //           icon: Icon(
+  //             Icons.restore,
+  //             size: 30,
+  //             color: Colors.white,
+  //           ),
+  //           message: 'purchase: ' + purchase.status.name,
+  //         ),
+  //       );
+  //     }
+  //   });
+  // }
 
-  void errorTest3() {
-    purchases.forEach((purchase) {
-      if (purchase.purchaseID != null) {
-        showTopSnackBar(
-          context,
-          CustomSnackBar.success(
-            backgroundColor: Colors.blue,
-            icon: Icon(
-              Icons.restore,
-              size: 30,
-              color: Colors.white,
-            ),
-            message: 'purchase: ' + purchase.purchaseID,
-          ),
-        );
-      }
-    });
-  }
+  // void errorTest3() {
+  //   purchases.forEach((purchase) {
+  //     if (purchase.purchaseID != null) {
+  //       showTopSnackBar(
+  //         context,
+  //         CustomSnackBar.success(
+  //           backgroundColor: Colors.blue,
+  //           icon: Icon(
+  //             Icons.restore,
+  //             size: 30,
+  //             color: Colors.white,
+  //           ),
+  //           message: 'purchase: ' + purchase.purchaseID,
+  //         ),
+  //       );
+  //     }
+  //   });
+  // }
 
   void initialize() async {
     iap.purchaseStream.listen((newPurchaes) {
@@ -229,6 +257,51 @@ class _PurchaseAppState extends State<PurchaseApp> {
         print('new purchases : ' + purchase.productID.toString());
       });
       purchases.addAll(newPurchaes);
+    });
+  }
+
+  // final databaseReference = FirebaseFirestore.instance;
+  void addDataToFirebse(Challengecontroller variable) {
+    final databaseReference = FirebaseFirestore.instance;
+    bool boolAchat = false;
+    bool boolrestor = false;
+    bool installationBool = false;
+    String purchaseId1 = '';
+    purchases.forEach((purchase) {
+      if (purchase.purchaseID != null) {
+        print('purchase: ' + purchase.status.name);
+        if (purchase.status == PurchaseStatus.purchased) {
+          boolAchat = true;
+          purchaseId1 = purchase.purchaseID;
+        } else {
+          boolAchat = false;
+          purchaseId1 = "Pas d'id";
+        }
+        if (purchase.status == PurchaseStatus.restored) {
+          boolrestor = true;
+        } else {
+          boolrestor = false;
+        }
+        if (boolAchat || boolrestor) {
+          installationBool = true;
+        } else {
+          installationBool = false;
+        }
+        DateTime today = new DateTime.now();
+
+        try {
+          databaseReference.collection("Activation EASYTODO").add({
+            "Achat": boolAchat,
+            "activation": boolAchat,
+            "IdCommade": purchaseId1,
+            "Installation": installationBool,
+            "LastConnect": DateFormat('EEEE, d MMM, yyyy').format(today),
+            "Restor": boolrestor
+          }).then((value) => variable.documentIdFirebase(value.id));
+        } catch (e) {
+          print(e.toString());
+        }
+      }
     });
   }
 
@@ -376,6 +449,7 @@ class _PurchaseAppState extends State<PurchaseApp> {
                       if (!data.hasData) {
                         return CircularProgressIndicator();
                       }
+
                       return Container(
                           padding: EdgeInsets.all(10.0),
                           child: VerticalCardPager(
@@ -388,8 +462,11 @@ class _PurchaseAppState extends State<PurchaseApp> {
                               print("page : $page");
                               if (page == 0) {
                                 restaurProduct(data.data[0], variable);
+                                addDataToFirebse(variable);
                               } else if (page == 1) {
                                 buyProduct(data.data[0], variable);
+
+                                addDataToFirebse(variable);
                               }
                             },
                             images: items,

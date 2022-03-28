@@ -769,7 +769,7 @@ class Challengecontroller extends ChangeNotifier {
       challengeyesterday.nbTacheEnCours = "false";
       challengeyesterday.commentaire = "true";
       challengeyesterday.nbchallengeVallide = "0";
-      challengeyesterday.nbtacheVallide = "0";
+      challengeyesterday.nbtacheVallide = "";
       await _saveChallenyesterday();
       _initChallengeListStartChallenge();
     }
@@ -792,8 +792,21 @@ class Challengecontroller extends ChangeNotifier {
     }
   }
 
-  void switchTrueIntro() {
-    challengeyesterday.nbChallengeEnCours = "false";
+  void documentIdFirebase(String valueId) async {
+    challengeyesterday.nbtacheVallide = valueId;
+    await _saveChallenyesterday();
+    _initChallengeListStartChallenge();
+  }
+
+  void switchTrueIntro(bool active) async {
+    if (active) {
+      challengeyesterday.nbChallengeEnCours = "true";
+    } else {
+      challengeyesterday.nbChallengeEnCours = "false";
+    }
+
+    await _saveChallenyesterday();
+    _initChallengeListStartChallenge();
   }
 
   void initChallendays() async {
