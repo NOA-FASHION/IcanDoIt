@@ -769,7 +769,7 @@ class Challengecontroller extends ChangeNotifier {
       challengeyesterday.nbTacheEnCours = "false";
       challengeyesterday.commentaire = "true";
       challengeyesterday.nbchallengeVallide = "0";
-      challengeyesterday.nbtacheVallide = "";
+      challengeyesterday.nbtacheVallide = "de";
       await _saveChallenyesterday();
       _initChallengeListStartChallenge();
     }
@@ -800,9 +800,9 @@ class Challengecontroller extends ChangeNotifier {
 
   void switchTrueIntro(bool active) async {
     if (active) {
-      challengeyesterday.nbChallengeEnCours = "true";
-    } else {
       challengeyesterday.nbChallengeEnCours = "false";
+    } else {
+      challengeyesterday.nbChallengeEnCours = "true";
     }
 
     await _saveChallenyesterday();

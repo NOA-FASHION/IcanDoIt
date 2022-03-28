@@ -103,7 +103,7 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
       if (purchase.purchaseID != null) {
         print('purchase: ' + purchase.status.name);
         if (purchase.status == PurchaseStatus.purchased) {
-          variable.switchTrueIntro(true);
+          addDataToFirebse(variable);
           Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => ChangeNotifierProvider.value(
                   value: variable,
@@ -125,9 +125,11 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
     purchases.forEach((purchase) {
       if (purchase.purchaseID != null) {
         // print('purchase: ' + purchase.productID);
-
-        if (purchase.status == PurchaseStatus.restored) {
-          variable.switchTrueIntro(true);
+        String switchIntro =
+            variable.getChallengeyesterday().nbChallengeEnCours;
+        if (purchase.status == PurchaseStatus.restored &&
+            switchIntro == 'false') {
+          // variable.switchTrueIntro(true);
           showTopSnackBar(
             context,
             CustomSnackBar.success(
@@ -462,11 +464,9 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
                               print("page : $page");
                               if (page == 0) {
                                 restaurProduct(data.data[0], variable);
-                                addDataToFirebse(variable);
+                                // addDataToFirebse(variable);
                               } else if (page == 1) {
                                 buyProduct(data.data[0], variable);
-
-                                addDataToFirebse(variable);
                               }
                             },
                             images: items,
@@ -475,71 +475,7 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
                     }),
               ),
 
-              // Column(
-              //   children: [
-              //     Text("Erreur"),
-              //     IconButton(
-              //         onPressed: () {
-              //           errorTest();
-              //         },
-              //         icon: Icon(
-              //           Icons.error,
-              //           size: 50,
-              //           semanticLabel: "test",
-              //         )),
-              //   ],
-              // ),
-              // SizedBox(
-              //   height: 30,
-              // ),
-              // Column(
-              //   children: [
-              //     Text("Erreur code"),
-              //     IconButton(
-              //         onPressed: () {
-              //           errorTest1();
-              //         },
-              //         icon: Icon(
-              //           Icons.bedroom_child,
-              //           size: 50,
-              //         )),
-              //   ],
-              // ),
-              // SizedBox(
-              //   height: 30,
-              // ),
-              // Column(
-              //   children: [
-              //     Text("status"),
-              //     IconButton(
-              //         onPressed: () {
-              //           errorTest2();
-              //         },
-              //         icon: Icon(
-              //           Icons.start,
-              //           size: 50,
-              //         )),
-              //   ],
-              // ),
-              // SizedBox(
-              //   height: 30,
-              // ),
-              // Column(
-              //   children: [
-              //     Text("purchaseId"),
-              //     IconButton(
-              //         onPressed: () {
-              //           errorTest3();
-              //         },
-              //         icon: Icon(
-              //           Icons.airlines,
-              //           size: 50,
-              //         )),
-              //   ],
-              // ),
-              // SizedBox(
-              //   height: 30,
-              // ),
+             
             ]),
           ),
         ),

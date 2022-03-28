@@ -18,6 +18,7 @@ class GuestScreenStart extends StatefulWidget {
 class _GuestScreenStartState extends State<GuestScreenStart> {
   @override
   Widget build(BuildContext context) {
+    Challengecontroller variable = Provider.of<Challengecontroller>(context);
     return FutureBuilder(
       future: Firebase.initializeApp(),
       builder: (context, snapshot) {
@@ -25,7 +26,8 @@ class _GuestScreenStartState extends State<GuestScreenStart> {
           return const ErrorFirebase();
         }
         if (snapshot.connectionState == ConnectionState.done) {
-          return AddFirebase();
+          return ChangeNotifierProvider.value(
+              value: variable, child: AddFirebase());
         }
         return const Loading();
       },
@@ -73,25 +75,35 @@ class AddFirebase extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Challengecontroller variable = Provider.of<Challengecontroller>(context);
-    String ducumentId = variable.getChallengeyesterday().nbtacheVallide;
+    // String documentId = variable.getChallengeyesterday().nbtacheVallide;
     final databaseReference = FirebaseFirestore.instance;
-
-    if (ducumentId.isNotEmpty) {
-      databaseReference
-          .collection("users")
-          .doc("SA63wvKbU0zo3jFyqISt")
-          .get()
-          .then((value) {
-        print(value.data());
-        variable.switchTrueIntro(value.data()["activation"]);
-      });
+    Future<QuerySnapshot> getDiscussions() {
+      return databaseReference.collection("Activation EASYTODO").get();
     }
-    String switchIntro = variable.getChallengeyesterday().nbChallengeEnCours;
 
-    return Container(
-      child: switchIntro == "true" || switchIntro == ""
-          ? ChangeNotifierProvider.value(value: variable, child: PurchaseApp())
-          : ChangeNotifierProvider.value(value: variable, child: GuestScreen()),
-    );
+    return FutureBuilder(
+        future: getDiscussions(),
+        builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (!snapshot.hasData) {
+            return CircularProgressIndicator();
+          }
+          for (var p in snapshot.data.docs) {
+            if (p.data() == 'LUOwDqKQ0hRHrWHIUfij') {
+              bool test = p['activation'];
+              print(test);
+            }
+          }
+          print(snapshot.data.docs);
+          // variable.switchTrueIntro(snapshot.data.docs);
+          String switchIntro =
+              variable.getChallengeyesterday().nbChallengeEnCours;
+          return Container(
+            child: switchIntro == "true" || switchIntro == ""
+                ? ChangeNotifierProvider.value(
+                    value: variable, child: PurchaseApp())
+                : ChangeNotifierProvider.value(
+                    value: variable, child: GuestScreen()),
+          );
+        });
   }
 }
