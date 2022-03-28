@@ -10,6 +10,11 @@ import 'package:vertical_card_pager/vertical_card_pager.dart';
 
 import '../home_screen.dart';
 
+//import for GooglePlayProductDetails
+import 'package:in_app_purchase_android/in_app_purchase_android.dart';
+//import for SkuDetailsWrapper
+import 'package:in_app_purchase_android/billing_client_wrappers.dart';
+
 GlobalKey<_PurchaseAppState> myAppKey = GlobalKey();
 
 class PurchaseApp extends StatefulWidget {
@@ -87,12 +92,14 @@ class _PurchaseAppState extends State<PurchaseApp> {
 
   void restaurProduct(ProductDetails prod, Challengecontroller variable) async {
     await iap.restorePurchases();
+
     await delay(500);
     purchases.forEach((purchase) {
       if (purchase.purchaseID != null) {
         // print('purchase: ' + purchase.productID);
 
         if (purchase.status == PurchaseStatus.restored) {
+          variable.switchTrueIntro();
           showTopSnackBar(
             context,
             CustomSnackBar.success(
@@ -134,22 +141,29 @@ class _PurchaseAppState extends State<PurchaseApp> {
   }
 
   void errorTest() {
-    purchases.forEach((purchase) {
-      if (purchase.purchaseID != null) {
-        showTopSnackBar(
-          context,
-          CustomSnackBar.success(
-            backgroundColor: Colors.blue,
-            icon: Icon(
-              Icons.restore,
-              size: 30,
-              color: Colors.white,
-            ),
-            message: 'purchase: ' + purchase.error.message,
-          ),
-        );
+    for (var prod in products) {
+      if (prod is GooglePlayProductDetails) {
+        SkuDetailsWrapper skuDetails =
+            (prod as GooglePlayProductDetails).skuDetails;
+        print(skuDetails.introductoryPricePeriod);
+        purchases.forEach((purchase) {
+          if (purchase.purchaseID != null) {
+            showTopSnackBar(
+              context,
+              CustomSnackBar.success(
+                backgroundColor: Colors.blue,
+                icon: Icon(
+                  Icons.restore,
+                  size: 30,
+                  color: Colors.white,
+                ),
+                message: 'skuDetails: ' + skuDetails.subscriptionPeriod,
+              ),
+            );
+          }
+        });
       }
-    });
+    }
   }
 
   void errorTest1() {
@@ -446,9 +460,9 @@ class _PurchaseAppState extends State<PurchaseApp> {
               //         )),
               //   ],
               // ),
-              SizedBox(
-                height: 30,
-              ),
+              // SizedBox(
+              //   height: 30,
+              // ),
             ]),
           ),
         ),
