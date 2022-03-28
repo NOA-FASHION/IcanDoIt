@@ -7,7 +7,7 @@ import 'package:icandoit/screens/components/build_challenge_list.dart';
 import 'package:icandoit/controllers/challenge_controller.dart';
 import 'package:icandoit/screens/components/home_screen1.dart';
 import 'package:icandoit/screens/components/purchase_app.dart';
-import 'package:icandoit/screens/inn_app_purchase.dart';
+
 import 'package:multiselect_formfield/multiselect_formfield.dart';
 import 'package:nanoid/nanoid.dart';
 import 'package:page_transition/page_transition.dart';
@@ -86,10 +86,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     Challengecontroller variable1 =
         Provider.of<Challengecontroller>(context, listen: false);
     if (quotidient) {
-      // print("quotidien:" + quotidient.toString());
-      // print(nom);
-      // print(description);
-      // print(dateQuotidien);
+
       variable1.scheduleQuotidiendNotification(
           channelID: idNotif[0],
           channelName: nom,
@@ -99,10 +96,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           notificationBody: 'We are showing notification!',
           hours: int.parse(dateQuotidien));
     } else if (hebdoBool) {
-      // print("hebdoBool:" + hebdoBool.toString());
-      // print(nom);
-      // print(description);
-      // print(heure);
+
       for (var n = totalDays.length - 1; n >= 0; n--) {
         print(totalDays[n]);
         print(idNotif[n]);
@@ -850,13 +844,12 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           SizedBox(height: 5.0),
           InkWell(
             onTap: () {
-                 Navigator.push(
-              context,
-              PageTransition(
-                  type: PageTransitionType.bottomToTop,
-                  child: ChangeNotifierProvider.value(
-                      value: variable,
-                      child: PurchaseApp( ))));
+              Navigator.push(
+                  context,
+                  PageTransition(
+                      type: PageTransitionType.bottomToTop,
+                      child: ChangeNotifierProvider.value(
+                          value: variable, child: PurchaseApp())));
               // Navigator.of(context).push(MaterialPageRoute(
               //     builder: (context) => ChangeNotifierProvider.value(
               //         value: variable, child: PurchaseApp())));
