@@ -3,7 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:icandoit/controllers/challenge_controller.dart';
-import 'package:icandoit/guestscreen1.dart';
+
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -13,11 +13,6 @@ import 'package:top_snackbar_flutter/top_snack_bar.dart';
 import 'package:vertical_card_pager/vertical_card_pager.dart';
 
 import '../home_screen.dart';
-
-//import for GooglePlayProductDetails
-import 'package:in_app_purchase_android/in_app_purchase_android.dart';
-//import for SkuDetailsWrapper
-import 'package:in_app_purchase_android/billing_client_wrappers.dart';
 
 // GlobalKey<_PurchaseAppState> myAppKey = GlobalKey();
 class PurchaseApp extends StatefulWidget {
@@ -129,7 +124,7 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
             variable.getChallengeyesterday().nbChallengeEnCours;
         if (purchase.status == PurchaseStatus.restored &&
             switchIntro == 'false') {
-          // variable.switchTrueIntro(true);
+          addDataToFirebse(variable);
           showTopSnackBar(
             context,
             CustomSnackBar.success(
@@ -170,89 +165,6 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
     });
   }
 
-  // void errorTest() {
-  //   for (var prod in products) {
-  //     if (prod is GooglePlayProductDetails) {
-  //       SkuDetailsWrapper skuDetails =
-  //           (prod as GooglePlayProductDetails).skuDetails;
-  //       print(skuDetails.introductoryPricePeriod);
-  //       purchases.forEach((purchase) {
-  //         if (purchase.purchaseID != null) {
-  //           showTopSnackBar(
-  //             context,
-  //             CustomSnackBar.success(
-  //               backgroundColor: Colors.blue,
-  //               icon: Icon(
-  //                 Icons.restore,
-  //                 size: 30,
-  //                 color: Colors.white,
-  //               ),
-  //               message: 'skuDetails: ' + skuDetails.subscriptionPeriod,
-  //             ),
-  //           );
-  //         }
-  //       });
-  //     }
-  //   }
-  // }
-
-  // void errorTest1() {
-  //   purchases.forEach((purchase) {
-  //     if (purchase.purchaseID != null) {
-  //       showTopSnackBar(
-  //         context,
-  //         CustomSnackBar.success(
-  //           backgroundColor: Colors.blue,
-  //           icon: Icon(
-  //             Icons.restore,
-  //             size: 30,
-  //             color: Colors.white,
-  //           ),
-  //           message: 'purchase: ' + purchase.error.code,
-  //         ),
-  //       );
-  //     }
-  //   });
-  // }
-
-  // void errorTest2() {
-  //   purchases.forEach((purchase) {
-  //     if (purchase.purchaseID != null) {
-  //       showTopSnackBar(
-  //         context,
-  //         CustomSnackBar.success(
-  //           backgroundColor: Colors.blue,
-  //           icon: Icon(
-  //             Icons.restore,
-  //             size: 30,
-  //             color: Colors.white,
-  //           ),
-  //           message: 'purchase: ' + purchase.status.name,
-  //         ),
-  //       );
-  //     }
-  //   });
-  // }
-
-  // void errorTest3() {
-  //   purchases.forEach((purchase) {
-  //     if (purchase.purchaseID != null) {
-  //       showTopSnackBar(
-  //         context,
-  //         CustomSnackBar.success(
-  //           backgroundColor: Colors.blue,
-  //           icon: Icon(
-  //             Icons.restore,
-  //             size: 30,
-  //             color: Colors.white,
-  //           ),
-  //           message: 'purchase: ' + purchase.purchaseID,
-  //         ),
-  //       );
-  //     }
-  //   });
-  // }
-
   void initialize() async {
     iap.purchaseStream.listen((newPurchaes) {
       newPurchaes.forEach((purchase) {
@@ -264,10 +176,9 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
 
   // final databaseReference = FirebaseFirestore.instance;
   void addDataToFirebse(Challengecontroller variable) {
-    final databaseReference = FirebaseFirestore.instance;
     bool boolAchat = false;
     bool boolrestor = false;
-    bool installationBool = false;
+    bool activationBoll = false;
     String purchaseId1 = '';
     purchases.forEach((purchase) {
       if (purchase.purchaseID != null) {
@@ -284,27 +195,42 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
         } else {
           boolrestor = false;
         }
-        if (boolAchat || boolrestor) {
-          installationBool = true;
+        if (boolAchat) {
+          activationBoll = true;
         } else {
-          installationBool = false;
+          activationBoll = false;
         }
-        DateTime today = new DateTime.now();
 
-        try {
-          databaseReference.collection("activation").add({
-            "Achat": boolAchat,
-            "activation": boolAchat,
-            "IdCommade": purchaseId1,
-            "Installation": installationBool,
-            "LastConnect": DateFormat('EEEE, d MMM, yyyy').format(today),
-            "Restor": boolrestor
-          }).then((value) => variable.documentIdFirebase(value.id));
-        } catch (e) {
-          print(e.toString());
-        }
+        activationEasy(
+            variable: variable,
+            boolAchat: boolAchat,
+            activationBoll: activationBoll,
+            purchaseId1: purchaseId1,
+            boolrestor: boolrestor);
       }
     });
+  }
+
+  Future<void> activationEasy(
+      {Challengecontroller variable,
+      bool boolAchat,
+      bool activationBoll,
+      String purchaseId1,
+      bool boolrestor}) async {
+    DateTime today = new DateTime.now();
+    String documentId = variable.getChallengeyesterday().nbtacheVallide;
+    final databaseReference = FirebaseFirestore.instance;
+    try {
+      await databaseReference.collection("products").doc(documentId).update({
+        "Achat": boolAchat,
+        "activation": activationBoll,
+        "IdCommade": purchaseId1,
+        "LastConnect": DateFormat('EEEE, d MMM, yyyy').format(today),
+        "Restor": boolrestor
+      });
+    } catch (e) {
+      print(e.toString());
+    }
   }
 
   void initState() {
@@ -556,6 +482,40 @@ class HeaderSection extends StatelessWidget {
         // ),
         SizedBox(height: 1),
       ],
+    );
+  }
+}
+
+class ErrorFirebase extends StatelessWidget {
+  const ErrorFirebase({Key key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        body: Container(
+          color: Colors.white,
+          child: const Center(
+            child: Text('Erreur de chargement des données'),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class Loading extends StatelessWidget {
+  const Loading({Key key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        body: Container(
+          color: Colors.white,
+          child: const Center(
+            child: Text('Chargement'),
+          ),
+        ),
+      ),
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:typed_data';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 // import 'package:nanoid/async.dart';
@@ -17,6 +18,8 @@ import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 import 'package:share/share.dart';
 import 'package:youtube_parser/youtube_parser.dart';
+
+import '../screens/components/initialiseFirebase.dart';
 
 /////////////////////////////////////// /////////////////////////////////////// /////////////////////////////////////// packages
 const String keyAcces = "challengeList";
@@ -64,6 +67,12 @@ class Challengecontroller extends ChangeNotifier {
     _initChallengeList();
     initLocalNotification();
     _configureLocalTimeZone();
+    initialiseFirebase();
+  }
+
+  void initialiseFirebase() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    await Firebase.initializeApp();
   }
 
 /////////////////////////////////////// /////////////////////////////////////// /////////////////////////////////////// initialisaton
@@ -763,33 +772,36 @@ class Challengecontroller extends ChangeNotifier {
 
     DateTime today = new DateTime.now();
     if (challengeyesterday.nbTacheEnCours != "false") {
-      print("start:1");
       challengeyesterday.date = DateFormat('EEEE, d MMM, yyyy').format(today);
       challengeyesterday.nbChallengeEnCours = "false";
       challengeyesterday.nbTacheEnCours = "false";
       challengeyesterday.commentaire = "true";
-      challengeyesterday.nbchallengeVallide = "0";
+      challengeyesterday.nbchallengeVallide = "false";
       challengeyesterday.nbtacheVallide = "de";
+      await initialiseConnectionDatabase();
       await _saveChallenyesterday();
       _initChallengeListStartChallenge();
     }
   }
 
   void initChallengeyesterday() async {
+    await CommonService().getBoolActivation().then(
+        (value) => challengeyesterday.nbChallengeEnCours = value.toString());
+    await modifDtabaseFirebase();
     DateTime today = new DateTime.now();
     DateTime lastDay =
         DateFormat('EEEE, d MMM, yyyy').parseStrict(challengeyesterday.date);
     if ((today.day >= (lastDay.day + 1)) || (today.month > lastDay.month)) {
-      print("end:2");
-      challengeyesterday.nbChallengeEnCours = "true";
+      challengeyesterday.nbchallengeVallide = "true";
       // challengeyesterday.date = DateFormat('EEEE, d MMM, yyyy').format(today);
       // challengeyesterday.nbChallengeEnCours = challengeDays.nbChallengeEnCours;
       // challengeyesterday.nbTacheEnCours = challengeDays.nbTacheEnCours;
       // challengeyesterday.nbchallengeVallide = challengeDays.nbchallengeVallide;
       // challengeyesterday.nbtacheVallide = challengeDays.nbtacheVallide;
-      await _saveChallenyesterday();
-      _initChallengeListStartChallenge();
+
     }
+    await _saveChallenyesterday();
+    _initChallengeListStartChallenge();
   }
 
   void documentIdFirebase(String valueId) async {
@@ -2082,5 +2094,50 @@ class Challengecontroller extends ChangeNotifier {
       }
     }
     return _jsonChallengeList;
+  }
+
+  modifDtabaseFirebase() async {
+    DateTime today = new DateTime.now();
+    String documentId = getChallengeyesterday().nbtacheVallide;
+    final databaseReference = FirebaseFirestore.instance;
+    try {
+      await databaseReference.collection("products").doc(documentId).update({
+        "LastConnect": DateFormat('EEEE, d MMM, yyyy').format(today),
+      });
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  initialiseConnectionDatabase() async {
+    final databaseReference = FirebaseFirestore.instance;
+    DateTime today = new DateTime.now();
+
+    try {
+      databaseReference.collection("activation").add({
+        "Achat": false,
+        "activation": false,
+        "IdCommade": "pas d'ID",
+        "Installation": true,
+        "LastConnect": DateFormat('EEEE, d MMM, yyyy').format(today),
+        "Restor": false
+      }).then((value) => documentIdFirebase(value.id));
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+}
+
+class CommonService {
+  Future<bool> getBoolActivation() async {
+    // String documentId = variable.getChallengeyesterday().nbtacheVallide;
+
+    final databaseReference = FirebaseFirestore.instance;
+
+    DocumentReference documentRef =
+        databaseReference.collection("activation").doc("scRiUq3wMUdJfgOB0Zgl");
+    bool content = (await documentRef.get()).get('activation');
+
+    return content;
   }
 }

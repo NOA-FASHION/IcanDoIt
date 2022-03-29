@@ -1,27 +1,20 @@
-// import 'package:flutter/foundation.dart';
+
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-// import 'package:google_fonts/google_fonts.dart';
-// import 'package:icandoit/Switch.dart';
+
 import 'package:icandoit/controllers/challenge_controller.dart';
 import 'package:icandoit/guestscreen1.dart';
 
-// import 'package:icandoit/listTacheQuotidienne.dart';
-// import 'package:icandoit/listeDeCourse.dart';
+
 import 'package:icandoit/screens/components/challenge_list_save.dart';
-// import 'package:icandoit/screens/components/formations.dart';
 
-// import 'package:icandoit/screens/components/listeDeMusics.dart';
-// import 'package:icandoit/screens/components/restaurantList.dart';
-// import 'package:icandoit/screens/components/shareChallenge.dart';
-// import 'package:icandoit/screens/components/travauxDeRenovation.dart';
-// import 'package:introduction_screen/introduction_screen.dart';
-// import 'package:page_transition/page_transition.dart';
-
-// import 'faireGateauxAuChocolat.dart';
-// import 'screens/home_screen.dart';
 import 'package:provider/provider.dart';
 
-void main() => runApp(IcanDoIt());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(IcanDoIt());
+}
 
 class IcanDoIt extends StatefulWidget {
   IcanDoIt({Key key}) : super(key: key);
