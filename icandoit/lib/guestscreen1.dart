@@ -27,7 +27,7 @@ class _GuestScreenStartState extends State<GuestScreenStart> {
         }
         if (snapshot.connectionState == ConnectionState.done) {
           return ChangeNotifierProvider.value(
-              value: variable, child: AddFirebase());
+              value: variable, child: AddFirebase1());
         }
         return const Loading();
       },
@@ -105,5 +105,32 @@ class AddFirebase extends StatelessWidget {
                     value: variable, child: GuestScreen()),
           );
         });
+  }
+}
+
+class AddFirebase1 extends StatelessWidget {
+  const AddFirebase1({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    Challengecontroller variable = Provider.of<Challengecontroller>(context);
+    // String documentId = variable.getChallengeyesterday().nbtacheVallide;
+    final databaseReference = FirebaseFirestore.instance;
+
+    databaseReference
+        .collection("activation")
+        .doc("Y6Qt6mARaJmdczcSEoFE")
+        .get()
+        .then((value) {
+      print(value.data());
+    });
+    variable.switchTrueIntro(true);
+    String switchIntro = variable.getChallengeyesterday().nbChallengeEnCours;
+    return Container(
+        child: Container(
+      child: switchIntro == "true" || switchIntro == ""
+          ? ChangeNotifierProvider.value(value: variable, child: PurchaseApp())
+          : ChangeNotifierProvider.value(value: variable, child: GuestScreen()),
+    ));
   }
 }

@@ -292,7 +292,7 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
         DateTime today = new DateTime.now();
 
         try {
-          databaseReference.collection("Activation EASYTODO").add({
+          databaseReference.collection("activation").add({
             "Achat": boolAchat,
             "activation": boolAchat,
             "IdCommade": purchaseId1,
@@ -474,8 +474,6 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
                           ));
                     }),
               ),
-
-             
             ]),
           ),
         ),
