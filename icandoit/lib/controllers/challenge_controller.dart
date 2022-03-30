@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:typed_data';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 // import 'package:nanoid/async.dart';
 import 'package:timezone/data/latest.dart' as tz;
@@ -64,7 +66,6 @@ class Challengecontroller extends ChangeNotifier {
     _initChallengeList();
     initLocalNotification();
     _configureLocalTimeZone();
-    // initialiseFirebase();
   }
 
 /////////////////////////////////////// /////////////////////////////////////// /////////////////////////////////////// initialisaton
@@ -100,7 +101,10 @@ class Challengecontroller extends ChangeNotifier {
           .toList();
     }
     paiemtBool = false;
+
     _initChallengeListStartChallenge();
+    modifDtabaseFirebase();
+    // getBoolActivation();
 
     notifyListeners();
   }
@@ -108,9 +112,9 @@ class Challengecontroller extends ChangeNotifier {
 /////////////////////////////////////// /////////////////////////////////////// /////////////////////////////////////// fin initialisaton
   ///
   ///
-  void initChallengeList() {
-    _initChallengeList();
-  }
+  // void initChallengeList() {
+  //   _initChallengeList();
+  // }
 
 /////////////////////////////////////// /////////////////////////////////////// /////////////////////////////////////// notification
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
@@ -750,18 +754,13 @@ class Challengecontroller extends ChangeNotifier {
       challengeDays.commentaire = "";
       challengeDays.nbchallengeVallide = "0";
       challengeDays.nbtacheVallide = "0";
+
       await _saveChallendays();
       _initChallengeListStartChallenge();
     }
   }
 
   void startChallenyesterday() async {
-    // DateTime lastDay =
-    //     DateFormat('EEEE, d MMM, yyyy').parseStrict(challengeDays.date);
-    // if (today.month == lastDay.month &&
-    //     lastDay.day < int.parse(challengeListSave.date) &&
-    //     today.day > int.parse(challengeListSave.date)) {}
-
     DateTime today = new DateTime.now();
     if (challengeyesterday.nbTacheEnCours != "false") {
       challengeyesterday.date = DateFormat('EEEE, d MMM, yyyy').format(today);
@@ -770,7 +769,7 @@ class Challengecontroller extends ChangeNotifier {
       challengeyesterday.commentaire = "true";
       challengeyesterday.nbchallengeVallide = "false";
       challengeyesterday.nbtacheVallide = "de";
-      // await initialiseConnectionDatabase();
+      await initialiseConnectionDatabase();
       await _saveChallenyesterday();
       _initChallengeListStartChallenge();
     }
@@ -784,11 +783,6 @@ class Challengecontroller extends ChangeNotifier {
         DateFormat('EEEE, d MMM, yyyy').parseStrict(challengeyesterday.date);
     if ((today.day >= (lastDay.day + 1)) || (today.month > lastDay.month)) {
       challengeyesterday.nbchallengeVallide = "true";
-      // challengeyesterday.date = DateFormat('EEEE, d MMM, yyyy').format(today);
-      // challengeyesterday.nbChallengeEnCours = challengeDays.nbChallengeEnCours;
-      // challengeyesterday.nbTacheEnCours = challengeDays.nbTacheEnCours;
-      // challengeyesterday.nbchallengeVallide = challengeDays.nbchallengeVallide;
-      // challengeyesterday.nbtacheVallide = challengeDays.nbtacheVallide;
       await _saveChallenyesterday();
       _initChallengeListStartChallenge();
     }
@@ -812,8 +806,11 @@ class Challengecontroller extends ChangeNotifier {
   }
 
   void initChallendays() async {
+    // print(challengeyesterday.nbtacheVallide);
     DateTime today = new DateTime.now();
     if (challengeDays.date != DateFormat('EEEE, d MMM, yyyy').format(today)) {
+      modifDtabaseFirebase();
+      getBoolActivation();
       removeQuotidientSave();
       initialiseQuotidient();
       removeHebdo();
@@ -871,6 +868,7 @@ class Challengecontroller extends ChangeNotifier {
 
   Future<bool> _saveChallenyesterday() async {
     if (challengeyesterday != null) {
+      print('save challengeyesterday ok');
       Map mapyesterday = challengeyesterday.toJson();
       String _jsonyesterday = jsonEncode(mapyesterday);
       return _localData.setString(keyAccesChallengeYesterday, _jsonyesterday);
@@ -2086,47 +2084,49 @@ class Challengecontroller extends ChangeNotifier {
     return _jsonChallengeList;
   }
 
-//   modifDtabaseFirebase() async {
-//     DateTime today = new DateTime.now();
-//     String documentId = challengeyesterday.nbtacheVallide;
-//     final databaseReference = FirebaseFirestore.instance;
-//     try {
-//       await databaseReference.collection("activation").doc(documentId).update({
-//         "LastConnect": DateFormat('EEEE, d MMM, yyyy').format(today),
-//       });
-//     } catch (e) {
-//       print(e.toString());
-//     }
-//   }
+  modifDtabaseFirebase() {
+    DateTime today = new DateTime.now();
+    String documentId = challengeyesterday.nbtacheVallide;
+    final databaseReference = FirebaseFirestore.instance;
+    // print("documentID:" + challengeyesterday.nbtacheVallide);
+    try {
+      databaseReference.collection("activation").doc(documentId).update({
+        // "LastConnect": DateFormat('EEEE, d MMM, yyyy').format(today),
+        "LastConnect": "date test",
+      });
+    } catch (e) {
+      print(e.toString());
+    }
+  }
 
-//   initialiseConnectionDatabase() async {
-//     final databaseReference = FirebaseFirestore.instance;
-//     DateTime today = new DateTime.now();
+  initialiseConnectionDatabase() async {
+    final databaseReference = FirebaseFirestore.instance;
+    DateTime today = new DateTime.now();
 
-//     try {
-//       databaseReference.collection("activation").add({
-//         "Achat": false,
-//         "activation": false,
-//         "IdCommade": "pas d'ID",
-//         "Installation": true,
-//         "LastConnect": DateFormat('EEEE, d MMM, yyyy').format(today),
-//         "Restor": false
-//       }).then((value) => challengeyesterday.nbtacheVallide = value.id);
-//     } catch (e) {
-//       print(e.toString());
-//     }
-//   }
+    try {
+      await databaseReference.collection("activation").add({
+        "Achat": false,
+        "activation": false,
+        "IdCommade": "pas d'ID",
+        "Installation": true,
+        "LastConnect": DateFormat('EEEE, d MMM, yyyy').format(today),
+        "Restor": false
+      }).then((value) => challengeyesterday.nbtacheVallide = value.id);
+    } catch (e) {
+      print(e.toString());
+    }
+  }
 
-//   void getBoolActivation() async {
-//     String documentId = challengeyesterday.nbtacheVallide;
-//     // print('documentId:' + documentId);
-//     final databaseReference = FirebaseFirestore.instance;
-//     var a =
-//         await databaseReference.collection("activation").doc(documentId).get();
-//     if (a.exists) {
-//       final DocumentReference documentReference =
-//           databaseReference.collection("activation").doc(documentId);
-//       print(documentReference);
-//     }
-//   }
+  void getBoolActivation() async {
+    String documentId = challengeyesterday.nbtacheVallide;
+    // print('documentId:' + documentId);
+    final databaseReference = FirebaseFirestore.instance;
+    var a =
+        await databaseReference.collection("activation").doc(documentId).get();
+    if (a.exists) {
+      final DocumentReference documentReference =
+          databaseReference.collection("activation").doc(documentId);
+      print(documentReference);
+    }
+  }
 }

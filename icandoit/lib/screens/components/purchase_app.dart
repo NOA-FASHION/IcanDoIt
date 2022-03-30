@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:icandoit/controllers/challenge_controller.dart';
@@ -13,7 +15,6 @@ import 'package:vertical_card_pager/vertical_card_pager.dart';
 import '../home_screen.dart';
 
 // GlobalKey<_PurchaseAppState> myAppKey = GlobalKey();
-
 class PurchaseApp extends StatefulWidget {
   PurchaseApp({Key myAppKey}) : super(key: myAppKey);
 
@@ -22,6 +23,31 @@ class PurchaseApp extends StatefulWidget {
 }
 
 class _PurchaseAppState extends State<PurchaseApp> {
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: Firebase.initializeApp(),
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          return const ErrorFirebase();
+        }
+        if (snapshot.connectionState == ConnectionState.done) {
+          return PurchaseAppStart();
+        }
+        return const Loading();
+      },
+    );
+  }
+}
+
+class PurchaseAppStart extends StatefulWidget {
+  PurchaseAppStart({Key myAppKey}) : super(key: myAppKey);
+
+  @override
+  State<PurchaseAppStart> createState() => _PurchaseAppStartState();
+}
+
+class _PurchaseAppStartState extends State<PurchaseAppStart> {
   Future<Null> delay(int milliseconds) {
     return new Future.delayed(new Duration(milliseconds: milliseconds));
   }
@@ -175,37 +201,37 @@ class _PurchaseAppState extends State<PurchaseApp> {
           activationBoll = false;
         }
 
-        // activationEasy(
-        //     variable: variable,
-        //     boolAchat: boolAchat,
-        //     activationBoll: activationBoll,
-        //     purchaseId1: purchaseId1,
-        //     boolrestor: boolrestor);
+        activationEasy(
+            variable: variable,
+            boolAchat: boolAchat,
+            activationBoll: activationBoll,
+            purchaseId1: purchaseId1,
+            boolrestor: boolrestor);
       }
     });
   }
 
-  // Future<void> activationEasy(
-  //     {Challengecontroller variable,
-  //     bool boolAchat,
-  //     bool activationBoll,
-  //     String purchaseId1,
-  //     bool boolrestor}) async {
-  //   DateTime today = new DateTime.now();
-  //   String documentId = variable.getChallengeyesterday().nbtacheVallide;
-  // final databaseReference = FirebaseFirestore.instance;
-  //   try {
-  //     await databaseReference.collection("products").doc(documentId).update({
-  //       "Achat": boolAchat,
-  //       "activation": activationBoll,
-  //       "IdCommade": purchaseId1,
-  //       "LastConnect": DateFormat('EEEE, d MMM, yyyy').format(today),
-  //       "Restor": boolrestor
-  //     });
-  //   } catch (e) {
-  //     print(e.toString());
-  //   }
-  // }
+  Future<void> activationEasy(
+      {Challengecontroller variable,
+      bool boolAchat,
+      bool activationBoll,
+      String purchaseId1,
+      bool boolrestor}) async {
+    DateTime today = new DateTime.now();
+    String documentId = variable.getChallengeyesterday().nbtacheVallide;
+    final databaseReference = FirebaseFirestore.instance;
+    try {
+      await databaseReference.collection("products").doc(documentId).update({
+        "Achat": boolAchat,
+        "activation": activationBoll,
+        "IdCommade": purchaseId1,
+        "LastConnect": DateFormat('EEEE, d MMM, yyyy').format(today),
+        "Restor": boolrestor
+      });
+    } catch (e) {
+      print(e.toString());
+    }
+  }
 
   void initState() {
     super.initState();
@@ -374,6 +400,21 @@ class _PurchaseAppState extends State<PurchaseApp> {
                           ));
                     }),
               ),
+              Column(
+                children: [
+                  Text("commentaire: " +
+                      variable.getChallengeyesterday().commentaire),
+                  Text("date: " + variable.getChallengeyesterday().date),
+                  Text("nbChallengeEnCours : " +
+                      variable.getChallengeyesterday().nbChallengeEnCours),
+                  Text("nbTacheEnCours: " +
+                      variable.getChallengeyesterday().nbTacheEnCours),
+                  Text("nbchallengeVallide: " +
+                      variable.getChallengeyesterday().nbchallengeVallide),
+                  Text("nbtacheVallide:" +
+                      variable.getChallengeyesterday().nbtacheVallide),
+                ],
+              )
             ]),
           ),
         ),
