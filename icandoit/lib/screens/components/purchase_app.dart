@@ -401,21 +401,21 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
                           ));
                     }),
               ),
-              Column(
-                children: [
-                  Text("commentaire: " +
-                      variable.getChallengeyesterday().commentaire),
-                  Text("date: " + variable.getChallengeyesterday().date),
-                  Text("nbChallengeEnCours : " +
-                      variable.getChallengeyesterday().nbChallengeEnCours),
-                  Text("nbTacheEnCours: " +
-                      variable.getChallengeyesterday().nbTacheEnCours),
-                  Text("nbchallengeVallide: " +
-                      variable.getChallengeyesterday().nbchallengeVallide),
-                  Text("nbtacheVallide:" +
-                      variable.getChallengeyesterday().nbtacheVallide),
-                ],
-              )
+              // Column(
+              //   children: [
+              //     Text("commentaire: " +
+              //         variable.getChallengeyesterday().commentaire),
+              //     Text("date: " + variable.getChallengeyesterday().date),
+              //     Text("nbChallengeEnCours : " +
+              //         variable.getChallengeyesterday().nbChallengeEnCours),
+              //     Text("nbTacheEnCours: " +
+              //         variable.getChallengeyesterday().nbTacheEnCours),
+              //     Text("nbchallengeVallide: " +
+              //         variable.getChallengeyesterday().nbchallengeVallide),
+              //     Text("nbtacheVallide:" +
+              //         variable.getChallengeyesterday().nbtacheVallide),
+              //   ],
+              // )
             ]),
           ),
         ),

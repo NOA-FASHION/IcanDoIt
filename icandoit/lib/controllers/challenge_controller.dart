@@ -760,12 +760,13 @@ class Challengecontroller extends ChangeNotifier {
   void startChallenyesterday() async {
     DateTime today = new DateTime.now();
     if (challengeyesterday.nbTacheEnCours != "false") {
+      print('start challenge yestederday');
       challengeyesterday.date = DateFormat('EEEE, d MMM, yyyy').format(today);
       challengeyesterday.nbChallengeEnCours = "true";
       challengeyesterday.nbTacheEnCours = "false";
       challengeyesterday.commentaire = "true";
       challengeyesterday.nbchallengeVallide = "false";
-      challengeyesterday.nbtacheVallide = "de";
+      challengeyesterday.nbtacheVallide = "";
       await initialiseConnectionDatabase();
       await _saveChallenyesterday();
       _initChallengeListStartChallenge();
@@ -779,6 +780,7 @@ class Challengecontroller extends ChangeNotifier {
     DateTime lastDay =
         DateFormat('EEEE, d MMM, yyyy').parseStrict(challengeyesterday.date);
     if ((today.day >= (lastDay.day + 1)) || (today.month > lastDay.month)) {
+      print('start init yestederday');
       challengeyesterday.nbchallengeVallide = "true";
       await _saveChallenyesterday();
       _initChallengeListStartChallenge();
@@ -799,7 +801,7 @@ class Challengecontroller extends ChangeNotifier {
     }
 
     await _saveChallenyesterday();
-    _initChallengeListStartChallenge();
+    // _initChallengeListStartChallenge();
   }
 
   void initChallendays() async {
@@ -2089,7 +2091,7 @@ class Challengecontroller extends ChangeNotifier {
     try {
       databaseReference.collection("activation").doc(documentId).update({
         // "LastConnect": DateFormat('EEEE, d MMM, yyyy').format(today),
-        "LastConnect": "date test5",
+        "LastConnect": "date test7",
       });
     } catch (e) {
       print(e.toString());

@@ -20,28 +20,51 @@ class _GuestScreenStart1State extends State<GuestScreenStart1> {
     return new Future.delayed(new Duration(milliseconds: milliseconds));
   }
 
-  String test;
+  bool test1;
+  String test = '';
   modifDtabaseFirebase() async {
     await delay(1500);
-    DateTime today = new DateTime.now();
-    final databaseReference = FirebaseFirestore.instance;
-    try {
-      databaseReference.collection("activation").doc(test).update({
-        "LastConnect": DateFormat('EEEE, d MMM, yyyy').format(today),
-        // "LastConnect": "date test7",
-      });
-    } catch (e) {
-      print(e.toString());
+    if (test != null && test.isNotEmpty) {
+      DateTime today = new DateTime.now();
+
+      try {
+        final databaseReference = FirebaseFirestore.instance;
+        // var a =
+        //     await databaseReference.collection("activation").doc(test).get();
+        // if (a.exists) {
+        databaseReference.collection("activation").doc(test).update({
+          // "LastConnect": DateFormat('EEEE, d MMM, yyyy').format(today),
+          "LastConnect": "date test7",
+        });
+        // }
+      } catch (e) {
+        print(e.toString());
+      }
     }
   }
 
-  void getBoolActivation(Challengecontroller variable) async {
-    await delay(1500);
+  Future<bool> getBoolActivation(Challengecontroller variable) async {
+    await delay(2500);
 
-    final databaseReference = FirebaseFirestore.instance;
-    databaseReference.collection("activation").doc(test).get().then((value) {
-      print(value.data()['activation']);
-    });
+    if (test != null && test.isNotEmpty) {
+      final databaseReference = FirebaseFirestore.instance;
+      // var a = await databaseReference.collection("activation").doc(test).get();
+      // if (a.exists) {
+      databaseReference.collection("activation").doc(test).get().then((value) {
+        print(value.data()['activation']);
+        test1 = value.data()['activation'];
+      });
+    }
+    // }
+    return test1;
+    // switIntro(variable);
+  }
+
+  void switIntro(Challengecontroller variable) async {
+    if (test1 != null) {
+      await delay(3500);
+      variable.switchTrueIntro(test1);
+    }
   }
 
   @override
@@ -49,7 +72,7 @@ class _GuestScreenStart1State extends State<GuestScreenStart1> {
     Challengecontroller variable = Provider.of<Challengecontroller>(context);
     test = variable.getChallengeyesterday().nbtacheVallide;
     modifDtabaseFirebase();
-    getBoolActivation(variable);
+    getBoolActivation(variable).then((value) => switIntro(variable));
     String switchIntro1 = variable.getChallengeyesterday().nbchallengeVallide;
 
     String switchIntro = variable.getChallengeyesterday().nbChallengeEnCours;
