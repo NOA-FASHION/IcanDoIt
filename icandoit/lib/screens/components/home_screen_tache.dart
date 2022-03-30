@@ -247,7 +247,6 @@ class _HomeTachesState extends State<HomeTaches> {
     return percent1;
   }
 
-
   Future<Null> delay(int milliseconds) {
     return new Future.delayed(new Duration(milliseconds: milliseconds));
   }
@@ -644,6 +643,9 @@ class _HomeTachesState extends State<HomeTaches> {
   @override
   Widget build(BuildContext context) {
     Challengecontroller variable = Provider.of<Challengecontroller>(context);
+    String test = variable.getChallengeyesterday().nbtacheVallide;
+    print("test:" + test);
+    variable.modifDtabaseFirebase(test);
     List<ChallengeModel> _challengesListget = variable.getChallenges();
     // isSwitched = _challengesListget[widget.indexChallenge].prelevementAutoBool;
     challengeBoolAppBar(_challengesListget);
@@ -967,7 +969,6 @@ class _HomeTachesState extends State<HomeTaches> {
                                   ],
                                 ),
                               ),
-                             
                               DropdownMenuItem(
                                 value: "formation",
                                 child: Row(

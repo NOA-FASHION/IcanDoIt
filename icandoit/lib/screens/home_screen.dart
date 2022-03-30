@@ -86,7 +86,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     Challengecontroller variable1 =
         Provider.of<Challengecontroller>(context, listen: false);
     if (quotidient) {
-
       variable1.scheduleQuotidiendNotification(
           channelID: idNotif[0],
           channelName: nom,
@@ -96,7 +95,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           notificationBody: 'We are showing notification!',
           hours: int.parse(dateQuotidien));
     } else if (hebdoBool) {
-
       for (var n = totalDays.length - 1; n >= 0; n--) {
         print(totalDays[n]);
         print(idNotif[n]);
@@ -689,6 +687,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     Challengecontroller variable = Provider.of<Challengecontroller>(context);
+   
     return Material(
       child: FancyDrawerWrapper(
         hideOnContentTap: true,

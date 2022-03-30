@@ -34,7 +34,7 @@ dependencies:
   colour: ^1.0.5
   shimmer_animation: ^2.1.0+1
   percent_indicator: ^3.0.1
-  provider: ^6.0.1
+  provider: ^6.0.2
   flutter_list_drag_and_drop: ^0.1.6
   lottie: ^1.2.1
   slide_drawer: ^1.0.3

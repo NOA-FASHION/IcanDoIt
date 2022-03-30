@@ -16,6 +16,7 @@ class _GuestScreenState extends State<GuestScreen> {
   Widget build(BuildContext context) {
     Challengecontroller variable = Provider.of<Challengecontroller>(context);
     String switchIntro = variable.getChallengeyesterday().commentaire;
+
     return Container(
       child: switchIntro == "true" || switchIntro == ""
           ? ChangeNotifierProvider.value(value: variable, child: HomeScreen())

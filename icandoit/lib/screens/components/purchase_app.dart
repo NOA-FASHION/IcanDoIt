@@ -270,6 +270,7 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
   @override
   Widget build(BuildContext context) {
     Challengecontroller variable = Provider.of<Challengecontroller>(context);
+
     return Scaffold(
       backgroundColor: Colors.purple,
       body: Container(

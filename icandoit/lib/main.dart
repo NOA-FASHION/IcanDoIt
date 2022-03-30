@@ -2,7 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import 'package:icandoit/controllers/challenge_controller.dart';
-import 'package:icandoit/guestscreen1.dart';
+import 'package:icandoit/guestScreenStart.dart';
 
 import 'package:icandoit/screens/components/challenge_list_save.dart';
 
@@ -38,7 +38,7 @@ class _IcanDoItState extends State<IcanDoIt> {
       },
       home: ChangeNotifierProvider<Challengecontroller>(
           create: (context) => Challengecontroller(),
-          child: GuestScreenStart()),
+          child: GuestScreenStart1()),
     );
   }
 }
