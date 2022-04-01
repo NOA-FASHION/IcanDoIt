@@ -16,13 +16,14 @@ import '../home_screen.dart';
 
 // GlobalKey<_PurchaseAppState> myAppKey = GlobalKey();
 class PurchaseApp extends StatefulWidget {
-  PurchaseApp({Key myAppKey}) : super(key: myAppKey);
+ 
 
   @override
   State<PurchaseApp> createState() => _PurchaseAppState();
 }
 
 class _PurchaseAppState extends State<PurchaseApp> {
+ 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -48,6 +49,8 @@ class PurchaseAppStart extends StatefulWidget {
 }
 
 class _PurchaseAppStartState extends State<PurchaseAppStart> {
+    
+  
   Future<Null> delay(int milliseconds) {
     return new Future.delayed(new Duration(milliseconds: milliseconds));
   }
@@ -248,8 +251,9 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
   final List<String> titles = [
     "",
     "",
+    "",
   ];
-
+GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final List<Widget> items = [
     ClipRRect(
       borderRadius: BorderRadius.circular(20.0),
@@ -263,6 +267,105 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
       child: Image.asset(
         'assets/1.png',
         fit: BoxFit.cover,
+      ),
+    ),
+    ClipRRect(
+      borderRadius: BorderRadius.circular(20.0),
+      child: Stack(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/3.png'),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          Align(
+              alignment: Alignment.topRight,
+              child: Form(
+                key: formKey,
+                child: Column(
+                  children: [
+                    TextFormField(
+                      textCapitalization: TextCapitalization.sentences,
+                      onSaved: (value) {},
+                      validator: (value) {
+                        if (value.isEmpty) {
+                          return "Merci d'entrer un nom pour le challenge";
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                          helperText: "Exemple : 'Tâche quotidienne '",
+                          focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  width: 2.0, color: Colors.blueAccent),
+                              borderRadius: BorderRadius.circular(15.0)),
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  width: 1.0, color: Colors.blueAccent),
+                              borderRadius: BorderRadius.circular(15.0)),
+                          contentPadding: EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 10),
+                          labelText: "Nom de la mission",
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15.0))),
+                    ),
+                    TextFormField(
+                      textCapitalization: TextCapitalization.sentences,
+                      onSaved: (value) {},
+                      validator: (value) {
+                        if (value.isEmpty) {
+                          return "Merci d'entrer un nom pour le challenge";
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                          helperText: "Exemple : 'Tâche quotidienne '",
+                          focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  width: 2.0, color: Colors.blueAccent),
+                              borderRadius: BorderRadius.circular(15.0)),
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  width: 1.0, color: Colors.blueAccent),
+                              borderRadius: BorderRadius.circular(15.0)),
+                          contentPadding: EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 10),
+                          labelText: "Nom de la mission",
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15.0))),
+                    ),
+                    Center(
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          elevation: 0,
+                          primary: Colors.amber,
+                        ),
+                        onPressed: () {
+                          if (formKey.currentState.validate()) {
+                            formKey.currentState.save();
+                            {}
+                          }
+                        },
+                        child: const Text(
+                          'Réduire',
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.black87,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              )),
+        ],
       ),
     ),
   ];
