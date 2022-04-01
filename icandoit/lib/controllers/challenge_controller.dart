@@ -779,7 +779,7 @@ class Challengecontroller extends ChangeNotifier {
     DateTime today = new DateTime.now();
     DateTime lastDay =
         DateFormat('EEEE, d MMM, yyyy').parseStrict(challengeyesterday.date);
-    if ((today.day >= (lastDay.day + 1)) || (today.month > lastDay.month)) {
+    if ((today.day >= (lastDay.day)) || (today.month > lastDay.month)) {
       if (challengeyesterday.nbchallengeVallide == "false") {
         print('start init yestederday');
         challengeyesterday.nbchallengeVallide = "true";

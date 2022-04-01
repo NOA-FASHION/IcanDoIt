@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:icandoit/controllers/challenge_controller.dart';
+import 'package:icandoit/screens/components/code_activation.dart';
 
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:intl/intl.dart';
@@ -16,14 +17,11 @@ import '../home_screen.dart';
 
 // GlobalKey<_PurchaseAppState> myAppKey = GlobalKey();
 class PurchaseApp extends StatefulWidget {
- 
-
   @override
   State<PurchaseApp> createState() => _PurchaseAppState();
 }
 
 class _PurchaseAppState extends State<PurchaseApp> {
- 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -49,8 +47,6 @@ class PurchaseAppStart extends StatefulWidget {
 }
 
 class _PurchaseAppStartState extends State<PurchaseAppStart> {
-    
-  
   Future<Null> delay(int milliseconds) {
     return new Future.delayed(new Duration(milliseconds: milliseconds));
   }
@@ -86,7 +82,8 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
     }
   }
 
-  void buyProduct(ProductDetails prod, Challengecontroller variable) async {
+  void buyProduct(ProductDetails prod, Challengecontroller variable,
+      String documentId) async {
     print("prod :" + prod.toString());
     final PurchaseParam purchaseParam = PurchaseParam(productDetails: prod);
 
@@ -101,7 +98,7 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
       if (purchase.purchaseID != null) {
         print('purchase: ' + purchase.status.name);
         if (purchase.status == PurchaseStatus.purchased) {
-          addDataToFirebse(variable);
+          addDataToFirebse(variable, documentId);
           Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => ChangeNotifierProvider.value(
                   value: variable,
@@ -116,7 +113,8 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
     });
   }
 
-  void restaurProduct(ProductDetails prod, Challengecontroller variable) async {
+  void restaurProduct(ProductDetails prod, Challengecontroller variable,
+      String documentId) async {
     await iap.restorePurchases();
 
     await delay(500);
@@ -127,7 +125,7 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
             variable.getChallengeyesterday().nbChallengeEnCours;
         if (purchase.status == PurchaseStatus.restored &&
             switchIntro == 'false') {
-          addDataToFirebse(variable);
+          addDataToFirebse(variable, documentId);
           showTopSnackBar(
             context,
             CustomSnackBar.success(
@@ -178,7 +176,7 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
   }
 
   // final databaseReference = FirebaseFirestore.instance;
-  void addDataToFirebse(Challengecontroller variable) {
+  void addDataToFirebse(Challengecontroller variable, String documentId) {
     bool boolAchat = false;
     bool boolrestor = false;
     bool activationBoll = false;
@@ -205,6 +203,7 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
         }
 
         activationEasy(
+            documentId: documentId,
             variable: variable,
             boolAchat: boolAchat,
             activationBoll: activationBoll,
@@ -216,23 +215,41 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
 
   Future<void> activationEasy(
       {Challengecontroller variable,
+      String documentId,
       bool boolAchat,
       bool activationBoll,
       String purchaseId1,
       bool boolrestor}) async {
     DateTime today = new DateTime.now();
-    String documentId = variable.getChallengeyesterday().nbtacheVallide;
+
     final databaseReference = FirebaseFirestore.instance;
-    try {
-      await databaseReference.collection("products").doc(documentId).update({
-        "Achat": boolAchat,
-        "activation": activationBoll,
-        "IdCommade": purchaseId1,
-        "LastConnect": DateFormat('EEEE, d MMM, yyyy').format(today),
-        "Restor": boolrestor
-      });
-    } catch (e) {
-      print(e.toString());
+    if (documentId.isEmpty && documentId != null) {
+      try {
+        await databaseReference.collection("products").doc(documentId).update({
+          "Achat": boolAchat,
+          "activation": activationBoll,
+          "IdCommade": purchaseId1,
+          "LastConnect": DateFormat('EEEE, d MMM, yyyy').format(today),
+          "Restor": boolrestor
+        });
+      } catch (e) {
+        print(e.toString());
+      }
+    } else {
+      DateTime today = new DateTime.now();
+
+      try {
+        await databaseReference.collection("activation").add({
+          "Achat": boolAchat,
+          "activation": activationBoll,
+          "IdCommade": purchaseId1,
+          "Installation": true,
+          "LastConnect": DateFormat('EEEE, d MMM, yyyy').format(today),
+          "Restor": boolrestor
+        }).then((value) => variable.documentIdFirebase(value.id));
+      } catch (e) {
+        print(e.toString());
+      }
     }
   }
 
@@ -253,8 +270,111 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
     "",
     "",
   ];
-GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  final List<Widget> items = [
+
+  bool _isDialogShowing = false;
+
+  editActivation(Challengecontroller variable) {
+    // var baseDialog = EditProduitGagnant();
+    showDialog(
+        context: context,
+        builder: (context) {
+          return ChangeNotifierProvider.value(
+              value: variable, child: CodeActivation());
+        });
+  }
+  // GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  // Widget itemsWidget() {
+  //   Widget activationCode = Form(
+  //     key: formKey,
+  //     child: Column(
+  //       children: [
+  //         Padding(
+  //           padding: const EdgeInsets.all(8.0),
+  //           child: TextFormField(
+  //             textCapitalization: TextCapitalization.sentences,
+  //             onSaved: (value) {},
+  //             validator: (value) {
+  //               if (value.isEmpty) {
+  //                 return "Merci d'entrer un nom pour le challenge";
+  //               }
+  //               return null;
+  //             },
+  //             decoration: InputDecoration(
+  //                 helperText: "Exemple : 'Tâche quotidienne '",
+  //                 focusedBorder: OutlineInputBorder(
+  //                     borderSide:
+  //                         BorderSide(width: 2.0, color: Colors.blueAccent),
+  //                     borderRadius: BorderRadius.circular(15.0)),
+  //                 enabledBorder: OutlineInputBorder(
+  //                     borderSide:
+  //                         BorderSide(width: 1.0, color: Colors.blueAccent),
+  //                     borderRadius: BorderRadius.circular(15.0)),
+  //                 contentPadding:
+  //                     EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+  //                 labelText: "Nom de la mission",
+  //                 border: OutlineInputBorder(
+  //                     borderRadius: BorderRadius.circular(15.0))),
+  //           ),
+  //         ),
+  //         TextFormField(
+  //           textCapitalization: TextCapitalization.sentences,
+  //           onSaved: (value) {},
+  //           validator: (value) {
+  //             if (value.isEmpty) {
+  //               return "Merci d'entrer un nom pour le challenge";
+  //             }
+  //             return null;
+  //           },
+  //           decoration: InputDecoration(
+  //               helperText: "Exemple : 'Tâche quotidienne '",
+  //               focusedBorder: OutlineInputBorder(
+  //                   borderSide:
+  //                       BorderSide(width: 2.0, color: Colors.blueAccent),
+  //                   borderRadius: BorderRadius.circular(15.0)),
+  //               enabledBorder: OutlineInputBorder(
+  //                   borderSide:
+  //                       BorderSide(width: 1.0, color: Colors.blueAccent),
+  //                   borderRadius: BorderRadius.circular(15.0)),
+  //               contentPadding:
+  //                   EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+  //               labelText: "Nom de la mission",
+  //               border: OutlineInputBorder(
+  //                   borderRadius: BorderRadius.circular(15.0))),
+  //         ),
+  //         Center(
+  //           child: ElevatedButton(
+  //             style: ElevatedButton.styleFrom(
+  //               shape: RoundedRectangleBorder(
+  //                 borderRadius: BorderRadius.circular(12),
+  //               ),
+  //               elevation: 0,
+  //               primary: Colors.amber,
+  //             ),
+  //             onPressed: () {
+  //               if (formKey.currentState.validate()) {
+  //                 formKey.currentState.save();
+  //                 {}
+  //               }
+  //             },
+  //             child: const Text(
+  //               'Réduire',
+  //               style: TextStyle(
+  //                 fontSize: 15,
+  //                 color: Colors.black87,
+  //                 fontWeight: FontWeight.bold,
+  //               ),
+  //             ),
+  //           ),
+  //         )
+  //       ],
+  //     ),
+  //   );
+
+  //   return activationCode;
+  // }
+
+  List<Widget> items = [
     ClipRRect(
       borderRadius: BorderRadius.circular(20.0),
       child: Image.asset(
@@ -271,101 +391,9 @@ GlobalKey<FormState> formKey = GlobalKey<FormState>();
     ),
     ClipRRect(
       borderRadius: BorderRadius.circular(20.0),
-      child: Stack(
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/3.png'),
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          Align(
-              alignment: Alignment.topRight,
-              child: Form(
-                key: formKey,
-                child: Column(
-                  children: [
-                    TextFormField(
-                      textCapitalization: TextCapitalization.sentences,
-                      onSaved: (value) {},
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return "Merci d'entrer un nom pour le challenge";
-                        }
-                        return null;
-                      },
-                      decoration: InputDecoration(
-                          helperText: "Exemple : 'Tâche quotidienne '",
-                          focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  width: 2.0, color: Colors.blueAccent),
-                              borderRadius: BorderRadius.circular(15.0)),
-                          enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  width: 1.0, color: Colors.blueAccent),
-                              borderRadius: BorderRadius.circular(15.0)),
-                          contentPadding: EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 10),
-                          labelText: "Nom de la mission",
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15.0))),
-                    ),
-                    TextFormField(
-                      textCapitalization: TextCapitalization.sentences,
-                      onSaved: (value) {},
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return "Merci d'entrer un nom pour le challenge";
-                        }
-                        return null;
-                      },
-                      decoration: InputDecoration(
-                          helperText: "Exemple : 'Tâche quotidienne '",
-                          focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  width: 2.0, color: Colors.blueAccent),
-                              borderRadius: BorderRadius.circular(15.0)),
-                          enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  width: 1.0, color: Colors.blueAccent),
-                              borderRadius: BorderRadius.circular(15.0)),
-                          contentPadding: EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 10),
-                          labelText: "Nom de la mission",
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15.0))),
-                    ),
-                    Center(
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          elevation: 0,
-                          primary: Colors.amber,
-                        ),
-                        onPressed: () {
-                          if (formKey.currentState.validate()) {
-                            formKey.currentState.save();
-                            {}
-                          }
-                        },
-                        child: const Text(
-                          'Réduire',
-                          style: TextStyle(
-                            fontSize: 15,
-                            color: Colors.black87,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              )),
-        ],
+      child: Image.asset(
+        'assets/3.png',
+        fit: BoxFit.cover,
       ),
     ),
   ];
@@ -373,7 +401,7 @@ GlobalKey<FormState> formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     Challengecontroller variable = Provider.of<Challengecontroller>(context);
-
+    String documentId = variable.getChallengeyesterday().nbtacheVallide;
     return Scaffold(
       backgroundColor: Colors.purple,
       body: Container(
@@ -493,10 +521,13 @@ GlobalKey<FormState> formKey = GlobalKey<FormState>();
                             onSelectedItem: (page) {
                               print("page : $page");
                               if (page == 0) {
-                                restaurProduct(data.data[0], variable);
+                                restaurProduct(
+                                    data.data[0], variable, documentId);
                                 // addDataToFirebse(variable);
                               } else if (page == 1) {
-                                buyProduct(data.data[0], variable);
+                                buyProduct(data.data[0], variable, documentId);
+                              } else if (page == 2) {
+                                editActivation(variable);
                               }
                             },
                             images: items,

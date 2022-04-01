@@ -33,8 +33,8 @@ class _GuestScreenStart1State extends State<GuestScreenStart1> {
         //     await databaseReference.collection("activation").doc(test).get();
         // if (a.exists) {
         databaseReference.collection("activation").doc(test).update({
-          "LastConnect": DateFormat('EEEE, d MMM, yyyy').format(today),
-          // "LastConnect": "date test7",
+          // "LastConnect": DateFormat('EEEE, d MMM, yyyy').format(today),
+          "LastConnect": "date test7",
         });
         // }
       } catch (e) {
@@ -61,8 +61,11 @@ class _GuestScreenStart1State extends State<GuestScreenStart1> {
   }
 
   void switIntro(Challengecontroller variable) async {
+    await delay(2500);
     if (test1 != null) {
-      await delay(3500);
+      print("test réussi avec succes");
+      print(test1);
+
       variable.switchTrueIntro(test1);
     }
   }
@@ -76,6 +79,10 @@ class _GuestScreenStart1State extends State<GuestScreenStart1> {
     String switchIntro1 = variable.getChallengeyesterday().nbchallengeVallide;
 
     String switchIntro = variable.getChallengeyesterday().nbChallengeEnCours;
+    // String switchIntro1 = "true";
+
+    // String switchIntro = "false";
+
     print(switchIntro);
     return Container(
         child: Container(
