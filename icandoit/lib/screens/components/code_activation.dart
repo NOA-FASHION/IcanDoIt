@@ -1,14 +1,23 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
+
+import '../../controllers/challenge_controller.dart';
 
 class CodeActivation extends StatefulWidget {
-  CodeActivation({Key key}) : super(key: key);
+  final String documentId;
+  final Challengecontroller variable;
+  CodeActivation({this.documentId, this.variable});
 
   @override
   State<CodeActivation> createState() => _CodeActivationState();
 }
 
 class _CodeActivationState extends State<CodeActivation> {
+  String codeActivation;
+  String emailActivation;
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -90,18 +99,6 @@ class _CodeActivationState extends State<CodeActivation> {
                               ],
                             ),
                             SizedBox(height: 4),
-                            // Row(
-                            //   children: [
-                            //     Icon(Icons.contacts, color: Colors.blue),
-                            //     SizedBox(
-                            //       width: 6,
-                            //     ),
-                            //     Text(
-                            //       "Easytodo972@gmail.com.",
-                            //       style: GoogleFonts.playfairDisplay(),
-                            //     ),
-                            //   ],
-                            // ),
                           ],
                         ),
                       ),
@@ -111,7 +108,9 @@ class _CodeActivationState extends State<CodeActivation> {
                     padding: const EdgeInsets.all(30.0),
                     child: TextFormField(
                       textCapitalization: TextCapitalization.sentences,
-                      onSaved: (value) {},
+                      onSaved: (value) {
+                        emailActivation = value;
+                      },
                       validator: (value) {
                         if (value.isEmpty) {
                           return "Merci d'entrer une adresse Email valide";
@@ -139,7 +138,9 @@ class _CodeActivationState extends State<CodeActivation> {
                     padding: const EdgeInsets.only(right: 30.0, left: 30),
                     child: TextFormField(
                       textCapitalization: TextCapitalization.sentences,
-                      onSaved: (value) {},
+                      onSaved: (value) {
+                        codeActivation = value;
+                      },
                       validator: (value) {
                         if (value.isEmpty) {
                           return "Merci d'entrer le code d'activation";
@@ -198,10 +199,57 @@ class _CodeActivationState extends State<CodeActivation> {
                             elevation: 0,
                             primary: Colors.amber,
                           ),
-                          onPressed: () {
+                          onPressed: () async {
                             if (formKey.currentState.validate()) {
                               formKey.currentState.save();
-                              {
+
+                              final Email email = Email(
+                                body: 'Email body',
+                                subject: "Code d'activation",
+                                recipients: [emailActivation],
+                                cc: ['easutodo972@gmail.com'],
+                                bcc: ['bcc@example.com'],
+                                isHTML: false,
+                              );
+                              await FlutterEmailSender.send(email);
+
+                              final databaseReference =
+                                  FirebaseFirestore.instance;
+                              if (widget.documentId.isEmpty &&
+                                  widget.documentId != null) {
+                                try {
+                                  await databaseReference
+                                      .collection("products")
+                                      .doc(widget.documentId)
+                                      .update({
+                                    "Code d'activation": codeActivation,
+                                  });
+                                } catch (e) {
+                                  print(e.toString());
+                                }
+                              } else {
+                                DateTime today = new DateTime.now();
+
+                                try {
+                                  await databaseReference
+                                      .collection("activation")
+                                      .add({
+                                    "Achat": false,
+                                    "Code d'activation": codeActivation,
+                                    "activation": false,
+                                    "IdCommade": "pas d'ID",
+                                    "Installation": true,
+                                    "LastConnect":
+                                        DateFormat('EEEE, d MMM, yyyy')
+                                            .format(today),
+                                    "Restor": false
+                                  }).then((value) => widget
+                                          .variable
+                                          .challengeyesterday
+                                          .nbtacheVallide = value.id);
+                                } catch (e) {
+                                  print(e.toString());
+                                }
                                 Navigator.pop(context);
                               }
                             }

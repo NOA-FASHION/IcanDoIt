@@ -2107,6 +2107,7 @@ class Challengecontroller extends ChangeNotifier {
     try {
       await databaseReference.collection("activation").add({
         "Achat": false,
+        "Code d'activation": "Pas de code",
         "activation": false,
         "IdCommade": "pas d'ID",
         "Installation": true,

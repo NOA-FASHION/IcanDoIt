@@ -273,106 +273,19 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
 
   bool _isDialogShowing = false;
 
-  editActivation(Challengecontroller variable) {
+  editActivation(Challengecontroller variable, String documentId) {
     // var baseDialog = EditProduitGagnant();
     showDialog(
         context: context,
         builder: (context) {
           return ChangeNotifierProvider.value(
-              value: variable, child: CodeActivation());
+              value: variable,
+              child: CodeActivation(
+                variable: variable,
+                documentId: documentId,
+              ));
         });
   }
-  // GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
-  // Widget itemsWidget() {
-  //   Widget activationCode = Form(
-  //     key: formKey,
-  //     child: Column(
-  //       children: [
-  //         Padding(
-  //           padding: const EdgeInsets.all(8.0),
-  //           child: TextFormField(
-  //             textCapitalization: TextCapitalization.sentences,
-  //             onSaved: (value) {},
-  //             validator: (value) {
-  //               if (value.isEmpty) {
-  //                 return "Merci d'entrer un nom pour le challenge";
-  //               }
-  //               return null;
-  //             },
-  //             decoration: InputDecoration(
-  //                 helperText: "Exemple : 'Tâche quotidienne '",
-  //                 focusedBorder: OutlineInputBorder(
-  //                     borderSide:
-  //                         BorderSide(width: 2.0, color: Colors.blueAccent),
-  //                     borderRadius: BorderRadius.circular(15.0)),
-  //                 enabledBorder: OutlineInputBorder(
-  //                     borderSide:
-  //                         BorderSide(width: 1.0, color: Colors.blueAccent),
-  //                     borderRadius: BorderRadius.circular(15.0)),
-  //                 contentPadding:
-  //                     EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-  //                 labelText: "Nom de la mission",
-  //                 border: OutlineInputBorder(
-  //                     borderRadius: BorderRadius.circular(15.0))),
-  //           ),
-  //         ),
-  //         TextFormField(
-  //           textCapitalization: TextCapitalization.sentences,
-  //           onSaved: (value) {},
-  //           validator: (value) {
-  //             if (value.isEmpty) {
-  //               return "Merci d'entrer un nom pour le challenge";
-  //             }
-  //             return null;
-  //           },
-  //           decoration: InputDecoration(
-  //               helperText: "Exemple : 'Tâche quotidienne '",
-  //               focusedBorder: OutlineInputBorder(
-  //                   borderSide:
-  //                       BorderSide(width: 2.0, color: Colors.blueAccent),
-  //                   borderRadius: BorderRadius.circular(15.0)),
-  //               enabledBorder: OutlineInputBorder(
-  //                   borderSide:
-  //                       BorderSide(width: 1.0, color: Colors.blueAccent),
-  //                   borderRadius: BorderRadius.circular(15.0)),
-  //               contentPadding:
-  //                   EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-  //               labelText: "Nom de la mission",
-  //               border: OutlineInputBorder(
-  //                   borderRadius: BorderRadius.circular(15.0))),
-  //         ),
-  //         Center(
-  //           child: ElevatedButton(
-  //             style: ElevatedButton.styleFrom(
-  //               shape: RoundedRectangleBorder(
-  //                 borderRadius: BorderRadius.circular(12),
-  //               ),
-  //               elevation: 0,
-  //               primary: Colors.amber,
-  //             ),
-  //             onPressed: () {
-  //               if (formKey.currentState.validate()) {
-  //                 formKey.currentState.save();
-  //                 {}
-  //               }
-  //             },
-  //             child: const Text(
-  //               'Réduire',
-  //               style: TextStyle(
-  //                 fontSize: 15,
-  //                 color: Colors.black87,
-  //                 fontWeight: FontWeight.bold,
-  //               ),
-  //             ),
-  //           ),
-  //         )
-  //       ],
-  //     ),
-  //   );
-
-  //   return activationCode;
-  // }
 
   List<Widget> items = [
     ClipRRect(
@@ -385,14 +298,14 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
     ClipRRect(
       borderRadius: BorderRadius.circular(20.0),
       child: Image.asset(
-        'assets/1.png',
+        'assets/3.png',
         fit: BoxFit.cover,
       ),
     ),
     ClipRRect(
       borderRadius: BorderRadius.circular(20.0),
       child: Image.asset(
-        'assets/3.png',
+        'assets/1.png',
         fit: BoxFit.cover,
       ),
     ),
@@ -524,10 +437,10 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
                                 restaurProduct(
                                     data.data[0], variable, documentId);
                                 // addDataToFirebse(variable);
-                              } else if (page == 1) {
-                                buyProduct(data.data[0], variable, documentId);
                               } else if (page == 2) {
-                                editActivation(variable);
+                                buyProduct(data.data[0], variable, documentId);
+                              } else if (page == 1) {
+                                editActivation(variable, documentId);
                               }
                             },
                             images: items,
@@ -535,21 +448,6 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
                           ));
                     }),
               ),
-              // Column(
-              //   children: [
-              //     Text("commentaire: " +
-              //         variable.getChallengeyesterday().commentaire),
-              //     Text("date: " + variable.getChallengeyesterday().date),
-              //     Text("nbChallengeEnCours : " +
-              //         variable.getChallengeyesterday().nbChallengeEnCours),
-              //     Text("nbTacheEnCours: " +
-              //         variable.getChallengeyesterday().nbTacheEnCours),
-              //     Text("nbchallengeVallide: " +
-              //         variable.getChallengeyesterday().nbchallengeVallide),
-              //     Text("nbtacheVallide:" +
-              //         variable.getChallengeyesterday().nbtacheVallide),
-              //   ],
-              // )
             ]),
           ),
         ),
@@ -621,15 +519,6 @@ class HeaderSection extends StatelessWidget {
         SizedBox(height: 5),
         Image.asset('assets/divider.png'),
         SizedBox(height: 5),
-        // Text(
-        //   'SATISFAIT OU REMBOURSÉ',
-        //   textAlign: TextAlign.center,
-        //   style: TextStyle(
-        //     fontSize: 11,
-        //     fontWeight: FontWeight.w400,
-        //     color: Colors.grey[200],
-        //   ),
-        // ),
         SizedBox(height: 1),
       ],
     );
