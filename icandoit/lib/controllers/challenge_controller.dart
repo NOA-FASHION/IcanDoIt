@@ -55,6 +55,7 @@ class Challengecontroller extends ChangeNotifier {
   SharedPreferences _localDataChallengeDay;
   SharedPreferences _localDataChallengeyesterday;
   final _prefs = SharedPreferences.getInstance();
+
   ChallengeDays challengeDays = ChallengeDays();
 
   Challengeyesterday challengeyesterday = Challengeyesterday();
@@ -105,7 +106,7 @@ class Challengecontroller extends ChangeNotifier {
     paiemtBool = false;
 
     _initChallengeListStartChallenge();
-    initActivatonboo();
+
     notifyListeners();
   }
 
@@ -116,12 +117,16 @@ class Challengecontroller extends ChangeNotifier {
   //   _initChallengeList();
   // }
 
-  void initActivatonboo() async {
+  Future<String> initActivatonboo() async {
     await delay(2500);
+    String test;
     // print(challengeyesterday.nbtacheVallide);
-    if (challengeyesterday.nbtacheVallide.isNotEmpty) {
-      await getBoolActivation1(challengeyesterday.nbtacheVallide);
-    }
+    // if (challengeyesterday.nbtacheVallide.isNotEmpty) {
+    //   test = await getBoolActivation1(challengeyesterday.nbtacheVallide);
+    // }
+    test = challengeyesterday.nbtacheVallide;
+
+    return test;
   }
 
   Future<bool> getBoolActivation1(String test) async {
@@ -148,7 +153,14 @@ class Challengecontroller extends ChangeNotifier {
       final SharedPreferences prefs = await _prefs;
       await prefs.setBool('repeat', activation);
       print("test réussi avec succes");
+    } else {
+      final SharedPreferences prefs = await _prefs;
+      await prefs.setBool('repeat', true);
     }
+  }
+
+  void demarageSwitchIntro() {
+    initActivatonboo().then((value) => getBoolActivation1(value));
   }
 
 /////////////////////////////////////// /////////////////////////////////////// /////////////////////////////////////// notification
@@ -850,6 +862,7 @@ class Challengecontroller extends ChangeNotifier {
     if (challengeDays.date != DateFormat('EEEE, d MMM, yyyy').format(today)) {
       // modifDtabaseFirebase();
       // getBoolActivation();
+
       initActivatonboo();
       removeQuotidientSave();
       initialiseQuotidient();

@@ -62,8 +62,14 @@ class _GuestScreenStart1State extends State<GuestScreenStart1> {
   // }
 
   Future<bool> switIntro() async {
+    bool repeat;
     final prefs = await SharedPreferences.getInstance();
-    final bool repeat = prefs.getBool('repeat');
+
+    if (prefs.getBool('repeat') != null) {
+      repeat = prefs.getBool('repeat');
+    } else {
+      repeat = true;
+    }
     print("intro: " + repeat.toString());
     return repeat;
   }
@@ -71,6 +77,7 @@ class _GuestScreenStart1State extends State<GuestScreenStart1> {
   @override
   Widget build(BuildContext context) {
     Challengecontroller variable = Provider.of<Challengecontroller>(context);
+    variable.demarageSwitchIntro();
     test = variable.getChallengeyesterday().nbtacheVallide;
     modifDtabaseFirebase();
 
@@ -85,8 +92,8 @@ class _GuestScreenStart1State extends State<GuestScreenStart1> {
           if (!snapshot.hasData) {
             return CircularProgressIndicator();
           } else {
+            // return (Container(child: Text(snapshot.data.toString())));
             return Container(
-                child: Container(
               child: switchIntro == "true" &&
                       switchIntro1 == "true" &&
                       snapshot.data == false
@@ -94,7 +101,7 @@ class _GuestScreenStart1State extends State<GuestScreenStart1> {
                       value: variable, child: PurchaseApp())
                   : ChangeNotifierProvider.value(
                       value: variable, child: GuestScreen()),
-            ));
+            );
           }
         });
   }
