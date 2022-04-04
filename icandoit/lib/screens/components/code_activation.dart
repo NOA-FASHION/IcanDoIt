@@ -99,6 +99,32 @@ class _CodeActivationState extends State<CodeActivation> {
                               ],
                             ),
                             SizedBox(height: 4),
+                            Row(
+                              children: [
+                                Icon(Icons.send, color: Colors.blue),
+                                SizedBox(
+                                  width: 6,
+                                ),
+                                Text(
+                                  "Envoyer une demande",
+                                  style: GoogleFonts.playfairDisplay(),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 4),
+                            Row(
+                              children: [
+                                Icon(Icons.email, color: Colors.blue),
+                                SizedBox(
+                                  width: 6,
+                                ),
+                                Text(
+                                  "Á easytodo972@gmail.com",
+                                  style: GoogleFonts.playfairDisplay(),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 4),
                           ],
                         ),
                       ),
@@ -159,7 +185,7 @@ class _CodeActivationState extends State<CodeActivation> {
                               borderRadius: BorderRadius.circular(15.0)),
                           contentPadding: EdgeInsets.symmetric(
                               horizontal: 20, vertical: 10),
-                          labelText: "Nom de la mission",
+                          labelText: "Code d'activation",
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(15.0))),
                     ),
@@ -203,26 +229,27 @@ class _CodeActivationState extends State<CodeActivation> {
                             if (formKey.currentState.validate()) {
                               formKey.currentState.save();
 
-                              final Email email = Email(
-                                body: 'Email body',
-                                subject: "Code d'activation",
-                                recipients: [emailActivation],
-                                cc: ['easutodo972@gmail.com'],
-                                bcc: ['bcc@example.com'],
-                                isHTML: false,
-                              );
-                              await FlutterEmailSender.send(email);
+                              // final Email email = Email(
+                              //   body: 'Email body',
+                              //   subject: "Code d'activation",
+                              //   recipients: ["michel.almont@gmail.com"],
+                              //   cc: ['easytodo972@gmail.com'],
+                              //   // bcc: ['bcc@example.com'],
+                              //   isHTML: false,
+                              // );
+                              // await FlutterEmailSender.send(email);
 
                               final databaseReference =
                                   FirebaseFirestore.instance;
-                              if (widget.documentId.isEmpty &&
+                              if (widget.documentId.isNotEmpty &&
                                   widget.documentId != null) {
                                 try {
                                   await databaseReference
-                                      .collection("products")
+                                      .collection("activation")
                                       .doc(widget.documentId)
                                       .update({
                                     "Code d'activation": codeActivation,
+                                    "email": emailActivation,
                                   });
                                 } catch (e) {
                                   print(e.toString());
@@ -234,6 +261,8 @@ class _CodeActivationState extends State<CodeActivation> {
                                   await databaseReference
                                       .collection("activation")
                                       .add({
+                                    "email": emailActivation,
+                                    "activatipnManuelle": false,
                                     "Achat": false,
                                     "Code d'activation": codeActivation,
                                     "activation": false,
@@ -243,10 +272,8 @@ class _CodeActivationState extends State<CodeActivation> {
                                         DateFormat('EEEE, d MMM, yyyy')
                                             .format(today),
                                     "Restor": false
-                                  }).then((value) => widget
-                                          .variable
-                                          .challengeyesterday
-                                          .nbtacheVallide = value.id);
+                                  }).then((value) => widget.variable
+                                          .documentIdFirebase(value.id));
                                 } catch (e) {
                                   print(e.toString());
                                 }

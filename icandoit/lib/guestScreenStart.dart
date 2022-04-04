@@ -44,23 +44,6 @@ class _GuestScreenStart1State extends State<GuestScreenStart1> {
     }
   }
 
-  // Future<bool> getBoolActivation(Challengecontroller variable) async {
-  //   await delay(2500);
-
-  //   if (test != null && test.isNotEmpty) {
-  //     final databaseReference = FirebaseFirestore.instance;
-  //     // var a = await databaseReference.collection("activation").doc(test).get();
-  //     // if (a.exists) {
-  //     databaseReference.collection("activation").doc(test).get().then((value) {
-  //       print(value.data()['activation']);
-  //       test1 = value.data()['activation'];
-  //     });
-  //   }
-  //   // }
-  //   return test1;
-  //   // switIntro(variable);
-  // }
-
   Future<bool> switIntro() async {
     bool repeat;
     final prefs = await SharedPreferences.getInstance();
@@ -68,7 +51,7 @@ class _GuestScreenStart1State extends State<GuestScreenStart1> {
     if (prefs.getBool('repeat') != null) {
       repeat = prefs.getBool('repeat');
     } else {
-      repeat = true;
+      repeat = false;
     }
     print("intro: " + repeat.toString());
     return repeat;
@@ -83,7 +66,7 @@ class _GuestScreenStart1State extends State<GuestScreenStart1> {
 
     String switchIntro1 = variable.getChallengeyesterday().nbchallengeVallide;
 
-    String switchIntro = variable.getChallengeyesterday().nbChallengeEnCours;
+    // String switchIntro = variable.getChallengeyesterday().nbChallengeEnCours;
 
     // print(switchIntro);
     return FutureBuilder<bool>(
@@ -94,9 +77,8 @@ class _GuestScreenStart1State extends State<GuestScreenStart1> {
           } else {
             // return (Container(child: Text(snapshot.data.toString())));
             return Container(
-              child: switchIntro == "true" &&
-                      switchIntro1 == "true" &&
-                      snapshot.data == false
+              child: (switchIntro1 == "false" && snapshot.data == false) ||
+                      (switchIntro1 == "true" && snapshot.data == true)
                   ? ChangeNotifierProvider.value(
                       value: variable, child: PurchaseApp())
                   : ChangeNotifierProvider.value(

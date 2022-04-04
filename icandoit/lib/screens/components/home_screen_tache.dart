@@ -643,9 +643,9 @@ class _HomeTachesState extends State<HomeTaches> {
   @override
   Widget build(BuildContext context) {
     Challengecontroller variable = Provider.of<Challengecontroller>(context);
-    String test = variable.getChallengeyesterday().nbtacheVallide;
-    print("test:" + test);
-    variable.modifDtabaseFirebase(test);
+    // String test = variable.getChallengeyesterday().nbtacheVallide;
+    // print("test:" + test);
+    // variable.modifDtabaseFirebase(test);
     List<ChallengeModel> _challengesListget = variable.getChallenges();
     // isSwitched = _challengesListget[widget.indexChallenge].prelevementAutoBool;
     challengeBoolAppBar(_challengesListget);

@@ -121,10 +121,9 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
     purchases.forEach((purchase) {
       if (purchase.purchaseID != null) {
         // print('purchase: ' + purchase.productID);
-        String switchIntro =
-            variable.getChallengeyesterday().nbChallengeEnCours;
-        if (purchase.status == PurchaseStatus.restored &&
-            switchIntro == 'false') {
+        // String switchIntro =
+        //     variable.getChallengeyesterday().nbChallengeEnCours;
+        if (purchase.status == PurchaseStatus.restored) {
           addDataToFirebse(variable, documentId);
           showTopSnackBar(
             context,
@@ -224,9 +223,12 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
     DateTime today = new DateTime.now();
 
     final databaseReference = FirebaseFirestore.instance;
-    if (documentId.isEmpty && documentId != null) {
+    if (documentId.isNotEmpty && documentId != null) {
       try {
-        await databaseReference.collection("products").doc(documentId).update({
+        await databaseReference
+            .collection("activation")
+            .doc(documentId)
+            .update({
           "Achat": boolAchat,
           "activation": activationBoll,
           "IdCommade": purchaseId1,
@@ -241,8 +243,11 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
 
       try {
         await databaseReference.collection("activation").add({
+          "email": "Pas d'email",
           "Achat": boolAchat,
+          "Code d'activation": "Pas de code",
           "activation": activationBoll,
+          "activatipnManuelle": false,
           "IdCommade": purchaseId1,
           "Installation": true,
           "LastConnect": DateFormat('EEEE, d MMM, yyyy').format(today),

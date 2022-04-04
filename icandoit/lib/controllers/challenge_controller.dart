@@ -815,7 +815,7 @@ class Challengecontroller extends ChangeNotifier {
       challengeyesterday.nbChallengeEnCours = "true";
       challengeyesterday.nbTacheEnCours = "false";
       challengeyesterday.commentaire = "true";
-      challengeyesterday.nbchallengeVallide = "false";
+      challengeyesterday.nbchallengeVallide = "true";
       challengeyesterday.nbtacheVallide = "";
       await initialiseConnectionDatabase();
       await _saveChallenyesterday();
@@ -830,9 +830,10 @@ class Challengecontroller extends ChangeNotifier {
     DateTime lastDay =
         DateFormat('EEEE, d MMM, yyyy').parseStrict(challengeyesterday.date);
     if ((today.day >= (lastDay.day)) || (today.month > lastDay.month)) {
-      if (challengeyesterday.nbchallengeVallide == "false") {
+      if (challengeyesterday.nbChallengeEnCours == "true") {
         print('start init yestederday');
-        challengeyesterday.nbchallengeVallide = "true";
+        challengeyesterday.nbChallengeEnCours = "false";
+        challengeyesterday.nbchallengeVallide = "false";
         await _saveChallenyesterday();
         _initChallengeListStartChallenge();
       }
@@ -847,9 +848,9 @@ class Challengecontroller extends ChangeNotifier {
 
   void switchTrueIntro(bool active) async {
     if (active) {
-      challengeyesterday.nbChallengeEnCours = "false";
+      challengeyesterday.nbchallengeVallide = "true";
     } else {
-      challengeyesterday.nbChallengeEnCours = "true";
+      challengeyesterday.nbchallengeVallide = "false";
     }
 
     await _saveChallenyesterday();
@@ -2137,20 +2138,20 @@ class Challengecontroller extends ChangeNotifier {
     return _jsonChallengeList;
   }
 
-  modifDtabaseFirebase(String documentId) {
-    DateTime today = new DateTime.now();
-    // String documentId = challengeyesterday.nbtacheVallide;
-    final databaseReference = FirebaseFirestore.instance;
-    // print("documentID:" + challengeyesterday.nbtacheVallide);
-    try {
-      databaseReference.collection("activation").doc(documentId).update({
-        // "LastConnect": DateFormat('EEEE, d MMM, yyyy').format(today),
-        "LastConnect": "date test7",
-      });
-    } catch (e) {
-      print(e.toString());
-    }
-  }
+  // modifDtabaseFirebase(String documentId) {
+  //   DateTime today = new DateTime.now();
+  //   // String documentId = challengeyesterday.nbtacheVallide;
+  //   final databaseReference = FirebaseFirestore.instance;
+  //   // print("documentID:" + challengeyesterday.nbtacheVallide);
+  //   try {
+  //     databaseReference.collection("activation").doc(documentId).update({
+  //       // "LastConnect": DateFormat('EEEE, d MMM, yyyy').format(today),
+  //       "LastConnect": "date test7",
+  //     });
+  //   } catch (e) {
+  //     print(e.toString());
+  //   }
+  // }
 
   initialiseConnectionDatabase() async {
     final databaseReference = FirebaseFirestore.instance;
@@ -2158,9 +2159,10 @@ class Challengecontroller extends ChangeNotifier {
 
     try {
       await databaseReference.collection("activation").add({
+        "email": "Pas d'email",
         "Achat": false,
         "Code d'activation": "Pas de code",
-        "activatipnManuelle": true,
+        "activatipnManuelle": false,
         "activation": false,
         "IdCommade": "pas d'ID",
         "Installation": true,
