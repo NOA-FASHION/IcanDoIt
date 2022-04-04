@@ -4,6 +4,7 @@ import 'package:icandoit/controllers/challenge_controller.dart';
 import 'package:intl/intl.dart';
 
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'screens/components/guest_screen.dart';
 import 'screens/components/purchase_app.dart';
@@ -33,8 +34,8 @@ class _GuestScreenStart1State extends State<GuestScreenStart1> {
         //     await databaseReference.collection("activation").doc(test).get();
         // if (a.exists) {
         databaseReference.collection("activation").doc(test).update({
-          // "LastConnect": DateFormat('EEEE, d MMM, yyyy').format(today),
-          "LastConnect": "date test7",
+          "LastConnect": DateFormat('EEEE, d MMM, yyyy').format(today),
+          // "LastConnect": "date test7",
         });
         // }
       } catch (e) {
@@ -43,31 +44,28 @@ class _GuestScreenStart1State extends State<GuestScreenStart1> {
     }
   }
 
-  Future<bool> getBoolActivation(Challengecontroller variable) async {
-    await delay(2500);
+  // Future<bool> getBoolActivation(Challengecontroller variable) async {
+  //   await delay(2500);
 
-    if (test != null && test.isNotEmpty) {
-      final databaseReference = FirebaseFirestore.instance;
-      // var a = await databaseReference.collection("activation").doc(test).get();
-      // if (a.exists) {
-      databaseReference.collection("activation").doc(test).get().then((value) {
-        print(value.data()['activation']);
-        test1 = value.data()['activation'];
-      });
-    }
-    // }
-    return test1;
-    // switIntro(variable);
-  }
+  //   if (test != null && test.isNotEmpty) {
+  //     final databaseReference = FirebaseFirestore.instance;
+  //     // var a = await databaseReference.collection("activation").doc(test).get();
+  //     // if (a.exists) {
+  //     databaseReference.collection("activation").doc(test).get().then((value) {
+  //       print(value.data()['activation']);
+  //       test1 = value.data()['activation'];
+  //     });
+  //   }
+  //   // }
+  //   return test1;
+  //   // switIntro(variable);
+  // }
 
-  void switIntro(Challengecontroller variable) async {
-    await delay(2500);
-    if (test1 != null) {
-      print("test réussi avec succes");
-      print(test1);
-
-      variable.switchTrueIntro(test1);
-    }
+  Future<bool> switIntro() async {
+    final prefs = await SharedPreferences.getInstance();
+    final bool repeat = prefs.getBool('repeat');
+    print("intro: " + repeat.toString());
+    return repeat;
   }
 
   @override
@@ -75,20 +73,29 @@ class _GuestScreenStart1State extends State<GuestScreenStart1> {
     Challengecontroller variable = Provider.of<Challengecontroller>(context);
     test = variable.getChallengeyesterday().nbtacheVallide;
     modifDtabaseFirebase();
-    getBoolActivation(variable).then((value) => switIntro(variable));
+
     String switchIntro1 = variable.getChallengeyesterday().nbchallengeVallide;
 
     String switchIntro = variable.getChallengeyesterday().nbChallengeEnCours;
-    // String switchIntro1 = "true";
 
-    // String switchIntro = "false";
-
-    print(switchIntro);
-    return Container(
-        child: Container(
-      child: switchIntro == "true" && switchIntro1 == "true"
-          ? ChangeNotifierProvider.value(value: variable, child: PurchaseApp())
-          : ChangeNotifierProvider.value(value: variable, child: GuestScreen()),
-    ));
+    // print(switchIntro);
+    return FutureBuilder<bool>(
+        future: switIntro(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return CircularProgressIndicator();
+          } else {
+            return Container(
+                child: Container(
+              child: switchIntro == "true" &&
+                      switchIntro1 == "true" &&
+                      snapshot.data == false
+                  ? ChangeNotifierProvider.value(
+                      value: variable, child: PurchaseApp())
+                  : ChangeNotifierProvider.value(
+                      value: variable, child: GuestScreen()),
+            ));
+          }
+        });
   }
 }

@@ -196,8 +196,9 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
         } else {
           boolrestor = false;
         }
-        if (boolAchat) {
+        if (boolAchat || boolrestor) {
           activationBoll = true;
+          variable.switchTrueIntro(activationBoll);
         } else {
           activationBoll = false;
         }

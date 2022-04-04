@@ -54,7 +54,9 @@ class Challengecontroller extends ChangeNotifier {
   SharedPreferences _localDataSave;
   SharedPreferences _localDataChallengeDay;
   SharedPreferences _localDataChallengeyesterday;
+  final _prefs = SharedPreferences.getInstance();
   ChallengeDays challengeDays = ChallengeDays();
+
   Challengeyesterday challengeyesterday = Challengeyesterday();
   int indexSave;
   String something = "";
@@ -103,6 +105,7 @@ class Challengecontroller extends ChangeNotifier {
     paiemtBool = false;
 
     _initChallengeListStartChallenge();
+    initActivatonboo();
     notifyListeners();
   }
 
@@ -112,6 +115,41 @@ class Challengecontroller extends ChangeNotifier {
   // void initChallengeList() {
   //   _initChallengeList();
   // }
+
+  void initActivatonboo() async {
+    await delay(2500);
+    // print(challengeyesterday.nbtacheVallide);
+    if (challengeyesterday.nbtacheVallide.isNotEmpty) {
+      await getBoolActivation1(challengeyesterday.nbtacheVallide);
+    }
+  }
+
+  Future<bool> getBoolActivation1(String test) async {
+    await delay(2500);
+    bool test1;
+    if (test != null && test.isNotEmpty) {
+      final databaseReference = FirebaseFirestore.instance;
+      // var a = await databaseReference.collection("activation").doc(test).get();
+      // if (a.exists) {
+      databaseReference.collection("activation").doc(test).get().then((value) {
+        print(value.data()['activatipnManuelle']);
+        switIntro(value.data()['activatipnManuelle']);
+        test1 = value.data()['activatipnManuelle'];
+      });
+    }
+    // }
+    return test1;
+    // switIntro(variable);
+  }
+
+  void switIntro(bool activation) async {
+    await delay(2500);
+    if (activation != null) {
+      final SharedPreferences prefs = await _prefs;
+      await prefs.setBool('repeat', activation);
+      print("test réussi avec succes");
+    }
+  }
 
 /////////////////////////////////////// /////////////////////////////////////// /////////////////////////////////////// notification
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
@@ -812,6 +850,7 @@ class Challengecontroller extends ChangeNotifier {
     if (challengeDays.date != DateFormat('EEEE, d MMM, yyyy').format(today)) {
       // modifDtabaseFirebase();
       // getBoolActivation();
+      initActivatonboo();
       removeQuotidientSave();
       initialiseQuotidient();
       removeHebdo();
@@ -2108,6 +2147,7 @@ class Challengecontroller extends ChangeNotifier {
       await databaseReference.collection("activation").add({
         "Achat": false,
         "Code d'activation": "Pas de code",
+        "activatipnManuelle": true,
         "activation": false,
         "IdCommade": "pas d'ID",
         "Installation": true,
