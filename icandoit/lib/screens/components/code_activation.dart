@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_email_sender/flutter_email_sender.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
