@@ -44,6 +44,7 @@ class Challengecontroller extends ChangeNotifier {
     return new Future.delayed(new Duration(milliseconds: milliseconds));
   }
 
+  bool introActivationManuelle;
   bool paiemtBool;
   String unityPattern = "unity_challenge.";
   List<ChallengeModel> _challengeList = [];
@@ -54,7 +55,7 @@ class Challengecontroller extends ChangeNotifier {
   SharedPreferences _localDataSave;
   SharedPreferences _localDataChallengeDay;
   SharedPreferences _localDataChallengeyesterday;
-  final _prefs = SharedPreferences.getInstance();
+  SharedPreferences _prefs;
 
   ChallengeDays challengeDays = ChallengeDays();
 
@@ -104,7 +105,12 @@ class Challengecontroller extends ChangeNotifier {
           .toList();
     }
     paiemtBool = false;
-
+    _prefs = await SharedPreferences.getInstance();
+    if (_prefs.getBool('repeat') != null) {
+      introActivationManuelle = _prefs.getBool('repeat');
+    } else {
+      introActivationManuelle = false;
+    }
     _initChallengeListStartChallenge();
 
     notifyListeners();
@@ -113,17 +119,30 @@ class Challengecontroller extends ChangeNotifier {
 /////////////////////////////////////// /////////////////////////////////////// /////////////////////////////////////// fin initialisaton
   ///
   ///
-  // void initChallengeList() {
-  //   _initChallengeList();
+  void initChallengeList() {
+    _initChallengeList();
+  }
+
+  // Future<bool> switIntro1() async {
+  //   bool repeat;
+  //   final prefs = await SharedPreferences.getInstance();
+
+  //   if (prefs.getBool('repeat') != null) {
+  //     repeat = prefs.getBool('repeat');
+  //   } else {
+  //     repeat = false;
+  //   }
+  //   print("intro: " + repeat.toString());
+  //   return repeat;
   // }
+  bool getActivationmanuelle() {
+    return introActivationManuelle;
+  }
 
   Future<String> initActivatonboo() async {
     await delay(2500);
     String test;
-    // print(challengeyesterday.nbtacheVallide);
-    // if (challengeyesterday.nbtacheVallide.isNotEmpty) {
-    //   test = await getBoolActivation1(challengeyesterday.nbtacheVallide);
-    // }
+
     test = challengeyesterday.nbtacheVallide;
 
     return test;
@@ -277,8 +296,8 @@ class Challengecontroller extends ChangeNotifier {
 
   Future<void> _showNotification() async {
     const AndroidNotificationDetails androidPlatformChannelSpecifics =
-        AndroidNotificationDetails('your channel id', 'your channel name',
-            channelDescription: 'your channel description',
+        AndroidNotificationDetails(
+            'your channel id', 'your channel name', 'your channel description',
             importance: Importance.max,
             priority: Priority.high,
             ticker: 'ticker');
@@ -297,9 +316,8 @@ class Challengecontroller extends ChangeNotifier {
     vibrationPattern[3] = 2000;
 
     final AndroidNotificationDetails androidPlatformChannelSpecifics =
-        AndroidNotificationDetails(
-            'other custom channel id', 'other custom channel name',
-            channelDescription: 'other custom channel description',
+        AndroidNotificationDetails('other custom channel id',
+            'other custom channel name', 'other custom channel description',
             // icon: 'secondary_icon',
             // largeIcon: const DrawableResourceAndroidBitmap('sample_large_icon'),
             vibrationPattern: vibrationPattern,
@@ -332,7 +350,7 @@ class Challengecontroller extends ChangeNotifier {
         AndroidNotificationDetails(
       channelID,
       channelName,
-      channelDescription: channelDesc,
+      channelDesc,
       priority: Priority.high,
       importance: Importance.max,
       ticker: '$channelName',
@@ -446,7 +464,7 @@ class Challengecontroller extends ChangeNotifier {
         AndroidNotificationDetails(
       channelID,
       channelName,
-      channelDescription: channelDesc,
+      channelDesc,
       priority: Priority.high,
       importance: Importance.max,
       ticker: '$channelName',
@@ -482,9 +500,10 @@ class Challengecontroller extends ChangeNotifier {
         channelDesc,
         _nextInstancDayeOfTenAM(days, hours),
         const NotificationDetails(
-          android: AndroidNotificationDetails('weekly notification channel id',
+          android: AndroidNotificationDetails(
+              'weekly notification channel id',
               'weekly notification channel name',
-              channelDescription: 'weekly notificationdescription'),
+              'weekly notificationdescription'),
         ),
         androidAllowWhileIdle: true,
         uiLocalNotificationDateInterpretation:
@@ -507,9 +526,10 @@ class Challengecontroller extends ChangeNotifier {
         channelDesc,
         _nextInstanceOfMondayTenAM(hours, weekdays),
         const NotificationDetails(
-          android: AndroidNotificationDetails('weekly notification channel id',
+          android: AndroidNotificationDetails(
+              'weekly notification channel id',
               'weekly notification channel name',
-              channelDescription: 'weekly notificationdescription'),
+              'weekly notificationdescription'),
         ),
         androidAllowWhileIdle: true,
         uiLocalNotificationDateInterpretation:
@@ -531,9 +551,10 @@ class Challengecontroller extends ChangeNotifier {
         channelDesc,
         _nextInstanceOfTenAM(hours),
         const NotificationDetails(
-          android: AndroidNotificationDetails('daily notification channel id',
+          android: AndroidNotificationDetails(
+              'daily notification channel id',
               'daily notification channel name',
-              channelDescription: 'daily notification description'),
+              'daily notification description'),
         ),
         androidAllowWhileIdle: true,
         uiLocalNotificationDateInterpretation:
@@ -548,9 +569,10 @@ class Challengecontroller extends ChangeNotifier {
         'daily scheduled notification body',
         _nextInstanceOfTenAM2(),
         const NotificationDetails(
-          android: AndroidNotificationDetails('daily notification channel id',
+          android: AndroidNotificationDetails(
+              'daily notification channel id',
               'daily notification channel name',
-              channelDescription: 'daily notification description'),
+              'daily notification description'),
         ),
         androidAllowWhileIdle: true,
         uiLocalNotificationDateInterpretation:
@@ -861,7 +883,7 @@ class Challengecontroller extends ChangeNotifier {
       // modifDtabaseFirebase();
       // getBoolActivation();
 
-      initActivatonboo();
+      // initActivatonboo();
       removeQuotidientSave();
       initialiseQuotidient();
       removeHebdo();
@@ -2171,16 +2193,16 @@ class Challengecontroller extends ChangeNotifier {
     }
   }
 
-  void getBoolActivation() async {
-    String documentId = challengeyesterday.nbtacheVallide;
-    // print('documentId:' + documentId);
-    final databaseReference = FirebaseFirestore.instance;
-    var a =
-        await databaseReference.collection("activation").doc(documentId).get();
-    if (a.exists) {
-      final DocumentReference documentReference =
-          databaseReference.collection("activation").doc(documentId);
-      print(documentReference);
-    }
-  }
+  // void getBoolActivation() async {
+  //   String documentId = challengeyesterday.nbtacheVallide;
+  //   // print('documentId:' + documentId);
+  //   final databaseReference = FirebaseFirestore.instance;
+  //   var a =
+  //       await databaseReference.collection("activation").doc(documentId).get();
+  //   if (a.exists) {
+  //     final DocumentReference documentReference =
+  //         databaseReference.collection("activation").doc(documentId);
+  //     print(documentReference);
+  //   }
+  // }
 }

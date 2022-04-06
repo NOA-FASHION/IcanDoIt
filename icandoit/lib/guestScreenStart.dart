@@ -44,47 +44,40 @@ class _GuestScreenStart1State extends State<GuestScreenStart1> {
     }
   }
 
-  Future<bool> switIntro() async {
-    bool repeat;
-    final prefs = await SharedPreferences.getInstance();
-
-    if (prefs.getBool('repeat') != null) {
-      repeat = prefs.getBool('repeat');
-    } else {
-      repeat = false;
-    }
-    print("intro: " + repeat.toString());
-    return repeat;
-  }
-
   @override
   Widget build(BuildContext context) {
     Challengecontroller variable = Provider.of<Challengecontroller>(context);
     variable.demarageSwitchIntro();
     test = variable.getChallengeyesterday().nbtacheVallide;
     modifDtabaseFirebase();
-
+    bool activationManuel = variable.getActivationmanuelle();
     String switchIntro1 = variable.getChallengeyesterday().nbchallengeVallide;
+    return Container(
+      child: (switchIntro1 == "false" && activationManuel == false) ||
+              (switchIntro1 == "true" && activationManuel == true)
+          ? ChangeNotifierProvider.value(value: variable, child: PurchaseApp())
+          : ChangeNotifierProvider.value(value: variable, child: GuestScreen()),
+    );
 
     // String switchIntro = variable.getChallengeyesterday().nbChallengeEnCours;
 
     // print(switchIntro);
-    return FutureBuilder<bool>(
-        future: switIntro(),
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return CircularProgressIndicator();
-          } else {
-            // return (Container(child: Text(snapshot.data.toString())));
-            return Container(
-              child: (switchIntro1 == "false" && snapshot.data == false) ||
-                      (switchIntro1 == "true" && snapshot.data == true)
-                  ? ChangeNotifierProvider.value(
-                      value: variable, child: PurchaseApp())
-                  : ChangeNotifierProvider.value(
-                      value: variable, child: GuestScreen()),
-            );
-          }
-        });
+    // return FutureBuilder<bool>(
+    //     future: switIntro(),
+    //     builder: (context, snapshot) {
+    //       if (!snapshot.hasData) {
+    //         return CircularProgressIndicator();
+    //       } else {
+    //         // return (Container(child: Text(snapshot.data.toString())));
+    //         return Container(
+    //           child: (switchIntro1 == "false" && snapshot.data == false) ||
+    //                   (switchIntro1 == "true" && snapshot.data == true)
+    //               ? ChangeNotifierProvider.value(
+    //                   value: variable, child: PurchaseApp())
+    //               : ChangeNotifierProvider.value(
+    //                   value: variable, child: GuestScreen()),
+    //         );
+    //       }
+    //     });
   }
 }
