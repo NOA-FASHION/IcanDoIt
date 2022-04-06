@@ -296,8 +296,8 @@ class Challengecontroller extends ChangeNotifier {
 
   Future<void> _showNotification() async {
     const AndroidNotificationDetails androidPlatformChannelSpecifics =
-        AndroidNotificationDetails(
-            'your channel id', 'your channel name', 'your channel description',
+        AndroidNotificationDetails('your channel id', 'your channel name',
+            channelDescription: 'your channel description',
             importance: Importance.max,
             priority: Priority.high,
             ticker: 'ticker');
@@ -316,8 +316,9 @@ class Challengecontroller extends ChangeNotifier {
     vibrationPattern[3] = 2000;
 
     final AndroidNotificationDetails androidPlatformChannelSpecifics =
-        AndroidNotificationDetails('other custom channel id',
-            'other custom channel name', 'other custom channel description',
+        AndroidNotificationDetails(
+            'other custom channel id', 'other custom channel name',
+            channelDescription: 'other custom channel description',
             // icon: 'secondary_icon',
             // largeIcon: const DrawableResourceAndroidBitmap('sample_large_icon'),
             vibrationPattern: vibrationPattern,
@@ -350,7 +351,7 @@ class Challengecontroller extends ChangeNotifier {
         AndroidNotificationDetails(
       channelID,
       channelName,
-      channelDesc,
+      channelDescription: channelDesc,
       priority: Priority.high,
       importance: Importance.max,
       ticker: '$channelName',
@@ -464,7 +465,7 @@ class Challengecontroller extends ChangeNotifier {
         AndroidNotificationDetails(
       channelID,
       channelName,
-      channelDesc,
+      channelDescription: channelDesc,
       priority: Priority.high,
       importance: Importance.max,
       ticker: '$channelName',
@@ -500,10 +501,9 @@ class Challengecontroller extends ChangeNotifier {
         channelDesc,
         _nextInstancDayeOfTenAM(days, hours),
         const NotificationDetails(
-          android: AndroidNotificationDetails(
-              'weekly notification channel id',
+          android: AndroidNotificationDetails('weekly notification channel id',
               'weekly notification channel name',
-              'weekly notificationdescription'),
+              channelDescription: 'weekly notificationdescription'),
         ),
         androidAllowWhileIdle: true,
         uiLocalNotificationDateInterpretation:
@@ -526,10 +526,9 @@ class Challengecontroller extends ChangeNotifier {
         channelDesc,
         _nextInstanceOfMondayTenAM(hours, weekdays),
         const NotificationDetails(
-          android: AndroidNotificationDetails(
-              'weekly notification channel id',
+          android: AndroidNotificationDetails('weekly notification channel id',
               'weekly notification channel name',
-              'weekly notificationdescription'),
+              channelDescription: 'weekly notificationdescription'),
         ),
         androidAllowWhileIdle: true,
         uiLocalNotificationDateInterpretation:
@@ -551,10 +550,9 @@ class Challengecontroller extends ChangeNotifier {
         channelDesc,
         _nextInstanceOfTenAM(hours),
         const NotificationDetails(
-          android: AndroidNotificationDetails(
-              'daily notification channel id',
+          android: AndroidNotificationDetails('daily notification channel id',
               'daily notification channel name',
-              'daily notification description'),
+              channelDescription: 'daily notification description'),
         ),
         androidAllowWhileIdle: true,
         uiLocalNotificationDateInterpretation:
@@ -569,10 +567,9 @@ class Challengecontroller extends ChangeNotifier {
         'daily scheduled notification body',
         _nextInstanceOfTenAM2(),
         const NotificationDetails(
-          android: AndroidNotificationDetails(
-              'daily notification channel id',
+          android: AndroidNotificationDetails('daily notification channel id',
               'daily notification channel name',
-              'daily notification description'),
+              channelDescription: 'daily notification description'),
         ),
         androidAllowWhileIdle: true,
         uiLocalNotificationDateInterpretation:
