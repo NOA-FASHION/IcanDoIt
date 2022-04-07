@@ -33,7 +33,7 @@ dependencies:
   shared_preferences: ^2.0.13
   colour: ^1.0.5
   shimmer_animation: ^2.1.0+1
-  percent_indicator: ^4.0.0
+  percent_indicator: ^3.0.1
   provider: ^6.0.2
   flutter_list_drag_and_drop: ^0.1.6
   lottie: ^1.2.1
