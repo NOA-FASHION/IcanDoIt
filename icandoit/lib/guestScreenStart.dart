@@ -59,25 +59,6 @@ class _GuestScreenStart1State extends State<GuestScreenStart1> {
           : ChangeNotifierProvider.value(value: variable, child: GuestScreen()),
     );
 
-    // String switchIntro = variable.getChallengeyesterday().nbChallengeEnCours;
-
-    // print(switchIntro);
-    // return FutureBuilder<bool>(
-    //     future: switIntro(),
-    //     builder: (context, snapshot) {
-    //       if (!snapshot.hasData) {
-    //         return CircularProgressIndicator();
-    //       } else {
-    //         // return (Container(child: Text(snapshot.data.toString())));
-    //         return Container(
-    //           child: (switchIntro1 == "false" && snapshot.data == false) ||
-    //                   (switchIntro1 == "true" && snapshot.data == true)
-    //               ? ChangeNotifierProvider.value(
-    //                   value: variable, child: PurchaseApp())
-    //               : ChangeNotifierProvider.value(
-    //                   value: variable, child: GuestScreen()),
-    //         );
-    //       }
-    //     });
+ 
   }
 }

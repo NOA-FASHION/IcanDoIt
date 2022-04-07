@@ -687,7 +687,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     Challengecontroller variable = Provider.of<Challengecontroller>(context);
-   
+
     return Material(
       child: FancyDrawerWrapper(
         hideOnContentTap: true,
@@ -893,7 +893,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                             // splash color
                             splashColor: Colors.white,
                             onTap: () {
-                              variable.uploadChallenge();
+                              // variable.uploadChallenge();
+                              variable.initialiseConnectionDatabase();
                             }, // button pressed
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
