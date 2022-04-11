@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -83,7 +84,7 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
   }
 
   void buyProduct(ProductDetails prod, Challengecontroller variable,
-      String documentId) async {
+      FirebaseAuth _auth, String documentId) async {
     print("prod :" + prod.toString());
     final PurchaseParam purchaseParam = PurchaseParam(productDetails: prod);
 
@@ -98,7 +99,7 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
       if (purchase.purchaseID != null) {
         print('purchase: ' + purchase.status.name);
         if (purchase.status == PurchaseStatus.purchased) {
-          addDataToFirebse(variable, documentId);
+          addDataToFirebse(variable, documentId, _auth);
           Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => ChangeNotifierProvider.value(
                   value: variable,
@@ -114,7 +115,7 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
   }
 
   void restaurProduct(ProductDetails prod, Challengecontroller variable,
-      String documentId) async {
+      FirebaseAuth _auth, String documentId) async {
     await iap.restorePurchases();
 
     await delay(500);
@@ -124,7 +125,7 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
         // String switchIntro =
         //     variable.getChallengeyesterday().nbChallengeEnCours;
         if (purchase.status == PurchaseStatus.restored) {
-          addDataToFirebse(variable, documentId);
+          addDataToFirebse(variable, documentId, _auth);
           showTopSnackBar(
             context,
             CustomSnackBar.success(
@@ -175,7 +176,8 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
   }
 
   // final databaseReference = FirebaseFirestore.instance;
-  void addDataToFirebse(Challengecontroller variable, String documentId) {
+  void addDataToFirebse(
+      Challengecontroller variable, String documentId, FirebaseAuth _auth) {
     bool boolAchat = false;
     bool boolrestor = false;
     bool activationBoll = false;
@@ -203,18 +205,21 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
         }
 
         activationEasy(
-            documentId: documentId,
-            variable: variable,
-            boolAchat: boolAchat,
-            activationBoll: activationBoll,
-            purchaseId1: purchaseId1,
-            boolrestor: boolrestor);
+                auth: _auth,
+                documentId: documentId,
+                variable: variable,
+                boolAchat: boolAchat,
+                activationBoll: activationBoll,
+                purchaseId1: purchaseId1,
+                boolrestor: boolrestor)
+            .then((value) => _auth.signOut());
       }
     });
   }
 
   Future<void> activationEasy(
       {Challengecontroller variable,
+      FirebaseAuth auth,
       String documentId,
       bool boolAchat,
       bool activationBoll,
@@ -319,6 +324,8 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
 
   @override
   Widget build(BuildContext context) {
+    final _auth = FirebaseAuth.instance;
+    _auth.signInAnonymously();
     Challengecontroller variable = Provider.of<Challengecontroller>(context);
     String documentId = variable.getChallengeyesterday().nbtacheVallide;
     return Scaffold(
@@ -441,10 +448,15 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
                               print("page : $page");
                               if (page == 0) {
                                 restaurProduct(
-                                    data.data[0], variable, documentId);
+                                  data.data[0],
+                                  variable,
+                                  _auth,
+                                  documentId,
+                                );
                                 // addDataToFirebse(variable);
                               } else if (page == 2) {
-                                buyProduct(data.data[0], variable, documentId);
+                                buyProduct(
+                                    data.data[0], variable, _auth, documentId);
                               } else if (page == 1) {
                                 editActivation(variable, documentId);
                               }

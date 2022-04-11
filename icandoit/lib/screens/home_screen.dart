@@ -893,8 +893,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                             // splash color
                             splashColor: Colors.white,
                             onTap: () {
-                              // variable.uploadChallenge();
-                              variable.initialiseConnectionDatabase();
+                              variable.uploadChallenge();
+                              // variable.initialiseConnectionDatabase();
                             }, // button pressed
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,

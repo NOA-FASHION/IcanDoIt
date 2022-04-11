@@ -23,7 +23,7 @@ class _GuestScreenStart1State extends State<GuestScreenStart1> {
 
   bool test1;
   String test = '';
-  modifDtabaseFirebase() async {
+  Future<void> modifDtabaseFirebase() async {
     await delay(1500);
     if (test != null && test.isNotEmpty) {
       DateTime today = new DateTime.now();
@@ -34,8 +34,8 @@ class _GuestScreenStart1State extends State<GuestScreenStart1> {
         //     await databaseReference.collection("activation").doc(test).get();
         // if (a.exists) {
         databaseReference.collection("activation").doc(test).update({
-          "LastConnect": DateFormat('EEEE, d MMM, yyyy').format(today),
-          // "LastConnect": "date test7",
+          // "LastConnect": DateFormat('EEEE, d MMM, yyyy').format(today),
+          "LastConnect": "date test8",
         });
         // }
       } catch (e) {
@@ -47,9 +47,10 @@ class _GuestScreenStart1State extends State<GuestScreenStart1> {
   @override
   Widget build(BuildContext context) {
     Challengecontroller variable = Provider.of<Challengecontroller>(context);
-    variable.demarageSwitchIntro();
+    variable.authAnonyme();
+    // variable.demarageSwitchIntro();
     test = variable.getChallengeyesterday().nbtacheVallide;
-    modifDtabaseFirebase();
+    modifDtabaseFirebase().then((value) => variable.logOut);
     bool activationManuel = variable.getActivationmanuelle();
     String switchIntro1 = variable.getChallengeyesterday().nbchallengeVallide;
     return Container(
@@ -58,7 +59,5 @@ class _GuestScreenStart1State extends State<GuestScreenStart1> {
           ? ChangeNotifierProvider.value(value: variable, child: PurchaseApp())
           : ChangeNotifierProvider.value(value: variable, child: GuestScreen()),
     );
-
- 
   }
 }

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
@@ -16,11 +17,48 @@ class CodeActivation extends StatefulWidget {
 }
 
 class _CodeActivationState extends State<CodeActivation> {
+  Future<void> addFirebase() async {
+    final databaseReference = FirebaseFirestore.instance;
+    if (widget.documentId.isNotEmpty && widget.documentId != null) {
+      try {
+        await databaseReference
+            .collection("activation")
+            .doc(widget.documentId)
+            .update({
+          "Code d'activation": codeActivation,
+          "email": emailActivation,
+        });
+      } catch (e) {
+        print(e.toString());
+      }
+    } else {
+      DateTime today = new DateTime.now();
+
+      try {
+        await databaseReference.collection("activation").add({
+          "email": emailActivation,
+          "activatipnManuelle": false,
+          "Achat": false,
+          "Code d'activation": codeActivation,
+          "activation": false,
+          "IdCommade": "pas d'ID",
+          "Installation": true,
+          "LastConnect": DateFormat('EEEE, d MMM, yyyy').format(today),
+          "Restor": false
+        }).then((value) => widget.variable.documentIdFirebase(value.id));
+      } catch (e) {
+        print(e.toString());
+      }
+    }
+  }
+
   String codeActivation;
   String emailActivation;
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
+    final _auth = FirebaseAuth.instance;
+    _auth.signInAnonymously();
     return Container(
       margin: EdgeInsets.only(top: 100, left: 20, right: 20),
       child: Form(
@@ -228,57 +266,8 @@ class _CodeActivationState extends State<CodeActivation> {
                           onPressed: () async {
                             if (formKey.currentState.validate()) {
                               formKey.currentState.save();
-
-                              // final Email email = Email(
-                              //   body: 'Email body',
-                              //   subject: "Code d'activation",
-                              //   recipients: ["michel.almont@gmail.com"],
-                              //   cc: ['easytodo972@gmail.com'],
-                              //   // bcc: ['bcc@example.com'],
-                              //   isHTML: false,
-                              // );
-                              // await FlutterEmailSender.send(email);
-
-                              final databaseReference =
-                                  FirebaseFirestore.instance;
-                              if (widget.documentId.isNotEmpty &&
-                                  widget.documentId != null) {
-                                try {
-                                  await databaseReference
-                                      .collection("activation")
-                                      .doc(widget.documentId)
-                                      .update({
-                                    "Code d'activation": codeActivation,
-                                    "email": emailActivation,
-                                  });
-                                } catch (e) {
-                                  print(e.toString());
-                                }
-                              } else {
-                                DateTime today = new DateTime.now();
-
-                                try {
-                                  await databaseReference
-                                      .collection("activation")
-                                      .add({
-                                    "email": emailActivation,
-                                    "activatipnManuelle": false,
-                                    "Achat": false,
-                                    "Code d'activation": codeActivation,
-                                    "activation": false,
-                                    "IdCommade": "pas d'ID",
-                                    "Installation": true,
-                                    "LastConnect":
-                                        DateFormat('EEEE, d MMM, yyyy')
-                                            .format(today),
-                                    "Restor": false
-                                  }).then((value) => widget.variable
-                                          .documentIdFirebase(value.id));
-                                } catch (e) {
-                                  print(e.toString());
-                                }
-                                Navigator.pop(context);
-                              }
+                              addFirebase().then((value) => _auth.signOut());
+                              Navigator.pop(context);
                             }
                           },
                           child: const Text(

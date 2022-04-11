@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 // import 'package:nanoid/async.dart';
@@ -56,7 +57,7 @@ class Challengecontroller extends ChangeNotifier {
   SharedPreferences _localDataChallengeDay;
   SharedPreferences _localDataChallengeyesterday;
   SharedPreferences _prefs;
-
+  final _auth = FirebaseAuth.instance;
   ChallengeDays challengeDays = ChallengeDays();
 
   Challengeyesterday challengeyesterday = Challengeyesterday();
@@ -137,6 +138,16 @@ class Challengecontroller extends ChangeNotifier {
   // }
   bool getActivationmanuelle() {
     return introActivationManuelle;
+  }
+
+  Future<void> logOut() {
+    // _auth = FirebaseAuth.instance;
+    _auth.signOut();
+  }
+
+  Future<void> authAnonyme() {
+    // final _auth = FirebaseAuth.instance;
+    _auth.signInAnonymously().then((value) => demarageSwitchIntro());
   }
 
   Future<String> initActivatonboo() async {
@@ -2168,8 +2179,12 @@ class Challengecontroller extends ChangeNotifier {
   //     print(e.toString());
   //   }
   // }
+  Future<void> authAnonyme1() async {
+    final _auth = FirebaseAuth.instance;
+    _auth.signInAnonymously().then((value) => initialiseConnectionDatabase());
+  }
 
-  initialiseConnectionDatabase() async {
+  Future<void> initialiseConnectionDatabase() async {
     final databaseReference = FirebaseFirestore.instance;
     DateTime today = new DateTime.now();
 
