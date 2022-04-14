@@ -126,7 +126,7 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
 
   void activeTrue(ProductDetails prod, Challengecontroller variable,
       FirebaseAuth _auth, String documentId) async {
-    await delay(500);
+    await delay(1000);
     purchases.forEach((purchase) {
       iap.completePurchase(purchase);
       if (purchase.purchaseID != null) {
@@ -149,7 +149,7 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
 
   resutatRestaur(ProductDetails prod, Challengecontroller variable,
       FirebaseAuth _auth, String documentId) async {
-    await delay(500);
+    await delay(1000);
     purchases.forEach((purchase) {
       if (purchase.purchaseID != null) {
         // print('purchase: ' + purchase.productID);
