@@ -25,6 +25,7 @@ class PurchaseApp extends StatefulWidget {
 class _PurchaseAppState extends State<PurchaseApp> {
   @override
   Widget build(BuildContext context) {
+    Challengecontroller variable = Provider.of<Challengecontroller>(context);
     return FutureBuilder(
       future: Firebase.initializeApp(),
       builder: (context, snapshot) {
@@ -32,7 +33,8 @@ class _PurchaseAppState extends State<PurchaseApp> {
           return const ErrorFirebase();
         }
         if (snapshot.connectionState == ConnectionState.done) {
-          return PurchaseAppStart();
+          return ChangeNotifierProvider.value(
+              value: variable, child: PurchaseAppStart());
         }
         return const Loading();
       },
@@ -89,19 +91,46 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
 
   void buyProduct(ProductDetails prod, Challengecontroller variable,
       FirebaseAuth _auth, String documentId) async {
-    print("prod :" + prod.toString());
-    final PurchaseParam purchaseParam = PurchaseParam(productDetails: prod);
-
-    await iap.buyNonConsumable(purchaseParam: purchaseParam);
-    for (var purch in purchases) {
-      iap.completePurchase(purch);
-    }
-    // bool a = boolPurchase as bool;
-    // print("boolPurchase:" + a.toString());
-    await delay(500);
+    // print("prod :" + prod.toString());
     purchases.forEach((purchase) {
       if (purchase.purchaseID != null) {
-        print('purchase: ' + purchase.status.name);
+        if (purchase.status == PurchaseStatus.purchased) {
+          showTopSnackBar(
+            context,
+            CustomSnackBar.success(
+              backgroundColor: Colors.blue,
+              icon: Icon(
+                Icons.restore,
+                size: 30,
+                color: Colors.white,
+              ),
+              message:
+                  "Vous avez déja acheté cet article, procéder à une restauration",
+            ),
+          );
+          return;
+        }
+      }
+    });
+    final PurchaseParam purchaseParam = PurchaseParam(productDetails: prod);
+
+    await iap
+        .buyNonConsumable(purchaseParam: purchaseParam)
+        .then((value) => activeTrue(prod, variable, _auth, documentId));
+    // for (var purch in purchases) {
+    //   iap.completePurchase(purch);
+    // }
+    // bool a = boolPurchase as bool;
+    // print("boolPurchase:" + a.toString());
+  }
+
+  void activeTrue(ProductDetails prod, Challengecontroller variable,
+      FirebaseAuth _auth, String documentId) async {
+    await delay(500);
+    purchases.forEach((purchase) {
+      iap.completePurchase(purchase);
+      if (purchase.purchaseID != null) {
+        // print('purchase: ' + purchase.status.name);
         if (purchase.status == PurchaseStatus.purchased) {
           addDataToFirebse(variable, documentId, _auth);
           Navigator.of(context).push(MaterialPageRoute(
@@ -118,17 +147,16 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
     });
   }
 
-  void restaurProduct(ProductDetails prod, Challengecontroller variable,
+  resutatRestaur(ProductDetails prod, Challengecontroller variable,
       FirebaseAuth _auth, String documentId) async {
-    await iap.restorePurchases();
-
     await delay(500);
     purchases.forEach((purchase) {
       if (purchase.purchaseID != null) {
         // print('purchase: ' + purchase.productID);
         // String switchIntro =
         //     variable.getChallengeyesterday().nbChallengeEnCours;
-        if (purchase.status == PurchaseStatus.restored) {
+        if (purchase.status == PurchaseStatus.restored ||
+            purchase.status == PurchaseStatus.purchased) {
           addDataToFirebse(variable, documentId, _auth);
           showTopSnackBar(
             context,
@@ -168,6 +196,13 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
         }
       }
     });
+  }
+
+  void restaurProduct(ProductDetails prod, Challengecontroller variable,
+      FirebaseAuth _auth, String documentId) async {
+    await iap
+        .restorePurchases()
+        .then((value) => resutatRestaur(prod, variable, _auth, documentId));
   }
 
   void initialize() async {
@@ -445,19 +480,26 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
                           child: VerticalCardPager(
                             align: ALIGN.CENTER,
                             onPageChanged: (page) {
-                              print("page : $page");
+                              // print("page : $page");
                               setState(() {});
                             },
                             onSelectedItem: (page) {
-                              print("page : $page");
+                              // print("page : $page");
                               if (page == 0) {
+                                // activationEasy(
+                                //     activationBoll: true,
+                                //     variable: variable,
+                                //     auth: _auth,
+                                //     documentId: documentId,
+                                //     boolAchat: true,
+                                //     boolrestor: false,
+                                //     purchaseId1: "12334");
                                 restaurProduct(
                                   data.data[0],
                                   variable,
                                   _auth,
                                   documentId,
                                 );
-                                // addDataToFirebse(variable);
                               } else if (page == 2) {
                                 buyProduct(
                                     data.data[0], variable, _auth, documentId);

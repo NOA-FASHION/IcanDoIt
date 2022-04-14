@@ -34,8 +34,8 @@ class _GuestScreenStart1State extends State<GuestScreenStart1> {
         //     await databaseReference.collection("activation").doc(test).get();
         // if (a.exists) {
         databaseReference.collection("activation").doc(test).update({
-          // "LastConnect": DateFormat('EEEE, d MMM, yyyy').format(today),
-          "LastConnect": "date test8",
+          "LastConnect": DateFormat('EEEE, d MMM, yyyy').format(today),
+          // "LastConnect": "date test8",
         });
         // }
       } catch (e) {
