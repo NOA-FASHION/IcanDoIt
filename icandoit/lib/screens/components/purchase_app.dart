@@ -61,6 +61,10 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
     return available;
   }
 
+  String status = '';
+  String erreur = '';
+  String productId = '';
+  String purchaseId = '';
   Future<List<ProductDetails>> loadProductsForSale() async {
     if (await isAppPurchaseAvailable()) {
       const Set<String> _kids = {"in_app_purchase"};
@@ -466,6 +470,25 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
                           ));
                     }),
               ),
+              IconButton(
+                onPressed: () {
+                  purchases.forEach((purchase) {
+                    if (purchase.purchaseID != null) {
+                      setState(() {
+                        status = purchase.status.name;
+                        erreur = purchase.error.toString();
+                        productId = purchase.productID;
+                        purchaseId = purchase.purchaseID;
+                      });
+                    }
+                  });
+                },
+                icon: Icon(Icons.access_alarm),
+              ),
+              Text("Status:" + status),
+              Text("erreur:" + erreur),
+              Text("productId:" + productId),
+              Text("purchaseId:" + purchaseId),
             ]),
           ),
         ),

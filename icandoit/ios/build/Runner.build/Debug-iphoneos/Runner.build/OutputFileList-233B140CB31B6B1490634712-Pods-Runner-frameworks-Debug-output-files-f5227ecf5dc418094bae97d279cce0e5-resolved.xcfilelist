@@ -1,7 +1,9 @@
 /Volumes/USB2/easy/Ican Do It/icandoit/ios/build/Debug-iphoneos/Runner.app/Frameworks/openssl_grpc.framework
+/Volumes/USB2/easy/Ican Do It/icandoit/ios/build/Debug-iphoneos/Runner.app/Frameworks/FirebaseAuth.framework
 /Volumes/USB2/easy/Ican Do It/icandoit/ios/build/Debug-iphoneos/Runner.app/Frameworks/FirebaseCore.framework
 /Volumes/USB2/easy/Ican Do It/icandoit/ios/build/Debug-iphoneos/Runner.app/Frameworks/FirebaseCoreDiagnostics.framework
 /Volumes/USB2/easy/Ican Do It/icandoit/ios/build/Debug-iphoneos/Runner.app/Frameworks/FirebaseFirestore.framework
+/Volumes/USB2/easy/Ican Do It/icandoit/ios/build/Debug-iphoneos/Runner.app/Frameworks/GTMSessionFetcher.framework
 /Volumes/USB2/easy/Ican Do It/icandoit/ios/build/Debug-iphoneos/Runner.app/Frameworks/GoogleDataTransport.framework
 /Volumes/USB2/easy/Ican Do It/icandoit/ios/build/Debug-iphoneos/Runner.app/Frameworks/GoogleUtilities.framework
 /Volumes/USB2/easy/Ican Do It/icandoit/ios/build/Debug-iphoneos/Runner.app/Frameworks/OrderedSet.framework
@@ -11,10 +13,11 @@
 /Volumes/USB2/easy/Ican Do It/icandoit/ios/build/Debug-iphoneos/Runner.app/Frameworks/flutter_document_picker.framework
 /Volumes/USB2/easy/Ican Do It/icandoit/ios/build/Debug-iphoneos/Runner.app/Frameworks/flutter_inappwebview.framework
 /Volumes/USB2/easy/Ican Do It/icandoit/ios/build/Debug-iphoneos/Runner.app/Frameworks/flutter_local_notifications.framework
+/Volumes/USB2/easy/Ican Do It/icandoit/ios/build/Debug-iphoneos/Runner.app/Frameworks/flutter_native_splash.framework
 /Volumes/USB2/easy/Ican Do It/icandoit/ios/build/Debug-iphoneos/Runner.app/Frameworks/flutter_youtube_view.framework
 /Volumes/USB2/easy/Ican Do It/icandoit/ios/build/Debug-iphoneos/Runner.app/Frameworks/grpcpp.framework
 /Volumes/USB2/easy/Ican Do It/icandoit/ios/build/Debug-iphoneos/Runner.app/Frameworks/grpc.framework
-/Volumes/USB2/easy/Ican Do It/icandoit/ios/build/Debug-iphoneos/Runner.app/Frameworks/image_picker.framework
+/Volumes/USB2/easy/Ican Do It/icandoit/ios/build/Debug-iphoneos/Runner.app/Frameworks/image_picker_ios.framework
 /Volumes/USB2/easy/Ican Do It/icandoit/ios/build/Debug-iphoneos/Runner.app/Frameworks/in_app_purchase_storekit.framework
 /Volumes/USB2/easy/Ican Do It/icandoit/ios/build/Debug-iphoneos/Runner.app/Frameworks/leveldb.framework
 /Volumes/USB2/easy/Ican Do It/icandoit/ios/build/Debug-iphoneos/Runner.app/Frameworks/nanopb.framework
