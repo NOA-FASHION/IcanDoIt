@@ -212,7 +212,8 @@ class _CodeActivationState extends State<CodeActivation> {
                         return null;
                       },
                       decoration: InputDecoration(
-                          helperText: "Exemple : 'GPA.0386-2774-2650-645745'",
+                          helperText:
+                              "Exemple : 'GPA.0386-etc' ou '200008773...etc'",
                           focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                   width: 2.0, color: Colors.blueAccent),
