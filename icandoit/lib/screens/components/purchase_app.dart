@@ -140,14 +140,14 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
                     namechallenge: '',
                     returnRaccourci: false,
                   ))));
+          setState(() {
+            _isLoading = false;
+          });
         } else {
           setState(() {
             _isLoading = false;
           });
         }
-        setState(() {
-          _isLoading = false;
-        });
       } else {
         setState(() {
           _isLoading = false;
@@ -160,85 +160,59 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
       FirebaseAuth _auth, String documentId) async {
     await delay(2000);
 
-    addDataToFirebse(variable, documentId, _auth);
-    showTopSnackBar(
-      context,
-      CustomSnackBar.success(
-        backgroundColor: Colors.blue,
-        icon: Icon(
-          Icons.restore,
-          size: 30,
-          color: Colors.white,
-        ),
-        message: 'Achat restauré avec succes',
-      ),
-    );
+    purchases.forEach((purchase) {
+      if (purchase.purchaseID != null) {
+        if (purchase.status == PurchaseStatus.restored ||
+            purchase.status == PurchaseStatus.purchased) {
+          addDataToFirebse(variable, documentId, _auth);
+          showTopSnackBar(
+            context,
+            CustomSnackBar.success(
+              backgroundColor: Colors.blue,
+              icon: Icon(
+                Icons.restore,
+                size: 30,
+                color: Colors.white,
+              ),
+              message: 'Achat restauré avec succes',
+            ),
+          );
 
-    Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => ChangeNotifierProvider.value(
-            value: variable,
-            child: Home(
-              id: "",
-              idChallenge1: '',
-              namechallenge: '',
-              returnRaccourci: false,
-            ))));
-    setState(() {
-      _isLoading = false;
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => ChangeNotifierProvider.value(
+                  value: variable,
+                  child: Home(
+                    id: "",
+                    idChallenge1: '',
+                    namechallenge: '',
+                    returnRaccourci: false,
+                  ))));
+          setState(() {
+            _isLoading = false;
+          });
+        } else {
+          setState(() {
+            _isLoading = false;
+          });
+          showTopSnackBar(
+            context,
+            CustomSnackBar.success(
+              backgroundColor: Colors.blue,
+              icon: Icon(
+                Icons.restore,
+                size: 30,
+                color: Colors.white,
+              ),
+              message: "Vous n'avez pas encore acheté cet article",
+            ),
+          );
+        }
+      } else {
+        setState(() {
+          _isLoading = false;
+        });
+      }
     });
-    // purchases.forEach((purchase) {
-    //   if (purchase.purchaseID != null) {
-    //     if (purchase.status == PurchaseStatus.restored ||
-    //         purchase.status == PurchaseStatus.purchased) {
-    //       addDataToFirebse(variable, documentId, _auth);
-    //       showTopSnackBar(
-    //         context,
-    //         CustomSnackBar.success(
-    //           backgroundColor: Colors.blue,
-    //           icon: Icon(
-    //             Icons.restore,
-    //             size: 30,
-    //             color: Colors.white,
-    //           ),
-    //           message: 'Achat restauré avec succes',
-    //         ),
-    //       );
-
-    //       Navigator.of(context).push(MaterialPageRoute(
-    //           builder: (context) => ChangeNotifierProvider.value(
-    //               value: variable,
-    //               child: Home(
-    //                 id: "",
-    //                 idChallenge1: '',
-    //                 namechallenge: '',
-    //                 returnRaccourci: false,
-    //               ))));
-    //       setState(() {
-    //         _isLoading = false;
-    //       });
-    //     } else {
-    //       setState(() {
-    //         _isLoading = false;
-    //       });
-    //       showTopSnackBar(
-    //         context,
-    //         CustomSnackBar.success(
-    //           backgroundColor: Colors.blue,
-    //           icon: Icon(
-    //             Icons.restore,
-    //             size: 30,
-    //             color: Colors.white,
-    //           ),
-    //           message: "Vous n'avez pas encore acheté cet article",
-    //         ),
-    //       );
-    //     }
-    //   } else {
-    //     setState(() {
-    //       _isLoading = false;
-    //     });
-    //   }
-    // });
   }
 
   void restaurProduct(ProductDetails prod, Challengecontroller variable,
