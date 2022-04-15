@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:icandoit/controllers/challenge_controller.dart';
 import 'package:icandoit/screens/components/code_activation.dart';
-
+import 'package:loading_overlay_pro/loading_overlay_pro.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -117,16 +117,12 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
     await iap
         .buyNonConsumable(purchaseParam: purchaseParam)
         .then((value) => activeTrue(prod, variable, _auth, documentId));
-    // for (var purch in purchases) {
-    //   iap.completePurchase(purch);
-    // }
-    // bool a = boolPurchase as bool;
-    // print("boolPurchase:" + a.toString());
   }
 
   void activeTrue(ProductDetails prod, Challengecontroller variable,
       FirebaseAuth _auth, String documentId) async {
-    await delay(1000);
+    _isLoading = true;
+    await delay(2000);
     purchases.forEach((purchase) {
       iap.completePurchase(purchase);
       if (purchase.purchaseID != null) {
@@ -145,6 +141,7 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
         }
       }
     });
+    _isLoading = false;
   }
 
   resutatRestaur(ProductDetails prod, Challengecontroller variable,
@@ -152,9 +149,6 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
     await delay(1000);
     purchases.forEach((purchase) {
       if (purchase.purchaseID != null) {
-        // print('purchase: ' + purchase.productID);
-        // String switchIntro =
-        //     variable.getChallengeyesterday().nbChallengeEnCours;
         if (purchase.status == PurchaseStatus.restored ||
             purchase.status == PurchaseStatus.purchased) {
           addDataToFirebse(variable, documentId, _auth);
@@ -196,10 +190,12 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
         }
       }
     });
+    _isLoading = false;
   }
 
   void restaurProduct(ProductDetails prod, Challengecontroller variable,
       FirebaseAuth _auth, String documentId) async {
+    _isLoading = true;
     await iap
         .restorePurchases()
         .then((value) => resutatRestaur(prod, variable, _auth, documentId));
@@ -361,6 +357,8 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
     ),
   ];
 
+  bool _isLoading = false;
+
   @override
   Widget build(BuildContext context) {
     final _auth = FirebaseAuth.instance;
@@ -369,169 +367,172 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
     String documentId = variable.getChallengeyesterday().nbtacheVallide;
     return Scaffold(
       backgroundColor: Colors.purple,
-      body: Container(
-        decoration: BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.center,
-                end: Alignment.bottomCenter,
-                colors: [Colors.purple, Colors.blue])),
-        child: SingleChildScrollView(
-          child: Center(
-            child:
-                Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-              Container(
-                child: CustomPaint(
-                  painter: CurvePainter(),
+      body: LoadingOverlayPro(
+        isLoading: _isLoading,
+        child: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.center,
+                  end: Alignment.bottomCenter,
+                  colors: [Colors.purple, Colors.blue])),
+          child: SingleChildScrollView(
+            child: Center(
+              child:
+                  Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+                Container(
+                  child: CustomPaint(
+                    painter: CurvePainter(),
+                    child: Container(
+                      padding: EdgeInsets.all(25),
+                      child: Column(
+                        children: [
+                          HeaderSection(),
+                          // ButtonSection(),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Card(
+                  elevation: 15,
+                  borderOnForeground: true,
                   child: Container(
-                    padding: EdgeInsets.all(25),
-                    child: Column(
-                      children: [
-                        HeaderSection(),
-                        // ButtonSection(),
-                      ],
+                    width: MediaQuery.of(context).size.width / 1.18,
+                    child: Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.production_quantity_limits,
+                                color: Colors.blue,
+                              ),
+                              SizedBox(
+                                width: 6,
+                              ),
+                              Text(
+                                "C'est le moment de continuer l'aventure.  ",
+                                style: GoogleFonts.playfairDisplay(),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 4),
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.settings,
+                                color: Colors.blue,
+                              ),
+                              SizedBox(
+                                width: 6,
+                              ),
+                              Text(
+                                "D'autres fonctionnalités arrivent.",
+                                style: GoogleFonts.playfairDisplay(),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 4),
+                          Row(
+                            children: [
+                              Icon(Icons.lightbulb_rounded, color: Colors.blue),
+                              SizedBox(
+                                width: 6,
+                              ),
+                              Text(
+                                "Vos idées sont aussi les bienvenues.",
+                                style: GoogleFonts.playfairDisplay(),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 4),
+                          Row(
+                            children: [
+                              Icon(Icons.contacts, color: Colors.blue),
+                              SizedBox(
+                                width: 6,
+                              ),
+                              Text(
+                                "Easytodo972@gmail.com.",
+                                style: GoogleFonts.playfairDisplay(),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-              Card(
-                elevation: 15,
-                borderOnForeground: true,
-                child: Container(
-                  width: MediaQuery.of(context).size.width / 1.18,
-                  child: Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Column(
-                      children: [
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.production_quantity_limits,
-                              color: Colors.blue,
-                            ),
-                            SizedBox(
-                              width: 6,
-                            ),
-                            Text(
-                              "C'est le moment de continuer l'aventure.  ",
-                              style: GoogleFonts.playfairDisplay(),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 4),
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.settings,
-                              color: Colors.blue,
-                            ),
-                            SizedBox(
-                              width: 6,
-                            ),
-                            Text(
-                              "D'autres fonctionnalités arrivent.",
-                              style: GoogleFonts.playfairDisplay(),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 4),
-                        Row(
-                          children: [
-                            Icon(Icons.lightbulb_rounded, color: Colors.blue),
-                            SizedBox(
-                              width: 6,
-                            ),
-                            Text(
-                              "Vos idées sont aussi les bienvenues.",
-                              style: GoogleFonts.playfairDisplay(),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 4),
-                        Row(
-                          children: [
-                            Icon(Icons.contacts, color: Colors.blue),
-                            SizedBox(
-                              width: 6,
-                            ),
-                            Text(
-                              "Easytodo972@gmail.com.",
-                              style: GoogleFonts.playfairDisplay(),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              // Lottie.asset('assets/achat.json', width: 100),
-              Container(
-                height: 450,
-                child: FutureBuilder(
-                    future: loadProductsForSale(),
-                    builder:
-                        (context, AsyncSnapshot<List<ProductDetails>> data) {
-                      if (!data.hasData) {
-                        return CircularProgressIndicator();
-                      }
+                // Lottie.asset('assets/achat.json', width: 100),
+                Container(
+                  height: 450,
+                  child: FutureBuilder(
+                      future: loadProductsForSale(),
+                      builder:
+                          (context, AsyncSnapshot<List<ProductDetails>> data) {
+                        if (!data.hasData) {
+                          return CircularProgressIndicator();
+                        }
 
-                      return Container(
-                          padding: EdgeInsets.all(10.0),
-                          child: VerticalCardPager(
-                            align: ALIGN.CENTER,
-                            onPageChanged: (page) {
-                              // print("page : $page");
-                              setState(() {});
-                            },
-                            onSelectedItem: (page) {
-                              // print("page : $page");
-                              if (page == 0) {
-                                // activationEasy(
-                                //     activationBoll: true,
-                                //     variable: variable,
-                                //     auth: _auth,
-                                //     documentId: documentId,
-                                //     boolAchat: true,
-                                //     boolrestor: false,
-                                //     purchaseId1: "12334");
-                                restaurProduct(
-                                  data.data[0],
-                                  variable,
-                                  _auth,
-                                  documentId,
-                                );
-                              } else if (page == 2) {
-                                buyProduct(
-                                    data.data[0], variable, _auth, documentId);
-                              } else if (page == 1) {
-                                editActivation(variable, documentId);
-                              }
-                            },
-                            images: items,
-                            titles: titles,
-                          ));
-                    }),
-              ),
-              IconButton(
-                onPressed: () {
-                  purchases.forEach((purchase) {
-                    if (purchase.purchaseID != null) {
-                      setState(() {
-                        status = purchase.status.name;
-                        erreur = purchase.error.toString();
-                        productId = purchase.productID;
-                        purchaseId = purchase.purchaseID;
-                      });
-                    }
-                  });
-                },
-                icon: Icon(Icons.access_alarm),
-              ),
-              Text("Status:" + status),
-              Text("erreur:" + erreur),
-              Text("productId:" + productId),
-              Text("purchaseId:" + purchaseId),
-            ]),
+                        return Container(
+                            padding: EdgeInsets.all(10.0),
+                            child: VerticalCardPager(
+                              align: ALIGN.CENTER,
+                              onPageChanged: (page) {
+                                // print("page : $page");
+                                setState(() {});
+                              },
+                              onSelectedItem: (page) {
+                                // print("page : $page");
+                                if (page == 0) {
+                                  // activationEasy(
+                                  //     activationBoll: true,
+                                  //     variable: variable,
+                                  //     auth: _auth,
+                                  //     documentId: documentId,
+                                  //     boolAchat: true,
+                                  //     boolrestor: false,
+                                  //     purchaseId1: "12334");
+                                  restaurProduct(
+                                    data.data[0],
+                                    variable,
+                                    _auth,
+                                    documentId,
+                                  );
+                                } else if (page == 2) {
+                                  buyProduct(data.data[0], variable, _auth,
+                                      documentId);
+                                } else if (page == 1) {
+                                  editActivation(variable, documentId);
+                                }
+                              },
+                              images: items,
+                              titles: titles,
+                            ));
+                      }),
+                ),
+                IconButton(
+                  onPressed: () {
+                    purchases.forEach((purchase) {
+                      if (purchase.purchaseID != null) {
+                        setState(() {
+                          status = purchase.status.name;
+                          erreur = purchase.error.toString();
+                          productId = purchase.productID;
+                          purchaseId = purchase.purchaseID;
+                        });
+                      }
+                    });
+                  },
+                  icon: Icon(Icons.access_alarm),
+                ),
+                Text("Status:" + status),
+                Text("erreur:" + erreur),
+                Text("productId:" + productId),
+                Text("purchaseId:" + purchaseId),
+              ]),
+            ),
           ),
         ),
       ),

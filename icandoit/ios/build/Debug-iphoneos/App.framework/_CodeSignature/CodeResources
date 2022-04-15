@@ -10,7 +10,7 @@
 		</data>
 		<key>flutter_assets/AssetManifest.json</key>
 		<data>
-		E91Uidl2wNNrm2oJxtA82fSHSGc=
+		B9lN8o75Xl1r006/vkZlIFPlMS0=
 		</data>
 		<key>flutter_assets/FontManifest.json</key>
 		<data>
@@ -18,7 +18,7 @@
 		</data>
 		<key>flutter_assets/NOTICES.Z</key>
 		<data>
-		/CvBCDYOMHGGUf7p4ByKMymg7pQ=
+		MUat9EyOf8TBSM2sA28PgI9cFtI=
 		</data>
 		<key>flutter_assets/assets/.DS_Store</key>
 		<data>
@@ -31,6 +31,10 @@
 		<key>flutter_assets/assets/2.png</key>
 		<data>
 		lvtMTsJ/o5m58N9sT8gsyRleZok=
+		</data>
+		<key>flutter_assets/assets/3.png</key>
+		<data>
+		r9f8H+XIf2LzF4rZbU5WzJtGDYU=
 		</data>
 		<key>flutter_assets/assets/FaireGateauxAuChocoalat1.gif</key>
 		<data>
@@ -450,7 +454,7 @@
 		</data>
 		<key>flutter_assets/kernel_blob.bin</key>
 		<data>
-		3RdtJqbg+BOtgDgZhrokGv7/q/4=
+		Z8tPD8E44VASPyOpelv0ZelAewI=
 		</data>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
 		<data>
@@ -466,15 +470,15 @@
 		</data>
 		<key>flutter_assets/packages/font_awesome_flutter/lib/fonts/fa-brands-400.ttf</key>
 		<data>
-		9K4M4LFRtO0XT/e548Ht8/ou2QU=
+		6u0UYAaZAG/nCCXCnZ2knXOYbF8=
 		</data>
 		<key>flutter_assets/packages/font_awesome_flutter/lib/fonts/fa-regular-400.ttf</key>
 		<data>
-		TwxaL9PbSu7YG4pf8JX5PQN7/ow=
+		Nv0pIhuroURnNNlJzvht1cjo/8k=
 		</data>
 		<key>flutter_assets/packages/font_awesome_flutter/lib/fonts/fa-solid-900.ttf</key>
 		<data>
-		qCSzIeujm7QkMIhEZjtJuPn4xMA=
+		ZZBP0NxLS0FpDnRGkYi6CqkYiuk=
 		</data>
 		<key>flutter_assets/packages/youtube_player_flutter/assets/speedometer.webp</key>
 		<data>
@@ -491,11 +495,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			E91Uidl2wNNrm2oJxtA82fSHSGc=
+			B9lN8o75Xl1r006/vkZlIFPlMS0=
 			</data>
 			<key>hash2</key>
 			<data>
-			n/rKeo0Wp1exjvCiXKBZb/JSYI0VcVH8gMjEge3fexQ=
+			KHD7sVV1GyCgTmt/un7irIZRmPUIFyIkXerfPMRWjhQ=
 			</data>
 		</dict>
 		<key>flutter_assets/FontManifest.json</key>
@@ -513,11 +517,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			/CvBCDYOMHGGUf7p4ByKMymg7pQ=
+			MUat9EyOf8TBSM2sA28PgI9cFtI=
 			</data>
 			<key>hash2</key>
 			<data>
-			xACn/vO2wBUn2IRh7gDctEZrv+qh8Df9OGMboAMmyYc=
+			ics/saZWlhkhlca8F/sHnwBM5NasVrXBAglOqUyj1E8=
 			</data>
 		</dict>
 		<key>flutter_assets/assets/1.png</key>
@@ -540,6 +544,17 @@
 			<key>hash2</key>
 			<data>
 			dvzj0oBaT5WwgQ/nn/5trFi4lZ+axDNIuj/5BgoEB5U=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/3.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			r9f8H+XIf2LzF4rZbU5WzJtGDYU=
+			</data>
+			<key>hash2</key>
+			<data>
+			EuH8pdCsrBNcg4lC6e+r6KVnt9EYTYF9l4A+vhG46ng=
 			</data>
 		</dict>
 		<key>flutter_assets/assets/FaireGateauxAuChocoalat1.gif</key>
@@ -1690,11 +1705,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			3RdtJqbg+BOtgDgZhrokGv7/q/4=
+			Z8tPD8E44VASPyOpelv0ZelAewI=
 			</data>
 			<key>hash2</key>
 			<data>
-			OGyvpaQyyUKqwrjkP/Z6EPD16LF3Cygab69DwM7Havc=
+			b0c3Zpq61YbGCkP5ZsyXm1wBU9VZ5ZNSJcUxhcbM4/0=
 			</data>
 		</dict>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
@@ -1734,33 +1749,33 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			9K4M4LFRtO0XT/e548Ht8/ou2QU=
+			6u0UYAaZAG/nCCXCnZ2knXOYbF8=
 			</data>
 			<key>hash2</key>
 			<data>
-			5OdoB6IaKslj5wfd/7NiMoNhjAQ0VySya9wj0Nr9/eY=
+			Hk/pANBd4RABEotLzWFTP1veUAH9hYk4FMbzXtmffR0=
 			</data>
 		</dict>
 		<key>flutter_assets/packages/font_awesome_flutter/lib/fonts/fa-regular-400.ttf</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			TwxaL9PbSu7YG4pf8JX5PQN7/ow=
+			Nv0pIhuroURnNNlJzvht1cjo/8k=
 			</data>
 			<key>hash2</key>
 			<data>
-			GmpZWgL5Po3urukCH4vQxdxDoXd8w56sQDVWoOBwCmk=
+			zp4vJEJr1wnjqkl6TMW9pgbE/lE1mTAV0bUje+itGdg=
 			</data>
 		</dict>
 		<key>flutter_assets/packages/font_awesome_flutter/lib/fonts/fa-solid-900.ttf</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			qCSzIeujm7QkMIhEZjtJuPn4xMA=
+			ZZBP0NxLS0FpDnRGkYi6CqkYiuk=
 			</data>
 			<key>hash2</key>
 			<data>
-			+daTPQTFmkKsowvYjuw4u5y+tpsVR/1VDvc+ugvOeho=
+			kBTU+CzwK0WehA3WAbgZLiyXARfdq0hH4bn+D8fa/Fg=
 			</data>
 		</dict>
 		<key>flutter_assets/packages/youtube_player_flutter/assets/speedometer.webp</key>
