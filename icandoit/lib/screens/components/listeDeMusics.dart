@@ -146,7 +146,7 @@ class ListeDeMusics extends StatelessWidget {
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge: Text(
-                "Automatiquement une icône youtube apparaît en haut a gauche de votre écran vous donnant la possibilité d'écouter votre liste de musique l'une à la suite de l'autre. "),
+                "Automatiquement une icône youtube apparaît en haut à gauche de votre écran vous donnant la possibilité d'écouter votre liste de musique l'une à la suite de l'autre. "),
             actionChallenge2: 'Documentations  possibles',
             pictureChallenge: 'assets/lister.gif'),
         SizedBox(height: 30),
@@ -205,7 +205,7 @@ class ListeDeMusics extends StatelessWidget {
             actionChallenge: Column(
               children: [
                 Text(
-                    " Vous pouvez uoploader une liste qu'un de vos amis vous a envoyé."),
+                    " Vous pouvez uploader une liste qu'un de vos amis vous a envoyé."),
                 SizedBox(
                   height: 20,
                 )

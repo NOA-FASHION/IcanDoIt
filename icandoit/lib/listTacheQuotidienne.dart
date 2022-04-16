@@ -154,7 +154,7 @@ class ListeTacheQuotidienne extends StatelessWidget {
             lienInternet:
                 "https://newaccount1626188315630.freshdesk.com/support/solutions/articles/69000513812-documentation-possible",
             etape: 'Option',
-            typeChallenge1: 'Types de documenations',
+            typeChallenge1: 'Types de documentation',
             typeChallenge: "qu'il est possible de créer ",
             lottiesChallenge: "assets/digital.json",
             assetPictureChallengeeCreer: 'assets/docs.png',

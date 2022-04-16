@@ -100,7 +100,7 @@ class Formations extends StatelessWidget {
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge: Text(
-                "Rentrer les différentes formations que vous étudiez en créant pour chaque matière un évènement de type formations."),
+                "Rentrer les différentes formations que vous étudiez en créant pour chaque matière un évènement de type formation."),
             actionChallenge2: 'Eléments et documentations ',
             pictureChallenge: 'assets/challengeQuotidien.png'),
         SizedBox(height: 30),
@@ -153,7 +153,7 @@ class Formations extends StatelessWidget {
             actionChallenge: Column(
               children: [
                 Text(
-                    "Vous pouvez aussi a tout moment modifier la progression de votre parcours de formation en sélectionnant l'icône en forme de crayon. "),
+                    "Vous pouvez aussi à tout moment modifier la progression de votre parcours de formation en sélectionnant l'icône en forme de crayon. "),
                 Text(
                     "Cela vous permettra de reprendre votre formation exactement à l'endroit ou vous vous êtes arrêté la dernière fois. ")
               ],
@@ -174,7 +174,7 @@ class Formations extends StatelessWidget {
             descriptionChallenge: 'Liste des challenges',
             prioriteChallenge: 'Quotidien',
             actionChallenge: Text(
-                "la totalité des évènements seront restaurés à leurs états initials à chaque journée de la semaine que vous avez choisi lors de la création de votre mission hebdomadaire."),
+                "La totalité des évènements seront restaurés à leurs états initials à chaque journée de la semaine que vous avez choisi lors de la création de votre mission hebdomadaire."),
             actionChallenge2: 'Sauvegarde et restauration',
             pictureChallenge: 'assets/formation1.gif'),
         SizedBox(height: 70),

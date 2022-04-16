@@ -3,7 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:icandoit/filp_main.dart';
 import 'package:lottie/lottie.dart';
 
-
 class ListeDeCourses extends StatelessWidget {
   const ListeDeCourses({Key key}) : super(key: key);
 
@@ -101,7 +100,7 @@ class ListeDeCourses extends StatelessWidget {
             actionChallenge: Column(
               children: [
                 Text(
-                    "Créer un élément de type 'achat' pour chaque article que se trouve dans votre caddie."),
+                    "Créer un élément de type 'achat' pour chaque article qui se trouve dans votre caddie."),
                 SizedBox(
                   height: 20,
                 )

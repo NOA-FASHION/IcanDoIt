@@ -127,7 +127,7 @@ class RestaurantList extends StatelessWidget {
             actionChallenge: Column(
               children: [
                 Text(
-                    "Pour chaque catégorie créer un mission normale avec le nom du restaurant  "),
+                    "Pour chaque catégorie créer une mission normale avec le nom du restaurant."),
                 SizedBox(
                   height: 20,
                 )
@@ -151,7 +151,7 @@ class RestaurantList extends StatelessWidget {
             actionChallenge: Column(
               children: [
                 Text(
-                    "Rentrer et associer y les documents et les informations importantes telles que :"),
+                    "Rentrez et associez y les documents et les informations importantes telles que :"),
                 Row(
                   children: [
                     Text('\u2022'),
@@ -163,28 +163,28 @@ class RestaurantList extends StatelessWidget {
                   children: [
                     Text('\u2022'),
                     SizedBox(width: 5),
-                    Expanded(child: Text('Les photos du menu.')),
+                    Expanded(child: Text('Les photos du menu')),
                   ],
                 ),
                 Row(
                   children: [
                     Text('\u2022'),
                     SizedBox(width: 5),
-                    Expanded(child: Text('Des videos du lieu.')),
+                    Expanded(child: Text('Des videos du lieu')),
                   ],
                 ),
                 Row(
                   children: [
                     Text('\u2022'),
                     SizedBox(width: 5),
-                    Expanded(child: Text('Des liens internet avec des avis.')),
+                    Expanded(child: Text('Des liens internet avec des avis')),
                   ],
                 ),
                 Row(
                   children: [
                     Text('\u2022'),
                     SizedBox(width: 5),
-                    Expanded(child: Text("Des video youtube de l'ambiance.")),
+                    Expanded(child: Text("Des video youtube de l'ambiance")),
                   ],
                 ),
               ],
@@ -195,7 +195,7 @@ class RestaurantList extends StatelessWidget {
         FlipLayoutDemo(
             lienInternet:
                 "https://newaccount1626188315630.freshdesk.com/a/solutions/articles/69000805276",
-            etape: 'Etape 3',
+            etape: 'Etape 5',
             typeChallenge1: 'Exemple de structure pour',
             typeChallenge: 'Une liste de restaurant',
             lottiesChallenge: "assets/missionNormal.json",
@@ -207,7 +207,7 @@ class RestaurantList extends StatelessWidget {
             actionChallenge: Column(
               children: [
                 Text(
-                    "Exemplde de structure complexe pour une liste de restaurant."),
+                    "Exemple de structure complexe pour une liste de restaurant."),
                 SizedBox(
                   height: 20,
                 )
