@@ -75,6 +75,7 @@ dependencies:
   firebase_core: ^1.13.1
   firebase_auth: ^3.3.12
   loading_overlay_pro: any
+  
   # flutter_email_sender: ^5.1.0
 
 

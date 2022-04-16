@@ -1,3 +1,4 @@
+import 'package:avatar_glow/avatar_glow.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -114,9 +115,10 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
     });
     final PurchaseParam purchaseParam = PurchaseParam(productDetails: prod);
 
-    await iap
-        .buyNonConsumable(purchaseParam: purchaseParam)
-        .then((value) => activeTrue(prod, variable, _auth, documentId));
+    await iap.buyNonConsumable(purchaseParam: purchaseParam);
+    purchases.forEach((purchase) {
+      iap.completePurchase(purchase);
+    });
   }
 
   void activeTrue(ProductDetails prod, Challengecontroller variable,
@@ -126,9 +128,7 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
     });
     await delay(2000);
     purchases.forEach((purchase) {
-      iap.completePurchase(purchase);
       if (purchase.purchaseID != null) {
-        // print('purchase: ' + purchase.status.name);
         if (purchase.status == PurchaseStatus.purchased) {
           addDataToFirebse(variable, documentId, _auth);
           Navigator.of(context).push(MaterialPageRoute(
@@ -153,6 +153,9 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
           _isLoading = false;
         });
       }
+    });
+    setState(() {
+      _isLoading = false;
     });
   }
 
@@ -228,7 +231,15 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
   void initialize() async {
     iap.purchaseStream.listen((newPurchaes) {
       newPurchaes.forEach((purchase) {
-        print('new purchases : ' + purchase.productID.toString());
+        iap.completePurchase(purchase);
+        if (purchase.purchaseID != null) {
+          if (purchase.status == PurchaseStatus.purchased) {
+            setState(() {
+              visibleButt = true;
+              // print("visibulbut:" + visibleButt.toString());
+            });
+          }
+        }
       });
       purchases.addAll(newPurchaes);
     });
@@ -334,7 +345,7 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
   }
 
   bool index = true;
-
+  bool visibleButt = false;
   final List<String> titles = [
     "",
     "",
@@ -488,9 +499,10 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
                     ),
                   ),
                 ),
+
                 // Lottie.asset('assets/achat.json', width: 100),
                 Container(
-                  height: 450,
+                  height: 700,
                   child: FutureBuilder(
                       future: loadProductsForSale(),
                       builder:
@@ -499,62 +511,104 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
                           return CircularProgressIndicator();
                         }
 
-                        return Container(
-                            padding: EdgeInsets.all(10.0),
-                            child: VerticalCardPager(
-                              align: ALIGN.CENTER,
-                              onPageChanged: (page) {
-                                // print("page : $page");
-                                setState(() {});
-                              },
-                              onSelectedItem: (page) {
-                                // print("page : $page");
-                                if (page == 0) {
-                                  // activationEasy(
-                                  //     activationBoll: true,
-                                  //     variable: variable,
-                                  //     auth: _auth,
-                                  //     documentId: documentId,
-                                  //     boolAchat: true,
-                                  //     boolrestor: false,
-                                  //     purchaseId1: "12334");
-                                  restaurProduct(
-                                    data.data[0],
-                                    variable,
-                                    _auth,
-                                    documentId,
-                                  );
-                                } else if (page == 2) {
-                                  buyProduct(data.data[0], variable, _auth,
-                                      documentId);
-                                } else if (page == 1) {
-                                  editActivation(variable, documentId);
-                                }
-                              },
-                              images: items,
-                              titles: titles,
-                            ));
+                        return Column(
+                          children: [
+                            Visibility(
+                              visible: visibleButt,
+                              child: AvatarGlow(
+                                startDelay: Duration(milliseconds: 1000),
+                                glowColor: Colors.white,
+                                endRadius: 120.0,
+                                duration: Duration(milliseconds: 2000),
+                                repeat: true,
+                                showTwoGlows: true,
+                                repeatPauseDuration:
+                                    Duration(milliseconds: 100),
+                                child: MaterialButton(
+                                  onPressed: () {
+                                    activeTrue(data.data[0], variable, _auth,
+                                        documentId);
+                                  },
+                                  elevation: 20.0,
+                                  shape: CircleBorder(),
+                                  child: Container(
+                                    width: 100.0,
+                                    height: 100.0,
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius:
+                                            BorderRadius.circular(160.0)),
+                                    child: Text(
+                                      "GO",
+                                      style: TextStyle(
+                                          fontSize: 25.0,
+                                          fontWeight: FontWeight.w800,
+                                          color: Color(0xFF7557D6)),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Container(
+                                height: 450,
+                                padding: EdgeInsets.all(10.0),
+                                child: VerticalCardPager(
+                                  align: ALIGN.CENTER,
+                                  onPageChanged: (page) {
+                                    // print("page : $page");
+                                    setState(() {});
+                                  },
+                                  onSelectedItem: (page) {
+                                    // print("page : $page");
+                                    if (page == 0) {
+                                      // activationEasy(
+                                      //     activationBoll: true,
+                                      //     variable: variable,
+                                      //     auth: _auth,
+                                      //     documentId: documentId,
+                                      //     boolAchat: true,
+                                      //     boolrestor: false,
+                                      //     purchaseId1: "12334");
+                                      restaurProduct(
+                                        data.data[0],
+                                        variable,
+                                        _auth,
+                                        documentId,
+                                      );
+                                    } else if (page == 2) {
+                                      buyProduct(data.data[0], variable, _auth,
+                                          documentId);
+                                    } else if (page == 1) {
+                                      editActivation(variable, documentId);
+                                    }
+                                  },
+                                  images: items,
+                                  titles: titles,
+                                )),
+                          ],
+                        );
                       }),
                 ),
-                // IconButton(
-                //   onPressed: () {
-                //     purchases.forEach((purchase) {
-                //       if (purchase.purchaseID != null) {
-                //         setState(() {
-                //           status = purchase.status.name;
-                //           erreur = purchase.error.toString();
-                //           productId = purchase.productID;
-                //           purchaseId = purchase.purchaseID;
-                //         });
-                //       }
-                //     });
-                //   },
-                //   icon: Icon(Icons.access_alarm),
-                // ),
-                // Text("Status:" + status),
-                // Text("erreur:" + erreur),
-                // Text("productId:" + productId),
-                // Text("purchaseId:" + purchaseId),
+                IconButton(
+                  onPressed: () {
+                    purchases.forEach((purchase) {
+                      if (purchase.purchaseID != null) {
+                        setState(() {
+                          status = purchase.status.name;
+                          erreur = purchase.error.toString();
+                          productId = purchase.productID;
+                          purchaseId = purchase.purchaseID;
+                        });
+                      }
+                    });
+                  },
+                  icon: Icon(Icons.access_alarm),
+                ),
+                Text("Status:" + status),
+                Text("erreur:" + erreur),
+                Text("productId:" + productId),
+                Text("purchaseId:" + purchaseId),
               ]),
             ),
           ),

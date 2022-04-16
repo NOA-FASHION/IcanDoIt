@@ -124,29 +124,15 @@ class Challengecontroller extends ChangeNotifier {
     _initChallengeList();
   }
 
-  // Future<bool> switIntro1() async {
-  //   bool repeat;
-  //   final prefs = await SharedPreferences.getInstance();
-
-  //   if (prefs.getBool('repeat') != null) {
-  //     repeat = prefs.getBool('repeat');
-  //   } else {
-  //     repeat = false;
-  //   }
-  //   print("intro: " + repeat.toString());
-  //   return repeat;
-  // }
   bool getActivationmanuelle() {
     return introActivationManuelle;
   }
 
   Future<void> logOut() {
-    // _auth = FirebaseAuth.instance;
     _auth.signOut();
   }
 
   Future<void> authAnonyme() {
-    // final _auth = FirebaseAuth.instance;
     _auth.signInAnonymously().then((value) => demarageSwitchIntro());
   }
 
