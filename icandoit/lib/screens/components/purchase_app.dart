@@ -211,10 +211,25 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
           );
         }
       } else {
+        showTopSnackBar(
+          context,
+          CustomSnackBar.success(
+            backgroundColor: Colors.blue,
+            icon: Icon(
+              Icons.restore,
+              size: 30,
+              color: Colors.white,
+            ),
+            message: "Vous n'avez pas encore acheté cet article",
+          ),
+        );
         setState(() {
           _isLoading = false;
         });
       }
+    });
+    setState(() {
+      _isLoading = false;
     });
   }
 
