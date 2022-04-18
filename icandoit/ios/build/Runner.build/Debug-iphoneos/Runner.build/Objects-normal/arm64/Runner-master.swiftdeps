@@ -1,6 +1,6 @@
-version: "Apple Swift version 5.5.1 (swiftlang-1300.0.31.4 clang-1300.0.29.6)"
+version: "Apple Swift version 5.6 (swiftlang-5.6.0.323.62 clang-1316.0.20.8)"
 options: "83454cb8b97613ead8ebfaf18938885e4377dbf910f19e39ffe70772b7bca0aa"
-build_start_time: [1649975788, 516634941]
-build_end_time: [1649975804, 101631164]
+build_start_time: [1650300416, 108304977]
+build_end_time: [1650300438, 186038017]
 inputs:
   "/Volumes/USB2/easy/Ican Do It/icandoit/ios/Runner/AppDelegate.swift": [1621534123, 0]
