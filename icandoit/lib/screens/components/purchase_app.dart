@@ -114,8 +114,14 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
       }
     });
     final PurchaseParam purchaseParam = PurchaseParam(productDetails: prod);
-
-    await iap.buyNonConsumable(purchaseParam: purchaseParam);
+    setState(() {
+      _isLoading = true;
+    });
+    await iap
+        .buyNonConsumable(purchaseParam: purchaseParam)
+        .then((value) => setState(() {
+              _isLoading = false;
+            }));
     purchases.forEach((purchase) {
       iap.completePurchase(purchase);
     });
