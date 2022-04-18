@@ -366,7 +366,6 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
   final List<String> titles = [
     "",
     "",
-    "",
   ];
 
   bool _isDialogShowing = false;
@@ -393,13 +392,13 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
         fit: BoxFit.cover,
       ),
     ),
-    ClipRRect(
-      borderRadius: BorderRadius.circular(20.0),
-      child: Image.asset(
-        'assets/3.png',
-        fit: BoxFit.cover,
-      ),
-    ),
+    // ClipRRect(
+    //   borderRadius: BorderRadius.circular(20.0),
+    //   child: Image.asset(
+    //     'assets/3.png',
+    //     fit: BoxFit.cover,
+    //   ),
+    // ),
     ClipRRect(
       borderRadius: BorderRadius.circular(20.0),
       child: Image.asset(
@@ -593,12 +592,13 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
                                         _auth,
                                         documentId,
                                       );
-                                    } else if (page == 2) {
+                                    } else if (page == 1) {
                                       buyProduct(data.data[0], variable, _auth,
                                           documentId);
-                                    } else if (page == 1) {
-                                      editActivation(variable, documentId);
                                     }
+                                    // else if (page == 1) {
+                                    //   editActivation(variable, documentId);
+                                    // }
                                   },
                                   images: items,
                                   titles: titles,
