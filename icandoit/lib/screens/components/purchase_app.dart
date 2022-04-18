@@ -93,35 +93,31 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
   void buyProduct(ProductDetails prod, Challengecontroller variable,
       FirebaseAuth _auth, String documentId) async {
     // print("prod :" + prod.toString());
-    purchases.forEach((purchase) {
-      if (purchase.purchaseID != null) {
-        if (purchase.status == PurchaseStatus.purchased) {
-          showTopSnackBar(
-            context,
-            CustomSnackBar.success(
-              backgroundColor: Colors.blue,
-              icon: Icon(
-                Icons.restore,
-                size: 30,
-                color: Colors.white,
-              ),
-              message:
-                  "Vous avez déja acheté cet article, procéder à une restauration",
-            ),
-          );
-          return;
-        }
-      }
-    });
+    // purchases.forEach((purchase) {
+    //   if (purchase.purchaseID != null) {
+    //     if (purchase.status == PurchaseStatus.purchased) {
+    //       showTopSnackBar(
+    //         context,
+    //         CustomSnackBar.success(
+    //           backgroundColor: Colors.blue,
+    //           icon: Icon(
+    //             Icons.restore,
+    //             size: 30,
+    //             color: Colors.white,
+    //           ),
+    //           message:
+    //               "Vous avez déja acheté cet article, procéder à une restauration",
+    //         ),
+    //       );
+    //       return;
+    //     }
+    //   }
+    // });
     final PurchaseParam purchaseParam = PurchaseParam(productDetails: prod);
-    setState(() {
-      _isLoading = true;
-    });
-    await iap
-        .buyNonConsumable(purchaseParam: purchaseParam)
-        .then((value) => setState(() {
-              _isLoading = false;
-            }));
+    // setState(() {
+    //   _isLoading = true;
+    // });
+    await iap.buyNonConsumable(purchaseParam: purchaseParam);
     purchases.forEach((purchase) {
       iap.completePurchase(purchase);
     });
@@ -611,25 +607,25 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
                         );
                       }),
                 ),
-                IconButton(
-                  onPressed: () {
-                    purchases.forEach((purchase) {
-                      if (purchase.purchaseID != null) {
-                        setState(() {
-                          status = purchase.status.name;
-                          erreur = purchase.error.toString();
-                          productId = purchase.productID;
-                          purchaseId = purchase.purchaseID;
-                        });
-                      }
-                    });
-                  },
-                  icon: Icon(Icons.access_alarm),
-                ),
-                Text("Status:" + status),
-                Text("erreur:" + erreur),
-                Text("productId:" + productId),
-                Text("purchaseId:" + purchaseId),
+                // IconButton(
+                //   onPressed: () {
+                //     purchases.forEach((purchase) {
+                //       if (purchase.purchaseID != null) {
+                //         setState(() {
+                //           status = purchase.status.name;
+                //           erreur = purchase.error.toString();
+                //           productId = purchase.productID;
+                //           purchaseId = purchase.purchaseID;
+                //         });
+                //       }
+                //     });
+                //   },
+                //   icon: Icon(Icons.access_alarm),
+                // ),
+                // Text("Status:" + status),
+                // Text("erreur:" + erreur),
+                // Text("productId:" + productId),
+                // Text("purchaseId:" + purchaseId),
               ]),
             ),
           ),
