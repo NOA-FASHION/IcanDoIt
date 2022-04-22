@@ -157,7 +157,7 @@ class _ChallengesListBuilderTachesState
         width: MediaQuery.of(context).size.width / 2.55,
         color: Colors.transparent,
         child: MarqueeText(
-           text: TextSpan(text:word ),
+          text: TextSpan(text: word),
           style: TextStyle(
             color: Colors.black,
           ),
@@ -170,7 +170,7 @@ class _ChallengesListBuilderTachesState
         width: MediaQuery.of(context).size.width / 2.55,
         color: Colors.transparent,
         child: MarqueeText(
-          text: TextSpan(text:word ),
+          text: TextSpan(text: word),
           style: TextStyle(
             color: Colors.black,
           ),
@@ -453,7 +453,7 @@ class _ChallengesListBuilderTachesState
                           "Confirmation",
                           style: TextStyle(color: Colors.blue),
                         ),
-                        content: Text("Voulez vous suprimmez la mission"),
+                        content: Text("Voulez vous supprimer la mission"),
                         actions: [
                           RaisedButton(
                             onPressed: () {
@@ -465,7 +465,7 @@ class _ChallengesListBuilderTachesState
                             onPressed: () {
                               Navigator.pop(context, false);
                             },
-                            child: Text("Nom"),
+                            child: Text("Non"),
                           )
                         ],
                       );
