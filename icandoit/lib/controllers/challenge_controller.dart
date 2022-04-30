@@ -842,13 +842,30 @@ class Challengecontroller extends ChangeNotifier {
     DateTime today = new DateTime.now();
     DateTime lastDay =
         DateFormat('EEEE, d MMM, yyyy').parseStrict(challengeyesterday.date);
-    if ((today.day >= (lastDay.day + 7)) || (today.month > lastDay.month)) {
-      if (challengeyesterday.nbChallengeEnCours == "true") {
-        print('start init yestederday');
-        challengeyesterday.nbChallengeEnCours = "false";
-        challengeyesterday.nbchallengeVallide = "false";
-        await _saveChallenyesterday();
-        _initChallengeListStartChallenge();
+
+    if (lastDay.day <= (24)) {
+      if ((today.day >= (lastDay.day + 7)) ||
+          (today.month > lastDay.month + 1)) {
+        if (challengeyesterday.nbChallengeEnCours == "true") {
+          print('start init yestederday');
+          challengeyesterday.nbChallengeEnCours = "false";
+          challengeyesterday.nbchallengeVallide = "false";
+          await _saveChallenyesterday();
+          _initChallengeListStartChallenge();
+        }
+      } else {
+        if (today.day <= 24) {
+          if (((30 - lastDay.day)  + today.day >= 7) ||
+              (today.month > lastDay.month + 1)) {
+            if (challengeyesterday.nbChallengeEnCours == "true") {
+              print('start init yestederday');
+              challengeyesterday.nbChallengeEnCours = "false";
+              challengeyesterday.nbchallengeVallide = "false";
+              await _saveChallenyesterday();
+              _initChallengeListStartChallenge();
+            }
+          }
+        }
       }
     }
   }
