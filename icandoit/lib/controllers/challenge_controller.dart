@@ -823,7 +823,7 @@ class Challengecontroller extends ChangeNotifier {
   void startChallenyesterday() async {
     DateTime today = new DateTime.now();
     if (challengeyesterday.nbTacheEnCours != "false") {
-      print('start challenge yestederday');
+      // print('start challenge yestederday');
       challengeyesterday.date = DateFormat('EEEE, d MMM, yyyy').format(today);
       challengeyesterday.nbChallengeEnCours = "true";
       challengeyesterday.nbTacheEnCours = "false";
@@ -844,8 +844,7 @@ class Challengecontroller extends ChangeNotifier {
         DateFormat('EEEE, d MMM, yyyy').parseStrict(challengeyesterday.date);
 
     if (lastDay.day <= (24)) {
-      if ((today.day >= (lastDay.day + 7)) ||
-          (today.month > lastDay.month + 1)) {
+      if ((today.day >= (lastDay.day + 7)) || (today.month > lastDay.month)) {
         if (challengeyesterday.nbChallengeEnCours == "true") {
           print('start init yestederday');
           challengeyesterday.nbChallengeEnCours = "false";
@@ -855,7 +854,7 @@ class Challengecontroller extends ChangeNotifier {
         }
       } else {
         if (today.day <= 24) {
-          if (((30 - lastDay.day)  + today.day >= 7) ||
+          if (((30 - lastDay.day) + today.day >= 7) ||
               (today.month > lastDay.month + 1)) {
             if (challengeyesterday.nbChallengeEnCours == "true") {
               print('start init yestederday');
