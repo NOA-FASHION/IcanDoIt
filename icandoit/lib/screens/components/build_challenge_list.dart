@@ -189,12 +189,15 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                         lineWidth: 5.0,
                         percent: percentage(chalenge.listeDeTache.length,
                             int.parse(chalenge.totalChallenge)),
-                        center: new Text((percentage(
-                                        chalenge.listeDeTache.length,
-                                        int.parse(chalenge.totalChallenge)) *
-                                    100)
-                                .toStringAsFixed(0) +
-                            "%"),
+                        center: new Text(
+                            (percentage(
+                                            chalenge.listeDeTache.length,
+                                            int.parse(
+                                                chalenge.totalChallenge)) *
+                                        100)
+                                    .toStringAsFixed(0) +
+                                "%",
+                            style: TextStyle(color: Colors.blue)),
                         progressColor: Colors.green,
                       ),
                     ),
@@ -379,13 +382,15 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                               lineWidth: 5.0,
                               percent: percentage(chalenge.listeDeTache.length,
                                   int.parse(chalenge.totalChallenge)),
-                              center: new Text((percentage(
-                                              chalenge.listeDeTache.length,
-                                              int.parse(
-                                                  chalenge.totalChallenge)) *
-                                          100)
-                                      .toStringAsFixed(0) +
-                                  "%"),
+                              center: new Text(
+                                  (percentage(
+                                                  chalenge.listeDeTache.length,
+                                                  int.parse(chalenge
+                                                      .totalChallenge)) *
+                                              100)
+                                          .toStringAsFixed(0) +
+                                      "%",
+                                  style: TextStyle(color: Colors.blue)),
                               progressColor: Colors.green,
                             ),
                           ),
