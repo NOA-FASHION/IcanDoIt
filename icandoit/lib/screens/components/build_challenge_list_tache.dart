@@ -25,6 +25,7 @@ import '../playCommentaire.dart';
 import 'package:marquee_text/marquee_text.dart';
 
 class ChallengesListBuilderTaches extends StatefulWidget {
+  final String nuanceColors;
   final String id;
   final String nameChallenge;
   final int indexChallenge;
@@ -32,7 +33,8 @@ class ChallengesListBuilderTaches extends StatefulWidget {
   ChallengesListBuilderTaches(
       {@required this.id,
       @required this.indexChallenge,
-      @required this.nameChallenge});
+      @required this.nameChallenge,
+      @required this.nuanceColors});
   @override
   _ChallengesListBuilderTachesState createState() =>
       _ChallengesListBuilderTachesState();
@@ -512,6 +514,9 @@ class _ChallengesListBuilderTachesState
                 color: Colors.transparent,
               ),
               child: Card(
+                color: widget.nuanceColors.isNotEmpty
+                    ? Colors.grey[600]
+                    : Colors.grey[200],
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20.0),
                 ),

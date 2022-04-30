@@ -1,3 +1,5 @@
+import 'package:elliptic_text/elliptic_text.dart';
+import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:icandoit/models/challenge_model.dart';
 // import 'package:intl/intl.dart';
@@ -26,10 +28,13 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
   double percentage(int listeTache, int totalChallenge) {
     double percent1;
     if (listeTache != 0 && listeTache == totalChallenge) {
-      percent1 = 0.00;
+      percent1 = (totalChallenge - listeTache) / totalChallenge;
       return percent1;
     } else if (listeTache != 0 && listeTache != totalChallenge) {
       percent1 = (1 - (listeTache / totalChallenge));
+      return percent1;
+    } else if (listeTache == 0 && listeTache != totalChallenge) {
+      percent1 = ((totalChallenge - listeTache) / totalChallenge);
       return percent1;
     } else {
       percent1 = 0.00;
@@ -173,23 +178,85 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                     ),
                   ],
                 ),
-                Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(60.0),
+                FlipCard(
+                  front: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(60.0),
+                    ),
+                    elevation: 15.0,
+                    child: Container(
+                      child: new CircularPercentIndicator(
+                        radius: 60.0,
+                        lineWidth: 5.0,
+                        percent: percentage(chalenge.listeDeTache.length,
+                            int.parse(chalenge.totalChallenge)),
+                        center: new Text((percentage(
+                                        chalenge.listeDeTache.length,
+                                        int.parse(chalenge.totalChallenge)) *
+                                    100)
+                                .toStringAsFixed(0) +
+                            "%"),
+                        progressColor: Colors.green,
+                      ),
+                    ),
                   ),
-                  elevation: 15.0,
-                  child: Container(
-                    child: new CircularPercentIndicator(
-                      radius: 60.0,
-                      lineWidth: 5.0,
-                      percent: percentage(chalenge.listeDeTache.length,
-                          int.parse(chalenge.totalChallenge)),
-                      center: new Text((percentage(chalenge.listeDeTache.length,
-                                      int.parse(chalenge.totalChallenge)) *
-                                  100)
-                              .toStringAsFixed(0) +
-                          "%"),
-                      progressColor: Colors.green,
+                  back: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(60.0),
+                    ),
+                    elevation: 15.0,
+                    child: Container(
+                      height: 60,
+                      width: 60,
+                      alignment: Alignment.center,
+                      child: Stack(
+                        children: [
+                          Center(
+                            child: Text(
+                              (int.parse(chalenge.totalChallenge) -
+                                          chalenge.listeDeTache.length)
+                                      .toString() +
+                                  "/" +
+                                  chalenge.totalChallenge,
+                              style:
+                                  TextStyle(fontSize: 12.0, color: Colors.blue),
+                            ),
+                          ),
+                          EllipticText(
+                            text: "Tâches validées",
+                            style:
+                                TextStyle(fontSize: 12.0, color: Colors.blue),
+                            // Draw text at the bottom of the ellipse.
+                            perimiterAlignment:
+                                EllipticText_PerimiterAlignment.top,
+                            offset: 0.0,
+                            // Stretch text to half the circumference.
+                            fitFactor: 1 / 2,
+                            fitType: EllipticText_FitType.scaleFit,
+                          ),
+                          // _animate(
+                          //   (__value) => Center(
+                          //     // Wrap the EllipticText widget in a SizedBox to set its size.
+                          //     child: SizedBox(
+                          //       height: 60.0,
+                          //       width: 60.0,
+                          //       child: EllipticText(
+                          //         text: "test",
+                          //         style: TextStyle(
+                          //             fontSize: 10.0, color: Colors.blue),
+                          //         // Draw text at the bottom of the ellipse.
+                          //         perimiterAlignment:
+                          //             EllipticText_PerimiterAlignment.top,
+                          //         offset: __value,
+                          //         // Stretch text to half the circumference.
+                          //         fitFactor: 1 / 2,
+                          //         fitType: EllipticText_FitType.noFit,
+                          //       ),
+                          //     ),
+                          //   ),
+                          // )
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -226,81 +293,92 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      children: [
-                        Container(
-                          width: MediaQuery.of(context).size.width / 1.8,
-                          height: 25.0,
-                          child: Row(
-                            children: [
-                              Text(
-                                "Description",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.blue),
-                              ),
-                              SizedBox(
-                                width: 5.0,
-                              ),
-                              maxLetter(chalenge.description),
-                            ],
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        children: [
+                          Container(
+                            width: MediaQuery.of(context).size.width / 1.8,
+                            height: 25.0,
+                            child: Row(
+                              children: [
+                                Text(
+                                  "Description",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.blue),
+                                ),
+                                SizedBox(
+                                  width: 5.0,
+                                ),
+                                maxLetter(chalenge.description),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            width: MediaQuery.of(context).size.width / 1.8,
+                            height: 30.0,
+                            child: Row(
+                              children: [
+                                Text(
+                                  "Priorité",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.blue),
+                                ),
+                                SizedBox(
+                                  width: 5.0,
+                                ),
+                                Text(
+                                  chalenge.unity
+                                      .toString()
+                                      .replaceAll(unityPattern, "")
+                                      .toUpperCase(),
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: changeColors(chalenge.unity
+                                          .toString()
+                                          .replaceAll(unityPattern, ""))),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      FlipCard(
+                        front: Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(60.0),
+                          ),
+                          elevation: 15.0,
+                          child: Container(
+                            child: new CircularPercentIndicator(
+                              radius: 60.0,
+                              lineWidth: 5.0,
+                              percent: percentage(chalenge.listeDeTache.length,
+                                  int.parse(chalenge.totalChallenge)),
+                              center: new Text((percentage(
+                                              chalenge.listeDeTache.length,
+                                              int.parse(
+                                                  chalenge.totalChallenge)) *
+                                          100)
+                                      .toStringAsFixed(0) +
+                                  "%"),
+                              progressColor: Colors.green,
+                            ),
                           ),
                         ),
-                        Container(
-                          width: MediaQuery.of(context).size.width / 1.8,
-                          height: 30.0,
-                          child: Row(
-                            children: [
-                              Text(
-                                "Priorité",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.blue),
-                              ),
-                              SizedBox(
-                                width: 5.0,
-                              ),
-                              Text(
-                                chalenge.unity
-                                    .toString()
-                                    .replaceAll(unityPattern, "")
-                                    .toUpperCase(),
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: changeColors(chalenge.unity
-                                        .toString()
-                                        .replaceAll(unityPattern, ""))),
-                              ),
-                            ],
+                        back: Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(60.0),
+                          ),
+                          elevation: 15.0,
+                          child: Container(
+                            child: Text("test"),
                           ),
                         ),
-                      ],
-                    ),
-                    Card(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(60.0),
                       ),
-                      elevation: 15.0,
-                      child: Container(
-                        child: new CircularPercentIndicator(
-                          radius: 60.0,
-                          lineWidth: 5.0,
-                          percent: percentage(chalenge.listeDeTache.length,
-                              int.parse(chalenge.totalChallenge)),
-                          center: new Text((percentage(
-                                          chalenge.listeDeTache.length,
-                                          int.parse(chalenge.totalChallenge)) *
-                                      100)
-                                  .toStringAsFixed(0) +
-                              "%"),
-                          progressColor: Colors.green,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                    ]),
               ),
             ),
           ),
@@ -536,6 +614,9 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                 color: Colors.transparent,
               ),
               child: Card(
+                color: widget.idChallenge.isNotEmpty
+                    ? Colors.grey[400]
+                    : Colors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20.0),
                 ),
@@ -545,16 +626,6 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                     _confirmRegister(_challengesList[index].id);
                   },
                   onTap: () async {
-                    // Navigator.of(context).push(MaterialPageRoute(
-                    //     builder: (context) => ChangeNotifierProvider.value(
-                    //         value: variable,
-                    //         child: HomeTaches(
-                    //             _challengesList[index].id,
-                    //             variable.returnIndexForName(
-                    //                 _challengesList[index].id),
-                    //             _challengesList[index].name,
-                    //             _challengesList[index].animatedpadding))));
-
                     Navigator.push(
                         context,
                         PageTransition(
@@ -566,15 +637,8 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                                     variable.returnIndexForName(
                                         _challengesList[index].id),
                                     _challengesList[index].name,
-                                    _challengesList[index].animatedpadding))));
-
-                    // var HomeTaches1 =
-                    //     await buildPageAsync(_challengesList, variable, index);
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (context) => ChangeNotifierProvider.value(
-                    //             value: variable, child: HomeTaches1)));
+                                    _challengesList[index].animatedpadding,
+                                    widget.idChallenge))));
                   },
                   title: Container(
                     child: Row(
@@ -654,7 +718,8 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
           challengesList[index].id,
           variable.returnIndexForName(challengesList[index].id),
           challengesList[index].name,
-          challengesList[index].animatedpadding);
+          challengesList[index].animatedpadding,
+          widget.idChallenge);
     });
   }
 }
@@ -684,3 +749,14 @@ class SizeTransition3 extends PageRouteBuilder {
           },
         );
 }
+
+final _animate =
+    (final Widget Function(double) widget) => TweenAnimationBuilder(
+          tween: Tween<double>(
+            begin: 0.0,
+            // Revolve text at 30 RPM.
+            end: 30.0 * /*circumference = */ 1189.90797,
+          ),
+          duration: Duration(minutes: 1),
+          builder: (_, __value, __) => widget(__value),
+        );

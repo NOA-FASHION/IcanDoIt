@@ -26,13 +26,14 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 // import '../home_screen.dart';
 
 class HomeTaches extends StatefulWidget {
+  final String nuanceColors;
   final String id;
   final String something;
   final bool animatedpadding;
   final int indexChallenge;
 
-  HomeTaches(
-      this.id, this.indexChallenge, this.something, this.animatedpadding);
+  HomeTaches(this.id, this.indexChallenge, this.something, this.animatedpadding,
+      this.nuanceColors);
   @override
   _HomeTachesState createState() =>
       _HomeTachesState(indexChallenge, something, animatedpadding);
@@ -801,6 +802,7 @@ class _HomeTachesState extends State<HomeTaches> {
             id: widget.id,
             indexChallenge: indexChallenge,
             nameChallenge: something,
+            nuanceColors: widget.nuanceColors,
           ),
         ),
       ),
