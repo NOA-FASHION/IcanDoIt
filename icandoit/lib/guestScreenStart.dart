@@ -1,10 +1,10 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:icandoit/controllers/challenge_controller.dart';
-import 'package:intl/intl.dart';
+// import 'package:intl/intl.dart';
 
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
 
 import 'screens/components/guest_screen.dart';
 import 'screens/components/purchase_app.dart';
@@ -21,41 +21,40 @@ class _GuestScreenStart1State extends State<GuestScreenStart1> {
     return new Future.delayed(new Duration(milliseconds: milliseconds));
   }
 
-  bool test1;
-  String test = '';
-  Future<void> modifDtabaseFirebase() async {
-    await delay(1500);
-    if (test != null && test.isNotEmpty) {
-      DateTime today = new DateTime.now();
+  // bool test1;
+  // String test = '';
+  // Future<void> modifDtabaseFirebase() async {
+  //   await delay(1500);
+  //   if (test != null && test.isNotEmpty) {
+  //     DateTime today = new DateTime.now();
 
-      try {
-        final databaseReference = FirebaseFirestore.instance;
-        // var a =
-        //     await databaseReference.collection("activation").doc(test).get();
-        // if (a.exists) {
-        databaseReference.collection("activation").doc(test).update({
-          "LastConnect": DateFormat('EEEE, d MMM, yyyy').format(today),
-          // "LastConnect": "date test8",
-        });
-        // }
-      } catch (e) {
-        print(e.toString());
-      }
-    }
-  }
+  //     try {
+  //       final databaseReference = FirebaseFirestore.instance;
+  //       // var a =
+  //       //     await databaseReference.collection("activation").doc(test).get();
+  //       // if (a.exists) {
+  //       databaseReference.collection("activation").doc(test).update({
+  //         "LastConnect": DateFormat('EEEE, d MMM, yyyy').format(today),
+  //         // "LastConnect": "date test8",
+  //       });
+  //       // }
+  //     } catch (e) {
+  //       print(e.toString());
+  //     }
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
     Challengecontroller variable = Provider.of<Challengecontroller>(context);
-    variable.authAnonyme();
+    // variable.authAnonyme();
     // variable.demarageSwitchIntro();
-    test = variable.getChallengeyesterday().nbtacheVallide;
-    modifDtabaseFirebase().then((value) => variable.logOut);
-    bool activationManuel = variable.getActivationmanuelle();
+    // test = variable.getChallengeyesterday().nbtacheVallide;
+    // modifDtabaseFirebase().then((value) => variable.logOut);
+    bool activationManuel = false;
     String switchIntro1 = variable.getChallengeyesterday().nbchallengeVallide;
     return Container(
-      child: (switchIntro1 == "false" && activationManuel == false) ||
-              (switchIntro1 == "true" && activationManuel == true)
+      child: (switchIntro1 == "false" && activationManuel == false)
           ? ChangeNotifierProvider.value(value: variable, child: PurchaseApp())
           : ChangeNotifierProvider.value(value: variable, child: GuestScreen()),
     );

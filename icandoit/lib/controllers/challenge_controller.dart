@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:typed_data';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 // import 'package:nanoid/async.dart';
 import 'package:timezone/data/latest.dart' as tz;
@@ -57,7 +57,7 @@ class Challengecontroller extends ChangeNotifier {
   SharedPreferences _localDataChallengeDay;
   SharedPreferences _localDataChallengeyesterday;
   SharedPreferences _prefs;
-  final _auth = FirebaseAuth.instance;
+  // final _auth = FirebaseAuth.instance;
   ChallengeDays challengeDays = ChallengeDays();
 
   Challengeyesterday challengeyesterday = Challengeyesterday();
@@ -124,60 +124,60 @@ class Challengecontroller extends ChangeNotifier {
     _initChallengeList();
   }
 
-  bool getActivationmanuelle() {
-    return introActivationManuelle;
-  }
+  // bool getActivationmanuelle() {
+  //   return introActivationManuelle;
+  // }
 
-  Future<void> logOut() {
-    _auth.signOut();
-  }
+  // Future<void> logOut() {
+  //   _auth.signOut();
+  // }
 
-  Future<void> authAnonyme() {
-    _auth.signInAnonymously().then((value) => demarageSwitchIntro());
-  }
+  // Future<void> authAnonyme() {
+  //   _auth.signInAnonymously().then((value) => demarageSwitchIntro());
+  // }
 
-  Future<String> initActivatonboo() async {
-    await delay(2500);
-    String test;
+  // Future<String> initActivatonboo() async {
+  //   await delay(2500);
+  //   String test;
 
-    test = challengeyesterday.nbtacheVallide;
+  //   test = challengeyesterday.nbtacheVallide;
 
-    return test;
-  }
+  //   return test;
+  // }
 
-  Future<bool> getBoolActivation1(String test) async {
-    await delay(2500);
-    bool test1;
-    if (test != null && test.isNotEmpty) {
-      final databaseReference = FirebaseFirestore.instance;
-      // var a = await databaseReference.collection("activation").doc(test).get();
-      // if (a.exists) {
-      databaseReference.collection("activation").doc(test).get().then((value) {
-        print(value.data()['activatipnManuelle']);
-        switIntro(value.data()['activatipnManuelle']);
-        test1 = value.data()['activatipnManuelle'];
-      });
-    }
-    // }
-    return test1;
-    // switIntro(variable);
-  }
+  // Future<bool> getBoolActivation1(String test) async {
+  //   await delay(2500);
+  //   bool test1;
+  //   if (test != null && test.isNotEmpty) {
+  //     final databaseReference = FirebaseFirestore.instance;
+  //     // var a = await databaseReference.collection("activation").doc(test).get();
+  //     // if (a.exists) {
+  //     databaseReference.collection("activation").doc(test).get().then((value) {
+  //       print(value.data()['activatipnManuelle']);
+  //       switIntro(value.data()['activatipnManuelle']);
+  //       test1 = value.data()['activatipnManuelle'];
+  //     });
+  //   }
+  //   // }
+  //   return test1;
+  //   // switIntro(variable);
+  // }
 
-  void switIntro(bool activation) async {
-    await delay(2500);
-    if (activation != null) {
-      final SharedPreferences prefs = await _prefs;
-      await prefs.setBool('repeat', activation);
-      print("test réussi avec succes");
-    } else {
-      final SharedPreferences prefs = await _prefs;
-      await prefs.setBool('repeat', true);
-    }
-  }
+  // void switIntro(bool activation) async {
+  //   await delay(2500);
+  //   if (activation != null) {
+  //     final SharedPreferences prefs = await _prefs;
+  //     await prefs.setBool('repeat', activation);
+  //     print("test réussi avec succes");
+  //   } else {
+  //     final SharedPreferences prefs = await _prefs;
+  //     await prefs.setBool('repeat', true);
+  //   }
+  // }
 
-  void demarageSwitchIntro() {
-    initActivatonboo().then((value) => getBoolActivation1(value));
-  }
+  // void demarageSwitchIntro() {
+  //   initActivatonboo().then((value) => getBoolActivation1(value));
+  // }
 
 /////////////////////////////////////// /////////////////////////////////////// /////////////////////////////////////// notification
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
@@ -830,7 +830,7 @@ class Challengecontroller extends ChangeNotifier {
       challengeyesterday.commentaire = "true";
       challengeyesterday.nbchallengeVallide = "true";
       challengeyesterday.nbtacheVallide = "";
-      await initialiseConnectionDatabase();
+      // await initialiseConnectionDatabase();
       await _saveChallenyesterday();
       _initChallengeListStartChallenge();
     }
@@ -869,11 +869,11 @@ class Challengecontroller extends ChangeNotifier {
     }
   }
 
-  void documentIdFirebase(String valueId) async {
-    challengeyesterday.nbtacheVallide = valueId;
-    await _saveChallenyesterday();
-    _initChallengeListStartChallenge();
-  }
+  // void documentIdFirebase(String valueId) async {
+  //   challengeyesterday.nbtacheVallide = valueId;
+  //   await _saveChallenyesterday();
+  //   _initChallengeListStartChallenge();
+  // }
 
   void switchTrueIntro(bool active) async {
     if (active) {
@@ -2181,31 +2181,31 @@ class Challengecontroller extends ChangeNotifier {
   //     print(e.toString());
   //   }
   // }
-  Future<void> authAnonyme1() async {
-    final _auth = FirebaseAuth.instance;
-    _auth.signInAnonymously().then((value) => initialiseConnectionDatabase());
-  }
+  // Future<void> authAnonyme1() async {
+  //   final _auth = FirebaseAuth.instance;
+  //   _auth.signInAnonymously().then((value) => initialiseConnectionDatabase());
+  // }
 
-  Future<void> initialiseConnectionDatabase() async {
-    final databaseReference = FirebaseFirestore.instance;
-    DateTime today = new DateTime.now();
+  // Future<void> initialiseConnectionDatabase() async {
+  //   final databaseReference = FirebaseFirestore.instance;
+  //   DateTime today = new DateTime.now();
 
-    try {
-      await databaseReference.collection("activation").add({
-        "email": "Pas d'email",
-        "Achat": false,
-        "Code d'activation": "Pas de code",
-        "activatipnManuelle": false,
-        "activation": false,
-        "IdCommade": "pas d'ID",
-        "Installation": true,
-        "LastConnect": DateFormat('EEEE, d MMM, yyyy').format(today),
-        "Restor": false
-      }).then((value) => challengeyesterday.nbtacheVallide = value.id);
-    } catch (e) {
-      print(e.toString());
-    }
-  }
+  //   try {
+  //     await databaseReference.collection("activation").add({
+  //       "email": "Pas d'email",
+  //       "Achat": false,
+  //       "Code d'activation": "Pas de code",
+  //       "activatipnManuelle": false,
+  //       "activation": false,
+  //       "IdCommade": "pas d'ID",
+  //       "Installation": true,
+  //       "LastConnect": DateFormat('EEEE, d MMM, yyyy').format(today),
+  //       "Restor": false
+  //     }).then((value) => challengeyesterday.nbtacheVallide = value.id);
+  //   } catch (e) {
+  //     print(e.toString());
+  //   }
+  // }
 
   // void getBoolActivation() async {
   //   String documentId = challengeyesterday.nbtacheVallide;

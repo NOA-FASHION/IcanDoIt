@@ -1,14 +1,14 @@
 import 'package:avatar_glow/avatar_glow.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:icandoit/controllers/challenge_controller.dart';
 import 'package:icandoit/screens/components/code_activation.dart';
 import 'package:loading_overlay_pro/loading_overlay_pro.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
-import 'package:intl/intl.dart';
+// import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
@@ -18,39 +18,37 @@ import 'package:vertical_card_pager/vertical_card_pager.dart';
 import '../home_screen.dart';
 
 // GlobalKey<_PurchaseAppState> myAppKey = GlobalKey();
+// class PurchaseApp extends StatefulWidget {
+//   @override
+//   State<PurchaseApp> createState() => _PurchaseAppState();
+// }
+
+// class _PurchaseAppState extends State<PurchaseApp> {
+//   @override
+//   Widget build(BuildContext context) {
+//     Challengecontroller variable = Provider.of<Challengecontroller>(context);
+//     return FutureBuilder(
+//       future: Firebase.initializeApp(),
+//       builder: (context, snapshot) {
+//         if (snapshot.hasError) {
+//           return const ErrorFirebase();
+//         }
+//         if (snapshot.connectionState == ConnectionState.done) {
+//           return ChangeNotifierProvider.value(
+//               value: variable, child: PurchaseAppStart());
+//         }
+//         return const Loading();
+//       },
+//     );
+//   }
+// }
+
 class PurchaseApp extends StatefulWidget {
   @override
   State<PurchaseApp> createState() => _PurchaseAppState();
 }
 
 class _PurchaseAppState extends State<PurchaseApp> {
-  @override
-  Widget build(BuildContext context) {
-    Challengecontroller variable = Provider.of<Challengecontroller>(context);
-    return FutureBuilder(
-      future: Firebase.initializeApp(),
-      builder: (context, snapshot) {
-        if (snapshot.hasError) {
-          return const ErrorFirebase();
-        }
-        if (snapshot.connectionState == ConnectionState.done) {
-          return ChangeNotifierProvider.value(
-              value: variable, child: PurchaseAppStart());
-        }
-        return const Loading();
-      },
-    );
-  }
-}
-
-class PurchaseAppStart extends StatefulWidget {
-  PurchaseAppStart({Key myAppKey}) : super(key: myAppKey);
-
-  @override
-  State<PurchaseAppStart> createState() => _PurchaseAppStartState();
-}
-
-class _PurchaseAppStartState extends State<PurchaseAppStart> {
   Future<Null> delay(int milliseconds) {
     return new Future.delayed(new Duration(milliseconds: milliseconds));
   }
@@ -90,29 +88,11 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
     }
   }
 
-  void buyProduct(ProductDetails prod, Challengecontroller variable,
-      FirebaseAuth _auth, String documentId) async {
-    // print("prod :" + prod.toString());
-    // purchases.forEach((purchase) {
-    //   if (purchase.purchaseID != null) {
-    //     if (purchase.status == PurchaseStatus.purchased) {
-    //       showTopSnackBar(
-    //         context,
-    //         CustomSnackBar.success(
-    //           backgroundColor: Colors.blue,
-    //           icon: Icon(
-    //             Icons.restore,
-    //             size: 30,
-    //             color: Colors.white,
-    //           ),
-    //           message:
-    //               "Vous avez déja acheté cet article, procéder à une restauration",
-    //         ),
-    //       );
-    //       return;
-    //     }
-    //   }
-    // });
+  void buyProduct(
+    ProductDetails prod,
+    Challengecontroller variable,
+  ) async {
+   
     final PurchaseParam purchaseParam = PurchaseParam(productDetails: prod);
     // setState(() {
     //   _isLoading = true;
@@ -123,8 +103,10 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
     });
   }
 
-  void activeTrue(ProductDetails prod, Challengecontroller variable,
-      FirebaseAuth _auth, String documentId) async {
+  void activeTrue(
+    ProductDetails prod,
+    Challengecontroller variable,
+  ) async {
     setState(() {
       _isLoading = true;
     });
@@ -132,7 +114,8 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
     purchases.forEach((purchase) {
       if (purchase.purchaseID != null) {
         if (purchase.status == PurchaseStatus.purchased) {
-          addDataToFirebse(variable, documentId, _auth);
+          variable.switchTrueIntro(true);
+          // addDataToFirebse(variable, documentId, _auth);
           Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => ChangeNotifierProvider.value(
                   value: variable,
@@ -161,15 +144,18 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
     });
   }
 
-  resutatRestaur(ProductDetails prod, Challengecontroller variable,
-      FirebaseAuth _auth, String documentId) async {
+  resutatRestaur(
+    ProductDetails prod,
+    Challengecontroller variable,
+  ) async {
     await delay(2000);
 
     purchases.forEach((purchase) {
       if (purchase.purchaseID != null) {
         if (purchase.status == PurchaseStatus.restored ||
             purchase.status == PurchaseStatus.purchased) {
-          addDataToFirebse(variable, documentId, _auth);
+          // addDataToFirebse(variable, documentId, _auth);
+          variable.switchTrueIntro(true);
           showTopSnackBar(
             context,
             CustomSnackBar.success(
@@ -235,14 +221,16 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
     });
   }
 
-  void restaurProduct(ProductDetails prod, Challengecontroller variable,
-      FirebaseAuth _auth, String documentId) async {
+  void restaurProduct(
+    ProductDetails prod,
+    Challengecontroller variable,
+  ) async {
     setState(() {
       _isLoading = true;
     });
     await iap
         .restorePurchases()
-        .then((value) => resutatRestaur(prod, variable, _auth, documentId));
+        .then((value) => resutatRestaur(prod, variable));
   }
 
   void initialize() async {
@@ -263,93 +251,93 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
   }
 
   // final databaseReference = FirebaseFirestore.instance;
-  void addDataToFirebse(
-      Challengecontroller variable, String documentId, FirebaseAuth _auth) {
-    bool boolAchat = false;
-    bool boolrestor = false;
-    bool activationBoll = false;
-    String purchaseId1 = '';
-    purchases.forEach((purchase) {
-      if (purchase.purchaseID != null) {
-        print('purchase: ' + purchase.status.name);
-        if (purchase.status == PurchaseStatus.purchased) {
-          boolAchat = true;
-          purchaseId1 = purchase.purchaseID;
-        } else {
-          boolAchat = false;
-          purchaseId1 = "Pas d'id";
-        }
-        if (purchase.status == PurchaseStatus.restored) {
-          boolrestor = true;
-        } else {
-          boolrestor = false;
-        }
-        if (boolAchat || boolrestor) {
-          activationBoll = true;
-          variable.switchTrueIntro(activationBoll);
-        } else {
-          activationBoll = false;
-        }
+  // void addDataToFirebse(
+  //     Challengecontroller variable, String documentId, FirebaseAuth _auth) {
+  //   bool boolAchat = false;
+  //   bool boolrestor = false;
+  //   bool activationBoll = false;
+  //   String purchaseId1 = '';
+  //   purchases.forEach((purchase) {
+  //     if (purchase.purchaseID != null) {
+  //       print('purchase: ' + purchase.status.name);
+  //       if (purchase.status == PurchaseStatus.purchased) {
+  //         boolAchat = true;
+  //         purchaseId1 = purchase.purchaseID;
+  //       } else {
+  //         boolAchat = false;
+  //         purchaseId1 = "Pas d'id";
+  //       }
+  //       if (purchase.status == PurchaseStatus.restored) {
+  //         boolrestor = true;
+  //       } else {
+  //         boolrestor = false;
+  //       }
+  //       if (boolAchat || boolrestor) {
+  //         activationBoll = true;
+  //         variable.switchTrueIntro(activationBoll);
+  //       } else {
+  //         activationBoll = false;
+  //       }
 
-        activationEasy(
-                auth: _auth,
-                documentId: documentId,
-                variable: variable,
-                boolAchat: boolAchat,
-                activationBoll: activationBoll,
-                purchaseId1: purchaseId1,
-                boolrestor: boolrestor)
-            .then((value) => _auth.signOut());
-      }
-    });
-  }
+  //       activationEasy(
+  //               auth: _auth,
+  //               documentId: documentId,
+  //               variable: variable,
+  //               boolAchat: boolAchat,
+  //               activationBoll: activationBoll,
+  //               purchaseId1: purchaseId1,
+  //               boolrestor: boolrestor)
+  //           .then((value) => _auth.signOut());
+  //     }
+  //   });
+  // }
 
-  Future<void> activationEasy(
-      {Challengecontroller variable,
-      FirebaseAuth auth,
-      String documentId,
-      bool boolAchat,
-      bool activationBoll,
-      String purchaseId1,
-      bool boolrestor}) async {
-    DateTime today = new DateTime.now();
+  // Future<void> activationEasy(
+  //     {Challengecontroller variable,
+  //     FirebaseAuth auth,
+  //     String documentId,
+  //     bool boolAchat,
+  //     bool activationBoll,
+  //     String purchaseId1,
+  //     bool boolrestor}) async {
+  //   DateTime today = new DateTime.now();
 
-    final databaseReference = FirebaseFirestore.instance;
-    if (documentId.isNotEmpty && documentId != null) {
-      try {
-        await databaseReference
-            .collection("activation")
-            .doc(documentId)
-            .update({
-          "Achat": boolAchat,
-          "activation": activationBoll,
-          "IdCommade": purchaseId1,
-          "LastConnect": DateFormat('EEEE, d MMM, yyyy').format(today),
-          "Restor": boolrestor
-        });
-      } catch (e) {
-        print(e.toString());
-      }
-    } else {
-      DateTime today = new DateTime.now();
+  //   final databaseReference = FirebaseFirestore.instance;
+  //   if (documentId.isNotEmpty && documentId != null) {
+  //     try {
+  //       await databaseReference
+  //           .collection("activation")
+  //           .doc(documentId)
+  //           .update({
+  //         "Achat": boolAchat,
+  //         "activation": activationBoll,
+  //         "IdCommade": purchaseId1,
+  //         "LastConnect": DateFormat('EEEE, d MMM, yyyy').format(today),
+  //         "Restor": boolrestor
+  //       });
+  //     } catch (e) {
+  //       print(e.toString());
+  //     }
+  //   } else {
+  //     DateTime today = new DateTime.now();
 
-      try {
-        await databaseReference.collection("activation").add({
-          "email": "Pas d'email",
-          "Achat": boolAchat,
-          "Code d'activation": "Pas de code",
-          "activation": activationBoll,
-          "activatipnManuelle": false,
-          "IdCommade": purchaseId1,
-          "Installation": true,
-          "LastConnect": DateFormat('EEEE, d MMM, yyyy').format(today),
-          "Restor": boolrestor
-        }).then((value) => variable.documentIdFirebase(value.id));
-      } catch (e) {
-        print(e.toString());
-      }
-    }
-  }
+  //     try {
+  //       await databaseReference.collection("activation").add({
+  //         "email": "Pas d'email",
+  //         "Achat": boolAchat,
+  //         "Code d'activation": "Pas de code",
+  //         "activation": activationBoll,
+  //         "activatipnManuelle": false,
+  //         "IdCommade": purchaseId1,
+  //         "Installation": true,
+  //         "LastConnect": DateFormat('EEEE, d MMM, yyyy').format(today),
+  //         "Restor": boolrestor
+  //       }).then((value) => variable.documentIdFirebase(value.id));
+  //     } catch (e) {
+  //       print(e.toString());
+  //     }
+  //   }
+  // }
 
   void initState() {
     super.initState();
@@ -412,8 +400,8 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
 
   @override
   Widget build(BuildContext context) {
-    final _auth = FirebaseAuth.instance;
-    _auth.signInAnonymously();
+    // final _auth = FirebaseAuth.instance;
+    // _auth.signInAnonymously();
     Challengecontroller variable = Provider.of<Challengecontroller>(context);
     String documentId = variable.getChallengeyesterday().nbtacheVallide;
     return Scaffold(
@@ -542,8 +530,7 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
                                     Duration(milliseconds: 100),
                                 child: MaterialButton(
                                   onPressed: () {
-                                    activeTrue(data.data[0], variable, _auth,
-                                        documentId);
+                                    activeTrue(data.data[0], variable);
                                   },
                                   elevation: 20.0,
                                   shape: CircleBorder(),
@@ -589,12 +576,12 @@ class _PurchaseAppStartState extends State<PurchaseAppStart> {
                                       restaurProduct(
                                         data.data[0],
                                         variable,
-                                        _auth,
-                                        documentId,
                                       );
                                     } else if (page == 1) {
-                                      buyProduct(data.data[0], variable, _auth,
-                                          documentId);
+                                      buyProduct(
+                                        data.data[0],
+                                        variable,
+                                      );
                                     }
                                     // else if (page == 1) {
                                     //   editActivation(variable, documentId);
