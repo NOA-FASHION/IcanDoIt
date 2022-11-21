@@ -412,7 +412,7 @@ class _ChallengesListBuilderTachesState
             onDismissed: (direction) {
               if (direction == DismissDirection.endToStart) {
                 providerType.addnbtacheVallide();
-                Scaffold.of(context).showSnackBar(_buildSnackBar(
+                ScaffoldMessenger.of(context).showSnackBar(_buildSnackBar(
                     content: "La tâche a bien été validé",
                     lotties: 'assets/challenge.json'));
                 providerType.remove2(
@@ -429,7 +429,7 @@ class _ChallengesListBuilderTachesState
               }
 
               if (direction == DismissDirection.startToEnd) {
-                Scaffold.of(context).showSnackBar(_buildSnackBar(
+                ScaffoldMessenger.of(context).showSnackBar(_buildSnackBar(
                     content: "La mission a bien ete supprime",
                     lotties: 'assets/trash.json'));
                 providerType.remove2(
@@ -457,13 +457,13 @@ class _ChallengesListBuilderTachesState
                         ),
                         content: Text("Voulez vous supprimer la mission"),
                         actions: [
-                          RaisedButton(
+                          ElevatedButton(
                             onPressed: () {
                               Navigator.pop(context, true);
                             },
                             child: Text("Oui"),
                           ),
-                          RaisedButton(
+                          ElevatedButton(
                             onPressed: () {
                               Navigator.pop(context, false);
                             },

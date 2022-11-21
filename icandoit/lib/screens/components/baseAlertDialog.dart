@@ -41,16 +41,14 @@ class BaseAlertDialog extends StatelessWidget {
         shape:
             RoundedRectangleBorder(borderRadius: new BorderRadius.circular(15)),
         actions: <Widget>[
-          new FlatButton(
+          new TextButton(
             child: new Text(this._yes),
-            textColor: Colors.greenAccent,
             onPressed: () {
               this._yesOnPressed();
             },
           ),
-          new FlatButton(
+          new TextButton(
             child: Text(this._no),
-            textColor: Colors.redAccent,
             onPressed: () {
               this._noOnPressed();
             },

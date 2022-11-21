@@ -561,7 +561,7 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                     index: index1,
                     validate: true,
                     id: _challengesList[index].id);
-                Scaffold.of(context).showSnackBar(_buildSnackBar(
+                ScaffoldMessenger.of(context).showSnackBar(_buildSnackBar(
                     content: "Le challenge a bien été validé",
                     lotties: 'assets/challenge.json'));
               }
@@ -582,7 +582,7 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                     index: index1,
                     validate: false,
                     id: _challengesList[index].id);
-                Scaffold.of(context).showSnackBar(_buildSnackBar(
+                ScaffoldMessenger.of(context).showSnackBar(_buildSnackBar(
                     content: "La mission a bien été supprimée",
                     lotties: 'assets/trash.json'));
               }
@@ -599,13 +599,13 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                         ),
                         content: Text("Voulez vous supprimer la mission"),
                         actions: [
-                          RaisedButton(
+                          ElevatedButton(
                             onPressed: () {
                               Navigator.pop(context, true);
                             },
                             child: Text("Oui"),
                           ),
-                          RaisedButton(
+                          ElevatedButton(
                             onPressed: () {
                               Navigator.pop(context, false);
                             },
