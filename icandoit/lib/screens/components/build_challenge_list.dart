@@ -225,65 +225,7 @@ class _ChallengesListBuilderState extends State<ChallengesListBuilder> {
                       ),
                     ),
                   ),
-                  // back: Card(
-                  //   shape: RoundedRectangleBorder(
-                  //     borderRadius: BorderRadius.circular(60.0),
-                  //   ),
-                  //   elevation: 15.0,
-                  //   child: Container(
-                  //     height: 60,
-                  //     width: 60,
-                  //     alignment: Alignment.center,
-                  //     child: Stack(
-                  //       children: [
-                  //         Center(
-                  //           child: Text(
-                  //             (int.parse(chalenge.totalChallenge) -
-                  //                         chalenge.listeDeTache.length)
-                  //                     .toString() +
-                  //                 "/" +
-                  //                 chalenge.totalChallenge,
-                  //             style:
-                  //                 TextStyle(fontSize: 12.0, color: Colors.blue),
-                  //           ),
-                  //         ),
-                  //         EllipticText(
-                  //           text: "Tâches validées",
-                  //           style:
-                  //               TextStyle(fontSize: 12.0, color: Colors.blue),
-                  //           // Draw text at the bottom of the ellipse.
-                  //           perimiterAlignment:
-                  //               EllipticText_PerimiterAlignment.top,
-                  //           offset: 0.0,
-                  //           // Stretch text to half the circumference.
-                  //           fitFactor: 1 / 2,
-                  //           fitType: EllipticText_FitType.scaleFit,
-                  //         ),
-                  //         // _animate(
-                  //         //   (__value) => Center(
-                  //         //     // Wrap the EllipticText widget in a SizedBox to set its size.
-                  //         //     child: SizedBox(
-                  //         //       height: 60.0,
-                  //         //       width: 60.0,
-                  //         //       child: EllipticText(
-                  //         //         text: "test",
-                  //         //         style: TextStyle(
-                  //         //             fontSize: 10.0, color: Colors.blue),
-                  //         //         // Draw text at the bottom of the ellipse.
-                  //         //         perimiterAlignment:
-                  //         //             EllipticText_PerimiterAlignment.top,
-                  //         //         offset: __value,
-                  //         //         // Stretch text to half the circumference.
-                  //         //         fitFactor: 1 / 2,
-                  //         //         fitType: EllipticText_FitType.noFit,
-                  //         //       ),
-                  //         //     ),
-                  //         //   ),
-                  //         // )
-                  //       ],
-                  //     ),
-                  //   ),
-                  // ),
+                  
                 ),
               ],
             ),

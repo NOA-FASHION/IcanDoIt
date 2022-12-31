@@ -1120,25 +1120,7 @@ class _HomeTachesState extends State<HomeTaches> {
                                 color: Colors.orange[900],
                               ),
                               onPressed: () {
-                                // if (unityChallenge == "echeancier") {
-                                //   if (formKeyTache.currentState.validate()) {
-                                //     formKeyTache.currentState.save();
-                                //     Provider.of<Challengecontroller>(context,
-                                //             listen: false)
-                                //         .generateList(
-                                //       widget.animatedpadding,
-                                //       widget.id,
-                                //       widget.indexChallenge,
-                                //       int.parse(nombreEchenace),
-                                //       double.parse(coutPaiment),
-                                //       unityChallenge,
-                                //       targetChallenge,
-                                //       formations,
-                                //       double.parse(prixProduit),
-                                //     );
-                                //     Navigator.pop(context);
-                                //   }
-                                // }
+                            
                                 if (formKeyTache.currentState.validate()) {
                                   formKeyTache.currentState.save();
                                   setState(() {
